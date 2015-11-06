@@ -1,0 +1,537 @@
+/********************************************
+	AUTHOR:  	Erwin Aligam
+	MODIFIED BY:	Yonnick GERNIGON, Julien TROCHERIE, Thierry LEMEUNIER
+	WEBSITE:   	http://www.styleshout.com/
+	TEMPLATE NAME: 	Stylevantage - orange
+	TEMPLATE CODE: 	S-0001
+	VERSION:	1.0
+ *******************************************/
+
+/********************************************
+   HTML ELEMENTS
+********************************************/
+
+* {
+    margin: 0; padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0; padding: 0;
+    font: 71%/1.5em  Verdana, 'Trebuchet MS', Arial, Sans-serif;
+    background: url(../../images/headerbg.png) repeat-x;
+    color: #666666;
+    text-align: center;
+}
+
+/* links */
+a {
+    /*background: inherit;*/
+    color: #EC981F;
+}
+a:hover {
+    /*background: inherit;*/
+    color: #806B4D;
+}
+
+/* headers */
+h1, h2, h3 {
+    font: bold 1em 'Trebuchet MS', Tahoma, Sans-serif;
+    /*text-transform: uppercase;*/
+    color: #555;
+}
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.2em; text-transform: none;}
+h4 { font-size: 1.0em; text-transform: none;}
+
+#main h1 {
+    padding: 10px 0 5px 5px;
+    margin: 0 0 0 10px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+#sidebar h1 {
+    padding: 10px 0px 5px 30px;
+    background: url(../../images/square_arrow.gif) no-repeat 2px 12px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+footer, p, h1, h2, h3, h4 { margin: 10px 15px; }
+
+ul, ol {
+    margin: 10px 30px;
+    padding: 0 15px;
+}
+
+li { color: #666666; }
+
+ul span, ol span {
+    color: #666666;
+}
+
+img {
+    margin: 5px;
+    border: 0;
+}
+
+table {
+    width: 100%;
+}
+
+/* form elements */
+form {
+    margin:10px; padding: 0;
+    border: 1px solid #dcdbda;
+    background-color: #ededec;
+}
+
+label {
+    /*display:block;*/
+    font-weight:bold;
+    margin:5px 0;
+}
+
+input {
+    padding: 4px;
+    border:1px solid #ddd;
+    font: normal 1em/1.5em Verdana, sans-serif;
+    color:#777;
+}
+
+input[type="text"] {
+    width: 300px;
+}
+
+input.button {
+    margin: 0;
+    font: bold 1em Arial, Sans-serif;
+    border: 1px solid #CCC;
+    background: #FFF;
+    padding: 2px 3px;
+    color: #333;
+}
+
+textarea {
+    width: 350px;
+    padding: 4px;
+    font: normal 1em/1.5em Verdana, sans-serif;
+    border: 1px solid #eee;
+    height: 100px;
+    display: block;
+    color: #777;
+}
+
+#submit {
+    text-align: center;
+}
+
+/*****************/
+/*    Layout     */
+/*****************/
+
+#wrap {
+    margin: 0 auto;
+    width: 975px;
+    text-align: left;
+    background: #FFF;
+    height: auto;
+    min-height: 100%;
+}
+
+#content-wrap, #content-wrapAccueil {
+    clear:both;
+    margin: 0; padding:0;
+    width: 100%;
+    text-align: justify;
+}
+
+#content-wrap{
+    padding-bottom: 60px;	/* hauteur du footer se trouvant sur toutes les pages */
+}
+
+#content-wrapAccueil{
+    padding-bottom: 135px;	/* hauteur du footer se trouvant sur la page d'accueil */
+}
+
+#main {
+    float: left;
+    margin-left: 15px;
+    padding: 0;
+    width: 70%;
+    border-left: 1px solid #f2f2f2;
+}
+
+.titre1 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.titre2 {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.titre3 {
+    margin-top: 2px;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-style: italic;
+}
+.adroite {
+    text-align: right;
+    float: right;
+    width: 40%;
+    margin-right: 3%;
+    font-size: 90%;
+}
+
+/* header */
+#header {
+    position: relative;
+    background: url(../../images/headerbg.png) repeat-x 0% 0%;
+    height: 84px;
+
+}
+#header h1#logo {
+    position: absolute;
+    margin: 0; padding: 0;
+    font: bolder 4.1em 'Trebuchet MS', Arial, Sans-serif;
+    letter-spacing: -2px;
+    color: #CCC;
+    text-transform: lowercase;
+
+    /* change the values of top and Left to adjust the position of the logo*/
+    top: 0; right: 5px;
+}
+#header h2#slogan {
+    position: absolute;
+    margin: 0; padding: 0;
+    font: bold 1em 'Trebuchet MS', Arial, Sans-serif;
+    text-transform: none;
+    color: #FFF;
+    /* change the values of top and Left to adjust the position of the slogan*/
+    top: 48px; left:65px;
+}
+
+/* sideabar */
+#sidebar {
+    float: left;
+    width: 28%;
+    margin: 0;	padding: 0;
+    display: inline;
+}
+#sidebar ul.sidemenu {
+    list-style: none;
+    text-align: left;
+    margin: 0 0 8px 0;
+    padding-right: 0;
+    text-decoration: none;
+}
+#sidebar ul.sidemenu li {
+    font : bold 1.4em 'Trebuchet MS', Tahoma, Arial, Sans-serif;
+    border-bottom: 1px solid #EFF0F1;
+    background: no-repeat 2px 8px;
+    padding: 2px 5px 2px 20px;
+}
+
+* html body #sidebar ul.sidemenu li { height: 1%; }
+
+#sidebar ul.sidemenu a {
+    font-weight: bold;
+    background-image: none;
+    text-decoration: none;
+}
+
+/* footer */
+#footer, #footerAccueil {
+    background: #FFF url(../../images/footerbg.gif) repeat-x left top;
+    border-top: 1px solid #F2F2F2;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: relative;
+    clear: both;
+}
+
+#footer a, #footerAccueil a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#footer {
+    margin-top: -60px; 			/* valeur négative de la hauteur du footer se trouvant sur toutes les pages */
+}
+
+#footerAccueil {
+    margin-top: -135px; 		/* valeur négative de la hauteur du footer se trouvant sur la page d'accueil */
+}
+
+/* CLEAR FIX --> correction de certains bug pour le footer suivant le navigateur */
+/*
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+*/
+
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+
+/* Alignment classes */
+.float-left   { float: left;}
+.float-right  { float: right; }
+.align-left   { text-align: left; }
+.align-right  { text-align: right; }
+.align-center { text-align: center;	}
+.align-justify { text-align: justify; }
+
+/* display classes */
+.clear  { clear: both; }
+.block  { display: block; }
+.hide   { display: none; }
+.orange { color: #FFA600; }
+
+/********************************************
+   ELEMENTS PERSOS
+********************************************/
+
+#presentation_saisieOffreDeStage {
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    width: 98%;
+    margin: 5px;
+}
+
+#table_saisieOffreDeStage {
+    padding: 5px;
+    width: 100%;
+    margin: 5px;
+}
+
+#presentation_entreprise {
+    background: #FAFAFA;
+    border: 1px solid #EC981F;
+}
+
+#contact {
+    background: #FFFFFF;
+    border-left: 3px solid #EC981F;
+}
+
+#presentation_entreprise, #contact  {
+    padding: 5px;
+    padding-left: 15px;
+}
+
+#menuBdd {
+    background: #FAFAFA;
+    border: 1px solid #EC981F;
+    padding: 5px;
+    margin: 5px;
+}
+
+#menuBdd a {
+    text-decoration: none;
+    font: 1.1em 'Trebuchet MS', Tahoma, Sans-serif;
+}
+
+#titreMenuBdd {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+}
+#liensNavigation {
+    position: relative;
+    top: 63px;
+}
+
+#liensNavigation a {
+    color: #806B4D;
+    font: bold 1.2em 'Trebuchet MS', Tahoma, Sans-serif;
+}
+
+#liensNavigation a:hover {
+    color: #000000;
+}
+
+#erreur {
+    width: 100%;
+    text-align: center;
+    background: url(../../images/warning.png) 10px 10px no-repeat #FFCCCC;
+    color: #FF0000;
+}
+
+#erreur h1 {
+    font: bold 1.3em 'Trebuchet MS', Tahoma, Sans-serif;
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+#construction {
+    width: 100%;
+    text-align: center;
+    background: url(../../images/warning.png) 10px 10px no-repeat #FFFFCC;
+}
+
+#construction h1 {
+    font: bold 1.3em 'Trebuchet MS', Tahoma, Sans-serif;
+    color: #CCCC00;
+    text-decoration: underline;
+}
+
+#entete {
+    background: #fbc16d;
+}
+
+#entete td {
+    font: bold 1.2em 'Trebuchet MS', Tahoma, Sans-serif;
+    color: #806B4D;
+    padding: 4px;
+}
+
+#entete td, #ligne0 td, #ligne1 td {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+#entete2 {
+    background: #DDDDDD;
+}
+
+#entete2 td {
+    font: bold 1.2em 'Trebuchet MS', Tahoma, Sans-serif;
+    text-align: center;
+    color: #806B4D;
+    padding: 4px;
+}
+
+#entete2 td, #ligne0 td, #ligne1 td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#ligne0 {
+    background: #DDDDDD;
+}
+
+#ligne1 {
+    background: #ededec;
+}
+
+#dhtmlxtree {
+    margin: auto;
+    width: 250px;
+    height: 645px;
+    float: left;
+    border: solid;
+    border-width: 1px 1px 1px 1px;
+}
+
+#dhtmlxscheduler {
+    margin: auto;
+    width: 700px;
+    height: 645px;
+    float: right;
+    border: 1px solid;
+}
+
+#ongletsGestion {
+    position : absolute;
+    border : 1px solid transparent;
+    padding : 0;
+    font : bold 11px Tahoma, Sans-serif;
+    list-style-type : none;
+    left : 50%;
+    margin-top : 0;
+    width : 430px;
+    margin-left : -460px;
+}
+
+#ongletsGestion li {
+    float : left;
+    height : 21px;
+    background-color: #F4F9FD;
+    margin : 2px 2px 0 2px !important;
+    border : 1px solid #EC981F;
+}
+
+#ongletsGestion li.active {
+    border-bottom: 2px solid #EC981F;
+    background-color: #F4F9FD;
+}
+
+#ongletsGestion a {
+    display : block;
+    color : #806B4D;
+    text-decoration : none;
+    padding : 4px;
+}
+
+#ongletsGestion a:hover {
+    background: inherit;
+    color: #806B4D;
+}
+
+#menuGestion {
+    border-bottom : 1px solid #EC981F;
+    padding-bottom : 25px;
+}
+
+.aide_en_ligne_detaillee {
+    border: solid 1px black;
+    margin: 5px;
+    float: left;
+    width: 35%;
+}
+
+.article_aide_en_ligne_detaillee {
+    border: solid 1px black;
+    margin: 5px;
+    float: left;
+    width: 60%;
+}
+
+.article_aide_en_ligne_detaillee figure {
+    text-align: center;
+    border: solid 1px grey;
+    border-radius: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.article_aide_en_ligne_detaillee img {
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+}
+
+
+.image_aide_en_ligne_detaillee {
+    background-color: white;
+    background-clip: padding-box;
+    border: solid 2px black;
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: 15px 15px 10px silver;
+    z-index: 99;
+}
+
+.image_aide_en_ligne_detaillee figure {
+    text-align: center;
+}

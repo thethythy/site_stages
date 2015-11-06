@@ -1,0 +1,5 @@
+nbproject
+*.log
+*.bak
+*.db
+.DS_Store

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel xml:id="news">
+	<atom:link href="http://info-stages.univ-lemans.fr/flux/fluxrss.xml" rel="self" type="application/rss+xml"/>
+	<language>fr-FR</language>
+	<description>Ce flux RSS donne les nouvelles offres de stage pour les étudiants du Département Informatique de l'Université du Maine</description>
+	<link>http://info-stages.univ-lemans.fr/</link>
+	<title>Offres de stage en informatique</title>
+	<item>
+	    <title>Nouvelle offre de stage</title>
+	    <link>http://info-stages.univ-lemans.fr//stagiaire/visualiserOffre.php?id=202</link>
+	    <guid>http://info-stages.univ-lemans.fr//stagiaire/visualiserOffre.php?id=202</guid>
+	    <pubDate>Mon, 24 Sep 2012 16:51:45 +0200</pubDate>
+	    <author>thierry.lemeunier@univ-lemans.fr (Thierry Lemeunier)</author>
+	    <description>Stages CEA</description>
+	</item>
+	<item>
+	    <title>Nouvelle offre de stage</title>
+	    <link>http://info-stages.univ-lemans.fr//stagiaire/visualiserOffre.php?id=203</link>
+	    <guid>http://info-stages.univ-lemans.fr//stagiaire/visualiserOffre.php?id=203</guid>
+	    <pubDate>Wed, 10 Oct 2012 12:21:45 +0200</pubDate>
+	    <author>thierry.lemeunier@univ-lemans.fr (Thierry Lemeunier)</author>
+	    <description>Multilinguisme et traduction automatique</description>
+	</item>
+	<item>
+	    <title>Nouvelle offre de stage</title>
+	    <link>http://localhost:8888//stagiaire/visualiserOffre.php?id=206</link>
+	    <guid>http://localhost:8888//stagiaire/visualiserOffre.php?id=206</guid>
+	    <pubDate>Wed, 05 Jun 2013 11:18:48 +0200</pubDate>
+	    <author>thierry.lemeunier@univ-lemans.fr (Thierry Lemeunier)</author>
+	    <description>titre &amp;quot;bidon&amp;quot; et cash&amp;#039;s and go</description>
+	</item>
+    <item><title>Nouvelle offre de stage</title><link>http://localhost:8888//stagiaire/visualiserOffre.php?id=210</link><guid>http://localhost:8888//stagiaire/visualiserOffre.php?id=210</guid><pubDate>Wed, 28 May 2014 15:03:31 +0200</pubDate><author>thierry.lemeunier@univ-lemans.fr (Thierry Lemeunier)</author><description>test2</description></item></channel>
+</rss>

@@ -1,0 +1,96 @@
+<?php
+
+// ----------------------------------------------------------------------------
+// Connection à la base de données et déclaration des tables
+
+include_once("stages.inc");
+
+$tab1 = 'relation_promotion_datesoutenance';
+$tab2 = 'competence';
+$tab3 = 'contact';
+$tab4 = 'convention';
+$tab5 = 'datesoutenance';
+$tab6 = 'entreprise';
+$tab7 = 'profilsouhaite_offredestage';
+$tab8 = 'theme_offredestage';
+$tab9 = 'etudiant';
+$tab10 = 'filiere';
+$tab11 = 'relation_competence_offredestage';
+$tab12 = 'offredestage';
+$tab13 = 'parcours';
+$tab14 = 'parrain';
+$tab15 = 'promotion';
+$tab16 = 'salle_soutenance';
+$tab17 = 'soutenances';
+$tab18 = 'sujetdestage';
+$tab19 = 'relation_promotion_etudiant_convention';
+$tab20 = 'couleur';
+$tab21 = 'taches';
+
+function deconnexion() {
+    mysql_close();
+}
+
+// ----------------------------------------------------------------------------
+// Préventions contre les injections SQL
+
+function filterParameters($param) {
+    // Est-ce que le paramètre est un tableau ?
+    if (is_array($param)) {
+		// Alors parcourir le tableau
+		foreach ($param as $key => $value) {
+	    	// Es-ce que la valeur est elle-même un tableau
+	    	if (is_array($param[$key]))
+			// Alors appel récursif
+			$param[$key] = filterParameters($param[$key]);
+
+	    	// Est-ce que le paramètre est une chaîne ?
+	    	if (is_string($param[$key]))
+				// Alors échaper le paramètre
+				$param[$key] = mysql_real_escape_string($param[$key]);
+		}
+    }
+
+    // Est-ce que le paramètre est une chaîne ?
+    if (is_string($param))
+		// Alors échaper le paramètre
+		$param = mysql_real_escape_string($param);
+
+    // Return the filtered result
+    return $param;
+}
+
+mysql_set_charset("iso-8859-1");
+
+// Prévention contre les injection SQL dans les variables POST
+foreach ($_POST as $key => $value) {
+    $_POST[$key] = filterParameters($value);
+}
+
+// Prévention contre les injection SQL dans les variables GET
+foreach ($_GET as $key => $value) {
+    $_GET[$key] = filterParameters($value);
+}
+
+// Prévention contre les injection SQL dans les variables COOKIES
+foreach ($_COOKIE as $key => $value) {
+    $_COOKIE[$key] = filterParameters($value);
+}
+
+// Prévention contre les injection SQL dans les variables SESSION
+foreach ($_SESSION as $key => $value) {
+    $_SESSION[$key] = filterParameters($value);
+}
+
+// Prévention contre les injection SQL dans les variables FILES
+foreach ($_FILES as $key => $value) {
+    $_FILES[$key] = filterParameters($value);
+}
+
+// ----------------------------------------------------------------------------
+// Variables globales
+
+$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
+$baseSite = "http://localhost:8888/";
+
+?>

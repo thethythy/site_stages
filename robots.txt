@@ -1,0 +1,2 @@
+Sitemap : http://info-stages.univ-lemans.fr/sitemap.xml
+User-Agent: *

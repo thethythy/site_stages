@@ -1,0 +1,62 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Localisation du lieu de stage</title>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAf0WI2NblrXmU80Z-QiDGyxS1VhFXbuALaeEJN3GbbpdGlNBKjxRxkE7gb_qWeeeJs6J-zlTjvAQLOg" type="text/javascript"/>
+	<script type="text/javascript">
+
+	var geocoder = null;
+	var map = null;
+
+	function showAddress(address) {
+		geocoder.getLatLng(
+			address,
+			function(point) {
+				if (!point) {
+					alert(address + " not found");
+				} else {
+					map.setCenter(point, 13);
+					var marker = new GMarker(point);
+					map.addOverlay(marker);
+					marker.openInfoWindowHtml(address);
+				}
+			}
+		);
+	}
+
+	function getget(name) {
+		var q = document.location.search;
+		var i = q.indexOf(name + '=');
+		if (i == -1) {
+			return false;
+		}
+		var r = q.substr(i + name.length + 1, q.length - i - name.length - 1);
+		i = r.indexOf('&');
+		if (i != -1) {
+			r = r.substr(0, i);
+		}
+		return r.replace(/\\+/g, ' ');
+	}	
+
+	function initialize() {
+		if (GBrowserIsCompatible()) {
+			//alert(decodeURIComponent(getget("adr")));
+			geocoder = new GClientGeocoder();
+			map = new GMap2(document.getElementById("map_canvas"));
+			map.setUIToDefault();
+			showAddress(decodeURIComponent(getget("adr")));
+		}
+	}
+
+	</script>
+</head>
+
+<body align="center" onload="initialize()" onunload="GUnload()">
+	<br/>
+	<br/>
+	<br/>
+	<div id="map_canvas" style="left:30%; width: 500px; height: 300px"></div>
+</body>
+
+</html>
