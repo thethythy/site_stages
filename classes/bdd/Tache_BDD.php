@@ -2,7 +2,7 @@
 
 class Tache_BDD {
 
-    /* Méthodes statiques */
+    /* MÃ©thodes statiques */
 
     public static function save($tache) {
         global $tab21;
@@ -30,7 +30,7 @@ class Tache_BDD {
         global $tab21;
         global $db;
 
-        $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC;";
+        $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC";
         $result = mysql_query($sql, $db);
 
         $tabTache = array();
