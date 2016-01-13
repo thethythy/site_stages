@@ -55,8 +55,8 @@ if (sizeof($tabPromos) > 0) {
 		<form method="POST">
 			<table>
 				<tr id="entete">
-					<td width="40%">Etudiant</td>
-					<td width="60%" align="center">Statut</td>
+					<td width="30%">Etudiant</td>
+					<td width="70%" align="center">Statut</td>
 				</tr>
 		<?php
 
@@ -92,8 +92,10 @@ if (sizeof($tabPromos) > 0) {
 				break;
 			    case "5":
 				$nbAlters++;
+				break;
 			    case "6":
 				$nbRechs++;
+				break;
 			    default:
 				break;
 			}
