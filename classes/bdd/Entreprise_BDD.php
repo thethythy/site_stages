@@ -19,11 +19,11 @@ class Entreprise_BDD {
 						      '" . $entreprise->getPays() . "',
 						      '" . $entreprise->getEmail() . "');";
 
-	    $req = mysql_query($sql, $db);
+	    $req = $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
-	    $req = mysql_query($sql2);
-	    $result = mysql_fetch_assoc($req);
+	    $req = $db->query($sql2);
+	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab6 SET nom='" . $entreprise->getNom() . "',
@@ -33,7 +33,7 @@ class Entreprise_BDD {
 				     pays='" . $entreprise->getPays() . "',
 				     email='" . $entreprise->getEmail() . "'
 		    WHERE identreprise ='" . $entreprise->getIdentifiantBDD() . "'";
-	    $req = mysql_query($sql, $db);
+	    $req = $db->query($sql);
 
 	    return $entreprise->getIdentifiantBDD();
 	}
@@ -49,11 +49,11 @@ class Entreprise_BDD {
 	global $db;
 
 	$sql = "SELECT * FROM " . $tab6 . " WHERE identreprise='$identifiantBDD';";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
 	if ($req == FALSE) {
 	    return FALSE;
 	}
-	return mysql_fetch_assoc($req);
+	return mysqli_fetch_array($req);
     }
 
     /**
@@ -71,11 +71,11 @@ class Entreprise_BDD {
 	    $requete = "SELECT * FROM $tab6 WHERE " . $filtres->getStrFiltres() . " ORDER BY nom ASC;";
 
 	//echo $requete."<br/>";
-	$result = mysql_query($requete, $db);
+	$result = $db->query($req);
 
 	$tabEntreprises = array();
 
-	while ($entreprise = mysql_fetch_assoc($result)) {
+	while ($entreprise = mysqli_fetch_array($result)) {
 	    $tab = array();
 	    array_push($tab, $entreprise["identreprise"]);
 	    array_push($tab, $entreprise["nom"]);
@@ -96,7 +96,7 @@ class Entreprise_BDD {
 
 	$sql = "DELETE FROM $tab6 WHERE identreprise='$identifiantBDD'";
 	//echo $sql."<br/>";
-	mysql_query($sql, $db);
+	$db->query($sql);
     }
 
     public static function existe($ent) {
@@ -108,9 +108,9 @@ class Entreprise_BDD {
 				AND ville LIKE '" . $ent->getVille() . "'
 				AND pays LIKE '" . $ent->getPays() . "'";
 	//echo $sql."<br/>";
-	$result = mysql_query($sql, $db);
+	$result = $db->query($sql);
 
-	if (mysql_num_rows($result) == 0)
+	if (mysqli_num_rows($result) == 0)
 	    return false;
 	else
 	    return true;

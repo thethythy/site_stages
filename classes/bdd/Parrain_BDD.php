@@ -25,7 +25,7 @@ class Parrain_BDD{
 						idcouleur='".$couleur->getIdentifiantBDD()."'
 						WHERE idparrain=".$parrain->getIdentifiantBDD();
 		}
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 	}
 
 	public static function getParrain($identifiant){
@@ -34,19 +34,19 @@ class Parrain_BDD{
 
 		$result=array();
 		$sql = "SELECT * FROM $tab14 WHERE idparrain='$identifiant';";
-		$req = @mysql_query($sql,$db);
-		return @mysql_fetch_array($req);
+		$req = @$db->query($sql);
+		return @mysqli_fetch_array($req);
 	}
 
 	public static function listerParrain(){
 		global $tab14;
 		global $db;
 		$sql = "SELECT * FROM $tab14 ORDER BY nomparrain ASC;";
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 
 		$tabParrain = array();
 
-		while ($parrain = mysql_fetch_assoc($result)){
+		while ($parrain = mysqli_fetch_array($result)){
 			$tab = array();
 			array_push($tab, $parrain["idparrain"]);
 			array_push($tab, $parrain["nomparrain"]);
@@ -62,7 +62,7 @@ class Parrain_BDD{
 	public static function delete($identifiantBDD){
 		global $tab14;
 		$sql = "DELETE FROM $tab14 WHERE idparrain='$identifiantBDD'";
-		mysql_query($sql);
+		$db->query($sql);
 	}
 }
 ?>

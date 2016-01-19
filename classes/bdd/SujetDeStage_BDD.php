@@ -21,7 +21,7 @@ class SujetDeStage_BDD {
 					    '".$etudiant->getIdentifiantBDD()."',
 					    '".$promotion->getIdentifiantBDD()."')";
 			//echo $requete."<br/>";
-			mysql_query($requete, $db);
+			$db->query($requete);
 		}else{
 			// Mise à jour du Sujet de Stage
 			$requete = "UPDATE $tab18 SET description = '".$sds->getDescription()."',
@@ -31,7 +31,7 @@ class SujetDeStage_BDD {
 						      idpromotion = '".$promotion->getIdentifiantBDD()."'
 				    WHERE idsujetdestage = '".$sds->getIdentifiantBDD()."'";
 			//echo $requete."<br/>";
-			mysql_query($requete, $db);
+			$db->query($requete);
 		}
 
 	}
@@ -43,9 +43,9 @@ class SujetDeStage_BDD {
 
 		$requete = "SELECT * FROM $tab18 WHERE idsujetdestage='$id'";
 
-		$result = mysql_query($requete, $db);
+		$result = $db->query($requete);
 
-		return mysql_fetch_assoc($result);
+		return mysqli_fetch_array($result);
 	}
 
 	public static function getListeSujetDeStage($filtres){
@@ -58,11 +58,11 @@ class SujetDeStage_BDD {
 			$requete = "SELECT * FROM $tab18 WHERE ".$filtres->getStrFiltres();
 
 		//echo $requete."<br/>";
-		$result = mysql_query($requete, $db);
+		$result = $db->query($requete);
 
 		$tabSujetDeStage = array();
 
-		while ($sds = mysql_fetch_array($result, MYSQL_ASSOC)){
+		while ($sds = mysqli_fetch_array($result, MYSQL_ASSOC)){
 			$tab = array();
 			array_push($tab, $sds["idsujetdestage"]);
 			array_push($tab, $sds["idetudiant"]);
@@ -81,8 +81,8 @@ class SujetDeStage_BDD {
 		global $db;
 
 		$requete = "SELECT idsujetdestage FROM $tab18 WHERE idpromotion='$idPromotion' AND idetudiant='$idEtudiant'";
-		$result = mysql_query($requete, $db);
-		$result2 = mysql_fetch_assoc($result);
+		$result = $db->query($requete);
+		$result2 = mysqli_fetch_array($result);
 		return $result2[0];
 	}
 
@@ -91,7 +91,7 @@ class SujetDeStage_BDD {
 		global $db;
 
 		$sql = "DELETE FROM $tab18 WHERE idsujetdestage='$identifiantBDD'";
-		mysql_query($sql,$db);
+		$db->query($sql);
 	}
 
 }

@@ -12,7 +12,7 @@ class DateSoutenance_BDD {
 	    $sql = "UPDATE $tab5 SET jour='" . $dateSoutenance->getJour() . "', mois='" . $dateSoutenance->getMois() . "', annee='" . $dateSoutenance->getAnnee() . "'
 		    WHERE iddatesoutenance=" . $dateSoutenance->getIdentifiantBDD();
 	}
-	$result = mysql_query($sql, $db);
+	$result = $db->query($sql);
 	return ($dateSoutenance->getIdentifiantBDD() != "") ? $dateSoutenance->getIdentifiantBDD() : mysql_insert_id($db);
     }
 
@@ -23,7 +23,7 @@ class DateSoutenance_BDD {
 	DateSoutenance_BDD::deleteDatePromo($idDateSoutenance);
 	foreach ($promos as $promo) {
 	    $sql = "INSERT INTO $tab1 (iddatesoutenance, idpromotion) VALUES ('$idDateSoutenance', $promo);";
-	    $result = mysql_query($sql, $db);
+	    $result = $db->query($sql);
 	}
     }
 
@@ -33,8 +33,8 @@ class DateSoutenance_BDD {
 
 	$result = array();
 	$sql = "SELECT * FROM $tab5 WHERE iddatesoutenance='$identifiant';";
-	$req = mysql_query($sql, $db);
-	return mysql_fetch_array($req);
+	$req = $db->query($sql);
+	return mysqli_fetch_array($req);
     }
 
     public static function listerDateSoutenance($filtres) {
@@ -47,10 +47,10 @@ class DateSoutenance_BDD {
 	    $sql = "SELECT * FROM $tab5 WHERE " . $filtres->getStrFiltres() . " ORDER BY annee,mois,jour ASC;";
 
 	//echo $sql;
-	$result = mysql_query($sql, $db);
+	$result = $db->query($sql);
 	$tabDateSoutenance = array();
 
-	while ($dateSoutenance = mysql_fetch_assoc($result)) {
+	while ($dateSoutenance = mysqli_fetch_array($result)) {
 	    $tab = array();
 	    array_push($tab, $dateSoutenance["iddatesoutenance"]);
 	    array_push($tab, $dateSoutenance["jour"]);
@@ -67,10 +67,10 @@ class DateSoutenance_BDD {
 	global $db;
 
 	$sql = "SELECT idpromotion,iddatesoutenance FROM $tab1 WHERE iddatesoutenance='$idDate';";
-	$result = mysql_query($sql, $db);
+	$result = $db->query($sql);
 
 	$tabIdPromo = array();
-	while ($idpromo = mysql_fetch_row($result)) {
+	while ($idpromo = mysqli_fetch_row($result)) {
 	    array_push($tabIdPromo, $idpromo[0]);
 	}
 
@@ -80,14 +80,14 @@ class DateSoutenance_BDD {
     public static function delete($identifiantBDD) {
 	global $tab5;
 	$sql = "DELETE FROM $tab5 WHERE iddatesoutenance='$identifiantBDD';";
-	$result = mysql_query($sql);
-    }
+	$result = $db->query($sql);
+	  }
 
     public static function deleteDatePromo($identifiantBDD) {
 	global $tab1;
 	$sql = "DELETE FROM $tab1 WHERE iddatesoutenance='$identifiantBDD';";
-	$result = mysql_query($sql);
-    }
+	$result = $db->query($sql);
+	  }
 
 }
 

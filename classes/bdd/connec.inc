@@ -28,13 +28,17 @@ $tab20 = 'couleur';
 $tab21 = 'taches';
 
 function deconnexion() {
-    mysql_close();
+	global $db;
+    mysqli_close($db);
 }
 
 // ----------------------------------------------------------------------------
 // Préventions contre les injections SQL
 
 function filterParameters($param) {
+
+	global $db;
+
     // Est-ce que le paramètre est un tableau ?
     if (is_array($param)) {
 		// Alors parcourir le tableau
@@ -47,20 +51,20 @@ function filterParameters($param) {
 	    	// Est-ce que le paramètre est une chaîne ?
 	    	if (is_string($param[$key]))
 				// Alors échaper le paramètre
-				$param[$key] = mysql_real_escape_string($param[$key]);
+				$param[$key] = mysqli_real_escape_string($db,$param[$key]);
 		}
-    }
+    }	
 
     // Est-ce que le paramètre est une chaîne ?
     if (is_string($param))
 		// Alors échaper le paramètre
-		$param = mysql_real_escape_string($param);
+		$param = $db->real_escape_string($param);
 
     // Return the filtered result
     return $param;
 }
 
-mysql_set_charset("iso-8859-1");
+mysqli_set_charset($db,"iso-8859-1");
 
 // Prévention contre les injection SQL dans les variables POST
 foreach ($_POST as $key => $value) {

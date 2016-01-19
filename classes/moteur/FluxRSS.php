@@ -122,7 +122,7 @@ class FluxRSS {
 	// Suppression du fichier XML contenant le flux et suppression du contenu de la base
 	public static function deleteFlux() {
 		if (@unlink("../../flux/fluxrss.xml")) {
-			return mysql_query("TRUNCATE TABLE fluxrss");
+			return $db->query("TRUNCATE TABLE fluxrss");
 		}
 		return false;
 	}
@@ -138,8 +138,8 @@ class FluxRSS {
 		$file = FluxRSS::createXML();
 
 		// Ajout des news déjà existantes dans la base
-		$query_news = mysql_query("SELECT * FROM fluxrss") or die();
-		while ($data_news = mysql_fetch_array($query_news)) {
+		$query_news = $db->query("SELECT * FROM fluxrss") or die();
+		while ($data_news = mysqli_fetch_array($query_news)) {
 			FluxRSS::addOneNews($file, $data_news['title'], $data_news['link'], $data_news['timestamp'], $data_news['author'], $data_news['contents']);
 		}
 
@@ -150,7 +150,7 @@ class FluxRSS {
 	// Mise à jour du flux
 	public static function miseAJour($title, $link, $timestamp, $contents, $author) {
 		// Ajout de la news dans la base de données
-		mysql_query("INSERT INTO fluxrss (title, link, timestamp, contents, author) VALUES ('" . $title . "','" . $link . "','" . $timestamp . "','" . $contents . "','" . $author . "')") or die();
+		$db->query("INSERT INTO fluxrss (title, link, timestamp, contents, author) VALUES ('" . $title . "','" . $link . "','" . $timestamp . "','" . $contents . "','" . $author . "')") or die();
 
 		// Ouverture du fichier
 		$file = FluxRSS::openFluxXML();
