@@ -21,9 +21,10 @@ class Tache_BDD {
     public static function getTaches() {
         global $tab21;
         global $db;
+
         $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC";
-        //$result = mysql_query($sql, $db);
         $result = $db->query($sql);
+
         $tabTache = array();
         while ($tache = $result->fetch_assoc()) {
             $tab = array();
