@@ -1,9 +1,8 @@
 <?php
-
-// Connexion à la base
-$db = mysql_connect('localhost','root','glaedr') or die("Impossible de se connecter : " . mysql_error());
-
-// Sélection de la base
-mysql_select_db('stages', $db) or die("Impossible de trouver la base : " . mysql_error());;
-
+// Connexion et s�lection de la base
+$db = new mysqli('localhost','root','', 'stages');
+if ($db->connect_errno) {
+    echo "Echec lors de connexion (" . $db->connect_errno . ") " . $db->connect_error;
+}
+echo "Informations sur la database : " . $db->host_info . "\n";
 ?>

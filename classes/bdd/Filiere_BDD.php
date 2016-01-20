@@ -13,9 +13,9 @@ class Filiere_BDD {
 	global $db;
 	$sql = "SELECT * FROM $tab10 WHERE idfiliere='$identifiantBDD'";
 	//echo "getFiliere : $sql<br/>";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
 	//if (!$req) echo "KO Filiere_BDD::getFiliere : $sql<br/>"; else echo "OK getFiliere : $sql<br/>";
-	return mysql_fetch_assoc($req);
+	return mysqli_fetch_array($req);
     }
 
     /**
@@ -28,11 +28,11 @@ class Filiere_BDD {
 
 	$result = array();
 	$sql = "SELECT * FROM $tab10 ORDER BY nomfiliere ASC";
-	$result = mysql_query($sql, $db);
+	$result = $db->query($sql);
 
 	$tabFilieres = array();
 
-	while ($filiere = mysql_fetch_assoc($result)) {
+	while ($filiere = mysqli_fetch_array($result)) {
 	    $tab = array();
 	    array_push($tab, $filiere["idfiliere"]);
 	    array_push($tab, $filiere["nomfiliere"]);
@@ -52,16 +52,16 @@ class Filiere_BDD {
 	if ($f->getIdentifiantBDD() == "") {
 	    // Création d'une filière
 	    $requete = "INSERT INTO $tab10(nomfiliere, temps_soutenance) VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ")";
-	    mysql_query($requete, $db);
+	    $db->query($req);
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab10";
-	    $req = mysql_query($sql2);
-	    $result = mysql_fetch_assoc($req);
+	    $req = $db->query($sql);
+	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
 	    // Mise à jour d'une filière
 	    $requete = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "'
 			WHERE idfiliere = '" . $f->getIdentifiantBDD() . "'";
-	    mysql_query($requete, $db);
+	    $db->query($req);
 	    return $f->getIdentifiantBDD();
 	}
     }

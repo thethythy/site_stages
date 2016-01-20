@@ -19,11 +19,11 @@ class Contact_BDD {
 						'" . $contact->getTelecopie() . "',
 						'" . $contact->getEmail() . "',
 						'" . $entreprise->getIdentifiantBDD() . "');";
-	    mysql_query($sql, $db);
+	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab3";
-	    $req = mysql_query($sql2);
-	    $result = mysql_fetch_assoc($req);
+	    $req = $db->query($sql2);
+	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab3 SET nomcontact = '" . $contact->getNom() . "',
@@ -34,7 +34,7 @@ class Contact_BDD {
 				     identreprise = '" . $entreprise->getIdentifiantBDD() . "'
 		    WHERE idcontact = '" . $contact->getIdentifiantBDD() . "'";
 
-	    mysql_query($sql, $db);
+	    $db->query($sql);
 	    return $contact->getIdentifiantBDD();
 	}
     }
@@ -50,8 +50,8 @@ class Contact_BDD {
 
 	$result = array();
 	$sql = "SELECT * FROM $tab3 WHERE idcontact = '" . $identifiantBDD . "'";
-	$req = mysql_query($sql, $db);
-	return mysql_fetch_assoc($req);
+	$req = $db->query($sql);
+	return mysqli_fetch_array($req);
     }
 
     public static function supprimerContact($identifiantBDD) {
@@ -60,7 +60,7 @@ class Contact_BDD {
 
 	$sql = "DELETE FROM $tab3 WHERE idcontact='".$identifiantBDD."'";
 	//echo $sql."<br/>";
-	mysql_query($sql, $db);
+	$db->query($sql);
     }
 
     /**
@@ -75,8 +75,8 @@ class Contact_BDD {
 
 	$result = array();
 	$sql = "SELECT * FROM " . $tab3 . " WHERE identreprise = '" . $identifiantEntreprise . "' ORDER BY nomcontact ASC;";
-	$req = mysql_query($sql, $db);
-	while ($data = mysql_fetch_assoc($req)) {
+	$req = $db->query($sql);
+	while ($data = mysqli_fetch_array($req)) {
 	    $tab = array();
 	    array_push($tab, $data["idcontact"]);
 	    array_push($tab, $data["nomcontact"]);
@@ -105,11 +105,11 @@ class Contact_BDD {
 	    $requete = "SELECT * FROM $tab3 WHERE " . $filtres->getStrFiltres() . " ORDER BY nomcontact ASC;";
 
 	//echo $requete."<br/>";
-	$result = mysql_query($requete, $db);
+	$result = $db->query($requete);
 
 	$tabContacts = array();
 
-	while ($contact = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	while ($contact = mysqli_fetch_array($result, MYSQL_ASSOC)) {
 	    $tab = array();
 	    array_push($tab, $contact["idcontact"]);
 	    array_push($tab, $contact["nomcontact"]);
