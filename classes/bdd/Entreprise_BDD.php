@@ -17,13 +17,16 @@ class Entreprise_BDD {
 						      '" . $entreprise->getCodePostal() . "',
 						      '" . $entreprise->getVille() . "',
 						      '" . $entreprise->getPays() . "',
-						      '" . $entreprise->getEmail() . "');";
+						      '" . $entreprise->getEmail() . "',
+         					  '2')"; // ici on doit mettre getType.....
 
 	    $req = $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
 	    $req = $db->query($sql2);
 	    $result = mysqli_fetch_array($req);
+	    /*$result = $req->fetch_array(MYSQLI_BOTH);
+	    printf ("%s (%s)\n", $row[0], $row["CountryCode"]);*/
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab6 SET nom='" . $entreprise->getNom() . "',
@@ -31,7 +34,8 @@ class Entreprise_BDD {
 				     codepostal='" . $entreprise->getCodePostal() . "',
 				     ville='" . $entreprise->getVille() . "',
 				     pays='" . $entreprise->getPays() . "',
-				     email='" . $entreprise->getEmail() . "'
+				     email='" . $entreprise->getEmail() . "',
+				     type='" . $entreprise->getType() . "'
 		    WHERE identreprise ='" . $entreprise->getIdentifiantBDD() . "'";
 	    $req = $db->query($sql);
 
@@ -71,7 +75,7 @@ class Entreprise_BDD {
 	    $requete = "SELECT * FROM $tab6 WHERE " . $filtres->getStrFiltres() . " ORDER BY nom ASC;";
 
 	//echo $requete."<br/>";
-	$result = $db->query($req);
+	$result = $db->query($requete);
 
 	$tabEntreprises = array();
 
