@@ -20,24 +20,27 @@ include_once $chemin.'moteur/Parcours.php';
 
 
 
-$etudiant = Etudiant::getEtudiant($_GET['idEtu']);
+//$etudiant = Etudiant::getEtudiant($_GET['idEtu']);
 $promotion = Promotion::getPromotion($_GET['idPromo']);
 
 /* recuperation des donnees entreprises */
-$entreprise = $contact->getEntreprise();
-$parrain = $convention->getParrain();
+//$entreprise = $contact->getEntreprise();
+//$parrain = $convention->getParrain();
 
 /* recuperation des donnees etudiants */
-$contact = $convention->getContact();
-$filiere = $promotion->getFiliere();
-$parcours = $promotion->getParcours();
+//$contact = $convention->getContact();
+//$filiere = $promotion->getFiliere();
+//$parcours = $promotion->getParcours();
 
 /* recuperation des donnees soutenance */
 
 
 /* recuperation des donnees stage */
-$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
-
+//$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
+echo "<div id='data'>\n";
+echo "truc";
+echo $promotion ;
+echo "\n</div>";
 
 
 
