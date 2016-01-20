@@ -10,8 +10,9 @@ class Convention {
 	var $idEtudiant;
 	var $idSoutenance;
 	var $idContact;
+	var $themeStage; //Ajout de la variable themeStage pour l'ajout du theme de stage.
 
-	public function Convention($identifiant_BDD,$sujetDeStage,$aSonResume,$note,$idParrain,$idExaminateur,$idEtudiant,$idSoutenance,$idContact){
+	public function Convention($identifiant_BDD,$sujetDeStage,$aSonResume,$note,$idParrain,$idExaminateur,$idEtudiant,$idSoutenance,$idContact,$themeStage){
 		$this->identifiant_BDD = $identifiant_BDD;
 		$this->sujetDeStage = $sujetDeStage;
 		$this->aSonResume = $aSonResume;
@@ -21,6 +22,7 @@ class Convention {
 		$this->idEtudiant = $idEtudiant;
 		$this->idSoutenance = $idSoutenance;
 		$this->idContact = $idContact;
+		$this->themeStage = $themeStage; //Ajout du theme de stage dans le constructeur. ------------
 	}
 
 	public function setSujetDeStage($sds) {
@@ -53,6 +55,16 @@ class Convention {
 
 	public function setIdContact($idContact) {
 		$this->idContact = $idContact;
+	}
+
+	// Ajout du setter du theme de stage ---------------------------------------------------------
+	public function setThemeStage($themeStage){
+		$this->themeStage = $themeStage;
+	}
+
+	//Ajout du getter du theme de stage ----------------------------------------------------------
+	public function getThemeStage(){
+		return $this->themeStage;
 	}
 
 	public function getSujetDeStage() {
@@ -128,28 +140,32 @@ class Convention {
 		Convention_BDD::supprimerConvention($idConvention, $etu->getIdentifiantBDD(), $idPromo);
 	}
 
+	//Ajour de ', $convBDD["themeStage"]'
 	public static function getConvention($idConvention){
 		$convBDD = Convention_BDD::getConvention($idConvention);
-		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"]);
+		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["themeStage"]);
 	}
 
-	public static function getConventionFromEtudiantAndPromotion($idetudiant, $idpromotion) {
+	//Ajour de ', $convBDD["themeStage"]'
+	public static function getConventionFromEtudiantAndPromotion($idetudiant, $idpromotion) { 
 		$convBDD = Convention_BDD::getConvention2($idetudiant, $idpromotion);
-		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"]);
+		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["themeStage"]);
 	}
 
+	//Ajout de ', $tabLCString[$i][9]'
 	public static function getListeConvention($filtres){
 		$tabLCString = Convention_BDD::getListeConvention($filtres);
 
 		$tabLC = array();
 		for($i=0; $i<sizeof($tabLCString); $i++)
-			array_push($tabLC, new Convention($tabLCString[$i][0], $tabLCString[$i][1], $tabLCString[$i][2], $tabLCString[$i][3], $tabLCString[$i][4], $tabLCString[$i][5], $tabLCString[$i][6], $tabLCString[$i][7], $tabLCString[$i][8]));
+			array_push($tabLC, new Convention($tabLCString[$i][0], $tabLCString[$i][1], $tabLCString[$i][2], $tabLCString[$i][3], $tabLCString[$i][4], $tabLCString[$i][5], $tabLCString[$i][6], $tabLCString[$i][7], $tabLCString[$i][8], $tabLCString[$i][9]));
 
 		return $tabLC;
 	}
 
+	//Ajout de ',$tab_donnees[$i][8]'
 	public static function saisirDonneesConvention($tab_donnees){
-		$conv = new Convention("",$tab_donnees[0],$tab_donnees[1],$tab_donnees[2],$tab_donnees[3],$tab_donnees[4],$tab_donnees[5],$tab_donnees[6],$tab_donnees[7]);
+		$conv = new Convention("",$tab_donnees[0],$tab_donnees[1],$tab_donnees[2],$tab_donnees[3],$tab_donnees[4],$tab_donnees[5],$tab_donnees[6],$tab_donnees[7],$tab_donnees[$i][8]);
 		Convention_BDD::sauvegarder($conv);
 	}
 
