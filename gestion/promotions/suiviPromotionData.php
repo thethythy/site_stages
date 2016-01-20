@@ -55,13 +55,14 @@ if (sizeof($tabPromos) > 0) {
 		<form method="POST">
 			<table>
 				<tr id="entete">
-					<td width="40%">Etudiant</td>
-					<td width="60%" align="center">Statut</td>
+					<td width="30%">Etudiant</td>
+					<td width="70%" align="center">Statut</td>
 				</tr>
 		<?php
 
 		$nbEtudiants = sizeof($tabEtudiants);
 		$nbAlters = 0;
+		$nbRechs = 0;
 		$nbConvSignees = 0;
 		$nbConvEnCours = 0;
 		$nbDesPistes = 0;
@@ -91,6 +92,10 @@ if (sizeof($tabPromos) > 0) {
 				break;
 			    case "5":
 				$nbAlters++;
+				break;
+			    case "6":
+				$nbRechs++;
+				break;
 			    default:
 				break;
 			}
@@ -108,6 +113,7 @@ if (sizeof($tabPromos) > 0) {
 							<option value="3" <?php if ($statut == "3") echo "selected"; ?> >En signature</option>
 							<option value="4" <?php if ($statut == "4") echo "selected"; ?> >Signée</option>
 							<option value="5" <?php if ($statut == "5") echo "selected"; ?> >Alternant</option>
+							<option value="6" <?php if ($statut == "6") echo "selected"; ?> >Recherche</option>
 						</select>
 					</td>
 				</tr>
@@ -119,12 +125,13 @@ if (sizeof($tabPromos) > 0) {
 						Total : <?php echo $nbEtudiants; ?>
 					</td>
 					<td align="center">
-						Indéfini : <?php echo $nbIndefinis; ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						Rien : <?php echo $nbRiens; ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						Des pistes : <?php echo $nbDesPistes; ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						En cours : <?php echo $nbConvEnCours; ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						Signées : <?php echo $nbConvSignees; ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						Alternants : <?php echo $nbAlters; ?>
+						Indéfini : <?php echo $nbIndefinis; ?>&nbsp;&nbsp;&nbsp;
+						Rien : <?php echo $nbRiens; ?>&nbsp;&nbsp;&nbsp;
+						Des pistes : <?php echo $nbDesPistes; ?>&nbsp;&nbsp;&nbsp
+						En cours : <?php echo $nbConvEnCours; ?>&nbsp;&nbsp;&nbsp
+						Signées : <?php echo $nbConvSignees; ?>&nbsp;&nbsp;&nbsp
+						Alternants : <?php echo $nbAlters; ?>&nbsp;&nbsp;&nbsp;
+						Recherche : <?php echo $nbRechs; ?>
 					</td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>
