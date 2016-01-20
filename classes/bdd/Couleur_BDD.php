@@ -4,51 +4,51 @@ class Couleur_BDD {
     /** Méthodes statiques **/
 
     public static function sauvegarder($couleur) {
-	global $tab20;
-	global $db;
+		global $tab20;
+		global $db;
 
-	if ($couleur->getIdentifiantBDD() == "") {
-	    $sql = "INSERT INTO $tab20 VALUES ('" . $couleur->getIdentifiantBDD() . "', '" . $couleur->getNom() . "', '" . $couleur->getCode() . "')";
-	} else {
-	    $sql = "UPDATE $tab20 SET nomcouleur='" . $couleur->getNom() . "', codehexa='" . $couleur->getCode() . "' WHERE idcouleur='" . $couleur->getIdentifiantBDD() . "'";
-	}
-	$result = mysql_query($sql, $db);
+		if ($couleur->getIdentifiantBDD() == "") {
+		    $sql = "INSERT INTO $tab20 VALUES ('" . $couleur->getIdentifiantBDD() . "', '" . $couleur->getNom() . "', '" . $couleur->getCode() . "')";
+		} else {
+		    $sql = "UPDATE $tab20 SET nomcouleur='" . $couleur->getNom() . "', codehexa='" . $couleur->getCode() . "' WHERE idcouleur='" . $couleur->getIdentifiantBDD() . "'";
+		}
+		$result = $db->query($sql);
     }
 
     public static function getCouleur($identifiant) {
-	global $tab20;
-	global $db;
+		global $tab20;
+		global $db;
 
-	$result = array();
-	$sql = "SELECT * FROM $tab20 WHERE idcouleur='$identifiant';";
-	$req = mysql_query($sql, $db);
-	return mysql_fetch_array($req);
+		$result = array();
+		$sql = "SELECT * FROM $tab20 WHERE idcouleur='$identifiant';";
+		$req = $db->query($sql);
+		return mysqli_fetch_array($req);
     }
 
     public static function listerCouleur() {
-	global $tab20;
-	global $db;
-	$sql = "SELECT * FROM $tab20 ORDER BY nomcouleur ASC;";
-	$result = mysql_query($sql, $db);
+		global $tab20;
+		global $db;
+		$sql = "SELECT * FROM $tab20 ORDER BY nomcouleur ASC;";
+		$result = $db->query($sql);
 
-	$tabCouleur = array();
+		$tabCouleur = array();
 
-	while ($couleur = mysql_fetch_assoc($result)) {
-	    $tab = array();
-	    array_push($tab, $couleur["idcouleur"]);
-	    array_push($tab, $couleur["nomcouleur"]);
-	    array_push($tab, $couleur["codehexa"]);
-	    array_push($tabCouleur, $tab);
-	}
+		while ($couleur = mysqli_fetch_array($result)) {
+		    $tab = array();
+		    array_push($tab, $couleur["idcouleur"]);
+		    array_push($tab, $couleur["nomcouleur"]);
+		    array_push($tab, $couleur["codehexa"]);
+		    array_push($tabCouleur, $tab);
+		}
 
-	return $tabCouleur;
+		return $tabCouleur;
     }
 
     public static function delete($identifiantBDD) {
-	global $tab20;
-	$sql = "DELETE FROM $tab20 WHERE idcouleur='" . $identifiantBDD . "';";
-	$result = mysql_query($sql);
-    }
+		global $tab20;
+		$sql = "DELETE FROM $tab20 WHERE idcouleur='" . $identifiantBDD . "';";
+		$result = $db->query($sql);
+	}
 
 }
 

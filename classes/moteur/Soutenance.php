@@ -83,7 +83,7 @@ class Soutenance {
 	public static function listerSoutenanceFromSalleAndDate($salle, $date) {
 		$tabSString = Soutenance_BDD::listerSoutenanceFromSalleAndDate($salle->getIdentifiantBDD(), $date->getIdentifiantBDD());
 		$tabS = array();
-		while($soutenance = mysql_fetch_row($tabSString))
+		while($soutenance = mysqli_fetch_row($tabSString))
 			array_push($tabS, new Soutenance($soutenance[0], $soutenance[4], $soutenance[5], $soutenance[1], $soutenance[2], $soutenance[3]));
 		return $tabS;
 	}
@@ -101,7 +101,7 @@ class Soutenance {
 	public static function listerSoutenancesFromAnnee($annee) {
 		$tabSString = Soutenance_BDD::listerSoutenanceFromAnnee($annee);
 		$tabS = array();
-		while($soutenance = mysql_fetch_row($tabSString))
+		while($soutenance = mysqli_fetch_row($tabSString))
 			array_push($tabS, new Soutenance($soutenance[0], $soutenance[4], $soutenance[5], $soutenance[1], $soutenance[2], $soutenance[3]));
 		return $tabS;
 	}

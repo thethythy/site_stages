@@ -1,41 +1,32 @@
 <?php
-
 class Tache_BDD {
-
-    /* MÃ©thodes statiques */
-
+    /* Méthodes statiques */
     public static function save($tache) {
         global $tab21;
         global $db;
-
         if ($tache->getIdentifiantBDD() == "") {
             $sql = "INSERT INTO $tab21 VALUES ('" . $tache->getIdentifiantBDD() . "', '" . $tache->getIntitule() . "', '" . $tache->getStatut() . "', '" . $tache->getPriorite() . "', '" . $tache->getDateLimite() . "')";
         } else {
             $sql = "UPDATE $tab21 SET intitule='" . $tache->getIntitule() . "', statut='" . $tache->getStatut() . "', priorite='" . $tache->getPriorite() . "', datelimite='" . $tache->getDateLimite() . "' WHERE idtache='" . $tache->getIdentifiantBDD() . "'";
         }
-
-        $result = mysql_query($sql, $db);
+        $result = mysqli_query($db, $sql);
     }
-
     public static function getTache($identifiant) {
         global $tab21;
         global $db;
-
         $sql = "SELECT * FROM $tab21 WHERE idtache='$identifiant'";
-        $result = mysql_query($sql, $db);
-	return mysql_fetch_array($result);
+        $result = mysqli_query($db, $sql);
+        return mysqli_fetch_array($result);
     }
-
     public static function getTaches() {
         global $tab21;
         global $db;
 
         $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC";
-        $result = mysql_query($sql, $db);
+        $result = $db->query($sql);
 
         $tabTache = array();
-
-        while ($tache = mysql_fetch_assoc($result)) {
+        while ($tache = $result->fetch_assoc()) {
             $tab = array();
             array_push($tab, $tache["idtache"]);
             array_push($tab, $tache["intitule"]);
@@ -46,14 +37,11 @@ class Tache_BDD {
         }
         return $tabTache;
     }
-
     public static function delete($identifiantBDD) {
         global $tab21;
         global $db;
         $sql = "DELETE FROM $tab21 WHERE idtache='$identifiantBDD'";
-        $result = mysql_query($sql, $db);
+        $result = mysqli_query($db, $sql);
     }
-
 }
-
 ?>
