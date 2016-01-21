@@ -21,7 +21,8 @@ include_once $chemin.'moteur/Parcours.php';
 
 
 //$etudiant = Etudiant::getEtudiant($_GET['idEtu']);
-$promotion = Promotion::getPromotion($_GET['idPromo']);
+$essai = array();
+$essai = Entreprise::getListeEntreprises("");
 
 /* recuperation des donnees entreprises */
 //$entreprise = $contact->getEntreprise();
@@ -39,7 +40,14 @@ $promotion = Promotion::getPromotion($_GET['idPromo']);
 //$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
 echo "<div id='data'>\n";
 echo "truc";
-echo $promotion ;
+if(sizeof($tabEntreprises)>0){
+	echo "table non vide" ;
+}
+else{
+	echo " table vide";
+	
+}
+//echo $essai[0]->getNom() ;
 echo "\n</div>";
 
 
