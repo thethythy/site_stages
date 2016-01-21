@@ -14,19 +14,19 @@ class Parcours_BDD {
 		$result=array();
 		$sql = "SELECT * FROM $tab13 WHERE idparcours='$identifiantBDD';";
 		//echo "getParcours : $sql<br/>";
-		$req = mysql_query($sql,$db);
-		return mysql_fetch_assoc($req);
+		$req = $db->query($sql);
+		return mysqli_fetch_array($req);
 	}
 
 	public static function listerParcours(){
 		global $tab13;
 		global $db;
 		$sql = "SELECT * FROM $tab13 ORDER BY nomparcours ASC;";
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 
 		$tabParcours = array();
 
-		while ($parcours = mysql_fetch_assoc($result)){
+		while ($parcours = mysqli_fetch_array($result)){
 			$tab = array();
 			array_push($tab, $parcours["idparcours"]);
 			array_push($tab, $parcours["nomparcours"]);
@@ -44,15 +44,15 @@ class Parcours_BDD {
 		if($p->getIdentifiantBDD() == ""){
 			// Création d'un parcours
 			$requete = "INSERT INTO $tab13(nomparcours) VALUES ('".$p->getNom()."')";
-			mysql_query($requete, $db);
+			$db->query($req, $db);
 			$sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab13";
-			$req = mysql_query($sql2);
-			$result = mysql_fetch_assoc($req);
+			$req = $db->query($sql);
+			$result = mysqli_fetch_array($req);
 			return $result['ID'];
 		} else {
 			// Mise à jour d'un parcours
 			$requete = "UPDATE $tab13 SET nomparcours = '".$p->getNom()."' WHERE idparcours = '".$p->getIdentifiantBDD()."'";
-			mysql_query($requete, $db);
+			$db->query($req, $db);
 			return $p->getIdentifiantBDD();
 		}
 	}

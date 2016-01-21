@@ -25,11 +25,11 @@ class Etudiant_BDD {
 			    '" . $etudiant->getEmailPersonnel() . "',
 			    '" . $etudiant->getCodeEtudiant() . "')";
 
-	    mysql_query($sql, $db);
+	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab9";
-	    $req = mysql_query($sql2);
-	    $result = mysql_fetch_assoc($req);
+	    $req = $db->query($sql);
+	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab9 SET
@@ -39,7 +39,7 @@ class Etudiant_BDD {
 			email_personnel='" . $etudiant->getEmailPersonnel() . "',
 			codeetudiant='" . $etudiant->getCodeEtudiant() . "'
 			WHERE idetudiant = '" . $etudiant->getIdentifiantBDD() . "'";
-	    mysql_query($sql, $db);
+	    $db->query($sql);
 	    return $etudiant->getIdentifiantBDD();
 	}
     }
@@ -54,8 +54,8 @@ class Etudiant_BDD {
 	global $db;
 
 	$sql = "SELECT * FROM $tab9 WHERE idetudiant='$identifiantBDD'";
-	$req = mysql_query($sql, $db);
-	return mysql_fetch_assoc($req);
+	$req = $db->query($sql);
+	return mysqli_fetch_array($req);
     }
 
     // Suppression d'un étudiant dans une promo --> Dans la table 'relation_promotion_etudiant_convention'
@@ -65,7 +65,7 @@ class Etudiant_BDD {
 
 	$sql = "DELETE FROM $tab19 WHERE idetudiant='$identifiantBDD' AND idpromotion='$idPromo'";
 	//echo $sql."<br/>";
-	mysql_query($sql, $db);
+	$db->query($sql);
     }
 
     // Suppression définitive d'un étudiant --> Dans la table 'etudiant'
@@ -75,7 +75,7 @@ class Etudiant_BDD {
 
 	$sql = "DELETE FROM $tab9 WHERE idetudiant='$identifiantBDD'";
 	//echo $sql."<br/>";
-	mysql_query($sql, $db);
+	$db->query($sql);
     }
 
     /**
@@ -92,12 +92,12 @@ class Etudiant_BDD {
 	$result = array();
 	$sql = "SELECT idetudiant FROM $tab19 WHERE idpromotion='$identifiantPromo'";
 	//echo "REQUETE 1 : ".$sql."<br/>";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
 
 	$sql2 = "SELECT * FROM $tab9 WHERE";
 	$aucunEtudiant = true;
 
-	while ($idEtu = mysql_fetch_array($req, MYSQL_ASSOC)) {
+	while ($idEtu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
 	    $aucunEtudiant = false;
 	    $sql2 .= " idetudiant='" . $idEtu["idetudiant"] . "' OR";
 	}
@@ -106,9 +106,9 @@ class Etudiant_BDD {
 	    $sql2 = substr_replace($sql2, "", -3, 3);
 	    $sql2 .= " ORDER BY nometudiant ASC;";
 	    //echo "REQUETE 2 : ".$sql2."<br/>";
-	    $req = mysql_query($sql2, $db);
+	    $req = $db->query($sqlb);
 
-	    while ($etu = mysql_fetch_array($req, MYSQL_ASSOC)) {
+	    while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
 		$tab = array();
 		array_push($tab, $etu["idetudiant"]);
 		array_push($tab, $etu["nometudiant"]);
@@ -132,7 +132,7 @@ class Etudiant_BDD {
 	global $db;
 
 	$sql = "INSERT INTO $tab19(idetudiant, idpromotion) VALUES ('$etu', '$promo')";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
     }
 
     /**
@@ -147,7 +147,7 @@ class Etudiant_BDD {
 
 	$sql = "UPDATE $tab19 SET idconvention = '$idconv'
 		WHERE idetudiant = '$idetu' AND idpromotion = '$idpromo'";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
     }
 
     public static function recherchePromotion($etu, $annee) {
@@ -161,8 +161,8 @@ class Etudiant_BDD {
 		AND $tab19.idpromotion = $tab15.idpromotion";
 
 	// echo "REQUETE : ".$sql."<br/>";
-	$req = mysql_query($sql, $db);
-	$result = mysql_fetch_assoc($req);
+	$req = $db->query($sql);
+	$result = mysqli_fetch_array($req);
 	// echo "RESULT : ".$result['idpromo']."<br/>";
 	return $result['idpromo'];
     }
@@ -180,8 +180,8 @@ class Etudiant_BDD {
 		AND $tab19.idconvention = $tab4.idconvention";
 
 	//echo "REQUETE : ".$sql."<br/>";
-	$req = mysql_query($sql, $db);
-	$result = mysql_fetch_assoc($req);
+	$req = $db->query($sql);
+	$result = mysqli_fetch_array($req);
 	//echo "Result : ".$result['idpromo']."<br/>";
 	return $result['idconv'];
     }
@@ -199,10 +199,10 @@ class Etudiant_BDD {
 	global $tab9;
 
 	$sql = "SELECT * FROM $tab9 WHERE nometudiant LIKE '$nom' AND prenometudiant LIKE '$prenom'";
-	$req = mysql_query($sql, $db);
+	$req = $db->query($sql);
 
 	$tabSEtudiants = array();
-	while ($etu = mysql_fetch_array($req, MYSQL_ASSOC)) {
+	while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
 	    $tab = array();
 	    array_push($tab, $etu["idetudiant"]);
 	    array_push($tab, $etu["nometudiant"]);

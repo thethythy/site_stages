@@ -2,15 +2,15 @@
 
 <?php
 
-$chemin = "/Applications/MAMP/htdocs/classes/";
+$chemin = "/Users/lemeunie/git-repository/site_stages/classes/";
 include_once($chemin . "bdd/Tache_BDD.php");
 include_once($chemin . "moteur/Tache.php");
 
-// Connexion à la base
-$db = mysql_connect('127.0.0.1:8889','','') or die("Impossible de se connecter : " . mysql_error());
-
-// Sélection de la base
-mysql_select_db('stages', $db) or die("Impossible de trouver la base : " . mysql_error());
+// Connexion et sélection de la base
+$db = new mysqli('localhost','root','', 'stages');
+if ($db->connect_errno) {
+    echo "Echec lors de connexion (" . $db->connect_errno . ") " . $db->connect_error;
+}
 
 // Table des tâches en base
 $tab21 = 'taches';

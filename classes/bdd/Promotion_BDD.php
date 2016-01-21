@@ -26,11 +26,11 @@ class Promotion_BDD {
 
 			//echo $sql."<br/>";
 
-			mysql_query($sql,$db);
+			$db->query($sql);
 
 			$sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab15";
-			$req = mysql_query($sql2);
-			$result = mysql_fetch_assoc($req);
+			$req = $db->query($sql2);
+			$result = mysqli_fetch_array($req);
 			return $result['ID'];
 		}else {
 			$sql = "UPDATE $tab15 SET
@@ -40,7 +40,7 @@ class Promotion_BDD {
 						email_promotion='".$promotion->getEmailPromotion()."'
 						WHERE idpromotion ='".$promotion->getIdentifiantBDD()."'";
 
-			mysql_query($sql,$db);
+			$db->query($sql);
 			return $promotion->getIdentifiantBDD();
 		}
 	}
@@ -57,8 +57,8 @@ class Promotion_BDD {
 		$result=array();
 		$sql = "SELECT * FROM $tab15 WHERE idpromotion='$identifiantBDD'";
 		//echo $sql."<br/>";
-		$req = mysql_query($sql,$db);
-		return mysql_fetch_assoc($req);
+		$req = $db->query($sql);
+		return mysqli_fetch_array($req);
 	}
 
 	public static function getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours) {
@@ -68,8 +68,8 @@ class Promotion_BDD {
 		$result = array();
 		$sql = "SELECT * FROM $tab15 WHERE anneeuniversitaire='$annee' AND idparcours='$idparcours' AND idfiliere='$idfiliere'";
 		//echo $sql."<br/>";
-		$req = mysql_query($sql, $db);
-		return mysql_fetch_assoc($req);
+		$req = $db->query($sql);
+		return mysqli_fetch_array($req);
 	}
 
 	public static function getAnneesUniversitaires(){
@@ -77,11 +77,11 @@ class Promotion_BDD {
 		global $db;
 
 		$sql = "SELECT DISTINCT anneeuniversitaire FROM $tab15 ORDER BY anneeuniversitaire DESC";
-		$req = mysql_query($sql,$db);
+		$req = $db->query($sql);
 
 		$tabAU = array();
 
-		while ($au = mysql_fetch_array($req))
+		while ($au = mysqli_fetch_array($req))
   			array_push($tabAU, $au[0]);
 
   		return $tabAU;
@@ -97,10 +97,10 @@ class Promotion_BDD {
 			$requete = "SELECT * FROM $tab15 WHERE ".$filtres->getStrFiltres();
 
 		// echo "REQUETE : $requete<br/>";
-		$res = mysql_query($requete, $db);
+		$res = $db->query($requete);
 
 		$tabPromos = array();
-		while ($p = mysql_fetch_assoc($res)){
+		while ($p = mysqli_fetch_array($res)){
 			$tab = array();
 			array_push($tab, $p["idpromotion"]);
 			array_push($tab, $p["anneeuniversitaire"]);
@@ -118,8 +118,8 @@ class Promotion_BDD {
 		global $db;
 
 		$sql = "SELECT MAX(anneeuniversitaire) as maxAU FROM $tab15";
-		$req = mysql_query($sql,$db);
-		$result = mysql_fetch_assoc($req);
+		$req = $db->query($sql);
+		$result = mysqli_fetch_array($req);
 		return $result['maxAU'];
 	}
 
@@ -129,7 +129,7 @@ class Promotion_BDD {
 
 		$sql = "DELETE FROM $tab15 WHERE idpromotion='$identifiantBDD'";
 		//echo $sql."<br/>";
-		mysql_query($sql,$db);
+		$db->query($sql);
 	}
 
 	public static function existe($promo){
@@ -145,9 +145,9 @@ class Promotion_BDD {
 			AND idparcours='".$parcours->getIdentifiantBDD()."'
 			AND email_promotion='".$promo->getEmailPromotion()."'";
 		//echo $sql."<br/>";
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 
-		if(mysql_num_rows($result) == 0)
+		if(mysqli_num_rows($result) == 0)
 			return false;
 		else
 			return true;

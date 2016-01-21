@@ -12,7 +12,7 @@ class Salle_BDD{
 		}else {
 			$sql = "UPDATE $tab16 SET nomsalle='".$salle->getNom()."' WHERE idsalle=".$salle->getIdentifiantBDD();
 		}
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 	}
 
 	public static function getSalle($identifiant){
@@ -21,19 +21,19 @@ class Salle_BDD{
 
 		$result=array();
 		$sql = "SELECT * FROM $tab16 WHERE idsalle='$identifiant'";
-		$req = mysql_query($sql,$db);
-		return mysql_fetch_array($req);
+		$req = $db->query($sql);
+		return mysqli_fetch_array($req);
 	}
 
 	public static function listerSalle(){
 		global $tab16;
 		global $db;
 		$sql = "SELECT * FROM $tab16 ORDER BY nomsalle ASC;";
-		$result = mysql_query($sql,$db);
+		$result = $db->query($sql);
 
 		$tabSalle = array();
 
-		while ($salle = mysql_fetch_assoc($result)){
+		while ($salle = mysqli_fetch_array($result)){
 			$tab = array();
 			array_push($tab, $salle["idsalle"]);
 			array_push($tab, $salle["nomsalle"]);
@@ -45,8 +45,9 @@ class Salle_BDD{
 
 	public static function delete($identifiantBDD){
 		global $tab16;
+		global $db;
 		$sql = "DELETE FROM $tab16 WHERE idsalle='$identifiantBDD'";
-		$result=mysql_query($sql);
+		$result=$db->query($sql);
 
 	}
 }

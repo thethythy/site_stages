@@ -21,12 +21,12 @@ class Soutenance_BDD {
 			// Création de la soutenance
 			$requete = "INSERT INTO $tab17(heuredebut, mindebut, ahuitclos, iddatesoutenance, idsalle)
 				    VALUES ('$heuredebut', '$mindebut', '$ahuitclos', '$iddatesoutenance', '$idsalle')";
-			mysql_query($requete,$db);
+			$db->query($requete);
 
 			// Chercher l'id de la soutenance
 			$sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab17";
-			$req = mysql_query($sql, $db);
-			$result = mysql_fetch_assoc($req);
+			$req = $db->query($sql);
+			$result = mysqli_fetch_array($req);
 			$soutenance->setIdentifiantBDD($result['ID']);
 		} else {
 			// Mise à jour de la soutenance
@@ -37,7 +37,7 @@ class Soutenance_BDD {
 						      idsalle = '$idsalle'
 				    WHERE idsoutenance = ".$soutenance->getIdentifiantBDD();
 
-			mysql_query($requete,$db);
+			$db->query($requete);
 		}
 
 		// Retourner l'id de la soutenance
@@ -53,7 +53,7 @@ class Soutenance_BDD {
 		global $tab17;
 
 		$requete = "DELETE FROM $tab17 WHERE idsoutenance='$id'";
-		mysql_query($requete, $db);
+		$db->query($requete);
 	}
 
 	// $id : Un int, représentant un identifiant dans la BDD
@@ -62,8 +62,8 @@ class Soutenance_BDD {
 		global $db;
 
 		$requete = "SELECT * FROM $tab17 WHERE idsoutenance='$id'";
-		$convention = mysql_query($requete, $db);
-		return mysql_fetch_assoc($convention);
+		$convention = $db->query($requete);
+		return mysqli_fetch_array($convention);
 	}
 
 	public static function getConvention($idsoutenance) {
@@ -71,8 +71,8 @@ class Soutenance_BDD {
 		global $db;
 
 		$requete = "SELECT * FROM $tab4 WHERE idsoutenance='$idsoutenance'";
-		$convention = mysql_query($requete, $db);
-		return mysql_fetch_row($convention);
+		$convention = $db->query($requete);
+		return mysqli_fetch_row($convention);
 	}
 
 	public static function listerSoutenanceFromSalleAndDate($idsalle, $iddate) {
@@ -80,7 +80,7 @@ class Soutenance_BDD {
 		global $db;
 
 		$requete = "SELECT * FROM $tab17 WHERE iddatesoutenance='$iddate' AND idsalle='$idsalle'";
-		return mysql_query($requete, $db);
+		return $db->query($requete);
 	}
 
 	public static function listerSoutenanceFromAnnee($annee) {
@@ -90,7 +90,7 @@ class Soutenance_BDD {
 
 		$requete = "SELECT $tab17.idsoutenance, $tab17.heuredebut, $tab17.mindebut, $tab17.ahuitclos, $tab17.iddatesoutenance, $tab17.idsalle
 			    FROM $tab17, $tab5 WHERE $tab17.iddatesoutenance = $tab5.iddatesoutenance AND $tab5.annee='$annee'";
-		return mysql_query($requete, $db);
+		return $db->query($requete);
 	}
 }
 
