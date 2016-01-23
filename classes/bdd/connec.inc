@@ -82,8 +82,10 @@ foreach ($_COOKIE as $key => $value) {
 }
 
 // Prévention contre les injection SQL dans les variables SESSION
-foreach ($_SESSION as $key => $value) {
-    $_SESSION[$key] = filterParameters($value);
+if(isset($_SESSION)) {
+	foreach ($_SESSION as $key => $value) {
+	    $_SESSION[$key] = filterParameters($value);
+	}
 }
 
 // Prévention contre les injection SQL dans les variables FILES
