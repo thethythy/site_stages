@@ -18,7 +18,7 @@ class Entreprise_BDD {
 						      '" . $entreprise->getVille() . "',
 						      '" . $entreprise->getPays() . "',
 						      '" . $entreprise->getEmail() . "',
-         					  '2')"; // ici on doit mettre getType.....
+         					  '" . $entreprise->getType() . "')";
 
 	    $req = $db->query($sql);
 

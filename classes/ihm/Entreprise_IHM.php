@@ -83,6 +83,13 @@ class Entreprise_IHM {
 									<input type="text" name="email" <?php if(isset($_POST['email'])) echo "value='".$_POST['email']."'"; else if($ent != "") echo "value='".$ent->getEmail()."'"; ?> />
 								</td>
 							</tr>
+							<tr>
+								<td>Type de l'entreprise (1, 2, 3, Soleil)</td>
+								<td>
+									<!-- On doit mettre une liste deroulant petite, moyenne, grande, hors info !!! -->
+									<input type="text" name="type" <?php if(isset($_POST['type'])) echo "value='".$_POST['type']."'"; else if($ent != "") echo "value='".$ent->getType()."'"; ?> />
+								</td>
+							</tr>
 							
 						</table>
 					</td>

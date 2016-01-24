@@ -122,6 +122,21 @@ class Convention_IHM {
 									?>
 								</td>
 							</tr>
+
+							<!-- Ajout du theme de stage *************************************************************************** -->
+							<tr>
+								<td>
+									<?php
+										echo "Theme du stage";
+									?>
+								</td>
+								<td><!-- CEST PAS ENCORE CA ! *************************************************************************** -->
+									<?php 
+										echo "<textarea name='sujet' style='width: 85%;'></textarea>";
+									?>
+								</td>
+							</tr>
+
 						</table>
 					</td>
 				</tr>

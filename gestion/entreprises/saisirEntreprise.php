@@ -17,11 +17,11 @@ IHM_Generale::header("Saisir une", "entreprise", "../../", $tabLiens);
 if(isset($_POST['add'])){
 	extract($_POST);
 		
-	if(($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "")){
+	if(($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "") || ($type == "")){
 		Entreprise_IHM::afficherFormulaireSaisie("");
 		IHM_Generale::erreur("Tous les champs sont obligatoires !");
 	}else{		
-		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email);
+		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $type);
 		
 		// Si l'entreprise que l'on veut créer n'existe pas déjà
 		if(Entreprise_BDD::existe($newEntreprise) == false){

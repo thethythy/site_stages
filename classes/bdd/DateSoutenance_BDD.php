@@ -13,7 +13,7 @@ class DateSoutenance_BDD {
 		    WHERE iddatesoutenance=" . $dateSoutenance->getIdentifiantBDD();
 	}
 	$result = $db->query($sql);
-	return ($dateSoutenance->getIdentifiantBDD() != "") ? $dateSoutenance->getIdentifiantBDD() : mysql_insert_id($db);
+	return ($dateSoutenance->getIdentifiantBDD() != "") ? $dateSoutenance->getIdentifiantBDD() : $db->insert_id;
     }
 
     public static function sauvegarderRelationPromo($idDateSoutenance, $promos) {
@@ -79,13 +79,15 @@ class DateSoutenance_BDD {
 
     public static function delete($identifiantBDD) {
 	global $tab5;
+	global $db;
 	$sql = "DELETE FROM $tab5 WHERE iddatesoutenance='$identifiantBDD';";
 	$result = $db->query($sql);
 	  }
 
     public static function deleteDatePromo($identifiantBDD) {
 	global $tab1;
-	$sql = "DELETE FROM $tab1 WHERE iddatesoutenance='$identifiantBDD';";
+	global $db;
+	$sql = "DELETE FROM $tab1 WHERE iddatesoutenance='$identifiantBDD'";
 	$result = $db->query($sql);
 	  }
 
