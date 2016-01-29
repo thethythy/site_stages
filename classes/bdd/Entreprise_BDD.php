@@ -88,6 +88,7 @@ class Entreprise_BDD {
 	    array_push($tab, $entreprise["ville"]);
 	    array_push($tab, $entreprise["pays"]);
 	    array_push($tab, $entreprise["email"]);
+	    array_push($tab, $entreprise["idtype"]);
 	    array_push($tabEntreprises, $tab);
 	}
 

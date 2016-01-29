@@ -84,10 +84,15 @@ class Entreprise_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Type de l'entreprise (1, 2, 3, Soleil)</td>
+								<td>Type de l'entreprise</td>
 								<td>
 									<!-- On doit mettre une liste deroulant petite, moyenne, grande, hors info !!! -->
-									<input type="text" name="type" <?php if(isset($_POST['type'])) echo "value='".$_POST['type']."'"; else if($ent != "") echo "value='".$ent->getType()."'"; ?> />
+									<select name="idtype" >
+										<option>petite
+										<option>moyenne
+										<option>grande
+										<option>hors info
+									</select>
 								</td>
 							</tr>
 							

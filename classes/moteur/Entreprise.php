@@ -106,7 +106,7 @@ class Entreprise {
 				      $entrepriseBDD["ville"],
 				      $entrepriseBDD["pays"],
 				      $entrepriseBDD["email"],
-				      $entrepriseBDD["type"]);
+				      $entrepriseBDD["idtype"]);
 	}
 
 	public static function getListeEntreprises($filtres){
