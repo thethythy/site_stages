@@ -5,13 +5,17 @@ $chemin = '../../classes/';
 include_once($chemin."bdd/connec.inc");
 include_once($chemin."bdd/Entreprise_BDD.php");
 include_once($chemin."bdd/Etudiant_BDD.php");
+include_once($chemin."bdd/Promotion_BDD.php");
 
 include_once($chemin."ihm/Entreprise_IHM.php");
 include_once($chemin."ihm/Etudiant_IHM.php");
+include_once($chemin."ihm/Promotion_IHM.php");
 include_once($chemin."ihm/IHM_Generale.php");
 
 include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."moteur/Etudiant.php");
+include_once($chemin."moteur/Promotion.php");
+
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
@@ -19,10 +23,10 @@ include_once($chemin."moteur/FiltreString.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Statistiques');
-IHM_Generale::header("undefined field", "entreprises", "../../", $tabLiens);
+IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
 
 $etudiant = Etudiant::getListeEtudiants("2015");
-
+$tabEtudiants = Promotion::listerEtudiants("");
 /* recuperation des donnees entreprises */
 $tabEntreprises = Entreprise::getListeEntreprises("");
 //$parrain = $convention->getParrain();
@@ -55,12 +59,11 @@ if(sizeof($tabEntreprises)>0){
 		$email = $tabEntreprises[$i]->getEmail();
 		$dep = $codepostal[0].$codepostal[1];
 		$deps = array("53","85","49","44");
-		//echo $ville;
 
 		if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") ) {
 			$mans++;
 		}
-		else if($dep == "72") {
+		else if($dep == "72"  && strstr($pays, "france")  && ($codepostal != "72000" || $codepostal != "72100") ) {
 			$sarthe++;
 		}
 		else if(in_array($dep, $deps) && strstr($pays, "france")) {
@@ -85,7 +88,6 @@ if(sizeof($tabEntreprises)>0){
 		<?php*/
 	}
 
-	echo "mans = ".$mans." sarthe = ".$sarthe." region = ".$region." france = ".$france." monde = ".$monde;
 }
 echo "\n</div>";
 
