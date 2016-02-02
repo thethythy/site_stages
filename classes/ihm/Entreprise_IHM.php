@@ -87,11 +87,11 @@ class Entreprise_IHM {
 								<td>Type de l'entreprise</td>
 								<td>
 									<!-- On doit mettre une liste deroulant petite, moyenne, grande, hors info !!! -->
-									<select name="idtype" >
-										<option>petite
-										<option>moyenne
-										<option>grande
-										<option>hors info
+									<select>
+										<option value="0">petite</option>
+										<option value="1">moyenne</option>
+										<option value="2">grande</option>
+										<option value="3">hors info</option>
 									</select>
 								</td>
 							</tr>
