@@ -25,6 +25,8 @@ class Tache_BDD {
         $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC";
         $result = $db->query($sql);
 
+        
+
         $tabTache = array();
         while ($tache = $result->fetch_assoc()) {
             $tab = array();
