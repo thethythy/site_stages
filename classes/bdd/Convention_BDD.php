@@ -336,6 +336,26 @@ class Convention_BDD {
 	return $tabPays;
     }
 
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static function getListeTheme(){
+    	global $db;
+
+    	$requete = "SELECT t.idtheme, theme FROM convention c, theme_destage t WHERE c.idtheme =  t.idtheme;";
+
+		$result = $db->query($requete);
+
+		$tabTheme = array();
+		while ($theme = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+			$tab = array();
+		    array_push($tab, $theme["idtheme"]);
+		    array_push($tab, $theme["theme"]);
+		    array_push($tabTheme, $tab);
+		}
+
+		return $tabTheme;
+    }
+
 }
 
 ?>
