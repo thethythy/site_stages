@@ -199,9 +199,9 @@ class Convention {
 		
 		$tabTheme = array();
 		for($i=0; $i<sizeof($tabThemeString); $i++)
-  			array_push($tabTheme, $tabThemeString[$i][1]);
+  			array_push($tabTheme, $tabThemeString[$i][0]);
   			
-		return $tabTheme;
+		return array_unique($tabTheme);
 	}
 
 }

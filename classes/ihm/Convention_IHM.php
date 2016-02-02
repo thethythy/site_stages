@@ -159,7 +159,6 @@ class Convention_IHM {
 		</form>
 		<?php 
 	}
-	
 }
 
 ?>
