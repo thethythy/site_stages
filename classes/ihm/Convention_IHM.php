@@ -107,10 +107,10 @@ class Convention_IHM {
 								<td>
 									<select name="idTheme" style="width: 300px;">
 										<?php 
-											$tabTheme = Convention::getListeTheme();
+											$tabTheme = ThemeDeStage::getListeTheme();
 											
 											for ($i = 0; $i < sizeof($tabTheme); $i++) {
-												echo "<option value='".$tabTheme[$i]."''>".$tabTheme[$i]."</option>";
+												echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
 											}
 										?>	
 									</select>

@@ -12,10 +12,12 @@ include_once($chemin."bdd/Parcours_BDD.php");
 include_once($chemin."bdd/Promotion_BDD.php");
 include_once($chemin."bdd/Parrain_BDD.php");
 include_once($chemin."bdd/Soutenance_BDD.php");
+include_once($chemin."bdd/ThemeDeStage_BDD.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Contact_IHM.php");
 include_once($chemin."ihm/Convention_IHM.php");
 include_once($chemin."ihm/Promotion_IHM.php");
+include_once($chemin."ihm/ThemeDeStage_IHM.php");
 include_once($chemin."moteur/Contact.php");
 include_once($chemin."moteur/Convention.php");
 include_once($chemin."moteur/Entreprise.php");
@@ -28,6 +30,7 @@ include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
+include_once($chemin."moteur/ThemeDeStage.php");
 
 // Précisons l'encodage des données si cela n'est pas déjà fait
 if (!headers_sent())
