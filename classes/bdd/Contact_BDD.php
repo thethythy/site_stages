@@ -109,7 +109,7 @@ class Contact_BDD {
 
 	$tabContacts = array();
 
-	while ($contact = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+	while ($contact = mysqli_fetch_array($result)) {
 	    $tab = array();
 	    array_push($tab, $contact["idcontact"]);
 	    array_push($tab, $contact["nomcontact"]);

@@ -10,6 +10,9 @@ class Entreprise_BDD {
     public static function sauvegarder($entreprise) {
 		global $tab6;
 		global $db;
+
+		$typeEntreprise = $entreprise->getTypeEntreprise();
+
 		if ($entreprise->getIdentifiantBDD() == "") {
 		    $sql = "INSERT INTO " . $tab6 . " VALUES ('" . $entreprise->getIdentifiantBDD() . "',
 							      '" . $entreprise->getNom() . "',
@@ -18,15 +21,13 @@ class Entreprise_BDD {
 							      '" . $entreprise->getVille() . "',
 							      '" . $entreprise->getPays() . "',
 							      '" . $entreprise->getEmail() . "',
-	         					  '" . $entreprise->getType() . "')";
+	         					  '" . $typeEntreprise->getIdentifiantBDD() . "')";
 
 		    $req = $db->query($sql);
 
 		    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
 		    $req = $db->query($sql2);
 		    $result = mysqli_fetch_array($req);
-		    /*$result = $req->fetch_array(MYSQLI_BOTH);
-		    printf ("%s (%s)\n", $row[0], $row["CountryCode"]);*/
 		    return $result['ID'];
 		} else {
 		    $sql = "UPDATE $tab6 SET nom='" . $entreprise->getNom() . "',
@@ -35,7 +36,7 @@ class Entreprise_BDD {
 					     ville='" . $entreprise->getVille() . "',
 					     pays='" . $entreprise->getPays() . "',
 					     email='" . $entreprise->getEmail() . "',
-					     type='" . $entreprise->getType() . "'
+					     idtypeentreprise='" . $typeEntreprise->getIdentifiantBDD() . "',
 			    WHERE identreprise ='" . $entreprise->getIdentifiantBDD() . "'";
 		    $req = $db->query($sql);
 
@@ -88,7 +89,7 @@ class Entreprise_BDD {
 		    array_push($tab, $entreprise["ville"]);
 		    array_push($tab, $entreprise["pays"]);
 		    array_push($tab, $entreprise["email"]);
-		    array_push($tab, $entreprise["idtype"]);
+		    array_push($tab, $entreprise["idtypeentreprise"]);
 		    array_push($tabEntreprises, $tab);
 		}
 
