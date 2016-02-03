@@ -335,7 +335,6 @@ class Convention_BDD {
 
 	return $tabPays;
     }
-
 }
 
 ?>

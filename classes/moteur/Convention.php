@@ -10,9 +10,9 @@ class Convention {
 	var $idEtudiant;
 	var $idSoutenance;
 	var $idContact;
-	var $themeStage; //Ajout de la variable themeStage pour l'ajout du theme de stage.
+	var $idTheme; //Ajout de la variable idTheme pour l'ajout du theme de stage.
 
-	public function Convention($identifiant_BDD,$sujetDeStage,$aSonResume,$note,$idParrain,$idExaminateur,$idEtudiant,$idSoutenance,$idContact,$themeStage){
+	public function Convention($identifiant_BDD,$sujetDeStage,$aSonResume,$note,$idParrain,$idExaminateur,$idEtudiant,$idSoutenance,$idContact,$idTheme){
 		$this->identifiant_BDD = $identifiant_BDD;
 		$this->sujetDeStage = $sujetDeStage;
 		$this->aSonResume = $aSonResume;
@@ -22,7 +22,7 @@ class Convention {
 		$this->idEtudiant = $idEtudiant;
 		$this->idSoutenance = $idSoutenance;
 		$this->idContact = $idContact;
-		$this->themeStage = $themeStage; //Ajout du theme de stage dans le constructeur. ------------
+		$this->idTheme = $idTheme; //Ajout du theme de stage dans le constructeur. ------------
 	}
 
 	public function setSujetDeStage($sds) {
@@ -58,13 +58,13 @@ class Convention {
 	}
 
 	// Ajout du setter du theme de stage ---------------------------------------------------------
-	public function setThemeStage($themeStage){
-		$this->themeStage = $themeStage;
+	public function setIdTheme($idTheme){
+		$this->idTheme = $idTheme;
 	}
 
 	//Ajout du getter du theme de stage ----------------------------------------------------------
-	public function getThemeStage(){
-		return $this->themeStage;
+	public function getIdTheme(){
+		return $this->idTheme;
 	}
 
 	public function getSujetDeStage() {
@@ -140,16 +140,16 @@ class Convention {
 		Convention_BDD::supprimerConvention($idConvention, $etu->getIdentifiantBDD(), $idPromo);
 	}
 
-	//Ajour de ', $convBDD["themeStage"]'
+	//Ajour de ', $convBDD["idtheme"]'
 	public static function getConvention($idConvention){
 		$convBDD = Convention_BDD::getConvention($idConvention);
-		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["themeStage"]);
+		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["idtheme"]);
 	}
 
-	//Ajour de ', $convBDD["themeStage"]'
+	//Ajour de ', $convBDD["idtheme"]'
 	public static function getConventionFromEtudiantAndPromotion($idetudiant, $idpromotion) { 
 		$convBDD = Convention_BDD::getConvention2($idetudiant, $idpromotion);
-		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["themeStage"]);
+		return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"], $convBDD["asonresume"], $convBDD["note"], $convBDD["idparrain"], $convBDD["idexaminateur"], $convBDD["idetudiant"], $convBDD["idsoutenance"], $convBDD["idcontact"], $convBDD["idtheme"]);
 	}
 
 	//Ajout de ', $tabLCString[$i][9]'

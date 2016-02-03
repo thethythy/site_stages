@@ -27,6 +27,7 @@ $tab19 = 'relation_promotion_etudiant_convention';
 $tab20 = 'couleur';
 $tab21 = 'taches';
 $tab22 = 'typeEntreprise';
+$tab23 = 'theme_destage';
 
 function deconnexion() {
 	global $db;

@@ -14,6 +14,7 @@ class Convention_IHM {
 			$examinateur = $conv->getExaminateur();
 			$etudiant = $conv->getEtudiant();
 			$contact = $conv->getContact();
+			$idTheme = $conv->getIdTheme(); ////////////////////////////// Ajout de $idTheme.------------------------------------------------------
 		}
 		
 		?>
@@ -100,6 +101,22 @@ class Convention_IHM {
 									</select>
 								</td>
 							</tr>
+								<!-- Ajout du theme de stage *************************************************************************** -->
+							<tr>
+								<td>Thème de stage</td>
+								<td>
+									<select name="idTheme" style="width: 300px;">
+										<?php 
+											$tabTheme = ThemeDeStage::getListeTheme();
+											
+											for ($i = 0; $i < sizeof($tabTheme); $i++) {
+												echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
+											}
+										?>	
+									</select>
+								</td>
+							</tr>
+
 							<tr>
 								<td>
 									<?php
@@ -123,19 +140,7 @@ class Convention_IHM {
 								</td>
 							</tr>
 
-							<!-- Ajout du theme de stage *************************************************************************** -->
-							<tr>
-								<td>
-									<?php
-										echo "Theme du stage";
-									?>
-								</td>
-								<td><!-- CEST PAS ENCORE CA ! *************************************************************************** -->
-									<?php 
-										echo "<textarea name='sujet' style='width: 85%;'></textarea>";
-									?>
-								</td>
-							</tr>
+							
 
 						</table>
 					</td>
@@ -154,7 +159,6 @@ class Convention_IHM {
 		</form>
 		<?php 
 	}
-	
 }
 
 ?>
