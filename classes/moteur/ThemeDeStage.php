@@ -11,14 +11,14 @@
 		}
 
 		/* Accesseurs */
-		public function setIdTheme($idTheme){
+		/*public function setIdTheme($idTheme){
 			$this->idTheme = $idTheme;
 		}
 
 		public function setTheme($theme){
 			$this->theme = $theme;
 		}
-
+		*/
 		public function getIdTheme(){
 			return $this->idTheme;
 		}

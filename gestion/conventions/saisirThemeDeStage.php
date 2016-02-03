@@ -8,31 +8,25 @@ include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/ThemeDeStage_IHM.php");
 include_once($chemin."moteur/ThemeDeStage.php");
 
+$tabLiens = array();
+$tabLiens[0] = array('../../', 'Accueil');
+$tabLiens[1] = array('../', 'Gestion de la base');
+IHM_Generale::header("Saisir un", "theme de stage", "../../",$tabLiens);
 
 // Si un ajout a été effectué
-if (isset($_POST['add'])) {
+if(isset($_POST['add'])){
 	extract($_POST);
 	
-	//Ajout de ', $themeStage' -----------------------------------------------------------------------------------------------------
-	$newTheme = new ThemeDeStage("", $sujet, 0, 0, $idPar, $idExam, $idEtu, "NULL", $idCont, $themeStage);
-	
-	// Si la convention que l'on veut créer n'existe pas déjà
-	if (Convention_BDD::existe($newConvention, $annee) == false) {
-		
-		// Sauvegarde de la convention
-		$idConv = Convention_BDD::sauvegarder($newConvention);
-
-		// Mise à jour du lien promotion /étudiant / convention
-		if (isset($filiere) && isset($parcours)) {
-			$promotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $filiere, $parcours);
-			Etudiant_BDD::ajouterConvention($idEtu, $idConv, $promotion->getIdentifiantBDD());
-		}
-		
+	if ($theme == "") {
+		ThemeDeStage_IHM::afficherFormulaireSaisie("");
+		IHM_Generale::erreur("Le nom du thème est obligatoires !");
+	} else {
+		$newThemeDeStage = new ThemeDeStage("", $theme);
 		?>
 			<table align="center">
 				<tr>
-					<td align="center">
-						Ajout d'un thème de stage réalisé avec succès.
+					<td colspan="2" align="center">
+						Ajout du nouveau thème <?php echo $theme; ?> réalisée avec succès.
 					</td>
 				</tr>
 				<tr>
@@ -43,13 +37,16 @@ if (isset($_POST['add'])) {
 					</td>
 				</tr>
 			</table>
-		<?php
-	} else {
-		Convention_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
-		IHM_Generale::erreur("Cet étudiant à déjà une convention pour l'année sélectionnée !");
+		<?php 
 	}
-} else {
-	Convention_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
+}else{
+	ThemeDeStage_IHM::afficherFormulaireSaisie("");
 }
+
+IHM_Generale::endHeader(false);
+IHM_Generale::footer("../../");
+
+
+/* Fonction Save à faire surement .... */
 
 ?>

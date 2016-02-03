@@ -5,9 +5,8 @@
 	    public static function getListeTheme(){
 	    	global $db;
 	    	global $tab23;
-	    	global $tab4;
 
-	    	$requete = "SELECT DISTINCT $tab23.idtheme, theme FROM $tab4, $tab23 WHERE $tab4.idtheme =  $tab23.idtheme;";
+	    	$requete = "SELECT * FROM $tab23;";
 
 			$result = $db->query($requete);
 
