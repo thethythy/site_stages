@@ -222,7 +222,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 			<td>
 			    <ul>
 				<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
-				<li><a href="./statistiques/statistique.php">Visualiser statistiques</a></li>
+				<li><a href="./statistiques/statistiques.php">Visualiser statistiques</a></li>
 			    </ul>
 			</td>
 		    </tr>

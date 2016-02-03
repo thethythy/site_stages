@@ -76,7 +76,7 @@ if(sizeof($tabEntreprises)>0){
 			$monde++;
 		}
 
-
+		//echo sizeof($tabEtudiants);
 		/*?><br/>
 		<?php	echo $tabEntreprises[$i]->getNom();	?> <br/>
 		<?php	echo $tabEntreprises[$i]->getAdresse();	?> <br/>
