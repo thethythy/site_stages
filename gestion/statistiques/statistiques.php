@@ -2,7 +2,7 @@
 
 $chemin = '../../classes/';
 include_once($chemin."moteur/Filtre.php");
-include_once("recupererDonnee.php");
+include_once("statistiqueData.php");
 
 
 echo "</br>";echo "</br>";echo "</br>";
@@ -12,8 +12,8 @@ echo "</br>";echo "</br>";echo "</br>";
 <html>
 	<head>
 		<title>Statistiques Reloaded</title>
-		<script src="jquery.js"></script>
-		<script src="Chart.js"></script>
+		<script src="frameworksJS/jquery.js"></script>
+		<script src="frameworksJS/Chart.js"></script>
 	</head>
 	<body>
 		<section>
