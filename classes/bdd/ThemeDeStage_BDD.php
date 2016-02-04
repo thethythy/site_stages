@@ -21,5 +21,22 @@
 			return $tabThemes;
 	    }
 
+	    public static function sauvegarder($themeDeStage){
+	    	global $tab23;
+	    	global $db;
+
+	    	if($themeDeStage->getIdTheme() == ""){
+	    		$sql = "INSERT INTO $tab23 VALUES (
+	    					'".$themeDeStage->getIdTheme()."',
+	    					'".$themeDeStage->getTheme()."')";
+			}
+			else{
+	    		$sql = "UPDATE $tab23 SET 
+	    					idtheme = '".$themeDeStage->getIdTheme()."',
+	    					theme = ".$themeDeStage->getTheme();
+	    	}
+	    	$result = $db->query($sql);
+	    }
+
 	}
 ?>

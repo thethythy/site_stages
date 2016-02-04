@@ -2,11 +2,11 @@
 
 include_once("../../classes/bdd/connec.inc");
 include_once("../../classes/bdd/Parrain_BDD.php");
-include_once("../../classes/moteur/Parrain.php");
 include_once("../../classes/bdd/Couleur_BDD.php");
-include_once("../../classes/moteur/Couleur.php");
 include_once("../../classes/ihm/IHM_Generale.php");
 include_once("../../classes/ihm/Parrain_IHM.php");
+include_once("../../classes/moteur/Parrain.php");
+include_once("../../classes/moteur/Couleur.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
