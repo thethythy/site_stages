@@ -1,54 +1,67 @@
 <?php
+$chemin = "../../classes/";
+include_once($chemin."bdd/connec.inc");
+include_once($chemin."bdd/ThemeDeStage_BDD.php");
+include_once($chemin."ihm/IHM_Generale.php");
+include_once($chemin."ihm/ThemeDeStage_IHM.php");
+include_once($chemin."moteur/ThemeDeStage.php");
 
 	class ThemeDeStage_IHM {
 		
-		// $theme = ThemeDeStage qui est modifier et dont les informations sont affichées.
-		// si $theme = "", alors il s'agit d'un formulaire de création (champs vide)
-		public static function afficherFormulaireSaisie($theme) {
-			
-			if($theme != "")
-				$label = $theme->getTheme();
+		public static function afficherFormulaireSaisie() {
 			?>
-			<form method=post action="">
-
-				<table width="100%">
-					<tr>
-						<td width="50%" align="center">
-							<table>
-								<tr>
-									<td>Theme de stage</td>
-									<td>
-										<input type="text" name="theme" <?php if(isset($_POST['theme'])) echo "value='".$_POST['theme']."'"; ?> />
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-					<td colspan="2" align="center">
-						Sélectionnez un theme :
-						<select name="idTheme">
-							<option value='-1'>--Selectionner un thème--</option>
-							<?php
-								$tabTheme = ThemeDeStage::getListeTheme();
-								
-								for ($i=0; $i<sizeof($tabTheme); $i++) {
-									echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
-								}
-							?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" id="submit">
-						<input type="hidden" value="1" name="<?php if($theme != "") echo "edit"; else echo "add";?>" />
-						<input type="submit" value="Valider" />
-					</td>
-				</tr>
-				</table>
-			</form>
+			<FORM METHOD="POST" ACTION="">
+            <table id="table_saisieTheme">
+                <tr><td colspan=2>
+                        <table id="presentation_saisieTheme">
+                            <tr id="entete2">
+                                <td colspan=2>Saisir un thème de stage</td>
+                                <td><input type="text" name="theme" ></td>
+                            </tr>
+                            <tr>
+                                <td colspan=2><input type=submit value="Enregistrer le thème"/><input type=reset value="Effacer"/></td>
+                            </tr>
+                        </table>
+            </table>
+        </FORM>
 			
 			<?php
+		}
+
+
+		public static function afficherFormulaireModification(){
+			?>
+			<FORM id="formModifTheme" METHOD="POST" ACTION="">
+            <table id="table_msTheme">
+                <tr><td colspan=2>
+                        <table id="presentation_msTheme">
+                            <tr id="entete2">
+                                <td colspan=2>Modifier/Supprimer un thème de stage</td>
+                            </tr>
+                            <tr>
+                                <th width="220">Sélectionnez le thème : </th>
+                                <th>
+                                    <?php
+                                    $tabTheme = ThemeDeStage::getListeTheme();
+                                    echo "<select name=theme>";
+                                    echo "<option  value='-1' selected></option>";
+                                    for ($i = 0; $i < sizeof($tabTheme); $i++) {
+                                    	echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
+                                    }
+                                    echo "</select>";
+                                    ?>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <input type=submit value="Modifier un thème" />
+                                    <input type=submit value="Supprimer un thème" onclick=""/>
+                                </td>
+                            </tr>
+                        </table>
+            </table>
+        	</FORM>
+        	<?php
 		}
 	}
 ?>

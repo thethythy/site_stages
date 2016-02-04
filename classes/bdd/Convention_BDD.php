@@ -26,7 +26,7 @@ class Convention_BDD {
 	// Permet de vérifier si la Convention existe déjà dans la BDD
 	if ($convention->getIdentifiantBDD() == "") {
 	    // Création de la Convention
-	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note)
+	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note, idTheme)
 						VALUES ('" . $parrain->getIdentifiantBDD() . "',
 							'" . $examinateur->getIdentifiantBDD() . "',
 							'" . $etudiant->getIdentifiantBDD() . "',
@@ -34,7 +34,8 @@ class Convention_BDD {
 							'" . $contact->getIdentifiantBDD() . "',
 							'" . $convention->getSujetDeStage() . "',
 							'" . $convention->getASonResume() . "',
-							'" . $convention->getNote() . "'
+							'" . $convention->getNote() . "',
+							'" . $convention->getIdTheme() . "'
 							)";
 	    $db->query($requete);
 
@@ -52,7 +53,8 @@ class Convention_BDD {
 					 idcontact = '" . $contact->getIdentifiantBDD() . "',
 					 sujetdestage = '" . $convention->getSujetDeStage() . "',
 					 asonresume ='" . $convention->getASonResume() . "',
-					 note = '" . $convention->getNote() . "'
+					 note = '" . $convention->getNote() . "',
+					 idtheme = '" . $convention->getIdTheme() . "'
 				WHERE idconvention = '" . $convention->getIdentifiantBDD() . "'";
 
 	    $req = $db->query($requete);
@@ -116,6 +118,7 @@ class Convention_BDD {
 	    array_push($tab, $ods['idetudiant']);
 	    array_push($tab, $ods['idsoutenance']);
 	    array_push($tab, $ods['idcontact']);
+	    array_push($tab, $ods['idtheme']);
 
 	    array_push($tabC, $tab);
 	}
