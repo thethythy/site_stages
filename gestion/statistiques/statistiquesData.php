@@ -60,7 +60,7 @@ if(sizeof($tabEntreprises)>0){
 		$dep = $codepostal[0].$codepostal[1];
 		$deps = array("53","85","49","44");
 
-		if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") ) {
+		if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france") ) {
 			$mans++;
 		}
 		else if($dep == "72"  && strstr($pays, "france")  && ($codepostal != "72000" || $codepostal != "72100") ) {
@@ -76,7 +76,7 @@ if(sizeof($tabEntreprises)>0){
 			$monde++;
 		}
 
-
+		//echo sizeof($tabEtudiants);
 		/*?><br/>
 		<?php	echo $tabEntreprises[$i]->getNom();	?> <br/>
 		<?php	echo $tabEntreprises[$i]->getAdresse();	?> <br/>
