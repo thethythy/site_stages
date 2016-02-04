@@ -39,5 +39,10 @@
 			return $tab_themes;
 		}
 
+		public static function saisirDonneesTheme($themeDeStage){
+			$theme = new ThemeDeStage('', $themeDeStage);
+			ThemeDeStage_BDD::sauvegarder($theme);
+		}
+
 	}
 ?>
