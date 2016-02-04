@@ -25,8 +25,8 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Statistiques');
 IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
 
-$etudiant = Etudiant::getListeEtudiants("2015");
-$tabEtudiants = Promotion::listerEtudiants("");
+/*$etudiant = Etudiant::getListeEtudiants("2015");
+$tabEtudiants = Promotion::listerEtudiants("");*/
 /* recuperation des donnees entreprises */
 $tabEntreprises = Entreprise::getListeEntreprises("");
 //$parrain = $convention->getParrain();
@@ -41,12 +41,15 @@ $tabEntreprises = Entreprise::getListeEntreprises("");
 
 /* recuperation des donnees stage */
 //$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
-echo "<div id='data'>\n";
+
 $mans = 0;
 $sarthe = 0;
 $region = 0;
 $france = 0;
 $monde = 0;
+$dep = 0;
+
+$cpt = 0;
 
 if(sizeof($tabEntreprises)>0){
 	// Affichage des entreprises correspondants aux critères de recherches
@@ -57,7 +60,9 @@ if(sizeof($tabEntreprises)>0){
 		$ville = strtolower($tabEntreprises[$i]->getVille());
 		$pays = strtolower($tabEntreprises[$i]->getPays());	
 		$email = $tabEntreprises[$i]->getEmail();
+		
 		$dep = $codepostal[0].$codepostal[1];
+		
 		$deps = array("53","85","49","44");
 
 		if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france") ) {
@@ -87,9 +92,8 @@ if(sizeof($tabEntreprises)>0){
 		<?php	echo $dep;	?> <br/>
 		<?php*/
 	}
-
 }
-echo "\n</div>";
+
 
 
 

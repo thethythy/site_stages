@@ -5,7 +5,7 @@ include_once($chemin."moteur/Filtre.php");
 include_once("statistiquesData.php");
 
 
-echo "</br>";echo "</br>";echo "</br>";
+
 ?>
 
 <!DOCTYPE html>
