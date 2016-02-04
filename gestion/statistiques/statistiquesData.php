@@ -6,15 +6,24 @@ include_once($chemin."bdd/connec.inc");
 include_once($chemin."bdd/Entreprise_BDD.php");
 include_once($chemin."bdd/Etudiant_BDD.php");
 include_once($chemin."bdd/Promotion_BDD.php");
+include_once($chemin."bdd/ThemeDeStage_BDD.php");
+include_once($chemin."bdd/Convention_BDD.php");
+
 
 include_once($chemin."ihm/Entreprise_IHM.php");
 include_once($chemin."ihm/Etudiant_IHM.php");
 include_once($chemin."ihm/Promotion_IHM.php");
+include_once($chemin."ihm/ThemeDeStage_IHM.php");
+include_once($chemin."ihm/Convention_IHM.php");
+
 include_once($chemin."ihm/IHM_Generale.php");
+
 
 include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."moteur/Etudiant.php");
 include_once($chemin."moteur/Promotion.php");
+include_once($chemin."moteur/ThemeDeStage.php");
+include_once($chemin."moteur/Convention.php");
 
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
@@ -25,22 +34,11 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Statistiques');
 IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
 
-/*$etudiant = Etudiant::getListeEtudiants("2015");
-$tabEtudiants = Promotion::listerEtudiants("");*/
-/* recuperation des donnees entreprises */
+
 $tabEntreprises = Entreprise::getListeEntreprises("");
-//$parrain = $convention->getParrain();
+$tabThemeDeStage = ThemeDeStage::getListeTheme();
+$tabConvention = Convention::getListeConvention("");
 
-/* recuperation des donnees etudiants */
-//$contact = $convention->getContact();
-//$filiere = $promotion->getFiliere();
-//$parcours = $promotion->getParcours();
-
-/* recuperation des donnees soutenance */
-
-
-/* recuperation des donnees stage */
-//$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
 
 $mans = 0;
 $sarthe = 0;
@@ -49,7 +47,6 @@ $france = 0;
 $monde = 0;
 $dep = 0;
 
-$cpt = 0;
 
 if(sizeof($tabEntreprises)>0){
 	// Affichage des entreprises correspondants aux critères de recherches
@@ -92,6 +89,10 @@ if(sizeof($tabEntreprises)>0){
 		<?php	echo $dep;	?> <br/>
 		<?php*/
 	}
+}
+
+if (sizeof($tabThemeDeStage)>0){
+
 }
 
 
