@@ -29,6 +29,7 @@ if(isset($_POST['edit'])){
 		$ent->setVille($ville);
 		$ent->setPays($pays);
 		$ent->setEmail($email);
+		//$ent->setType($idtype);
 							
 		$idEnt = Entreprise_BDD::sauvegarder($ent);
 		
@@ -45,6 +46,12 @@ if(isset($_POST['edit'])){
 							<input type="hidden" value="<?php echo $_GET['ville']; ?>" name="ville"/>
 							<input type="hidden" value="<?php echo $_GET['pays']; ?>" name="pays"/>
 							<input type="hidden" value="<?php echo $_GET['email']; ?>" name="email"/>
+							<select>
+								<option value="0">petite</option>
+								<option value="1">moyenne</option>
+								<option value="2">grande</option>
+								<option value="3">hors info</option>
+							</select>
 							<input type="submit" value="Retourner à la liste"/>
 						</form>
 					</td>

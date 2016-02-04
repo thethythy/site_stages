@@ -193,17 +193,6 @@ class Convention {
 		return 1;
 	}
 
-	// -------------------------------------------------------------------------------------------------------------------------------
-	public static function getListeTheme(){
-		$tabThemeString = Convention_BDD::getListeTheme();
-		
-		$tabTheme = array();
-		for($i=0; $i<sizeof($tabThemeString); $i++)
-  			array_push($tabTheme, $tabThemeString[$i][1]);
-  			
-		return $tabTheme;
-	}
-
 }
 
 ?>

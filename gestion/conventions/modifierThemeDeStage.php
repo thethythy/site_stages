@@ -32,7 +32,7 @@ include_once($chemin."moteur/Soutenance.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Modifier un", "theme de stage", "../../", $tabLiens);
+IHM_Generale::header("Modifier une ", "convention", "../../", $tabLiens);
 
 $oConv = Convention::getConvention($_GET['id']);
 

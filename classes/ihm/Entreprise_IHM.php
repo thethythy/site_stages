@@ -2,7 +2,7 @@
 
 class Entreprise_IHM {
  
-	// Méthodes statiques
+	// MÃ©thodes statiques
 	
 	public static function afficherFormulaireRecherche($page){
 		?>
@@ -55,9 +55,12 @@ class Entreprise_IHM {
 		<?php
 	}
 	
-	// $ent = Entreprise qui est modifier et dont les informations son affichées.
-	// si $ent = "", alors il s'agit d'un formulaire de création (champs vide)
+	// $ent = Entreprise qui est modifier et dont les informations son affichÃ©es.
+	// si $ent = "", alors il s'agit d'un formulaire de crÃ©ation (champs vide)
 	public static function afficherFormulaireSaisie($ent){
+		
+		if($ent != "")
+			$typ = $ent->getTypeEntreprise();
 		?>
 		<form method=post action="">
 			
@@ -78,19 +81,11 @@ class Entreprise_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Email DRH ou équivalent</td>
+								<td>Email DRH ou Ã©quivalent</td>
 								<td>
 									<input type="text" name="email" <?php if(isset($_POST['email'])) echo "value='".$_POST['email']."'"; else if($ent != "") echo "value='".$ent->getEmail()."'"; ?> />
 								</td>
 							</tr>
-							<tr>
-								<td>Type de l'entreprise (1, 2, 3, Soleil)</td>
-								<td>
-									<!-- On doit mettre une liste deroulant petite, moyenne, grande, hors info !!! -->
-									<input type="text" name="type" <?php if(isset($_POST['type'])) echo "value='".$_POST['type']."'"; else if($ent != "") echo "value='".$ent->getType()."'"; ?> />
-								</td>
-							</tr>
-							
 						</table>
 					</td>
 					<td width="50%" align="center">
@@ -114,6 +109,23 @@ class Entreprise_IHM {
 								</td>
 							</tr>
 						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="left">
+						Type de l'entreprise :
+						<select name="idtype">
+							<?php
+								$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise("");
+
+								for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++){
+									if (((isset($_POST['idtype'])) && ($_POST['idtype'] == $tabTypeEntreprise[$i]->getIdentifiantBDD())) || (($ent != "") && ($typ->getIdentifiantBDD() == $tabTypeEntreprise[$i]->getIdentifiantBDD())))
+										echo "<option selected value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'>".$tabTypeEntreprise[$i]->getTypeEntreprise()." </option>";
+									else
+  										echo "<option value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'>".$tabTypeEntreprise[$i]->getTypeEntreprise()." </option>";
+								}
+							?>
+						</select>
 					</td>
 				</tr>
 				<tr>
