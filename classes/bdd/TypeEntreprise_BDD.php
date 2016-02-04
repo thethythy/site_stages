@@ -7,9 +7,9 @@ class TypeEntreprise_BDD {
 		global $db;
 
 		if ($typeEntreprise->getIdentifiantBDD() == "") {
-		    $sql = "INSERT INTO " . $tab22 . " VALUES (
+		    $sql = "INSERT INTO $tab22 VALUES (
 							'" . $typeEntreprise->getIdentifiantBDD() . "',
-							'" . $typeEntreprise->getType() . "');";
+							'" . $typeEntreprise->getType() . "')";
 		    $db->query($sql);
 		    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab22";
 		    $req = $db->query($sql2);
@@ -28,12 +28,29 @@ class TypeEntreprise_BDD {
 		global $tab22;
 		global $db;
 
-		$sql = "SELECT * FROM $tab22 WHERE idtypeentreprise='$identifiantBDD'";
+		$sql = "SELECT * FROM $tab22 WHERE idtypeentreprise='".$identifiantBDD."';";
 		$req = $db->query($sql);
-		if ($req == FALSE) {
-		    return FALSE;
-		}
 		return mysqli_fetch_array($req);
+
+    }
+
+	public static function listerTypeEntreprise() {
+		global $tab22;
+		global $db;
+
+		$requete = "SELECT * FROM $tab22 ORDER BY type ASC";
+		$result = $db->query($requete);
+
+		$tabTypeEntreprise = array();
+
+		while($typeEntreprise = mysqli_fetch_array($result)) {
+		    $tab = array();
+		    array_push($tab, $typeEntreprise["idtypeentreprise"]);
+		    array_push($tab, $typeEntreprise["type"]);
+		    array_push($tabTypeEntreprise, $tab);
+		}
+
+		return $tabTypeEntreprise;
 
     }
 
@@ -61,12 +78,10 @@ class TypeEntreprise_BDD {
 
     }
 
-    public static function supprimerTypeEntreprise($typeEntreprise) {
+    public static function supprimerTypeEntreprise($identifiant) {
 		global $tab22;
 		global $db;
-
-		$sql = "DELETE FROM $tab22 WHERE idtypeentreprise='$identifiantBDD'";
-		//echo $sql."<br/>";
+		$sql = "DELETE FROM $tab22 WHERE idtypeentreprise='".$identifiant."';";
 		$db->query($sql);
     }
 

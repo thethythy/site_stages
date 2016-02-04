@@ -33,6 +33,14 @@ class TypeEntreprise {
 
     }
 
+    public static function listerTypeEntreprise() {
+		$tabTypeEntreprise = array();
+		$tabTypeEntrepriseString = TypeEntreprise_BDD::listerTypeEntreprise();
+		for($i=0; $i<sizeof($tabTypeEntrepriseString); $i++)
+  			array_push($tabTypeEntreprise, new TypeEntreprise($tabTypeEntrepriseString[$i][0],$tabTypeEntrepriseString[$i][1]));
+  		return $tabTypeEntreprise;
+    }
+
     public static function getListeTypeEntreprise($filtres) {
 
 		$tabTypeEntrepriseString = TypeEntreprise_BDD::getListeEntreprises($filtres);
@@ -40,15 +48,15 @@ class TypeEntreprise {
 		$tabTypeEntreprise = array();
 		for($i=0; $i<sizeof($tabTypeEntrepriseString); $i++)
   			array_push($tabTypeEntreprise, new Entreprise($tabTypeEntrepriseString[$i][0],
-						$tabTypeEntrepriseString[$i][1],));
+						$tabTypeEntrepriseString[$i][1]));
 
   		return $tabTypeEntreprise;
 
     }
 
-    public static function supprimerTypeEntreprise($typeEntreprise) {
+    public static function supprimerTypeEntreprise($identifiant) {
 
-    	return $typeEntreprise;
+    	TypeEntreprise_BDD::supprimerTypeEntreprise($identifiant);
 
     }
 
