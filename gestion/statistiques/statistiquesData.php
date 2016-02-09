@@ -6,15 +6,24 @@ include_once($chemin."bdd/connec.inc");
 include_once($chemin."bdd/Entreprise_BDD.php");
 include_once($chemin."bdd/Etudiant_BDD.php");
 include_once($chemin."bdd/Promotion_BDD.php");
+include_once($chemin."bdd/ThemeDeStage_BDD.php");
+include_once($chemin."bdd/Convention_BDD.php");
+
 
 include_once($chemin."ihm/Entreprise_IHM.php");
 include_once($chemin."ihm/Etudiant_IHM.php");
 include_once($chemin."ihm/Promotion_IHM.php");
+include_once($chemin."ihm/ThemeDeStage_IHM.php");
+include_once($chemin."ihm/Convention_IHM.php");
+
 include_once($chemin."ihm/IHM_Generale.php");
+
 
 include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."moteur/Etudiant.php");
 include_once($chemin."moteur/Promotion.php");
+include_once($chemin."moteur/ThemeDeStage.php");
+include_once($chemin."moteur/Convention.php");
 
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
@@ -22,34 +31,25 @@ include_once($chemin."moteur/FiltreString.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
-$tabLiens[1] = array('../', 'Statistiques');
+$tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
 
-$etudiant = Etudiant::getListeEtudiants("2015");
-$tabEtudiants = Promotion::listerEtudiants("");
-/* recuperation des donnees entreprises */
+Promotion_IHM::afficherFormulaireSelectionAnnee(true);
+
+
+
 $tabEntreprises = Entreprise::getListeEntreprises("");
-//$parrain = $convention->getParrain();
+$tabThemeDeStage = ThemeDeStage::getListeTheme();
+$tabConvention = Convention::getListeConvention("");
 
-/* recuperation des donnees etudiants */
-//$contact = $convention->getContact();
-//$filiere = $promotion->getFiliere();
-//$parcours = $promotion->getParcours();
-
-/* recuperation des donnees soutenance */
-
-
-/* recuperation des donnees stage */
-//$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
-echo "<div id='data'>\n";
 $mans = 0;
 $sarthe = 0;
 $region = 0;
 $france = 0;
 $monde = 0;
+$dep = 0;
 
 if(sizeof($tabEntreprises)>0){
-	// Affichage des entreprises correspondants aux critères de recherches
 	for($i=0; $i<sizeof($tabEntreprises); $i++){
 		$nom = $tabEntreprises[$i]->getNom();	
 		$adresse = $tabEntreprises[$i]->getAdresse();	
@@ -57,7 +57,9 @@ if(sizeof($tabEntreprises)>0){
 		$ville = strtolower($tabEntreprises[$i]->getVille());
 		$pays = strtolower($tabEntreprises[$i]->getPays());	
 		$email = $tabEntreprises[$i]->getEmail();
+		
 		$dep = $codepostal[0].$codepostal[1];
+		
 		$deps = array("53","85","49","44");
 
 		if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france") ) {
@@ -76,20 +78,13 @@ if(sizeof($tabEntreprises)>0){
 			$monde++;
 		}
 
-		//echo sizeof($tabEtudiants);
-		/*?><br/>
-		<?php	echo $tabEntreprises[$i]->getNom();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getAdresse();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getCodePostal();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getVille();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getPays();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getEmail();	?> <br/>
-		<?php	echo $dep;	?> <br/>
-		<?php*/
 	}
-
 }
-echo "\n</div>";
+
+/*if (sizeof($tabThemeDeStage)>0){
+
+}*/
+
 
 
 
