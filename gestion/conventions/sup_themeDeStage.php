@@ -10,9 +10,6 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Supprimer un ", "thème de stage", "../../",$tabLiens);
 
-$theme = $_POST['theme'];
-echo $_POST['theme'];
-
 function supprimer(){
 	if(isset($_POST['theme']) && $_POST['theme'] != -1){
 		$theme=$_POST['theme'];

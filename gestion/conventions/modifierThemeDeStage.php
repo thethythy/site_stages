@@ -15,14 +15,12 @@ IHM_Generale::header("Modifier un ", "thème de stage", "../../", $tabLiens);
 ThemeDeStage_IHM::afficherFormulaireModification();
 
 function modifier() {
-    global $tab23;
-
     if (isset($_POST['theme']) && $_POST['theme'] != -1) {
         $element = $_POST['theme'];
 
         $theme = ThemeDeStage::getThemeDeStage($element);
         printf("<h2>Modification d'un thème de stage</h2>");
-        printf("<center><form action='../../gestion/conventions/mod_themeDeStage.php' method=post name='theme'>\n");
+        printf("<center><form action='../../gestion/conventions/mod_themeDeStage.php' method=post name='the'>\n");
         printf("<td><input type=hidden name='id' size=100 value=%s></td>\n", $theme->getIdTheme());
         printf("<table><center><tr><td>Thème de stage : </td>\n");
         printf("<td><input name='label' size=100 value=%s></td>\n", $theme->getTheme());

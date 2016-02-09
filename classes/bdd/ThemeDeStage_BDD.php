@@ -21,6 +21,14 @@ class ThemeDeStage_BDD {
 		return $tabThemes;
     }
 
+    public static function getIdTheme($label){
+    	global $tab23;
+    	global $db;
+    	$sql = "SELECT idtheme FROM $tab23 WHERE theme = '".$label."';";
+    	$result = $db->query($sql);
+    	return mysqli_fetch_array($result);
+    }
+
     public static function getThemeDeStage($id){
     	global $tab23;
     	global $db;
@@ -44,6 +52,16 @@ class ThemeDeStage_BDD {
     					theme = ".$themeDeStage->getTheme();
     	}
     	$result = $db->query($sql);
+    }
+
+    public static function saveModification($themeDeStage){
+        global $tab23;
+        global $db;
+
+        $sql = "UPDATE $tab23 SET 
+                        idtheme = '".$themeDeStage->getIdThemeDeStage()."',
+                        theme = ".$themeDeStage->getTheme();
+        $result = $db->query($sql);
     }
 
     public static function delete($themeDeStage){

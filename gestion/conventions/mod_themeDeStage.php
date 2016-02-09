@@ -12,9 +12,11 @@ IHM_Generale::header("Modifier un ", "thème de stage", "../../", $tabLiens);
 
 function modifier(){
 	if($_POST['id']!=-1){
-		$theme=ThemeDeStage::getThemeDeStage($_POST['id']);
+
+		$theme = ThemeDeStage::getThemeDeStage($_POST['id']);
 		$theme->setTheme($_POST['label']);
-		ThemeDeStage_BDD::sauvegarder($theme);
+
+		ThemeDeStage_BDD::saveModification($theme);
 		printf("Le thème de stage a été modifié ! ");
 	}else {
 		IHM_Generale::erreur("Vous devez sélectionner un thème de stage !");
