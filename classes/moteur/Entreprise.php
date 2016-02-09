@@ -120,7 +120,7 @@ class Entreprise {
 								  $tabEntrepriseString[$i][4],
 								  $tabEntrepriseString[$i][5],
 								  $tabEntrepriseString[$i][6],
-								  @$tabEntrepriseString[$i][7]));
+								  $tabEntrepriseString[$i][7]));
 
   		return $tabEntreprise;
 	}

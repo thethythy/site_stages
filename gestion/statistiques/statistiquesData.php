@@ -31,14 +31,16 @@ include_once($chemin."moteur/FiltreString.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
-$tabLiens[1] = array('../', 'Statistiques');
+$tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
+
+Promotion_IHM::afficherFormulaireSelectionAnnee(true);
+
 
 
 $tabEntreprises = Entreprise::getListeEntreprises("");
 $tabThemeDeStage = ThemeDeStage::getListeTheme();
 $tabConvention = Convention::getListeConvention("");
-
 
 $mans = 0;
 $sarthe = 0;
@@ -47,9 +49,7 @@ $france = 0;
 $monde = 0;
 $dep = 0;
 
-
 if(sizeof($tabEntreprises)>0){
-	// Affichage des entreprises correspondants aux critères de recherches
 	for($i=0; $i<sizeof($tabEntreprises); $i++){
 		$nom = $tabEntreprises[$i]->getNom();	
 		$adresse = $tabEntreprises[$i]->getAdresse();	
@@ -78,22 +78,12 @@ if(sizeof($tabEntreprises)>0){
 			$monde++;
 		}
 
-		//echo sizeof($tabEtudiants);
-		/*?><br/>
-		<?php	echo $tabEntreprises[$i]->getNom();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getAdresse();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getCodePostal();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getVille();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getPays();	?> <br/>
-		<?php	echo $tabEntreprises[$i]->getEmail();	?> <br/>
-		<?php	echo $dep;	?> <br/>
-		<?php*/
 	}
 }
 
-if (sizeof($tabThemeDeStage)>0){
+/*if (sizeof($tabThemeDeStage)>0){
 
-}
+}*/
 
 
 
