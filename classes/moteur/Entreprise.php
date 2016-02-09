@@ -121,7 +121,6 @@ class Entreprise {
 								  $tabEntrepriseString[$i][5],
 								  $tabEntrepriseString[$i][6],
 								  $tabEntrepriseString[$i][7]));
-
   		return $tabEntreprise;
 	}
 

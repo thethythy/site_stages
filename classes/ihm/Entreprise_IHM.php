@@ -117,12 +117,12 @@ class Entreprise_IHM {
 						Type de l'entreprise :
 						<!-- Récupération des types d'entreprises -->
 						<?php
-							//$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise("");
-							$tabTypeEntreprise = TypeEntreprise::listerTypeEntreprise();
-							echo "<select name='typeEntrprise'>";
-							for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++){
-								echo "<option selected value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'
-									>".$tabTypeEntreprise[$i]->getTypeEntreprise()."</option>";
+							$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise();
+							echo "<select name='typeEntreprise'>";
+							for($i=0; $i<sizeof($tabTypeEntreprise); $i++) {
+								$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
+								$type = $tabTypeEntreprise[$i]->getTypeEntreprise($id)->getType();
+								echo "<option value='$id'>$type</option>";
 							}
 							echo "</select>";
 						?>
