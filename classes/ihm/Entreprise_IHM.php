@@ -1,8 +1,11 @@
 <?php
 
+include_once("../../classes/bdd/TypeEntreprise_BDD.php");
+include_once("../../classes/moteur/TypeEntreprise.php");
+
 class Entreprise_IHM {
  
-	// Méthodes statiques
+	// MÃ©thodes statiques
 	
 	public static function afficherFormulaireRecherche($page){
 		?>
@@ -55,9 +58,10 @@ class Entreprise_IHM {
 		<?php
 	}
 	
-	// $ent = Entreprise qui est modifier et dont les informations son affichées.
-	// si $ent = "", alors il s'agit d'un formulaire de création (champs vide)
+	// $ent = Entreprise qui est modifier et dont les informations son affichÃ©es.
+	// si $ent = "", alors il s'agit d'un formulaire de crÃ©ation (champs vide)
 	public static function afficherFormulaireSaisie($ent){
+		
 		?>
 		<form method=post action="">
 			
@@ -78,12 +82,11 @@ class Entreprise_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Email DRH ou équivalent</td>
+								<td>Email DRH ou Ã©quivalent</td>
 								<td>
 									<input type="text" name="email" <?php if(isset($_POST['email'])) echo "value='".$_POST['email']."'"; else if($ent != "") echo "value='".$ent->getEmail()."'"; ?> />
 								</td>
 							</tr>
-							
 						</table>
 					</td>
 					<td width="50%" align="center">
@@ -110,6 +113,20 @@ class Entreprise_IHM {
 					</td>
 				</tr>
 				<tr>
+					<td>
+						Type de l'entreprise :
+						<!-- RÃ©cupÃ©ration des types d'entreprises -->
+						<?php
+							//$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise("");
+							$tabTypeEntreprise = TypeEntreprise::listerTypeEntreprise();
+							echo "<select name='typeEntrprise'>";
+							for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++){
+								echo "<option selected value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'
+									>".$tabTypeEntreprise[$i]->getTypeEntreprise()."</option>";
+							}
+							echo "</select>";
+						?>
+					</td>
 					<td colspan="2" id="submit">
 						<input type="hidden" value="1" name="<?php if($ent != "") echo "edit"; else echo "add";?>" />
 						<input type="submit" value="Valider" />

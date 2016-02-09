@@ -31,6 +31,7 @@ class Promotion_IHM {
 
 	    <script type="text/javascript">
 		var table = new Array("annee");
+		
 		new LoadData(table, "", "onchange");
 	    </script>
 	<?php

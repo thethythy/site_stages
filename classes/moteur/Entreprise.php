@@ -10,9 +10,10 @@ class Entreprise {
 	var $ville;
 	var $pays;
 	var $email;
+	var $idTypeEntreprise;
 
 	// Constructeur de classe
-	public function Entreprise($identifiantBDD, $nom, $adresse, $codePostal, $ville, $pays, $email) {
+	public function Entreprise($identifiantBDD, $nom, $adresse, $codePostal, $ville, $pays, $email, $idTypeEntreprise) {
 		$this->identifiantBDD = $identifiantBDD;
 		$this->nom = $nom;
 		$this->adresse = $adresse;
@@ -20,6 +21,7 @@ class Entreprise {
 		$this->ville = $ville;
 		$this->pays = $pays;
 		$this->email = $email;
+		$this->idTypeEntreprise = $idTypeEntreprise;
 	}
 
 	// Méthodes diverses
@@ -76,12 +78,19 @@ class Entreprise {
 		$this->email = $email;
 	}
 
+	public function getType() {
+		return TypeEntreprise::getTypeEntreprise($this->idTypeEntreprise);
+	}
+
+	public function setTypeEntreprise($idTypeEntreprise) {
+		$this->idTypeEntreprise = $idTypeEntreprise;
+	}
+
 	public function listeDeContacts(){
 		return Contact::listerContacts($this->identifiantBDD);
 	}
 
 	/** Méthodes statiques **/
-
 	public static function supprimerEntreprise($idEntreprise){
 		Entreprise_BDD::supprimerEntreprise($idEntreprise);
 	}
@@ -95,7 +104,8 @@ class Entreprise {
 				      $entrepriseBDD["codepostal"],
 				      $entrepriseBDD["ville"],
 				      $entrepriseBDD["pays"],
-				      $entrepriseBDD["email"]);
+				      $entrepriseBDD["email"],
+				      $entrepriseBDD["idtypeentreprise"]);
 	}
 
 	public static function getListeEntreprises($filtres){
@@ -109,14 +119,15 @@ class Entreprise {
 								  $tabEntrepriseString[$i][3],
 								  $tabEntrepriseString[$i][4],
 								  $tabEntrepriseString[$i][5],
-								  $tabEntrepriseString[$i][6]));
+								  $tabEntrepriseString[$i][6],
+								  $tabEntrepriseString[$i][7]));
 
   		return $tabEntreprise;
 	}
 
 	// $tab_donnees : Un tableau de String contenant les champs du formulaire de saisie
 	public static function saisisrDonneesEntreprise($tab_donnees){
-    	$entreprise = new Entreprise("", $tab_donnees[0], $tab_donnees[1], $tab_donnees[2], $tab_donnees[3], $tab_donnees[4], $tab_donnees[5]);
+    	$entreprise = new Entreprise("", $tab_donnees[0], $tab_donnees[1], $tab_donnees[2], $tab_donnees[3], $tab_donnees[4], $tab_donnees[5], $tab_donnees[6],$tab_donnees[7]);
     	$id = Entreprise_BDD::sauvegarder($entreprise);
     	return id;
 	}

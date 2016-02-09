@@ -26,6 +26,7 @@ $tab18 = 'sujetdestage';
 $tab19 = 'relation_promotion_etudiant_convention';
 $tab20 = 'couleur';
 $tab21 = 'taches';
+$tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
 
 function deconnexion() {
@@ -83,8 +84,10 @@ foreach ($_COOKIE as $key => $value) {
 }
 
 // Prévention contre les injection SQL dans les variables SESSION
-foreach ($_SESSION as $key => $value) {
-    $_SESSION[$key] = filterParameters($value);
+if(isset($_SESSION)) {
+	foreach ($_SESSION as $key => $value) {
+	    $_SESSION[$key] = filterParameters($value);
+	}
 }
 
 // Prévention contre les injection SQL dans les variables FILES
