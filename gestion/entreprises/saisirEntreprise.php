@@ -24,8 +24,7 @@ if(isset($_POST['add'])){
 		IHM_Generale::erreur("Tous les champs sont obligatoires !");
 	}else{
 
-		$unType = new TypeEntreprise(2,"grande");
-		$idtype = $unType->getIdentifiantBDD();
+		$idtype = $_POST['typeEntreprise'];
 
 		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
 		

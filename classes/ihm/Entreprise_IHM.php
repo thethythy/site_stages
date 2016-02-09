@@ -122,7 +122,7 @@ class Entreprise_IHM {
 							for($i=0; $i<sizeof($tabTypeEntreprise); $i++) {
 								$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
 								$type = $tabTypeEntreprise[$i]->getTypeEntreprise($id)->getType();
-								echo "<option value='$id'>$type</option>";
+								echo "<option value='$id'>$type</option>"; 
 							}
 							echo "</select>";
 						?>

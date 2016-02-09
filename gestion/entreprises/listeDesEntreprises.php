@@ -12,6 +12,8 @@ include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
+include_once($chemin."bdd/TypeEntreprise_BDD.php");
+include_once($chemin."moteur/TypeEntreprise.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -70,7 +72,8 @@ if(sizeof($tabEntreprises)>0){
 					<?php	echo $tabEntreprises[$i]->getCodePostal();	?>
 					<?php	echo $tabEntreprises[$i]->getVille();	?> <br/>
 					<?php	echo $tabEntreprises[$i]->getPays();	?> <br/>
-					<?php	echo $tabEntreprises[$i]->getEmail();	?>
+					<?php	echo $tabEntreprises[$i]->getEmail();	?> <br/>
+					<?php	echo "Type de l'entreprise: ".$tabEntreprises[$i]->getType()->getType();	?>
 				</td>
 				<td width="50%" id="contact">
 					<?php
