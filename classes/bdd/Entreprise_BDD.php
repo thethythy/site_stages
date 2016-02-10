@@ -11,7 +11,7 @@ class Entreprise_BDD {
 		global $tab6;
 		global $db;
 
-		$typeEntreprise = $entreprise->getTypeEntreprise();
+		$typeEntreprise = $entreprise->getType();
 
 		if ($entreprise->getIdentifiantBDD() == "") {
 		    $sql = "INSERT INTO " . $tab6 . " VALUES ('" . $entreprise->getIdentifiantBDD() . "',
