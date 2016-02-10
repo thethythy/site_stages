@@ -1,5 +1,8 @@
 <?php
 
+include_once("../../classes/bdd/TypeEntreprise_BDD.php");
+include_once("../../classes/moteur/TypeEntreprise.php");
+
 class Entreprise_IHM {
  
 	// Méthodes statiques
@@ -59,8 +62,6 @@ class Entreprise_IHM {
 	// si $ent = "", alors il s'agit d'un formulaire de création (champs vide)
 	public static function afficherFormulaireSaisie($ent){
 		
-		if($ent != "")
-			$typ = $ent->getTypeEntreprise();
 		?>
 		<form method=post action="">
 			
@@ -112,23 +113,20 @@ class Entreprise_IHM {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left">
+					<td>
 						Type de l'entreprise :
-						<select name="idtype">
-							<?php
-								$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise("");
-
-								for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++){
-									if (((isset($_POST['idtype'])) && ($_POST['idtype'] == $tabTypeEntreprise[$i]->getIdentifiantBDD())) || (($ent != "") && ($typ->getIdentifiantBDD() == $tabTypeEntreprise[$i]->getIdentifiantBDD())))
-										echo "<option selected value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'>".$tabTypeEntreprise[$i]->getTypeEntreprise()." </option>";
-									else
-  										echo "<option value='".$tabTypeEntreprise[$i]->getIdentifiantBDD()."'>".$tabTypeEntreprise[$i]->getTypeEntreprise()." </option>";
-								}
-							?>
-						</select>
+						<!-- Récupération des types d'entreprises -->
+						<?php
+							$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise();
+							echo "<select name='typeEntreprise'>";
+							for($i=0; $i<sizeof($tabTypeEntreprise); $i++) {
+								$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
+								$type = $tabTypeEntreprise[$i]->getTypeEntreprise($id)->getType();
+								echo "<option value='$id'>$type</option>"; 
+							}
+							echo "</select>";
+						?>
 					</td>
-				</tr>
-				<tr>
 					<td colspan="2" id="submit">
 						<input type="hidden" value="1" name="<?php if($ent != "") echo "edit"; else echo "add";?>" />
 						<input type="submit" value="Valider" />

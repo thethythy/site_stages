@@ -7,6 +7,8 @@ include_once($chemin."bdd/Entreprise_BDD.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Entreprise_IHM.php");
 include_once($chemin."moteur/Entreprise.php");
+include_once($chemin."bdd/TypeEntreprise_BDD.php");
+include_once($chemin."moteur/TypeEntreprise.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -20,7 +22,10 @@ if(isset($_POST['add'])){
 	if(($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "")){
 		Entreprise_IHM::afficherFormulaireSaisie("");
 		IHM_Generale::erreur("Tous les champs sont obligatoires !");
-	}else{		
+	}else{
+
+		$idtype = $_POST['typeEntreprise'];
+
 		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
 		
 		// Si l'entreprise que l'on veut créer n'existe pas déjà
