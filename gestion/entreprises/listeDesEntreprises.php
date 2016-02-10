@@ -12,8 +12,6 @@ include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
-include_once($chemin."bdd/TypeEntreprise_BDD.php");
-include_once($chemin."moteur/TypeEntreprise.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
