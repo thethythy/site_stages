@@ -6,7 +6,7 @@ class ThemeDeStage {
 
 	/* Constructeur(s) */
 	public function ThemeDeStage($idtheme, $theme){
-		$this->idtheme = $idtheme;
+		$this->idTheme = $idtheme;
 		$this->theme = $theme;
 	}
 
@@ -17,17 +17,17 @@ class ThemeDeStage {
 	}
 
 	public function setIdTheme($id){
-		$this->theme = $id;
+		$this->idTheme = $id;
 	}
 
-	public function getIdTheme(){
+	/*public function getIdTheme(){
 		$idThemeString = ThemeDeStage_BDD::getIdTheme($this->theme);
 		$idThemeDeStage = $idThemeString['idtheme'];
 
 		return $idThemeDeStage;
-	}
+	}*/
 
-	public function getIdThemeDeStage(){
+	public function getIdTheme(){
 		return $this->idTheme;
 	}
 

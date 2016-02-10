@@ -47,21 +47,10 @@ class ThemeDeStage_BDD {
     					'".$themeDeStage->getTheme()."')";
 		}
 		else{
-    		$sql = "UPDATE $tab23 SET 
-    					idtheme = '".$themeDeStage->getIdTheme()."',
-    					theme = ".$themeDeStage->getTheme();
+    		$sql = "UPDATE $tab23 SET theme = '".$themeDeStage->getTheme()."'
+                    WHERE idtheme = '".$themeDeStage->getIdTheme()."'";
     	}
     	$result = $db->query($sql);
-    }
-
-    public static function saveModification($themeDeStage){
-        global $tab23;
-        global $db;
-
-        $sql = "UPDATE $tab23 SET 
-                        idtheme = '".$themeDeStage->getIdThemeDeStage()."',
-                        theme = ".$themeDeStage->getTheme();
-        $result = $db->query($sql);
     }
 
     public static function delete($themeDeStage){

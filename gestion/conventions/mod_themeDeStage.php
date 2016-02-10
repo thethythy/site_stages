@@ -16,7 +16,9 @@ function modifier(){
 		$theme = ThemeDeStage::getThemeDeStage($_POST['id']);
 		$theme->setTheme($_POST['label']);
 
-		ThemeDeStage_BDD::saveModification($theme);
+		echo "PATATE ".$theme->getIdTheme()." - ".$theme->getTheme();
+
+		ThemeDeStage_BDD::sauvegarder($theme);
 		printf("Le thème de stage a été modifié ! ");
 	}else {
 		IHM_Generale::erreur("Vous devez sélectionner un thème de stage !");
