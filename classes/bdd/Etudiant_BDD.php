@@ -106,7 +106,7 @@ class Etudiant_BDD {
 	    $sql2 = substr_replace($sql2, "", -3, 3);
 	    $sql2 .= " ORDER BY nometudiant ASC;";
 	    //echo "REQUETE 2 : ".$sql2."<br/>";
-	    $req = $db->query($sqlb);
+	    $req = $db->query($sql2);
 
 	    while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
 		$tab = array();
