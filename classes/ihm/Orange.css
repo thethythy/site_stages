@@ -535,3 +535,22 @@ textarea {
 .image_aide_en_ligne_detaillee figure {
     text-align: center;
 }
+
+section {
+    padding : 0;
+    margin : auto;
+
+    display : inline-block;
+}
+
+#section_gauche {
+    margin-right: 9.5%;
+}
+
+#section_centre {
+    margin-right: 9.5%;
+}
+
+section table td {
+    min-width: 5px
+}

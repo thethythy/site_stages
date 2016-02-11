@@ -45,9 +45,16 @@ include_once($chemin."moteur/ThemeDeStage.php");
                                     $tabTheme = ThemeDeStage::getListeTheme();
                                     echo "<select name=theme>";
                                     echo "<option  value='-1' selected></option>";
+
                                     for ($i = 0; $i < sizeof($tabTheme); $i++) {
+
+                                        echo $tabTheme[0]->getIdTheme();
+
+
                                     	echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
                                     }
+
+
                                     echo "</select>";
                                     ?>
                                 </th>
@@ -55,7 +62,7 @@ include_once($chemin."moteur/ThemeDeStage.php");
                             <tr>
                                 <td colspan=2>
                                     <input type=submit value="Modifier un thème" />
-                                    <input type=submit value="Supprimer un thème" onclick=""/>
+                                    <input type=submit value="Supprimer un thème" onclick="this.form.action='../../gestion/conventions/sup_themeDeStage.php'"/>
                                 </td>
                             </tr>
                         </table>

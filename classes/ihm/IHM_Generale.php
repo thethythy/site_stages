@@ -46,7 +46,9 @@ class IHM_Generale {
 	    ?>
 
 	    <link rel="stylesheet" href="<?php echo $lienRacine; ?>classes/ihm/Orange.css"/>
-
+        <script src="frameworksJS/jquery.js"></script>
+        <script src="frameworksJS/Chart.js"></script>
+        
         </head>
         <body>
             <div id="wrap">
