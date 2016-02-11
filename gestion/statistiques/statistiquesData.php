@@ -66,7 +66,7 @@ $conventionM2 = Convention::getListeConvention($filtreConventionM2);
 $tabtype = TypeEntreprise::getListeTypeEntreprise("");
 
 if( ($taille=sizeof($tabtype))>0) {
-	echo $taille."dee</br>";
+	
 }
 
 $mansM1 = 0;
@@ -94,7 +94,7 @@ if(sizeof($conventionM1)>0) {
 		$villeM1 = strtolower($entreprise->getVille());
 		$paysM1 = strtolower($entreprise->getPays());	
 		$emailM1 = $entreprise->getEmail();
-
+		$typeentrepriseM1 = $entreprise->getType();
 
 		$depM1 = $codepostalM1[0].$codepostalM1[1];
 		
