@@ -10,7 +10,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Gestion des ", "thèmes de stage", "../../", $tabLiens);
+IHM_Generale::header("Modifier un ", "thème de stage", "../../", $tabLiens);
 
 ThemeDeStage_IHM::afficherFormulaireModification();
 
@@ -24,7 +24,6 @@ function modifier() {
         printf("<td><input type=hidden name='id' size=100 value=%s></td>\n", $theme->getIdTheme());
         printf("<table><center><tr><td>Thème de stage : </td>\n");
         printf("<td><input name='label' size=100 value=%s></td>\n", $theme->getTheme());
-       
         printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
         printf("</table></form></center>");
     }

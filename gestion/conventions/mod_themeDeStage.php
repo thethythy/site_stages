@@ -22,7 +22,7 @@ function modifier(){
 	}
 }
 modifier();
-printf("<p><a href='../../gestion/conventions/gestionThemeDeStage.php'>Retour</a></p>");
+printf("<p><a href='../../gestion/conventions/modifierThemeDeStage.php'>Retour</a></p>");
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
 ?>

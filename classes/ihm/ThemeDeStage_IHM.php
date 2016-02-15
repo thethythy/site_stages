@@ -44,7 +44,7 @@ include_once($chemin."moteur/ThemeDeStage.php");
                                     <?php
                                     $tabTheme = ThemeDeStage::getListeTheme();
                                     echo "<select name=theme>";
-                                    echo "<option  value='-1' selected></option>";
+                                    echo "<option  value='-1' selected>---Theme de stage---</option>";
 
                                     for ($i = 0; $i < sizeof($tabTheme); $i++) {
 
@@ -61,8 +61,8 @@ include_once($chemin."moteur/ThemeDeStage.php");
                             </tr>
                             <tr>
                                 <td colspan=2>
-                                    <input type=submit value="Modifier un thème" />
-                                    <input type=submit value="Supprimer un thème" onclick="this.form.action='../../gestion/conventions/sup_themeDeStage.php'"/>
+                                    <input type=submit value="Modifier" />
+                                    <input type=submit value="Supprimer" onclick="this.form.action='../../gestion/conventions/sup_themeDeStage.php'"/>
                                 </td>
                             </tr>
                         </table>
@@ -76,33 +76,22 @@ include_once($chemin."moteur/ThemeDeStage.php");
             <FORM id="formGestionTheme" METHOD="POST" ACTION="">
             <table id="table_gTheme">
                 <tr><td colspan=2>
-                        <table id="presentation_gTheme">
-                            <tr id="entete2">
-                                <td colspan=2>Ajouter, modifer ou supprimer un thème de stage</td>
-                            </tr>
-                            <tr>
-                                <th width="220">Sélectionnez un thème : </th>
-                                <th>
-                                    <?php
-                                    $tabTheme = ThemeDeStage::getListeTheme();
-                                    echo "<select name=theme>";
-                                    echo "<option  value='-1' selected>--------------------</option>";
-
-                                    for ($i = 0; $i < sizeof($tabTheme); $i++) {
-                                        echo $tabTheme[0]->getIdTheme();
-                                        echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
-                                    }
-                                    echo "</select>";
-                                    ?>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td colspan=2>
-                                    <input type=submit value="Ajouter"/>
-                                    <input type=submit value="Modifier"/>
-                                    <input type=submit value="Supprimer" onclick="this.form.action='../../gestion/conventions/sup_themeDeStage.php'"/>
-                                </td>
-                            </tr>
+                        <?php
+                            $tabTheme = ThemeDeStage::getListeTheme();
+                            for ($i = 0; $i < sizeof($tabTheme); $i++) {
+                        ?>
+                        <table id="presentation_theme">
+                            <td width="210" align="right">
+                                <?php echo $tabTheme[$i]->getTheme();?>
+                            </td>
+                            <td colspan=2><?php
+                                printf("<input type=submit value=Modifier />");
+                                printf("<input type=submit value=Supprimer onclick=this.form.action='../../gestion/conventions/sup_themeDeStage.php'/>");
+                            ?>
+                            </td>
+                            <?php
+                            }
+                            ?> 
                         </table>
             </table>
             </FORM>
