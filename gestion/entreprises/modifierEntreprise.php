@@ -7,6 +7,8 @@ include_once($chemin."bdd/Entreprise_BDD.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Entreprise_IHM.php");
 include_once($chemin."moteur/Entreprise.php");
+include_once($chemin."bdd/TypeEntreprise_BDD.php");
+include_once($chemin."moteur/TypeEntreprise.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -22,14 +24,19 @@ if(isset($_POST['edit'])){
 	if(($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "")){
 		Entreprise_IHM::afficherFormulaireSaisie($ent);
 		IHM_Generale::erreur("Tous les champs sont obligatoires !");
-	}else{		
+	}else{
+
+		$idtype = $_POST['typeEntreprise'];
+
 		$ent->setNom($nom);
 		$ent->setAdresse($adresse);
 		$ent->setCodePostal($cp);
 		$ent->setVille($ville);
 		$ent->setPays($pays);
 		$ent->setEmail($email);
-		//$ent->setType($idtype);
+		$ent->setTypeEntreprise($idtype);
+
+		echo "Juste avant l'appel a entreprise_bdd : (".$ent->getIdentifiantBDD()."), ".$ent->getNom().", ".$ent->getType()->getType();
 							
 		$idEnt = Entreprise_BDD::sauvegarder($ent);
 		
@@ -46,12 +53,6 @@ if(isset($_POST['edit'])){
 							<input type="hidden" value="<?php echo $_GET['ville']; ?>" name="ville"/>
 							<input type="hidden" value="<?php echo $_GET['pays']; ?>" name="pays"/>
 							<input type="hidden" value="<?php echo $_GET['email']; ?>" name="email"/>
-							<select>
-								<option value="0">petite</option>
-								<option value="1">moyenne</option>
-								<option value="2">grande</option>
-								<option value="3">hors info</option>
-							</select>
 							<input type="submit" value="Retourner à la liste"/>
 						</form>
 					</td>
