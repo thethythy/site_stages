@@ -70,5 +70,43 @@ include_once($chemin."moteur/ThemeDeStage.php");
         	</FORM>
         	<?php
 		}
+
+        public static function afficherFormulaireGestion(){
+            ?>
+            <FORM id="formGestionTheme" METHOD="POST" ACTION="">
+            <table id="table_gTheme">
+                <tr><td colspan=2>
+                        <table id="presentation_gTheme">
+                            <tr id="entete2">
+                                <td colspan=2>Ajouter, modifer ou supprimer un thème de stage</td>
+                            </tr>
+                            <tr>
+                                <th width="220">Sélectionnez un thème : </th>
+                                <th>
+                                    <?php
+                                    $tabTheme = ThemeDeStage::getListeTheme();
+                                    echo "<select name=theme>";
+                                    echo "<option  value='-1' selected>--------------------</option>";
+
+                                    for ($i = 0; $i < sizeof($tabTheme); $i++) {
+                                        echo $tabTheme[0]->getIdTheme();
+                                        echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
+                                    }
+                                    echo "</select>";
+                                    ?>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td colspan=2>
+                                    <input type=submit value="Ajouter"/>
+                                    <input type=submit value="Modifier"/>
+                                    <input type=submit value="Supprimer" onclick="this.form.action='../../gestion/conventions/sup_themeDeStage.php'"/>
+                                </td>
+                            </tr>
+                        </table>
+            </table>
+            </FORM>
+            <?php
+        }
 	}
 ?>

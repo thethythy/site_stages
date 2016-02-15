@@ -10,9 +10,23 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Gestion des ", "thèmes de stage", "../../", $tabLiens);
+IHM_Generale::header("Modifier un ", "thème de stage", "../../", $tabLiens);
 
-ThemeDeStage_IHM::afficherFormulaireModification();
+ThemeDeStage_IHM::afficherFormulaireGestion();
+
+function save(){
+	if(isset($_POST['theme'])) {
+		if($_POST['theme'] != ""){	
+			
+			$theme=$_POST['theme'];
+			ThemeDeStage::saisirDonneesTheme($theme);
+			printf("<p>Le nouveau thème de stage a été enregistré ! </p>");
+		}else{
+			IHM_Generale::erreur("Vous devez saisir des informations !");
+		}
+	}
+	
+}
 
 function modifier() {
     if (isset($_POST['theme']) && $_POST['theme'] != -1) {
@@ -30,6 +44,7 @@ function modifier() {
     }
 }
 
+save();
 modifier();
 deconnexion();
 

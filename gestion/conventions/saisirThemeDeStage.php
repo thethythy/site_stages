@@ -11,6 +11,7 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Saisir un", "theme de stage", "../../",$tabLiens);
+ThemeDeStage_IHM::afficherFormulaireSaisie();
 
 function save(){
 	if(isset($_POST['theme'])) {
@@ -26,7 +27,6 @@ function save(){
 	
 }
 save();
-ThemeDeStage_IHM::afficherFormulaireSaisie();
 deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");

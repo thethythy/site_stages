@@ -78,6 +78,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
 				<li><a href="./gestion/editiontache.php">Gestion des tâches</a></li>
 				<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
+				<li><a href="./gestion/exporterBDD.php">Exporter la base de données</a></li>
+
 			    </ul>
 			</td>
 		    </tr>
@@ -185,6 +187,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
+			    <li><a href="./conventions/gestionThemeDeStage.php">Gestion des thèmes de stage</a></li>
 				<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
 				<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li>
 				<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li><br/>

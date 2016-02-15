@@ -15,9 +15,6 @@ function modifier(){
 
 		$theme = ThemeDeStage::getThemeDeStage($_POST['id']);
 		$theme->setTheme($_POST['label']);
-
-		echo "PATATE ".$theme->getIdTheme()." - ".$theme->getTheme();
-
 		ThemeDeStage_BDD::sauvegarder($theme);
 		printf("Le thème de stage a été modifié ! ");
 	}else {
@@ -25,7 +22,7 @@ function modifier(){
 	}
 }
 modifier();
-printf("<p><a href='../../gestion/conventions/modifierThemeDeStage.php'>Retour</a></p>");
+printf("<p><a href='../../gestion/conventions/gestionThemeDeStage.php'>Retour</a></p>");
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
 ?>
