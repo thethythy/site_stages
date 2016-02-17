@@ -16,9 +16,14 @@ ThemeDeStage_IHM::afficherFormulaireSaisie();
 function save(){
 	if(isset($_POST['theme'])) {
 		if($_POST['theme'] != ""){	
-			
+			$tabDonnees = array();
+
 			$theme=$_POST['theme'];
-			ThemeDeStage::saisirDonneesTheme($theme);
+			array_push($tabDonnees,$theme);
+			$couleur=$_POST['idCouleur'];
+			array_push($tabDonnees,$couleur);
+
+			ThemeDeStage::saisirDonneesTheme($tabDonnees);
 			printf("<p>Le nouveau thème de stage a été enregistré ! </p>");
 		}else{
 			IHM_Generale::erreur("Vous devez saisir des informations !");
