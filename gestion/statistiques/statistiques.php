@@ -16,21 +16,39 @@ include_once($chemin."moteur/FiltreString.php");
 include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Promotion.php");
 include_once("frameworksJS/statistique_fonctions.php");
-
-
-
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens);
+IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens, "statistiques");
+?>
+<script>
+$(function() {
+	var menuVisible = false;
+	$('#menuBtn').click(function() {
+		if (menuVisible) {
+			$('#annee2009').css({'display':'none'});
+			menuVisible = false;
+			return;
+		}
+		$('#annee2009').css({'display':'block'});
+		menuVisible = true;
+	});
+	$('#annee2009').click(function() {
+		$(this).css({'display':'none'});
+		menuVisible = false;
+	});
+});
 
-Statistiques::selectionAnnee(false);
+</script>
 
+<?php
 
-echo "<br/>";
-echo "<br/>";
-echo "<div id='data'>\n";
-include_once("statistiquesData.php");
+echo "<div id='menuBtn'>click me</div>";
+
+include("statistiquesData.php");
+
+echo "<div id='view'>\n";
+include("pageInter.php");
 echo "\n</div>";
 
 
