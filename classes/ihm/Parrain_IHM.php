@@ -52,7 +52,8 @@ class Parrain_IHM {
                 couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
             }
         </script>
-    <?php }
+    <?php 
+    }
 
     public static function afficherFormulaireModification() { ?>
         <FORM id="formModifParrain" METHOD="POST" ACTION="" name="sd">

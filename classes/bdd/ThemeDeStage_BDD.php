@@ -15,18 +15,11 @@ class ThemeDeStage_BDD {
 			$tab = array();
 		    array_push($tab, $theme["idtheme"]);
 		    array_push($tab, $theme["theme"]);
+            array_push($tab, $theme["idcouleur"]);
 		    array_push($tabThemes, $tab);
 		}
 
 		return $tabThemes;
-    }
-
-    public static function getIdTheme($label){
-    	global $tab23;
-    	global $db;
-    	$sql = "SELECT idtheme FROM $tab23 WHERE theme = '".$label."';";
-    	$result = $db->query($sql);
-    	return mysqli_fetch_array($result);
     }
 
     public static function getThemeDeStage($id){
@@ -41,14 +34,19 @@ class ThemeDeStage_BDD {
     	global $tab23;
     	global $db;
 
+        $couleur = $themeDeStage->getCouleur();
+
     	if($themeDeStage->getIdTheme() == ""){
     		$sql = "INSERT INTO $tab23 VALUES (
     					'".$themeDeStage->getIdTheme()."',
-    					'".$themeDeStage->getTheme()."')";
+    					'".$themeDeStage->getTheme()."',
+                        '".$couleur->getIdentifiantBDD()."')";
 		}
 		else{
-    		$sql = "UPDATE $tab23 SET theme = '".$themeDeStage->getTheme()."'
-                    WHERE idtheme = '".$themeDeStage->getIdTheme()."'";
+    		$sql = "UPDATE $tab23 SET 
+                        theme = '".$themeDeStage->getTheme()."',
+                        idcouleur = '".$couleur->getIdentifiantBDD()."'
+                        WHERE idtheme = '".$themeDeStage->getIdTheme()."'";
     	}
     	$result = $db->query($sql);
     }

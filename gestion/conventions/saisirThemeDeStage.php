@@ -10,14 +10,20 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Saisir un", "theme de stage", "../../",$tabLiens);
+IHM_Generale::header("Ajouter un", "theme de stage", "../../",$tabLiens);
+ThemeDeStage_IHM::afficherFormulaireSaisie();
 
 function save(){
 	if(isset($_POST['theme'])) {
 		if($_POST['theme'] != ""){	
-			
+			$tabDonnees = array();
+
 			$theme=$_POST['theme'];
-			ThemeDeStage::saisirDonneesTheme($theme);
+			array_push($tabDonnees,$theme);
+			$couleur=$_POST['idCouleur'];
+			array_push($tabDonnees,$couleur);
+
+			ThemeDeStage::saisirDonneesTheme($tabDonnees);
 			printf("<p>Le nouveau thème de stage a été enregistré ! </p>");
 		}else{
 			IHM_Generale::erreur("Vous devez saisir des informations !");
@@ -26,7 +32,6 @@ function save(){
 	
 }
 save();
-ThemeDeStage_IHM::afficherFormulaireSaisie();
 deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");

@@ -78,6 +78,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
 				<li><a href="./gestion/editiontache.php">Gestion des tâches</a></li>
 				<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
+				<li><a href="./gestion/exporterBDD.php">Exporter la base de données</a></li>
+
 			    </ul>
 			</td>
 		    </tr>
@@ -99,7 +101,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
 				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
-				<li><a href="./entreprises/gestionCompetence.php">Ajouter/Supprimer une compétence</a></li>
+				<li><a href="./entreprises/gestionCompetence.php">Ajouter/Supprimer une competence</a></li>
+				<li><a href="./entreprises/gestionTypeEntreprise.php">Ajouter/Supprimer un type d'entreprise</a></li>
 			    </ul>
 			</td>
 		    </tr>
@@ -185,13 +188,13 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
+				<li><a href="./conventions/saisirThemeDeStage.php">Saisir un thème de stage</a></li>
+				<li><a href="./conventions/modifierThemeDeStage.php">Modifier/Supprimer un thème de stage</a></li><br/>
 				<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
 				<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li>
 				<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li><br/>
 				<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
 				<li><a href="./conventions/bilanConventions.php">Bilan des conventions</a></li><br/>
-				<li><a href="./conventions/saisirThemeDeStage.php">Saisir un thème de stage</a></li>
-				<li><a href="./conventions/modifierThemeDeStage.php">Modifier/Supprimer un thème de stage</a></li>
 			    </ul>
 			</td>
 		    </tr>

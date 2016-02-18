@@ -30,15 +30,17 @@ class Entreprise_BDD {
 		    $result = mysqli_fetch_array($req);
 		    return $result['ID'];
 		} else {
-		    $sql = "UPDATE $tab6 SET nom='" . $entreprise->getNom() . "',
-					     adresse='" . $entreprise->getAdresse() . "',
-					     codepostal='" . $entreprise->getCodePostal() . "',
-					     ville='" . $entreprise->getVille() . "',
-					     pays='" . $entreprise->getPays() . "',
-					     email='" . $entreprise->getEmail() . "',
-					     idtypeentreprise='" . $typeEntreprise->getIdentifiantBDD() . "',
-			    WHERE identreprise ='" . $entreprise->getIdentifiantBDD() . "'";
+		    $sql = "UPDATE $tab6 SET nom='".$entreprise->getNom()."',
+					     adresse='".$entreprise->getAdresse()."',
+					     codepostal='".$entreprise->getCodePostal()."',
+					     ville='".$entreprise->getVille()."',
+					     pays='".$entreprise->getPays()."',
+					     email='".$entreprise->getEmail()."',
+					     idtypeentreprise='".$entreprise->getIdentifiantBDD()."',
+			    WHERE identreprise ='".$entreprise->getIdentifiantBDD()."'";
 		    $req = $db->query($sql);
+
+		    echo "Ici UPDATE dans entreprise_bdd: (".$entreprise->getIdentifiantBDD()."), ".$entreprise->getNom().", ".$typeEntreprise->getIdentifiantBDD();
 
 		    return $entreprise->getIdentifiantBDD();
 		}

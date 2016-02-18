@@ -93,7 +93,8 @@ if(sizeof($tabEntreprises)>0){
 					<?php	echo $tabEntreprises[$i]->getAdresse();	?> <br/>
 					<?php	echo $tabEntreprises[$i]->getCodePostal();	?>
 					<?php	echo $tabEntreprises[$i]->getVille();	?> <br/>
-					<?php	echo $tabEntreprises[$i]->getPays();	?>
+					<?php	echo $tabEntreprises[$i]->getPays();	?> <br/>
+					<?php	echo $tabEntreprises[$i]->getType()->getType();	?>
 				</td>
 				<td width="50%" id="contact">
 					<?php
