@@ -98,6 +98,10 @@ class Convention {
 	public function getEtudiant() {
 		return Etudiant::getEtudiant($this->idEtudiant);
 	}
+	
+	public function getTheme() {
+		return ThemeDeStage::getThemeDeStage($this->idTheme);
+	}
 
 	public function getIdEtudiant() {
 		return $this->idEtudiant;

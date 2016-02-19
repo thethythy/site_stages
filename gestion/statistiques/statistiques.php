@@ -20,32 +20,38 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens, "statistiques");
+$tabAU = Promotion_BDD::getAnneesUniversitaires();
+$tabTheme = ThemeDeStage::getListeTheme();
+include("statistiquesData.php");
 ?>
 <script>
+
+
+
 $(function() {
-	var menuVisible = false;
-	$('#menuBtn').click(function() {
-		if (menuVisible) {
-			$('#annee2009').css({'display':'none'});
-			menuVisible = false;
-			return;
-		}
-		$('#annee2009').css({'display':'block'});
-		menuVisible = true;
-	});
-	$('#annee2009').click(function() {
-		$(this).css({'display':'none'});
-		menuVisible = false;
-	});
+    var curPage="";
+    $("#menu a").click(function() {
+        if (curPage.length) { 
+            $("#"+curPage).hide();
+        }
+        curPage=$(this).data("page");
+        $("#"+curPage).show();
+    });
 });
-
 </script>
+<div class="nav">
+    <ul id="menu">
+    	<?php
+for ($i=0; $i<sizeof($tabAU); $i++) {
 
+		echo "<li id='link".$i."'><a href='#' data-page='page".$i."'>".$tabAU[$i]."</a></li>";
+    	
+    }
+    ?>
+    </ul>
+</div>
 <?php
 
-echo "<div id='menuBtn'>click me</div>";
-
-include("statistiquesData.php");
 
 echo "<div id='view'>\n";
 include("pageInter.php");

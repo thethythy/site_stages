@@ -34,7 +34,14 @@ include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
 
 
-
+function themeDeStage($convention) {
+	if (sizeof($conventionM1)>0) {
+		for ($i=0; $i<sizeof($conventionM1); $i++) {
+			$tabtheme[$i] = $conventionM1[$i]->getTheme();
+		}
+	}
+	return $tabtheme;
+}
 
 //recuperer une année universitaire
 //construire un filtre selon la bonne année universitaire

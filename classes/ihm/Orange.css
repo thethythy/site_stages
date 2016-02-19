@@ -554,3 +554,35 @@ section {
 section table td {
     min-width: 5px
 }
+
+.content { display:none;}
+
+#menu  {
+  margin: 0 ;
+  padding: 0 ;
+  list-style: none ;
+  text-align: center ;
+}
+
+#menu li {
+  display: inline ;
+  margin-right: 1px ;
+  color: #fff ;
+  background: #c00 ;
+}
+
+#menu li a {
+  padding: 4px 20px ;
+  background: #eea737 ;
+  color: #806B4D ;
+  border: 1px ;
+  font: 1em "Trebuchet MS",Arial,sans-serif ;
+  line-height: 1em ;
+  text-align: center ;
+  text-decoration: none ;
+}
+
+#menu li a:hover, #menu li a:focus, #navigation li a:active {
+  background: #fec757 ;
+  text-decoration: underline ;
+}
