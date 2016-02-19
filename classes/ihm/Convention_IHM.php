@@ -108,10 +108,16 @@ class Convention_IHM {
 									<select name="idTheme" style="width: 300px;">
 										<?php 
 											$tabTheme = ThemeDeStage::getListeTheme();
-											
-											for ($i = 0; $i < sizeof($tabTheme); $i++) {
-												echo "<option value='".$tabTheme[$i]->getIdTheme()."'>".$tabTheme[$i]->getTheme()."</option>";
-											}
+			                                //echo "<option  value='-1' selected>---Theme de stage---</option>";
+			                                for ($i = 0; $i < sizeof($tabTheme); $i++) {
+
+			                                    $couleur = $tabTheme[$i]->getCouleur();
+
+												if ($tabTheme[$i]->getIdTheme() == $conv->getIdTheme())
+													echo "<option selected value='".$tabTheme[$i]->getIdTheme()."'style='color: #" . $couleur->getCode() . ";'>".$tabTheme[$i]->getTheme()."</option>";
+												else
+													echo "<option value='".$tabTheme[$i]->getIdTheme()."'style='color: #" . $couleur->getCode() . ";'>".$tabTheme[$i]->getTheme()."</option>";
+			                                }
 										?>	
 									</select>
 								</td>
@@ -157,6 +163,13 @@ class Convention_IHM {
 				</tr>
 			</table>
 		</form>
+		<script>
+	        function showColor() {
+	            var couleurActuelHTML = document.getElementById("couleurActuel");
+	            var couleurHTML = document.getElementById("idCouleur");
+	            couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
+	        }
+    	</script>
 		<?php 
 	}
 }

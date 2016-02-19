@@ -12,6 +12,7 @@ include_once($chemin."bdd/Parcours_BDD.php");
 include_once($chemin."bdd/Promotion_BDD.php");
 include_once($chemin."bdd/Parrain_BDD.php");
 include_once($chemin."bdd/Soutenance_BDD.php");
+include_once($chemin."bdd/ThemeDeStage_BDD.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Contact_IHM.php");
 include_once($chemin."ihm/Convention_IHM.php");
@@ -28,6 +29,7 @@ include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
+include_once($chemin."moteur/ThemeDeStage.php");
 
 // Précisons l'encodage des données si cela n'est pas déjà fait
 if (!headers_sent())
@@ -82,6 +84,7 @@ if (sizeof($tabPromos) > 0) {
 						<td width='15%'>Examinateur</td>
 						<td width='15%'>Contact</td>
 						<td width='15%'>Entreprise</td>
+						<td width='15%'>Thème</td>
 						<td width='10%' align='center'>Modifier</td>
 						<td width='10%' align='center'>Supprimer</td>
 					</tr>";
@@ -91,6 +94,7 @@ if (sizeof($tabPromos) > 0) {
 			$examinateur = $conv->getExaminateur();
 			$contact = $conv->getContact();
 			$entreprise = $contact->getEntreprise();
+			$theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
 			
 			?>
 				<tr id="ligne<?php echo $i%2; ?>">
@@ -108,6 +112,9 @@ if (sizeof($tabPromos) > 0) {
 					</td>
 					<td>
 						<?php echo $entreprise->getNom(); ?>
+					</td>
+					<td>
+						<?php echo $theme->getTheme(); ?>
 					</td>
 					<td align="center">
 						<a href="modifierConvention.php?promo=<?php echo $idPromo; ?>&id=<?php echo $conv->getIdentifiantBDD(); ?>">
