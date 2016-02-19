@@ -11,7 +11,7 @@ class ThemeDeStage {
 		$this->theme = $theme;
 		$this->identifiant_couleur = $identifiant_couleur;
 	}
-
+	
 	/* Accesseurs */
 
 	public function setTheme($label){
