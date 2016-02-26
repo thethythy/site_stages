@@ -92,6 +92,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
+			    <li><a href="./entreprises/gestionTypeEntreprise.php">Ajouter/Supprimer un type d'entreprise</a></li><br/>
 				<li><a href="./entreprises/listeDesEntreprises.php">Liste des entreprises</a></li>
 				<li><a href="./entreprises/saisirEntreprise.php">Saisir une entreprise</a></li>
 				<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
@@ -100,7 +101,6 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
 				<li><a href="./entreprises/gestionCompetence.php">Ajouter/Supprimer une competence</a></li>
-				<li><a href="./entreprises/gestionTypeEntreprise.php">Ajouter/Supprimer un type d'entreprise</a></li>
 			    </ul>
 			</td>
 		    </tr>
