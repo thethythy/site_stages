@@ -5,7 +5,7 @@ class IHM_Generale {
     public static function header($titreGris, $titreOrange, $lienRacine, $liens, $ext=false) {
         ?>
 
-        <!DOCTYPE html>
+        <!DOCTYPE HTML>
 	<html lang="fr">
         <head>
 	    <title>Département Informatique - Stage</title>
@@ -43,11 +43,17 @@ class IHM_Generale {
 		echo "<link rel='stylesheet' type='text/css' href='scripts/jquery.contextmenu/jquery.contextMenu-1.01.css' />";
 		echo "<link rel='stylesheet' type='text/css' href='styles/filemanager.css' />";
 	    }
+
+        if ($ext == "statistiques") {
+            echo "<script src='frameworksJS/Chart.js'></script>";
+            echo "<script src='frameworksJS/jquery.js'></script>";
+            echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>";
+        }
 	    ?>
 
 	    <link rel="stylesheet" href="<?php echo $lienRacine; ?>classes/ihm/Orange.css"/>
-        <script src="frameworksJS/jquery.js"></script>
-        <script src="frameworksJS/Chart.js"></script>
+        <!--<script src="frameworksJS/jquery.js"></script>
+        <script src="frameworksJS/Chart.js"></script>-->
         
         </head>
         <body>
