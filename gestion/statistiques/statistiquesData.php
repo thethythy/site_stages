@@ -34,14 +34,25 @@ include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
 
 
+$tabCptTheme = array();
+for ($i=0; $i<sizeof($tabListeTheme); $i++) {
+	$tabCptTheme[$tabListeTheme[$i]->getIdTheme()] = 0;
+}
+
+
+
 function themeDeStage($convention) {
-	if (sizeof($conventionM1)>0) {
-		for ($i=0; $i<sizeof($conventionM1); $i++) {
-			$tabtheme[$i] = $conventionM1[$i]->getTheme();
+	$tabtheme = array();
+	if (sizeof($convention)>0) {
+		for ($i=0; $i<sizeof($convention); $i++) {
+			$tabtheme[$i] = $convention[$i]->getTheme();
 		}
 	}
 	return $tabtheme;
 }
+
+
+
 
 //recuperer une année universitaire
 //construire un filtre selon la bonne année universitaire

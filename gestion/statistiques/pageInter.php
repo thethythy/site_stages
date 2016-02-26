@@ -2,19 +2,208 @@
 
 
 for ($i=0; $i<sizeof($tabAU); $i++) {
+
 	$conventionM1 = recupererDonneeM1($tabAU[$i]);
+	$conventionM2 = recupererDonneeM2($tabAU[$i]);
+
 	$tabM1 = themeDeStage($conventionM1);
 	$tabM2 = themeDeStage($conventionM2);
+	$tabMaster = $tabM1+$tabM2;
 	
-	$conventionM2 = recupererDonneeM2($tabAU[$i]);
 	echo "<div id='page".$i."' class='content'>";
 	afficherEntreprise($conventionM1, $conventionM2, $tabAU[$i]);
+	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i]);
 	echo "</div>";
 	$tabAU[$i]++;
 }
 
-function afficherTheme($tab) {
+function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 
+	$temp = $tabCptTheme;
+	if(sizeof($tabM1)>0) {
+		for ($i=0; $i<sizeof($tabM1); $i++){
+			$temp[$tabM1[$i]->getIdTheme()]++;
+		}
+	}
+	?>
+	<section id="section_gauche">
+		<table >
+		<th colspan=3>Theme de stage M1</th>
+				
+				<?php
+				foreach ($temp as $i => $j){
+				?>
+					<tr>
+						<td bgcolor=<?php echo ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode(); ?> ></td>
+						<td ><?php echo ThemeDeStage::getThemeDeStage($i)->getTheme(); ?></td>
+						<td><?php echo $j?></td>
+					</tr>
+	
+				<?php
+				}
+
+			?>
+		</table>
+
+		</br></br>
+		<canvas id="<?php echo 'mycanvastheme'.$annee;?>" width="256" height="256">
+		</canvas>
+
+		<script>
+			
+			$(document).ready(function(){
+				var ctx = $(<?php echo '"#mycanvastheme'.$annee.'"';?>).get(0).getContext("2d");
+				//pie chart data
+				//sum of values = peu importe
+				
+				var data = [
+				
+					<?php
+					foreach ($temp as $i => $j) {
+						?>
+						{
+							value: <?php echo $j ?>,
+							color: <?php echo "'#".ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode()."'"; ?>,
+							label: <?php echo "'".ThemeDeStage::getThemeDeStage($i)->getTheme()."'"; ?>
+						},
+
+						<?php
+
+					}
+
+					?>
+					
+				];
+				//draw
+				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
+				//var linechart = new Chart(ctx).Line(data);
+			});
+		</script>
+	</section>
+	<?php
+	$temp = $tabCptTheme;
+	if(sizeof($tabM2)>0) {
+		for ($i=0; $i<sizeof($tabM2); $i++){
+			$temp[$tabM2[$i]->getIdTheme()]++;
+		}
+	}
+	?>
+	<section id="section_centre">
+		<table >
+		<th colspan=3>Theme de stage M2</th>
+				
+				<?php
+				foreach ($temp as $i => $j){
+				?>
+					<tr>
+						<td bgcolor=<?php echo ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode(); ?> ></td>
+						<td ><?php echo ThemeDeStage::getThemeDeStage($i)->getTheme(); ?></td>
+						<td><?php echo $j?></td>
+					</tr>
+	
+				<?php
+				}
+
+			?>
+		</table>
+		</br></br>
+		<canvas id="<?php echo 'mycanvastheme1'.$annee;?>" width="256" height="256">
+		</canvas>
+
+		<script>
+			
+			$(document).ready(function(){
+				var ctx = $(<?php echo '"#mycanvastheme1'.$annee.'"';?>).get(0).getContext("2d");
+				//pie chart data
+				//sum of values = peu importe
+				
+				var data = [
+				
+					<?php
+					foreach ($temp as $i => $j) {
+						?>
+						{
+							value: <?php echo $j ?>,
+							color: <?php echo "'#".ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode()."'"; ?>,
+							label: <?php echo "'".ThemeDeStage::getThemeDeStage($i)->getTheme()."'"; ?>
+						},
+
+						<?php
+
+					}
+
+					?>
+					
+				];
+				//draw
+				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
+				//var linechart = new Chart(ctx).Line(data);
+			});
+		</script>
+	</section>
+	<?php
+	$temp = $tabCptTheme;
+	if(sizeof($tabMaster)>0) {
+		for ($i=0; $i<sizeof($tabMaster); $i++){
+			$temp[$tabMaster[$i]->getIdTheme()]++;
+		}
+	}
+	?>
+	<section id="section_droite">
+		<table >
+		<th colspan=3>Theme de stage Master</th>
+				
+				<?php
+				foreach ($temp as $i => $j){
+				?>
+					<tr>
+						<td bgcolor=<?php echo ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode(); ?> ></td>
+						<td ><?php echo ThemeDeStage::getThemeDeStage($i)->getTheme(); ?></td>
+						<td><?php echo $j?></td>
+					</tr>
+	
+				<?php
+				}
+				
+
+			?>
+		</table>
+		</br></br>
+		<canvas id="<?php echo 'mycanvastheme2'.$annee;?>" width="256" height="256">
+		</canvas>
+
+		<script>
+			
+			$(document).ready(function(){
+				var ctx = $(<?php echo '"#mycanvastheme2'.$annee.'"';?>).get(0).getContext("2d");
+				//pie chart data
+				//sum of values = peu importe
+				
+				var data = [
+				
+					<?php
+					foreach ($temp as $i => $j) {
+						?>
+						{
+							value: <?php echo $j ?>,
+							color: <?php echo "'#".ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode()."'"; ?>,
+							label: <?php echo "'".ThemeDeStage::getThemeDeStage($i)->getTheme()."'"; ?>
+						},
+
+						<?php
+
+					}
+
+					?>
+					
+				];
+				//draw
+				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
+				//var linechart = new Chart(ctx).Line(data);
+			});
+		</script>
+	</section>
+		<?php
 }
 
 function afficherEntreprise($conventionM1, $conventionM2, $annee) {
