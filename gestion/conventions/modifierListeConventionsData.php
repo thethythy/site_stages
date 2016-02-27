@@ -79,15 +79,15 @@ if (sizeof($tabPromos) > 0) {
 		
 		echo "<table>
 				<tr id='entete'>
-						<td width='20%'>Etudiant</td>
-						<td width='15%'>Référent</td>
-						<td width='15%'>Examinateur</td>
-						<td width='15%'>Contact</td>
-						<td width='15%'>Entreprise</td>
-						<td width='15%'>Thème</td>
-						<td width='10%' align='center'>Modifier</td>
-						<td width='10%' align='center'>Supprimer</td>
-					</tr>";
+					<td width='20%'>Etudiant</td>
+					<td width='15%'>Référent</td>
+					<td width='15%'>Examinateur</td>
+					<td width='15%'>Contact</td>
+					<td width='15%'>Entreprise</td>
+					<td width='15%'>Thème</td>
+					<td width='10%' align='center'>Modifier</td>
+					<td width='10%' align='center'>Supprimer</td>
+				</tr>";
 		for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
 			$conv = $tabEtuWithConv[$i]->getConvention($annee);
 			$parrain = $conv->getParrain();
