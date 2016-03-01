@@ -10,13 +10,20 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Ajouter/Supprimer des", "Types d'entreprise", "../../",$tabLiens );
+IHM_Generale::header("Ajouter un", "Type d'entreprise", "../../",$tabLiens );
+TypeEntreprise_IHM::afficherFormulaireSaisie();
 
 function save(){
-	if(isset($_POST['idtypeentreprise'])) {
-		if($_POST['idtypeentreprise'] != "") {
-			$type=$_POST['idtypeentreprise'];
-			TypeEntreprise::saisirDonneesType($type);
+	if(isset($_POST['type'])) {
+		if($_POST['type'] != "") {
+
+			$tabDonnees = array();
+
+			$type=$_POST['type'];
+			array_push($tabDonnees,$type);
+			$couleur=$_POST['idCouleur'];
+			array_push($tabDonnees,$couleur);
+			TypeEntreprise::saisirDonneesType($tabDonnees);
 			printf("<p>Le nouveau type d'entreprise a été enregistré ! </p>");
 		}
 		else {
@@ -26,7 +33,6 @@ function save(){
 }
 
 save();
-TypeEntreprise_IHM::afficherFormulaireSaisie();
 deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");

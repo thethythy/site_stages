@@ -4,7 +4,6 @@ include_once($chemin."bdd/connec.inc");
 include_once($chemin."bdd/TypeEntreprise_BDD.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."moteur/TypeEntreprise.php");
-
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
