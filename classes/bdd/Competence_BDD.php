@@ -14,7 +14,7 @@ class Competence_BDD {
 	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    $sql = "UPDATE $tab2 SET nomcompetence='" . $competence->getNom() . "' WHERE idcompetence='" . $competence->getIdentifiant() . "';";
+	    $sql = "UPDATE $tab2 SET nomcompetence='" . $competence->getNom() . "' WHERE idcompetence='" . $competence->getIdentifiantBDD() . "';";
 	    $result = $db->query($sql);
 	    return $competence->getIdentifiantBDD();
 	}
@@ -22,6 +22,7 @@ class Competence_BDD {
 
     public static function getCompetence($identifiantBDD) {
 	global $tab2;
+	global $db;
 	$sql = "SELECT * FROM $tab2 WHERE idcompetence='" . $identifiantBDD . "';";
 	$result = $db->query($sql);
 	return mysqli_fetch_array($result);

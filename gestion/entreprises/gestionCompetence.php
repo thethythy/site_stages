@@ -9,7 +9,11 @@ include_once("../../classes/moteur/Competence.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Ajouter/Supprimer des", "compétences", "../../",$tabLiens );
+IHM_Generale::header("Gestion des", "compétences", "../../",$tabLiens );
+
+if (isset($_GET['id'])) {
+	Competence::deleteCompetence($_GET['id']);
+}
 
 function save(){
 	if (isset($_POST['nomCompetence']) && $_POST['nomCompetence'] != "") {
@@ -17,10 +21,6 @@ function save(){
 		$nom=$_POST['nomCompetence'];
 		array_push($tabDonnees,$nom);
 		Competence::saisirDonneesCompetences($tabDonnees);
-	}
-	if (isset($_POST['competences']) && $_POST['competences'] != -1) {
-		$element = $_POST['competences'];
-		Competence::deleteCompetence($element);
 	}
 }
 
