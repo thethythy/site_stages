@@ -36,7 +36,10 @@ if(isset($_POST['edit'])){
 		$ent->setEmail($email);
 		$ent->setTypeEntreprise($idtype);
 
-		echo "Juste avant l'appel a entreprise_bdd : (".$ent->getIdentifiantBDD()."), ".$ent->getNom().", ".$ent->getType()->getType();
+		echo "Juste avant l'appel a Entreprise_BDD : ("
+			.$ent->getIdentifiantBDD()."), "
+			.$ent->getNom().", "
+			.$ent->getType()->getType();
 							
 		$idEnt = Entreprise_BDD::sauvegarder($ent);
 		
@@ -47,12 +50,12 @@ if(isset($_POST['edit'])){
 				<tr>
 					<td width="50%" align="center">
 						<form method=post action="modifierListeEntreprises.php">
-							<input type="hidden" value="1" name="rech"/>
+							<!--<input type="hidden" value="1" name="rech"/>
 							<input type="hidden" value="<?php echo $_GET['nom']; ?>" name="nom"/>
 							<input type="hidden" value="<?php echo $_GET['cp']; ?>" name="cp"/>
 							<input type="hidden" value="<?php echo $_GET['ville']; ?>" name="ville"/>
 							<input type="hidden" value="<?php echo $_GET['pays']; ?>" name="pays"/>
-							<input type="hidden" value="<?php echo $_GET['email']; ?>" name="email"/>
+							<input type="hidden" value="<?php echo $_GET['email']; ?>" name="email"/>-->
 							<input type="submit" value="Retourner à la liste"/>
 						</form>
 					</td>
