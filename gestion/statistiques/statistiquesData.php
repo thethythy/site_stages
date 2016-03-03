@@ -30,7 +30,60 @@ function typeEntreprise($convention) {
 	return $tabentreprise;
 }
 
+function lieuDuStage($convention) {
+	$mans = 0;
+	$sarthe = 0;
+	$region = 0;
+	$france = 0;
+	$monde = 0;
+	$dep = 0;
 
+	if(sizeof($convention)>0) {
+		for ($i=0; $i<sizeof($convention); $i++){
+			$entreprise = $convention[$i]->getEntreprise();
+
+			$nom = $entreprise->getNom();	
+			$adresse = $entreprise->getAdresse();	
+			$codepostal = $entreprise->getCodePostal();
+			$ville = strtolower($entreprise->getVille());
+			$pays = strtolower($entreprise->getPays());	
+			$email = $entreprise->getEmail();
+			$typeentrepriseM1 = $entreprise->getType();
+
+			if (strlen($codepostal) == 5) 
+				$dep = $codepostal[0].$codepostal[1];
+			
+			
+			$deps = array("53","85","49","44");
+
+			if(strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france") ) {
+				$mans++;
+			}
+			else if($dep == "72"  && strstr($pays, "france")  && ($codepostal != "72000" || $codepostal != "72100") ) {
+				$sarthe++;
+			}
+			else if(in_array($dep, $deps) && strstr($pays, "france")) {
+				$region++;
+			}
+			else if(strstr($pays, "france")) {
+				$france++;
+			}
+			else {
+				$monde++;
+			}
+		}
+	}
+
+	$tabLieu = array(
+		'Le Mans' => $mans,
+		'Sarthe (Hors Le Mans)' => $sarthe,
+		'Pays de la Loire (Hors Sarthe)' => $region,
+		'France (Hors Pays de la Loire)' => $france,
+		'Etranger (Hors France)' => $monde
+		);
+
+	return $tabLieu;
+}
 //recuperer une année universitaire
 //construire un filtre selon la bonne année universitaire
 
