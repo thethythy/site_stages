@@ -66,7 +66,7 @@ function filterParameters($param) {
     return $param;
 }
 
-mysqli_set_charset($db,"iso-8859-1");
+mysqli_set_charset($db,"utf-8");
 
 // Prévention contre les injection SQL dans les variables POST
 foreach ($_POST as $key => $value) {
