@@ -53,19 +53,21 @@ function export(){
 	$zip = new ZipArchive();
 
 	if ($zip->open($zipName, ZipArchive::CREATE)!==TRUE){
-	    exit("Impossible d'ouvrir le fichier <$zipName>\n");
+	    echo "Impossible d'ouvrir le fichier <$zipName>";
 	}
+    else{
+        $backup = fopen($backupName, "wb");
+        fwrite($backup, utf8_encode($creations));
+        fwrite($backup, utf8_encode($insertions));
 
-    $backup = fopen($backupName, "wb");
-    fwrite($backup, utf8_encode($creations));
-    fwrite($backup, utf8_encode($insertions));
+        $zip->addFile($backupName);
+        fclose($backup);
+        $zip->close();
 
-    $zip->addFile($backupName);
-    fclose($backup);
-    $zip->close();
-
-    @unlink($backupName);
-    echo "La sauvegarde est terminée.";
+        @unlink($backupName);
+        echo "La sauvegarde est terminée.";
+    }  
+    printf("<div><a href='../../gestion/index.php'>Retour</a></div>");
 }
 
 export();
