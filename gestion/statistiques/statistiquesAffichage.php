@@ -73,7 +73,7 @@ function patternTableType($temp){
 	foreach ($temp as $i => $j){
 	?>
 		<tr>
-			<td bgcolor="red"></td>
+			<td bgcolor=<?php echo TypeEntreprise::getTypeEntreprise($i)->getCouleur()->getCode(); ?> ></td>
 			<td ><?php echo TypeEntreprise::getTypeEntreprise($i)->getType(); ?></td>
 			<td><?php echo round($j/$somme*100, 2)." %"?></td>
 		</tr>
@@ -118,7 +118,7 @@ function patternScriptType($temp){
 		?>
 		{
 			value: <?php echo $j ?>,
-			color: "darkred",
+			color: <?php echo "'#".TypeEntreprise::getTypeEntreprise($i)->getCouleur()->getCode()."'"; ?>,
 			label: <?php echo "'".TypeEntreprise::getTypeEntreprise($i)->getType()." : ".round($j/$somme*100, 2)."%'"; ?>
 		},
 		<?php
@@ -244,6 +244,7 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 			$temp[$tabM1[$i]->getIdTheme()]++;
 		}
 	}
+	
 	?>
 	<section id="section_gauche">
 		<table >

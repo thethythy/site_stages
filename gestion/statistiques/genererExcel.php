@@ -11,7 +11,9 @@ include_once($cheminExcel."PHPExcel/Writer/Excel2007.php");
 
 function getStatsPromo($annee, $promo, $convention, $tabTypeEntreprise, $tabCptTypeEntreprise, $tabThemeStage, $tabCptTheme, $nbEtudiant, $nbSoutenance) {
 	
-	$workbook = new PHPExcel; 
+	$workbook = new PHPExcel;
+
+	//$workbook = new PHPExcel_Chart("name"); 
      
 	$sheet = $workbook->getActiveSheet();
 	
