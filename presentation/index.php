@@ -3,6 +3,8 @@
 include_once("./../classes/ihm/IHM_Generale.php");
 include_once("./../classes/ihm/Menu.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 IHM_Generale::header("Présentation", "détaillée", "../", $tabLiens);

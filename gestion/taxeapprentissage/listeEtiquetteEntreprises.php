@@ -23,6 +23,9 @@ include_once($chemin."moteur/FiltreString.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Promotion_IHM.php");
 
+
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion des stages');

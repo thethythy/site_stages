@@ -15,6 +15,8 @@ include_once($chemin."moteur/Salle.php");
 include_once($chemin."bdd/Filiere_BDD.php");
 include_once($chemin."moteur/Filiere.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');

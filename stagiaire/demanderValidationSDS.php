@@ -19,6 +19,8 @@ include_once($chemin."bdd/Filiere_BDD.php");
 include_once($chemin."bdd/Parcours_BDD.php");
 include_once($chemin."bdd/Promotion_BDD.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');

@@ -27,6 +27,8 @@ include_once($chemin."bdd/Convention_BDD.php");
 include_once($chemin."bdd/Contact_BDD.php");
 include_once($chemin."bdd/Entreprise_BDD.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');
