@@ -104,10 +104,6 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
 				<li><a href="./entreprises/gestionCompetence.php">Gestion des compétences</a></li>
-<<<<<<< HEAD
-=======
-				<li><a href="./entreprises/gestionTypeEntreprise.php">Ajouter/Supprimer un type d'entreprise</a></li>
->>>>>>> francisque
 			    </ul>
 			</td>
 		    </tr>
