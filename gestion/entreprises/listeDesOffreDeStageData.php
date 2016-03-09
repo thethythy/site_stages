@@ -25,7 +25,7 @@ include_once($chemin."moteur/FiltreString.php");
 
 // Précisons l'encodage des données si cela n'est pas déjà fait
 if (!headers_sent())
-	header("Content-type: text/html; charset=iso-8859-15");
+	header("Content-type: text/html; charset=utf-8");
 
 // Prise en compte des paramètres
 $filtres = array();
