@@ -37,7 +37,7 @@ include_once($chemin."moteur/Entreprise.php");
 header("Content-type:text/xml");
 
 // Début du flux XML
-print("<?xml version='1.0' encoding='iso-8859-1' ?>\n");
+print("<?xml version='1.0' encoding='utf-8' ?>\n");
 print("<tree id='0'>\n");
 
 // Récupération des promotions de l'année sélectionnée

@@ -4,11 +4,13 @@ class TypeEntreprise {
 	// Déclaration des attributs de la classe
 	var $identifiantBDD;
 	var $type;
+	var $identifiant_couleur;
 
 	// Constructeur de classe
-	public function TypeEntreprise($identifiantBDD, $type) {
+	public function TypeEntreprise($identifiantBDD, $type, $identifiant_couleur) {
 		$this->identifiantBDD = $identifiantBDD;
 		$this->type = $type;
+		$this->identifiant_couleur = $identifiant_couleur;
 	}
 
 	// getter-setter
@@ -20,6 +22,14 @@ class TypeEntreprise {
     	return $this->type;
 	}
 
+	public function getCouleur() {
+		return Couleur::getCouleur($this->identifiant_couleur);
+	}
+
+	public function setIdentifiant_couleur($identifiant_couleur) {
+		$this->identifiant_couleur = $identifiant_couleur;
+	}
+
 	public function setType($type){
     	$this->type = $type;
 	}
@@ -27,25 +37,21 @@ class TypeEntreprise {
 	// méthodes statiques
 	public static function getTypeEntreprise($identifiant) {
 		$typeEntrepriseBDD = TypeEntreprise_BDD::getTypeEntreprise($identifiant);
-		return new TypeEntreprise($typeEntrepriseBDD["idtypeentreprise"], $typeEntrepriseBDD["type"]);
+		return new TypeEntreprise($typeEntrepriseBDD["idtypeentreprise"], $typeEntrepriseBDD["type"], $typeEntrepriseBDD["idcouleur"]);
     }
 
     public static function getListeTypeEntreprise() {
 		$tabTypeEntreprise = array();
 		$tabTypeEntrepriseString = TypeEntreprise_BDD::getListeTypeEntreprise();
-		/*var_dump($tabTypeEntrepriseString[0][0],$tabTypeEntrepriseString[0][1]);
-		var_dump($tabTypeEntrepriseString[1][0],$tabTypeEntrepriseString[1][1]);
-		var_dump($tabTypeEntrepriseString[2][0],$tabTypeEntrepriseString[2][1]);
-		var_dump($tabTypeEntrepriseString[3][0],$tabTypeEntrepriseString[3][1]);*/
 		for($i=0; $i<sizeof($tabTypeEntrepriseString); $i++)
-			array_push($tabTypeEntreprise, new TypeEntreprise($tabTypeEntrepriseString[$i][0],$tabTypeEntrepriseString[$i][1]));
-		//var_dump($tabTypeEntreprise);
-		/*$truc = $tabTypeEntreprise[3]->getIdentifiantBDD();
-		$truc2 = $tabTypeEntreprise[3]->getTypeEntreprise($truc);
-		echo "$truc";
-		echo $truc2->getType();*/
+			array_push($tabTypeEntreprise, new TypeEntreprise($tabTypeEntrepriseString[$i][0],$tabTypeEntrepriseString[$i][1],$tabTypeEntrepriseString[$i][2]));
   		return $tabTypeEntreprise;
     }
+
+	public static function saisirDonneesType($tab_donnees){
+		$type = new TypeEntreprise('', $tab_donnees[0], $tab_donnees[1]);
+		TypeEntreprise_BDD::sauvegarder($type);
+	}
 
     public static function supprimerTypeEntreprise($identifiant) {
     	TypeEntreprise_BDD::supprimerTypeEntreprise($identifiant);

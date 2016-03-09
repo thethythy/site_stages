@@ -18,6 +18,8 @@ include_once("../classes/moteur/Competence.php");
 include_once("../classes/bdd/Parcours_BDD.php");
 include_once("../classes/moteur/Parcours.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');

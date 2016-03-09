@@ -29,9 +29,7 @@ include_once($chemin."moteur/Utils.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Menu.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
-if (!headers_sent())
-	header("Content-type: text/html; charset=iso-8859-15");
+header ("Content-type:text/html; charset=utf-8");
 
 if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['enseignant'] != -1) {
 	$parrain = Parrain::getParrain($_POST['enseignant']);

@@ -1,6 +1,7 @@
 <?php 
 include_once("./classes/ihm/IHM_Generale.php");
 include_once("./classes/ihm/Menu.php");
+header ("Content-type:text/html; charset=utf-8");
 IHM_Generale::header("Les stages", "étudiants", "", array());
 Menu::menuAccueil();
 ?>

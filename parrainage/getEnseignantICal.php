@@ -42,6 +42,8 @@ include_once($chemin."moteur/Entreprise.php");
 include_once($chemin."bdd/Salle_BDD.php");
 include_once($chemin."moteur/Salle.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 // Récupération de l'id de l'enseignant concerné
 if (isset($_GET["id"])) $id = $_GET["id"]; else $id = "";
 

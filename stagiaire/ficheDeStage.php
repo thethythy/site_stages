@@ -32,6 +32,8 @@ include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('index.php', 'Stagiaire');

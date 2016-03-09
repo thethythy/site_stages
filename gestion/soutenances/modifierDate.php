@@ -13,6 +13,8 @@ include_once("../../classes/ihm/DateSoutenance_IHM.php");
 include_once("../../classes/moteur/Filtre.php");
 include_once("../../classes/moteur/FiltreString.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
