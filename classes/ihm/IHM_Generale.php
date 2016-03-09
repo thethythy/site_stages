@@ -45,8 +45,8 @@ class IHM_Generale {
 	    }
 
         if ($ext == "statistiques") {
-            echo "<script src='frameworksJS/Chart.js'></script>";
-            echo "<script src='frameworksJS/jquery.js'></script>";
+            echo "<script src='frameworks/Chart.js'></script>";
+            echo "<script src='frameworks/jquery.js'></script>";
             echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>";
         }
 	    ?>

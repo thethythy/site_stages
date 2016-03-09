@@ -31,7 +31,6 @@ include_once($chemin."moteur/Convention.php");
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
-//include_once("frameworksJS/statistique_fonctions.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -41,6 +40,7 @@ $tabAU = Promotion_BDD::getAnneesUniversitaires();
 $tabListeTheme = ThemeDeStage::getListeTheme();
 $tabListeType = TypeEntreprise::getListeTypeEntreprise();
 include("statistiquesData.php");
+include("genererExcel.php");
 ?>
 <script>
 
@@ -72,7 +72,8 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 
 
 echo "<div id='view'>\n";
-include("pageInter.php");
+
+include("statistiquesAffichage.php");
 echo "\n</div>";
 
 
