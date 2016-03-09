@@ -1,13 +1,21 @@
 <?php
 
-
 for ($i=0; $i<sizeof($tabAU); $i++) {
 
 	$conventionM1 = recupererDonneeM1($tabAU[$i]);
 	$conventionM2 = recupererDonneeM2($tabAU[$i]);
+	$convention = array_merge($conventionM1, $conventionM2);
 
 	$tabEM1 = lieuDuStage($conventionM1);
 	$tabEM2 = lieuDuStage($conventionM2);
+	$tabEMaster = $tabEM1;
+	foreach($tabEMaster as $key =>$value) {
+		$tabEMaster[$key] = $tabEM1[$key]+$tabEM2[$key];
+	}
+
+	$nbsoutenancesM1 = sommeSoutenances($conventionM1);
+	$nbsoutenancesM2 = sommeSoutenances($conventionM2);
+	$nbsoutenancesMaster = sommeSoutenances($convention);
 
 	$tabM1 = themeDeStage($conventionM1);
 	$tabM2 = themeDeStage($conventionM2);
@@ -17,14 +25,123 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 	$tabTM2 = typeEntreprise($conventionM2);
 	$tabTMaster = array_merge($tabTM1, $tabTM2);
 
-	echo "<div id='page".$i."' class='content'>";
-	
+	echo "<div id='page".$i."' class='content'>";	
+	getStatsPromo($tabAU[$i], "M1", $conventionM1, $tabTM1, $tabCptTypeEntreprise, $tabM1, $tabCptTheme, sizeof($conventionM1), $nbsoutenancesM1);
+	getStatsPromo($tabAU[$i], "M2", $conventionM2, $tabTM2, $tabCptTypeEntreprise, $tabM2, $tabCptTheme, sizeof($conventionM2), $nbsoutenancesM2);
+	getStatsPromo($tabAU[$i], "Master", $convention, $tabTMaster, $tabCptTypeEntreprise, $tabMaster, $tabCptTheme, sizeof($convention), $nbsoutenancesMaster);
+
 	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i]);
 	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i]);
 	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i]);
 	echo "</div>";
 	$tabAU[$i]++;
 }
+
+function sommeSoutenances($convention) {
+	$somme = 0;
+	for($i=0; $i<sizeof($convention); $i++) {
+		if($convention[$i]->getIdSoutenance() != NULL){
+			$somme++;
+		}
+	}
+	return $somme;
+}
+
+function somme($temp) {
+	$somme = 0;
+	foreach($temp as $i => $j) {
+		$somme+=$j;
+	}
+	return $somme;
+}
+
+function patternTableTheme($temp){
+	$somme = somme($temp);
+	foreach ($temp as $i => $j){
+	?>
+		<tr>
+			<td bgcolor=<?php echo ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode(); ?> ></td>
+			<td ><?php echo ThemeDeStage::getThemeDeStage($i)->getTheme(); ?></td>
+			<td><?php echo round($j/$somme*100, 2)." %"?></td>
+		</tr>
+	<?php
+	}
+}
+
+function patternTableType($temp){
+	$somme = somme($temp);
+	foreach ($temp as $i => $j){
+	?>
+		<tr>
+			<td bgcolor="red"></td>
+			<td ><?php echo TypeEntreprise::getTypeEntreprise($i)->getType(); ?></td>
+			<td><?php echo round($j/$somme*100, 2)." %"?></td>
+		</tr>
+	<?php
+	}
+}
+
+function patternTableLieu($tab, $tabCouleur) {
+	$somme = array_sum($tab);
+	$tete=0;
+	foreach($tab as $i => $j) {
+	?>
+	<tr>
+		<td bgcolor=<?php echo $tabCouleur[$tete]; ?> ></td>
+		<td > <?php echo $i; ?> </td>
+		<td><?php echo round($j/$somme*100, 2)." %"?></td>
+	</tr>
+	<?php 
+	$tete++;
+	}
+}
+
+
+function patternScriptTheme($temp){
+	$somme = somme($temp);
+	foreach ($temp as $i => $j) {
+		?>
+		{
+			value: <?php echo $j;?>,
+			color: <?php echo "'#".ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode()."'"; ?>,
+			label: <?php echo "'".ThemeDeStage::getThemeDeStage($i)->getTheme()." : ".round($j/$somme*100, 2)."%'"; ?>
+		},
+		<?php
+	}
+}
+
+
+
+function patternScriptType($temp){
+	$somme = somme($temp);
+	foreach ($temp as $i => $j) {
+		?>
+		{
+			value: <?php echo $j ?>,
+			color: "darkred",
+			label: <?php echo "'".TypeEntreprise::getTypeEntreprise($i)->getType()." : ".round($j/$somme*100, 2)."%'"; ?>
+		},
+		<?php
+
+	}
+}
+
+
+function patternScriptLieu($tab, $tabCouleur) {
+	$somme = array_sum($tab);
+	$tete = 0;
+	foreach ($tab as $i => $j) {
+	?>
+	{
+		value: <?php echo $j;?>,
+		color: <?php echo "'".$tabCouleur[$tete]."'";?>,
+		label:  <?php echo "'".$i." : ".round($j/$somme*100, 2)."%'";?>					
+	},
+	<?php
+	$tete++;
+	}
+}
+
 
 function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee) {
 
@@ -36,22 +153,9 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 	}
 	?>
 	<section id="section_gauche">
-		<table >
-		<th colspan=3>Theme de stage M1</th>
-				
-				<?php
-				foreach ($temp as $i => $j){
-				?>
-					<tr>
-						<td bgcolor="red"></td>
-						<td ><?php echo TypeEntreprise::getTypeEntreprise($i)->getType(); ?></td>
-						<td><?php echo $j?></td>
-					</tr>
-	
-				<?php
-				}
-
-			?>
+		<table>
+		<th colspan=3>Type de stage M1</th>
+				<?php patternTableType($temp); ?>	
 		</table>
 
 		</br></br>
@@ -62,30 +166,12 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 			
 			$(document).on('ready',function(){
 				var ctx = $(<?php echo '"#mycanvastype'.$annee.'"';?>).get(0).getContext("2d");
-
-				
 				var data = [
-				
-					<?php
-					foreach ($temp as $i => $j) {
-						?>
-						{
-							value: <?php echo $j ?>,
-							color: "darkred",
-							label: <?php echo "'".TypeEntreprise::getTypeEntreprise($i)->getType()."'"; ?>
-						},
-
-						<?php
-
-					}
-
-					?>
-					
+					<?php patternScriptType($temp);	?>
 				];
-
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-
 			});
+
 		</script>
 	</section>
 	<?php
@@ -98,21 +184,8 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 	?>
 	<section id="section_centre">
 		<table >
-		<th colspan=3>Theme de stage M2</th>
-				
-				<?php
-				foreach ($temp as $i => $j){
-				?>
-					<tr>
-						<td bgcolor="red" ></td>
-						<td ><?php echo TypeEntreprise::getTypeEntreprise($i)->getType(); ?></td>
-						<td><?php echo $j?></td>
-					</tr>
-	
-				<?php
-				}
-
-			?>
+		<th colspan=3>Type de stage M2</th>
+				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
 		<canvas id="<?php echo 'mycanvastype1'.$annee;?>" width="256" height="256">
@@ -122,29 +195,12 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 			
 			$(document).on('ready',function(){
 				var ctx = $(<?php echo '"#mycanvastype1'.$annee.'"';?>).get(0).getContext("2d");
-				
 				var data = [
-				
-					<?php
-					foreach ($temp as $i => $j) {
-						?>
-						{
-							value: <?php echo $j ?>,
-							color: "red",
-							label: <?php echo "'".TypeEntreprise::getTypeEntreprise($i)->getType()."'"; ?>
-						},
-
-						<?php
-
-					}
-
-					?>
-					
+					<?php patternScriptType($temp);	?>
 				];
-				//draw
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-				//var linechart = new Chart(ctx).Line(data);
 			});
+
 		</script>
 	</section>
 	<?php
@@ -157,22 +213,8 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 	?>
 	<section id="section_droite">
 		<table >
-		<th colspan=3>Theme de stage Master</th>
-				
-				<?php
-				foreach ($temp as $i => $j){
-				?>
-					<tr>
-						<td bgcolor="red"></td>
-						<td ><?php echo TypeEntreprise::getTypeEntreprise($i)->getType(); ?></td>
-						<td><?php echo $j?></td>
-					</tr>
-	
-				<?php
-				}
-				
-
-			?>
+		<th colspan=3>Type de stage Master</th>
+				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
 		<canvas id="<?php echo 'mycanvastype2'.$annee;?>" width="256" height="256">
@@ -182,61 +224,17 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 			
 			$(document).on('ready',function(){
 				var ctx = $(<?php echo '"#mycanvastype2'.$annee.'"';?>).get(0).getContext("2d");
-
-				
 				var data = [
-				
-					<?php
-					foreach ($temp as $i => $j) {
-						?>
-						{
-							value: <?php echo $j ?>,
-							color: "red",
-							label: <?php echo "'".TypeEntreprise::getTypeEntreprise($i)->getType()."'"; ?>
-						},
-
-						<?php
-
-					}
-
-					?>
-					
+					<?php patternScriptType($temp);	?>
 				];
-		
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-	
 			});
+
 		</script>
 	</section>
 		<?php
 }
 
-function patternTableTheme($temp){
-	foreach ($temp as $i => $j){
-	?>
-		<tr>
-			<td bgcolor=<?php echo ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode(); ?> ></td>
-			<td ><?php echo ThemeDeStage::getThemeDeStage($i)->getTheme(); ?></td>
-			<td><?php echo $j?></td>
-		</tr>
-
-	<?php
-	}
-}
-
-function patternScriptTheme($temp){
-	foreach ($temp as $i => $j) {
-		?>
-		{
-			value: <?php echo $j ?>,
-			color: <?php echo "'#".ThemeDeStage::getThemeDeStage($i)->getCouleur()->getCode()."'"; ?>,
-			label: <?php echo "'".ThemeDeStage::getThemeDeStage($i)->getTheme()."'"; ?>
-		},
-
-		<?php
-
-	}
-}
 
 function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 
@@ -264,9 +262,9 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 				var data = [
 					<?php patternScriptTheme($temp); ?>	
 				];
-		
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
 			});
+
 		</script>
 	</section>
 	<?php
@@ -294,8 +292,8 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 					<?php patternScriptTheme($temp); ?>	
 				];
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-		
 			});
+
 		</script>
 	</section>
 	<?php
@@ -323,17 +321,16 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 					<?php patternScriptTheme($temp); ?>	
 				];
 				var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-	
 			});
+
 		</script>
 	</section>
 		<?php
 }
 
+
 function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 	$tabCouleur = array("red","orange", "green", "blue", "darkviolet");
-	$tabSelectCouleur = array("darkred","darkorange", "darkgreen", "darkblue", "indigo");
-	$tete = 0;
 	?>
 	<h1 >Ann&eacute;e <?php echo $annee;?></h1>
  
@@ -342,21 +339,7 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 		
 			<table  >
 				<th colspan=3>Lieu du stage</th>
-				<?php
-				foreach($tabEM1 as $i => $j) {
-					?>
-
-
-				<tr>
-					<td bgcolor=<?php echo $tabCouleur[$tete]; ?> ></td>
-					<td > <?php echo $i; ?> </td>
-					<td> <?php echo $j; ?> </td>
-				</tr>
-
-				<?php
-					$tete++;
-				}
-				?>
+				<?php patternTableLieu($tabEM1, $tabCouleur); ?>
 			</table>
 
 			</br></br>
@@ -367,30 +350,9 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 				
 				$(document).on('ready',function(){
 					var ctx = $(<?php echo '"#mycanvas'.$annee.'"';?>).get(0).getContext("2d");
-
-					
 					var data = [
-
-
-					<?php
-					$tete = 0;
-					foreach ($tabEM1 as $i => $j) {
-						?>
-
-						{
-							value: <?php echo $j;?>,
-							color: <?php echo "'".$tabCouleur[$tete]."'";?>,
-							highlight: <?php echo "'".$tabSelectCouleur[$tete]."'";?>,
-							label:  <?php echo "'".$i."'";?>					
-						},
-
-						<?php
-						$tete++;
-					}
-					?>
-						
+						<?php patternScriptLieu($tabEM1, $tabCouleur); ?>
 					];
-	
 					var piechart = new Chart(ctx).Pie(data, { animateScale: true});
 		
 				});
@@ -402,22 +364,7 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 		
 			<table  >
 				<th colspan=3>Lieu du stage</th>
-				<?php
-				$tete=0;
-				foreach($tabEM2 as $i =>$j) {
-					?>
-
-
-				<tr>
-					<td bgcolor=<?php echo $tabCouleur[$tete]; ?> ></td>
-					<td > <?php echo $i; ?> </td>
-					<td><?php echo $j;?></td>
-				</tr>
-
-				<?php
-					$tete++;
-				}
-				?>
+				<?php patternTableLieu($tabEM2, $tabCouleur); ?>
 			</table>
 
 			</br></br>
@@ -428,30 +375,9 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 				
 				$(document).on('ready',function(){
 					var ctx = $(<?php echo '"#mycanvas2'.$annee.'"';?>).get(0).getContext("2d");
-
-					
 					var data = [
-
-
-					<?php
-					$tete = 0;
-					foreach ($tabEM2 as $i => $j) {
-						?>
-
-						{
-							value: <?php echo $j;?>,
-							color: <?php echo "'".$tabCouleur[$tete]."'";?>,
-							highlight: <?php echo "'".$tabSelectCouleur[$tete]."'";?>,
-							label:  <?php echo "'".$i."'";?>					
-						},
-
-						<?php
-						$tete++;
-					}
-					?>
-						
+						<?php patternScriptLieu($tabEM2, $tabCouleur); ?>
 					];
-	
 					var piechart = new Chart(ctx).Pie(data, { animateScale: true});
 		
 				});
@@ -469,23 +395,9 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 		<section id="section_droite">
 		<h2 style="color:LightSkyBlue">Promotion Master</h2>
 		
-			<table  >
+			<table>
 				<th colspan=3>Lieu du stage</th>
-				<?php
-				foreach($tabEMaster as $i =>$j) {
-					?>
-
-
-				<tr>
-					<td bgcolor=<?php echo $tabCouleur[$tete]; ?> ></td>
-					<td > <?php echo $i; ?> </td>
-					<td><?php echo $j;?></td>
-				</tr>
-
-				<?php
-					$tete++;
-				}
-				?>
+				<?php patternTableLieu($tabEMaster, $tabCouleur); ?>
 			</table>
 
 			</br></br>
@@ -496,32 +408,10 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 				
 				$(document).on('ready',function(){
 					var ctx = $(<?php echo '"#mycanvas3'.$annee.'"';?>).get(0).getContext("2d");
-
-					
 					var data = [
-
-
-					<?php
-					$tete = 0;
-					foreach ($tabEMaster as $i => $j) {
-						?>
-
-						{
-							value: <?php echo $j;?>,
-							color: <?php echo "'".$tabCouleur[$tete]."'";?>,
-							highlight: <?php echo "'".$tabSelectCouleur[$tete]."'";?>,
-							label:  <?php echo "'".$i."'";?>					
-						},
-
-						<?php
-						$tete++;
-					}
-					?>
-						
+						<?php patternScriptLieu($tabEMaster, $tabCouleur); ?>
 					];
-	
 					var piechart = new Chart(ctx).Pie(data, { animateScale: true});
-		
 				});
 			</script>
 		</section>

@@ -40,6 +40,7 @@ $tabAU = Promotion_BDD::getAnneesUniversitaires();
 $tabListeTheme = ThemeDeStage::getListeTheme();
 $tabListeType = TypeEntreprise::getListeTypeEntreprise();
 include("statistiquesData.php");
+include("genererExcel.php");
 ?>
 <script>
 

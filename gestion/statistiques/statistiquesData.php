@@ -76,10 +76,10 @@ function lieuDuStage($convention) {
 
 	$tabLieu = array(
 		'Le Mans' => $mans,
-		'Sarthe (Hors Le Mans)' => $sarthe,
-		'Pays de la Loire (Hors Sarthe)' => $region,
-		'France (Hors Pays de la Loire)' => $france,
-		'Etranger (Hors France)' => $monde
+		'Sarthe' => $sarthe,
+		'Pays de la Loire' => $region,
+		'France' => $france,
+		'Etranger' => $monde
 		);
 
 	return $tabLieu;
