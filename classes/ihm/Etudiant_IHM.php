@@ -1,5 +1,5 @@
 <?php
-
+header ('Content-type:text/html; charset=utf-8');
 class Etudiant_IHM {
 
     // $etu = Etudiant qui est modifié et dont les informations sont affichées.

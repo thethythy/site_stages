@@ -28,9 +28,7 @@ include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
-if (!headers_sent())
-	header("Content-type: text/html; charset=iso-8859-15");
+header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 

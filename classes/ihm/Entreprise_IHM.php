@@ -1,5 +1,5 @@
 <?php
-
+header ('Content-type:text/html; charset=utf-8');
 include_once("../../classes/bdd/TypeEntreprise_BDD.php");
 include_once("../../classes/moteur/TypeEntreprise.php");
 

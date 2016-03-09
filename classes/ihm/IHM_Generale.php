@@ -8,11 +8,11 @@ class IHM_Generale {
         <!DOCTYPE HTML>
 	<html lang="fr">
         <head>
-	    <title>Département Informatique - Stage</title>
+	    <title>DÃ©partement Informatique - Stage</title>
 	    <meta name="application-name" content="Gestion des stages"/>
             <meta name="author" content="Thierry Lemeunier"/>
-            <meta name="keywords" content="stage,informatique,université du maine"/>
-            <meta charset="ISO-8859-1"/>
+            <meta name="keywords" content="stage,informatique,universitÃ© du maine"/>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
             <link rel="alternate" type="application/rss+xml" title="Flux RSS" href="http://info-stages.univ-lemans.fr/flux/fluxrss.xml"/>
 	    <script src="<?php echo $lienRacine; ?>classes/ihm/util.js"></script>
 
@@ -28,11 +28,11 @@ class IHM_Generale {
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/dhtmlxscheduler.js'></script>\n";
                 // Localisation du planning
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/locale_fr.js'></script>\n";
-                // Affichage plein écran
+                // Affichage plein Ã©cran
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/ext/dhtmlxscheduler_expand.js'></script>\n";
                 // Ajout des tooltips
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/ext/dhtmlxscheduler_tooltip.js'></script>\n";
-                // Ajout des éditeurs spécifiques
+                // Ajout des Ã©diteurs spÃ©cifiques
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/ext/dhtmlxscheduler_editors.js'></script>\n";
                 // Ajout du drag & drop depuis l'exterieur
                 echo "<script src='" . $lienRacine . "classes/ihm/dhtmlxscheduler/ext/dhtmlxscheduler_outerdrag.js'></script>\n";
@@ -89,8 +89,8 @@ class IHM_Generale {
 
         public static function footerAccueil() { ?>
             <div id="footerAccueil">
-                <a href="gestion/" title="Partie réservée au responsable">Gestion des stages</a>
-                <p>Publié : <time datetime="2015-09-28">28/09/2015</time>
+                <a href="gestion/" title="Partie rÃ©servÃ©e au responsable">Gestion des stages</a>
+                <p>PubliÃ© : <time datetime="2015-09-28">28/09/2015</time>
 		    <a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
 		    <a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage sur le flux RSS'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 		    <a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
@@ -123,15 +123,15 @@ class IHM_Generale {
         <div id="footer">
             <nav>
                 <a href='<?php echo $lienRacine; ?>index.php' title="Accueil du site">Accueil | </a>
-                <a href='<?php echo $lienRacine; ?>presentation/' title="Présentation détaillée">Présentation | </a>
+                <a href='<?php echo $lienRacine; ?>presentation/' title="PrÃ©sentation dÃ©taillÃ©e">PrÃ©sentation | </a>
                 <a href='<?php echo $lienRacine; ?>stagiaire/' title="Outils pour rechercher un stage">Rechercher un stage | </a>
                 <a href='<?php echo $lienRacine; ?>stagiaire/' title="Validation d'un stage par le responsable">Valider un stage | </a>
-                <a href='<?php echo $lienRacine; ?>parrainage/' title="Partie pour les enseignants">Enseignant référent | </a>
-                <a href='<?php echo $lienRacine; ?>entreprise/' title="Partie pour les entreprises">Déposer un sujet | </a>
-                <a href='<?php echo $lienRacine; ?>soutenances/' title="Accès aux plannings des soutenances">Soutenances | </a>
-                <a href='<?php echo $lienRacine; ?>gestion/' title="Partie réservée au responsable">Gestion des stages</a>
+                <a href='<?php echo $lienRacine; ?>parrainage/' title="Partie pour les enseignants">Enseignant rÃ©fÃ©rent | </a>
+                <a href='<?php echo $lienRacine; ?>entreprise/' title="Partie pour les entreprises">DÃ©poser un sujet | </a>
+                <a href='<?php echo $lienRacine; ?>soutenances/' title="AccÃ¨s aux plannings des soutenances">Soutenances | </a>
+                <a href='<?php echo $lienRacine; ?>gestion/' title="Partie rÃ©servÃ©e au responsable">Gestion des stages</a>
             </nav>
-            <p>Publié : <time datetime="2015-09-28">28/09/2015</time>
+            <p>PubliÃ© : <time datetime="2015-09-28">28/09/2015</time>
 		<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !"><img src='/images/mail.png' align='center' alt='Email' /></a>
 		<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 		<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>

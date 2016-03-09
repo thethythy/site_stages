@@ -29,9 +29,7 @@ include_once($chemin."moteur/Utils.php");
 include_once($chemin."ihm/IHM_Generale.php");
 include_once($chemin."ihm/Menu.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
-if (!headers_sent())
-	header("Content-type: text/html; charset=iso-8859-15");
+header ("Content-type:text/html; charset=utf-8");
 
 // Recuperation de l'annee de promotion (la rentrée)
 if (date('n')>=10) $annee = date('Y');

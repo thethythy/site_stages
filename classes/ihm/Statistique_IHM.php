@@ -1,5 +1,7 @@
 <?php
 
+header ('Content-type:text/html; charset=utf-8');
+
 class Statistique_IHM {
 
 	// $page = nom de la page sur laquelle sera renvoyée le résultat du formulaire

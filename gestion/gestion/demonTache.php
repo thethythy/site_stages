@@ -1,6 +1,7 @@
 #!/usr/bin/php
 
 <?php
+header ('Content-type:text/html; charset=utf-8');
 $chemin = "/Applications/MAMP/htdocs/classes/";
 include_once($chemin . "bdd/Tache_BDD.php");
 include_once($chemin . "moteur/Tache.php");

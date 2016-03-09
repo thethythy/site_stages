@@ -26,9 +26,7 @@ include_once($chemin."bdd/Promotion_BDD.php");
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
-if (!headers_sent())
-	header("Content-type: text/html; charset=iso-8859-15");
+header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 

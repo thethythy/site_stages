@@ -1,1 +1,3 @@
 ErrorDocument 404 http://info-stages.univ-lemans.fr 
+php_flag default_charset utf-8
+AddDefaultCharset UTF-8

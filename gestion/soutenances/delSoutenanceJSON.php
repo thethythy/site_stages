@@ -23,7 +23,7 @@ include_once($chemin."bdd/Soutenance_BDD.php");
 include_once($chemin."moteur/Soutenance.php");
 
 // Format de la réponse
-header("Content-type:text/plain");
+header("Content-type:text/plain; charset=utf-8");
 
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);

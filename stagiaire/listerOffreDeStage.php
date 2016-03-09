@@ -23,6 +23,8 @@ include_once($chemin."moteur/Competence.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
 
+header ("Content-type:text/html; charset=utf-8");
+
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');
