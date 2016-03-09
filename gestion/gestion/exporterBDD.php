@@ -16,7 +16,7 @@ function export(){
     $insertions = "\n\n";
     $date = date("Y-m-d");
 
-    $path = "../../telechargements/";
+    $path = "../../documents/exportations/";
     $backupName = $path."base_stage_".$date.".sql";
     $zipName = $path."base_stage_".$date.".sql.zip";
  
