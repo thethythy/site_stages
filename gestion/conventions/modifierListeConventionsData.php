@@ -136,5 +136,4 @@ if (sizeof($tabPromos) > 0) {
 } else {
 	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.</center><br/>";
 }
-
 ?>

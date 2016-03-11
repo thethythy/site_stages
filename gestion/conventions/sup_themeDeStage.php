@@ -22,6 +22,7 @@ function supprimer(){
 
 supprimer();
 printf("<div><a href='../../gestion/conventions/modifierThemeDeStage.php'>Retour</a></div>");
+
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
 ?>

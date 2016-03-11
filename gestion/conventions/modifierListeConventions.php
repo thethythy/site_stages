@@ -73,5 +73,4 @@ deconnexion();
 
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
-
 ?>

@@ -46,7 +46,7 @@ $oPromo = Promotion::getPromotion($_GET['promo']);
 $oFiliere = $oPromo->getFiliere();
 $oParcours = $oPromo->getParcours();
 
-// Si un modification a été effectué
+// Si un modification a ?t? effectu?
 if (isset($_POST['edit'])) {
 	extract($_POST);
 
@@ -63,7 +63,7 @@ if (isset($_POST['edit'])) {
 
 	$oEtu = $oConv->getEtudiant();
 
-	echo "Les informations sur la convention de ".$oEtu->getNom()." ".$oEtu->getPrenom()." ont été mises à jour.";
+	echo "Les informations sur la convention de ".$oEtu->getNom()." ".$oEtu->getPrenom()." ont ?t? mises ? jour.";
 
 	?>
 		<table>
@@ -74,7 +74,7 @@ if (isset($_POST['edit'])) {
 						<input type="hidden" value="<?php echo $oPromo->getAnneeUniversitaire(); ?>" name="annee"/>
 						<input type="hidden" value="<?php echo $oFiliere->getIdentifiantBDD(); ?>" name="filiere"/>
 						<input type="hidden" value="<?php echo $oParcours->getIdentifiantBDD(); ?>" name="parcours"/>
-						<input type="submit" value="Retourner à la liste"/>
+						<input type="submit" value="Retourner ? la liste"/>
 					</form>
 				</td>
 				<td width="50%" align="center">
@@ -91,5 +91,4 @@ if (isset($_POST['edit'])) {
 
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
-
 ?>
