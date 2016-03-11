@@ -30,9 +30,9 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 	getStatsPromo($tabAU[$i], "M2", $conventionM2, $tabTM2, $tabCptTypeEntreprise, $tabM2, $tabCptTheme, sizeof($conventionM2), $nbsoutenancesM2);
 	getStatsPromo($tabAU[$i], "Master", $convention, $tabTMaster, $tabCptTypeEntreprise, $tabMaster, $tabCptTheme, sizeof($convention), $nbsoutenancesMaster);
 
-	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i]);
-	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i]);
-	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i]);
+	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i], 192);
+	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i], 192);
+	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i], 192);
 	echo "</div>";
 	$tabAU[$i]++;
 }
@@ -143,7 +143,7 @@ function patternScriptLieu($tab, $tabCouleur) {
 }
 
 
-function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee) {
+function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee, $taille) {
 
 	$temp = $tabCptTypeEntreprise;
 	if(sizeof($tabM1)>0) {
@@ -159,7 +159,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 		</table>
 
 		</br></br>
-		<canvas id="<?php echo 'mycanvastype'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastype'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -188,7 +188,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
-		<canvas id="<?php echo 'mycanvastype1'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastype1'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -217,7 +217,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
-		<canvas id="<?php echo 'mycanvastype2'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastype2'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -236,7 +236,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee)
 }
 
 
-function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
+function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee, $taille) {
 
 	$temp = $tabCptTheme;
 	if(sizeof($tabM1)>0) {
@@ -253,7 +253,7 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 		</table>
 
 		</br></br>
-		<canvas id="<?php echo 'mycanvastheme'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastheme'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -282,7 +282,7 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 				<?php patternTableTheme($temp); ?>
 		</table>
 		</br></br>
-		<canvas id="<?php echo 'mycanvastheme1'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastheme1'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -311,7 +311,7 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 				<?php patternTableTheme($temp); ?>
 		</table>
 		</br></br>
-		<canvas id="<?php echo 'mycanvastheme2'.$annee;?>" width="256" height="256">
+		<canvas id="<?php echo 'mycanvastheme2'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 		</canvas>
 
 		<script>
@@ -330,7 +330,7 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee) {
 }
 
 
-function afficherEntreprise($tabEM1, $tabEM2, $annee) {
+function afficherEntreprise($tabEM1, $tabEM2, $annee, $taille) {
 	$tabCouleur = array("red","orange", "green", "blue", "darkviolet");
 	?>
 	<h1 >Ann&eacute;e <?php echo $annee;?></h1>
@@ -344,7 +344,7 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 			</table>
 
 			</br></br>
-			<canvas id="<?php echo 'mycanvas'.$annee;?>" width="256" height="256">
+			<canvas id="<?php echo 'mycanvas'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 			</canvas>
 
 			<script>
@@ -369,7 +369,7 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 			</table>
 
 			</br></br>
-			<canvas id="<?php echo 'mycanvas2'.$annee;?>" width="256" height="256">
+			<canvas id="<?php echo 'mycanvas2'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 			</canvas>
 
 			<script>
@@ -402,7 +402,7 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee) {
 			</table>
 
 			</br></br>
-			<canvas id="<?php echo 'mycanvas3'.$annee;?>" width="256" height="256">
+			<canvas id="<?php echo 'mycanvas3'.$annee;?>" width="<?php echo $taille; ?>" height="<?php echo $taille; ?>">
 			</canvas>
 
 			<script>
