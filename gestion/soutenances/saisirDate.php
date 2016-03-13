@@ -32,7 +32,7 @@ function save(){
             array_push($tabDonnees,$_POST['promo']);
 	
             DateSoutenance::saisirDonneesDateSoutenance($tabDonnees);
-            printf("<p>La nouvelle date a été enregistrée ! </p>");
+            printf("<p>La nouvelle date a Ã©tÃ© enregistrÃ©e ! </p>");
         } else{
             IHM_Generale::erreur("Vous devez saisir des informations !");
         }

@@ -31,7 +31,7 @@ include_once($chemin."ihm/Menu.php");
 
 header ("Content-type:text/html; charset=utf-8");
 
-// Recuperation de l'annee de promotion (la rentrée)
+// Recuperation de l'annee de promotion (la rentrÃ©e)
 if (date('n')>=10) $annee = date('Y');
 else $annee = date('Y')-1;
 //$annee = 2010; // Pour tester
@@ -57,15 +57,15 @@ if (isset($date) && isset($salle)) {
 	$enteteTableau ="<table>
 						<tr id='entete'>
 							<td rowspan='2' style='width: 85px;'>Horaires</td>
-							<td colspan='2'>Étudiant</td>
+							<td colspan='2'>Ã‰tudiant</td>
 							<td rowspan='2' style='width: 50px;'>Fiche de stage</td>
 							<td colspan='2'>Jury</td>
 							<td rowspan='2' style='width: 75px;'>Salle</td>
 						</tr>
 						<tr id='entete'>
-							<td style='width: 100px;'>Nom prénom</td>
+							<td style='width: 100px;'>Nom prÃ©nom</td>
 							<td style='width: 60px;'>Cycle</td>
-							<td style='width: 110px;'>Référent</td>
+							<td style='width: 110px;'>RÃ©fÃ©rent</td>
 							<td style='width: 110px;'>Examinateur</td>
 						</tr>";
 	$finTableau = "</table>";
@@ -96,7 +96,7 @@ if (isset($date) && isset($salle)) {
 		}
 		
 		$j++; $k++;
-		$nomSalle = ($soutenance->getSalle()->getIdentifiantBDD() != 0) ? $soutenance->getSalle()->getNom() : "Non attribuée";
+		$nomSalle = ($soutenance->getSalle()->getIdentifiantBDD() != 0) ? $soutenance->getSalle()->getNom() : "Non attribuÃ©e";
 		$etudiant = $convention->getEtudiant();
 		$promotion = $etudiant->getPromotion($annee);
 		$parcours = $promotion->getParcours();
@@ -135,8 +135,8 @@ if (isset($date) && isset($salle)) {
 		
 	// S'il n'y a pas de conventions
 	if ($k == 0)
-		echo "<br/><center>Il n'y a pas de soutenance associée à cette salle pour la date sélectionnée.</center>";	
+		echo "<br/><center>Il n'y a pas de soutenance associÃ©e Ã  cette salle pour la date sÃ©lectionnÃ©e.</center>";	
 } else
-	echo "<br/><center>Veuillez sélectionner une salle et une date.</center>";
+	echo "<br/><center>Veuillez sÃ©lectionner une salle et une date.</center>";
 
 ?>

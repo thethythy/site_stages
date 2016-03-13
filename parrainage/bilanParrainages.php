@@ -26,13 +26,13 @@ header ("Content-type:text/html; charset=utf-8");
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
-$tabLiens[1] = array('index.php', 'Conventions et référents');
-IHM_Generale::header("Bilan des", "référents", "../", $tabLiens);
+$tabLiens[1] = array('index.php', 'Conventions et rÃ©fÃ©rents');
+IHM_Generale::header("Bilan des", "rÃ©fÃ©rents", "../", $tabLiens);
 
 // Affichage du formulaire de recherche
 afficherFormulaireRecherche("bilanParrainagesData.php");
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<br/>";
 echo "<div id='data'>\n";

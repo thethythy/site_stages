@@ -19,7 +19,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Modifier/Supprimer un", "contact", "../../", $tabLiens);
 
 if(isset($_GET['id'])){
-	// Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+	// NÃ©cÃ©ssaire pour que dans le formulaire de recherche, on resÃ©lectionne les valeurs prÃ©cÃ©dement sÃ©lectionnÃ©es
 	$_POST['nom'] = $_GET['nom'];
 	$_POST['prenom'] = $_GET['prenom'];
 	$_POST['tel'] = $_GET['tel'];
@@ -31,7 +31,7 @@ if(isset($_GET['id'])){
 
 Contact_IHM::afficherFormulaireRecherche("modifierListeContacts.php");
 
-// Si une recherche a été effectuée
+// Si une recherche a Ã©tÃ© effectuÃ©e
 if((isset($_POST['rech'])) || (isset($_GET['id']))){	
 	$nom = $_POST['nom'];
 	$prenom = $_POST['prenom'];
@@ -43,19 +43,19 @@ if((isset($_POST['rech'])) || (isset($_GET['id']))){
 
 $filtres = array();
 
-// Si une recherche sur le nom du contact est demandée
+// Si une recherche sur le nom du contact est demandÃ©e
 if($nom != "")
 	array_push($filtres, new FiltreString("nomcontact", $_POST['nom']."%"));
 	
-// Si une recherche sur le prénom du contact est demandée
+// Si une recherche sur le prÃ©nom du contact est demandÃ©e
 if($prenom != "")
 	array_push($filtres, new FiltreString("prenomcontact", $_POST['prenom']."%"));
 	
-// Si une recherche sur le téléphone est demandée
+// Si une recherche sur le tÃ©lÃ©phone est demandÃ©e
 if($tel != "")
 	array_push($filtres, new FiltreString("telephone", $_POST['tel']."%"));
 	
-// Si une recherche sur le fax est demandée
+// Si une recherche sur le fax est demandÃ©e
 if($fax != "")
 	array_push($filtres, new FiltreString("telecopie", $_POST['fax']."%"));
 
@@ -75,7 +75,7 @@ $tabContacts = Contact::getListeContacts($filtre);
 	
 // Si il y a au moins un contact 
 if(sizeof($tabContacts)>0){
-	// Affichage des contacts correspondants aux critères de recherches
+	// Affichage des contacts correspondants aux critÃ¨res de recherches
 	for($i=0; $i<sizeof($tabContacts); $i++){
 		?>
 		<table id="presentation_entreprise">	
@@ -119,7 +119,7 @@ if(sizeof($tabContacts)>0){
 		<?php
 	}
 }else{
-	echo "Aucun contact ne correspond aux critères de recherche.";
+	echo "Aucun contact ne correspond aux critÃ¨res de recherche.";
 }
 
 IHM_Generale::endHeader(false);

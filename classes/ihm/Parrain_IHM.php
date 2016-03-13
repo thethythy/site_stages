@@ -17,14 +17,14 @@ class Parrain_IHM {
                 <tr><td colspan=2>
                         <table id="presentation_saisieParrain">
                             <tr id="entete2">
-                                <td colspan=2>Saisir un référent</td>
+                                <td colspan=2>Saisir un rÃ©fÃ©rent</td>
                             </tr>
                             <tr>
                                 <th width="200">Nom :</th>
                                 <td><input type="text" name="nomParrain" ></td>
                             </tr>
                             <tr>
-                                <th>Prénom :</th>
+                                <th>PrÃ©nom :</th>
                                 <td><input type="text" name="prenomParrain" ></td>
                             </tr>
                             <tr>
@@ -32,7 +32,7 @@ class Parrain_IHM {
                                 <td><input type="text" name="emailParrain" ></td>
                             </tr>
                             <tr>
-                                <th>Sélectionnez la couleur :</th>
+                                <th>SÃ©lectionnez la couleur :</th>
                                 <td><select id="idCouleur" name="idCouleur" onchange='showColor()'>
                                         <?php
                                         $tabCouleur = Couleur::listerCouleur();
@@ -43,7 +43,7 @@ class Parrain_IHM {
                                     </select>&nbsp;&nbsp;&nbsp;&nbsp;<input id="couleurActuel" readonly="disabled" style="background-color: <?php echo '#' . $tabCouleur[0]->getCode(); ?>; width: 100px; border-width: 0px;"/></td>
                             </tr>
                             <tr>
-                                <td colspan=2><input type=submit value="Enregistrer les données"/><input type=reset value="Effacer"/></td>
+                                <td colspan=2><input type=submit value="Enregistrer les donnÃ©es"/><input type=reset value="Effacer"/></td>
                             </tr>
                         </table>
             </table>
@@ -64,10 +64,10 @@ class Parrain_IHM {
                 <tr><td colspan=2>
                         <table id="presentation_msParrain">
                             <tr id="entete2">
-                                <td colspan=2>Modifier/Supprimer un référent</td>
+                                <td colspan=2>Modifier/Supprimer un rÃ©fÃ©rent</td>
                             </tr>
                             <tr>
-                                <th width="220">Sélectionnez le référent : </th>
+                                <th width="220">SÃ©lectionnez le rÃ©fÃ©rent : </th>
                                 <th>
                                     <?php
                                     $tabParrain = Parrain::listerParrain();
@@ -85,8 +85,8 @@ class Parrain_IHM {
                             </tr>
                             <tr>
                                 <td colspan=2>
-                                    <input type=submit value="Modifier un référent" />
-                                    <input type=submit value="Supprimer un référent" onclick="this.form.action='../../gestion/parrains/sup_parrains.php'"/>
+                                    <input type=submit value="Modifier un rÃ©fÃ©rent" />
+                                    <input type=submit value="Supprimer un rÃ©fÃ©rent" onclick="this.form.action='../../gestion/parrains/sup_parrains.php'"/>
                                 </td>
                             </tr>
                         </table>

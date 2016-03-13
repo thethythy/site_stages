@@ -6,14 +6,14 @@ header ("Content-type:text/html; charset=utf-8");
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
-IHM_Generale::header("Conventions et", "référents", "../", $tabLiens);
+IHM_Generale::header("Conventions et", "rÃ©fÃ©rents", "../", $tabLiens);
 Menu::menuParrainage();
 ?>
-<p>Cette partie du site concerne principalement les enseignants-référents.</p>
+<p>Cette partie du site concerne principalement les enseignants-rÃ©fÃ©rents.</p>
 
-<p>Elle permet d'une part d'accéder à la liste des enseignants-référents de stages par année, par référent et par diplôme.</p>
+<p>Elle permet d'une part d'accÃ©der Ã  la liste des enseignants-rÃ©fÃ©rents de stages par annÃ©e, par rÃ©fÃ©rent et par diplÃ´me.</p>
 
-<p>Elle permet d'autre part d'accéder à un résumé de la charge des référents par année et par diplôme pour chaque enseignant-référent membre de l'équipe pédagogique du département informatique.
+<p>Elle permet d'autre part d'accÃ©der Ã  un rÃ©sumÃ© de la charge des rÃ©fÃ©rents par annÃ©e et par diplÃ´me pour chaque enseignant-rÃ©fÃ©rent membre de l'Ã©quipe pÃ©dagogique du dÃ©partement informatique.
 </p>
 
 <?php

@@ -29,11 +29,11 @@ include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Prise en compte des paramètres
+// Prise en compte des paramÃ¨tres
 $filtres = array();
 
 if (!isset($_POST['annee']))
@@ -64,7 +64,7 @@ $tabPromos = Promotion_BDD::getListePromotions($filtre);
 if (sizeof($tabPromos) > 0) {
 	$idPromo = $tabPromos[0][0];
 	
-	// Récupération des étudiants ayant une convention
+	// RÃ©cupÃ©ration des Ã©tudiants ayant une convention
 	$tabEtuWithConv = array();
 	
 	for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
@@ -72,9 +72,9 @@ if (sizeof($tabPromos) > 0) {
 			array_push($tabEtuWithConv, $tabEtudiants[$i]);
 	}
 	
-	// Si il y a au moins un étudiant avec une convention
+	// Si il y a au moins un Ã©tudiant avec une convention
 	if (sizeof($tabEtuWithConv) > 0) {
-		// Affichage des conventions des étudiants
+		// Affichage des conventions des Ã©tudiants
 		
 		?>
 		
@@ -138,10 +138,10 @@ if (sizeof($tabPromos) > 0) {
 		</form>
 		<?php
 	} else {
-		echo "<br/><center>Aucune convention n'a été trouvée.</center><br/>";
+		echo "<br/><center>Aucune convention n'a Ã©tÃ© trouvÃ©e.</center><br/>";
 	}
 } else {
-	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.</center><br/>";
+	echo "<br/><center>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.</center><br/>";
 }
 
 ?>

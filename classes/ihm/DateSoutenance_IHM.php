@@ -27,10 +27,10 @@ class DateSoutenance_IHM {
                             <td>&nbsp;</td>
                         </tr>
 			<tr>
-                            <th width="200">Sélectionner les<br />promotions associées :</th>
+                            <th width="200">SÃ©lectionner les<br />promotions associÃ©es :</th>
                             <td>
                                 <?php
-                                    // Recuperation de l'annee promotion (la rentrée)
+                                    // Recuperation de l'annee promotion (la rentrÃ©e)
                                     if (date('n')>=9) $annee = date('Y'); else $annee = date('Y')-1;
                                     $tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $annee));
                                     foreach ($tabPromo as $promo)
@@ -43,7 +43,7 @@ class DateSoutenance_IHM {
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                            <td colspan=2><input type=submit value="Enregistrer les données"/><input type=reset value="Effacer"/></td>
+                            <td colspan=2><input type=submit value="Enregistrer les donnÃ©es"/><input type=reset value="Effacer"/></td>
                         </tr>
                     </table>
                 </td></tr>
@@ -60,7 +60,7 @@ class DateSoutenance_IHM {
                             <td colspan=2>Modifier/Supprimer une date de soutenance</td>
 			</tr>
 			<tr>
-                            <th width="220">Sélectionnez la date : </th>
+                            <th width="220">SÃ©lectionnez la date : </th>
                             <th>
                                 <?php
                                     $tabDateSoutenance = DateSoutenance::listerDateSoutenance();

@@ -27,35 +27,35 @@ header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 
-// Si une recherche sur le nom de l'entreprise est demandée
+// Si une recherche sur le nom de l'entreprise est demandÃ©e
 if (isset($_POST['nom']) && $_POST['nom'] != "")
 	array_push($filtres, new FiltreString("nom", "%".$_POST['nom']."%"));
 
-// Si une recherche sur le code postal est demandée
+// Si une recherche sur le code postal est demandÃ©e
 if (isset($_POST['cp']) && $_POST['cp'] != "")
 	array_push($filtres, new FiltreString("codepostal", $_POST['cp']."%"));
 
-// Si une recherche sur la ville est demandée
+// Si une recherche sur la ville est demandÃ©e
 if (isset($_POST['ville']) && $_POST['ville'] != "")
 	array_push($filtres, new FiltreString("ville", $_POST['ville']."%"));
 
-// Si une recherche sur le pays est demandée
+// Si une recherche sur le pays est demandÃ©e
 if (isset($_POST['pays']) && $_POST['pays'] != "")
 	array_push($filtres, new FiltreString("pays", $_POST['pays']."%"));
 
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
-// Si une recherche sur le parcours est demandée
+// Si une recherche sur le parcours est demandÃ©e
 if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
 
-// Si une recherche sur la competence est demandée
+// Si une recherche sur la competence est demandÃ©e
 if(isset($_POST['competence']) && $_POST['competence'] != '*')
 	array_push($filtres, new FiltreNumeric("idcompetence", $_POST['competence']));
 
-// Si une recherche sur la duree est demandée
+// Si une recherche sur la duree est demandÃ©e
 if (isset($_POST['duree']) && $_POST['duree'] != '*') {
 	array_push($filtres, new FiltreInferieur("dureemin", $_POST['duree']));
 	array_push($filtres, new FiltreSuperieur("dureemax", $_POST['duree']));
@@ -82,13 +82,13 @@ if (sizeof($tabOffreDeStages) > 0) { ?>
 		<tr id="entete">
 			<td width="30%">Titre</td>
 			<td width="35%">Entreprise</td>
-			<td width="15%">Diplôme</td>
-			<td width="15%">Spécialité</td>
+			<td width="15%">DiplÃ´me</td>
+			<td width="15%">SpÃ©cialitÃ©</td>
 			<td align="center" width="5%">Visualiser</td>
 		</tr>
 
 	<?php
-		// Affichage des entreprises correspondants aux critères de recherches
+		// Affichage des entreprises correspondants aux critÃ¨res de recherches
 		$cpt=0;
 		for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
 			if ($tabOffreDeStages[$i]->estVisible()) {
@@ -141,7 +141,7 @@ if (sizeof($tabOffreDeStages) > 0) { ?>
 } else {
 	?>
 		<br/>
-		<p>Aucune offre de stage ne correspond aux critères de recherche.</p>
+		<p>Aucune offre de stage ne correspond aux critÃ¨res de recherche.</p>
 		<br/>
 	<?php
 }

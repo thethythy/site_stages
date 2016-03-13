@@ -4,7 +4,7 @@ header ('Content-type:text/html; charset=utf-8');
 
 class Statistique_IHM {
 
-	// $page = nom de la page sur laquelle sera renvoyée le résultat du formulaire
+	// $page = nom de la page sur laquelle sera renvoyÃ©e le rÃ©sultat du formulaire
 	// $tous = permet de savoir si on affiche ou pas la proposition "Tous" dans les combobox
 	public static function afficherFormulaireRechercheLocalisation($page) {
 		?>
@@ -13,7 +13,7 @@ class Statistique_IHM {
 			<table width="100%">
 				<tr>
 					<td align="center">
-						L'année initiale :
+						L'annÃ©e initiale :
 						<select name="annee_in">
 						<?php
 							$tabAU = Promotion_BDD::getAnneesUniversitaires();
@@ -27,7 +27,7 @@ class Statistique_IHM {
 						?>
 						</select>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						L'année finale :
+						L'annÃ©e finale :
 						<select name="annee_fin">
 						<?php
 							$tabAU = Promotion_BDD::getAnneesUniversitaires();
@@ -50,7 +50,7 @@ class Statistique_IHM {
 	<?php
 	}
 
-	// $tabConventions = tableau contenant la liste des conventions à afficher
+	// $tabConventions = tableau contenant la liste des conventions Ã  afficher
 	// $page = nom de la page de map Google
 	public static function afficherTableauLocalisation($tabConventions, $page) {
 		?>

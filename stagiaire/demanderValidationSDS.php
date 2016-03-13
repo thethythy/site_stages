@@ -37,7 +37,7 @@ function envoyerNotification(){
 	$headers .= 'Reply-To: '.$emailResponsable."\n";
 	$headers .= 'X-Mailer: PHP/'.phpversion();
 
-	$msg = "Un nouveau sujet de stage a été soumis.<br/>Vous pouvez le visualisez <a href='".$baseSite."gestion/etudiants/validerSDS.php'>ici</a>";
+	$msg = "Un nouveau sujet de stage a Ã©tÃ© soumis.<br/>Vous pouvez le visualisez <a href='".$baseSite."gestion/etudiants/validerSDS.php'>ici</a>";
 	mail($emailResponsable, 'Site des stages : Demande de validation !', $msg, $headers);
 }
 
@@ -66,23 +66,23 @@ function depotSujet($identifiant) {
 		$nomFichier = $etudiant->getIdentifiantBDD()."_".$etudiant->getNom()."_".$etudiant->getPrenom()."_".date('j-m-Y_H\Hi\m\i\ns').".".$extension;
 
 		if ($size > $file_size_max) {
-			IHM_Generale::erreur("Désolé, votre fichier est trop volumineux !");
+			IHM_Generale::erreur("DÃ©solÃ©, votre fichier est trop volumineux !");
 			$erreur = true;
 			printf("<div><a href='../stagiaire/depot_doc.php'>Retour</a></div>");
 		} else if (file_exists($store_dir.$_FILES['uploadSujet']['name']) && ($accept_overwrite)) {
 			unlink($store_dir.$_FILES['uploadSujet']['name']);
 			if (!@move_uploaded_file($_FILES['uploadSujet']['tmp_name'],$store_dir.$nomFichier)) {
-				echo "Désolé, le dépôt a échoué !";
+				echo "DÃ©solÃ©, le dÃ©pÃ´t a Ã©chouÃ© !";
 			}
 		} else if (!@move_uploaded_file($_FILES['uploadSujet']['tmp_name'],$store_dir.$nomFichier)) {
 				$erreur = true;
-				IHM_Generale::erreur("Le dépôt de fichier a échoué !");
+				IHM_Generale::erreur("Le dÃ©pÃ´t de fichier a Ã©chouÃ© !");
 		} else {
-			echo "<p>Votre sujet est bien enregistré !!!</p>";
+			echo "<p>Votre sujet est bien enregistrÃ© !!!</p>";
 		}
 
 	} else {
-		IHM_Generale::erreur("Soit aucun sujet de stage est donné soit l'extension du fichier n'est pas acceptée !!");
+		IHM_Generale::erreur("Soit aucun sujet de stage est donnÃ© soit l'extension du fichier n'est pas acceptÃ©e !!");
 	}
 
 	if ($erreur) {
@@ -95,32 +95,32 @@ if (isset($_POST['idetudiant']) && $_POST['idetudiant'] != -1) {
 	$tabDonnees = array();
 	// identifiant etudiant
 	array_push($tabDonnees, $_POST['idetudiant']);
-	//identifiant promotion de l'étudiant pour l'année sélectionnée
+	//identifiant promotion de l'Ã©tudiant pour l'annÃ©e sÃ©lectionnÃ©e
 	$etudiant = Etudiant::getEtudiant($_POST['idetudiant']);
 	$promotion = $etudiant->getPromotion($_POST['annee']);
 	array_push($tabDonnees, $promotion->getIdentifiantBDD());
 	// description
-	if (isset($_FILES['uploadSujet']['name']) && $_FILES['uploadSujet']['name']!="") { //si un fichier est envoyé
+	if (isset($_FILES['uploadSujet']['name']) && $_FILES['uploadSujet']['name']!="") { //si un fichier est envoyÃ©
 		$filename = depotSujet($_POST['idetudiant']);
 		if ($filename!="") {
 			array_push($tabDonnees, $filename);
 			SujetDeStage::saisirDonnees($tabDonnees);
 			envoyerNotification();
-			echo "<p>Votre demande de validation a été envoyée.</p>";
+			echo "<p>Votre demande de validation a Ã©tÃ© envoyÃ©e.</p>";
 		}
 	} else if(isset($_POST['desc']) && $_POST['desc']!="") {
 		array_push($tabDonnees, $_POST['desc']);
 		SujetDeStage::saisirDonnees($tabDonnees);
 		envoyerNotification();
-		echo "<p>Votre demande de validation a été envoyée.</p>";
+		echo "<p>Votre demande de validation a Ã©tÃ© envoyÃ©e.</p>";
 	} else {
-		IHM_Generale::erreur("Vous devez soit saisir une description soit déposer un fichier avant de soumettre votre sujet !");
+		IHM_Generale::erreur("Vous devez soit saisir une description soit dÃ©poser un fichier avant de soumettre votre sujet !");
 	}
 } else {
     // Affichage du formulaire de filtrage
     Promotion_IHM::afficherFormulaireRecherche("demanderValidationSDSData.php", false);
 
-    // Affichage des données
+    // Affichage des donnÃ©es
     echo "<div id='data'>\n";
     include_once("demanderValidationSDSData.php");
     echo "\n</div>";

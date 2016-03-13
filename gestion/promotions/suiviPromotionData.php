@@ -16,11 +16,11 @@ include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Convention.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Prise en compte des paramètres
+// Prise en compte des paramÃ¨tres
 $filtres = array();
 
 if (!isset($_POST['annee']) && is_numeric($_POST['annee']))
@@ -107,11 +107,11 @@ if (sizeof($tabPromos) > 0) {
 					</td>
 					<td align="center">
 						<select name="<?php echo "statut[$idEtu]"; ?>">
-							<option value="0" <?php if ($statut == "0" || $statut == "") echo "selected"; ?> >Indéfini</option>
+							<option value="0" <?php if ($statut == "0" || $statut == "") echo "selected"; ?> >IndÃ©fini</option>
 							<option value="1" <?php if ($statut == "1") echo "selected"; ?> >Rien</option>
 							<option value="2" <?php if ($statut == "2") echo "selected"; ?> >Des pistes</option>
 							<option value="3" <?php if ($statut == "3") echo "selected"; ?> >En signature</option>
-							<option value="4" <?php if ($statut == "4") echo "selected"; ?> >Signée</option>
+							<option value="4" <?php if ($statut == "4") echo "selected"; ?> >SignÃ©e</option>
 							<option value="5" <?php if ($statut == "5") echo "selected"; ?> >Alternant</option>
 							<option value="6" <?php if ($statut == "6") echo "selected"; ?> >Recherche</option>
 						</select>
@@ -125,11 +125,11 @@ if (sizeof($tabPromos) > 0) {
 						Total : <?php echo $nbEtudiants; ?>
 					</td>
 					<td align="center">
-						Indéfini : <?php echo $nbIndefinis; ?>&nbsp;&nbsp;&nbsp;
+						IndÃ©fini : <?php echo $nbIndefinis; ?>&nbsp;&nbsp;&nbsp;
 						Rien : <?php echo $nbRiens; ?>&nbsp;&nbsp;&nbsp;
 						Des pistes : <?php echo $nbDesPistes; ?>&nbsp;&nbsp;&nbsp
 						En cours : <?php echo $nbConvEnCours; ?>&nbsp;&nbsp;&nbsp
-						Signées : <?php echo $nbConvSignees; ?>&nbsp;&nbsp;&nbsp
+						SignÃ©es : <?php echo $nbConvSignees; ?>&nbsp;&nbsp;&nbsp
 						Alternants : <?php echo $nbAlters; ?>&nbsp;&nbsp;&nbsp;
 						Recherche : <?php echo $nbRechs; ?>
 					</td>
@@ -140,7 +140,7 @@ if (sizeof($tabPromos) > 0) {
 				<tr>
 					<td align=center>
 						<input type=submit name=valider value="Valider les modifications"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type=submit name=reset value="Tout réinitialiser"/>
+						<input type=submit name=reset value="Tout rÃ©initialiser"/>
 					</td>
 				</tr>
 			</table>
@@ -152,10 +152,10 @@ if (sizeof($tabPromos) > 0) {
 		</form>
 	<?php
 	} else {
-		echo "<br/><center>Aucun étudiant n'est dans cette promotion.<center/><br/>";
+		echo "<br/><center>Aucun Ã©tudiant n'est dans cette promotion.<center/><br/>";
 	}
 } else {
-	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.<center/><br/>";
+	echo "<br/><center>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.<center/><br/>";
 }
 
 

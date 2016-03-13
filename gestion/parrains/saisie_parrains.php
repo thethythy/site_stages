@@ -10,7 +10,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Saisie d'un ", "référent", "../../",$tabLiens);
+IHM_Generale::header("Saisie d'un ", "rÃ©fÃ©rent", "../../",$tabLiens);
 function save(){
 	if(isset($_POST['nomParrain'])) {
 		if($_POST['nomParrain'] != "" && $_POST['prenomParrain']!=""){	
@@ -26,7 +26,7 @@ function save(){
 			array_push($tabDonnees,$couleur);
 	
 			Parrain::saisirDonneesParrain($tabDonnees);
-			printf("<p>Le nouveau référent a été enregistré ! </p>");
+			printf("<p>Le nouveau rÃ©fÃ©rent a Ã©tÃ© enregistrÃ© ! </p>");
 		}else{
 			IHM_Generale::erreur("Vous devez saisir des informations !");
 		}

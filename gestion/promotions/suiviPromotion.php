@@ -19,15 +19,15 @@ include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Convention.php");
 
 // ---------------------
-// Contrôleur de la page
+// ContrÃ´leur de la page
 
-// Demande remise à l'état par défaut du statut des étudiants de la promotion
+// Demande remise Ã  l'Ã©tat par dÃ©faut du statut des Ã©tudiants de la promotion
 if (   isset($_POST['reset'])
     && isset($_POST['annee']) && is_numeric($_POST['annee'])
     && isset($_POST['filiere']) && is_numeric($_POST['filiere'])
     && isset($_POST['parcours']) && is_numeric($_POST['parcours'])) {
 
-	// Prise en compte des paramètres
+	// Prise en compte des paramÃ¨tres
 	$filtres = array();
 
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
@@ -39,7 +39,7 @@ if (   isset($_POST['reset'])
 	for ($i = 1; $i < sizeof($filtres); $i++)
 		$filtre = new Filtre($filtre, $filtres[$i], "AND");
 
-	// Reset du statut de tous les étudiants de la promotion
+	// Reset du statut de tous les Ã©tudiants de la promotion
 	$tabEtudiants = Promotion::listerEtudiants($filtre);
 
 	foreach ($tabEtudiants as $oEtudiant) {
@@ -48,7 +48,7 @@ if (   isset($_POST['reset'])
 	}
 }
 
-// Demande modification du statut des étudiants modifiés
+// Demande modification du statut des Ã©tudiants modifiÃ©s
 if (isset($_POST['valider']) && isset($_POST['statut'])) {
     foreach ($_POST['statut'] as $key => $value) {
 	$oEtudiant = Etudiant::getEtudiant($key);
@@ -67,7 +67,7 @@ IHM_Generale::header("Suivi de la", "promotion", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("suiviPromotionData.php", false);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("suiviPromotionData.php");
 echo "\n</div>";

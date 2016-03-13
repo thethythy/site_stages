@@ -20,23 +20,23 @@ IHM_Generale::header("Liste des", "contacts", "../../", $tabLiens);
 
 Contact_IHM::afficherFormulaireRecherche("listeDesContacts.php");
 
-// Si une recherche a été effectuée
+// Si une recherche a Ã©tÃ© effectuÃ©e
 if(isset($_POST['rech'])){	
 	$filtres = array();
 	
-	// Si une recherche sur le nom du contact est demandée
+	// Si une recherche sur le nom du contact est demandÃ©e
 	if(isset($_POST['nom']) && $_POST['nom'] != "")
 		array_push($filtres, new FiltreString("nomcontact", $_POST['nom']."%"));
 		
-	// Si une recherche sur le prénom du contact est demandée
+	// Si une recherche sur le prÃ©nom du contact est demandÃ©e
 	if(isset($_POST['prenom']) && $_POST['prenom'] != "")
 		array_push($filtres, new FiltreString("prenomcontact", $_POST['prenom']."%"));
 		
-	// Si une recherche sur le téléphone est demandée
+	// Si une recherche sur le tÃ©lÃ©phone est demandÃ©e
 	if(isset($_POST['tel']) && $_POST['tel'] != "")
 		array_push($filtres, new FiltreString("telephone", $_POST['tel']."%"));
 		
-	// Si une recherche sur le fax est demandée
+	// Si une recherche sur le fax est demandÃ©e
 	if(isset($_POST['fax']) && $_POST['fax'] != "")
 		array_push($filtres, new FiltreString("telecopie", $_POST['fax']."%"));
 	
@@ -59,7 +59,7 @@ if(isset($_POST['rech'])){
 
 // Si il y a au moins un contact 
 if(sizeof($tabContacts)>0){
-	// Affichage des contacts correspondants aux critères de recherches
+	// Affichage des contacts correspondants aux critÃ¨res de recherches
 	for($i=0; $i<sizeof($tabContacts); $i++){
 		?>
 		<table id="presentation_entreprise">	
@@ -95,7 +95,7 @@ if(sizeof($tabContacts)>0){
 		<?php
 	}
 }else{
-	echo "Aucun contact ne correspond aux critères de recherche.";
+	echo "Aucun contact ne correspond aux critÃ¨res de recherche.";
 }
 
 IHM_Generale::endHeader(false);

@@ -20,7 +20,7 @@ include_once($chemin."moteur/Utils.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Modifier une", "durée de soutenance", "../../", $tabLiens);
+IHM_Generale::header("Modifier une", "durÃ©e de soutenance", "../../", $tabLiens);
 
 Filiere_IHM::afficherFormulaireModificationTempsSoutenance();
 
@@ -30,13 +30,13 @@ function modifier(){
 		$element=$_POST['filiere'];
 	
 		$filiere=Filiere::getFiliere($element);
-		printf("<h2>Modification de la durée de la soutenance</h2>");
+		printf("<h2>Modification de la durÃ©e de la soutenance</h2>");
 		printf("<center><form action='../../gestion/promotions/modTempsSoutenance.php' method=post name=temps>\n");
 		printf("<td><input type=hidden name='id' size=100 value=%s></td>\n",$filiere->getIdentifiantBDD());
 		printf("<table><center><tr><td style='width: 200px;'>Nom :</td><td>%s</td></tr>\n",$filiere->getNom());
-		printf("<tr><td>Durée de la soutenance : </td>\n");
+		printf("<tr><td>DurÃ©e de la soutenance : </td>\n");
 		printf("<td><input name='duree' size=3 value=%s> minutes</td>\n",$filiere->getTempsSoutenance());
-		printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
+		printf("<table><tr><td><input type=submit value='Enregistrer les donnÃ©es'/></center></td></tr>");
 		printf("</table></form></center>");
 	}
 }

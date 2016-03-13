@@ -16,13 +16,13 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Numéro département (ou code postal)</td>
+				<td>NumÃ©ro dÃ©partement (ou code postal)</td>
 				<td>
 				    <input id="cp" type="text" value="<?php if (isset($_POST['cp'])) { echo $_POST['cp']; } ?>"name="cp"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>Diplôme</td>
+				<td>DiplÃ´me</td>
 				<td>
 				    <select id="filiere" name="filiere">
 					<?php
@@ -41,9 +41,9 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Durée</td>
+				<td>DurÃ©e</td>
 				<td>
-				    <select id="duree" name="duree"><option value='*'>Indifférent </option>
+				    <select id="duree" name="duree"><option value='*'>IndiffÃ©rent </option>
 					<?php
 					    for ($i = 1; $i <= 12; $i++) {
 						if (isset($_POST['duree']) && $_POST['duree'] == $i) {
@@ -74,7 +74,7 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Spécialité</td>
+				<td>SpÃ©cialitÃ©</td>
 				<td>
 				    <select id="parcours" name="parcours">
 					<?php
@@ -93,7 +93,7 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Compétence</td>
+				<td>CompÃ©tence</td>
 				<td>
 				    <select id="competence" name="competence">
 					<?php
@@ -130,7 +130,7 @@ class OffreDeStage_IHM {
     public static function afficherFormulaireSaisie() {
 	?>
 	<script language="javascript">
-	    var compteur = 0; // Compteur des compétences ajoutées
+	    var compteur = 0; // Compteur des compÃ©tences ajoutÃ©es
 	    function ajout_competence(){
 		var child1 = document.createTextNode("Nom : ");
 		var child2 = document.createElement("input");
@@ -144,7 +144,7 @@ class OffreDeStage_IHM {
 	    }
 	</script>
 
-	<p>Les champs marqués d'une * sont obligatoires</p>
+	<p>Les champs marquÃ©s d'une * sont obligatoires</p>
 
 	<FORM METHOD="POST" ACTION="">
 
@@ -168,12 +168,12 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>Compétence(s) (*) :</th>
+				<th>CompÃ©tence(s) (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- Récupération des compétences -->
+					<!-- RÃ©cupÃ©ration des compÃ©tences -->
 					<?php
 					$tabCompetences = Competence::listerCompetences();
 					for ($i = 0; $i < sizeof($tabCompetences); $i++) {
@@ -195,7 +195,7 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    <input type="button" value="Ajouter une compétence" onClick="ajout_competence()"/>
+				    <input type="button" value="Ajouter une compÃ©tence" onClick="ajout_competence()"/>
 				    <div id="ajout_competence"></div>
 				</td>
 			    </tr>
@@ -214,12 +214,12 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th>Profil souhaité (*) :</th>
+				<th>Profil souhaitÃ© (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- Récupération des filières -->
+					<!-- RÃ©cupÃ©ration des filiÃ¨res -->
 					<?php
 					    $tabFilieres = Filiere::listerFilieres();
 					    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
@@ -243,7 +243,7 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>Durée (*) :</th>
+				<th>DurÃ©e (*) :</th>
 				<td>Entre <select name="dureeMin">
 					    <?php
 						for ($i = 1; $i <= 12; $i++) {
@@ -269,7 +269,7 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th>Indemnités :</th>
+				<th>IndemnitÃ©s :</th>
 				<td><input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } ?>" name="indemnites" size="100"/></td>
 			    </tr>
 			    <tr>
@@ -306,7 +306,7 @@ class OffreDeStage_IHM {
 				<td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>Email DRH ou équivalent :</th>
+				<th>Email DRH ou Ã©quivalent :</th>
 				<td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
 			    </tr>
 			</table>
@@ -316,14 +316,14 @@ class OffreDeStage_IHM {
 		    <td>
 			<table id="presentation_saisieOffreDeStage">
 			    <tr id="entete2">
-				<td colspan=2>Contact ou maître de stage</td>
+				<td colspan=2>Contact ou maÃ®tre de stage</td>
 			    </tr>
 			    <tr>
 				<th width='170'>Nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } ?>" name="nom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>Prénom (*) :</th>
+				<th>PrÃ©nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } ?>" name="prenom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
@@ -361,7 +361,7 @@ class OffreDeStage_IHM {
 	    }
 	</script>
 
-	<p>Les champs marqués d'une * sont obligatoires</p>
+	<p>Les champs marquÃ©s d'une * sont obligatoires</p>
 
 	<FORM METHOD="POST" ACTION="">
 	    <!-- Dans le cas d'une modification d'une offre de stage -->
@@ -400,7 +400,7 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    Copier/coller le texte suivant pour insérer un lien html vers un document descriptif :<br/>
+				    Copier/coller le texte suivant pour insÃ©rer un lien html vers un document descriptif :<br/>
 				    <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDeStages/nom_document'>Commentaire</a>"); ?>
 				</td>
 			    </tr>
@@ -408,12 +408,12 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th colspan="2">Compétence(s) (*) :</th>
+				<th colspan="2">CompÃ©tence(s) (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- Récupération des compétences -->
+					<!-- RÃ©cupÃ©ration des compÃ©tences -->
 					<?php
 					    $tabCompetences = Competence::listerCompetences();
 					    for ($i = 0; $i < sizeof($tabCompetences); $i++) {
@@ -447,7 +447,7 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
+				    <input type="button" value="Ajouter une compÃ©tence" onClick="ajout_competence()">
 				    <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
 				    <div id="ajout_competence"></div>
 				</td>
@@ -488,12 +488,12 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th colspan="2">Thème du stage :</th>
+				<th colspan="2">ThÃ¨me du stage :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- Récupération des parcours -->
+					<!-- RÃ©cupÃ©ration des parcours -->
 					<?php
 					$tabParcours = Parcours::listerParcours();
 					for ($i = 0; $i < sizeof($tabParcours); $i++) {
@@ -526,12 +526,12 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th colspan="2">Profil souhaité :</th>
+				<th colspan="2">Profil souhaitÃ© :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- Récupération des filières -->
+					<!-- RÃ©cupÃ©ration des filiÃ¨res -->
 					<?php
 					    $tabFilieres = Filiere::listerFilieres();
 					    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
@@ -567,7 +567,7 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>Durée (*) :</th>
+				<th>DurÃ©e (*) :</th>
 				<td>Entre <select name="dureeMin">
 					<?php
 					    for ($i = 1; $i <= 12; $i++) {
@@ -592,7 +592,7 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th>Indemnités :</th>
+				<th>IndemnitÃ©s :</th>
 				<td>
 				    <input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } else if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->getIndemnite(); } ?>" name="indemnites" size="50"/>
 				</td>
@@ -633,7 +633,7 @@ class OffreDeStage_IHM {
 				<td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else if (isset($modificationEntreprise)) { echo $modificationEntreprise->getPays(); } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>Email DRH ou équivalent :</th>
+				<th>Email DRH ou Ã©quivalent :</th>
 				<td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"/></td>
 			    </tr>
 			</table>
@@ -643,14 +643,14 @@ class OffreDeStage_IHM {
 		    <td colspan="2">
 			<table id="presentation_saisieOffreDeStage">
 			    <tr id="entete2">
-				<td colspan=2>Contact ou Maître de stage</td>
+				<td colspan=2>Contact ou MaÃ®tre de stage</td>
 			    </tr>
 			    <tr>
 				<th width="170">Nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getNom(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="nom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>Prénom (*) :</th>
+				<th>PrÃ©nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getPrenom(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="prenom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
@@ -706,9 +706,9 @@ class OffreDeStage_IHM {
 			    <th colspan="2"><p/><hr/><p/></th>
 			</tr>
 			<tr>
-			    <th>Compétence(s) :</th>
+			    <th>CompÃ©tence(s) :</th>
 			    <td>
-				<!-- Récupération des compétences -->
+				<!-- RÃ©cupÃ©ration des compÃ©tences -->
 				<?php
 				    for ($i = 0; $i < sizeof($competences); $i++) {
 					$competence = Competence::getCompetence($competences[$i]->getIdentifiantBDD());
@@ -742,9 +742,9 @@ class OffreDeStage_IHM {
 			    </td>
 			</tr>
 			<tr>
-			    <th>Thème du stage :</th>
+			    <th>ThÃ¨me du stage :</th>
 			    <td>
-				<!-- Récupération des parcours -->
+				<!-- RÃ©cupÃ©ration des parcours -->
 				<?php
 				    for ($i = 0; $i < sizeof($themes); $i++) {
 					$parcours = Parcours::getParcours($themes[$i]->getIdentifiantBDD());
@@ -758,9 +758,9 @@ class OffreDeStage_IHM {
 			    </td>
 			</tr>
 			<tr>
-			    <th>Profil souhaité :</th>
+			    <th>Profil souhaitÃ© :</th>
 			    <td>
-				<!-- Récupération des filières -->
+				<!-- RÃ©cupÃ©ration des filiÃ¨res -->
 				<?php
 				    for ($i = 0; $i < sizeof($profils); $i++) {
 					$filiere = Filiere::getFiliere($profils[$i]->getIdentifiantBDD());
@@ -777,11 +777,11 @@ class OffreDeStage_IHM {
 			    <th colspan="2"><p/><hr/><p/></th>
 			</tr>
 			<tr>
-			    <th>Durée :</th>
+			    <th>DurÃ©e :</th>
 			    <td>Entre <?php echo $offreDeStage->getDureeMinimale(); ?> et <?php echo $offreDeStage->getDureeMaximale(); ?> mois</td>
 			</tr>
 			<tr>
-			    <th>Indemnités :</th>
+			    <th>IndemnitÃ©s :</th>
 			    <td>
 				<?php if ($offreDeStage->getIndemnite()) { echo $offreDeStage->getIndemnite(); } else { echo " ";} ?>
 			    </td>
@@ -826,14 +826,14 @@ class OffreDeStage_IHM {
 		<td colspan="2">
 		    <table id="presentation_saisieOffreDeStage">
 			<tr id="entete2">
-			    <td colspan="2">Contact ou Maître de stage</td>
+			    <td colspan="2">Contact ou MaÃ®tre de stage</td>
 			</tr>
 			<tr>
 			    <th width="160">Nom :</th>
 			    <td><?php echo $contact->getNom(); ?></td>
 			</tr>
 			<tr>
-			    <th>Prénom :</th>
+			    <th>PrÃ©nom :</th>
 			    <td><?php echo $contact->getPrenom(); ?></td>
 			</tr>
 			<tr>

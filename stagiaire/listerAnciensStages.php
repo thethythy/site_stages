@@ -38,7 +38,7 @@ IHM_Generale::header("Liste des", "anciens stages", "../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("listerAnciensStagesData.php", true);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>\n";
 echo "<br/>\n";
 echo "<div id='data'>\n";

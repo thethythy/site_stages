@@ -32,11 +32,11 @@ include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 include_once($chemin."moteur/ThemeDeStage.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=utf-8");
 
-// Prise en compte des paramètres
+// Prise en compte des paramÃ¨tres
 $filtres = array();
 
 if (!isset($_POST['annee']))
@@ -63,20 +63,20 @@ for ($i = 1; $i < sizeof($filtres); $i++)
 
 $tabEtudiants = Promotion::listerEtudiants($filtre);
 
-// Si un ajout a été effectué
+// Si un ajout a Ã©tÃ© effectuÃ©
 if (isset($_POST['add'])) {
 	extract($_POST);
 	
 	//Ajout de ', $themeStage' -----------------------------------------------------------------------------------------------------
 	$newConvention = new Convention("", $sujet, 0, 0, $idPar, $idExam, $idEtu, "NULL", $idCont, $themeStage);
 	
-	// Si la convention que l'on veut créer n'existe pas déjà
+	// Si la convention que l'on veut crÃ©er n'existe pas dÃ©jÃ 
 	if (Convention_BDD::existe($newConvention, $annee) == false) {
 		
 		// Sauvegarde de la convention
 		$idConv = Convention_BDD::sauvegarder($newConvention);
 
-		// Mise à jour du lien promotion /étudiant / convention
+		// Mise Ã  jour du lien promotion /Ã©tudiant / convention
 		if (isset($filiere) && isset($parcours)) {
 			$promotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $filiere, $parcours);
 			Etudiant_BDD::ajouterConvention($idEtu, $idConv, $promotion->getIdentifiantBDD());
@@ -86,7 +86,7 @@ if (isset($_POST['add'])) {
 			<table align="center">
 				<tr>
 					<td align="center">
-						Création de la convention réalisée avec succès.
+						CrÃ©ation de la convention rÃ©alisÃ©e avec succÃ¨s.
 					</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@ if (isset($_POST['add'])) {
 		<?php
 	} else {
 		Convention_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
-		IHM_Generale::erreur("Cet étudiant à déjà une convention pour l'année sélectionnée !");
+		IHM_Generale::erreur("Cet Ã©tudiant Ã  dÃ©jÃ  une convention pour l'annÃ©e sÃ©lectionnÃ©e !");
 	}
 } else {
 	Convention_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);

@@ -12,7 +12,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Modifier/supprimer un ", "référent", "../../", $tabLiens);
+IHM_Generale::header("Modifier/supprimer un ", "rÃ©fÃ©rent", "../../", $tabLiens);
 
 Parrain_IHM::afficherFormulaireModification();
 
@@ -25,12 +25,12 @@ function modifier() {
         $couleur = $parrain->getCouleur();
         $tabCouleur = Couleur::listerCouleur();
 
-        printf("<h2>Modification d'un référent</h2>");
+        printf("<h2>Modification d'un rÃ©fÃ©rent</h2>");
         printf("<center><form action='../../gestion/parrains/mod_parrains.php' method=post name=par>\n");
         printf("<td><input type=hidden name='id' size=100 value=%s></td>\n", $parrain->getIdentifiantBDD());
         printf("<table><center><tr><td>Nom : </td>\n");
         printf("<td><input name='nom' size=100 value=%s></td>\n", $parrain->getNom());
-        printf("</tr><tr><td>Prénom : </td>\n");
+        printf("</tr><tr><td>PrÃ©nom : </td>\n");
         printf("<td><input name='prenom' size=100 value=%s></td></tr></center>\n", $parrain->getPrenom());
         printf("</tr><tr><td>Email : </td>\n");
         printf("<td><input name='email' size=100 value=%s></td>\n", $parrain->getEmail());
@@ -45,7 +45,7 @@ function modifier() {
         }
 
         printf("</select>&nbsp;&nbsp;&nbsp;&nbsp;<input id='couleurActuel' readonly='disabled' style='background-color: %s; width: 100px; border-width: 0px;'/></td></tr></center></table>\n", '#' . $couleur->getCode());
-        printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
+        printf("<table><tr><td><input type=submit value='Enregistrer les donnÃ©es'/></center></td></tr>");
         printf("</table></form></center>");
 
         printf("

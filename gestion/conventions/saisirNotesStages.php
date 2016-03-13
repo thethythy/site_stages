@@ -36,11 +36,11 @@ IHM_Generale::header("Saisir des", "notes de stages", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("saisirNotesStagesData.php", false);
 
-// Si un enregistrement des notes a été effectuée
+// Si un enregistrement des notes a Ã©tÃ© effectuÃ©e
 if (isset($_POST['save'])) {
 	$tabIdConventions = $_POST['idConventions'];
 	
-	// Y-a-t-il au moins une note à changer ?
+	// Y-a-t-il au moins une note Ã  changer ?
 	if ($tabIdConventions != "") {
 		$tabIdConv = explode(";", $tabIdConventions);
 		for ($i = 0; $i < sizeof($tabIdConv); $i++) {
@@ -51,7 +51,7 @@ if (isset($_POST['save'])) {
 	}
 }
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("saisirNotesStagesData.php");
 echo "\n</div>";

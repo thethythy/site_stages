@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
 class Couleur_BDD {
-    /** M�thodes statiques **/
+    /** Méthodes statiques **/
 
     public static function sauvegarder($couleur) {
 		global $tab20;

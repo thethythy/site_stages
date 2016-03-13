@@ -30,7 +30,7 @@ IHM_Generale::header("Liste des", "offres de stage", "../../", $tabLiens);
 
 OffreDeStage_IHM::afficherFormulaireRecherche("listeDesOffreDeStageData.php");
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("listeDesOffreDeStageData.php");
 echo "\n</div>";

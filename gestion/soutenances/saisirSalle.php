@@ -21,7 +21,7 @@ function save(){
 			array_push($tabDonnees,$nom);
 	
 			Salle::saisirDonneesSalle($tabDonnees);
-			printf("<p>La nouvelle salle a été enregistrée ! </p>");
+			printf("<p>La nouvelle salle a Ã©tÃ© enregistrÃ©e ! </p>");
 		}else{
 			IHM_Generale::erreur("Vous devez saisir des informations !");
 		}

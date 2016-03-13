@@ -23,42 +23,42 @@ include_once($chemin."moteur/Competence.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=utf-8");
 
-// Prise en compte des paramètres
+// Prise en compte des paramÃ¨tres
 $filtres = array();
 
-// Si une recherche sur le nom de l'entreprise est demandée
+// Si une recherche sur le nom de l'entreprise est demandÃ©e
 if (isset($_POST['nom']) && $_POST['nom'] != "")
 	array_push($filtres, new FiltreString("nom", "%".$_POST['nom']."%"));
 
-// Si une recherche sur le code postal est demandée
+// Si une recherche sur le code postal est demandÃ©e
 if (isset($_POST['cp']) && $_POST['cp'] != "")
 	array_push($filtres, new FiltreString("codepostal", $_POST['cp']."%"));
 
-// Si une recherche sur la ville est demandée
+// Si une recherche sur la ville est demandÃ©e
 if (isset($_POST['ville']) && $_POST['ville'] != "")
 	array_push($filtres, new FiltreString("ville", $_POST['ville']."%"));
 
-	// Si une recherche sur le pays est demandée
+	// Si une recherche sur le pays est demandÃ©e
 if (isset($_POST['pays']) && $_POST['pays'] != "")
 	array_push($filtres, new FiltreString("pays", $_POST['pays']."%"));
 
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
-// Si une recherche sur le parcours est demandé
+// Si une recherche sur le parcours est demandÃ©
 if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
 
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if (isset($_POST['competence']) && $_POST['competence'] != '*')
 	array_push($filtres, new FiltreNumeric("idcompetence", $_POST['competence']));
 
-// Si une recherche sur la duree est demandée
+// Si une recherche sur la duree est demandÃ©e
 if (isset($_POST['duree']) &&  $_POST['duree'] != '*') {
 		array_push($filtres, new FiltreInferieur("dureemin", $_POST['duree']));
 		array_push($filtres, new FiltreSuperieur("dureemax", $_POST['duree']));
@@ -73,9 +73,9 @@ if (sizeof($filtres) > 0) {
 
 $tabOffreDeStages = OffreDeStage::getListeOffreDeStage($filtre);
 
-// Si il y a au moins une offre de stage à traiter
+// Si il y a au moins une offre de stage Ã  traiter
 if (sizeof($tabOffreDeStages) > 0) {
-	// Affichage des entreprises correspondants aux critères de recherches
+	// Affichage des entreprises correspondants aux critÃ¨res de recherches
 	echo "<br/>";
 	$cpt = 0;
 	$enteteAffichee = false;
@@ -85,13 +85,13 @@ if (sizeof($tabOffreDeStages) > 0) {
 			if (!$enteteAffichee) {
 				$enteteAffichee = true;
 				?>
-					<p>Voici la liste des offres de stage qui restent à traiter :</p>
+					<p>Voici la liste des offres de stage qui restent Ã  traiter :</p>
 					<table width="100%">
 						<tr id="entete">
 							<td width="30%">Titre</td>
 							<td width="35%">Entreprise</td>
-							<td width="13%">Diplôme</td>
-							<td width="13%">Spécialité</td>
+							<td width="13%">DiplÃ´me</td>
+							<td width="13%">SpÃ©cialitÃ©</td>
 							<td align="center" width="9%">A Valider</td>
 						</tr>
 				<?php
@@ -137,7 +137,7 @@ if (sizeof($tabOffreDeStages) > 0) {
 	}
 
 	if ($cpt == 0) {
-		echo "<p>Toutes les offres de stages ont été validées.</p>";
+		echo "<p>Toutes les offres de stages ont Ã©tÃ© validÃ©es.</p>";
 	}
 
 	?>
@@ -146,8 +146,8 @@ if (sizeof($tabOffreDeStages) > 0) {
 		<tr id="entete">
 			<td width="30%">Titre</td>
 			<td width="35%">Entreprise</td>
-			<td width="13%">Diplôme</td>
-			<td width="13%">Spécialité</td>
+			<td width="13%">DiplÃ´me</td>
+			<td width="13%">SpÃ©cialitÃ©</td>
 			<td align="center" width="9%">Visualiser</td>
 		</tr>
 
@@ -203,7 +203,7 @@ if (sizeof($tabOffreDeStages) > 0) {
 <?php
 
 } else {
-	echo "<br/><center>Aucune offre de stage ne correspond aux critères de recherche.<center/><br/>";
+	echo "<br/><center>Aucune offre de stage ne correspond aux critÃ¨res de recherche.<center/><br/>";
 }
 
 ?>

@@ -2,11 +2,11 @@
 header ('Content-type:text/html; charset=utf-8');
 class Convention_IHM {
  
-	// Méthodes statiques
+	// MÃ©thodes statiques
 		
-	// $conv = Entreprise qui est modifier et dont les informations son affichées.
-	// si $conv = "", alors il s'agit d'un formulaire de création (champs vide)
-	// $tabEtu = tableau contenant les étudiants à afficher
+	// $conv = Entreprise qui est modifier et dont les informations son affichÃ©es.
+	// si $conv = "", alors il s'agit d'un formulaire de crÃ©ation (champs vide)
+	// $tabEtu = tableau contenant les Ã©tudiants Ã  afficher
 	public static function afficherFormulaireSaisie($conv, $tabEtu, $annee, $parcours, $filiere) {
 
 		if ($conv != "") {
@@ -47,7 +47,7 @@ class Convention_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Référent</td>
+								<td>RÃ©fÃ©rent</td>
 								<td>
 									<select name="idPar" style="width: 300px;">
 										<?php 
@@ -103,7 +103,7 @@ class Convention_IHM {
 							</tr>
 								<!-- Ajout du theme de stage *************************************************************************** -->
 							<tr>
-								<td>Thème de stage</td>
+								<td>ThÃ¨me de stage</td>
 								<td>
 									<select name="idTheme" style="width: 300px;">
 										<?php 
@@ -127,7 +127,7 @@ class Convention_IHM {
 								<td>
 									<?php
 										if (($conv != "") && ($conv->getASonResume() == 1)) {
-											echo "Résumé du stage";
+											echo "RÃ©sumÃ© du stage";
 										} else {
 											echo "Sujet de stage";
 										}

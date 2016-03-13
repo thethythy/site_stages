@@ -29,7 +29,7 @@ function modifier() {
         printf("</tr><tr><td>Couleur : </td>");
         printf("<td><input id='colorPicker' type='color' name='codeHexa' value='%s' style='width: 100px;'></td></tr></center>\n", "#" . $couleur->getCode());
         printf("</td></tr></center></table>");
-        printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
+        printf("<table><tr><td><input type=submit value='Enregistrer les donnÃ©es'/></center></td></tr>");
         printf("</table></form></center>");
 
         printf("<script>

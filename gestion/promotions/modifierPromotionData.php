@@ -17,11 +17,11 @@ include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Utils.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Si une suppression d'un étudiant ou une modification de l'email a été effectuée
+// Si une suppression d'un Ã©tudiant ou une modification de l'email a Ã©tÃ© effectuÃ©e
 if (isset($_POST['email']) || isset($_GET['id'])) {
 	$annee = $_POST['annee'];
 	$parcours = $_POST['parcours'];
@@ -73,13 +73,13 @@ if (sizeof($tabPromos) > 0) {
 		</form>
 	<?php
 	
-	// Si il y a au moins un étudiant
+	// Si il y a au moins un Ã©tudiant
 	if (sizeof($tabEtudiants) > 0) {
-		// Affichage des étudiants correspondants aux critères de recherches
-		echo "Nombre d'étudiants de la promotion : ".sizeof($tabEtudiants)."<p/>";
+		// Affichage des Ã©tudiants correspondants aux critÃ¨res de recherches
+		echo "Nombre d'Ã©tudiants de la promotion : ".sizeof($tabEtudiants)."<p/>";
 		echo "<table width='75%'>
 				<tr id='entete'>
-					<td width='55%'>Nom et Prénom</td>
+					<td width='55%'>Nom et PrÃ©nom</td>
 					<td width='10%' align='center'>Modifier</td>
 					<td width='10%' align='center'>Supprimer</td>
 				</tr>";
@@ -104,7 +104,7 @@ if (sizeof($tabPromos) > 0) {
 		}
 		echo "</table>";
 	} else {
-		echo "<br/><center>Aucun étudiant n'a été trouvé.</center><br/>";
+		echo "<br/><center>Aucun Ã©tudiant n'a Ã©tÃ© trouvÃ©.</center><br/>";
 	}
 	?>
 	
@@ -115,13 +115,13 @@ if (sizeof($tabPromos) > 0) {
 			<td width="25%" align="center">
 				<form method=post action="ajouterEtudiant.php">
 					<input type="hidden" value="<?php echo $idPromo; ?>" name="promo"/>
-					<input type="submit" value="Ajouter un nouvel étudiant"/>
+					<input type="submit" value="Ajouter un nouvel Ã©tudiant"/>
 				</form>
 			</td>
 			<td width="25%" align="center">
 				<form method=post action="importationEtudiants.php">
 					<input type="hidden" value="<?php echo $idPromo; ?>" name="promo"/>
-					<input type="submit" value="Importer des étudiants"/>
+					<input type="submit" value="Importer des Ã©tudiants"/>
 				</form>
 			</td>
 			<td width="25%" align="center">
@@ -143,7 +143,7 @@ if (sizeof($tabPromos) > 0) {
 	
 	<?php
 } else {
-	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.</center><br/>";
+	echo "<br/><center>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.</center><br/>";
 }
 
 ?>

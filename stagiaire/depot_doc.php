@@ -32,7 +32,7 @@ header ("Content-type:text/html; charset=utf-8");
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');
-IHM_Generale::header("Dépôt de", "documents", "../", $tabLiens);
+IHM_Generale::header("DÃ©pÃ´t de", "documents", "../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("depot_docData.php", false);
 
@@ -53,17 +53,17 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
 	$headers .= 'X-Mailer: PHP/'.phpversion();
 
 	$msg = "Ceci est un message automatique concernant le suivi de stage.<br/>
-		Un $typedocument a été déposé sur le site des stages.<br/>
+		Un $typedocument a Ã©tÃ© dÃ©posÃ© sur le site des stages.<br/>
 		<br/>
 		Etudiant : ".$oEtudiant->getNom()." ".$oEtudiant->getPrenom()."<br/>
-		Diplôme : ".$oPromotion->getFiliere()->getNom()." ".$oPromotion->getParcours()->getNom()."<br/>
+		DiplÃ´me : ".$oPromotion->getFiliere()->getNom()." ".$oPromotion->getParcours()->getNom()."<br/>
 		Entreprise : ".$oConvention->getContact()->getEntreprise()->getNom()."<br/>
 		Document : $typedocument <a href='".$baseSite."documents/".$nomFichier."'>accessible ici</a><br/>
 		<br/>
 		Bonne lecture<br/>
 		Le responsable des stages";
 
-	mail($oParrain->getEmail().",".$emailResponsable.",".$oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
+	mail($oParrain->getEmail().",".$emailResponsable.",".$oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument dÃ©posÃ©", $msg, $headers);
 }
 
 //Fonction pour copier le rapport sur le serveur
@@ -92,20 +92,20 @@ function depotRapport($etudiant, $annee, $filiere) {
 		$nomFichier = $etudiant->getIdentifiantBDD() ."_". $nomFiliere ."_". Utils::removeaccents($etudiant->getNom()) ."_". Utils::removeaccents($etudiant->getPrenom()) ."_". $annees .".". $extension;
 
 		if ($size > $file_size_max) {
-			IHM_Generale::erreur("Désolé, votre fichier est trop volumineux (supérieur à 20 Mo) !");
+			IHM_Generale::erreur("DÃ©solÃ©, votre fichier est trop volumineux (supÃ©rieur Ã  20 Mo) !");
 			$erreur=true;
 		} else if (file_exists($store_dir.$nomFichier) && ($accept_overwrite)) {
 			unlink($store_dir.$nomFichier);
 			if (!@move_uploaded_file($_FILES['uploadRapport']['tmp_name'],$store_dir.$nomFichier)) {
 				$erreur=true;
-				IHM_Generale::erreur("Désolé mais le dépôt a échoué !");
+				IHM_Generale::erreur("DÃ©solÃ© mais le dÃ©pÃ´t a Ã©chouÃ© !");
 			}
 		} else if (!@move_uploaded_file($_FILES['uploadRapport']['tmp_name'],$store_dir.$nomFichier)) {
 			$erreur=true;
-			IHM_Generale::erreur("Le dépôt de fichier a échoué !");
+			IHM_Generale::erreur("Le dÃ©pÃ´t de fichier a Ã©chouÃ© !");
 		}
 	} else {
-		IHM_Generale::erreur("Vous n'avez donné aucun nom de fichier ou l'extension n'est peut-être pas acceptée !!");
+		IHM_Generale::erreur("Vous n'avez donnÃ© aucun nom de fichier ou l'extension n'est peut-Ãªtre pas acceptÃ©e !!");
 	}
 
 	if ($erreur) {
@@ -115,7 +115,7 @@ function depotRapport($etudiant, $annee, $filiere) {
 	return $nomFichier;
 }
 
-//Fonction pour copier les résumés sur le serveur
+//Fonction pour copier les rÃ©sumÃ©s sur le serveur
 function depotResume($etudiant, $annee, $filiere) {
 	$nomFichier="";
 	$erreur=false;
@@ -141,20 +141,20 @@ function depotResume($etudiant, $annee, $filiere) {
 		$nomFichier = $etudiant->getIdentifiantBDD() ."_". $nomFiliere ."_". Utils::removeaccents($etudiant->getNom()) ."_". Utils::removeaccents($etudiant->getPrenom()) ."_". $annees .".". $extension;
 
 		if ($size > $file_size_max){
-			IHM_Generale::erreur("Désolé, votre sujet de stage est trop volumineux (supérieur à 20 Mo) !");
+			IHM_Generale::erreur("DÃ©solÃ©, votre sujet de stage est trop volumineux (supÃ©rieur Ã  20 Mo) !");
 			$erreur=true;
 		} else if (file_exists($store_dir.$nomFichier) && ($accept_overwrite)) {
 			unlink($store_dir.$nomFichier);
 			if (!@move_uploaded_file($_FILES['uploadResume']['tmp_name'],$store_dir.$nomFichier)) {
 				$erreur=true;
-				IHM_Generale::erreur("Désolé mais le dépôt a échoué !");
+				IHM_Generale::erreur("DÃ©solÃ© mais le dÃ©pÃ´t a Ã©chouÃ© !");
 			}
 		} else if (!@move_uploaded_file($_FILES['uploadResume']['tmp_name'],$store_dir.$nomFichier)) {
 				$erreur=true;
-				IHM_Generale::erreur("Le dépôt de fichier a échoué !");
+				IHM_Generale::erreur("Le dÃ©pÃ´t de fichier a Ã©chouÃ© !");
 		}
 	  } else {
-		IHM_Generale::erreur("Vous n'avez donné aucun nom de fichier ou l'extension n'est peut-être pas acceptée !!");
+		IHM_Generale::erreur("Vous n'avez donnÃ© aucun nom de fichier ou l'extension n'est peut-Ãªtre pas acceptÃ©e !!");
 	  }
 
 	  if ($erreur) {
@@ -163,36 +163,36 @@ function depotResume($etudiant, $annee, $filiere) {
 	  return $nomFichier;
 }
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("depot_docData.php");
 echo "\n</div>";
 
-// Dépôt d'un rapport
+// DÃ©pÃ´t d'un rapport
 if (isset($_POST['submitRapport'])) {
-	if (isset($_FILES['uploadRapport']['name']) && $_FILES['uploadRapport']['name'] != "") { //si un fichier est envoyé
+	if (isset($_FILES['uploadRapport']['name']) && $_FILES['uploadRapport']['name'] != "") { //si un fichier est envoyÃ©
 		$etudiant = Etudiant::getEtudiant($_POST['idEtudiant']);
 		$filename = depotRapport($etudiant, $_POST['annee'], $_POST['filiere']);
 		if($filename!=""){
 			envoyerNotification($etudiant, $_POST['annee'], $_POST['filiere'], $_POST['parcours'], $_POST['idParrain'], "rapports/".$filename, "rapport de stage");
-			echo "<p>Votre rapport de stage a été enregistré et votre référent a été informé de ce dépôt.</p>";
+			echo "<p>Votre rapport de stage a Ã©tÃ© enregistrÃ© et votre rÃ©fÃ©rent a Ã©tÃ© informÃ© de ce dÃ©pÃ´t.</p>";
 		}
 	} else {
-		IHM_Generale::erreur("Vous devez spécifier un fichier !");
+		IHM_Generale::erreur("Vous devez spÃ©cifier un fichier !");
 	}
 }
 
-// Dépôt d'un résumé
+// DÃ©pÃ´t d'un rÃ©sumÃ©
 if (isset($_POST['submitResume'])) {
-	if(isset($_FILES['uploadResume']['name']) && $_FILES['uploadResume']['name'] != ""){ //si un fichier est envoyé
+	if(isset($_FILES['uploadResume']['name']) && $_FILES['uploadResume']['name'] != ""){ //si un fichier est envoyÃ©
 		$etudiant = Etudiant::getEtudiant($_POST['idEtudiant']);
 		$filename = depotResume($etudiant, $_POST['annee'], $_POST['filiere']);
 		if ($filename!="") {
-			envoyerNotification($etudiant,$_POST['annee'], $_POST['filiere'], $_POST['parcours'], $_POST['idParrain'], "resumes/".$filename, "résumé de stage");
-			echo "<p>Votre résumé de stage a été enregistré et votre référent a été informé de ce dépôt.</p>";
+			envoyerNotification($etudiant,$_POST['annee'], $_POST['filiere'], $_POST['parcours'], $_POST['idParrain'], "resumes/".$filename, "rÃ©sumÃ© de stage");
+			echo "<p>Votre rÃ©sumÃ© de stage a Ã©tÃ© enregistrÃ© et votre rÃ©fÃ©rent a Ã©tÃ© informÃ© de ce dÃ©pÃ´t.</p>";
 		}
 	} else {
-		IHM_Generale::erreur("Vous devez spécifier un fichier !");
+		IHM_Generale::erreur("Vous devez spÃ©cifier un fichier !");
 	}
 }
 

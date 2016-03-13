@@ -23,7 +23,7 @@ function save(){
             array_push($tabDonnees,$code);
 
             Couleur::saisirDonneesCouleur($tabDonnees);
-            printf("<p>La nouvelle couleur a été enregistrée ! </p>");
+            printf("<p>La nouvelle couleur a Ã©tÃ© enregistrÃ©e ! </p>");
 	} else {
             IHM_Generale::erreur("Vous devez saisir des informations !");
 	}

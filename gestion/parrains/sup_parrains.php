@@ -7,15 +7,15 @@ include_once("../../classes/ihm/IHM_Generale.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Supprimer un ", "référent", "../../",$tabLiens);
+IHM_Generale::header("Supprimer un ", "rÃ©fÃ©rent", "../../",$tabLiens);
 
 function supprimer(){
 	if($_POST['parrain']!=-1){
 		$element=$_POST['parrain'];
 		Parrain::deleteParrain($element);
-		printf("<p>Le référent a été supprimé !</p>");
+		printf("<p>Le rÃ©fÃ©rent a Ã©tÃ© supprimÃ© !</p>");
 	}else {
-		IHM_Generale::erreur("Vous devez sélectionner un référent !");
+		IHM_Generale::erreur("Vous devez sÃ©lectionner un rÃ©fÃ©rent !");
 	}
 }
 

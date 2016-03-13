@@ -13,9 +13,9 @@ function supprimer(){
 	if($_POST['couleur']!=-1){
 		$element=$_POST['couleur'];
 		Couleur::deleteCouleur($element);
-		printf("<p>La couleur a été supprimée!</p>");
+		printf("<p>La couleur a Ã©tÃ© supprimÃ©e!</p>");
 	}else {
-		IHM_Generale::erreur("Vous devez sélectionner une couleur !");
+		IHM_Generale::erreur("Vous devez sÃ©lectionner une couleur !");
 	}
 }
 

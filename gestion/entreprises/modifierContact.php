@@ -17,13 +17,13 @@ IHM_Generale::header("Modifier un", "contact", "../../", $tabLiens);
 
 $contact = Contact::getContact($_GET['id']);
 
-// Si une edition a été effectué
+// Si une edition a Ã©tÃ© effectuÃ©
 if(isset($_POST['edit'])){
 	extract($_POST);
 		
 	if(($nom == "") || ($prenom == "") || ($tel == "")){
 		Contact_IHM::afficherFormulaireSaisie($contact);
-		IHM_Generale::erreur("Le nom, le prénom et le numéro de téléphone sont obligatoires !");
+		IHM_Generale::erreur("Le nom, le prÃ©nom et le numÃ©ro de tÃ©lÃ©phone sont obligatoires !");
 	}else{		
 		$contact->setNom($nom);
 		$contact->setPrenom($prenom);
@@ -36,7 +36,7 @@ if(isset($_POST['edit'])){
 		$contact = Contact::getContact($idCont);
 		$entreprise = $contact->getEntreprise();
 		
-		echo "Les informations sur le contact $nom $prenom (".$entreprise->getNom().") ont été mis à jours.";
+		echo "Les informations sur le contact $nom $prenom (".$entreprise->getNom().") ont Ã©tÃ© mis Ã  jours.";
 					
 		?>
 			<table>
@@ -48,7 +48,7 @@ if(isset($_POST['edit'])){
 							<input type="hidden" value="<?php echo $_GET['prenom']; ?>" name="prenom"/>
 							<input type="hidden" value="<?php echo $_GET['tel']; ?>" name="tel"/>
 							<input type="hidden" value="<?php echo $_GET['fax']; ?>" name="fax"/>
-							<input type="submit" value="Retourner à la liste"/>
+							<input type="submit" value="Retourner Ã  la liste"/>
 						</form>
 					</td>
 					<td width="50%" align="center">

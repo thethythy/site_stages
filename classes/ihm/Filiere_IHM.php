@@ -12,10 +12,10 @@ class Filiere_IHM {
 						<tr><td colspan=2>
 						<table id="presentation_modifierTemps">
 							<tr id="entete2">
-								<td colspan=2>Modifier/Supprimer une durée de soutenance</td>
+								<td colspan=2>Modifier/Supprimer une durÃ©e de soutenance</td>
 							</tr>
 							<tr>
-								<th width="220">Sélectionnez le diplôme : </th>
+								<th width="220">SÃ©lectionnez le diplÃ´me : </th>
 								<th>
 							<?php
 								$tabFiliere = Filiere::listerFilieres();
@@ -33,7 +33,7 @@ class Filiere_IHM {
 							</tr>
 							<tr>
 								<td colspan=2>
-									<input type=submit value="Modifier un dipôme" />
+									<input type=submit value="Modifier un dipÃ´me" />
 								</td>
 							</tr>
 						</table>

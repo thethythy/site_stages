@@ -27,7 +27,7 @@ if (isset($_POST['delpromo'])) {
 	// Suppression de la promotion
 	Promotion::supprimerPromotion($_POST['delpromo']);
 	?>
-		Promotion supprimée avec succès.
+		Promotion supprimÃ©e avec succÃ¨s.
 		<br/><br/>
 		<table align="center">
 			<tr>
@@ -55,7 +55,7 @@ if (isset($_POST['delpromo'])) {
 	}
 	
 	if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
-		// Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+		// NÃ©cÃ©ssaire pour que dans le formulaire de recherche, on resÃ©lectionne les valeurs prÃ©cÃ©dement sÃ©lectionnÃ©es
 		$promo = Promotion::getPromotion($_GET['promo']);
 		$filiere = $promo->getFiliere();
 		$parcours = $promo->getParcours();
@@ -63,14 +63,14 @@ if (isset($_POST['delpromo'])) {
 		$_POST['parcours'] = $parcours->getIdentifiantBDD();
 		$_POST['filiere'] = $filiere->getIdentifiantBDD();
 		
-		// Suppression de l'étudiant
+		// Suppression de l'Ã©tudiant
 		Etudiant::supprimerEtudiant($_GET['id'], $_GET['promo']);
 	}
 	
 	// Affichage du formulaire de recherche
 	Promotion_IHM::afficherFormulaireRecherche("modifierPromotionData.php", false);
 	
-	// Affichage des données
+	// Affichage des donnÃ©es
 	echo "<div id='data'>\n";
 	include_once("modifierPromotionData.php");
 	echo "\n</div>";

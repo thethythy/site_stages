@@ -2,14 +2,14 @@
 include_once("./classes/ihm/IHM_Generale.php");
 include_once("./classes/ihm/Menu.php");
 header ("Content-type:text/html; charset=utf-8");
-IHM_Generale::header("Les stages", "étudiants", "", array());
+IHM_Generale::header("Les stages", "Ã©tudiants", "", array());
 Menu::menuAccueil();
 ?>
 <br></br>
-<p>Ce site est dédié à la gestion et à l'accès aux informations concernant les stages des étudiants en informatique de la Faculté des Sciences et Techniques de l'Université du Maine. Il est l'outil principal de communication entre les différentes personnes concernées : les étudiants, l'équipe enseignante, les entreprises, et le responsable pédagogique des stages.</p>
-<p>Il permet aux étudiants de prendre connaissance d'un certain nombre d'offres de stages et de faire des demandes de validation de sujet de stage. Il liste également les entreprises ayant déjà accueillies des stagiaires. </p>
-<p>En ce qui concernent l'équipe enseignante, il permet d'accéder à la liste des enseignants-référents et à la liste des conventions pas section et par année. Les plannings des soutenances des différentes sections sont accessibles durant les périodes concernées.</p>
-<p>Ce site permet également aux entreprises de saisir directement des propositions de stages qui seront ensuite diffusées aux étudiants.</p>
+<p>Ce site est dÃ©diÃ© Ã  la gestion et Ã  l'accÃ¨s aux informations concernant les stages des Ã©tudiants en informatique de la FacultÃ© des Sciences et Techniques de l'UniversitÃ© du Maine. Il est l'outil principal de communication entre les diffÃ©rentes personnes concernÃ©es : les Ã©tudiants, l'Ã©quipe enseignante, les entreprises, et le responsable pÃ©dagogique des stages.</p>
+<p>Il permet aux Ã©tudiants de prendre connaissance d'un certain nombre d'offres de stages et de faire des demandes de validation de sujet de stage. Il liste Ã©galement les entreprises ayant dÃ©jÃ  accueillies des stagiaires. </p>
+<p>En ce qui concernent l'Ã©quipe enseignante, il permet d'accÃ©der Ã  la liste des enseignants-rÃ©fÃ©rents et Ã  la liste des conventions pas section et par annÃ©e. Les plannings des soutenances des diffÃ©rentes sections sont accessibles durant les pÃ©riodes concernÃ©es.</p>
+<p>Ce site permet Ã©galement aux entreprises de saisir directement des propositions de stages qui seront ensuite diffusÃ©es aux Ã©tudiants.</p>
 <br />
 <p align=right>Cordialement, le responsable des stages<br/>Thierry Lemeunier</p>
 <?php

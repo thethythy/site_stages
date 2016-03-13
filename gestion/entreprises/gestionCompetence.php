@@ -9,7 +9,7 @@ include_once("../../classes/moteur/Competence.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Gestion des", "compétences", "../../",$tabLiens );
+IHM_Generale::header("Gestion des", "compÃ©tences", "../../",$tabLiens );
 
 if (isset($_GET['id'])) {
 	Competence::deleteCompetence($_GET['id']);

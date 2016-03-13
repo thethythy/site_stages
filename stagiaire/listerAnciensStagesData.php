@@ -32,23 +32,23 @@ header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
+// Si pas d'annÃ©e sÃ©lectionnÃ©e
 if (!isset($_POST['annee'])) {
 	$annee = Promotion_BDD::getLastAnnee();
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
 }
 
-// Si une recherche sur l'année est demandée
+// Si une recherche sur l'annÃ©e est demandÃ©e
 if (isset($_POST['annee']) && $_POST['annee'] != "") {
 	$annee = $_POST['annee'];
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
 }
 
-// Si une recherche sur le parcours est demandé
+// Si une recherche sur le parcours est demandÃ©
 if ($_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
 	
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if ($_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
@@ -61,7 +61,7 @@ $tabEtudiants = Promotion::listerEtudiants($filtre);
 $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
-	// Récupération des étudiants ayant une convention
+	// RÃ©cupÃ©ration des Ã©tudiants ayant une convention
 	$tabEtuWithConv = array();
 	
 	for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
@@ -69,9 +69,9 @@ if (sizeof($tabPromos) > 0) {
 			array_push($tabEtuWithConv, $tabEtudiants[$i]);
 	}
 	
-	// Si il y a au moins un étudiant avec une convention
+	// Si il y a au moins un Ã©tudiant avec une convention
 	if (sizeof($tabEtuWithConv) > 0) {
-		// Affichage des stages des étudiants
+		// Affichage des stages des Ã©tudiants
 		
 		echo "<table>
 				<tr id='entete'>
@@ -125,7 +125,7 @@ if (sizeof($tabPromos) > 0) {
 							
 							<tr>
 								<td width="50%">
-									Résumé :
+									RÃ©sumÃ© :
 								</td>
 								<td width="50%">
 									<a href="./ficheDeStage.php?annee=<?php echo $annee; ?>&parcours=<?php echo $parcours; ?>&filiere=<?php echo $filiere; ?>&idEtu=<?php echo $tabEtuWithConv[$i]->getIdentifiantBDD(); ?>&idPromo=<?php echo $promotion->getIdentifiantBDD(); ?>" target="_blank">
@@ -140,10 +140,10 @@ if (sizeof($tabPromos) > 0) {
 		}
 		echo "</table>";
 	} else {
-		echo "Aucun stage n'a été trouvé.";
+		echo "Aucun stage n'a Ã©tÃ© trouvÃ©.";
 	}
 } else {
-	echo "Aucune promotion ne correspond à ces critères de recherche.";
+	echo "Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.";
 }
 
 ?>

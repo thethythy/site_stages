@@ -23,7 +23,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Planifier les ", "soutenances", "../../", $tabLiens, "planifieur");
 
-// Affichage du formulaire de sélection
+// Affichage du formulaire de sÃ©lection
 Promotion_IHM::afficherFormulaireSelectionAnnee(true);
 
 // Affichage de l'arborescence et du planning
@@ -44,21 +44,21 @@ echo "<div id='dhtmlxscheduler' class='dhx_cal_container'>\n
 	</div>\n";
 echo "<div id='logline'></div>\n";
 
-// Création de la liste des salles
+// CrÃ©ation de la liste des salles
 $salles = Salle::listerSalle();
 echo "<script type='text/javascript'>var salles=[";
 for ($i = 0; $i < sizeof($salles); $i++)
 	echo "{key:".$salles[$i]->getIdentifiantBDD().", label:'".$salles[$i]->getNom()."'},";
 echo "];</script>\n";
 
-// Création de la liste des temps de soutenances selon les filieres
+// CrÃ©ation de la liste des temps de soutenances selon les filieres
 $filieres = Filiere::listerFilieres();
 echo "<script type='text/javascript'>var temps_soutenances=[";
 for ($i = 0; $i < sizeof($filieres); $i++)
 	echo "{key:".$filieres[$i]->getIdentifiantBDD().", temps:'".$filieres[$i]->getTempsSoutenance()."'},";
 echo "];</script>\n";
 
-// Chargement des traitements (affichage et contrôle) liées à la planification
+// Chargement des traitements (affichage et contrÃ´le) liÃ©es Ã  la planification
 echo "<script type='text/javascript' src='planifier_compresse.js'></script>\n";
 
 deconnexion();

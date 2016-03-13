@@ -26,7 +26,7 @@ function modifier(){
 		printf("<td><input type=hidden name='id' size=100 value=%s></td>\n",$salle->getIdentifiantBDD());
 		printf("<table><center><tr><td>Nom : </td>\n");
 		printf("<td><input name='nom' size=100 value=%s></td>\n",$salle->getNom());
-		printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
+		printf("<table><tr><td><input type=submit value='Enregistrer les donnÃ©es'/></center></td></tr>");
 		printf("</table></form></center>");
 	}
 }

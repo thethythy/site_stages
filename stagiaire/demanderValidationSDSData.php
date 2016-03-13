@@ -23,19 +23,19 @@ header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
+// Si pas d'annÃ©e sÃ©lectionnÃ©e
 if (!isset($_POST['annee']))
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", Promotion_BDD::getLastAnnee()));
 
-// Si une recherche sur l'année est demandée
+// Si une recherche sur l'annÃ©e est demandÃ©e
 if (isset($_POST['annee']) && $_POST['annee'] != "")
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
 	
-// Si une recherche sur le parcours est demandé
+// Si une recherche sur le parcours est demandÃ©
 if ($_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
 
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if ($_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 	
@@ -51,7 +51,7 @@ if (sizeof($tabEtudiants) > 0)
 else {
 	?>
 		<br/>
-			<p>Aucun étudiant ne correspond aux critères de recherche.</p>
+			<p>Aucun Ã©tudiant ne correspond aux critÃ¨res de recherche.</p>
 		<br/>
 	<?php
 }
