@@ -2,6 +2,8 @@
 
 for ($i=0; $i<sizeof($tabAU); $i++) {
 
+	$taille = 192;
+
 	$conventionM1 = recupererDonneeM1($tabAU[$i]);
 	$conventionM2 = recupererDonneeM2($tabAU[$i]);
 	$convention = array_merge($conventionM1, $conventionM2);
@@ -30,9 +32,9 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 	getStatsPromo($tabAU[$i], "M2", $conventionM2, $tabTM2, $tabCptTypeEntreprise, $tabM2, $tabCptTheme, sizeof($conventionM2), $nbsoutenancesM2);
 	getStatsPromo($tabAU[$i], "Master", $convention, $tabTMaster, $tabCptTypeEntreprise, $tabMaster, $tabCptTheme, sizeof($convention), $nbsoutenancesMaster);
 
-	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i], 192);
-	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i], 192);
-	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i], 192);
+	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i], $taille);
+	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i], $taille);
+	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i], $taille);
 	echo "</div>";
 	$tabAU[$i]++;
 }
