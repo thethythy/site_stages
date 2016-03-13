@@ -4,8 +4,8 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 
 	$taille = 192;
 
-	$conventionM1 = recupererDonneeM1($tabAU[$i]);
-	$conventionM2 = recupererDonneeM2($tabAU[$i]);
+	$conventionM1 = recupererDonnee($tabAU[$i], $filiere, $promoM1);
+	$conventionM2 = recupererDonnee($tabAU[$i], $filiere, $promoM2);
 	$convention = array_merge($conventionM1, $conventionM2);
 
 	$tabEM1 = lieuDuStage($conventionM1);
@@ -28,13 +28,26 @@ for ($i=0; $i<sizeof($tabAU); $i++) {
 	$tabTMaster = array_merge($tabTM1, $tabTM2);
 
 	echo "<div id='page".$i."' class='content'>";	
-	getStatsPromo($tabAU[$i], "M1", $conventionM1, $tabTM1, $tabCptTypeEntreprise, $tabM1, $tabCptTheme, sizeof($conventionM1), $nbsoutenancesM1);
-	getStatsPromo($tabAU[$i], "M2", $conventionM2, $tabTM2, $tabCptTypeEntreprise, $tabM2, $tabCptTheme, sizeof($conventionM2), $nbsoutenancesM2);
-	getStatsPromo($tabAU[$i], "Master", $convention, $tabTMaster, $tabCptTypeEntreprise, $tabMaster, $tabCptTheme, sizeof($convention), $nbsoutenancesMaster);
+	echo "<p style='font-size: 24px;font-weight:bold;color:#910'>Ann&eacute;e ".$tabAU[$i]."</p>";
 
+	echo "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
+	//getStatsPromo($tabAU[$i], "M1", $conventionM1, $tabTM1, $tabCptTypeEntreprise, $tabM1, $tabCptTheme, sizeof($conventionM1), $nbsoutenancesM1);
+	//getStatsPromo($tabAU[$i], "M2", $conventionM2, $tabTM2, $tabCptTypeEntreprise, $tabM2, $tabCptTheme, sizeof($conventionM2), $nbsoutenancesM2);
+	//getStatsPromo($tabAU[$i], "Master", $convention, $tabTMaster, $tabCptTypeEntreprise, $tabMaster, $tabCptTheme, sizeof($convention), $nbsoutenancesMaster);
+	
+	
+	afficherTitre();
+	echo "</div>";
+	echo "<div style='border-bottom : 1px solid #555;padding-bottom:100px'>";
 	afficherEntreprise($tabEM1, $tabEM2, $tabAU[$i], $taille);
+	echo "</div>";
+	echo "<div style='border-bottom : 1px solid #555;padding-bottom:100px'>";
 	afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $tabAU[$i], $taille);
+	echo "</div>";
+	echo "<div style='border-bottom : 1px solid #555;padding-bottom:100px'>";
 	afficherType($tabTM1, $tabTM2, $tabTMaster, $tabCptTypeEntreprise, $tabAU[$i], $taille);
+	echo "</div>";
+	
 	echo "</div>";
 	$tabAU[$i]++;
 }
@@ -154,9 +167,11 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee,
 		}
 	}
 	?>
+	<p style="font-size:16px;font-weight: bold;color:grey">Type de stage</p>
 	<section id="section_gauche">
+		
 		<table>
-		<th colspan=3>Type de stage M1</th>
+		
 				<?php patternTableType($temp); ?>	
 		</table>
 
@@ -186,7 +201,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee,
 	?>
 	<section id="section_centre">
 		<table >
-		<th colspan=3>Type de stage M2</th>
+		
 				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
@@ -215,7 +230,7 @@ function afficherType($tabM1, $tabM2, $tabMaster, $tabCptTypeEntreprise, $annee,
 	?>
 	<section id="section_droite">
 		<table >
-		<th colspan=3>Type de stage Master</th>
+		
 				<?php patternTableType($temp); ?>
 		</table>
 		</br></br>
@@ -248,9 +263,9 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee, $taille
 	}
 	
 	?>
+	<p style="font-size:16px;font-weight: bold;color:grey">Theme de stage</p>
 	<section id="section_gauche">
 		<table >
-		<th colspan=3>Theme de stage M1</th>
 				<?php patternTableTheme($temp); ?>
 		</table>
 
@@ -280,7 +295,6 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee, $taille
 	?>
 	<section id="section_centre">
 		<table >
-		<th colspan=3>Theme de stage M2</th>
 				<?php patternTableTheme($temp); ?>
 		</table>
 		</br></br>
@@ -309,7 +323,6 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee, $taille
 	?>
 	<section id="section_droite">
 		<table >
-		<th colspan=3>Theme de stage Master</th>
 				<?php patternTableTheme($temp); ?>
 		</table>
 		</br></br>
@@ -335,13 +348,11 @@ function afficherTheme($tabM1, $tabM2, $tabMaster, $tabCptTheme, $annee, $taille
 function afficherEntreprise($tabEM1, $tabEM2, $annee, $taille) {
 	$tabCouleur = array("red","orange", "green", "blue", "darkviolet");
 	?>
-	<h1 >Ann&eacute;e <?php echo $annee;?></h1>
- 
+	
+ 	<p style="font-size:16px;font-weight: bold;color:grey">Lieu de stage</p>
 	<section id="section_gauche">
-		<h2 style="color:LightSkyBlue">Promotion M1</h2>
 		
 			<table  >
-				<th colspan=3>Lieu du stage</th>
 				<?php patternTableLieu($tabEM1, $tabCouleur); ?>
 			</table>
 
@@ -363,10 +374,8 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee, $taille) {
 		</section>
 
 	<section id="section_centre">
-		<h2 style="color:LightSkyBlue">Promotion M2</h2>
 		
 			<table  >
-				<th colspan=3>Lieu du stage</th>
 				<?php patternTableLieu($tabEM2, $tabCouleur); ?>
 			</table>
 
@@ -396,10 +405,8 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee, $taille) {
 
 		?>
 		<section id="section_droite">
-		<h2 style="color:LightSkyBlue">Promotion Master</h2>
 		
 			<table>
-				<th colspan=3>Lieu du stage</th>
 				<?php patternTableLieu($tabEMaster, $tabCouleur); ?>
 			</table>
 
@@ -420,4 +427,21 @@ function afficherEntreprise($tabEM1, $tabEM2, $annee, $taille) {
 		</section>
 			<?php
 }
+
+function afficherTitre() {
+?>
+<section id="section_gauche">
+		<h2 style="color:LightSkyBlue">Promotion M1</h2>
+</section>
+
+<section style="padding-left:7%" id="section_centre">
+		<h2 style="color:LightSkyBlue">Promotion M2</h2>
+</section>
+
+<section style="padding-left:7%" id="section_droite">
+		<h2 style="color:LightSkyBlue;">Promotion Master</h2>
+</section>
+<?php
+}
+
 ?>

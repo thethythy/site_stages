@@ -10,6 +10,18 @@ for ($i=0; $i<sizeof($tabListeType); $i++) {
 	$tabCptTypeEntreprise[$tabListeType[$i]->getIdentifiantBDD()] = 0;
 }
 
+for ($i=0; $i<sizeof($tabParcours); $i++) {
+	if ($tabParcours[$i]->getNom() == "ISI")
+		$filiere = $tabParcours[$i]->getIdentifiantBDD();
+}
+
+for ($i=0; $i<sizeof($tabFiliere); $i++) {
+	if ($tabFiliere[$i]->getNom() == "Master1")
+		$promoM1 = $tabFiliere[$i]->getIdentifiantBDD();
+	if ($tabFiliere[$i]->getNom() == "Master2")
+		$promoM2 = $tabFiliere[$i]->getIdentifiantBDD();
+}
+
 function themeDeStage($convention) {
 	$tabtheme = array();
 	if (sizeof($convention)>0) {
@@ -87,12 +99,10 @@ function lieuDuStage($convention) {
 //recuperer une année universitaire
 //construire un filtre selon la bonne année universitaire
 
-function recupererDonneeM1($annee) {
-	$parcoursISI = "9";
-	$filiereMaster1 = "4";
+function recupererDonnee($annee, $parcoursISI, $filiereMaster) {
 
 	$filtreAnnee = new FiltreString('anneeuniversitaire', $annee);
-	$filtreFiliere1 = new FiltreNumeric('idfiliere', $filiereMaster1);
+	$filtreFiliere1 = new FiltreNumeric('idfiliere', $filiereMaster);
 
 	$filtreM1 = new Filtre($filtreAnnee, $filtreFiliere1, "AND");
 
@@ -108,25 +118,4 @@ function recupererDonneeM1($annee) {
 
 	return $conventionM1;
 
-}
-
-function recupererDonneeM2($annee) {
-	$parcoursISI = "9";
-	$filiereMaster2 = "1";
-
-	$filtreAnnee = new FiltreString('anneeuniversitaire', $annee);
-	$filtreFiliere2 = new FiltreNumeric('idfiliere', $filiereMaster2);
-
-	$filtreM2 = new Filtre($filtreAnnee, $filtreFiliere2, "AND");
-
-
-	$filtreConventionM2 = new Filtre($filtreAnnee, $filtreFiliere2, "AND");
-	$conventionM2 = Convention::getListeConvention($filtreConventionM2);
-
-	// get type possible
-	$tabtype = TypeEntreprise::getListeTypeEntreprise("");
-	if( ($taille=sizeof($tabtype))>0) {
-
-	}
-	return $conventionM2;
 }

@@ -536,6 +536,8 @@ textarea {
     text-align: center;
 }
 
+
+
 section {
     padding : 0;
     margin : auto;
@@ -544,11 +546,14 @@ section {
 }
 
 #section_gauche {
-    margin-right: 9.5%;
+    margin-left: 19.5%;
 }
 
 #section_centre {
-    margin-right: 9.5%;
+    margin-left: 9.5%;
+}
+#section_droite {
+    margin-left: 9.5%;
 }
 
 section table td {
