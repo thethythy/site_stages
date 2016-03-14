@@ -23,7 +23,7 @@ class Couleur_IHM {
                                     <td><input id="colorPicker" type="color" name="codeHexa" value="#FFFFFF"/></td>
 				</tr>
                                 <tr>
-                                    <td colspan=2><input type=submit value="Enregistrer les données"/><input type=reset value="Effacer" onclick="effacerCouleur()"/></td>
+                                    <td colspan=2><input type=submit value="Enregistrer les donnÃ©es"/><input type=reset value="Effacer" onclick="effacerCouleur()"/></td>
 				</tr>
                             </table>
                        </td></tr> 
@@ -45,7 +45,7 @@ class Couleur_IHM {
                                     <td colspan=2>Modifier/Supprimer une couleur</td>
 				</tr>
 				<tr>
-                                    <th width="220">Sélectionner la couleur : </th>
+                                    <th width="220">SÃ©lectionner la couleur : </th>
                                     <th>
                                         <?php
                                             $tabCouleur = Couleur::listerCouleur();

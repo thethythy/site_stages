@@ -25,27 +25,27 @@ include_once($chemin."ihm/Promotion_IHM.php");
 
 header ("Content-type:text/html; charset=utf-8");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Création du filtre de recherche
+// CrÃ©ation du filtre de recherche
 
 $filtres = array();
 
-// Sélection d'une année
+// SÃ©lection d'une annÃ©e
 if (!isset($_POST['annee'])) 
-	// Si pas d'année sélectionnée
+	// Si pas d'annÃ©e sÃ©lectionnÃ©e
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", Promotion_BDD::getLastAnnee()));
 else
-	// Si une recherche sur l'année est demandée
+	// Si une recherche sur l'annÃ©e est demandÃ©e
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
 
-// Sélection d'un parcours 
+// SÃ©lection d'un parcours 
 if($_POST['parcours'] != '*')
 	array_push($filtres, new FiltreString("idparcours", $_POST['parcours']));
 	
-// Sélection d'une filière
+// SÃ©lection d'une filiÃ¨re
 if($_POST['filiere'] != '*')
 	array_push($filtres, new FiltreString("idfiliere", $_POST['filiere']));
 
@@ -54,18 +54,18 @@ $filtre = $filtres[0];
 for ( $i = 1; $i < sizeof($filtres); $i++)
 	$filtre = new Filtre($filtre, $filtres[$i], "AND");
 
-// Recherche des promotions correspondant aux critères
+// Recherche des promotions correspondant aux critÃ¨res
 $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
-// Est-ce qu'il y a des promotions qui suit les critères ?
+// Est-ce qu'il y a des promotions qui suit les critÃ¨res ?
 if (sizeof($tabPromos) > 0) {
 	
-	// Récupération des entreprises
+	// RÃ©cupÃ©ration des entreprises
 	$tabEntreprises = Entreprise::getListeEntreprises("");
 	
 	// Est-ce qu'il y a des entreprises ?
 	if (sizeof($tabEntreprises) > 0) {
-		// En-tête du tableau
+		// En-tÃªte du tableau
 		echo "<table>
 					<tr id='entete'>
 						<td width='100%'>Etiquette entreprise</td>
@@ -74,22 +74,22 @@ if (sizeof($tabPromos) > 0) {
 		
 		for ($k=0; $k < sizeof($tabEntreprises); $k++) {
 			
-			// Récupération des contacts
+			// RÃ©cupÃ©ration des contacts
 			$tabContacts = $tabEntreprises[$k]->listeDeContacts();
 			
-			// Pour tous les contacts classés par ordre alphabétique
+			// Pour tous les contacts classÃ©s par ordre alphabÃ©tique
 			for ($i=0; $i < sizeof($tabContacts); $i++) {
 		
 				// Le contact courant
 				$contact = $tabContacts[$i];
 		
-				// Est-ce que le contact est liée à une convention qui suit les critères ?
+				// Est-ce que le contact est liÃ©e Ã  une convention qui suit les critÃ¨res ?
 				if (Convention_BDD::existe2($contact->getIdentifiantBDD(), $filtre)) {
 			
-					// L'entreprise qui correspond au contact qui suit les critères de recherche
+					// L'entreprise qui correspond au contact qui suit les critÃ¨res de recherche
 					$entreprise = $tabEntreprises[$k];
 		
-					// Affichage de l'étiquette
+					// Affichage de l'Ã©tiquette
 					?>
 					<tr id="ligne<?php echo $j%2; ?>">
 						<td>
@@ -110,10 +110,10 @@ if (sizeof($tabPromos) > 0) {
 		echo "</table>";
 		
 	} else {
-		echo "<br/><p>Aucune entreprise n'a été trouvée</p><br/>";
+		echo "<br/><p>Aucune entreprise n'a Ã©tÃ© trouvÃ©e</p><br/>";
 	}
 } else {
-	echo "<br/><p>Aucune promotion ne correspond à ces critères de recherche.</p><br/>";
+	echo "<br/><p>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.</p><br/>";
 }
 
 ?>

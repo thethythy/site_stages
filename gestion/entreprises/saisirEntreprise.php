@@ -17,7 +17,7 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Saisir une", "entreprise", "../../", $tabLiens);
 
-// Si un ajout a été effectué
+// Si un ajout a Ã©tÃ© effectuÃ©
 if(isset($_POST['add'])){
 	extract($_POST);
 		
@@ -30,7 +30,7 @@ if(isset($_POST['add'])){
 
 		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
 		
-		// Si l'entreprise que l'on veut créer n'existe pas déjà
+		// Si l'entreprise que l'on veut crÃ©er n'existe pas dÃ©jÃ 
 		if(Entreprise_BDD::existe($newEntreprise) == false){
 			
 			$ent = Entreprise_BDD::sauvegarder($newEntreprise);
@@ -39,7 +39,7 @@ if(isset($_POST['add'])){
 				<table align="center">
 					<tr>
 						<td colspan="2" align="center">
-							Création de l'entreprise réalisée avec succès.
+							CrÃ©ation de l'entreprise rÃ©alisÃ©e avec succÃ¨s.
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +59,7 @@ if(isset($_POST['add'])){
 			<?php 
 		}else{
 			Entreprise_IHM::afficherFormulaireSaisie("");
-			IHM_Generale::erreur("Une entreprise du même nom et se trouvant dans la même ville et le même pays existe déjà !");
+			IHM_Generale::erreur("Une entreprise du mÃªme nom et se trouvant dans la mÃªme ville et le mÃªme pays existe dÃ©jÃ  !");
 		}
 	}
 }else{

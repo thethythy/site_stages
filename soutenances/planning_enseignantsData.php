@@ -34,7 +34,7 @@ header ("Content-type:text/html; charset=utf-8");
 if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['enseignant'] != -1) {
 	$parrain = Parrain::getParrain($_POST['enseignant']);
 	
-	// Recuperation de l'annee promotion (la rentrée)
+	// Recuperation de l'annee promotion (la rentrÃ©e)
 	if (date('n') >= 10) $annee = date('Y');
 	else $annee = date('Y') - 1;
 	//$annee = 2011; // Pour tester
@@ -61,15 +61,15 @@ if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['ensei
 		<table>
 		<tr id='entete'>
 			<td rowspan='2' style='width: 85px;'>Horaires</td>
-			<td colspan='2'>Étudiant</td>
+			<td colspan='2'>Ã‰tudiant</td>
 			<td rowspan='2' style='width: 50px;'>Fiche de stage</td>
 			<td colspan='2'>Jury</td>
 			<td rowspan='2' style='width: 75px;'>Salle</td>
 		</tr>
 		<tr id='entete'>
-			<td style='width: 100px;'>Nom prénom</td>
+			<td style='width: 100px;'>Nom prÃ©nom</td>
 			<td style='width: 60px;'>Cycle</td>
-			<td style='width: 110px;'>Référent</td>
+			<td style='width: 110px;'>RÃ©fÃ©rent</td>
 			<td style='width: 110px;'>Examinateur</td>
 		</tr>
 	";
@@ -92,7 +92,7 @@ if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['ensei
 						echo $enteteTableau;
 					}
 					$j++; $k++;
-					$nomSalle = ($soutenance->getSalle()->getIdentifiantBDD()!=0) ? $soutenance->getSalle()->getNom() : "Non attribuée";
+					$nomSalle = ($soutenance->getSalle()->getIdentifiantBDD()!=0) ? $soutenance->getSalle()->getNom() : "Non attribuÃ©e";
 					$etudiant = $convention->getEtudiant();
 					$promotion = $etudiant->getPromotion($annee);
 					$parcours = $promotion->getParcours();
@@ -136,9 +136,9 @@ if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['ensei
 	
 	// S'il n'y a pas de conventions
 	if ($k == 0)
-		echo "<br/><center>Il n'y a pas de soutenance associée à cet enseignant.</center>";
+		echo "<br/><center>Il n'y a pas de soutenance associÃ©e Ã  cet enseignant.</center>";
 
 } else
-	echo "<br/><center>Veuillez sélectionner un enseignant</center>";
+	echo "<br/><center>Veuillez sÃ©lectionner un enseignant</center>";
 
 ?>

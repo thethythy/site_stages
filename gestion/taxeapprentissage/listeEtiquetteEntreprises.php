@@ -34,7 +34,7 @@ IHM_Generale::header("Taxe", "d'apprentissage", "../../", $tabLiens);
 // Affichage du formulaire de recherche
 Promotion_IHM::afficherFormulaireRecherche("listeEtiquetteEntreprisesData.php", true);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<br/>";
 echo "<div id='data'>\n";

@@ -18,7 +18,7 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Ajouter une", "promotion", "../../", $tabLiens);
 
-// Si un ajout a ÈtÈ effectuÈ
+// Si un ajout a √©t√© effectu√©
 if(isset($_POST['add'])){
 	extract($_POST);
 	
@@ -42,7 +42,7 @@ if(isset($_POST['add'])){
 				
 			$newPromotion = new Promotion("", $annee, $parcours, $filiere, $email);
 		
-			// Si la promotion que l'on veut crÈer n'Èxiste pas dÈj‡
+			// Si la promotion que l'on veut cr√©er n'√©xiste pas d√©j√†
 			if(Promotion_BDD::existe($newPromotion) == false){
 			
 				$promo = Promotion_BDD::sauvegarder($newPromotion);
@@ -51,7 +51,7 @@ if(isset($_POST['add'])){
 				<table align="center">
 					<tr>
 						<td colspan="2" align="center">
-							CrÈation de la promotion rÈalisÈe avec succËs.
+							Cr√©ation de la promotion r√©alis√©e avec succ√®s.
 						</td>
 					</tr>
 					<tr>
@@ -63,7 +63,7 @@ if(isset($_POST['add'])){
 						<td width="20%" align="center">
 							<form method=post action="./importationEtudiants.php">
 								<input type="hidden" value="<?php echo $promo; ?>" name="promo"/>
-								<input type="submit" value="Importer des Ètudiants"/>
+								<input type="submit" value="Importer des √©tudiants"/>
 							</form>
 						</td>
 					</tr>
@@ -71,7 +71,7 @@ if(isset($_POST['add'])){
 				<?php 
 			}else{
 				Promotion_IHM::afficherFormulaireAjout();
-				IHM_Generale::erreur("Cette promotion existe dÈj‡ !");
+				IHM_Generale::erreur("Cette promotion existe d√©j√† !");
 			}		
 		}else{
 			Promotion_IHM::afficherFormulaireAjout();
@@ -79,7 +79,7 @@ if(isset($_POST['add'])){
 		}
 	}else{
 		Promotion_IHM::afficherFormulaireAjout();		
-		IHM_Generale::erreur("L'annÈe n'est pas valide ! (Exemple : ".date("Y").")");
+		IHM_Generale::erreur("L'ann√©e n'est pas valide ! (Exemple : ".date("Y").")");
 	}
 }else{
 	Promotion_IHM::afficherFormulaireAjout();

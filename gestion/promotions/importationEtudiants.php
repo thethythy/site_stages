@@ -1,6 +1,6 @@
 <?php
 
-// Début de session
+// DÃ©but de session
 session_start();
 
 $chemin = "../../classes/";
@@ -24,7 +24,7 @@ include_once($chemin."moteur/Utils.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Importer des", "étudiants", "../../", $tabLiens);
+IHM_Generale::header("Importer des", "Ã©tudiants", "../../", $tabLiens);
 
 // Info venant de la page modifierPromotion
 if (isset($_POST['promo'])) {
@@ -41,10 +41,10 @@ if (isset($_SESSION['promo'])) {
 	$parcours_modifie = $promo_modifiee->getParcours();
 }
 
-// Si un import a été effectué
+// Si un import a Ã©tÃ© effectuÃ©
 if (isset($_POST['import'])) {
 	
-	// Création du filtre de recherche
+	// CrÃ©ation du filtre de recherche
 	$filtres = array();
 	
 	array_push($filtres, new FiltreString("anneeuniversitaire", $_POST['annee']));
@@ -56,16 +56,16 @@ if (isset($_POST['import'])) {
 	
 	for ($i = 1; $i < sizeof($filtres); $i++) $filtre = new Filtre($filtre, $filtres[$i], "AND");
 	
-	// Récupérer les étudiants de la promotion sélectionnée
+	// RÃ©cupÃ©rer les Ã©tudiants de la promotion sÃ©lectionnÃ©e
 	$tabEtudiants = Promotion::listerEtudiants($filtre);
 	
-	// Récupérer la promo, la filiere et le parcours
+	// RÃ©cupÃ©rer la promo, la filiere et le parcours
 	$tabPromos = Promotion_BDD::getListePromotions($filtre);
 	$promo = Promotion::getPromotion($tabPromos[0][0]);
 	$filiere = $promo->getFiliere();
 	$parcours = $promo->getParcours();
 	
-	echo "Les étudiants ci-dessous ont été ajoutés à la promotion : ";
+	echo "Les Ã©tudiants ci-dessous ont Ã©tÃ© ajoutÃ©s Ã  la promotion : ";
 	echo $filiere_modifiee->getNom()." ".$parcours_modifie->getNom()." - ".$promo_modifiee->getAnneeUniversitaire()."<br/>";
 	
 	?>
@@ -76,9 +76,9 @@ if (isset($_POST['import'])) {
 		
 			for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 				if (isset($_POST['etu'.$tabEtudiants[$i]->getIdentifiantBDD()])) {
-					// Mise à jour de l'étudiant
+					// Mise Ã  jour de l'Ã©tudiant
 					Etudiant_BDD::sauvegarder($tabEtudiants[$i], false);
-					// Insertion de l'étudiant dans la promotion
+					// Insertion de l'Ã©tudiant dans la promotion
 					Etudiant_BDD::ajouterPromotion($tabEtudiants[$i]->getIdentifiantBDD(), $promo_modifiee->getIdentifiantBDD());
 					?>
 					<tr id="ligne<?php echo $i%2; ?>">
@@ -124,12 +124,12 @@ if (isset($_POST['import'])) {
 	
 } else {
 	
-	echo "Veuillez sélectionner la promotion des étudiants à importer dans la nouvelle promotion : ";
+	echo "Veuillez sÃ©lectionner la promotion des Ã©tudiants Ã  importer dans la nouvelle promotion : ";
 	echo $filiere_modifiee->getNom()." ".$parcours_modifie->getNom()." - ".$promo_modifiee->getAnneeUniversitaire()."<br/>";
 	
 	Promotion_IHM::afficherFormulaireRecherche("importationEtudiantsData.php", false);
 	
-	// Affichage des données
+	// Affichage des donnÃ©es
 	echo "<div id='data'>\n";
 	include_once("importationEtudiantsData.php");
 	echo "\n</div>";

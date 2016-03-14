@@ -4,16 +4,16 @@ header ('Content-type:text/html; charset=utf-8');
 
 class Promotion_IHM {
 
-    // Méthodes statiques
+    // MÃ©thodes statiques
 
-    // $vide = permet de savoir si on affiche ou pas une année vide
+    // $vide = permet de savoir si on affiche ou pas une annÃ©e vide
     public static function afficherFormulaireSelectionAnnee($vide) {
 	?>
 	    <form method=post action="javascript:">
 		<table width="100%">
 		    <tr>
 			<td align="center" >
-			    Sélectionnez l'année :
+			    SÃ©lectionnez l'annÃ©e :
 			    <select id="annee" name="annee">
 				<?php
 				    if ($vide) echo "<option value=''></option>";
@@ -39,7 +39,7 @@ class Promotion_IHM {
 	<?php
     }
 
-    // $page = nom de la page sur laquelle sera renvoyée le résultat du formulaire
+    // $page = nom de la page sur laquelle sera renvoyÃ©e le rÃ©sultat du formulaire
     // $tous = permet de savoir si on affiche ou pas la proposition "Tous" dans les combobox
     public static function afficherFormulaireRecherche($page, $tous, $vide=FALSE) {
 	?>
@@ -47,7 +47,7 @@ class Promotion_IHM {
 		<table width="100%">
 		    <tr>
 			<td align="center" >
-			    Sélectionnez l'année :
+			    SÃ©lectionnez l'annÃ©e :
 			    <select id="annee" name="annee">
 				<?php
 				    if ($vide) echo "<option value=''>----------</option>";
@@ -66,7 +66,7 @@ class Promotion_IHM {
 			    <table width="100%">
 				<tr>
 				    <td align="center">
-					Sélectionnez le diplôme :
+					SÃ©lectionnez le diplÃ´me :
 					<select id="filiere" name="filiere">
 					    <?php
 						if ($tous) echo "<option value='*'>Tous</option>";
@@ -83,7 +83,7 @@ class Promotion_IHM {
 				</tr>
 				<tr>
 				    <td align="center">
-					Sélectionnez la spécialité :
+					SÃ©lectionnez la spÃ©cialitÃ© :
 					<select id="parcours" name="parcours">
 					    <?php
 						if ($tous) echo "<option value='*'>Tous</option>";
@@ -117,7 +117,7 @@ class Promotion_IHM {
 		<table width="100%">
 		    <tr>
 			<td colspan="3" align="center">
-			    Année :&nbsp;
+			    AnnÃ©e :&nbsp;
 			    <?php
 				if((isset($_POST['annee'])) && ($_POST['annee'] != ""))
 				    echo "<input type='text' value='".$_POST['annee']."' name='annee'>";
@@ -129,7 +129,7 @@ class Promotion_IHM {
 		    <tr>
 			<td width="45%" align="center">
 			    <br/>
-			    Sélectionnez le diplôme :&nbsp;
+			    SÃ©lectionnez le diplÃ´me :&nbsp;
 			    <select name="filiere1">
 				<?php
 				    $tabF = Filiere::listerFilieres();
@@ -143,12 +143,12 @@ class Promotion_IHM {
 			    </select>
 			</td>
 			<td width="10%" align="center">OU</td>
-			<td width="45%" align="center">Créez un nouveau diplôme :&nbsp;<input type="text" value="<?php if(isset($_POST['filiere2'])) $_POST['filiere2'] ?>" name="filiere2"></td>
+			<td width="45%" align="center">CrÃ©ez un nouveau diplÃ´me :&nbsp;<input type="text" value="<?php if(isset($_POST['filiere2'])) $_POST['filiere2'] ?>" name="filiere2"></td>
 		    </tr>
 		    <tr>
 			<td width="45%" align="center">
 			    <br/>
-			    Sélectionnez la spécialité :&nbsp;
+			    SÃ©lectionnez la spÃ©cialitÃ© :&nbsp;
 			    <select name="parcours1">
 				<?php
 				    $tabP = Parcours::listerParcours();
@@ -162,7 +162,7 @@ class Promotion_IHM {
 			    </select>
 			</td>
 			<td width="10%" align="center">OU</td>
-			<td width="45%" align="center">Crééz une nouveau parcours :&nbsp;<input type="text" value="<?php if(isset($_POST['parcours2'])) $_POST['parcours2'] ?>" name="parcours2"></td>
+			<td width="45%" align="center">CrÃ©Ã©z une nouveau parcours :&nbsp;<input type="text" value="<?php if(isset($_POST['parcours2'])) $_POST['parcours2'] ?>" name="parcours2"></td>
 		    </tr>
 		    <tr>
 			<td colspan="3" align="center">

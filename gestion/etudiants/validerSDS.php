@@ -28,7 +28,7 @@ $tabSDS=SujetDeStage::getSujetDeStageAValider();
 if (sizeof($tabSDS) > 0)
 	SujetDeStage_IHM::afficherTableauSDSAValider($tabSDS);
 else
-	echo "Il n'y a aucun sujet à valider en attente.<br/>";
+	echo "Il n'y a aucun sujet Ã  valider en attente.<br/>";
 
 deconnexion();
 IHM_Generale::endHeader(false);

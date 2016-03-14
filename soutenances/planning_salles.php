@@ -39,7 +39,7 @@ IHM_Generale::header("Planning soutenance ", "par salles", "../",$tabLiens);
 
 Menu::menuSoutenance();
 
-// Recuperation de l'annee promotion (la rentrée)
+// Recuperation de l'annee promotion (la rentrÃ©e)
 if (date('n')>=10) $annee = date('Y');
 else $annee = date('Y')-1;
 //$annee = 2011; // Pour tester
@@ -55,7 +55,7 @@ else $annee = date('Y')-1;
 						<td colspan=2>Affichage du planning des soutenances par salle</td>
 					</tr>
 					<tr>
-						<th width="220">Sélectionnez la salle : </th>
+						<th width="220">SÃ©lectionnez la salle : </th>
 						<th>
 							<?php
 								// Recuperation de la liste des salles
@@ -75,7 +75,7 @@ else $annee = date('Y')-1;
 						</th>
 					</tr>
 					<tr>
-						<th width="220">Sélectionnez la date : </th>
+						<th width="220">SÃ©lectionnez la date : </th>
 						<th>
 							<?php
 								// Recuperation de la liste des dates
@@ -108,7 +108,7 @@ else $annee = date('Y')-1;
 
 <?php
 	
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<div id='data'>\n";
 include_once("planning_sallesData.php");

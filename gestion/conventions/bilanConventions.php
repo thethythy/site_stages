@@ -36,7 +36,7 @@ IHM_Generale::header("Bilan des", "conventions", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("bilanConventionsData.php", false);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("bilanConventionsData.php");
 echo "\n</div>";

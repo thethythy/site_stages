@@ -25,7 +25,7 @@ $tabLiens[1] = array('../', 'Gestion');
 IHM_Generale::header("Traiter", "un sujet de stage", "../../", $tabLiens);
 
 function envoyerNotification($message, $sds){
-	//Envoie d'un mail de validation ou invalidation à l'étudiant
+	//Envoie d'un mail de validation ou invalidation Ã  l'Ã©tudiant
 	global $emailResponsable;
 	
 	$destinataire = $sds->getEtudiant()->getEmailInstitutionel();
@@ -54,17 +54,17 @@ if(isset($_POST['accept'])){
 	global $baseSite;
 	$message = "Bonjour,<br><br>
 
-				Votre demande de validation d'un sujet de stage a été traitée et le sujet acceptée.<br>
-				Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='".$baseSite."presentation/index.php'>ici</a>.<br>
+				Votre demande de validation d'un sujet de stage a Ã©tÃ© traitÃ©e et le sujet acceptÃ©e.<br>
+				Veuillez poursuivre la procÃ©dure spÃ©cifique comme elle est indiquÃ©e <a href='".$baseSite."presentation/index.php'>ici</a>.<br>
 
 				Bon courage<br><br>
 
 				Thierry Lemeunier<br>
-				Responsable pédagogique des stages";
+				Responsable pÃ©dagogique des stages";
 		
 	envoyerNotification($message, $sds);
 	
-	echo "<p>Le sujet de stage a été validé.</p>";
+	echo "<p>Le sujet de stage a Ã©tÃ© validÃ©.</p>";
 	echo "<p><a href='./validerSDS.php'>Retour</a></p>";
 }
 
@@ -76,23 +76,23 @@ if(isset($_POST['refus'])){
 	
 	$message = "Bonjour,<br><br>
 
-				Votre demande de validation d'un sujet de stage a été traitée mais le sujet proposé<br>
-				ne peut être accepté tel que vous le présentez actuellement car il ne correspond<br>
-				pas à votre formation.<br><br>
+				Votre demande de validation d'un sujet de stage a Ã©tÃ© traitÃ©e mais le sujet proposÃ©<br>
+				ne peut Ãªtre acceptÃ© tel que vous le prÃ©sentez actuellement car il ne correspond<br>
+				pas Ã  votre formation.<br><br>
 
-				Vous avez plusieurs possibilités :<br>
-				- refaire une demande de validation avec un sujet modifié ;<br>
+				Vous avez plusieurs possibilitÃ©s :<br>
+				- refaire une demande de validation avec un sujet modifiÃ© ;<br>
 				- trouver un autre sujet et faire une demande de validation de ce sujet ;<br>
-				- demander plus d'explications en venant voir le responsable pédagogique.<br><br>
+				- demander plus d'explications en venant voir le responsable pÃ©dagogique.<br><br>
 
 				Bon courage <br>
 
 				Thierry Lemeunier<br>
-				Responsable pédagogique des stages";
+				Responsable pÃ©dagogique des stages";
 	
 	envoyerNotification($message, $sds);
 	
-	echo "<p>Le sujet de stage a été refusé.</p>";
+	echo "<p>Le sujet de stage a Ã©tÃ© refusÃ©.</p>";
 	echo "<p><a href='./validerSDS.php'>Retour</a></p>";
 }
 

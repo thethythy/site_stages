@@ -1,11 +1,11 @@
 <?php
 
 class Convention_BDD {
-    /** Méthodes statiques * */
+    /** MÃ©thodes statiques * */
 
     /**
      * Sauvegarde un objet Convention
-     * @param $convention la convention à sauvegarder
+     * @param $convention la convention Ã  sauvegarder
      */
     public static function sauvegarder($convention) {
 	global $tab4;
@@ -16,16 +16,16 @@ class Convention_BDD {
 	$etudiant = $convention->getEtudiant();
 	$contact = $convention->getContact();
 
-	// Test si la chaîne contenant le sujet n'est pas déjà échappé
+	// Test si la chaÃ®ne contenant le sujet n'est pas dÃ©jÃ  Ã©chappÃ©
 	if (strpos($convention->getSujetDeStage(), '\\') === false) {
 		/* Pas sur de la conversion mysql vers mysqli */
 		//$convention->setSujetDeStage(mysql_real_escape_string($convention->getSujetDeStage()));
 	    $convention->setSujetDeStage(mysqli_real_escape_string($db, $convention->getSujetDeStage()));
 	}
 
-	// Permet de vérifier si la Convention existe déjà dans la BDD
+	// Permet de vÃ©rifier si la Convention existe dÃ©jÃ  dans la BDD
 	if ($convention->getIdentifiantBDD() == "") {
-	    // Création de la Convention
+	    // CrÃ©ation de la Convention
 	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note, idTheme)
 						VALUES ('" . $parrain->getIdentifiantBDD() . "',
 							'" . $examinateur->getIdentifiantBDD() . "',
@@ -44,7 +44,7 @@ class Convention_BDD {
 		$result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    // Mise à jour de la Convention
+	    // Mise Ã  jour de la Convention
 
 	    $requete = "UPDATE $tab4 SET idparrain = '" . $parrain->getIdentifiantBDD() . "',
 					 idexaminateur = '" . $examinateur->getIdentifiantBDD() . "',
@@ -65,7 +65,7 @@ class Convention_BDD {
 	}
     }
 
-    // $id : Un int, représentant un identifiant dans la BDD
+    // $id : Un int, reprÃ©sentant un identifiant dans la BDD
     public static function getConvention($id) {
 	global $tab4;
 	global $db;
@@ -292,7 +292,7 @@ class Convention_BDD {
 	    // echo  $ville." : ".$infos[$ville]."<br/>";
 	}
 
-	// Construire la réponse
+	// Construire la rÃ©ponse
 	$tabVilles = array();
 	foreach ($infos as $ville => $compteur) {
 	    $laville = array();
@@ -327,7 +327,7 @@ class Convention_BDD {
 	    // echo  strtoupper($data['pays'])." : ".$infos[strtoupper($data['pays'])]."<br/>";
 	}
 
-	// Construire la réponse
+	// Construire la rÃ©ponse
 	$tabPays = array();
 	foreach ($infos as $ville => $compteur) {
 	    $pays = array();

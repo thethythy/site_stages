@@ -15,9 +15,9 @@ if($_POST['id']!=-1){
 	$couleur->setNom($_POST['nomCouleur']);
 	$couleur->setCode(ltrim($_POST['codeHexa'], "#"));
 	Couleur_BDD::sauvegarder($couleur);
-	printf("La couleur a été modifiée ! ");
+	printf("La couleur a Ã©tÃ© modifiÃ©e ! ");
 }else {
-	IHM_Generale::erreur("Vous devez sélectionner une couleur !");
+	IHM_Generale::erreur("Vous devez sÃ©lectionner une couleur !");
 }
 }
 modifier();

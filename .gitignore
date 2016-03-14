@@ -4,4 +4,5 @@ nbproject
 *.db
 .DS_Store
 gestion/gestion/demonTache.php
-documents/statistiques
+documents/statistiques/*
+documents/exportations/*

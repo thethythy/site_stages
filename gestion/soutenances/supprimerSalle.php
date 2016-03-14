@@ -15,9 +15,9 @@ function supprimer(){
 if($_POST['salle']!=-1){
 	$element=$_POST['salle'];
 	Salle::deleteSalle($element);
-	printf("<p>La salle a été supprimée!</p>");
+	printf("<p>La salle a Ã©tÃ© supprimÃ©e!</p>");
 }else {
-	IHM_Generale::erreur("Vous devez sélectionner une salle !");
+	IHM_Generale::erreur("Vous devez sÃ©lectionner une salle !");
 }
 }
 

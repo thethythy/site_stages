@@ -16,13 +16,13 @@ include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Promotion.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
+// Si pas d'annÃ©e sÃ©lectionnÃ©e
 if (!isset($_POST['annee'])) {
 	$annee = Promotion_BDD::getLastAnnee();
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
@@ -46,18 +46,18 @@ $tabEtudiants = Promotion::listerEtudiants($filtre);
 $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
-	// Si il y a au moins un étudiant
+	// Si il y a au moins un Ã©tudiant
 	if (sizeof($tabEtudiants) > 0) {
-		// Affichage des étudiants correspondants aux critères de recherches
+		// Affichage des Ã©tudiants correspondants aux critÃ¨res de recherches
 
-		echo "Nombre d'étudiants sélectionnés : ".sizeof($tabEtudiants)."<p/>";
+		echo "Nombre d'Ã©tudiants sÃ©lectionnÃ©s : ".sizeof($tabEtudiants)."<p/>";
 
 		echo "<table>
 				<tr id='entete'>
-						<td width='40%'>Nom et Prénom</td>
+						<td width='40%'>Nom et PrÃ©nom</td>
 						<td width='40%'>Mail institutionnel</td>
-						<td width='10%'>Diplôme</td>
-						<td width='10%'>Spécialité</td>
+						<td width='10%'>DiplÃ´me</td>
+						<td width='10%'>SpÃ©cialitÃ©</td>
 					</tr>";
 		for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 			?>
@@ -86,10 +86,10 @@ if (sizeof($tabPromos) > 0) {
 		}
 		echo "</table>";
 	} else {
-		echo "<br/><center>Aucun étudiant n'a été trouvé.</center><br/>";
+		echo "<br/><center>Aucun Ã©tudiant n'a Ã©tÃ© trouvÃ©.</center><br/>";
 	}
 } else {
-	echo "<br/><center>Aucune promotion ne correspond aux critères de recherche.</center><br/>";
+	echo "<br/><center>Aucune promotion ne correspond aux critÃ¨res de recherche.</center><br/>";
 }
 
 ?>

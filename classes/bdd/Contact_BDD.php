@@ -1,8 +1,8 @@
-<?php
+ï»¿<?php
 
 class Contact_BDD {
 
-    // Méthodes statiques
+    // MÃ©thodes statiques
 
     public static function sauvegarder($contact) {
 		global $tab3;
@@ -40,8 +40,8 @@ class Contact_BDD {
     }
 
     /**
-     * Récupère un contact suivant son identifiant
-     * @param $identifiantBDD l'identifiant du contact à récupérer
+     * RÃ©cupÃ¨re un contact suivant son identifiant
+     * @param $identifiantBDD l'identifiant du contact Ã  rÃ©cupÃ©rer
      * @return String[] tableau contenant les informations d'un contact
      */
     public static function getContact($identifiantBDD) {
@@ -93,7 +93,7 @@ class Contact_BDD {
     /**
      * Retourne une liste de contacts suivant un filtre
      * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les contacts concernées par le filtre
+     * @return String[] tableau contenant les contacts concernÃ©es par le filtre
      */
     public static function getListeContacts($filtres) {
 		global $tab3;

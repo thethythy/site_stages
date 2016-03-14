@@ -1,12 +1,12 @@
-<?php
+ï»¿<?php
 
 header ('Content-type:text/html; charset=utf-8');
 
 class SujetDeStage_IHM {
 
-	/** Méthodes statiques **/
+	/** MÃ©thodes statiques **/
 
-	// $tabEtu = tableau contenant les étudiants à afficher
+	// $tabEtu = tableau contenant les Ã©tudiants Ã  afficher
 	public static function afficherDemandeValidation($tabEtu) {
 		?>
 		<form enctype="multipart/form-data" method=post action="">
@@ -39,7 +39,7 @@ class SujetDeStage_IHM {
 							</tr>
 							<tr>
 								<td>Sujet de stage <br/>
-								(extension acceptée .pdf, .doc, .docx, .odt)</td>
+								(extension acceptÃ©e .pdf, .doc, .docx, .odt)</td>
 								<td>
 									<input name="uploadSujet" type="file">
 								</td>
@@ -67,14 +67,14 @@ class SujetDeStage_IHM {
 			$parcours = $promotion->getParcours();
 			if(!$enteteAffichee){
 					$enteteAffichee=true;?>
-						<p>Voici la liste des sujets de stage qui restent à traiter : </p>
+						<p>Voici la liste des sujets de stage qui restent Ã  traiter : </p>
 						<table width="100%">
 							<tr id="entete">
 								<td width="30%">Nom</td>
 								<td width="30%">Prenom</td>
-								<td width="10%">Diplôme</td>
-								<td width="10%">Spécialité</td>
-								<td width="5%">Année</td>
+								<td width="10%">DiplÃ´me</td>
+								<td width="10%">SpÃ©cialitÃ©</td>
+								<td width="5%">AnnÃ©e</td>
 								<td width="15%">Traiter</td>
 							</tr>
 				<?php }?>
@@ -110,15 +110,15 @@ class SujetDeStage_IHM {
 							<td><?php   echo $etudiant->getPrenom();	?></td>
 						</tr>
 						<tr>
-							<th>Diplôme</th>
+							<th>DiplÃ´me</th>
 							<td><?php   echo $filiere->getNom();	?></td>
 						</tr>
 						<tr>
-							<th>Spécialité</th>
+							<th>SpÃ©cialitÃ©</th>
 							<td><?php   echo $parcours->getNom();	?></td>
 						</tr>
 						<tr>
-							<th>Année</th>
+							<th>AnnÃ©e</th>
 							<td><?php   echo $promotion->getAnneeUniversitaire()	?></td>
 						</tr>
 						<tr>
@@ -154,14 +154,14 @@ class SujetDeStage_IHM {
 			if(!$enteteAffichee) {
 				$enteteAffichee=true;
 				?>
-				<p>Voici la liste des sujets de stage qui ont été validés : </p>
+				<p>Voici la liste des sujets de stage qui ont Ã©tÃ© validÃ©s : </p>
 				<table width="100%">
 					<tr id="entete">
 						<td width="30%">Nom</td>
 						<td width="30%">Prenom</td>
-						<td width="10%">Diplôme</td>
-						<td width="10%">Spécialité</td>
-						<td width="5%">Année</td>
+						<td width="10%">DiplÃ´me</td>
+						<td width="10%">SpÃ©cialitÃ©</td>
+						<td width="5%">AnnÃ©e</td>
 						<td width="15%">Visualiser</td>
 					</tr>
 				<?php

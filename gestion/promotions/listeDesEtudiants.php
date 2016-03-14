@@ -20,12 +20,12 @@ include_once($chemin."moteur/Promotion.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Liste des", "étudiants", "../../", $tabLiens);
+IHM_Generale::header("Liste des", "Ã©tudiants", "../../", $tabLiens);
 
 // Affichage du formulaire de recherche
 Promotion_IHM::afficherFormulaireRecherche("listeDesEtudiantsData.php", true);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<br/>";
 echo "<div id='data'>\n";

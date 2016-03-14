@@ -30,23 +30,23 @@ header ("Content-type:text/html; charset=utf-8");
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
+// Si pas d'annÃ©e sÃ©lectionnÃ©e
 if (!isset($_POST['annee']))
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", Promotion_BDD::getLastAnnee()));
 
-// Si une recherche sur l'année est demandée
+// Si une recherche sur l'annÃ©e est demandÃ©e
 if (isset($_POST['annee']) && $_POST['annee'] != "")
 	array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
 
-// Si une recherche sur le nom du parrain est demandée
+// Si une recherche sur le nom du parrain est demandÃ©e
 if (isset($_POST['nom']) && $_POST['nom'] != '*')
 	array_push($filtres, new FiltreNumeric("idparrain", $_POST['nom']));
 
-// Si une recherche sur la filiere est demandée
+// Si une recherche sur la filiere est demandÃ©e
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
-// Si une recherche sur le parcours est demandé
+// Si une recherche sur le parcours est demandÃ©
 if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
 
@@ -64,20 +64,20 @@ if ($nbFiltres >= 2) {
 
 $tabConventions = Convention::getListeConvention($filtre);
 
-// Afficher le résultat de la recherche
+// Afficher le rÃ©sultat de la recherche
 if (sizeof($tabConventions) > 0) {?>
 <br/>
 	<table width="100%">
 		<tr id="entete">
-			<td width="15%">Référent</td>
+			<td width="15%">RÃ©fÃ©rent</td>
 			<td width="15%">Etudiant</td>
-			<td width="15%">Diplôme</td>
+			<td width="15%">DiplÃ´me</td>
 			<td width="40%">Entreprise</td>
 			<td align="center" width="15%">Sujet de stage</td>
 		</tr>
 
 	<?php
-	// Affichage des conventions correspondants aux critères de recherches
+	// Affichage des conventions correspondants aux critÃ¨res de recherches
 	$cpt = 0;
 	for ($i = 0; $i < sizeof($tabConventions); $i++) {
 		if (isset($_POST['annee']) && $_POST['annee'] != "")
@@ -122,7 +122,7 @@ if (sizeof($tabConventions) > 0) {?>
 <?php }else{
 	?>
 		<br/>
-			<p>Aucun référent ne correspond aux critères de recherche.</p>
+			<p>Aucun rÃ©fÃ©rent ne correspond aux critÃ¨res de recherche.</p>
 		<br/>
 	<?php
 }

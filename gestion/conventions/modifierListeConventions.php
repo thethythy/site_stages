@@ -35,7 +35,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Modifier/Supprimer une", "convention", "../../", $tabLiens);
 
 if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
-	// Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+	// NÃ©cÃ©ssaire pour que dans le formulaire de recherche, on resÃ©lectionne les valeurs prÃ©cÃ©dement sÃ©lectionnÃ©es
 	$promo = Promotion::getPromotion($_GET['promo']);
 	$filiere = $promo->getFiliere();
 	$parcours = $promo->getParcours();
@@ -43,13 +43,13 @@ if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
 	$_POST['parcours'] = $parcours->getIdentifiantBDD();
 	$_POST['filiere'] = $filiere->getIdentifiantBDD();
 	
-	// Suppression de l'étudiant
+	// Suppression de l'Ã©tudiant
 	Convention::supprimerConvention($_GET['id'], $_GET['promo']);
 }
 	
 Promotion_IHM::afficherFormulaireRecherche("modifierListeConventionsData.php", false);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("modifierListeConventionsData.php");
 echo "\n</div>";

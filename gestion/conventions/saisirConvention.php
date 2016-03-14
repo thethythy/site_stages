@@ -36,7 +36,7 @@ IHM_Generale::header("Saisir une", "convention", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("saisirConventionData.php", false);
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("saisirConventionData.php");
 echo "\n</div>";

@@ -20,16 +20,16 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion des stages');
 IHM_Generale::header("Gestion de la", "base", "../../", $tabLiens);
 
-// Vérification de la période pour exécuter cette fonction
+// VÃ©rification de la pÃ©riode pour exÃ©cuter cette fonction
 $date = date('n');
-if ($date == 9 || $date == 10) { // Il faut être entre le 1 septembre et le 31 octobre de l'année en cours
+if ($date == 9 || $date == 10) { // Il faut Ãªtre entre le 1 septembre et le 31 octobre de l'annÃ©e en cours
 	
 	// Suppression des anciennes offres de stages
 	$tabOffres = OffreDeStage::getListeOffreDeStage("");
 	foreach ($tabOffres as $offre) {
 		OffreDeStage::supprimerDonnees($offre->getIdentifiantBDD());
 	}
-	echo "<p>Suppression des anciennes offres de stages effectuée.</p>";
+	echo "<p>Suppression des anciennes offres de stages effectuÃ©e.</p>";
 	
 	// Suppression des contacts superflus
 	$tabConventions = Convention::getListeConvention("");
@@ -42,7 +42,7 @@ if ($date == 9 || $date == 10) { // Il faut être entre le 1 septembre et le 31 o
 		if (! in_array($contact->getIdentifiantBDD(), $tabIdContactConventions))
 			Contact::supprimerContact($contact->getIdentifiantBDD());
 	}
-	echo "<p>Suppression des contacts superflus effectuée.</p>";
+	echo "<p>Suppression des contacts superflus effectuÃ©e.</p>";
 	
 	// Suppression des entreprises superflues
 	$tabContacts = Contact::getListeContacts("");
@@ -55,11 +55,11 @@ if ($date == 9 || $date == 10) { // Il faut être entre le 1 septembre et le 31 o
 		if (! in_array($entreprise->getIdentifiantBDD(), $tabIdEntrepriseContacts))
 			Entreprise::supprimerEntreprise($entreprise->getIdentifiantBDD());
 	}
-	echo "<p>Suppression des entreprises superflues effectuée.</p>";
+	echo "<p>Suppression des entreprises superflues effectuÃ©e.</p>";
 	
 }
 else
-	IHM_Generale::erreur("Cette fonctionnalité n'est accessible que durant le mois de Septembre et le mois d'octobre");
+	IHM_Generale::erreur("Cette fonctionnalitÃ© n'est accessible que durant le mois de Septembre et le mois d'octobre");
 
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");

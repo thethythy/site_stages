@@ -19,7 +19,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Modifier/Supprimer une", "entreprise", "../../", $tabLiens);
 
 if(isset($_GET['id'])){
-	// Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+	// NÃ©cÃ©ssaire pour que dans le formulaire de recherche, on resÃ©lectionne les valeurs prÃ©cÃ©dement sÃ©lectionnÃ©es
 	$_POST['nom'] = $_GET['nom'];
 	$_POST['cp'] = $_GET['cp'];
 	$_POST['ville'] = $_GET['ville'];
@@ -31,7 +31,7 @@ if(isset($_GET['id'])){
 
 Entreprise_IHM::afficherFormulaireRecherche("modifierListeEntreprises.php");
 
-// Si une recherche a été effectuée
+// Si une recherche a Ã©tÃ© effectuÃ©e
 if((isset($_POST['rech'])) || (isset($_GET['id']))){	
 	$nom = $_POST['nom'];
 	$cp = $_POST['cp'];
@@ -43,19 +43,19 @@ if((isset($_POST['rech'])) || (isset($_GET['id']))){
 
 $filtres = array();
 
-// Si une recherche sur le nom de l'entreprise est demandée
+// Si une recherche sur le nom de l'entreprise est demandÃ©e
 if($nom != "")
 	array_push($filtres, new FiltreString("nom", "%".$nom."%"));
 	
-// Si une recherche sur le code postal est demandée
+// Si une recherche sur le code postal est demandÃ©e
 if($cp != "")
 	array_push($filtres, new FiltreString("codepostal", $cp."%"));
 	
-// Si une recherche sur la ville est demandée
+// Si une recherche sur la ville est demandÃ©e
 if($ville != "")
 	array_push($filtres, new FiltreString("ville", $ville."%"));
 	
-// Si une recherche sur le pays est demandée
+// Si une recherche sur le pays est demandÃ©e
 if($pays != "")
 	array_push($filtres, new FiltreString("pays", $pays."%"));
 
@@ -75,7 +75,7 @@ $tabEntreprises = Entreprise::getListeEntreprises($filtre);
 	
 // Si il y a au moins une entreprise 
 if(sizeof($tabEntreprises)>0){
-	// Affichage des entreprises correspondants aux critères de recherches
+	// Affichage des entreprises correspondants aux critÃ¨res de recherches
 	for($i=0; $i<sizeof($tabEntreprises); $i++){
 		?>
 		<table id="presentation_entreprise">	
@@ -128,7 +128,7 @@ if(sizeof($tabEntreprises)>0){
 		<?php
 	}
 }else{
-	echo "Aucune entreprise ne correspond aux critères de recherche.";
+	echo "Aucune entreprise ne correspond aux critÃ¨res de recherche.";
 }
 
 IHM_Generale::endHeader(false);

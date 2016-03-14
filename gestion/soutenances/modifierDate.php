@@ -33,7 +33,7 @@ function modifier() {
 	printf("<table><center><tr><td>Date : </td>\n");
 	printf("<td><input id='newdate' type='date' name='newdate' value='%s'/></td>\n", date('Y-m-d', mktime(0, 0, 0, $date->getMois(), $date->getJour(), $date->getAnnee())));
 	printf("<tr><td>&nbsp;</td><td></td></tr>");
-	printf("<tr><td size=200>Sélectionner les<br />promotions associées :</td><td>");
+	printf("<tr><td size=200>SÃ©lectionner les<br />promotions associÃ©es :</td><td>");
         $tabPromoDate = DateSoutenance::listerRelationPromoDate($date->getIdentifiantBDD());
         $tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $date->getAnnee() - 1));
         foreach ($tabPromo as $promo) {
@@ -44,7 +44,7 @@ function modifier() {
         }  
         printf("</td></tr>");
         printf("<tr><td>&nbsp;</td><td></td></tr>");
-        printf("<table><tr><td><input type=submit value='Enregistrer les données'/></center></td></tr>");
+        printf("<table><tr><td><input type=submit value='Enregistrer les donnÃ©es'/></center></td></tr>");
         printf("</table></form></center>");
         
         printf("<script>

@@ -29,7 +29,7 @@ $tabSDS=SujetDeStage::getSujetDeStageValide();
 if (sizeof($tabSDS) > 0)
 	SujetDeStage_IHM::afficherTableauSDSValide($tabSDS);
 else
-	echo "<p>Il n'y aucun sujet de stage validé.</p>";
+	echo "<p>Il n'y aucun sujet de stage validÃ©.</p>";
 
 deconnexion();
 IHM_Generale::endHeader(false);

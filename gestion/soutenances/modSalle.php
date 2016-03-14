@@ -16,9 +16,9 @@ if($_POST['id']!=-1){
 	$salle=Salle::getSalle($_POST['id']);
 	$salle->setNom($_POST['nom']);
 	Salle_BDD::sauvegarder($salle);
-	printf("La salle a été modifiée ! ");
+	printf("La salle a Ã©tÃ© modifiÃ©e ! ");
 }else {
-	IHM_Generale::erreur("Vous devez sélectionner une salle !");
+	IHM_Generale::erreur("Vous devez sÃ©lectionner une salle !");
 }
 }
 modifier();

@@ -21,7 +21,7 @@ class Salle_IHM {
 							<td><input type="text" name="nom" ></td>
 						</tr>
 						<tr>
-							<td colspan=2><input type=submit value="Enregistrer les données"/><input type=reset value="Effacer"/></td>
+							<td colspan=2><input type=submit value="Enregistrer les donnÃ©es"/><input type=reset value="Effacer"/></td>
 						</tr>
 						</table>
 					</table>
@@ -37,7 +37,7 @@ class Salle_IHM {
 								<td colspan=2>Modifier/Supprimer une salle</td>
 							</tr>
 							<tr>
-								<th width="220">Sélectionnez la salle : </th>
+								<th width="220">SÃ©lectionnez la salle : </th>
 								<th>
 							<?php
 								$tabSalle = Salle::listerSalle();	

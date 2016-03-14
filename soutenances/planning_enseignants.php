@@ -49,7 +49,7 @@ Menu::menuSoutenance();
 				<td colspan=2>Affichage du planning des soutenances par enseignant</td>
 			</tr>
 			<tr>
-				<th width="220">Sélectionnez l'enseignant : </th>
+				<th width="220">SÃ©lectionnez l'enseignant : </th>
 				<th>
 			<?php
 				$tabParrain = Parrain::listerParrain();
@@ -78,7 +78,7 @@ Menu::menuSoutenance();
 
 <?php
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<div id='data'>\n";
 include_once("planning_enseignantsData.php");

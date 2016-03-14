@@ -35,7 +35,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Soutenances');
 
-IHM_Generale::header("Planning soutenance ", "par diplôme", "../",$tabLiens);
+IHM_Generale::header("Planning soutenance ", "par diplÃ´me", "../",$tabLiens);
 
 Menu::menuSoutenance();
 
@@ -46,18 +46,18 @@ Menu::menuSoutenance();
 		<tr><td colspan=2>
 		<table id="presentation_afficherPlanningFiliere">
 			<tr id="entete2">
-				<td colspan=2>Affichage du planning des soutenances par diplôme</td>
+				<td colspan=2>Affichage du planning des soutenances par diplÃ´me</td>
 			</tr>
 			<tr>
-				<th width="220">Sélectionnez le diplôme : </th>
+				<th width="220">SÃ©lectionnez le diplÃ´me : </th>
 				<th>
 			<?php
-				// Recuperation de l'annee promotion (la rentrée)
+				// Recuperation de l'annee promotion (la rentrÃ©e)
 				if (date('n')>=10) $annee = date('Y');
 				else $annee = date('Y')-1;
 				//$annee = 2011; // Pour tester
 				
-				// Liste promotion de l'année
+				// Liste promotion de l'annÃ©e
 				$filtrePromotion = new FiltreNumeric('anneeuniversitaire', $annee);
 				$tabPromotion = Promotion::listerPromotions($filtrePromotion);
 				echo "<select id='promotion' name='promotion'>";	
@@ -88,7 +88,7 @@ Menu::menuSoutenance();
 
 <?php
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<br/>";
 echo "<div id='data'>\n";
 include_once("planning_filieresData.php");

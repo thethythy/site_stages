@@ -29,11 +29,11 @@ include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Si une recherche a été effectuée
+// Si une recherche a Ã©tÃ© effectuÃ©e
 if ((isset($_POST['rech'])) || (isset($_GET['id']))){
 	$annee = $_POST['annee'];
 	$parcours = $_POST['parcours'];
@@ -74,7 +74,7 @@ $tabPromos = Promotion_BDD::getListePromotions($filtre);
 if (sizeof($tabPromos) > 0) {
 	$idPromo = $tabPromos[0][0];
 	
-	// Récupération des étudiants n'ayant pas de convention
+	// RÃ©cupÃ©ration des Ã©tudiants n'ayant pas de convention
 	$tabEtuSansConv = array();
 	
 	for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
@@ -82,9 +82,9 @@ if (sizeof($tabPromos) > 0) {
 			array_push($tabEtuSansConv, $tabEtudiants[$i]);
 	}
 	
-	// Si il y a au moins un étudiant sans convention
+	// Si il y a au moins un Ã©tudiant sans convention
 	if (sizeof($tabEtuSansConv) > 0) {
-		// Affichage des étudiants sans conventions
+		// Affichage des Ã©tudiants sans conventions
 		
 		echo "<table>
 				<tr id='entete'>
@@ -108,10 +108,10 @@ if (sizeof($tabPromos) > 0) {
 		}
 		echo "</table>";
 	} else {
-		echo "<br/><center>Aucune étudiant ne peut être supprimé dans cette promotion.<br/>Tous les étudiants de cette promotion ont déjà réalisé au moins un stage.</center><br/>";
+		echo "<br/><center>Aucune Ã©tudiant ne peut Ãªtre supprimÃ© dans cette promotion.<br/>Tous les Ã©tudiants de cette promotion ont dÃ©jÃ  rÃ©alisÃ© au moins un stage.</center><br/>";
 	}
 } else {
-	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.<br/></center>";
+	echo "<br/><center>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.<br/></center>";
 }
 
 ?>

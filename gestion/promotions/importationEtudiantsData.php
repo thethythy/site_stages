@@ -17,14 +17,14 @@ include_once($chemin."moteur/FiltreString.php");
 include_once($chemin."moteur/Parcours.php");
 include_once($chemin."moteur/Promotion.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Si une recherche a été effectuée
+// Si une recherche a Ã©tÃ© effectuÃ©e
 if (isset($_POST['annee']) && isset($_POST['parcours']) && isset($_POST['filiere'])) {
 
-	// Création du filtre de recherche
+	// CrÃ©ation du filtre de recherche
 	$filtres = array();
 	
 	array_push($filtres, new FiltreString("anneeuniversitaire", $_POST['annee']));
@@ -36,7 +36,7 @@ if (isset($_POST['annee']) && isset($_POST['parcours']) && isset($_POST['filiere
 	
 	for ($i = 1; $i < sizeof($filtres); $i++) $filtre = new Filtre($filtre, $filtres[$i], "AND");
 	
-	// Récupérer la promo, la filiere et le parcours
+	// RÃ©cupÃ©rer la promo, la filiere et le parcours
 	$tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 	// Si au moins une promotion existe
@@ -46,13 +46,13 @@ if (isset($_POST['annee']) && isset($_POST['parcours']) && isset($_POST['filiere
 		$filiere = $promo->getFiliere();
 		$parcours = $promo->getParcours();
 		
-		echo "<br/>Veuillez sélectionner les étudiants à importer depuis la promotion : ";
+		echo "<br/>Veuillez sÃ©lectionner les Ã©tudiants Ã  importer depuis la promotion : ";
 		echo $filiere->getNom()." ".$parcours->getNom()." - ".$promo->getAnneeUniversitaire()."<br/><br/>";
 		
-		// Récupérer les étudiants de la promotion sélectionnée
+		// RÃ©cupÃ©rer les Ã©tudiants de la promotion sÃ©lectionnÃ©e
 		$tabEtudiants = Promotion::listerEtudiants($filtre);
 		
-		// Si il y a au moins un étudiant
+		// Si il y a au moins un Ã©tudiant
 		if (sizeof($tabEtudiants) > 0) {
 			
 			?>
@@ -100,10 +100,10 @@ if (isset($_POST['annee']) && isset($_POST['parcours']) && isset($_POST['filiere
 			<?php
 			
 		} else {
-			echo "Aucun étudiant n'a été trouvé.";
+			echo "Aucun Ã©tudiant n'a Ã©tÃ© trouvÃ©.";
 		}
 	} else {
-		echo "Aucune promotion ne correspond à ces critères de recherche.";
+		echo "Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.";
 	}
 }
 

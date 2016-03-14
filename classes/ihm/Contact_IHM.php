@@ -3,7 +3,7 @@ header ('Content-type:text/html; charset=utf-8');
 
 class Contact_IHM {
  
-	// Méthodes statiques
+	// MÃ©thodes statiques
 	
 	public static function afficherFormulaireRecherche($page) {
 		?>
@@ -20,7 +20,7 @@ class Contact_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Prénom</td>
+								<td>PrÃ©nom</td>
 								<td>
 									<input type="text" name="prenom" <?php if(isset($_POST['prenom'])) echo "value='".$_POST['prenom']."'"; ?> />
 								</td>
@@ -30,7 +30,7 @@ class Contact_IHM {
 					<td width="50%">
 						<table>
 							<tr>
-								<td>Téléphone</td>
+								<td>TÃ©lÃ©phone</td>
 								<td>
 									<input type="text" name="tel" <?php if(isset($_POST['tel'])) echo "value='".$_POST['tel']."'"; ?> />
 								</td>
@@ -56,8 +56,8 @@ class Contact_IHM {
 		<?php
 	}
 	
-	// $cont = Contact qui est modifier et dont les informations son affichées.
-	// si $cont = "", alors il s'agit d'un formulaire de création (champs vide)
+	// $cont = Contact qui est modifier et dont les informations son affichÃ©es.
+	// si $cont = "", alors il s'agit d'un formulaire de crÃ©ation (champs vide)
 	public static function afficherFormulaireSaisie($cont) {
 		
 		if($cont != "")
@@ -76,7 +76,7 @@ class Contact_IHM {
 								</td>
 							</tr>
 							<tr>
-								<td>Prénom</td>
+								<td>PrÃ©nom</td>
 								<td>
 									<input type="text" name="prenom" <?php if(isset($_POST['prenom'])) echo "value='".$_POST['prenom']."'"; else if($cont != "") echo "value='".$cont->getPrenom()."'"; ?> />
 								</td>
@@ -86,7 +86,7 @@ class Contact_IHM {
 					<td width="50%" align="center">
 						<table>
 							<tr>
-								<td>Téléphone</td>
+								<td>TÃ©lÃ©phone</td>
 								<td>
 									<input type="text" name="tel" <?php if(isset($_POST['tel'])) echo "value='".$_POST['tel']."'"; else if($cont != "") echo "value='".$cont->getTelephone()."'"; ?> />
 								</td>
@@ -108,7 +108,7 @@ class Contact_IHM {
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						Sélectionnez l'entreprise :
+						SÃ©lectionnez l'entreprise :
 						<select name="idEntreprise">
 							<?php
 								$tabEnt = Entreprise::getListeEntreprises("");

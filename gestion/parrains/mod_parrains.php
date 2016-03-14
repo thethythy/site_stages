@@ -10,7 +10,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Modifier un ", "référent", "../../", $tabLiens);
+IHM_Generale::header("Modifier un ", "rÃ©fÃ©rent", "../../", $tabLiens);
 function modifier(){
 if($_POST['id']!=-1){
 	$parrain=Parrain::getParrain($_POST['id']);
@@ -19,9 +19,9 @@ if($_POST['id']!=-1){
 	$parrain->setEmail($_POST['email']);
 	$parrain->setIdentifiant_couleur($_POST['couleur']);
 	Parrain_BDD::sauvegarder($parrain);
-	printf("Le référent a été modifié ! ");
+	printf("Le rÃ©fÃ©rent a Ã©tÃ© modifiÃ© ! ");
 }else {
-	IHM_Generale::erreur("Vous devez sélectionner un référent !");
+	IHM_Generale::erreur("Vous devez sÃ©lectionner un rÃ©fÃ©rent !");
 }
 }
 modifier();

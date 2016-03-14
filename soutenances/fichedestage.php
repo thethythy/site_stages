@@ -37,7 +37,7 @@ header ("Content-type:text/html; charset=utf-8");
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('index.php', 'Conventions et suivi de stage');
-$tabLiens[2] = array('listerParrainages.php', 'Liste des référents');
+$tabLiens[2] = array('listerParrainages.php', 'Liste des rÃ©fÃ©rents');
 IHM_Generale::header("Fiche de", "stage", "../", $tabLiens);
 
 $etudiant = Etudiant::getEtudiant($_GET['idEtu']);
@@ -52,7 +52,7 @@ $couleur = $parrain->getCouleur();
 
 ?>
 
-<h3>L'étudiant</h3>
+<h3>L'Ã©tudiant</h3>
 <?php echo $etudiant->getPrenom()." ".$etudiant->getNom(); ?><br/>
 Promotion : <?php echo $filiere->getNom()." ".$parcours->getNom(); ?><br/>
 Annee : <?php echo $promotion->getAnneeUniversitaire(); ?>
@@ -87,7 +87,7 @@ if($contact->getEmail() != "")
 <h3>Le stage</h3>
 <?php
 	if($convention->aSonResume == "1"){
-		echo "<a href='../documents/resumes/".$convention->getSujetDeStage()."'>Résumé du stage</a>";
+		echo "<a href='../documents/resumes/".$convention->getSujetDeStage()."'>RÃ©sumÃ© du stage</a>";
 	}else{
 		$chaine = $convention->getSujetDeStage();
 		echo $chaine;
@@ -96,7 +96,7 @@ if($contact->getEmail() != "")
 
 <br/><br/><br/>
 
-<h3>Référent</h3>
+<h3>RÃ©fÃ©rent</h3>
 <?php echo $parrain->getPreNom()." ".$parrain->getNom(); ?><br/>
 
 <br/>

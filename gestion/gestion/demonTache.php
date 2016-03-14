@@ -5,14 +5,14 @@ header ('Content-type:text/html; charset=utf-8');
 $chemin = "/Applications/MAMP/htdocs/classes/";
 include_once($chemin . "bdd/Tache_BDD.php");
 include_once($chemin . "moteur/Tache.php");
-// Connexion ‡ la base
+// Connexion √† la base
 $db = mysql_connect('127.0.0.1:8889','','') or die("Impossible de se connecter : " . mysql_error());
 
-// SÈlection de la base
+// S√©lection de la base
 //mysql_select_db('stages', $db) or die("Impossible de trouver la base : " . mysql_error());
-// Table des t‚ches en base
+// Table des t√¢ches en base
 $tab21 = 'taches';
-// CrÈation du tableau des infos des t‚ches
+// Cr√©ation du tableau des infos des t√¢ches
 function createTableSTache(&$tabSTache) {
     foreach (Tache::listerTaches() as $oTache) {
 	if ($oTache->getStatut() == "Pas fait") {
@@ -23,18 +23,18 @@ function createTableSTache(&$tabSTache) {
 	}
     }
 }
-// Notification par email des t‚ches ‡ effectuer
+// Notification par email des t√¢ches √† effectuer
 function notifier($iTache) {
     $headers = "From: thierry.lemeunier@univ-lemans.fr\n";
     $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
     $headers .= "Content-Transfer-Encoding: 8bit";
-    $msg = "Date limite atteinte pour la t‚che : " . $iTache;
-    mail("thierry.lemeunier@univ-lemans.fr", 'Site des stages : t‚che ‡ effectuer', $msg, $headers);
+    $msg = "Date limite atteinte pour la t√¢che : " . $iTache;
+    mail("thierry.lemeunier@univ-lemans.fr", 'Site des stages : t√¢che √† effectuer', $msg, $headers);
 }
-// Chargement du tableau des t‚ches
+// Chargement du tableau des t√¢ches
 $tabSTache = array();
 createTableSTache($tabSTache);
-// Notifier l'utilisateur si nÈcessaire
+// Notifier l'utilisateur si n√©cessaire
 date_default_timezone_set("Europe/Paris");
 $date = time();
 foreach ($tabSTache as $sTache) {

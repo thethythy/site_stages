@@ -29,11 +29,11 @@ include_once($chemin."moteur/Parrain.php");
 include_once($chemin."moteur/Promotion.php");
 include_once($chemin."moteur/Soutenance.php");
 
-// Précisons l'encodage des données si cela n'est pas déjà fait
+// PrÃ©cisons l'encodage des donnÃ©es si cela n'est pas dÃ©jÃ  fait
 if (!headers_sent())
 	header("Content-type: text/html; charset=iso-8859-15");
 
-// Prise en compte des paramètres
+// Prise en compte des paramÃ¨tres
 $filtres = array();
 
 if (!isset($_POST['annee']))
@@ -104,10 +104,10 @@ if (sizeof($tabPromos) > 0) {
 		</table>
 		<?php
 	} else {
-		echo "<br/><center>Aucun étudiant n'est dans cette promotion.<center/><br/>";
+		echo "<br/><center>Aucun Ã©tudiant n'est dans cette promotion.<center/><br/>";
 	}
 } else {
-	echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.<center/><br/>";
+	echo "<br/><center>Aucune promotion ne correspond Ã  ces critÃ¨res de recherche.<center/><br/>";
 }
 
 ?>

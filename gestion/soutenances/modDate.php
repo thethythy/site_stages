@@ -26,9 +26,9 @@ function modifier(){
 		$date->setAnnee($newDateData[0]);
 		$idd = DateSoutenance_BDD::sauvegarder($date);
 		DateSoutenance_BDD::sauvegarderRelationPromo($idd, $_POST['promo']);
-		printf("La date a été modifiée ! ");
+		printf("La date a Ã©tÃ© modifiÃ©e ! ");
 	}else {
-		IHM_Generale::erreur("Vous devez sélectionner une date !");
+		IHM_Generale::erreur("Vous devez sÃ©lectionner une date !");
 	}
 }
 modifier();

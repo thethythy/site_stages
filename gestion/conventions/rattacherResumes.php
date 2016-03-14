@@ -32,11 +32,11 @@ include_once($chemin."moteur/Soutenance.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Rattacher des", "rÈsumÈs", "../../", $tabLiens);
+IHM_Generale::header("Rattacher des", "r√©sum√©s", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("rattacherResumesData.php", false);
 
-// Si un enregistrement des rÈsumÈs a ÈtÈ effectuÈe
+// Si un enregistrement des r√©sum√©s a √©t√© effectu√©e
 if (isset($_POST['save'])) {
 	$tabIdConventions = $_POST['idConventions'];
 	if ($tabIdConventions != "") {
@@ -48,14 +48,14 @@ if (isset($_POST['save'])) {
 				$conv->setSujetDeStage($_POST['conv'.$tabIdConv[$i]]);
 			} else {
 				$conv->setASonResume(0);
-				$conv->setSujetDeStage("Pas de rÈsumÈ");
+				$conv->setSujetDeStage("Pas de r√©sum√©");
 			}
 			Convention_BDD::sauvegarder($conv);
 		}
 	}
 }
 
-// Affichage des donnÈes
+// Affichage des donn√©es
 echo "<div id='data'>\n";
 include_once("rattacherResumesData.php");
 echo "\n</div>";

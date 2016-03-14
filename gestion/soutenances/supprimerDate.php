@@ -15,9 +15,9 @@ function supprimer(){
 if($_POST['date']!=-1){
 	$element=$_POST['date'];
 	DateSoutenance::deleteDateSoutenance($element);
-	printf("<p>La date a été supprimée!</p>");
+	printf("<p>La date a Ã©tÃ© supprimÃ©e!</p>");
 }else {
-	IHM_Generale::erreur("Vous devez sélectionner une date !");
+	IHM_Generale::erreur("Vous devez sÃ©lectionner une date !");
 }
 }
 

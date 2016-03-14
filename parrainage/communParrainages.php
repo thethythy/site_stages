@@ -10,7 +10,7 @@ function afficherFormulaireRecherche($fichier){ ?>
 					<table width="100%">
 						<tr>
 							<td>
-								Sélectionnez l'année :
+								SÃ©lectionnez l'annÃ©e :
 								<select id="annee" name="annee">
 									<?php
 										$tabAU = Promotion_BDD::getAnneesUniversitaires();
@@ -27,7 +27,7 @@ function afficherFormulaireRecherche($fichier){ ?>
 						</tr>
 						<tr>
 							<td>
-								Sélectionnez le nom du référent :
+								SÃ©lectionnez le nom du rÃ©fÃ©rent :
 								<select id="nom" name="nom">
 									<?php
 										echo "<option value='*'>Tous</option>";
@@ -51,7 +51,7 @@ function afficherFormulaireRecherche($fichier){ ?>
 					<table width="100%">
 						<tr>
 							<td>
-								Sélectionnez le diplôme :
+								SÃ©lectionnez le diplÃ´me :
 								<select id="filiere" name="filiere">
 									<?php
 										echo "<option value='*'>Tous</option>";
@@ -68,7 +68,7 @@ function afficherFormulaireRecherche($fichier){ ?>
 						</tr>
 						<tr>
 							<td>
-								Sélectionnez la spécialité :
+								SÃ©lectionnez la spÃ©cialitÃ© :
 								<select id="parcours" name="parcours">
 									<?php 
 										echo "<option value='*'>Tous</option>";

@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 header ('Content-type:text/html; charset=utf-8');
 $chemin = "../../classes/";
 
@@ -17,7 +17,7 @@ IHM_Generale::header("Modifier une", "entreprise", "../../", $tabLiens);
 
 $ent = Entreprise::getEntreprise($_GET['id']);
 
-// Si une edition a été effectué
+// Si une edition a Ã©tÃ© effectuÃ©
 if(isset($_POST['edit'])){
 	extract($_POST);
 		
@@ -43,7 +43,7 @@ if(isset($_POST['edit'])){
 							
 		$idEnt = Entreprise_BDD::sauvegarder($ent);
 		
-		echo "Les informations sur l'entreprise $nom ont été mises à jour.";
+		echo "Les informations sur l'entreprise $nom ont Ã©tÃ© mises Ã  jour.";
 					
 		?>
 			<table>
@@ -56,7 +56,7 @@ if(isset($_POST['edit'])){
 							<input type="hidden" value="<?php echo $_GET['ville']; ?>" name="ville"/>
 							<input type="hidden" value="<?php echo $_GET['pays']; ?>" name="pays"/>
 							<input type="hidden" value="<?php echo $_GET['email']; ?>" name="email"/>-->
-							<input type="submit" value="Retourner à la liste"/>
+							<input type="submit" value="Retourner Ã  la liste"/>
 						</form>
 					</td>
 					<td width="50%" align="center">

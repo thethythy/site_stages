@@ -32,10 +32,10 @@ include_once($chemin."moteur/Soutenance.php");
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Supprimer un", "étudiant", "../../", $tabLiens);
+IHM_Generale::header("Supprimer un", "Ã©tudiant", "../../", $tabLiens);
 
 if((isset($_GET['id'])) && (isset($_GET['promo']))){
-	// Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+	// NÃ©cÃ©ssaire pour que dans le formulaire de recherche, on resÃ©lectionne les valeurs prÃ©cÃ©dement sÃ©lectionnÃ©es
 	$promo = Promotion::getPromotion($_GET['promo']);
 	$filiere = $promo->getFiliere();
 	$parcours = $promo->getParcours();
@@ -43,16 +43,16 @@ if((isset($_GET['id'])) && (isset($_GET['promo']))){
 	$_POST['parcours'] = $parcours->getIdentifiantBDD();
 	$_POST['filiere'] = $filiere->getIdentifiantBDD();
 	
-	// Suppression définitive de l'étudiant
+	// Suppression dÃ©finitive de l'Ã©tudiant
 	Etudiant::supprimerDefinitivementEtudiant($_GET['id']);
 }
 
 // Affichage du formulaire de recherche
 Promotion_IHM::afficherFormulaireRecherche("supprimerEtudiantData.php", false);
 
-echo "<br/><h3>Remarque :</h3>Il est possible de supprimer uniquement les étudiants qui n'ont pas encore fait de stage (étudiant sans convention).<br/><br/>";
+echo "<br/><h3>Remarque :</h3>Il est possible de supprimer uniquement les Ã©tudiants qui n'ont pas encore fait de stage (Ã©tudiant sans convention).<br/><br/>";
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("supprimerEtudiantData.php");
 echo "\n</div>";

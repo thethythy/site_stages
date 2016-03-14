@@ -31,7 +31,7 @@ if(isset($_GET['id'])){
 		OffreDeStage_IHM::visualiserOffre($offreDeStage, "./listerOffreDeStage.php", $_GET['nom'], $_GET['ville'], $_GET['cp'], $_GET['pays'], $_GET['filiere'], $_GET['parcours'], $_GET['duree'], $_GET['competence']);
 	}
 	else {
-		echo "Cette offre de stage a été retirée du site.<br/>";
+		echo "Cette offre de stage a Ã©tÃ© retirÃ©e du site.<br/>";
 	}
 }
 

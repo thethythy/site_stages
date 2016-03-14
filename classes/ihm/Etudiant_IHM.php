@@ -2,8 +2,8 @@
 header ('Content-type:text/html; charset=utf-8');
 class Etudiant_IHM {
 
-    // $etu = Etudiant qui est modifié et dont les informations sont affichées.
-    // si $etu = "", alors il s'agit d'un formulaire de création (champs vide)
+    // $etu = Etudiant qui est modifiÃ© et dont les informations sont affichÃ©es.
+    // si $etu = "", alors il s'agit d'un formulaire de crÃ©ation (champs vide)
     public static function afficherFormulaireEdition($etu) {
 	?>
 	<form method=post action="">
@@ -20,7 +20,7 @@ class Etudiant_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Prénom</td>
+				<td>PrÃ©nom</td>
 				<td>
 				    <input type="text" name="prenom" <?php if (isset($_POST['prenom']))
 				    echo "value='" . $_POST['prenom'] . "'"; else if ($etu != "")
@@ -85,7 +85,7 @@ class Etudiant_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Référent</td>
+				<td>RÃ©fÃ©rent</td>
 				<td>
 				    <select name="idParrain">
 					<option value="-1"></option>
@@ -106,22 +106,22 @@ class Etudiant_IHM {
 
 			    <tr>
 				<td>
-				    Les formats acceptés sont : PDF DOC DOCX.<br/>La taille doit être inférieure à 20 Mo.
+				    Les formats acceptÃ©s sont : PDF DOC DOCX.<br/>La taille doit Ãªtre infÃ©rieure Ã  20 Mo.
 				</td>
 			    </tr>
 
 			    <tr><td>&nbsp;</td></tr>
 
 			    <tr>
-				<td>Déposer votre rapport ici :</td>
+				<td>DÃ©poser votre rapport ici :</td>
 				<td>
-				    <input name="uploadRapport" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitRapport" value="Déposer le rapport"/>
+				    <input name="uploadRapport" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitRapport" value="DÃ©poser le rapport"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>Déposer votre résumé ici :</td>
+				<td>DÃ©poser votre rÃ©sumÃ© ici :</td>
 				<td>
-				    <input name="uploadResume" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitResume" value="Déposer le résumé"/>
+				    <input name="uploadResume" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitResume" value="DÃ©poser le rÃ©sumÃ©"/>
 				</td>
 			    </tr>
 			</table>

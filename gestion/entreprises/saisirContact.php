@@ -18,13 +18,13 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Saisir un", "contact", "../../", $tabLiens);
 
-// Si un ajout a été effectué
+// Si un ajout a Ã©tÃ© effectuÃ©
 if(isset($_POST['add'])){
 	extract($_POST);
 	
 	if (($nom == "") || ($prenom == "") || ($tel == "")) {
 		Contact_IHM::afficherFormulaireSaisie("");
-		IHM_Generale::erreur("Le nom, le prénom et le numéro de téléphone sont obligatoires !");
+		IHM_Generale::erreur("Le nom, le prÃ©nom et le numÃ©ro de tÃ©lÃ©phone sont obligatoires !");
 	} else {
 		$newContact = new Contact("", $nom, $prenom, $tel, $fax, $email, $idEntreprise);
 			
@@ -36,7 +36,7 @@ if(isset($_POST['add'])){
 			<table align="center">
 				<tr>
 					<td colspan="2" align="center">
-						Ajout du nouveau contact <?php echo $nom." ".$prenom; ?> (<?php echo $entreprise->getNom()." (".$entreprise->getVille().")"; ?>) réalisée avec succès.
+						Ajout du nouveau contact <?php echo $nom." ".$prenom; ?> (<?php echo $entreprise->getNom()." (".$entreprise->getVille().")"; ?>) rÃ©alisÃ©e avec succÃ¨s.
 					</td>
 				</tr>
 				<tr>

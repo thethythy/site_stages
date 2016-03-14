@@ -28,7 +28,7 @@ function envoyerNotifications($contact, $idOffreDeStage){
 	if (!isset($_POST['annee'])) $annee = Promotion_BDD::getLastAnnee(); else $annee = $_POST['annee'];
 
 	// ------------------------------------------------
-	// Envoie d'un mail de notification à l'entreprise
+	// Envoie d'un mail de notification Ã  l'entreprise
 	$expediteur = $emailResponsable;
 	$reponse = $emailResponsable;
 	$headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
@@ -37,18 +37,18 @@ function envoyerNotifications($contact, $idOffreDeStage){
 
     $msg = "Bonjour,<br/><br/>
 			Ceci est un message automatique.<br/>
-			Votre offre de stage a été diffusée à nos étudiants.<br/>
-			Vous pouvez la consulter à l'adresse suivante :<br/>
+			Votre offre de stage a Ã©tÃ© diffusÃ©e Ã  nos Ã©tudiants.<br/>
+			Vous pouvez la consulter Ã  l'adresse suivante :<br/>
 			<a href=".$baseSite."/stagiaire/visualiserOffre.php?id=".$idOffreDeStage.">".$baseSite."stagiaire/visualiserOffre.php?id=".$idOffreDeStage."</a><br/><br/>
 			Cordialement,<br/><br/>
 			Le responsable des stages<br/>
-			Département Informatique<br/>
-			Université du Maine";
+			DÃ©partement Informatique<br/>
+			UniversitÃ© du Maine";
 	mail($contact->getEmail(), 'Votre offre de stage', $msg, $headers);
-    echo "<p>Un email de notification a été envoyé à l'entreprise.</p>";
+    echo "<p>Un email de notification a Ã©tÃ© envoyÃ© Ã  l'entreprise.</p>";
 
 	// ----------------------------------------------------------
-	// Envoie d'un mail de notification aux promotions concernées
+	// Envoie d'un mail de notification aux promotions concernÃ©es
 	$offreDeStage = offreDeStage::getOffreDeStage($idOffreDeStage);
 	$destinataire = "";
 
@@ -67,27 +67,27 @@ function envoyerNotifications($contact, $idOffreDeStage){
 	$msg = "Bonjour,<br/><br/>
 			Ceci est un message automatique.<br/>
 			Une nouvelle offre de stage est disponible sur le site Web des stages.<br/>
-			Vous pouvez directement la consulter à l'adresse suivante :<br/>
+			Vous pouvez directement la consulter Ã  l'adresse suivante :<br/>
 			<a href='".$baseSite."/stagiaire/visualiserOffre.php?id=".$idOffreDeStage."'>'".$baseSite."stagiaire/visualiserOffre.php?id=".$idOffreDeStage."</a><br/><br/>
 			Thierry Lemeunier<br>
 			Responsable des stages<br>";
 	mail($destinataire, 'Site des stages : nouvelle offre sur le site', $msg, $headers);
-	echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
+	echo "<p>Un email de notification a Ã©tÃ© envoyÃ© aux Ã©tudiants concernÃ©s.</p>";
 
 	// ------------------------------------------------
-	// Mise à jour du flux RSS
+	// Mise Ã  jour du flux RSS
 
-	// Création initiale du flux si nécessaire
+	// CrÃ©ation initiale du flux si nÃ©cessaire
 	if (! FluxRSS::existe()) FluxRSS::initialise();
 
-	// Création d'une nouvelle news
+	// CrÃ©ation d'une nouvelle news
 	$title = "Nouvelle offre de stage";
 	$link = $baseSite."/stagiaire/visualiserOffre.php?id=".$idOffreDeStage;
 	$timestamp = time();
 	$contents = htmlspecialchars($offreDeStage->getTitre(), ENT_QUOTES,'iso-8859-1');
 	$author = $emailResponsable." (Thierry Lemeunier)";
 	FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
-	echo "<p>Le flux RSS a été mis à jour.</p>";
+	echo "<p>Le flux RSS a Ã©tÃ© mis Ã  jour.</p>";
 }
 
 function verifier(){
@@ -156,7 +156,7 @@ function verifier(){
 					array_push($competences, $_POST['competence'.$i]);
 				}
 			}
-			if($compteur_competence){//On ajoute les compétences
+			if($compteur_competence){//On ajoute les compÃ©tences
 				for($i=0;$i<$compteur_competence;$i++){
 					$nouvelleCompetence = new Competence("", $_POST['competence_ajout'.$i]);
 					$idCompetence = Competence_BDD::sauvegarder($nouvelleCompetence);
@@ -170,7 +170,7 @@ function verifier(){
 			$filtre = new Filtre($filtreNom, $filtreVille, "AND");
 			$entreprise = Entreprise::getListeEntreprises($filtre);
 
-			if(sizeof($entreprise) == 1){ //On récupère les informations sur l'entreprise
+			if(sizeof($entreprise) == 1){ //On rÃ©cupÃ¨re les informations sur l'entreprise
 				$idEntreprise=$entreprise[0]->getIdentifiantBDD();
 				$filtreNom = new FiltreString("nomcontact", $nom_contact);
 				$filtrePrenom = new FiltreString("prenomcontact", $prenom_contact);
@@ -178,13 +178,13 @@ function verifier(){
 				$filtre = new Filtre($filtreNom, $filtrePrenom, "AND");
 				$filtre = new Filtre($filtre, $filtreTel, "AND");
 				$contact = Contact::getListeContacts($filtre);
-				if(sizeof($contact) == 1){ //On récupère les informations sur le contact
+				if(sizeof($contact) == 1){ //On rÃ©cupÃ¨re les informations sur le contact
 					$idContact = $contact[0]->getIdentifiantBDD();
-				} else {//On enregistre le contact dans la base de données
+				} else {//On enregistre le contact dans la base de donnÃ©es
 					$nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
 					$idContact = Contact_BDD::sauvegarder($nouveauContact);
 				}
-			} else {//On enregistre l'entreprise dans la base de données
+			} else {//On enregistre l'entreprise dans la base de donnÃ©es
 				$nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise);
 				$idEntreprise = Entreprise_BDD::sauvegarder($nouvelleEntreprise);
 				$nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
@@ -197,14 +197,14 @@ function verifier(){
 				$contact = Contact::getContact($idContact);
 				if(!$_POST['estVisible'])
 					envoyerNotifications($contact, $idOffreDeStage);
-				echo "<p>L'offre de stage a été enregistrée !</p><p><a href='./listeDesOffreDeStage.php'>Retour</a></p>";
+				echo "<p>L'offre de stage a Ã©tÃ© enregistrÃ©e !</p><p><a href='./listeDesOffreDeStage.php'>Retour</a></p>";
 			}else if(isset($_POST['cancel'])){
 				OffreDeStage::supprimerDonnees($tabDonnees[0]);
-				echo "<p>L'offre de stage a été supprimée de la base de données !</p><p><a href='./listeDesOffreDeStage.php'>Retour</a></p>";
+				echo "<p>L'offre de stage a Ã©tÃ© supprimÃ©e de la base de donnÃ©es !</p><p><a href='./listeDesOffreDeStage.php'>Retour</a></p>";
 			}
 
 		} else {
-			IHM_Generale::erreur("Vous devez saisir tous les champs marqués d'une * !");
+			IHM_Generale::erreur("Vous devez saisir tous les champs marquÃ©s d'une * !");
 			OffreDeStage_IHM::afficherFormulaireModification();
 		}
 	} else {
