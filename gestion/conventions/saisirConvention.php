@@ -1,7 +1,6 @@
 <?php
 header ('Content-type:text/html; charset=utf-8');
 $chemin = "../../classes/";
-
 include_once($chemin."bdd/connec.inc");
 include_once($chemin."bdd/Contact_BDD.php");
 include_once($chemin."bdd/Convention_BDD.php");

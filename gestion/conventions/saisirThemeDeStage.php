@@ -34,6 +34,7 @@ function save(){
 }
 save();
 deconnexion();
+
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
 ?>

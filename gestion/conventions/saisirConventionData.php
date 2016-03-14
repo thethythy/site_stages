@@ -105,5 +105,4 @@ if (isset($_POST['add'])) {
 } else {
 	Convention_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
 }
-
 ?>

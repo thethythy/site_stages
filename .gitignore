@@ -4,5 +4,9 @@ nbproject
 *.db
 .DS_Store
 gestion/gestion/demonTache.php
+<<<<<<< HEAD
 documents/statistiques/*
 documents/exportations/*
+=======
+documents/statistiques
+>>>>>>> francisque
