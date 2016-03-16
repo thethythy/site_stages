@@ -113,7 +113,7 @@ class Convention_IHM {
 
 			                                    $couleur = $tabTheme[$i]->getCouleur();
 
-												if ($tabTheme[$i]->getIdTheme() == $conv->getIdTheme())
+												if (($conv != "") && $tabTheme[$i]->getIdTheme() == $conv->getIdTheme())
 													echo "<option selected value='".$tabTheme[$i]->getIdTheme()."'style='color: #" . $couleur->getCode() . ";'>".$tabTheme[$i]->getTheme()."</option>";
 												else
 													echo "<option value='".$tabTheme[$i]->getIdTheme()."'style='color: #" . $couleur->getCode() . ";'>".$tabTheme[$i]->getTheme()."</option>";

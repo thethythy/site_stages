@@ -11,7 +11,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Ajouter un", "theme de stage", "../../",$tabLiens);
+IHM_Generale::header("Ajouter un", "thème de stage", "../../",$tabLiens);
 ThemeDeStage_IHM::afficherFormulaireSaisie();
 
 function save(){
