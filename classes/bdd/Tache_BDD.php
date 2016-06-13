@@ -1,6 +1,8 @@
 <?php
 class Tache_BDD {
+
     /* Méthodes statiques */
+
     public static function save($tache) {
         global $tab21;
         global $db;
@@ -9,15 +11,17 @@ class Tache_BDD {
         } else {
             $sql = "UPDATE $tab21 SET intitule='" . $tache->getIntitule() . "', statut='" . $tache->getStatut() . "', priorite='" . $tache->getPriorite() . "', datelimite='" . $tache->getDateLimite() . "' WHERE idtache='" . $tache->getIdentifiantBDD() . "'";
         }
-        $result = mysqli_query($db, $sql);
+        $result = $db->query($sql);
     }
+
     public static function getTache($identifiant) {
         global $tab21;
         global $db;
         $sql = "SELECT * FROM $tab21 WHERE idtache='$identifiant'";
-        $result = mysqli_query($db, $sql);
+        $result = $db->query($sql);
         return mysqli_fetch_array($result);
     }
+
     public static function getTaches() {
         global $tab21;
         global $db;
@@ -25,10 +29,8 @@ class Tache_BDD {
         $sql = "SELECT * FROM $tab21 ORDER BY datelimite ASC, priorite DESC";
         $result = $db->query($sql);
 
-        
-
         $tabTache = array();
-        while ($tache = $result->fetch_assoc()) {
+        while ($tache = mysqli_fetch_array($result)) {
             $tab = array();
             array_push($tab, $tache["idtache"]);
             array_push($tab, $tache["intitule"]);
@@ -39,6 +41,7 @@ class Tache_BDD {
         }
         return $tabTache;
     }
+
     public static function delete($identifiantBDD) {
         global $tab21;
         global $db;
@@ -46,4 +49,5 @@ class Tache_BDD {
         $result = mysqli_query($db, $sql);
     }
 }
+
 ?>
