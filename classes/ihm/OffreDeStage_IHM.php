@@ -31,7 +31,7 @@ class OffreDeStage_IHM {
 					    $tabF = Filiere::listerFilieres();
 
 					    for ($i = 0; $i < sizeof($tabF); $i++) {
-						if ($_POST['filiere'] == $tabF[$i]->getIdentifiantBDD())
+						if (isset($_POST['filiere']) && $_POST['filiere'] == $tabF[$i]->getIdentifiantBDD())
 						    echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
 						else
 						    echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
@@ -83,7 +83,7 @@ class OffreDeStage_IHM {
 					    $tabP = Parcours::listerParcours();
 
 					    for ($i = 0; $i < sizeof($tabP); $i++) {
-						if ($_POST['parcours'] == $tabP[$i]->getIdentifiantBDD())
+						if (isset($_POST['parcours'])  && $_POST['parcours'] == $tabP[$i]->getIdentifiantBDD())
 						    echo "<option selected value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
 						else
 						    echo "<option value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
@@ -102,7 +102,7 @@ class OffreDeStage_IHM {
 					    $tabC = Competence::listerCompetences();
 
 					    for ($i = 0; $i < sizeof($tabC); $i++) {
-						if ($_POST['competence'] == $tabC[$i]->getIdentifiantBDD())
+						if (isset($_POST['competence']) && $_POST['competence'] == $tabC[$i]->getIdentifiantBDD())
 						    echo "<option selected value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";
 						else
 						    echo "<option value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";

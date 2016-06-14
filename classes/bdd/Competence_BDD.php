@@ -22,6 +22,7 @@ class Competence_BDD {
 
     public static function getCompetence($identifiantBDD) {
 	global $tab2;
+	global $db;
 	$sql = "SELECT * FROM $tab2 WHERE idcompetence='" . $identifiantBDD . "';";
 	$result = $db->query($sql);
 	return mysqli_fetch_array($result);

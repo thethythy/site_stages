@@ -46,6 +46,7 @@ class Couleur_BDD {
 
     public static function delete($identifiantBDD) {
 		global $tab20;
+		global $db;
 		$sql = "DELETE FROM $tab20 WHERE idcouleur='" . $identifiantBDD . "';";
 		$result = $db->query($sql);
 	}

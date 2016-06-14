@@ -121,6 +121,7 @@ class FluxRSS {
 
 	// Suppression du fichier XML contenant le flux et suppression du contenu de la base
 	public static function deleteFlux() {
+		global $db;
 		if (@unlink("../../flux/fluxrss.xml")) {
 			return $db->query("TRUNCATE TABLE fluxrss");
 		}
@@ -134,6 +135,7 @@ class FluxRSS {
 
 	// Initialisation du flux (à exécuter une seule fois)
 	public static function initialise() {
+		global $db;
 		// Création du fichier XML
 		$file = FluxRSS::createXML();
 
@@ -149,6 +151,7 @@ class FluxRSS {
 
 	// Mise à jour du flux
 	public static function miseAJour($title, $link, $timestamp, $contents, $author) {
+		global $db;
 		// Ajout de la news dans la base de données
 		$db->query("INSERT INTO fluxrss (title, link, timestamp, contents, author) VALUES ('" . $title . "','" . $link . "','" . $timestamp . "','" . $contents . "','" . $author . "')") or die();
 

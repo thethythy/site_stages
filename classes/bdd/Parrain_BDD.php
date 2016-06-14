@@ -61,6 +61,7 @@ class Parrain_BDD{
 
 	public static function delete($identifiantBDD){
 		global $tab14;
+		global $db;
 		$sql = "DELETE FROM $tab14 WHERE idparrain='$identifiantBDD'";
 		$db->query($sql);
 	}

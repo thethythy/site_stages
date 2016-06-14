@@ -79,15 +79,17 @@ class DateSoutenance_BDD {
 
     public static function delete($identifiantBDD) {
 	global $tab5;
+	global $db;
 	$sql = "DELETE FROM $tab5 WHERE iddatesoutenance='$identifiantBDD';";
 	$result = $db->query($sql);
-	  }
+    }
 
     public static function deleteDatePromo($identifiantBDD) {
 	global $tab1;
+	global $db;
 	$sql = "DELETE FROM $tab1 WHERE iddatesoutenance='$identifiantBDD';";
 	$result = $db->query($sql);
-	  }
+    }
 
 }
 

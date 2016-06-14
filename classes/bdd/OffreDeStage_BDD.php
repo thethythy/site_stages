@@ -120,8 +120,11 @@ class offreDeStage_BDD {
 	global $tab11;
 	global $tab12;
 	global $tab8;
-	$sql = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
-	$result = $db->query($sqldata = mysqli_fetch_array($result));
+	global $db;
+
+	$sql2 = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
+	$result = $db->query($sql2);
+	$data = mysqli_fetch_array($result);
 	$tabOffreDeStage = array();
 
 	array_push($tabOffreDeStage, $data['idoffre']);
@@ -130,7 +133,7 @@ class offreDeStage_BDD {
 	array_push($tabOffreDeStage, $data['listeenvironnement']);
 
 	$sql2 = "SELECT * FROM $tab8 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql);
+	$res = $db->query($sql2);
 	$tabThemes = array();
 	while ($theme = mysqli_fetch_array($res)) {
 	    array_push($tabThemes, $theme['idparcours']);
@@ -138,7 +141,7 @@ class offreDeStage_BDD {
 	array_push($tabOffreDeStage, $tabThemes);
 
 	$sql2 = "SELECT * FROM $tab7 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql);
+	$res = $db->query($sql2);
 	$tabProfils = array();
 	while ($profil = mysqli_fetch_array($res)) {
 	    array_push($tabProfils, $profil['idfiliere']);
@@ -152,7 +155,7 @@ class offreDeStage_BDD {
 	array_push($tabOffreDeStage, $data['estVisible']);
 
 	$sql2 = "SELECT * FROM $tab11 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql);
+	$res = $db->query($sql2);
 	$tabCompetences = array();
 	while ($competence = mysqli_fetch_array($res)) {
 	    array_push($tabCompetences, $competence['idcompetence']);
@@ -222,7 +225,7 @@ class offreDeStage_BDD {
 	    array_push($tab, $ods['listeenvironnement']);
 
 	    $sql2 = "SELECT * FROM " . $tab8 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql);
+	    $res = $db->query($sql2);
 	    $tabThemes = array();
 	    while ($theme = mysqli_fetch_array($res)) {
 		array_push($tabThemes, $theme['idparcours']);
@@ -230,7 +233,7 @@ class offreDeStage_BDD {
 	    array_push($tab, $tabThemes);
 
 	    $sql2 = "SELECT * FROM " . $tab7 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql);
+	    $res = $db->query($sql2);
 	    $tabProfils = array();
 	    while ($profil = mysqli_fetch_array($res)) {
 		array_push($tabProfils, $profil['idfiliere']);
@@ -244,7 +247,7 @@ class offreDeStage_BDD {
 	    array_push($tab, $ods['estVisible']);
 
 	    $sql2 = "SELECT * FROM " . $tab11 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql);
+	    $res = $db->query($sql2);
 	    $tabCompetences = array();
 	    while ($competence = mysqli_fetch_array($res)) {
 		array_push($tabCompetences, $competence['idcompetence']);

@@ -28,7 +28,7 @@ $tab20 = 'couleur';
 $tab21 = 'taches';
 
 function deconnexion() {
-	global $db;
+    global $db;
     mysqli_close($db);
 }
 
@@ -37,28 +37,28 @@ function deconnexion() {
 
 function filterParameters($param) {
 
-	global $db;
+    global $db;
 
     // Est-ce que le paramètre est un tableau ?
     if (is_array($param)) {
-		// Alors parcourir le tableau
-		foreach ($param as $key => $value) {
-	    	// Es-ce que la valeur est elle-même un tableau
-	    	if (is_array($param[$key]))
-			// Alors appel récursif
-			$param[$key] = filterParameters($param[$key]);
+	// Alors parcourir le tableau
+	foreach ($param as $key => $value) {
+	    // Es-ce que la valeur est elle-même un tableau
+	    if (is_array($param[$key]))
+		// Alors appel récursif
+		$param[$key] = filterParameters($param[$key]);
 
-	    	// Est-ce que le paramètre est une chaîne ?
-	    	if (is_string($param[$key]))
-				// Alors échaper le paramètre
-				$param[$key] = mysqli_real_escape_string($db,$param[$key]);
-		}
-    }	
+	    // Est-ce que le paramètre est une chaîne ?
+	    if (is_string($param[$key]))
+		// Alors échaper le paramètre
+		$param[$key] = mysqli_real_escape_string($db,$param[$key]);
+	}
+    }
 
     // Est-ce que le paramètre est une chaîne ?
     if (is_string($param))
-		// Alors échaper le paramètre
-		$param = $db->real_escape_string($param);
+	// Alors échaper le paramètre
+	$param = $db->real_escape_string($param);
 
     // Return the filtered result
     return $param;
@@ -82,8 +82,10 @@ foreach ($_COOKIE as $key => $value) {
 }
 
 // Prévention contre les injection SQL dans les variables SESSION
-foreach ($_SESSION as $key => $value) {
-    $_SESSION[$key] = filterParameters($value);
+if (isset($_SESSION)) {
+    foreach ($_SESSION as $key => $value) {
+	$_SESSION[$key] = filterParameters($value);
+    }
 }
 
 // Prévention contre les injection SQL dans les variables FILES

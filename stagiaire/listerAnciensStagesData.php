@@ -47,11 +47,11 @@ if (isset($_POST['annee']) && $_POST['annee'] != "") {
 }
 
 // Si une recherche sur le parcours est demandé
-if ($_POST['parcours'] != '*')
+if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 	array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
-	
+
 // Si une recherche sur la filiere est demandée
-if ($_POST['filiere'] != '*')
+if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
 	array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
 $filtre = $filtres[0];
@@ -65,23 +65,23 @@ $tabPromos = Promotion_BDD::getListePromotions($filtre);
 if (sizeof($tabPromos) > 0) {
 	// Récupération des étudiants ayant une convention
 	$tabEtuWithConv = array();
-	
+
 	for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 		if ($tabEtudiants[$i]->getConvention($annee) != null)
 			array_push($tabEtuWithConv, $tabEtudiants[$i]);
 	}
-	
+
 	// Si il y a au moins un étudiant avec une convention
 	if (sizeof($tabEtuWithConv) > 0) {
 		// Affichage des stages des étudiants
-		
+
 		echo "<table>
 				<tr id='entete'>
 					<td width='35%'>Entreprise</td>
 					<td width='35%'>Contact</td>
 					<td width='30%'>Stagiaire</td>
 				</tr>";
-		
+
 		for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
 			$promotion = $tabEtuWithConv[$i]->getPromotion($annee);
 			$promo_parcours = $promotion->getParcours();
@@ -89,7 +89,7 @@ if (sizeof($tabPromos) > 0) {
 			$conv = $tabEtuWithConv[$i]->getConvention($annee);
 			$contact = $conv->getContact();
 			$entreprise = $contact->getEntreprise();
-			
+
 			?>
 				<tr id="ligne<?php echo $i%2; ?>">
 					<td>
@@ -104,13 +104,13 @@ if (sizeof($tabPromos) > 0) {
 					<td>
 						<?php
 							echo $contact->getNom()." ".$contact->getPrenom()."<br/>";
-							
+
 							if ($contact->getTelephone() != "")
 								echo "Tel : ".$contact->getTelephone()."<br/>";
-							
+
 							if ($contact->getTelecopie() != "")
 								echo "Fax : ".$contact->getTelecopie()."<br/>";
-							
+
 							if ($contact->getEmail() != "")
 								echo "Email : ".$contact->getEmail();
 						?>
@@ -124,13 +124,13 @@ if (sizeof($tabPromos) > 0) {
 									?>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td width="50%">
 									Résumé :
 								</td>
 								<td width="50%">
-									<a href="./ficheDeStage.php?annee=<?php echo $annee; ?>&parcours=<?php echo $parcours; ?>&filiere=<?php echo $filiere; ?>&idEtu=<?php echo $tabEtuWithConv[$i]->getIdentifiantBDD(); ?>&idPromo=<?php echo $promotion->getIdentifiantBDD(); ?>" target="_blank">
+									<a href="./ficheDeStage.php?annee=<?php echo $annee; ?>&parcours=<?php echo $promo_parcours->getIdentifiantBDD(); ?>&filiere=<?php echo $promo_filiere->getIdentifiantBDD(); ?>&idEtu=<?php echo $tabEtuWithConv[$i]->getIdentifiantBDD(); ?>&idPromo=<?php echo $promotion->getIdentifiantBDD(); ?>" target="_blank">
 										<img src="../images/resume.png" />
 									</a>
 								</td>

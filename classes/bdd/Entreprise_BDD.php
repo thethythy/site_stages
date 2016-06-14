@@ -71,7 +71,7 @@ class Entreprise_BDD {
 	    $requete = "SELECT * FROM $tab6 WHERE " . $filtres->getStrFiltres() . " ORDER BY nom ASC;";
 
 	//echo $requete."<br/>";
-	$result = $db->query($req);
+	$result = $db->query($requete);
 
 	$tabEntreprises = array();
 
