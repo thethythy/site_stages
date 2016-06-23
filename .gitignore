@@ -2,4 +2,7 @@ nbproject
 *.log
 *.bak
 *.db
+*.zip
 .DS_Store
+documents/statistiques/*
+documents/exportations/*

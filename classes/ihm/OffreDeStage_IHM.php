@@ -3,6 +3,9 @@
 class OffreDeStage_IHM {
 
     public static function afficherFormulaireRecherche($fichier) {
+	$tabF = Filiere::listerFilieres();
+	$tabP = Parcours::listerParcours();
+	$tabC = Competence::listerCompetences();
 	?>
 	<form action="javascript:">
 	    <table width="100%">
@@ -12,46 +15,43 @@ class OffreDeStage_IHM {
 			    <tr>
 				<td>Nom de l'entreprise</td>
 				<td>
-				    <input id="nom" type="text" value="<?php if (isset($_POST['nom'])) { echo $_POST['nom']; } ?>" name="nom"/>
+				    <input id="nom" type="text" name="nom" value="<?php if (isset($_POST['nom'])) { echo $_POST['nom'];} ?>"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>NumÈro dÈpartement (ou code postal)</td>
+				<td>Num√©ro d√©partement (ou code postal)</td>
 				<td>
-				    <input id="cp" type="text" value="<?php if (isset($_POST['cp'])) { echo $_POST['cp']; } ?>"name="cp"/>
+				    <input id="cp" type="text" name="cp" value="<?php if (isset($_POST['cp'])) { echo $_POST['cp']; } ?>"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>DiplÙme</td>
+				<td>Dipl√¥me</td>
 				<td>
 				    <select id="filiere" name="filiere">
 					<?php
-					    echo "<option value='*'>Tous</option>";
-
-					    $tabF = Filiere::listerFilieres();
-
-					    for ($i = 0; $i < sizeof($tabF); $i++) {
-						if (isset($_POST['filiere']) && $_POST['filiere'] == $tabF[$i]->getIdentifiantBDD())
-						    echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
-						else
-						    echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
-					    }
+					echo "<option value='*'>Tous</option>";
+					for ($i = 0; $i < sizeof($tabF); $i++) {
+					    if (isset($_POST['filiere']) && $_POST['filiere'] == $tabF[$i]->getIdentifiantBDD())
+						echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+					    else
+						echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+					}
 					?>
 				    </select>
 				</td>
 			    </tr>
 			    <tr>
-				<td>DurÈe</td>
+				<td>Dur√©e</td>
 				<td>
-				    <select id="duree" name="duree"><option value='*'>IndiffÈrent </option>
+				    <select id="duree" name="duree"><option value='*'>Indiff√©rent </option>
 					<?php
-					    for ($i = 1; $i <= 12; $i++) {
-						if (isset($_POST['duree']) && $_POST['duree'] == $i) {
-						    echo "<option selected value='$i'>$i</option>";
-						} else {
-						    echo"<option value='$i'>$i</option>";
-						}
+					for ($i = 1; $i <= 12; $i++) {
+					    if (isset($_POST['duree']) && $_POST['duree'] == $i) {
+						echo "<option selected value='$i'>$i</option>";
+					    } else {
+						echo"<option value='$i'>$i</option>";
 					    }
+					}
 					?>
 				    </select>
 				    mois
@@ -64,49 +64,43 @@ class OffreDeStage_IHM {
 			    <tr>
 				<td>Ville</td>
 				<td>
-				    <input id="ville" type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>" name="ville"/>
+				    <input id="ville" type="text" name="ville" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>"/>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Pays</td>
 				<td>
-				    <input id="pays" type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } ?>" name="pays"/>
+				    <input id="pays" type="text" name="pays" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } ?>" />
 				</td>
 			    </tr>
 			    <tr>
-				<td>SpÈcialitÈ</td>
+				<td>Sp√©cialit√©</td>
 				<td>
 				    <select id="parcours" name="parcours">
 					<?php
-					    echo "<option value='*'>Toutes</option>";
-
-					    $tabP = Parcours::listerParcours();
-
-					    for ($i = 0; $i < sizeof($tabP); $i++) {
-						if (isset($_POST['parcours'])  && $_POST['parcours'] == $tabP[$i]->getIdentifiantBDD())
-						    echo "<option selected value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
-						else
-						    echo "<option value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
-					    }
+					echo "<option value='*'>Toutes</option>";
+					for ($i = 0; $i < sizeof($tabP); $i++) {
+					    if (isset($_POST['parcours']) && $_POST['parcours'] == $tabP[$i]->getIdentifiantBDD())
+						echo "<option selected value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
+					    else
+						echo "<option value='" . $tabP[$i]->getIdentifiantBDD() . "'>" . $tabP[$i]->getNom() . "</option>";
+					}
 					?>
 				    </select>
 				</td>
 			    </tr>
 			    <tr>
-				<td>CompÈtence</td>
+				<td>Comp√©tence</td>
 				<td>
 				    <select id="competence" name="competence">
 					<?php
-					    echo "<option value='*'>Toutes</option>";
-
-					    $tabC = Competence::listerCompetences();
-
-					    for ($i = 0; $i < sizeof($tabC); $i++) {
-						if (isset($_POST['competence']) && $_POST['competence'] == $tabC[$i]->getIdentifiantBDD())
-						    echo "<option selected value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";
-						else
-						    echo "<option value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";
-					    }
+					echo "<option value='*'>Toutes</option>";
+					for ($i = 0; $i < sizeof($tabC); $i++) {
+					    if (isset($_POST['competence']) && $_POST['competence'] == $tabC[$i]->getIdentifiantBDD())
+						echo "<option selected value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";
+					    else
+						echo "<option value='" . $tabC[$i]->getIdentifiantBDD() . "'>" . $tabC[$i]->getNom() . "</option>";
+					}
 					?>
 				    </select>
 				</td>
@@ -116,22 +110,22 @@ class OffreDeStage_IHM {
 		</tr>
 	    </table>
 	</form>
-
 	<script type="text/javascript">
 	    var table_onchange = new Array("filiere", "parcours", "duree", "competence");
 	    new LoadData(table_onchange, "<?php echo $fichier; ?>", "onchange");
 	    var table_onkeyup = new Array("nom", "ville", "cp", "pays");
 	    new LoadData(table_onkeyup, "<?php echo $fichier; ?>", "onkeyup");
 	</script>
-
-    <?php
+	<?php
     }
 
     public static function afficherFormulaireSaisie() {
+	$tabCompetences = Competence::listerCompetences();
+	$tabFilieres = Filiere::listerFilieres();
 	?>
 	<script language="javascript">
-	    var compteur = 0; // Compteur des compÈtences ajoutÈes
-	    function ajout_competence(){
+	    var compteur = 0; // Compteur des comp√©tences ajout√©es
+	    function ajout_competence() {
 		var child1 = document.createTextNode("Nom : ");
 		var child2 = document.createElement("input");
 		var child3 = document.createElement("br");
@@ -144,11 +138,10 @@ class OffreDeStage_IHM {
 	    }
 	</script>
 
-	<p>Les champs marquÈs d'une * sont obligatoires</p>
+	<p>Les champs marqu√©s d'une * sont obligatoires</p>
 
 	<FORM METHOD="POST" ACTION="">
-
-	    <!-- Dans le cas d'une modification d'une offre de stage -->
+	    <!-- Dans le cas d'une cr√©ation d'une offre de stage -->
 	    <table id="table_saisieOffreDeStage">
 		<tr>
 		    <td>
@@ -158,7 +151,7 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<th>Titre du stage (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } ?>" name="titre" size="100"/></td>
+				<td><input type="text" name="titre" size="100" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } ?>"/></td>
 			    </tr>
 			    <tr>
 				<th>Sujet du stage (*) :</th>
@@ -168,34 +161,33 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>CompÈtence(s) (*) :</th>
+				<th>Comp√©tence(s) (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    <table>
-					<!-- RÈcupÈration des compÈtences -->
-					<?php
-					$tabCompetences = Competence::listerCompetences();
-					for ($i = 0; $i < sizeof($tabCompetences); $i++) {
-					    if ($i % 6 == 0) {
-						echo "<tr>";
-					    }
-					    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
-						echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-					    } else {
-						echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-					    }
-					    if ($i % 6 == 6) {
-						echo "</tr>";
-					    }
+				<table>
+				    <!-- R√©cup√©ration des comp√©tences -->
+				    <?php
+				    for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+					if ($i % 6 == 0) {
+					    echo "<tr>";
 					}
-					?>
-				    </table>
+					if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+					    echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+					} else {
+					    echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+					}
+					if ($i % 6 == 6) {
+					    echo "</tr>";
+					}
+				    }
+				    ?>
+				</table>
 				</td>
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    <input type="button" value="Ajouter une compÈtence" onClick="ajout_competence()"/>
+				    <input type="button" value="Ajouter une comp√©tence" onClick="ajout_competence()"/>
 				    <div id="ajout_competence"></div>
 				</td>
 			    </tr>
@@ -206,7 +198,7 @@ class OffreDeStage_IHM {
 				<td colspan="2">
 				    <table>
 					<tr>
-					    <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
+					    <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'";} ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
 					    <td width="100"><input <?php if (isset($_POST['environnementUnix'])) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"> Unix/Linux</td>
 					    <td width="100"><input <?php if (isset($_POST['environnementMac'])) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"> Macintosh</td>
 					</tr>
@@ -214,27 +206,26 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th>Profil souhaitÈ (*) :</th>
+				<th>Profil souhait√© (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- RÈcupÈration des filiËres -->
+					<!-- R√©cup√©ration des fili√®res -->
 					<?php
-					    $tabFilieres = Filiere::listerFilieres();
-					    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
-						if ($i % 5 == 0) {
-						    echo "<tr>";
-						}
-						if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
-						    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-						} else if ($tabFilieres[$i]->getAffDepot() == 1) {
-						    echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-						}
-						if ($i % 5 == 5) {
-						    echo "</tr>";
-						}
+					for ($i = 0; $i < sizeof($tabFilieres); $i++) {
+					    if ($i % 5 == 0) {
+						echo "<tr>";
 					    }
+					    if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
+						echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+					    } else if ($tabFilieres[$i]->getAffDepot() == 1) {
+						echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+					    }
+					    if ($i % 5 == 5) {
+						echo "</tr>";
+					    }
+					}
 					?>
 				    </table>
 				</td>
@@ -243,33 +234,33 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>DurÈe (*) :</th>
-				<td>Entre <select name="dureeMin">
-					    <?php
-						for ($i = 1; $i <= 12; $i++) {
-						    if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
-							echo"<option selected value='$i'>$i</option>";
-						    } else {
-							echo"<option value='$i'>$i</option>";
-						    }
-						}
-					    ?>
+				<th>Dur√©e (*) :</th>
+				<td>Entre
+				    <select name="dureeMin">
+					<?php
+					for ($i = 1; $i <= 12; $i++) {
+					    if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
+						echo"<option selected value='$i'>$i</option>";
+					    } else {
+						echo"<option value='$i'>$i</option>";
+					    }
+					}
+					?>
 				    </select> et <select name="dureeMax">
-					    <?php
-						for ($i = 1; $i <= 12; $i++) {
-						    if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
-							echo"<option selected value='$i'>$i</option>";
-						    } else {
-							echo"<option value='$i'>$i</option>";
-						    }
-						}
-					    ?>
-				    </select>
-				    mois
+					<?php
+					for ($i = 1; $i <= 12; $i++) {
+					    if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
+						echo"<option selected value='$i'>$i</option>";
+					    } else {
+						echo"<option value='$i'>$i</option>";
+					    }
+					}
+					?>
+				    </select> mois
 				</td>
 			    </tr>
 			    <tr>
-				<th>IndemnitÈs :</th>
+				<th>Indemnit√©s :</th>
 				<td><input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } ?>" name="indemnites" size="100"/></td>
 			    </tr>
 			    <tr>
@@ -295,7 +286,7 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<th>Ville (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>" name="ville" size="50"/></td>
+				    <td><input type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>" name="ville" size="50"/></td>
 			    </tr>
 			    <tr>
 				<th>Code postal (*) :</th>
@@ -306,7 +297,7 @@ class OffreDeStage_IHM {
 				<td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>Email DRH ou Èquivalent :</th>
+				<th>Email DRH ou √©quivalent :</th>
 				<td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
 			    </tr>
 			</table>
@@ -316,19 +307,19 @@ class OffreDeStage_IHM {
 		    <td>
 			<table id="presentation_saisieOffreDeStage">
 			    <tr id="entete2">
-				<td colspan=2>Contact ou maÓtre de stage</td>
+				<td colspan=2>Contact ou ma√Ætre de stage</td>
 			    </tr>
 			    <tr>
 				<th width='170'>Nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } ?>" name="nom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
-				<th>PrÈnom (*) :</th>
+				<th>Pr√©nom (*) :</th>
 				<td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } ?>" name="prenom_contact" size="50"/></td>
 			    </tr>
 			    <tr>
 				<th>Tel (*) :</th>
-				    <td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
+				<td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
 			    </tr>
 			    <tr>
 				<th>Fax :</th>
@@ -346,42 +337,43 @@ class OffreDeStage_IHM {
 		</tr>
 	    </table>
 	</FORM>
-    <?php
+	<?php
     }
 
-    public static function afficherFormulaireModification() { ?>
+    public static function afficherFormulaireModification() {
+	?>
 	<script language="javascript">
-	    function ajout_competence(){
-		var code="";
-		var compteur=parseInt(document.getElementById('compteur_competence').value);
-		code = "Nom : <input type='text' name='competence_ajout"+compteur+"'/><br/> ";
-		compteur+=1;
-		document.getElementById('compteur_competence').value=compteur;
-		document.getElementById('ajout_competence').innerHTML+=code;
+	    function ajout_competence() {
+		var code = "";
+		var compteur = parseInt(document.getElementById('compteur_competence').value);
+		code = "Nom : <input type='text' name='competence_ajout" + compteur + "'/><br/> ";
+		compteur += 1;
+		document.getElementById('compteur_competence').value = compteur;
+		document.getElementById('ajout_competence').innerHTML += code;
 	    }
 	</script>
 
-	<p>Les champs marquÈs d'une * sont obligatoires</p>
+	<p>Les champs marqu√©s d'une * sont obligatoires</p>
 
 	<FORM METHOD="POST" ACTION="">
 	    <!-- Dans le cas d'une modification d'une offre de stage -->
-	    <?php
-		if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-		    ?>
-			<input type="hidden" value="<?php echo $_GET['id']; ?>" name="idOffreDeStage"/>
-		    <?php
-			$modificationOffreDeStage = OffreDeStage::getOffreDeStage($_GET['id']);
-			$modificationCompetences = $modificationOffreDeStage->getListesCompetences();
-			$modificationThemes = $modificationOffreDeStage->getThemes();
-			$modificationProfils = $modificationOffreDeStage->getListeProfilSouhaite();
-			$modificationContact = $modificationOffreDeStage->getContact();
-			$modificationEntreprise = $modificationContact->getEntreprise();
-			$environnement = array();
-			$environnement = explode(";", $modificationOffreDeStage->getListeEnvironnements());
-		}
-	    ?>
+	<?php
+	if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+	?>
+	    <input type="hidden" value="<?php echo $_GET['id']; ?>" name="idOffreDeStage"/>
 
-	    <input type="hidden" value="<?php if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->estVisible(); } ?>" name="estVisible"/>
+	<?php
+	$modificationOffreDeStage = OffreDeStage::getOffreDeStage($_GET['id']);
+	$modificationCompetences = $modificationOffreDeStage->getListesCompetences();
+	$modificationThemes = $modificationOffreDeStage->getThemes();
+	$modificationProfils = $modificationOffreDeStage->getListeProfilSouhaite();
+	$modificationContact = $modificationOffreDeStage->getContact();
+	$modificationEntreprise = $modificationContact->getEntreprise();
+	$environnement = explode(";", $modificationOffreDeStage->getListeEnvironnements());
+	}
+	?>
+
+	    <input type="hidden" name="estVisible" value="<?php if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->estVisible(); } ?>"/>
 
 	    <table id="table_saisieOffreDeStage">
 		<tr>
@@ -392,62 +384,76 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<th>Titre du stage (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } else if (isset($modificationOffreDeStage)) { echo htmlentities($modificationOffreDeStage->getTitre(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="titre" size="100"></td>
+				<td>
+				    <input type="text" name="titre" size="100" value="<?php
+				    if (isset($_POST['titre'])) {
+					echo $_POST['titre'];
+				    } else if (isset($modificationOffreDeStage)) {
+					echo htmlentities($modificationOffreDeStage->getTitre(), ENT_QUOTES, 'utf-8');
+				    }
+				    ?>">
+				</td>
 			    </tr>
 			    <tr>
 				<th>Sujet du stage (*) :</th>
-				<td><textarea name="sujet"><?php if (isset($_POST['sujet'])) { echo $_POST['sujet']; } else if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->getSujet(); } ?></textarea></td>
+				<td>
+				    <textarea name="sujet"><?php
+				    if (isset($_POST['sujet'])) {
+					echo $_POST['sujet'];
+				    } else if (isset($modificationOffreDeStage)) {
+					echo $modificationOffreDeStage->getSujet();
+				    }
+				    ?></textarea>
+				</td>
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    Copier/coller le texte suivant pour insÈrer un lien html vers un document descriptif :<br/>
-				    <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDeStages/nom_document'>Commentaire</a>"); ?>
+				    Copier/coller le texte suivant pour ins√©rer un lien html vers un document descriptif :<br/>
+				<?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDeStages/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
 				</td>
 			    </tr>
 			    <tr>
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th colspan="2">CompÈtence(s) (*) :</th>
+				<th colspan="2">Comp√©tence(s) (*) :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- RÈcupÈration des compÈtences -->
-					<?php
-					    $tabCompetences = Competence::listerCompetences();
-					    for ($i = 0; $i < sizeof($tabCompetences); $i++) {
-						if ($i % 6 == 0) {
-						    echo "<tr>";
-						}
-						if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
-						    echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-						} else {
-						    $competenceTrouve = false;
-						    if (isset($modificationCompetences)) {
-							for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
-							    if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
-								$competenceTrouve = true;
-							    }
-							}
+				    <!-- R√©cup√©ration des comp√©tences -->
+				    <?php
+				    $tabCompetences = Competence::listerCompetences();
+				    for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+					if ($i % 6 == 0) { echo "<tr>";}
+
+					if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+					    echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+					} else {
+					    $competenceTrouve = false;
+					    if (isset($modificationCompetences)) {
+						for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
+						    if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
+							$competenceTrouve = true;
 						    }
-						    if ($competenceTrouve) {
-							echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-						    } else {
-							echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-						    }
-						}
-						if ($i % 6 == 6) {
-						    echo "</tr>";
 						}
 					    }
-					?>
+					    if ($competenceTrouve) {
+						echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+					    } else {
+						echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+					    }
+					}
+
+					if ($i % 6 == 6) { echo "</tr>"; }
+				    }
+				    ?>
 				    </table>
 				</td>
 			    </tr>
 			    <tr>
 				<td colspan="2">
-				    <input type="button" value="Ajouter une compÈtence" onClick="ajout_competence()">
+				    <input type="button" value="Ajouter une comp√©tence" onClick="ajout_competence()">
 				    <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
 				    <div id="ajout_competence"></div>
 				</td>
@@ -459,21 +465,21 @@ class OffreDeStage_IHM {
 				<td colspan="2">
 				    <table>
 					<tr>
-					    <?php
-						$winTrouve = false;
-						$unixTrouve = false;
-						$macTrouve = false;
-						if (isset($environnement)) {
-						    for ($i = 0; $i < sizeof($environnement); $i++) {
-							if ($environnement[$i] == "win")
-							    $winTrouve = true;
-							if ($environnement[$i] == "unix")
-							    $unixTrouve = true;
-							if ($environnement[$i] == "mac")
-							    $macTrouve = true;
-						    }
-						}
-					    ?>
+					<?php
+					$winTrouve = false;
+					$unixTrouve = false;
+					$macTrouve = false;
+					if (isset($environnement)) {
+					    for ($i = 0; $i < sizeof($environnement); $i++) {
+						if ($environnement[$i] == "win")
+						    $winTrouve = true;
+						if ($environnement[$i] == "unix")
+						    $unixTrouve = true;
+						if ($environnement[$i] == "mac")
+						    $macTrouve = true;
+					    }
+					}
+					?>
 					    <td width="100">
 						<input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
 					    </td>
@@ -488,78 +494,72 @@ class OffreDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<th colspan="2">ThËme du stage :</th>
+				<th colspan="2">Th√®me du stage :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- RÈcupÈration des parcours -->
-					<?php
-					$tabParcours = Parcours::listerParcours();
-					for ($i = 0; $i < sizeof($tabParcours); $i++) {
-					    if ($i % 5 == 0) {
-						echo "<tr>";
-					    }
-					    if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
-						echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-					    } else {
-						$themeTrouve = false;
-						if (isset($modificationThemes)) {
-						    for ($j = 0; $j < sizeof($modificationThemes); $j++) {
-							if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
-							    $themeTrouve = true;
-							}
+				    <!-- R√©cup√©ration des parcours -->
+				    <?php
+				    $tabParcours = Parcours::listerParcours();
+				    for ($i = 0; $i < sizeof($tabParcours); $i++) {
+					if ($i % 5 == 0) { echo "<tr>"; }
+
+					if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
+					    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+					} else {
+					    $themeTrouve = false;
+					    if (isset($modificationThemes)) {
+						for ($j = 0; $j < sizeof($modificationThemes); $j++) {
+						    if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
+							$themeTrouve = true;
 						    }
 						}
-						if ($themeTrouve) {
-						    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-						} else {
-						    echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-						}
 					    }
-					    if ($i % 5 == 5) {
-						echo "</tr>";
+					    if ($themeTrouve) {
+						echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+					    } else {
+						echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
 					    }
 					}
-					?>
+					if ($i % 5 == 5) { echo "</tr>"; }
+				    }
+				    ?>
 				    </table>
 				</td>
 			    </tr>
 			    <tr>
-				<th colspan="2">Profil souhaitÈ :</th>
+				<th colspan="2">Profil souhait√© :</th>
 			    </tr>
 			    <tr>
 				<td colspan="2">
 				    <table>
-					<!-- RÈcupÈration des filiËres -->
-					<?php
-					    $tabFilieres = Filiere::listerFilieres();
-					    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
-						if ($i % 5 == 0) {
-						    echo "<tr>";
-						}
-						if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
-						    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-						} else {
-						    $profilTrouve = false;
-						    if (isset($modificationProfils)) {
-							for ($j = 0; $j < sizeof($modificationProfils); $j++) {
-							    if ($modificationProfils[$j]->getIdentifiantBDD() == $tabFilieres[$i]->getIdentifiantBDD()) {
-								$profilTrouve = true;
-							    }
-							}
+				    <!-- R√©cup√©ration des fili√®res -->
+				    <?php
+				    $tabFilieres = Filiere::listerFilieres();
+				    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
+					if ($i % 5 == 0) { echo "<tr>"; }
+
+					if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
+					    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+					} else {
+					    $profilTrouve = false;
+					    if (isset($modificationProfils)) {
+						for ($j = 0; $j < sizeof($modificationProfils); $j++) {
+						    if ($modificationProfils[$j]->getIdentifiantBDD() == $tabFilieres[$i]->getIdentifiantBDD()) {
+							$profilTrouve = true;
 						    }
-						    if ($profilTrouve) {
-							echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-						    } else {
-							echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-						    }
-						}
-						if ($i % 5 == 5) {
-						    echo "</tr>";
 						}
 					    }
-					?>
+					    if ($profilTrouve) {
+						echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+					    } else {
+						echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+					    }
+					}
+					if ($i % 5 == 5) { echo "</tr>"; }
+				    }
+				    ?>
 				    </table>
 				</td>
 			    </tr>
@@ -567,40 +567,55 @@ class OffreDeStage_IHM {
 				<th colspan="2"><p/><hr/><p/></th>
 			    </tr>
 			    <tr>
-				<th>DurÈe (*) :</th>
+				<th>Dur√©e (*) :</th>
 				<td>Entre <select name="dureeMin">
-					<?php
-					    for ($i = 1; $i <= 12; $i++) {
-						if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) || (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i)) {
-						    echo"<option selected value='$i'>$i</option>";
-						} else {
-						    echo"<option value='$i'>$i</option>";
-						}
-					    }
-					?>
+				    <?php
+				    for ($i = 1; $i <= 12; $i++) {
+					if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+					    (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i)) {
+					    echo"<option selected value='$i'>$i</option>";
+					} else {
+					    echo"<option value='$i'>$i</option>";
+					}
+				    }
+				    ?>
 				    </select> et <select name="dureeMax">
-					<?php
-					    for ($i = 1; $i <= 12; $i++) {
-						if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMaximale() == $i) || (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i)) {
-						    echo"<option selected value='$i'>$i</option>";
-						} else {
-						    echo"<option value='$i'>$i</option>";
-						}
-					    }
-					?>
+				    <?php
+				    for ($i = 1; $i <= 12; $i++) {
+					if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMaximale() == $i) ||
+					    (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i)) {
+					    echo"<option selected value='$i'>$i</option>";
+					} else {
+					    echo"<option value='$i'>$i</option>";
+					}
+				    }
+				    ?>
 				    </select> mois
 				</td>
 			    </tr>
 			    <tr>
-				<th>IndemnitÈs :</th>
+				<th>Indemnit√©s :</th>
 				<td>
-				    <input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } else if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->getIndemnite(); } ?>" name="indemnites" size="50"/>
+				    <input type="text" name="indemnites" size="50" value="<?php
+					if (isset($_POST['indemnites'])) {
+					    echo $_POST['indemnites'];
+					} else if (isset($modificationOffreDeStage)) {
+					    echo $modificationOffreDeStage->getIndemnite();
+					}
+					?>"
+				    />
 				</td>
 			    </tr>
 			    <tr>
 				<th>Remarques diverses :</th>
 				<td>
-				    <textarea name="rmq"><?php if (isset($_POST['rmq'])) { echo $_POST['rmq']; } else if (isset($modificationOffreDeStage)) { echo $modificationOffreDeStage->getRemarques(); } ?></textarea>
+				    <textarea name="rmq"><?php
+					if (isset($_POST['rmq'])) {
+					    echo $_POST['rmq'];
+					} else if (isset($modificationOffreDeStage)) {
+					    echo $modificationOffreDeStage->getRemarques();
+					}
+					?></textarea>
 				</td>
 			    </tr>
 			</table>
@@ -614,27 +629,83 @@ class OffreDeStage_IHM {
 			    </tr>
 			    <tr>
 				<th width="170">Nom (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['nom_entreprise'])) { echo $_POST['nom_entreprise']; } else if (isset($modificationEntreprise)) { echo htmlentities($modificationEntreprise->getNom(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="nom_entreprise" size="50"/></td>
+				<td>
+				    <input type="text" name="nom_entreprise" size="50" value="<?php
+					if (isset($_POST['nom_entreprise'])) {
+					    echo $_POST['nom_entreprise'];
+					} else if (isset($modificationEntreprise)) {
+					    echo htmlentities($modificationEntreprise->getNom(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Adresse (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['adresse'])) { echo $_POST['adresse']; } else if (isset($modificationEntreprise)) { echo htmlentities($modificationEntreprise->getAdresse(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="adresse" size="50"/></td>
+				<td>
+				    <input type="text" name="adresse" size="50" value="<?php
+					if (isset($_POST['adresse'])) {
+					    echo $_POST['adresse'];
+					} else if (isset($modificationEntreprise)) {
+					    echo htmlentities($modificationEntreprise->getAdresse(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Ville (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } else if (isset($modificationEntreprise)) { echo htmlentities($modificationEntreprise->getVille(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="ville" size="50"></td>
+				<td>
+				    <input type="text" name="ville" size="50" value="<?php
+					if (isset($_POST['ville'])) {
+					    echo $_POST['ville'];
+					} else if (isset($modificationEntreprise)) {
+					    echo htmlentities($modificationEntreprise->getVille(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Code postal (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['codePostal'])) { echo $_POST['codePostal']; } else if (isset($modificationEntreprise)) { echo htmlentities($modificationEntreprise->getcodePostal(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="codePostal" size="50"/></td>
+				<td>
+				    <input type="text" name="codePostal" size="50" value="<?php
+					if (isset($_POST['codePostal'])) {
+					    echo $_POST['codePostal'];
+					} else if (isset($modificationEntreprise)) {
+					    echo htmlentities($modificationEntreprise->getcodePostal(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Pays :</th>
-				<td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else if (isset($modificationEntreprise)) { echo $modificationEntreprise->getPays(); } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
+				    <td>
+					<input type="text" name="pays" size="50" value="<?php
+					    if (isset($_POST['pays'])) {
+						echo $_POST['pays'];
+					    } else if (isset($modificationEntreprise)) {
+						echo $modificationEntreprise->getPays();
+					    } else {
+						echo 'FRANCE';
+					    }
+					    ?>"
+					/>
+				    </td>
 			    </tr>
 			    <tr>
-				<th>Email DRH ou Èquivalent :</th>
-				<td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"/></td>
+				<th>Email DRH ou √©quivalent :</th>
+				<td>
+				    <input type="text" name="email_entreprise" size="50" value="<?php
+					if (isset($_POST['email_entreprise'])) {
+					    echo $_POST['email_entreprise'];
+					} else {
+					    echo "";
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			</table>
 		    </td>
@@ -643,51 +714,98 @@ class OffreDeStage_IHM {
 		    <td colspan="2">
 			<table id="presentation_saisieOffreDeStage">
 			    <tr id="entete2">
-				<td colspan=2>Contact ou MaÓtre de stage</td>
+				<td colspan=2>Contact ou Ma√Ætre de stage</td>
 			    </tr>
 			    <tr>
 				<th width="170">Nom (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getNom(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="nom_contact" size="50"/></td>
+				<td>
+				    <input type="text" name="nom_contact" size="50" value="<?php
+					if (isset($_POST['nom_contact'])) {
+					    echo $_POST['nom_contact'];
+					} else if (isset($modificationContact)) {
+					    echo htmlentities($modificationContact->getNom(), ENT_QUOTES, 'utf-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
-				<th>PrÈnom (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getPrenom(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="prenom_contact" size="50"/></td>
+				<th>Pr√©nom (*) :</th>
+				<td>
+				    <input type="text" name="prenom_contact" size="50" value="<?php
+					if (isset($_POST['prenom_contact'])) {
+					    echo $_POST['prenom_contact'];
+					} else if (isset($modificationContact)) {
+					    echo htmlentities($modificationContact->getPrenom(), ENT_QUOTES, 'utf-8');
+					} ?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Tel (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getTelephone(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="tel_contact" size="50"/></td>
+				<td>
+				    <input type="text" name="tel_contact" size="50" value="<?php
+					if (isset($_POST['tel_contact'])) {
+					    echo $_POST['tel_contact'];
+					} else if (isset($modificationContact)) {
+					    echo htmlentities($modificationContact->getTelephone(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Fax :</th>
-				<td><input type="text" value="<?php if (isset($_POST['fax_contact'])) { echo $_POST['fax_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getTelecopie(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="fax_contact" size="50"/></td>
+				<td>
+				    <input type="text" name="fax_contact" size="50" value="<?php
+					if (isset($_POST['fax_contact'])) {
+					    echo $_POST['fax_contact'];
+					} else if (isset($modificationContact)) {
+					    echo htmlentities($modificationContact->getTelecopie(), ENT_QUOTES, 'UTF-8');
+					}
+					?>"
+				    />
+				</td>
 			    </tr>
 			    <tr>
 				<th>Email (*) :</th>
-				<td><input type="text" value="<?php if (isset($_POST['email_contact'])) { echo $_POST['email_contact']; } else if (isset($modificationContact)) { echo htmlentities($modificationContact->getEmail(), ENT_QUOTES, 'iso-8859-1'); } ?>" name="email_contact" size="50"/></td>
+				    <td>
+					<input type="text" name="email_contact" size="50" value="<?php
+					    if (isset($_POST['email_contact'])) {
+						echo $_POST['email_contact'];
+					    } else if (isset($modificationContact)) {
+						echo htmlentities($modificationContact->getEmail(), ENT_QUOTES, 'utf-8');
+					    }
+					    ?>"
+					/>
+				    </td>
 			    </tr>
 			</table>
 		    </td>
 		</tr>
 		<tr>
-		    <td colspan="2"><input type="submit" name="valider" value="Valider l'offre de stage"> <input type="submit" name="cancel" value="Effacer l'offre de stage"></td>
+		    <td colspan="2">
+			<input type="submit" name="valider" value="Valider l'offre de stage">
+			<input type="submit" name="cancel" value="Effacer l'offre de stage">
+		    </td>
 		</tr>
 	    </table>
 	</FORM>
-    <?php
+	<br/><br/>
+	<?php
     }
 
-    public static function visualiserOffre($offreDeStage, $page, $nom_init, $ville_init, $cp_init, $pays_init, $filiere_init, $parcours_init, $duree_init, $competence_init) {
-
-	    $competences = $offreDeStage->getListesCompetences();
-	    $themes = $offreDeStage->getThemes();
-	    $profils = $offreDeStage->getListeProfilSouhaite();
-	    $contact = $offreDeStage->getContact();
-	    $entreprise = $offreDeStage->getEntreprise();
-	    $environnement = array();
-	    $environnement = explode(";", $offreDeStage->getListeEnvironnements());
+    public static function visualiserOffre($offreDeStage, $page, $nom_init,
+	    $ville_init, $cp_init, $pays_init, $filiere_init, $parcours_init,
+	    $duree_init, $competence_init) {
+	$competences = $offreDeStage->getListesCompetences();
+	$themes = $offreDeStage->getThemes();
+	$profils = $offreDeStage->getListeProfilSouhaite();
+	$contact = $offreDeStage->getContact();
+	$entreprise = $offreDeStage->getEntreprise();
+	$environnement = explode(";", $offreDeStage->getListeEnvironnements());
 	?>
-
-	<table >
+	<table>
 	    <tr>
 		<td colspan=2>
 		    <table id="presentation_saisieOffreDeStage">
@@ -706,18 +824,18 @@ class OffreDeStage_IHM {
 			    <th colspan="2"><p/><hr/><p/></th>
 			</tr>
 			<tr>
-			    <th>CompÈtence(s) :</th>
+			    <th>Comp√©tence(s) :</th>
 			    <td>
-				<!-- RÈcupÈration des compÈtences -->
+				<!-- R√©cup√©ration des comp√©tences -->
 				<?php
-				    for ($i = 0; $i < sizeof($competences); $i++) {
-					$competence = Competence::getCompetence($competences[$i]->getIdentifiantBDD());
-					if ($i == (sizeof($competences) - 1)) {
-					    echo $competence->getNom();
-					} else {
-					    echo $competence->getNom() . ", ";
-					}
+				for ($i = 0; $i < sizeof($competences); $i++) {
+				    $competence = Competence::getCompetence($competences[$i]->getIdentifiantBDD());
+				    if ($i == (sizeof($competences) - 1)) {
+					echo $competence->getNom();
+				    } else {
+					echo $competence->getNom() . ", ";
 				    }
+				}
 				?>
 			    </td>
 			</tr>
@@ -725,51 +843,51 @@ class OffreDeStage_IHM {
 			    <th width="160">Environnement(s) :</th>
 			    <td>
 				<?php
-				    $winTrouve = false;
-				    $unixTrouve = false;
-				    $macTrouve = false;
-				    if (isset($environnement)) {
-					for ($i = 0; $i < sizeof($environnement); $i++) {
-					    if ($environnement[$i] == "win")
-						echo " Windows ";
-					    if ($environnement[$i] == "unix")
-						echo " Unix/Linux ";
-					    if ($environnement[$i] == "mac")
-						echo " Macintosh ";
-					}
+				$winTrouve = false;
+				$unixTrouve = false;
+				$macTrouve = false;
+				if (isset($environnement)) {
+				    for ($i = 0; $i < sizeof($environnement); $i++) {
+					if ($environnement[$i] == "win")
+					    echo " Windows ";
+					if ($environnement[$i] == "unix")
+					    echo " Unix/Linux ";
+					if ($environnement[$i] == "mac")
+					    echo " Macintosh ";
 				    }
+				}
 				?>
 			    </td>
 			</tr>
 			<tr>
-			    <th>ThËme du stage :</th>
+			    <th>Th√®me du stage :</th>
 			    <td>
-				<!-- RÈcupÈration des parcours -->
+				<!-- R√©cup√©ration des parcours -->
 				<?php
-				    for ($i = 0; $i < sizeof($themes); $i++) {
-					$parcours = Parcours::getParcours($themes[$i]->getIdentifiantBDD());
-					if ($i == (sizeof($themes) - 1)) {
-					    echo $parcours->getNom();
-					} else {
-					    echo $parcours->getNom() . ", ";
-					}
+				for ($i = 0; $i < sizeof($themes); $i++) {
+				    $parcours = Parcours::getParcours($themes[$i]->getIdentifiantBDD());
+				    if ($i == (sizeof($themes) - 1)) {
+					echo $parcours->getNom();
+				    } else {
+					echo $parcours->getNom() . ", ";
 				    }
+				}
 				?>
 			    </td>
 			</tr>
 			<tr>
-			    <th>Profil souhaitÈ :</th>
+			    <th>Profil souhait√© :</th>
 			    <td>
-				<!-- RÈcupÈration des filiËres -->
+				<!-- R√©cup√©ration des fili√®res -->
 				<?php
-				    for ($i = 0; $i < sizeof($profils); $i++) {
-					$filiere = Filiere::getFiliere($profils[$i]->getIdentifiantBDD());
-					if ($i == (sizeof($profils) - 1)) {
-					    echo $filiere->getNom();
-					} else {
-					    echo $filiere->getNom() . ", ";
-					}
+				for ($i = 0; $i < sizeof($profils); $i++) {
+				    $filiere = Filiere::getFiliere($profils[$i]->getIdentifiantBDD());
+				    if ($i == (sizeof($profils) - 1)) {
+					echo $filiere->getNom();
+				    } else {
+					echo $filiere->getNom() . ", ";
 				    }
+				}
 				?>
 			    </td>
 			</tr>
@@ -777,14 +895,12 @@ class OffreDeStage_IHM {
 			    <th colspan="2"><p/><hr/><p/></th>
 			</tr>
 			<tr>
-			    <th>DurÈe :</th>
+			    <th>Dur√©e :</th>
 			    <td>Entre <?php echo $offreDeStage->getDureeMinimale(); ?> et <?php echo $offreDeStage->getDureeMaximale(); ?> mois</td>
 			</tr>
 			<tr>
-			    <th>IndemnitÈs :</th>
-			    <td>
-				<?php if ($offreDeStage->getIndemnite()) { echo $offreDeStage->getIndemnite(); } else { echo " ";} ?>
-			    </td>
+			    <th>Indemnit√©s :</th>
+			    <td><?php if ($offreDeStage->getIndemnite()) { echo $offreDeStage->getIndemnite(); } else { echo " "; } ?></td>
 			</tr>
 			<tr>
 			    <th>Remarques diverses :</th>
@@ -826,14 +942,14 @@ class OffreDeStage_IHM {
 		<td colspan="2">
 		    <table id="presentation_saisieOffreDeStage">
 			<tr id="entete2">
-			    <td colspan="2">Contact ou MaÓtre de stage</td>
+			    <td colspan="2">Contact ou Ma√Ætre de stage</td>
 			</tr>
 			<tr>
 			    <th width="160">Nom :</th>
 			    <td><?php echo $contact->getNom(); ?></td>
 			</tr>
 			<tr>
-			    <th>PrÈnom :</th>
+			    <th>Pr√©nom :</th>
 			    <td><?php echo $contact->getPrenom(); ?></td>
 			</tr>
 			<tr>
@@ -852,24 +968,222 @@ class OffreDeStage_IHM {
 		</td>
 	    </tr>
 	    <tr>
-	    <td align="center">
-		<FORM width="500" method="post" action="<?php echo $page; ?>">
-		    <?php if ($nom_init != "") echo "<input type='hidden' value='" . $nom_init . "' name='nom'/>" ?>
-		    <?php if ($ville_init != "") echo "<input type='hidden' value='" . $ville_init . "' name='ville'/>" ?>
-		    <?php if ($cp_init != "") echo "<input type='hidden' value=" . $cp_init . " name='cp'/>" ?>
-		    <?php if ($pays_init != "") echo "<input type='hidden' value=" . $pays_init . " name='pays'/>" ?>
-		    <?php if ($filiere_init != "") echo "<input type='hidden' value=$filiere_init name='filiere'/>" ?>
-		    <?php if ($parcours_init != "") echo "<input type='hidden' value=$parcours_init name='parcours'/>" ?>
-		    <?php if ($duree_init != "") echo "<input type='hidden' value=$duree_init name='duree'/>" ?>
-		    <?php if ($competence_init != "") echo "<input type='hidden' value=$competence_init name='competence'/>" ?>
-		    <input type="hidden" value="1" name="rech" />
-		    <input type="submit" value="Retour"/>
-		</form>
-	    </td>
-	</tr>
-    </table>
+		<td align="center">
+		    <FORM width="500" method="post" action="<?php echo $page; ?>">
+			<?php if ($nom_init != "") echo "<input type='hidden' value='" . $nom_init . "' name='nom'/>" ?>
+			<?php if ($ville_init != "") echo "<input type='hidden' value='" . $ville_init . "' name='ville'/>" ?>
+			<?php if ($cp_init != "") echo "<input type='hidden' value=" . $cp_init . " name='cp'/>" ?>
+			<?php if ($pays_init != "") echo "<input type='hidden' value=" . $pays_init . " name='pays'/>" ?>
+			<?php if ($filiere_init != "") echo "<input type='hidden' value=$filiere_init name='filiere'/>" ?>
+			<?php if ($parcours_init != "") echo "<input type='hidden' value=$parcours_init name='parcours'/>" ?>
+			<?php if ($duree_init != "") echo "<input type='hidden' value=$duree_init name='duree'/>" ?>
+			<?php if ($competence_init != "") echo "<input type='hidden' value=$competence_init name='competence'/>" ?>
+			<input type="hidden" value="1" name="rech" />
+			<input type="submit" value="Retour"/>
+		    </form>
+		</td>
+	    </tr>
+	</table>
     <?php
     }
 
+    public static function afficherListeOffres($tabOffreDeStages) {
+	?>
+	<br/>
+	<table width="100%">
+	    <tr id="entete">
+		<td width="30%">Titre</td>
+		<td width="35%">Entreprise</td>
+		<td width="15%">Dipl√¥me</td>
+		<td width="15%">Sp√©cialit√©</td>
+		<td align="center" width="5%">Visualiser</td>
+	    </tr>
+
+	<?php
+	$cpt = 0;
+	for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
+	    if ($tabOffreDeStages[$i]->estVisible()) {
+	?>
+	    <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+		<td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
+		<td>
+		    <?php
+		    $entreprise = $tabOffreDeStages[$i]->getEntreprise();
+		    echo $entreprise->getNom();
+		    ?>
+		</td>
+		<td>
+		    <?php
+		    $profil = $tabOffreDeStages[$i]->getListeProfilSouhaite();
+		    for ($j = 0; $j < sizeof($profil); $j++) {
+			if ($j == (sizeof($profil) - 1)) {
+			    echo $profil[$j]->getNom();
+			} else {
+			    echo $profil[$j]->getNom() . " / ";
+			}
+		    }
+		    ?>
+		</td>
+		<td>
+		    <?php
+		    $themes = $tabOffreDeStages[$i]->getThemes();
+		    for ($j = 0; $j < sizeof($themes); $j++) {
+			if ($j == (sizeof($themes) - 1)) {
+			    echo $themes[$j]->getNom();
+			} else {
+			    echo $themes[$j]->getNom() . " / ";
+			}
+		    }
+		    ?>
+		</td>
+		<td align="center">
+		    <a href="./visualiserOffre.php?id=<?php
+			$chaine = $tabOffreDeStages[$i]->getIdentifiantBDD();
+			if (isset($_POST['nom'])) $chaine = $chaine . "&nom=" . $_POST['nom'];
+			if (isset($_POST['ville'])) $chaine = $chaine . "&ville=" . $_POST['ville'];
+			if (isset($_POST['cp'])) $chaine = $chaine . "&cp=" . $_POST['cp'];
+			if (isset($_POST['pays'])) $chaine = $chaine . "&pays=" . $_POST['pays'];
+			if (isset($_POST['filiere'])) $chaine = $chaine . "&filiere=" . $_POST['filiere'];
+			if (isset($_POST['parcours'])) $chaine = $chaine . "&parcours=" . $_POST['parcours'];
+			if (isset($_POST['duree'])) $chaine = $chaine . "&duree=" . $_POST['duree'];
+			if (isset($_POST['competence'])) $chaine = $chaine . "&competence=" . $_POST['competence'];
+			echo $chaine;
+			?>">
+		    <img src="../images/search.png"></a>
+		</td>
+	    </tr>
+	    <?php
+	    }
+	}
+	?>
+	</table>
+	<br/><br/>
+	<?php
+    }
+
+    public static function afficherListeOffresAEditer($tabOffreDeStages) {
+	$cpt = 0;
+	$enteteAffichee = false;
+
+	for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
+	    if (!$tabOffreDeStages[$i]->estVisible()) {
+		if (!$enteteAffichee) {
+		    $enteteAffichee = true;
+		    ?>
+		    <p>Voici la liste des offres de stage qui restent √† traiter :</p>
+		    <table width="100%">
+			<tr id="entete">
+			    <td width="30%">Titre</td>
+			    <td width="35%">Entreprise</td>
+			    <td width="13%">Dipl√¥me</td>
+			    <td width="13%">Sp√©cialit√©</td>
+			    <td align="center" width="9%">A Valider</td>
+			</tr>
+		    <?php
+		}
+		?>
+			<tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+			    <td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
+			    <td><?php
+				$entreprise = $tabOffreDeStages[$i]->getEntreprise();
+				echo $entreprise->getNom();
+				?>
+			    </td>
+			    <td><?php
+				$profil = $tabOffreDeStages[$i]->getListeProfilSouhaite();
+				for ($j = 0; $j < sizeof($profil); $j++) {
+				    if ($j == (sizeof($profil) - 1)) {
+					echo $profil[$j]->getNom();
+				    } else {
+					echo $profil[$j]->getNom() . " / ";
+				    }
+				}
+				?>
+			    </td>
+			    <td><?php
+				$themes = $tabOffreDeStages[$i]->getThemes();
+				for ($j = 0; $j < sizeof($themes); $j++) {
+				    if ($j == (sizeof($themes) - 1)) {
+					echo $themes[$j]->getNom();
+				    } else {
+					echo $themes[$j]->getNom() . " / ";
+				    }
+				}
+				?>
+			    </td>
+			    <td align="center">
+				<a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDeStages[$i]->getIdentifiantBDD(); ?>">
+				    <img src="../../images/search.png">
+				</a>
+			    </td>
+			</tr>
+		<?php
+	    }
+	}
+
+	if ($cpt == 0) {
+	    echo "<p>Toutes les offres de stages ont √©t√© valid√©es.</p>";
+	}
+
+	?>
+	<table width="100%">
+	    <tr id="entete">
+		<td width="30%">Titre</td>
+		<td width="35%">Entreprise</td>
+		<td width="13%">Dipl√¥me</td>
+		<td width="13%">Sp√©cialit√©</td>
+		<td align="center" width="9%">Visualiser</td>
+	    </tr>
+
+	    <?php
+	    $cpt = 0;
+	    echo "<p>Voici la liste des offres de stage disponibles sur le site des stages : </p>";
+	    for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
+		if ($tabOffreDeStages[$i]->estVisible()) {
+	    ?>
+	    <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+		<td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
+		<td><?php
+		    $entreprise = $tabOffreDeStages[$i]->getEntreprise();
+		    echo $entreprise->getNom();
+		    ?>
+		</td>
+		<td><?php
+		    $profil = $tabOffreDeStages[$i]->getListeProfilSouhaite();
+		    for ($j = 0; $j < sizeof($profil); $j++) {
+			if ($j == (sizeof($profil) - 1)) {
+			    echo $profil[$j]->getNom();
+			} else {
+			    echo $profil[$j]->getNom() . " / ";
+			}
+		    }
+		    ?>
+		</td>
+		<td><?php
+		    $themes = $tabOffreDeStages[$i]->getThemes();
+		    for ($j = 0; $j < sizeof($themes); $j++) {
+			if ($j == (sizeof($themes) - 1)) {
+			    echo $themes[$j]->getNom();
+			} else {
+			    echo $themes[$j]->getNom() . " / ";
+			}
+		    }
+		    ?>
+		</td>
+		<td align="center">
+		    <a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDeStages[$i]->getIdentifiantBDD(); ?>">
+		        <img src="../../images/search.png">
+		    </a>
+		</td>
+	    </tr>
+	    <?php
+	    }
+	}
+	?>
+        </table>
+        <br/><br/>
+	<?php
+    }
 }
+
 ?>

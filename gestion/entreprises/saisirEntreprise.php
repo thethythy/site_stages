@@ -2,61 +2,65 @@
 
 $chemin = "../../classes/";
 
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."ihm/IHM_Generale.php");
-include_once($chemin."ihm/Entreprise_IHM.php");
-include_once($chemin."moteur/Entreprise.php");
+include_once($chemin . "bdd/connec.inc");
+include_once($chemin . "ihm/IHM_Generale.php");
+
+include_once($chemin . "ihm/Entreprise_IHM.php");
+include_once($chemin . "bdd/Entreprise_BDD.php");
+include_once($chemin . "moteur/Entreprise.php");
+
+include_once($chemin . "bdd/TypeEntreprise_BDD.php");
+include_once($chemin . "moteur/TypeEntreprise.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
+
 IHM_Generale::header("Saisir une", "entreprise", "../../", $tabLiens);
 
-// Si un ajout a été effectué
-if(isset($_POST['add'])){
-	extract($_POST);
-		
-	if(($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "")){
-		Entreprise_IHM::afficherFormulaireSaisie("");
-		IHM_Generale::erreur("Tous les champs sont obligatoires !");
-	}else{		
-		$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email);
-		
-		// Si l'entreprise que l'on veut créer n'existe pas déjà
-		if(Entreprise_BDD::existe($newEntreprise) == false){
-			
-			$ent = Entreprise_BDD::sauvegarder($newEntreprise);
-			
-			?>				
-				<table align="center">
-					<tr>
-						<td colspan="2" align="center">
-							Création de l'entreprise réalisée avec succès.
-						</td>
-					</tr>
-					<tr>
-						<td width="50%" align="center">
-							<form method=post action="../">
-								<input type="submit" value="Retourner au menu"/>
-							</form>
-						</td>
-						<td width="50%" align="center">
-							<form method=post action="./saisirContact.php">
-								<input type="hidden" value="<?php echo $ent; ?>" name="idEntreprise"/>
-								<input type="submit" value="Ajouter un contact"/>
-							</form>
-						</td>
-					</tr>
-				</table>
-			<?php 
-		}else{
-			Entreprise_IHM::afficherFormulaireSaisie("");
-			IHM_Generale::erreur("Une entreprise du même nom et se trouvant dans la même ville et le même pays existe déjà !");
-		}
-	}
-}else{
+// Si un ajout a Ã©tÃ© effectuÃ©
+if (isset($_POST['add'])) {
+    extract($_POST);
+
+    if (($nom == "") || ($adresse == "") || ($cp == "") || ($ville == "") || ($pays == "")) {
 	Entreprise_IHM::afficherFormulaireSaisie("");
+	IHM_Generale::erreur("Tous les champs sont obligatoires !");
+    } else {
+	$idtype = $_POST['typeEntreprise'];
+	$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
+
+	// Si l'entreprise que l'on veut crÃ©er n'existe pas dÃ©jÃ 
+	if (Entreprise_BDD::existe($newEntreprise) == false) {
+	    $ent = Entreprise_BDD::sauvegarder($newEntreprise);
+	    ?>
+	    <table align="center">
+	        <tr>
+	    	<td colspan="2" align="center">
+	    	    CrÃ©ation de l'entreprise rÃ©alisÃ©e avec succÃ¨s.
+	    	</td>
+	        </tr>
+	        <tr>
+	    	<td width="50%" align="center">
+	    	    <form method=post action="../">
+	    		<input type="submit" value="Retourner au menu"/>
+	    	    </form>
+	    	</td>
+	    	<td width="50%" align="center">
+	    	    <form method=post action="./saisirContact.php">
+	    		<input type="hidden" value="<?php echo $ent; ?>" name="idEntreprise"/>
+	    		<input type="submit" value="Ajouter un contact"/>
+	    	    </form>
+	    	</td>
+	        </tr>
+	    </table>
+	    <?php
+	} else {
+	    Entreprise_IHM::afficherFormulaireSaisie("");
+	    IHM_Generale::erreur("Une entreprise du mÃªme nom et se trouvant dans la mÃªme ville et le mÃªme pays existe dÃ©jÃ  !");
+	}
+    }
+} else {
+    Entreprise_IHM::afficherFormulaireSaisie("");
 }
 
 IHM_Generale::endHeader(false);

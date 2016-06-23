@@ -2,96 +2,102 @@
 
 class Soutenance_BDD {
 
-	/**
-	 * Sauvegarde un objet Soutenance
-	 * @param $soutenance la soutenance a sauvegarder
-	 */
-	public static function sauvegarder($soutenance) {
-		global $tab17;
-		global $db;
+    /**
+     * Sauvegarde un objet Soutenance
+     * @param $soutenance la soutenance Ã  sauvegarder
+     */
+    public static function sauvegarder($soutenance) {
+	global $db;
+	global $tab17;
 
-		$heuredebut = $soutenance->getHeureDebut();
-		$mindebut = $soutenance->getMinuteDebut();
-		$ahuitclos = $soutenance->isAHuitClos();
-		$iddatesoutenance = $soutenance->getDateSoutenance()->getIdentifiantBDD();
-		$idsalle = $soutenance->getSalle()->getIdentifiantBDD();
+	$heuredebut = $soutenance->getHeureDebut();
+	$mindebut = $soutenance->getMinuteDebut();
+	$ahuitclos = $soutenance->isAHuitClos();
+	$iddatesoutenance = $soutenance->getDateSoutenance()->getIdentifiantBDD();
+	$idsalle = $soutenance->getSalle()->getIdentifiantBDD();
 
-		// Permet de vérifier si la Convention existe déjà dans la BDD
-		if ($soutenance->getIdentifiantBDD() == "") {
-			// Création de la soutenance
-			$requete = "INSERT INTO $tab17(heuredebut, mindebut, ahuitclos, iddatesoutenance, idsalle)
-				    VALUES ('$heuredebut', '$mindebut', '$ahuitclos', '$iddatesoutenance', '$idsalle')";
-			$db->query($requete);
+	// Permet de vÃ©rifier si la Convention existe dÃ©jÃ  dans la BDD
+	if ($soutenance->getIdentifiantBDD() == "") {
+	    // CrÃ©ation de la soutenance
+	    $requete = "INSERT INTO $tab17(heuredebut, mindebut, ahuitclos, iddatesoutenance, idsalle)
+			VALUES ('$heuredebut', '$mindebut', '$ahuitclos', '$iddatesoutenance', '$idsalle')";
+	    $db->query($requete);
 
-			// Chercher l'id de la soutenance
-			$sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab17";
-			$req = $db->query($sql);
-			$result = mysqli_fetch_array($req);
-			$soutenance->setIdentifiantBDD($result['ID']);
-		} else {
-			// Mise à jour de la soutenance
-			$requete = "UPDATE $tab17 SET heuredebut = '$heuredebut',
-						      mindebut = '$mindebut',
-						      ahuitclos = '$ahuitclos',
-						      iddatesoutenance = '$iddatesoutenance',
-						      idsalle = '$idsalle'
-				    WHERE idsoutenance = ".$soutenance->getIdentifiantBDD();
+	    // Chercher l'id de la soutenance
+	    $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab17";
+	    $req = $db->query($sql);
+	    $result = mysqli_fetch_array($req);
+	    $soutenance->setIdentifiantBDD($result['ID']);
+	} else {
+	    // Mise Ã  jour de la soutenance
+	    $requete = "UPDATE $tab17
+			SET heuredebut = '$heuredebut',
+			    mindebut = '$mindebut',
+			    ahuitclos = '$ahuitclos',
+			    iddatesoutenance = '$iddatesoutenance',
+			    idsalle = '$idsalle'
+			WHERE idsoutenance = " . $soutenance->getIdentifiantBDD();
 
-			$db->query($requete);
-		}
-
-		// Retourner l'id de la soutenance
-		return $soutenance->getIdentifiantBDD();
+	    $db->query($requete);
 	}
 
-	/**
-	 * Suppression d'une soutenance
-	 * @param $id L'identifiant de la soutenance
-	 */
-	public static function supprimer($id) {
-		global $db;
-		global $tab17;
+	// Retourner l'id de la soutenance
+	return $soutenance->getIdentifiantBDD();
+    }
 
-		$requete = "DELETE FROM $tab17 WHERE idsoutenance='$id'";
-		$db->query($requete);
-	}
+    /**
+     * Suppression d'une soutenance
+     * @param $id L'identifiant de la soutenance
+     */
+    public static function supprimer($id) {
+	global $db;
+	global $tab17;
 
-	// $id : Un int, représentant un identifiant dans la BDD
-	public static function getSoutenance($id){
-		global $tab17;
-		global $db;
+	$requete = "DELETE FROM $tab17 WHERE idsoutenance='$id'";
+	$db->query($requete);
+    }
 
-		$requete = "SELECT * FROM $tab17 WHERE idsoutenance='$id'";
-		$convention = $db->query($requete);
-		return mysqli_fetch_array($convention);
-	}
+    // $id : identifiant dans la BDD
+    public static function getSoutenance($id) {
+	global $db;
+	global $tab17;
 
-	public static function getConvention($idsoutenance) {
-		global $tab4;
-		global $db;
+	$requete = "SELECT * FROM $tab17 WHERE idsoutenance='$id'";
+	$convention = $db->query($requete);
+	return mysqli_fetch_array($convention);
+    }
 
-		$requete = "SELECT * FROM $tab4 WHERE idsoutenance='$idsoutenance'";
-		$convention = $db->query($requete);
-		return mysqli_fetch_row($convention);
-	}
+    public static function getConvention($idsoutenance) {
+	global $db;
+	global $tab4;
 
-	public static function listerSoutenanceFromSalleAndDate($idsalle, $iddate) {
-		global $tab17;
-		global $db;
+	$requete = "SELECT * FROM $tab4 WHERE idsoutenance='$idsoutenance'";
+	$convention = $db->query($requete);
+	return mysqli_fetch_row($convention);
+    }
 
-		$requete = "SELECT * FROM $tab17 WHERE iddatesoutenance='$iddate' AND idsalle='$idsalle'";
-		return $db->query($requete);
-	}
+    public static function listerSoutenanceFromSalleAndDate($idsalle, $iddate) {
+	global $db;
+	global $tab17;
 
-	public static function listerSoutenanceFromAnnee($annee) {
-		global $tab5;
-		global $tab17;
-		global $db;
+	$requete = "SELECT * FROM $tab17 WHERE iddatesoutenance='$iddate' AND idsalle='$idsalle'";
+	return $db->query($requete);
+    }
 
-		$requete = "SELECT $tab17.idsoutenance, $tab17.heuredebut, $tab17.mindebut, $tab17.ahuitclos, $tab17.iddatesoutenance, $tab17.idsalle
-			    FROM $tab17, $tab5 WHERE $tab17.iddatesoutenance = $tab5.iddatesoutenance AND $tab5.annee='$annee'";
-		return $db->query($requete);
-	}
+    public static function listerSoutenanceFromAnnee($annee) {
+	global $db;
+	global $tab5;
+	global $tab17;
+
+	$requete = "SELECT $tab17.idsoutenance, $tab17.heuredebut, $tab17.mindebut,
+			   $tab17.ahuitclos, $tab17.iddatesoutenance, $tab17.idsalle
+		    FROM $tab17, $tab5
+		    WHERE $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
+			  $tab5.annee='$annee'";
+
+	return $db->query($requete);
+    }
+
 }
 
 ?>

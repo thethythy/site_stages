@@ -1,53 +1,54 @@
 <?php
 
 class DateSoutenance_BDD {
-    /*     * Méthodes statiques* */
+
+    /** MÃ©thodes statiques **/
 
     public static function sauvegarder($dateSoutenance) {
-	global $tab5;
 	global $db;
+	global $tab5;
+
 	if ($dateSoutenance->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab5 VALUES ('" . $dateSoutenance->getIdentifiantBDD() . "', '" . $dateSoutenance->getJour() . "','" . $dateSoutenance->getMois() . "','" . $dateSoutenance->getAnnee() . "')";
 	} else {
 	    $sql = "UPDATE $tab5 SET jour='" . $dateSoutenance->getJour() . "', mois='" . $dateSoutenance->getMois() . "', annee='" . $dateSoutenance->getAnnee() . "'
 		    WHERE iddatesoutenance=" . $dateSoutenance->getIdentifiantBDD();
 	}
-	$result = $db->query($sql);
-	return ($dateSoutenance->getIdentifiantBDD() != "") ? $dateSoutenance->getIdentifiantBDD() : mysql_insert_id($db);
+	$db->query($sql);
+	return ($dateSoutenance->getIdentifiantBDD() != "") ? $dateSoutenance->getIdentifiantBDD() : $db->insert_id;
     }
 
     public static function sauvegarderRelationPromo($idDateSoutenance, $promos) {
-	global $tab1;
 	global $db;
+	global $tab1;
 
 	DateSoutenance_BDD::deleteDatePromo($idDateSoutenance);
 	foreach ($promos as $promo) {
-	    $sql = "INSERT INTO $tab1 (iddatesoutenance, idpromotion) VALUES ('$idDateSoutenance', $promo);";
-	    $result = $db->query($sql);
+	    $sql = "INSERT INTO $tab1 (iddatesoutenance, idpromotion) VALUES ('$idDateSoutenance', '$promo');";
+	    $db->query($sql);
 	}
     }
 
     public static function getDateSoutenance($identifiant) {
-	global $tab5;
 	global $db;
+	global $tab5;
 
-	$result = array();
 	$sql = "SELECT * FROM $tab5 WHERE iddatesoutenance='$identifiant';";
 	$req = $db->query($sql);
 	return mysqli_fetch_array($req);
     }
 
     public static function listerDateSoutenance($filtres) {
-	global $tab5;
 	global $db;
+	global $tab5;
 
 	if ($filtres == '')
 	    $sql = "SELECT * FROM $tab5 ORDER BY annee,mois,jour ASC;";
 	else
 	    $sql = "SELECT * FROM $tab5 WHERE " . $filtres->getStrFiltres() . " ORDER BY annee,mois,jour ASC;";
 
-	//echo $sql;
 	$result = $db->query($sql);
+
 	$tabDateSoutenance = array();
 
 	while ($dateSoutenance = mysqli_fetch_array($result)) {
@@ -63,8 +64,8 @@ class DateSoutenance_BDD {
     }
 
     public static function listerRelationPromoDate($idDate) {
-	global $tab1;
 	global $db;
+	global $tab1;
 
 	$sql = "SELECT idpromotion,iddatesoutenance FROM $tab1 WHERE iddatesoutenance='$idDate';";
 	$result = $db->query($sql);
@@ -78,17 +79,17 @@ class DateSoutenance_BDD {
     }
 
     public static function delete($identifiantBDD) {
-	global $tab5;
 	global $db;
+	global $tab5;
 	$sql = "DELETE FROM $tab5 WHERE iddatesoutenance='$identifiantBDD';";
-	$result = $db->query($sql);
+	$db->query($sql);
     }
 
     public static function deleteDatePromo($identifiantBDD) {
-	global $tab1;
 	global $db;
+	global $tab1;
 	$sql = "DELETE FROM $tab1 WHERE iddatesoutenance='$identifiantBDD';";
-	$result = $db->query($sql);
+	$db->query($sql);
     }
 
 }

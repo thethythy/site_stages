@@ -3,39 +3,48 @@
 $chemin = "../classes/";
 
 include_once($chemin."bdd/connec.inc");
-include_once($chemin."bdd/Contact_BDD.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."bdd/Etudiant_BDD.php");
-include_once($chemin."bdd/Filiere_BDD.php");
-include_once($chemin."bdd/Parcours_BDD.php");
-include_once($chemin."bdd/Promotion_BDD.php");
-include_once($chemin."bdd/Parrain_BDD.php");
-include_once($chemin."bdd/Couleur_BDD.php");
-include_once($chemin."bdd/Soutenance_BDD.php");
-include_once($chemin."ihm/IHM_Generale.php");
-include_once($chemin."ihm/Contact_IHM.php");
-include_once($chemin."ihm/Convention_IHM.php");
-include_once($chemin."ihm/Promotion_IHM.php");
-include_once($chemin."moteur/Contact.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."moteur/Entreprise.php");
-include_once($chemin."moteur/Etudiant.php");
-include_once($chemin."moteur/Filiere.php");
+
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."moteur/FiltreString.php");
-include_once($chemin."moteur/Parcours.php");
-include_once($chemin."moteur/Parrain.php");
-include_once($chemin."moteur/Couleur.php");
-include_once($chemin."moteur/Promotion.php");
-include_once($chemin."moteur/Soutenance.php");
 
+include_once($chemin."ihm/IHM_Generale.php");
+
+include_once($chemin."bdd/Contact_BDD.php");
+include_once($chemin."moteur/Contact.php");
+
+include_once($chemin."bdd/Convention_BDD.php");
+include_once($chemin."moteur/Convention.php");
+
+include_once($chemin."bdd/Entreprise_BDD.php");
+include_once($chemin."moteur/Entreprise.php");
+
+include_once($chemin."bdd/Etudiant_BDD.php");
+include_once($chemin."moteur/Etudiant.php");
+
+include_once($chemin."bdd/Filiere_BDD.php");
+include_once($chemin."moteur/Filiere.php");
+
+include_once($chemin."bdd/Parcours_BDD.php");
+include_once($chemin."moteur/Parcours.php");
+
+include_once($chemin."bdd/Promotion_BDD.php");
+include_once($chemin."moteur/Promotion.php");
+
+include_once($chemin."bdd/Parrain_BDD.php");
+include_once($chemin."moteur/Parrain.php");
+
+include_once($chemin."bdd/Couleur_BDD.php");
+include_once($chemin."moteur/Couleur.php");
+
+include_once($chemin."bdd/Soutenance_BDD.php");
+include_once($chemin."moteur/Soutenance.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('index.php', 'Conventions et suivi de stage');
-$tabLiens[2] = array('listerParrainages.php', 'Liste des référents');
+$tabLiens[2] = array('listerParrainages.php', 'Liste des rÃ©fÃ©rents');
+
 IHM_Generale::header("Fiche de", "stage", "../", $tabLiens);
 
 $etudiant = Etudiant::getEtudiant($_GET['idEtu']);
@@ -50,7 +59,7 @@ $couleur = $parrain->getCouleur();
 
 ?>
 
-<h3>L'étudiant</h3>
+<h3>L'Ã©tudiant</h3>
 <?php echo $etudiant->getPrenom()." ".$etudiant->getNom(); ?><br/>
 Promotion : <?php echo $filiere->getNom()." ".$parcours->getNom(); ?><br/>
 Annee : <?php echo $promotion->getAnneeUniversitaire(); ?>
@@ -85,7 +94,7 @@ if($contact->getEmail() != "")
 <h3>Le stage</h3>
 <?php
 	if($convention->aSonResume == "1"){
-		echo "<a href='../documents/resumes/".$convention->getSujetDeStage()."'>Résumé du stage</a>";
+		echo "<a href='../documents/resumes/".$convention->getSujetDeStage()."'>RÃ©sumÃ© du stage</a>";
 	}else{
 		$chaine = $convention->getSujetDeStage();
 		echo $chaine;
@@ -94,7 +103,7 @@ if($contact->getEmail() != "")
 
 <br/><br/><br/>
 
-<h3>Référent</h3>
+<h3>RÃ©fÃ©rent</h3>
 <?php echo $parrain->getPreNom()." ".$parrain->getNom(); ?><br/>
 
 <br/>

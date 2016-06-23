@@ -2,36 +2,36 @@
 
 class GestionDemon {
 
-    /* Lancer le démon */
+    /* Lancer le dÃ©mon */
 
     public function go() {
-	// Lancement si pas déjà lancé
+	// Lancement si pas dÃ©jÃ  lancÃ©
 	if (!file_exists('/tmp/RUN_CRON_SITE_STAGE')) {
-	    /* Création du service cron */
-	    $this->lancerServiceCron('*', '*', '*', '*', '*', '/usr/bin/php -f /Applications/MAMP/htdocs/gestion/gestion/demonTache.php > /dev/null 2>&1');
+	    /* CrÃ©ation du service cron */
+	    $this->lancerServiceCron('*', '*', '*', '*', '*', '/usr/bin/php -f /Users/lemeunie/git-repository/site_stages/gestion/gestion/demonTache.php > /dev/null 2>&1');
 
-	    /* Création du fichier témoin */
+	    /* CrÃ©ation du fichier tÃ©moin */
 	    fclose(fopen('/tmp/RUN_CRON_SITE_STAGE', 'w'));
 	}
     }
 
-    /* Arrêter le démon */
+    /* ArrÃªter le dÃ©mon */
 
     public function stop() {
-	// Rafraîchir au bout de 60 secondes
+	// RafraÃ®chir au bout de 60 secondes
 	if (!headers_sent())
 	    header("Refresh:60");
 
-	// Demande un arrêt
+	// Demande un arrÃªt
 	if (file_exists('/tmp/RUN_CRON_SITE_STAGE')) {
-	    /* Suppression du fichier témoin */
+	    /* Suppression du fichier tÃ©moin */
 	    unlink('/tmp/RUN_CRON_SITE_STAGE');
-	    /* Arrêt du service cron */
+	    /* ArrÃªt du service cron */
 	    $this->arretServiceCron();
 	}
     }
 
-    /* Test si le démon est en fonctionnement */
+    /* Test si le dÃ©mon est en fonctionnement */
 
     public function test() {
 	$valeur = -1;
@@ -49,14 +49,14 @@ class GestionDemon {
 	return $valeur;
     }
 
-    /* Création d'une nouvelle crontab */
+    /* CrÃ©ation d'une nouvelle crontab */
 
     private function lancerServiceCron($chpMinute, $chpHeure, $chpJourMois, $chpMois, $chpJourSemaine, $chpCommande) {
 
 	$newCrontab = Array(); /* pour chaque cellule une ligne du nouveau crontab */
 	$newCrontab[] = $chpMinute . ' ' . $chpHeure . ' ' . $chpJourMois . ' ' . $chpMois . ' ' . $chpJourSemaine . ' ' . $chpCommande;
 
-	$f = fopen('/tmp/tmpcrontab', 'w'); /* on crée un fichier temporaire */
+	$f = fopen('/tmp/tmpcrontab', 'w'); /* on crÃ©e un fichier temporaire */
 	fwrite($f, implode(CHR(0x0A), $newCrontab));
 	fclose($f);
 

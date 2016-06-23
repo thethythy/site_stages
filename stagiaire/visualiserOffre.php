@@ -2,25 +2,30 @@
 
 include_once("../classes/bdd/connec.inc");
 include_once("../classes/ihm/IHM_Generale.php");
+
 include_once("../classes/ihm/OffreDeStage_IHM.php");
 include_once("../classes/moteur/OffreDeStage.php");
 include_once("../classes/bdd/OffreDeStage_BDD.php");
+
 include_once("../classes/bdd/Filiere_BDD.php");
 include_once("../classes/moteur/Filiere.php");
-include_once("../classes/moteur/Filtre.php");
-include_once("../classes/moteur/FiltreString.php");
+
 include_once("../classes/moteur/Entreprise.php");
 include_once("../classes/bdd/Entreprise_BDD.php");
+
 include_once("../classes/moteur/Contact.php");
 include_once("../classes/bdd/Contact_BDD.php");
+
 include_once("../classes/bdd/Competence_BDD.php");
 include_once("../classes/moteur/Competence.php");
+
 include_once("../classes/bdd/Parcours_BDD.php");
 include_once("../classes/moteur/Parcours.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Stagiaire');
+
 IHM_Generale::header("Visualiser une", "offre de stage", "../", $tabLiens);
 
 if (isset($_GET['id'])) {
@@ -36,11 +41,12 @@ if (isset($_GET['id'])) {
 	$competence = isset($_GET['competence']) ? $_GET['competence'] : "";
 	OffreDeStage_IHM::visualiserOffre($offreDeStage, "./listerOffreDeStage.php", $nom, $ville, $cp, $pays, $filiere, $parcours, $duree, $competence);
     } else {
-	echo "Cette offre de stage a été retirée du site.<br/>";
+	echo "Cette offre de stage a Ã©tÃ© retirÃ©e du site.<br/>";
     }
 }
 
 deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../");
+
 ?>

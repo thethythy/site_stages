@@ -2,7 +2,7 @@
 
 class Etudiant {
 
-    // Déclaration des attributs de la classe
+    // DÃ©claration des attributs de la classe
     var $identifiantBDD;
     var $nom;
     var $prenom;
@@ -11,7 +11,8 @@ class Etudiant {
     var $codeEtudiant;
 
     // Constructeur de classe
-    public function Etudiant($identifiantBDD, $nom, $prenom, $emailInstitutionel, $emailPersonnel, $codeEtudiant = "") {
+    public function Etudiant($identifiantBDD, $nom, $prenom, $emailInstitutionel,
+	    $emailPersonnel, $codeEtudiant = "") {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;
 	$this->prenom = $prenom;
@@ -20,13 +21,13 @@ class Etudiant {
 	$this->codeEtudiant = $codeEtudiant;
     }
 
-    // Méthodes diverses
+    // MÃ©thodes diverses
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
     }
 
-    // Retourne la promotion de l'étudiant suivant une année donnée
+    // Retourne la promotion de l'Ã©tudiant suivant une annÃ©eï¿½donnÃ©e
     public function getPromotion($annee) {
 	$idPromo = Etudiant_BDD::recherchePromotion($this->identifiantBDD, $annee);
 
@@ -36,7 +37,7 @@ class Etudiant {
 	return Promotion::getPromotion($idPromo);
     }
 
-    // Retourne la convention de l'étudiant suivant une année donnée
+    // Retourne la convention de l'Ã©tudiant suivant une annÃ©e donnÃ©e
     public function getConvention($annee) {
 	$idConv = Etudiant_BDD::rechercheConvention($this->identifiantBDD, $annee);
 
@@ -86,7 +87,7 @@ class Etudiant {
 	$this->codeEtudiant = $codeEtudiant;
     }
 
-    // Méthodes statiques
+    // MÃ©thodes statiques
 
     public static function supprimerEtudiant($idEtudiant, $idPromo) {
 	Etudiant_BDD::supprimerEtudiant($idEtudiant, $idPromo);
@@ -98,33 +99,47 @@ class Etudiant {
 
     public static function getEtudiant($idEtudiant) {
 	$etuBDD = Etudiant_BDD::getEtudiant($idEtudiant);
-
-	return new Etudiant($etuBDD["idetudiant"], $etuBDD["nometudiant"], $etuBDD["prenometudiant"], $etuBDD["email_institutionnel"], $etuBDD["email_personnel"], $etuBDD["codeetudiant"]);
+	return new Etudiant($etuBDD["idetudiant"],
+			    $etuBDD["nometudiant"],
+			    $etuBDD["prenometudiant"],
+			    $etuBDD["email_institutionnel"],
+			    $etuBDD["email_personnel"],
+			    $etuBDD["codeetudiant"]);
     }
 
     public static function getListeEtudiants($idPromotion) {
 	$tabEtudiantString = Etudiant_BDD::getListeEtudiants($idPromotion);
-
-	//echo sizeof($tabEtudiantString)."<br/>";
-
 	$tabEtudiant = array();
+
 	for ($i = 0; $i < sizeof($tabEtudiantString); $i++)
-	    array_push($tabEtudiant, new Etudiant($tabEtudiantString[$i][0], $tabEtudiantString[$i][1], $tabEtudiantString[$i][2], $tabEtudiantString[$i][3], $tabEtudiantString[$i][4], $tabEtudiantString[$i][5]));
+	    array_push($tabEtudiant,
+		    new Etudiant($tabEtudiantString[$i][0],
+				 $tabEtudiantString[$i][1],
+				 $tabEtudiantString[$i][2],
+				 $tabEtudiantString[$i][3],
+				 $tabEtudiantString[$i][4],
+				 $tabEtudiantString[$i][5]));
 
 	return $tabEtudiant;
     }
 
     /**
-     * Cherche les étudiants avec un certain nom et un certain prénom
-     * @param chaîne $nom
-     * @param chaîne $prenom
-     * @return Etudiant[] tableau des étudiants trouvés correspondants aux deux critères
+     * Cherche les Ã©tudiants avec un certain nom et un certain prÃ©nom
+     * @param chaÃ®ne $nom
+     * @param chaÃ®ne $prenom
+     * @return Etudiant[] tableau des Ã©udiants trouvÃ©s correspondants aux deux critÃ¨res
      */
     public static function searchEtudiants($nom, $prenom) {
 	$tabEtudiantString = Etudiant_BDD::searchEtudiants($nom, $prenom);
 	$tabEtudiant = array();
 	for ($i = 0; $i < sizeof($tabEtudiantString); $i++)
-	    array_push($tabEtudiant, new Etudiant($tabEtudiantString[$i][0], $tabEtudiantString[$i][1], $tabEtudiantString[$i][2], $tabEtudiantString[$i][3], $tabEtudiantString[$i][4], $tabEtudiantString[$i][5]));
+	    array_push($tabEtudiant,
+		    new Etudiant($tabEtudiantString[$i][0],
+				 $tabEtudiantString[$i][1],
+				 $tabEtudiantString[$i][2],
+				 $tabEtudiantString[$i][3],
+				 $tabEtudiantString[$i][4],
+				 $tabEtudiantString[$i][5]));
 	return $tabEtudiant;
     }
 

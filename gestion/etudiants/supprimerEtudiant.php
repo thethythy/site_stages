@@ -2,73 +2,71 @@
 
 $chemin = "../../classes/";
 
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."bdd/Contact_BDD.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."bdd/Etudiant_BDD.php");
-include_once($chemin."bdd/Filiere_BDD.php");
-include_once($chemin."bdd/Parcours_BDD.php");
-include_once($chemin."bdd/Promotion_BDD.php");
-include_once($chemin."bdd/Parrain_BDD.php");
-include_once($chemin."bdd/Soutenance_BDD.php");
-include_once($chemin."ihm/IHM_Generale.php");
-include_once($chemin."ihm/Contact_IHM.php");
-include_once($chemin."ihm/Convention_IHM.php");
-include_once($chemin."ihm/Promotion_IHM.php");
-include_once($chemin."moteur/Contact.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."moteur/Entreprise.php");
-include_once($chemin."moteur/Etudiant.php");
-include_once($chemin."moteur/Filiere.php");
-include_once($chemin."moteur/Filtre.php");
-include_once($chemin."moteur/FiltreNumeric.php");
-include_once($chemin."moteur/FiltreString.php");
-include_once($chemin."moteur/Parcours.php");
-include_once($chemin."moteur/Parrain.php");
-include_once($chemin."moteur/Promotion.php");
-include_once($chemin."moteur/Soutenance.php");
+include_once($chemin . "bdd/connec.inc");
+
+include_once($chemin . "moteur/Filtre.php");
+include_once($chemin . "moteur/FiltreNumeric.php");
+include_once($chemin . "moteur/FiltreString.php");
+
+include_once($chemin . "ihm/IHM_Generale.php");
+
+include_once($chemin . "ihm/Promotion_IHM.php");
+include_once($chemin . "bdd/Promotion_BDD.php");
+include_once($chemin . "moteur/Promotion.php");
+
+include_once($chemin . "bdd/Contact_BDD.php");
+include_once($chemin . "moteur/Contact.php");
+
+include_once($chemin . "bdd/Convention_BDD.php");
+include_once($chemin . "moteur/Convention.php");
+
+include_once($chemin . "bdd/Entreprise_BDD.php");
+include_once($chemin . "moteur/Entreprise.php");
+
+include_once($chemin . "bdd/Etudiant_BDD.php");
+include_once($chemin . "moteur/Etudiant.php");
+
+include_once($chemin . "bdd/Filiere_BDD.php");
+include_once($chemin . "moteur/Filiere.php");
+
+include_once($chemin . "bdd/Parcours_BDD.php");
+include_once($chemin . "moteur/Parcours.php");
+
+include_once($chemin . "bdd/Parrain_BDD.php");
+include_once($chemin . "moteur/Parrain.php");
+
+include_once($chemin . "bdd/Soutenance_BDD.php");
+include_once($chemin . "moteur/Soutenance.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
-IHM_Generale::header("Supprimer un", "Ètudiant", "../../", $tabLiens);
 
-if((isset($_GET['id'])) && (isset($_GET['promo']))){
-	// NÈcÈssaire pour que dans le formulaire de recherche, on resÈlectionne les valeurs prÈcÈdement sÈlectionnÈes
-	$promo = Promotion::getPromotion($_GET['promo']);
-	$filiere = $promo->getFiliere();
-	$parcours = $promo->getParcours();
-	$_POST['annee'] = $promo->getAnneeUniversitaire();
-	$_POST['parcours'] = $parcours->getIdentifiantBDD();
-	$_POST['filiere'] = $filiere->getIdentifiantBDD();
-	
-	// Suppression dÈfinitive de l'Ètudiant
-	Etudiant::supprimerDefinitivementEtudiant($_GET['id']);
+IHM_Generale::header("Supprimer un", "√©tudiant", "../../", $tabLiens);
+
+if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
+    // Necessaire pour que dans le formulaire de recherche, on res√©lectionne les valeurs pr√©c√©dement s√©lectionn√©es
+    $promo = Promotion::getPromotion($_GET['promo']);
+    $filiere = $promo->getFiliere();
+    $parcours = $promo->getParcours();
+    $_POST['annee'] = $promo->getAnneeUniversitaire();
+    $_POST['parcours'] = $parcours->getIdentifiantBDD();
+    $_POST['filiere'] = $filiere->getIdentifiantBDD();
+
+    // Suppression d√©finitive de l'√©tudiant
+    Etudiant::supprimerDefinitivementEtudiant($_GET['id']);
 }
 
 // Affichage du formulaire de recherche
 Promotion_IHM::afficherFormulaireRecherche("supprimerEtudiantData.php", false);
 
-echo "<br/><h3>Remarque :</h3>Il est possible de supprimer uniquement les Ètudiants qui n'ont pas encore fait de stage (Ètudiant sans convention).<br/><br/>";
-
-// Affichage des donnÈes
+// Affichage des donn√©es
 echo "<div id='data'>\n";
 include_once("supprimerEtudiantData.php");
 echo "\n</div>";
 
 ?>
-	<br/><br/>
-	
-	<table align="center">
-		<tr>
-			<td width="100%" align="center">
-				<form method=post action="../">
-					<input type="submit" value="Retourner au menu"/>
-				</form>
-			</td>
-		</tr>
-	</table>
+
 <?php
 
 deconnexion();

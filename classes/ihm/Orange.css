@@ -118,6 +118,11 @@ input.button {
     color: #333;
 }
 
+select {
+    margin-bottom: : 4px;
+    margin-top: 4px;
+}
+
 textarea {
     width: 350px;
     padding: 4px;
@@ -270,11 +275,11 @@ textarea {
 }
 
 #footer {
-    margin-top: -60px; 			/* valeur négative de la hauteur du footer se trouvant sur toutes les pages */
+    margin-top: -60px; 			/* valeur nÃ©ative de la hauteur du footer se trouvant sur toutes les pages */
 }
 
 #footerAccueil {
-    margin-top: -135px; 		/* valeur négative de la hauteur du footer se trouvant sur la page d'accueil */
+    margin-top: -135px; 		/* valeur nÃ©ative de la hauteur du footer se trouvant sur la page d'accueil */
 }
 
 /* CLEAR FIX --> correction de certains bug pour le footer suivant le navigateur */
@@ -332,7 +337,7 @@ textarea {
     border-left: 3px solid #EC981F;
 }
 
-#presentation_entreprise, #contact  {
+#presentation_entreprise, #contact {
     padding: 5px;
     padding-left: 15px;
 }
@@ -340,8 +345,8 @@ textarea {
 #menuBdd {
     background: #FAFAFA;
     border: 1px solid #EC981F;
-    padding: 5px;
-    margin: 5px;
+    padding: 1px;
+    margin: 1px;
 }
 
 #menuBdd a {
@@ -351,7 +356,7 @@ textarea {
 
 #titreMenuBdd {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: center;
 }
 #liensNavigation {
@@ -521,7 +526,6 @@ textarea {
     padding:0px;
 }
 
-
 .image_aide_en_ligne_detaillee {
     background-color: white;
     background-clip: padding-box;
@@ -534,4 +538,58 @@ textarea {
 
 .image_aide_en_ligne_detaillee figure {
     text-align: center;
+}
+
+section {
+    padding : 0;
+    margin : auto;
+
+    display : inline-block;
+}
+
+#section_gauche {
+    margin-left: 19.5%;
+}
+
+#section_centre {
+    margin-left: 9.5%;
+}
+#section_droite {
+    margin-left: 9.5%;
+}
+
+section table td {
+    min-width: 5px
+}
+
+.content { display:none;}
+
+#menu  {
+  margin: 0 ;
+  padding: 0 ;
+  list-style: none ;
+  text-align: center ;
+}
+
+#menu li {
+  display: inline ;
+  margin-right: 1px ;
+  color: #fff ;
+  background: #c00 ;
+}
+
+#menu li a {
+  padding: 4px 20px ;
+  background: #eea737 ;
+  color: #806B4D ;
+  border: 1px ;
+  font: 1em "Trebuchet MS",Arial,sans-serif ;
+  line-height: 1em ;
+  text-align: center ;
+  text-decoration: none ;
+}
+
+#menu li a:hover, #menu li a:focus, #navigation li a:active {
+  background: #fec757 ;
+  text-decoration: underline ;
 }

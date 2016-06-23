@@ -2,7 +2,7 @@
 
 class Contact_BDD {
 
-    // Méthodes statiques
+    // MÃ©thodes statiques
 
     public static function sauvegarder($contact) {
 	global $tab3;
@@ -12,13 +12,13 @@ class Contact_BDD {
 
 	if ($contact->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO " . $tab3 . " VALUES (
-						'" . $contact->getIdentifiantBDD() . "',
-						'" . $contact->getNom() . "',
-						'" . $contact->getPrenom() . "',
-						'" . $contact->getTelephone() . "',
-						'" . $contact->getTelecopie() . "',
-						'" . $contact->getEmail() . "',
-						'" . $entreprise->getIdentifiantBDD() . "');";
+			'" . $contact->getIdentifiantBDD() . "',
+			'" . $contact->getNom() . "',
+			'" . $contact->getPrenom() . "',
+			'" . $contact->getTelephone() . "',
+			'" . $contact->getTelecopie() . "',
+			'" . $contact->getEmail() . "',
+			'" . $entreprise->getIdentifiantBDD() . "');";
 	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab3";
@@ -32,7 +32,7 @@ class Contact_BDD {
 				     telecopie = '" . $contact->getTelecopie() . "',
 				     email = '" . $contact->getEmail() . "',
 				     identreprise = '" . $entreprise->getIdentifiantBDD() . "'
-		    WHERE idcontact = '" . $contact->getIdentifiantBDD() . "'";
+			    WHERE idcontact = '" . $contact->getIdentifiantBDD() . "'";
 
 	    $db->query($sql);
 	    return $contact->getIdentifiantBDD();
@@ -40,15 +40,14 @@ class Contact_BDD {
     }
 
     /**
-     * Récupère un contact suivant son identifiant
-     * @param $identifiantBDD l'identifiant du contact à récupérer
+     * RÃ©cupÃ¨re un contact suivant son identifiant
+     * @param $identifiantBDD l'identifiant du contact Ã  rÃ©cupÃ©rer
      * @return String[] tableau contenant les informations d'un contact
      */
     public static function getContact($identifiantBDD) {
 	global $tab3;
 	global $db;
 
-	$result = array();
 	$sql = "SELECT * FROM $tab3 WHERE idcontact = '" . $identifiantBDD . "'";
 	$req = $db->query($sql);
 	return mysqli_fetch_array($req);
@@ -57,25 +56,24 @@ class Contact_BDD {
     public static function supprimerContact($identifiantBDD) {
 	global $tab3;
 	global $db;
-
-	$sql = "DELETE FROM $tab3 WHERE idcontact='".$identifiantBDD."'";
-	//echo $sql."<br/>";
+	$sql = "DELETE FROM $tab3 WHERE idcontact='" . $identifiantBDD . "'";
 	$db->query($sql);
     }
 
     /**
      * Renvoie la liste des contacts d'entreprise
-     * @param $identreprise l'identifiant de l'entreprise
+     * @param $identifiantEntreprise l'identifiant de l'entreprise
      * @return String[] tablrau contenant tous les contacts de l'entreprise
      */
     public static function listerContacts($identifiantEntreprise) {
-	$listeContacts = array();
 	global $tab3;
 	global $db;
 
-	$result = array();
 	$sql = "SELECT * FROM " . $tab3 . " WHERE identreprise = '" . $identifiantEntreprise . "' ORDER BY nomcontact ASC;";
 	$req = $db->query($sql);
+
+	$listeContacts = array();
+
 	while ($data = mysqli_fetch_array($req)) {
 	    $tab = array();
 	    array_push($tab, $data["idcontact"]);
@@ -87,13 +85,14 @@ class Contact_BDD {
 	    array_push($tab, $data["identreprise"]);
 	    array_push($listeContacts, $tab);
 	}
+
 	return $listeContacts;
     }
 
     /**
      * Retourne une liste de contacts suivant un filtre
      * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les contacts concernées par le filtre
+     * @return String[] tableau contenant les contacts concernÃ©es par le filtre
      */
     public static function getListeContacts($filtres) {
 	global $tab3;
@@ -104,7 +103,6 @@ class Contact_BDD {
 	else
 	    $requete = "SELECT * FROM $tab3 WHERE " . $filtres->getStrFiltres() . " ORDER BY nomcontact ASC;";
 
-	//echo $requete."<br/>";
 	$result = $db->query($requete);
 
 	$tabContacts = array();

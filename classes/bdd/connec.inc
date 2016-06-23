@@ -1,7 +1,7 @@
 <?php
 
 // ----------------------------------------------------------------------------
-// Connection à la base de données et déclaration des tables
+// Connection Ã  la base de donnÃ©es et dÃ©claration des tables
 
 include_once("stages.inc");
 
@@ -26,6 +26,8 @@ $tab18 = 'sujetdestage';
 $tab19 = 'relation_promotion_etudiant_convention';
 $tab20 = 'couleur';
 $tab21 = 'taches';
+$tab22 = 'type_entreprise';
+$tab23 = 'theme_destage';
 
 function deconnexion() {
     global $db;
@@ -33,62 +35,62 @@ function deconnexion() {
 }
 
 // ----------------------------------------------------------------------------
-// Préventions contre les injections SQL
+// PrÃ©ventions contre les injections SQL
 
 function filterParameters($param) {
 
     global $db;
 
-    // Est-ce que le paramètre est un tableau ?
+    // Est-ce que le paramÃ¨tre est un tableau ?
     if (is_array($param)) {
 	// Alors parcourir le tableau
 	foreach ($param as $key => $value) {
-	    // Es-ce que la valeur est elle-même un tableau
+	    // Es-ce que la valeur est elle-mÃªme un tableau
 	    if (is_array($param[$key]))
-		// Alors appel récursif
+		// Alors appel rÃ©cursif
 		$param[$key] = filterParameters($param[$key]);
 
-	    // Est-ce que le paramètre est une chaîne ?
+	    // Est-ce que le paramÃ¨tre est une chaÃ®ne ?
 	    if (is_string($param[$key]))
-		// Alors échaper le paramètre
+		// Alors Ã©chaper le paramÃ¨tre
 		$param[$key] = mysqli_real_escape_string($db,$param[$key]);
 	}
     }
 
-    // Est-ce que le paramètre est une chaîne ?
+    // Est-ce que le paramÃ¨tre est une chaÃ®ne ?
     if (is_string($param))
-	// Alors échaper le paramètre
+	// Alors Ã©chaper le paramÃ¨tre
 	$param = $db->real_escape_string($param);
 
     // Return the filtered result
     return $param;
 }
 
-mysqli_set_charset($db,"iso-8859-1");
+mysqli_set_charset($db,"utf8");
 
-// Prévention contre les injection SQL dans les variables POST
+// PrÃ©vention contre les injection SQL dans les variables POST
 foreach ($_POST as $key => $value) {
     $_POST[$key] = filterParameters($value);
 }
 
-// Prévention contre les injection SQL dans les variables GET
+// PrÃ©vention contre les injection SQL dans les variables GET
 foreach ($_GET as $key => $value) {
     $_GET[$key] = filterParameters($value);
 }
 
-// Prévention contre les injection SQL dans les variables COOKIES
+// PrÃ©vention contre les injection SQL dans les variables COOKIES
 foreach ($_COOKIE as $key => $value) {
     $_COOKIE[$key] = filterParameters($value);
 }
 
-// Prévention contre les injection SQL dans les variables SESSION
-if (isset($_SESSION)) {
+// PrÃ©vention contre les injection SQL dans les variables SESSION
+if(isset($_SESSION)) {
     foreach ($_SESSION as $key => $value) {
 	$_SESSION[$key] = filterParameters($value);
     }
 }
 
-// Prévention contre les injection SQL dans les variables FILES
+// PrÃ©vention contre les injection SQL dans les variables FILES
 foreach ($_FILES as $key => $value) {
     $_FILES[$key] = filterParameters($value);
 }

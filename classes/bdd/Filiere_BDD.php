@@ -1,32 +1,30 @@
 <?php
 
 class Filiere_BDD {
-    /** Méthodes statiques * */
+
+    /** MÃ©thodes statiques **/
 
     /**
-     * Récupère une filière suivant son identifiant
-     * @param $identifiantBDD l'identifiant de la filière à récupérer
-     * @return String[] tableau contenant les informations d'une filière
+     * RÃ©cupÃ©rer une filiÃ¨re suivant son identifiant
+     * @param $identifiantBDD l'identifiant de la filiÃ¨re rÃ©upÃ©rÃ©e
+     * @return String[] tableau contenant les informations d'une filiÃ¨re
      */
     public static function getFiliere($identifiantBDD) {
-	global $tab10;
 	global $db;
+	global $tab10;
 	$sql = "SELECT * FROM $tab10 WHERE idfiliere='$identifiantBDD'";
-	//echo "getFiliere : $sql<br/>";
 	$req = $db->query($sql);
-	//if (!$req) echo "KO Filiere_BDD::getFiliere : $sql<br/>"; else echo "OK getFiliere : $sql<br/>";
 	return mysqli_fetch_array($req);
     }
 
     /**
-     * Renvoie la liste de toutes les filières
-     * @return String[] tableau contenant les informations de toutes les filières
+     * Renvoie la liste de toutes les filiÃ¨res
+     * @return String[] tableau contenant les informations de toutes les filiÃ¨res
      */
     public static function listerFilieres() {
-	global $tab10;
 	global $db;
+	global $tab10;
 
-	$result = array();
 	$sql = "SELECT * FROM $tab10 ORDER BY nomfiliere ASC";
 	$result = $db->query($sql);
 
@@ -46,21 +44,22 @@ class Filiere_BDD {
 
     // $f : Un objet Filiere
     public static function sauvegarder($f) {
-	global $tab10;
 	global $db;
+	global $tab10;
 
 	if ($f->getIdentifiantBDD() == "") {
-	    // Création d'une filière
-	    $requete = "INSERT INTO $tab10(nomfiliere, temps_soutenance) VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ")";
+	    // CrÃ©ation d'une filiÃ¨re
+	    $req = "INSERT INTO $tab10(nomfiliere, temps_soutenance)
+		    VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ")";
 	    $db->query($req);
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab10";
-	    $req = $db->query($sql);
+	    $req = $db->query($sql2);
 	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    // Mise à jour d'une filière
-	    $requete = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "'
-			WHERE idfiliere = '" . $f->getIdentifiantBDD() . "'";
+	    // Mise Ã  jour d'une filiÃ¨re
+	    $req = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "'
+		    WHERE idfiliere = '" . $f->getIdentifiantBDD() . "'";
 	    $db->query($req);
 	    return $f->getIdentifiantBDD();
 	}

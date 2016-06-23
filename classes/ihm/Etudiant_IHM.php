@@ -2,8 +2,8 @@
 
 class Etudiant_IHM {
 
-    // $etu = Etudiant qui est modifiÈ et dont les informations sont affichÈes.
-    // si $etu = "", alors il s'agit d'un formulaire de crÈation (champs vide)
+    // $etu = Etudiant qui est modifi√© et dont les informations sont affich√©es.
+    // si $etu = "", alors il s'agit d'un formulaire de cr√©ation (champs vide)
     public static function afficherFormulaireEdition($etu) {
 	?>
 	<form method=post action="">
@@ -14,17 +14,27 @@ class Etudiant_IHM {
 			    <tr>
 				<td>Nom</td>
 				<td>
-				    <input type="text" name="nom" <?php if (isset($_POST['nom']))
-				    echo "value='" . $_POST['nom'] . "'"; else if ($etu != "")
-				    echo "value='" . $etu->getNom() . "'"; ?> />
+				    <input type="text" name="nom"
+				    <?php
+				    if (isset($_POST['nom']))
+					echo "value='" . $_POST['nom'] . "'";
+				    else if ($etu != "")
+					echo "value='" . $etu->getNom() . "'";
+				    ?>
+					   />
 				</td>
 			    </tr>
 			    <tr>
-				<td>PrÈnom</td>
+				<td>Pr√©nom</td>
 				<td>
-				    <input type="text" name="prenom" <?php if (isset($_POST['prenom']))
-				    echo "value='" . $_POST['prenom'] . "'"; else if ($etu != "")
-				    echo "value='" . $etu->getPrenom() . "'"; ?> />
+				    <input type="text" name="prenom"
+				    <?php
+				    if (isset($_POST['prenom']))
+					echo "value='" . $_POST['prenom'] . "'";
+				    else if ($etu != "")
+					echo "value='" . $etu->getPrenom() . "'";
+				    ?>
+					   />
 				</td>
 			    </tr>
 			</table>
@@ -34,17 +44,27 @@ class Etudiant_IHM {
 			    <tr>
 				<td>Email personnel</td>
 				<td>
-				    <input type="text" name="email" <?php if (isset($_POST['email']))
-				    echo "value='" . $_POST['email'] . "'"; else if ($etu != "")
-				    echo "value='" . $etu->getEmailPersonnel() . "'"; ?> />
+				    <input type="text" name="email"
+				    <?php
+				    if (isset($_POST['email']))
+					echo "value='" . $_POST['email'] . "'";
+				    else if ($etu != "")
+					echo "value='" . $etu->getEmailPersonnel() . "'";
+				    ?>
+					   />
 				</td>
 			    </tr>
 			    <tr>
 				<td>Email institutionnel</td>
 				<td>
-				    <input type="text" name="emailinst" <?php if (isset($_POST['emailinst']))
-				    echo "value='" . $_POST['emailinst'] . "'"; else if ($etu != "")
-				    echo "value='" . $etu->getEmailInstitutionel() . "'"; ?> />
+				    <input type="text" name="emailinst"
+				    <?php
+				    if (isset($_POST['emailinst']))
+					echo "value='" . $_POST['emailinst'] . "'";
+				    else if ($etu != "")
+					echo "value='" . $etu->getEmailInstitutionel() . "'";
+				    ?>
+					   />
 				</td>
 			    </tr>
 			</table>
@@ -85,7 +105,7 @@ class Etudiant_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>RÈfÈrent</td>
+				<td>R√©f√©rent</td>
 				<td>
 				    <select name="idParrain">
 					<option value="-1"></option>
@@ -106,22 +126,22 @@ class Etudiant_IHM {
 
 			    <tr>
 				<td>
-				    Les formats acceptÈs sont : PDF DOC DOCX.<br/>La taille doit Ítre infÈrieure ‡ 20 Mo.
+				    Les formats accept√©s sont : PDF DOC DOCX.<br/>La taille doit √™tre inf√©rieure √† 20 Mo.
 				</td>
 			    </tr>
 
 			    <tr><td>&nbsp;</td></tr>
 
 			    <tr>
-				<td>DÈposer votre rapport ici :</td>
+				<td>D√©poser votre rapport ici :</td>
 				<td>
-				    <input name="uploadRapport" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitRapport" value="DÈposer le rapport"/>
+				    <input name="uploadRapport" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitRapport" value="D√©poser le rapport"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>DÈposer votre rÈsumÈ ici :</td>
+				<td>D√©poser votre r√©sum√© ici :</td>
 				<td>
-				    <input name="uploadResume" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitResume" value="DÈposer le rÈsumÈ"/>
+				    <input name="uploadResume" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitResume" value="D√©poser le r√©sum√©"/>
 				</td>
 			    </tr>
 			</table>
@@ -137,5 +157,81 @@ class Etudiant_IHM {
 	<?php
     }
 
+    public static function afficherListeEtudiants($annee, $tabEtudiants) {
+	$nbEtudiants = sizeof($tabEtudiants);
+	?>
+	Nombre d'√©tudiants s√©lectionn√©s : <?php echo $nbEtudiants; ?><p/>
+	<table>
+	    <tr id='entete'>
+		<td width='40%'>Nom et Pr√©nom</td>
+		<td width='40%'>Mail institutionnel</td>
+		<td width='10%'>Dipl√¥me</td>
+		<td width='10%'>Sp√©cialit√©</td>
+	    </tr>
+	<?php
+	for ($i = 0; $i < $nbEtudiants; $i++) {
+	    $promo = $tabEtudiants[$i]->getPromotion($annee);
+	?>
+	    <tr id="ligne<?php echo $i % 2; ?>">
+	        <td>
+		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $tabEtudiants[$i]->getEmailInstitutionel(); ?>
+	        </td>
+	        <td>
+		    <?php echo $promo->getFiliere()->getNom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $promo->getParcours()->getNom(); ?>
+	        </td>
+	    </tr>
+	<?php
+	}
+	?>
+	</table>
+	<br/><br/>
+	<?php
+    }
+
+    public static function afficherListeEtudiantsSansConventions($idPromo, $tabEtuSansConv) {
+	if (sizeof($tabEtuSansConv) > 0) {
+	    ?>
+	    <table>
+		<tr id='entete'>
+		    <td width='90%'>Etudiant</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>
+	    <?php
+	    for ($i = 0; $i < sizeof($tabEtuSansConv); $i++) {
+	    ?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td>
+			<?php echo $tabEtuSansConv[$i]->getNom() . " " . $tabEtuSansConv[$i]->getPrenom(); ?>
+		    </td>
+		    <td align="center">
+			<a href="supprimerEtudiant.php?promo=<?php echo $idPromo; ?>&id=<?php echo $tabEtuSansConv[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
+		</tr>
+	    <?php
+	    }
+	    ?>
+	    </table>
+	    <?php
+	} else {
+	    ?>
+	    <br/>
+		<center>
+		    Aucune √©tudiant ne peut √™tre supprim√© dans cette promotion.
+		    <br/>
+		    Tous les √©tudiants de cette promotion ont d√©j√† r√©alis√© au moins un stage.
+		</center>
+	     <br/>
+	    <?php
+	}
+    }
 }
+
 ?>

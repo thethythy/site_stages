@@ -4,8 +4,8 @@ to use it in not GPL project. Please contact sales@dhtmlx.com for details
 */
 scheduler.locale={
 	date:{
-		month_full:["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-		month_short:["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aôu", "Sep", "Oct", "Nov", "Déc"],	
+		month_full:["Janvier", "FÃ©vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "AoÃ»t", "Septembre", "Octobre", "Novembre", "DÃ©cembre"],
+		month_short:["Jan", "FÃ©v", "Mar", "Avr", "Mai", "Juin", "Juil", "AoÃ»", "Sep", "Oct", "Nov", "DÃ©c"],
 		day_full:["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
     	day_short:["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
     },
@@ -14,30 +14,30 @@ scheduler.locale={
     	day_tab:"Jour",
     	week_tab:"Semaine",
     	month_tab:"Mois",
-    	new_event:"Nouvel événement",
+    	new_event:"Nouvel Ã©vÃ©nement",
 		icon_save:"Enregistrer",
 		icon_cancel:"Annuler",
-		icon_details:"Détails",
+		icon_details:"DÃ©tails",
 		icon_edit:"Modifier",
 		icon_delete:"Effacer",
-		confirm_closing:"",//Vos modifications seront perdus, êtes-vous sûr ? 
-		confirm_deleting:"L'événement sera effacé sans appel, êtes-vous sûr ?",
+		confirm_closing:"",//Vos modifications seront perdus,Ãªtes-vous sÃ»r ?
+		confirm_deleting:"L'Ã©vÃ©nement sera effacÃ© sans appel, Ãªtes-vous sÃ»r ?",
 		section_description:"Description",
-		section_time:"Période de temps",
-		full_day:"Journée complète",
-		
-		confirm_recurring:"Voulez-vous éditer toute une série d'évènements répétés ?",
-		section_recurring:"Répéter l'évènement",
-		button_recurring:"Désactivé",
-		button_recurring_open:"Activé",
-		
+		section_time:"PÃ©riode de temps",
+		full_day:"JournÃ©e complÃ¨te",
+
+		confirm_recurring:"Voulez-vous Ã©diter toute une sÃ©rie d'Ã©vÃ©nements rÃ©pÃ©tÃ©s ?",
+		section_recurring:"RÃ©pÃ©ter l'Ã©vÃ©nement",
+		button_recurring:"DÃ©sactivÃ©",
+		button_recurring_open:"ActivÃ©",
+
 		/*agenda view extension*/
 		agenda_tab:"Jour",
 		date:"Date",
 		description:"Description",
-		
+
 		/*year view extension*/
-		year_tab:"Année",
+		year_tab:"AnnÃ©e",
 
 		/*week agenda view extension*/
 		week_agenda_tab: "Jour"

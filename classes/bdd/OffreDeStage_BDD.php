@@ -3,11 +3,11 @@
 class offreDeStage_BDD {
 
     public static function sauvegarder($offreDeStage) {
+	global $db;
 	global $tab12;
 	global $tab8;
 	global $tab7;
 	global $tab11;
-	global $db;
 
 	$lastId = "0";
 	$estVisible = 0;
@@ -16,35 +16,35 @@ class offreDeStage_BDD {
 	}
 
 	if ($offreDeStage->getIdentifiantBDD() == "") {
-	    $sql = "INSERT INTO $tab12 VALUES ('" . $offreDeStage->getIdentifiantBDD() . "',
-					       '" . $offreDeStage->getSujet() . "',
-					       '" . $offreDeStage->getTitre() . "',
-					       '" . $offreDeStage->getListeEnvironnements() . "',
-					       '" . $offreDeStage->getDureeMinimale() . "',
-					       '" . $offreDeStage->getDureeMaximale() . "',
-					       '" . $offreDeStage->getIndemnite() . "',
-					       '" . $offreDeStage->getRemarques() . "',
-					       '" . $estVisible . "',
-					       '" . $offreDeStage->getIdContact() . "');";
-
-	    //echo $sql."<br/>";
+	    $sql = "INSERT INTO $tab12
+		    VALUES ('" . $offreDeStage->getIdentifiantBDD() . "',
+			    '" . $offreDeStage->getSujet() . "',
+			    '" . $offreDeStage->getTitre() . "',
+			    '" . $offreDeStage->getListeEnvironnements() . "',
+			    '" . $offreDeStage->getDureeMinimale() . "',
+			    '" . $offreDeStage->getDureeMaximale() . "',
+			    '" . $offreDeStage->getIndemnite() . "',
+			    '" . $offreDeStage->getRemarques() . "',
+			    '" . $estVisible . "',
+			    '" . $offreDeStage->getIdContact() . "');";
 
 	    $db->query($sql);
-	    //récupération de l'identifiant
+	    // rÃ©cupÃ©ration de l'identifiant
 	    $sql = "SELECT max(idoffre) AS lastId FROM $tab12;";
 	    $result = $db->query($sql);
 	    $data = mysqli_fetch_array($result);
 	    $lastId = $data['lastId'];
 	} else {
-	    $sql = "UPDATE $tab12 SET sujet='" . $offreDeStage->getSujet() . "',
-				     titre='" . $offreDeStage->getTitre() . "',
-				     listeenvironnement='" . $offreDeStage->getListeEnvironnements() . "',
-				     dureemin='" . $offreDeStage->getDureeMinimale() . "',
-				     dureemax='" . $offreDeStage->getDureeMaximale() . "',
-				     indemnite='" . $offreDeStage->getIndemnite() . "',
-				     remarques='" . $offreDeStage->getRemarques() . "',
-				     estVisible='" . $estVisible . "',
-				     idcontact='" . $offreDeStage->getIdContact() . "'
+	    $sql = "UPDATE $tab12
+		    SET sujet='" . $offreDeStage->getSujet() . "',
+			titre='" . $offreDeStage->getTitre() . "',
+			listeenvironnement='" . $offreDeStage->getListeEnvironnements() . "',
+			dureemin='" . $offreDeStage->getDureeMinimale() . "',
+			dureemax='" . $offreDeStage->getDureeMaximale() . "',
+			indemnite='" . $offreDeStage->getIndemnite() . "',
+			remarques='" . $offreDeStage->getRemarques() . "',
+			estVisible='" . $estVisible . "',
+			idcontact='" . $offreDeStage->getIdContact() . "'
 		    WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
@@ -52,40 +52,35 @@ class offreDeStage_BDD {
 	    $sql = "DELETE FROM $tab8 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //echo $sql."<br/>";
 	    //Profils
 	    $sql = "DELETE FROM $tab7 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //echo $sql."<br/>";
 	    //Competences
 	    $sql = "DELETE FROM $tab11 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //echo $sql."<br/>";
-
 	    $lastId = $offreDeStage->getIdentifiantBDD();
 	}
 
-	//Themes = Parcours
+	// Themes = Parcours
 	$tabThemes = $offreDeStage->getThemes();
 	for ($i = 0; $i < sizeof($tabThemes); $i++) {
 	    $sql = "INSERT INTO $tab8 VALUES('" . $tabThemes[$i]->getIdentifiantBDD() . "', '" . $lastId . "');";
 	    $db->query($sql);
 	}
 
-	//Profils = Filière
+	// Profils = FiliÃ¨re
 	$tabProfils = $offreDeStage->getListeProfilSouhaite();
 	for ($i = 0; $i < sizeof($tabProfils); $i++) {
 	    $sql = "INSERT INTO $tab7 VALUES('" . $lastId . "', '" . $tabProfils[$i]->getIdentifiantBDD() . "')";
 	    $db->query($sql);
 	}
 
-	//Competences
+	// CompÃ©tences
 	$tabCompetences = $offreDeStage->getListesCompetences();
 	for ($i = 0; $i < sizeof($tabCompetences); $i++) {
 	    $sql = "INSERT INTO $tab11 VALUES('" . $tabCompetences[$i]->getIdentifiantBDD() . "', '" . $lastId . "')";
-	    //echo $sql."<br/>";
 	    $db->query($sql);
 	}
 
@@ -93,11 +88,11 @@ class offreDeStage_BDD {
     }
 
     public static function delete($identifiantBDD) {
+	global $db;
 	global $tab12;
 	global $tab8;
 	global $tab7;
 	global $tab11;
-	global $db;
 
 	$sql = "DELETE FROM $tab12 WHERE idoffre='$identifiantBDD'";
 	$db->query($sql);
@@ -116,15 +111,15 @@ class offreDeStage_BDD {
     }
 
     public static function getOffreDeStage($identifiantBDD) {
+	global $db;
 	global $tab7;
 	global $tab11;
 	global $tab12;
 	global $tab8;
-	global $db;
 
-	$sql2 = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
-	$result = $db->query($sql2);
-	$data = mysqli_fetch_array($result);
+	$sql = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
+	$res = $db->query($sql);
+	$data = mysqli_fetch_array($res);
 	$tabOffreDeStage = array();
 
 	array_push($tabOffreDeStage, $data['idoffre']);
@@ -133,17 +128,17 @@ class offreDeStage_BDD {
 	array_push($tabOffreDeStage, $data['listeenvironnement']);
 
 	$sql2 = "SELECT * FROM $tab8 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql2);
+	$res2 = $db->query($sql2);
 	$tabThemes = array();
-	while ($theme = mysqli_fetch_array($res)) {
+	while ($theme = mysqli_fetch_array($res2)) {
 	    array_push($tabThemes, $theme['idparcours']);
 	}
 	array_push($tabOffreDeStage, $tabThemes);
 
-	$sql2 = "SELECT * FROM $tab7 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql2);
+	$sql3 = "SELECT * FROM $tab7 WHERE idoffre='$identifiantBDD'";
+	$res3 = $db->query($sql3);
 	$tabProfils = array();
-	while ($profil = mysqli_fetch_array($res)) {
+	while ($profil = mysqli_fetch_array($res3)) {
 	    array_push($tabProfils, $profil['idfiliere']);
 	}
 	array_push($tabOffreDeStage, $tabProfils);
@@ -154,10 +149,10 @@ class offreDeStage_BDD {
 	array_push($tabOffreDeStage, $data['remarques']);
 	array_push($tabOffreDeStage, $data['estVisible']);
 
-	$sql2 = "SELECT * FROM $tab11 WHERE idoffre='$identifiantBDD'";
-	$res = $db->query($sql2);
+	$sql4 = "SELECT * FROM $tab11 WHERE idoffre='$identifiantBDD'";
+	$res4 = $db->query($sql4);
 	$tabCompetences = array();
-	while ($competence = mysqli_fetch_array($res)) {
+	while ($competence = mysqli_fetch_array($res4)) {
 	    array_push($tabCompetences, $competence['idcompetence']);
 	}
 	array_push($tabOffreDeStage, $tabCompetences);
@@ -170,16 +165,16 @@ class offreDeStage_BDD {
     /**
      * Retourne une liste d'offre de stage suivant un filtre
      * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les offres de stage concernées par le filtre
+     * @return String[] tableau contenant les offres de stage concernÃ©es par le filtre
      */
     public static function getListeOffreDeStage($filtres) {
+	global $db;
 	global $tab3;
 	global $tab6;
 	global $tab7;
 	global $tab8;
 	global $tab11;
 	global $tab12;
-	global $db;
 
 	if ($filtres == "") {
 	    $requete = "SELECT * FROM $tab12";
@@ -211,7 +206,6 @@ class offreDeStage_BDD {
 	    $requete = "SELECT * $table $requete AND " . $filtres->getStrFiltres() . " ORDER BY $tab12.idoffre";
 	}
 
-	//echo $requete."<br/>";
 	$result = $db->query($requete);
 
 	$tabODS = array();
@@ -224,18 +218,18 @@ class offreDeStage_BDD {
 	    array_push($tab, $ods['titre']);
 	    array_push($tab, $ods['listeenvironnement']);
 
-	    $sql2 = "SELECT * FROM " . $tab8 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql2);
+	    $sql1 = "SELECT * FROM " . $tab8 . " WHERE idoffre=" . $ods['idoffre'];
+	    $res1 = $db->query($sql1);
 	    $tabThemes = array();
-	    while ($theme = mysqli_fetch_array($res)) {
+	    while ($theme = mysqli_fetch_array($res1)) {
 		array_push($tabThemes, $theme['idparcours']);
 	    }
 	    array_push($tab, $tabThemes);
 
 	    $sql2 = "SELECT * FROM " . $tab7 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql2);
+	    $res2 = $db->query($sql2);
 	    $tabProfils = array();
-	    while ($profil = mysqli_fetch_array($res)) {
+	    while ($profil = mysqli_fetch_array($res2)) {
 		array_push($tabProfils, $profil['idfiliere']);
 	    }
 	    array_push($tab, $tabProfils);
@@ -246,10 +240,10 @@ class offreDeStage_BDD {
 	    array_push($tab, $ods['remarques']);
 	    array_push($tab, $ods['estVisible']);
 
-	    $sql2 = "SELECT * FROM " . $tab11 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res = $db->query($sql2);
+	    $sql3 = "SELECT * FROM " . $tab11 . " WHERE idoffre=" . $ods['idoffre'];
+	    $res3 = $db->query($sql3);
 	    $tabCompetences = array();
-	    while ($competence = mysqli_fetch_array($res)) {
+	    while ($competence = mysqli_fetch_array($res3)) {
 		array_push($tabCompetences, $competence['idcompetence']);
 	    }
 	    array_push($tab, $tabCompetences);

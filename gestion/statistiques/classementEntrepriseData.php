@@ -3,27 +3,34 @@
 $chemin = '../../classes/';
 
 include_once $chemin.'bdd/connec.inc';
+
 include_once($chemin.'moteur/Filtre.php');
 include_once($chemin.'moteur/FiltreNumeric.php');
+
 include_once $chemin.'bdd/Convention_BDD.php';
-include_once $chemin.'bdd/Contact_BDD.php';
-include_once $chemin.'bdd/Entreprise_BDD.php';
-include_once $chemin.'bdd/Promotion_BDD.php';
-include_once $chemin.'bdd/Filiere_BDD.php';
-include_once $chemin.'bdd/Parcours_BDD.php';
 include_once $chemin.'moteur/Convention.php';
+
+include_once $chemin.'bdd/Contact_BDD.php';
 include_once $chemin.'moteur/Contact.php';
+
+include_once $chemin.'bdd/Entreprise_BDD.php';
 include_once $chemin.'moteur/Entreprise.php';
+
+include_once $chemin.'bdd/Promotion_BDD.php';
 include_once $chemin.'moteur/Promotion.php';
+
+include_once $chemin.'bdd/Filiere_BDD.php';
 include_once $chemin.'moteur/Filiere.php';
+
+include_once $chemin.'bdd/Parcours_BDD.php';
 include_once $chemin.'moteur/Parcours.php';
 
-// PrÈcisons l'encodage des donnÈes si cela n'est pas dÈj‡ fait
+// Pr√©cisons l'encodage des donn√©es si cela n'est pas d√©j√† fait
 if (!headers_sent())
-    header('Content-type: text/html; charset=iso-8859-15');
+    header('Content-type: text/html; charset=utf-8');
 
 // -----------------------------------------------------------------------------
-// CrÈation des filtres
+// Cr√©ation des filtres
 
 $filtres = array();
 
@@ -42,7 +49,7 @@ for ($i = 1; $i < sizeof($filtres); $i++)
     $filtre = new Filtre($filtre, $filtres[$i], 'AND');
 
 // -----------------------------------------------------------------------------
-// Affichage des donnÈes
+// Affichage des donn√©es
 
 function trouveEmailEntreprise($oEntreprise) {
     $email = $oEntreprise->getEmail();
@@ -58,7 +65,7 @@ if ($_POST['annee'] != '')
     $tabOConventions = Convention::getListeConvention($filtre);
 
 if (sizeof($tabOConventions) > 0) {
-    // CrÈation du tableau des donnÈes
+    // Cr√©ation du tableau des donn√©es
     $tabData = array();
     foreach ($tabOConventions as $oConvention) {
 	$idEntreprise = $oConvention->getEntreprise()->getIdentifiantBDD();
@@ -84,14 +91,14 @@ if (sizeof($tabOConventions) > 0) {
 	return ($a1 > $a2) ? -1 : 1;
     }
 
-    // Tri du tableau des donnÈes
+    // Tri du tableau des donn√©es
     uasort($tabData, 'cmp1');
     foreach ($tabData as $key => $value) {
 	uksort($tabData[$key]['promotions']['conventions'], 'cmp2');
     }
 
-    // Affichage du tableau triÈ
-    echo "Nombre d'entreprises sÈlectionnÈes : ".sizeof($tabData)."<p/>";
+    // Affichage du tableau tri√©
+    echo "Nombre d'entreprises s√©lectionn√©es : ".sizeof($tabData)."<p/>";
 
     echo '<table>
 	    <tr id="entete">
@@ -100,19 +107,19 @@ if (sizeof($tabOConventions) > 0) {
 		<td width="60%">Stage(s)</td>
 	    </tr>';
 
-    $i = 0; // Pour l'affichage de couleur alternÈ
+    $i = 0; // Pour l'affichage de couleur altern√©
     foreach ($tabData as $key => $value) {
 
 	echo '<tr id="ligne' . $i%2 . '">';
 
 	// L'entreprise
 	$oEntreprise = Entreprise::getEntreprise($key);
-	echo '<td><br/>';
+	echo '<td>';
 	echo $oEntreprise->getNom() . '<br/>';
 	echo $oEntreprise->getAdresse() . '<br/>';
 	echo $oEntreprise->getCodePostal() . '&nbsp;';
-	echo $oEntreprise->getVille() . '<br/><br/>';
-	echo trouveEmailEntreprise($oEntreprise) . '<br/>&nbsp;<br/>';
+	echo $oEntreprise->getVille() . '<br/>';
+	echo trouveEmailEntreprise($oEntreprise);
 	echo '</td>';
 
 	// Le nombre de stagiaires
@@ -131,7 +138,7 @@ if (sizeof($tabOConventions) > 0) {
 	    if ($anneeUniversitaire == '') $anneeUniversitaire = $oPromotion->anneeUniversitaire;
 	    $annees = $oPromotion->anneeUniversitaire . '-' . ($oPromotion->anneeUniversitaire + 1) ;
 
-	    $j = 1; // NumÈro de la fiche
+	    $j = 1; // Num√©ro de la fiche
 	    $fiches = '';
 	    foreach ($value2 as $key3 => $value3) {
 		$fiches .= '<a href="./ficheDeStage.php?&idEtu=' . $value3->getIdEtudiant() . '&idPromo=' . $oPromotion->getIdentifiantBDD() .'" target="_blank">F'.$j.'</a>';
@@ -157,7 +164,7 @@ if (sizeof($tabOConventions) > 0) {
     echo "</table>";
 
 } else {
-    echo '<br/><center>Aucune entreprise ne correspond aux critËres de recherche.</center><br/>';
+    echo '<br/><center>Aucune entreprise ne correspond aux crit√®res de recherche.</center><br/>';
 }
 
 ?>

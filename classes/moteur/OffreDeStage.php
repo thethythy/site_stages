@@ -7,16 +7,18 @@ class offreDeStage {
     var $titre;
     var $listeEnvironnement;
     var $theme; // Tableau d'identifiants de Parcours
-    var $listeProfilSouhaite; // Tableau d'identifiants de Filières
+    var $listeProfilSouhaite; // Tableau d'identifiants de FiliÃ¨res
     var $dureeMin;
     var $dureeMax;
     var $indemnite;
     var $remarques;
     var $estVisible;
-    var $competences;      //Tableau des compétences
+    var $competences;  //Tableau des compÃ©tences
     var $maitreDeStage;
 
-    public function offreDeStage($identifiantBDD, $sujet, $titre, $listeEnvironnement, $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques, $estVisible, $listeCompetences, $maitreDeStage) {
+    public function offreDeStage($identifiantBDD, $sujet, $titre, $listeEnvironnement,
+	    $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques,
+	    $estVisible, $listeCompetences, $maitreDeStage) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->sujet = $sujet;
 	$this->titre = $titre;
@@ -152,12 +154,23 @@ class offreDeStage {
     }
 
     public static function saisirDonnees($tab_donnees) {
-	$ods = new offreDeStage("", $tab_donnees[0], $tab_donnees[1], $tab_donnees[2], $tab_donnees[3], $tab_donnees[4], $tab_donnees[5], $tab_donnees[6], $tab_donnees[7], $tab_donnees[8], '0', $tab_donnees[9], $tab_donnees[10]);
+	$ods = new offreDeStage("", $tab_donnees[0], $tab_donnees[1],
+				    $tab_donnees[2], $tab_donnees[3],
+				    $tab_donnees[4], $tab_donnees[5],
+				    $tab_donnees[6], $tab_donnees[7],
+				    $tab_donnees[8], '0',
+				    $tab_donnees[9], $tab_donnees[10]);
 	return offreDeStage_BDD::sauvegarder($ods);
     }
 
     public static function modifierDonnees($tab_donnees) {
-	$ods = new offreDeStage($tab_donnees[0], $tab_donnees[1], $tab_donnees[2], $tab_donnees[3], $tab_donnees[4], $tab_donnees[5], $tab_donnees[6], $tab_donnees[7], $tab_donnees[8], $tab_donnees[9], $tab_donnees[10], $tab_donnees[11], $tab_donnees[12]);
+	$ods = new offreDeStage($tab_donnees[0], $tab_donnees[1],
+				$tab_donnees[2], $tab_donnees[3],
+				$tab_donnees[4], $tab_donnees[5],
+				$tab_donnees[6], $tab_donnees[7],
+				$tab_donnees[8], $tab_donnees[9],
+				$tab_donnees[10], $tab_donnees[11],
+				$tab_donnees[12]);
 	return offreDeStage_BDD::sauvegarder($ods);
     }
 
@@ -168,7 +181,13 @@ class offreDeStage {
     public static function getOffreDeStage($identifiantBDD) {
 	$offreDeStage = OffreDeStage_BDD::getOffreDeStage($identifiantBDD);
 
-	return new OffreDeStage($offreDeStage[0], $offreDeStage[1], $offreDeStage[2], $offreDeStage[3], $offreDeStage[4], $offreDeStage[5], $offreDeStage[6], $offreDeStage[7], $offreDeStage[8], $offreDeStage[9], $offreDeStage[10], $offreDeStage[11], $offreDeStage[12]);
+	return new OffreDeStage($offreDeStage[0], $offreDeStage[1],
+				$offreDeStage[2], $offreDeStage[3],
+				$offreDeStage[4], $offreDeStage[5],
+				$offreDeStage[6], $offreDeStage[7],
+				$offreDeStage[8], $offreDeStage[9],
+				$offreDeStage[10], $offreDeStage[11],
+				$offreDeStage[12]);
     }
 
     public static function getListeOffreDeStage($filtres) {
@@ -176,7 +195,14 @@ class offreDeStage {
 
 	$tabODS = array();
 	for ($i = 0; $i < sizeof($tabODSString); $i++) {
-	    array_push($tabODS, new OffreDeStage($tabODSString[$i][0], $tabODSString[$i][1], $tabODSString[$i][2], $tabODSString[$i][3], $tabODSString[$i][4], $tabODSString[$i][5], $tabODSString[$i][6], $tabODSString[$i][7], $tabODSString[$i][8], $tabODSString[$i][9], $tabODSString[$i][10], $tabODSString[$i][11], $tabODSString[$i][12]));
+	    array_push($tabODS,
+		    new OffreDeStage($tabODSString[$i][0], $tabODSString[$i][1],
+				     $tabODSString[$i][2], $tabODSString[$i][3],
+				     $tabODSString[$i][4], $tabODSString[$i][5],
+				     $tabODSString[$i][6], $tabODSString[$i][7],
+				     $tabODSString[$i][8], $tabODSString[$i][9],
+				     $tabODSString[$i][10], $tabODSString[$i][11],
+				     $tabODSString[$i][12]));
 	}
 
 	return $tabODS;

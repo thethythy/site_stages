@@ -1,18 +1,18 @@
 <?php
 
 class Etudiant_BDD {
-    /** Méthodes statiques **/
+    /** MÃ©thodes statiques **/
 
     /**
      * Sauvegarde un objet Etudiant
-     * @param $etudiant l'étudiant à sauvegarder
+     * @param $etudiant l'Ã©tudiant sauvegardÃ©
      */
     public static function sauvegarder($etudiant, $affiche = true) {
-	global $tab9;
 	global $db;
+	global $tab9;
 
 	if ($etudiant->getEmailInstitutionel() == "") {
-	    // Tentative pour trouver l'email institutionnel de l'étudiant dans le LDAP
+	    // Tentative pour trouver l'email institutionnel de l'Ã©tudiant dans le LDAP
 	    $mailInstitutionnel = Utils::search_ldap($etudiant->getNom(), $etudiant->getPrenom(), $affiche);
 	    $etudiant->setEmailInstitutionel($mailInstitutionnel);
 	}
@@ -28,70 +28,62 @@ class Etudiant_BDD {
 	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab9";
-	    $req = $db->query($sql);
+	    $req = $db->query($sql2);
 	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    $sql = "UPDATE $tab9 SET
-			nometudiant='" . $etudiant->getNom() . "',
+	    $sql = "UPDATE $tab9
+		    SET nometudiant='" . $etudiant->getNom() . "',
 			prenometudiant='" . $etudiant->getPrenom() . "',
 			email_institutionnel='" . $etudiant->getEmailInstitutionel() . "',
 			email_personnel='" . $etudiant->getEmailPersonnel() . "',
 			codeetudiant='" . $etudiant->getCodeEtudiant() . "'
-			WHERE idetudiant = '" . $etudiant->getIdentifiantBDD() . "'";
+		    WHERE idetudiant = '" . $etudiant->getIdentifiantBDD() . "'";
 	    $db->query($sql);
 	    return $etudiant->getIdentifiantBDD();
 	}
     }
 
     /**
-     * Récupère un étudiant suivant son identifiant
-     * @param $identifiantBDD l'identifiant de l'étudiant à récupérer
-     * @return String[] tableau contenant les informations d'un étudiant
+     * RÃ©cupÃ©rer un Ã©tudiant suivant son identifiant
+     * @param $identifiantBDD l'identifiant de l'Ã©tudiant rÃ©cupÃ©rÃ©
+     * @return String[] tableau contenant les informations d'un Ã©tudiant
      */
     public static function getEtudiant($identifiantBDD) {
-	global $tab9;
 	global $db;
-
+	global $tab9;
 	$sql = "SELECT * FROM $tab9 WHERE idetudiant='$identifiantBDD'";
 	$req = $db->query($sql);
 	return mysqli_fetch_array($req);
     }
 
-    // Suppression d'un étudiant dans une promo --> Dans la table 'relation_promotion_etudiant_convention'
+    // Suppression d'un Ã©tudiant dans une promo --> Dans la table 'relation_promotion_etudiant_convention'
     public static function supprimerEtudiant($identifiantBDD, $idPromo) {
-	global $tab19;
 	global $db;
-
+	global $tab19;
 	$sql = "DELETE FROM $tab19 WHERE idetudiant='$identifiantBDD' AND idpromotion='$idPromo'";
-	//echo $sql."<br/>";
 	$db->query($sql);
     }
 
-    // Suppression définitive d'un étudiant --> Dans la table 'etudiant'
+    // Suppression dÃ©finitive d'un Ã©tudiant --> Dans la table 'etudiant'
     public static function supprimerDefinitivementEtudiant($identifiantBDD) {
-	global $tab9;
 	global $db;
-
+	global $tab9;
 	$sql = "DELETE FROM $tab9 WHERE idetudiant='$identifiantBDD'";
-	//echo $sql."<br/>";
 	$db->query($sql);
     }
 
     /**
-     * Renvoie la liste des étudiants d'une promotion
+     * Renvoie la liste des Ã©tudiants d'une promotion
      * @param $identifiantPromo l'identifiant de la promotion
-     * @return String[] tableau contenant tous les étudiants de la promotion
+     * @return String[] tableau contenant tous les Ã©tudiants de la promotion
      */
     public static function getListeEtudiants($identifiantPromo) {
-	$listeEtudiants = array();
+	global $db;
 	global $tab9;
 	global $tab19;
-	global $db;
 
-	$result = array();
 	$sql = "SELECT idetudiant FROM $tab19 WHERE idpromotion='$identifiantPromo'";
-	//echo "REQUETE 1 : ".$sql."<br/>";
 	$req = $db->query($sql);
 
 	$sql2 = "SELECT * FROM $tab9 WHERE";
@@ -102,10 +94,11 @@ class Etudiant_BDD {
 	    $sql2 .= " idetudiant='" . $idEtu["idetudiant"] . "' OR";
 	}
 
+	$listeEtudiants = array();
+
 	if ($aucunEtudiant == false) {
 	    $sql2 = substr_replace($sql2, "", -3, 3);
 	    $sql2 .= " ORDER BY nometudiant ASC;";
-	    //echo "REQUETE 2 : ".$sql2."<br/>";
 	    $req = $db->query($sql2);
 
 	    while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
@@ -123,55 +116,53 @@ class Etudiant_BDD {
     }
 
     /**
-     * Permet de rattacher a un étudiant à une nouvelle promotion
-     * @param $etu		:	identifiant de l'étudiant
-     * @param $promo	:	identifiant de la promotion
+     * Permet de rattacher a un Ã©tudiant une nouvelle promotion
+     * @param $etu : identifiant de l'Ã©tudiant
+     * @param $promo : identifiant de la promotion
      */
     public static function ajouterPromotion($etu, $promo) {
-	global $tab19;
 	global $db;
+	global $tab19;
 
 	$sql = "INSERT INTO $tab19(idetudiant, idpromotion) VALUES ('$etu', '$promo')";
-	$req = $db->query($sql);
+	$db->query($sql);
     }
 
     /**
-     * Permet de rattacher a un étudiant à une nouvelle convention
-     * @param $idetu	:	identifiant de l'étudiant
-     * @param $idconv	:	identifiant de la convention
-     * @param $idpromo	:	identifiant de la promotion
+     * Permet de rattacher a un Ã©tudiant une nouvelle convention
+     * @param $idetu : identifiant de l'Ã©tudiant
+     * @param $idconv : identifiant de la convention
+     * @param $idpromo : identifiant de la promotion
      */
     public static function ajouterConvention($idetu, $idconv, $idpromo) {
-	global $tab19;
 	global $db;
+	global $tab19;
 
 	$sql = "UPDATE $tab19 SET idconvention = '$idconv'
 		WHERE idetudiant = '$idetu' AND idpromotion = '$idpromo'";
-	$req = $db->query($sql);
+	$db->query($sql);
     }
 
     public static function recherchePromotion($etu, $annee) {
+	global $db;
 	global $tab19;
 	global $tab15;
-	global $db;
 
 	$sql = "SELECT $tab19.idpromotion AS idpromo FROM $tab19, $tab15
 		WHERE $tab19.idetudiant LIKE '$etu'
 		AND $tab15.anneeuniversitaire LIKE '$annee'
 		AND $tab19.idpromotion = $tab15.idpromotion";
 
-	// echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql);
 	$result = mysqli_fetch_array($req);
-	// echo "RESULT : ".$result['idpromo']."<br/>";
 	return $result['idpromo'];
     }
 
     public static function rechercheConvention($etu, $annee) {
+	global $db;
 	global $tab19;
 	global $tab15;
 	global $tab4;
-	global $db;
 
 	$sql = "SELECT $tab19.idconvention AS idconv FROM $tab19, $tab4, $tab15
 		WHERE $tab19.idetudiant='$etu'
@@ -179,20 +170,18 @@ class Etudiant_BDD {
 		AND $tab19.idpromotion = $tab15.idpromotion
 		AND $tab19.idconvention = $tab4.idconvention";
 
-	//echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql);
 	$result = mysqli_fetch_array($req);
-	//echo "Result : ".$result['idpromo']."<br/>";
 	return $result['idconv'];
     }
 
     /**
-     * Recherche les étudiants s'appelant $nom $prenom
+     * Recherche les Ã©tudiants s'appelant $nom $prenom
      * @global type $db
      * @global type $tab9
-     * @param type $nom Le nom recherché
-     * @param type $prenom Le prénom recherché
-     * @return array La liste des données des étudiants trouvés
+     * @param type $nom Le nom recherchÃ©
+     * @param type $prenom Le prÃ©nom recherchÃ©ï¿½
+     * @return array La liste des donnÃ©es des Ã©tudiants trouvÃ©s
      */
     public static function searchEtudiants($nom, $prenom) {
 	global $db;
@@ -202,6 +191,7 @@ class Etudiant_BDD {
 	$req = $db->query($sql);
 
 	$tabSEtudiants = array();
+
 	while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
 	    $tab = array();
 	    array_push($tab, $etu["idetudiant"]);
@@ -212,6 +202,7 @@ class Etudiant_BDD {
 	    array_push($tab, $etu["codeetudiant"]);
 	    array_push($tabSEtudiants, $tab);
 	}
+
 	return $tabSEtudiants;
     }
 

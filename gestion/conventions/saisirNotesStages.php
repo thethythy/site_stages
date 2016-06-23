@@ -2,32 +2,36 @@
 
 $chemin = "../../classes/";
 
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."bdd/Contact_BDD.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."bdd/Etudiant_BDD.php");
-include_once($chemin."bdd/Filiere_BDD.php");
-include_once($chemin."bdd/Parcours_BDD.php");
-include_once($chemin."bdd/Promotion_BDD.php");
-include_once($chemin."bdd/Parrain_BDD.php");
-include_once($chemin."bdd/Soutenance_BDD.php");
-include_once($chemin."ihm/IHM_Generale.php");
-include_once($chemin."ihm/Contact_IHM.php");
-include_once($chemin."ihm/Convention_IHM.php");
-include_once($chemin."ihm/Promotion_IHM.php");
-include_once($chemin."moteur/Contact.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."moteur/Entreprise.php");
-include_once($chemin."moteur/Etudiant.php");
-include_once($chemin."moteur/Filiere.php");
-include_once($chemin."moteur/Filtre.php");
-include_once($chemin."moteur/FiltreNumeric.php");
-include_once($chemin."moteur/FiltreString.php");
-include_once($chemin."moteur/Parcours.php");
-include_once($chemin."moteur/Parrain.php");
-include_once($chemin."moteur/Promotion.php");
-include_once($chemin."moteur/Soutenance.php");
+include_once($chemin . "bdd/connec.inc");
+include_once($chemin . "ihm/IHM_Generale.php");
+
+include_once($chemin . "ihm/Promotion_IHM.php");
+include_once($chemin . "bdd/Promotion_BDD.php");
+include_once($chemin . "moteur/Promotion.php");
+
+include_once($chemin . "bdd/Contact_BDD.php");
+include_once($chemin . "moteur/Contact.php");
+
+include_once($chemin . "bdd/Convention_BDD.php");
+include_once($chemin . "moteur/Convention.php");
+
+include_once($chemin . "bdd/Entreprise_BDD.php");
+include_once($chemin . "moteur/Entreprise.php");
+
+include_once($chemin . "bdd/Etudiant_BDD.php");
+include_once($chemin . "moteur/Etudiant.php");
+
+include_once($chemin . "bdd/Filiere_BDD.php");
+include_once($chemin . "moteur/Filiere.php");
+
+include_once($chemin . "bdd/Parcours_BDD.php");
+include_once($chemin . "moteur/Parcours.php");
+
+include_once($chemin . "bdd/Parrain_BDD.php");
+include_once($chemin . "moteur/Parrain.php");
+
+include_once($chemin . "bdd/Soutenance_BDD.php");
+include_once($chemin . "moteur/Soutenance.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -36,36 +40,35 @@ IHM_Generale::header("Saisir des", "notes de stages", "../../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("saisirNotesStagesData.php", false);
 
-// Si un enregistrement des notes a été effectuée
+// Si un enregistrement des notes a Ã©tÃ© effectuÃ©e
 if (isset($_POST['save'])) {
-	$tabIdConventions = $_POST['idConventions'];
-	
-	// Y-a-t-il au moins une note à changer ?
-	if ($tabIdConventions != "") {
-		$tabIdConv = explode(";", $tabIdConventions);
-		for ($i = 0; $i < sizeof($tabIdConv); $i++) {
-			$conv = Convention::getConvention($tabIdConv[$i]);
-			$conv->setNote($_POST['conv'.$tabIdConv[$i]]);
-			Convention_BDD::sauvegarder($conv);
-		}
+    $tabIdConventions = $_POST['idConventions'];
+
+    // Y-a-t-il au moins une note Ã  changer ?
+    if ($tabIdConventions != "") {
+	$tabIdConv = explode(";", $tabIdConventions);
+	for ($i = 0; $i < sizeof($tabIdConv); $i++) {
+	    $conv = Convention::getConvention($tabIdConv[$i]);
+	    $conv->setNote($_POST['conv' . $tabIdConv[$i]]);
+	    Convention_BDD::sauvegarder($conv);
 	}
+    }
 }
 
-// Affichage des données
+// Affichage des donnÃ©es
 echo "<div id='data'>\n";
 include_once("saisirNotesStagesData.php");
 echo "\n</div>";
-
 ?>
-	<table align="center">
-		<tr>
-			<td width="100%" align="center">
-				<form method=post action="../">
-					<input type="submit" value="Retourner au menu"/>
-				</form>
-			</td>
-		</tr>
-	</table>
+<table align="center">
+    <tr>
+	<td width="100%" align="center">
+	    <form method=post action="../">
+		<input type="submit" value="Retourner au menu"/>
+	    </form>
+	</td>
+    </tr>
+</table>
 
 <?php
 

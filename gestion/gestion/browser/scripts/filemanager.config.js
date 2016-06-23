@@ -48,7 +48,8 @@
             "m4v",
             "ogg",
             "mp3",
-            "wav"
+            "wav",
+	    "zip"
         ]
     },
     "upload": {

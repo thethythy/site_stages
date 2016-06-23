@@ -2,27 +2,28 @@
 
 $chemin = "../../classes/";
 
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."ihm/IHM_Generale.php");
-include_once($chemin."ihm/Tache_IHM.php");
-include_once($chemin."bdd/Tache_BDD.php");
-include_once($chemin."moteur/Tache.php");
+include_once($chemin . "bdd/connec.inc");
+include_once($chemin . "ihm/IHM_Generale.php");
+
+include_once($chemin . "ihm/Tache_IHM.php");
+include_once($chemin . "bdd/Tache_BDD.php");
+include_once($chemin . "moteur/Tache.php");
 
 // -----------------------------
-// Fonctions de gestion du démon
+// Fonctions de gestion du dÃ©mon
 
 include_once("./gestionDemon.php");
 
 // ---------------------
-// Contrôleur de la page
+// ContrÃ´leur de la page
 
-// Demande d'enregistrement d'une nouvelle tâche
+// Demande d'enregistrement d'une nouvelle tÃ¢che
 if (isset($_POST['new']) && $_POST['newintitule'] != "") {
     $tabTache = array($_POST['newintitule'], $_POST['newstatut'], $_POST['newpriorite'], $_POST['newdatelimite']);
     Tache::saisirDonneesTache($tabTache);
 }
 
-// Demande de suppression d'une tâche
+// Demande de suppression d'une tÃ¢che
 if (isset($_POST['delete'])) {
     foreach ($_POST['delete'] as $key => $value) {
 	if ($value == 'Supprimer') {
@@ -32,7 +33,7 @@ if (isset($_POST['delete'])) {
     }
 }
 
-// Demande de modification des tâches
+// Demande de modification des tÃ¢ches
 if (isset($_POST['submit'])) {
     foreach ($_POST['intitule'] as $key => $value) {
 	$oTache = Tache::getTache($key);
@@ -44,13 +45,13 @@ if (isset($_POST['submit'])) {
     }
 }
 
-// Demande de réinitialisation des tâches
+// Demande de rÃ©initialisation des tÃ¢ches
 if (isset($_POST['reset'])) {
     foreach (Tache::listerTaches() as $oTache) {
-	// Remise à l'état normal
+	// Remise Ã  l'Ã©tat normal
 	$oTache->setStatut('Pas fait');
 
-	// Ajout d'une année à la date limite
+	// Ajout d'une annÃ©e Ã  la date limite
 	$oTache->setDateLimite(date('Y-m-d', strtotime("+1 year", strtotime($oTache->getDateLimite()))));
 
 	// Enregistrement des modifications
@@ -58,12 +59,12 @@ if (isset($_POST['reset'])) {
     }
 }
 
-// Demande d'arrêt du démon
+// Demande d'arrÃªt du dÃ©mon
 if (isset($_POST['stop'])) {
     (new GestionDemon())->stop();
 }
 
-// Demande de lancement du démon
+// Demande de lancement du dÃ©mon
 if (isset($_POST['go'])) {
     (new GestionDemon())->go();
 }
@@ -74,27 +75,28 @@ if (isset($_POST['go'])) {
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion des stages');
-IHM_Generale::header("Gestion des", "tâches", "../../", $tabLiens);
+
+IHM_Generale::header("Gestion des", "tÃ¢ches", "../../", $tabLiens);
 
 Tache_IHM::afficherFormulaireSaisie((new GestionDemon())->test());
 
 /*
-echo '<br/>';
-echo 'ls -l /usr/bin/crontab : ';
-$sortie = array();
-$return = 0;
-exec('ls -l /usr/bin/crontab', $sortie, $return);
-var_dump($sortie);
-echo 'return : ' . $return;
+  echo '<br/>';
+  echo 'ls -l /usr/bin/crontab : ';
+  $sortie = array();
+  $return = 0;
+  exec('ls -l /usr/bin/crontab', $sortie, $return);
+  var_dump($sortie);
+  echo 'return : ' . $return;
 
-echo '<br/>';
-echo '/usr/bin/crontab -l : ';
-$sortie = array();
-$return = 0;
-exec('/usr/bin/crontab -l', $sortie, $return);
-var_dump($sortie);
-echo 'return : ' . $return;
-*/
+  echo '<br/>';
+  echo '/usr/bin/crontab -l : ';
+  $sortie = array();
+  $return = 0;
+  exec('/usr/bin/crontab -l', $sortie, $return);
+  var_dump($sortie);
+  echo 'return : ' . $return;
+ */
 
 deconnexion();
 

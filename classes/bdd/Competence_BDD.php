@@ -2,20 +2,27 @@
 
 class Competence_BDD {
 
+    /**
+     * Sauvegarder en base un objet Competence
+     * @global string $tab2 Le nom de la table 'competence'
+     * @global resource $db Une référence sur la base ouverte
+     * @param Competence $competence Une instance de la classe Competence
+     * @return integer L'identifiant de la compétence
+     */
     public static function sauvegarder($competence) {
 	global $tab2;
 	global $db;
 	if ($competence->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab2 VALUES ('" . $competence->getIdentifiantBDD() . "','" . $competence->getNom() . "')";
-	    $result = $db->query($sql);
+	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab2";
 	    $req = $db->query($sql2);
 	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    $sql = "UPDATE $tab2 SET nomcompetence='" . $competence->getNom() . "' WHERE idcompetence='" . $competence->getIdentifiant() . "';";
-	    $result = $db->query($sql);
+	    $sql = "UPDATE $tab2 SET nomcompetence='" . $competence->getNom() . "' WHERE idcompetence='" . $competence->getIdentifiantBDD() . "';";
+	    $db->query($sql);
 	    return $competence->getIdentifiantBDD();
 	}
     }

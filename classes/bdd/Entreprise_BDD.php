@@ -1,29 +1,32 @@
 <?php
 
 class Entreprise_BDD {
-    /*     * Méthodes statiques* */
+    /** MÃ©thodes statiques * */
 
     /**
      * Sauvegarde d'une entreprise
-     * @param $entreprise l'entreprise à sauvegarder
+     * @param $entreprise l'entreprise ï¿½ sauvegarder
      */
     public static function sauvegarder($entreprise) {
-	global $tab6;
 	global $db;
-	if ($entreprise->getIdentifiantBDD() == "") {
-	    $sql = "INSERT INTO " . $tab6 . " VALUES ('" . $entreprise->getIdentifiantBDD() . "',
-						      '" . $entreprise->getNom() . "',
-						      '" . $entreprise->getAdresse() . "',
-						      '" . $entreprise->getCodePostal() . "',
-						      '" . $entreprise->getVille() . "',
-						      '" . $entreprise->getPays() . "',
-						      '" . $entreprise->getEmail() . "');";
+	global $tab6;
 
+	$typeEntreprise = $entreprise->getType();
+
+	if ($entreprise->getIdentifiantBDD() == "") {
+	    $sql = "INSERT INTO $tab6 VALUES ('" . $entreprise->getIdentifiantBDD() . "',
+					      '" . $entreprise->getNom() . "',
+					      '" . $entreprise->getAdresse() . "',
+					      '" . $entreprise->getCodePostal() . "',
+					      '" . $entreprise->getVille() . "',
+					      '" . $entreprise->getPays() . "',
+					      '" . $entreprise->getEmail() . "',
+					      '" . $typeEntreprise->getIdentifiantBDD() . "')";
 	    $req = $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
-	    $req = $db->query($sql2);
-	    $result = mysqli_fetch_array($req);
+	    $req2 = $db->query($sql2);
+	    $result = mysqli_fetch_array($req2);
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab6 SET nom='" . $entreprise->getNom() . "',
@@ -31,7 +34,8 @@ class Entreprise_BDD {
 				     codepostal='" . $entreprise->getCodePostal() . "',
 				     ville='" . $entreprise->getVille() . "',
 				     pays='" . $entreprise->getPays() . "',
-				     email='" . $entreprise->getEmail() . "'
+				     email='" . $entreprise->getEmail() . "',
+				     idtypeentreprise='" . $entreprise->getIdentifiantBDD() . "',
 		    WHERE identreprise ='" . $entreprise->getIdentifiantBDD() . "'";
 	    $req = $db->query($sql);
 
@@ -40,13 +44,13 @@ class Entreprise_BDD {
     }
 
     /**
-     * Récupère une entreprise suivant son identifiant
-     * @param $identifiantBDD l'identifiant de l'entreprise à récupérer
+     * RÃ©cupÃ©rer une entreprise suivant son identifiant
+     * @param $identifiantBDD l'identifiant de l'entreprise Ã  rÃ©cupÃ©rer
      * @return String[] tableau contenant les informations d'une entreprise
      */
     public static function getEntreprise($identifiantBDD) {
-	global $tab6;
 	global $db;
+	global $tab6;
 
 	$sql = "SELECT * FROM " . $tab6 . " WHERE identreprise='$identifiantBDD';";
 	$req = $db->query($sql);
@@ -59,18 +63,17 @@ class Entreprise_BDD {
     /**
      * Retourne une liste d'entreprise suivant un filtre
      * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les entreprises concernées par le filtre
+     * @return String[] tableau contenant les entreprises concernÃ©es par le filtre
      */
     public static function getListeEntreprises($filtres) {
-	global $tab6;
 	global $db;
+	global $tab6;
 
 	if ($filtres == "")
 	    $requete = "SELECT * FROM $tab6 ORDER BY nom ASC;";
 	else
 	    $requete = "SELECT * FROM $tab6 WHERE " . $filtres->getStrFiltres() . " ORDER BY nom ASC;";
 
-	//echo $requete."<br/>";
 	$result = $db->query($requete);
 
 	$tabEntreprises = array();
@@ -84,6 +87,7 @@ class Entreprise_BDD {
 	    array_push($tab, $entreprise["ville"]);
 	    array_push($tab, $entreprise["pays"]);
 	    array_push($tab, $entreprise["email"]);
+	    array_push($tab, $entreprise["idtypeentreprise"]);
 	    array_push($tabEntreprises, $tab);
 	}
 
@@ -91,11 +95,9 @@ class Entreprise_BDD {
     }
 
     public static function supprimerEntreprise($identifiantBDD) {
-	global $tab6;
 	global $db;
-
+	global $tab6;
 	$sql = "DELETE FROM $tab6 WHERE identreprise='$identifiantBDD'";
-	//echo $sql."<br/>";
 	$db->query($sql);
     }
 
@@ -103,11 +105,11 @@ class Entreprise_BDD {
 	global $tab6;
 	global $db;
 
-	$sql = "SELECT identreprise FROM $tab6
-				WHERE nom LIKE '" . $ent->getNom() . "'
-				AND ville LIKE '" . $ent->getVille() . "'
-				AND pays LIKE '" . $ent->getPays() . "'";
-	//echo $sql."<br/>";
+	$sql = "SELECT identreprise
+		FROM $tab6
+		WHERE nom LIKE '" . $ent->getNom() . "' AND
+		      ville LIKE '" . $ent->getVille() . "' AND
+		      pays LIKE '" . $ent->getPays() . "'";
 	$result = $db->query($sql);
 
 	if (mysqli_num_rows($result) == 0)

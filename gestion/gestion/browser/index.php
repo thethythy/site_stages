@@ -1,11 +1,14 @@
 <?php
+
 $chemin = "../../../classes/";
 include_once($chemin."ihm/IHM_Generale.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../../../', 'Accueil');
 $tabLiens[1] = array('../../', 'Gestion des stages');
+
 IHM_Generale::header("Gestion des ", "documents", "../../../", $tabLiens, "browser");
+
 ?>
 
 <form id="uploader" method="post">
@@ -41,6 +44,8 @@ IHM_Generale::header("Gestion des ", "documents", "../../../", $tabLiens, "brows
     </div>
 </form>
 
+<br/><br/>
+
 <ul id="itemOptions" class="contextMenu">
     <li class="select"><a href="#select"></a></li>
     <li class="download"><a href="#download"></a></li>
@@ -59,18 +64,9 @@ IHM_Generale::header("Gestion des ", "documents", "../../../", $tabLiens, "brows
 <script type="text/javascript" src="scripts/jquery.tablesorter-2.7.2.min.js"></script>
 <script type="text/javascript" src="scripts/filemanager.min.js"></script>
 
-<table align="center">
-    <tr>
-	<td width="100%" align="center">
-	    <form method=post action="../../">
-		<input type="submit" value="Retour"/>
-	     </form>
-	</td>
-    </tr>
-</table>
-
 <?php
 
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../../");
+
 ?>

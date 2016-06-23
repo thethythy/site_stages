@@ -1,50 +1,47 @@
 <?php
 
 class Convention_BDD {
-    /** Méthodes statiques * */
+    /** MÃ©thodes statiques * */
 
     /**
      * Sauvegarde un objet Convention
-     * @param $convention la convention à sauvegarder
+     * @param $convention la convention Ã  sauvegarder
      */
     public static function sauvegarder($convention) {
-	global $tab4;
 	global $db;
+	global $tab4;
 
 	$parrain = $convention->getParrain();
 	$examinateur = $convention->getExaminateur();
 	$etudiant = $convention->getEtudiant();
 	$contact = $convention->getContact();
 
-	// Test si la chaîne contenant le sujet n'est pas déjà échappé
+	// Test si la chaÃ®ne contenant le sujet n'est pas dÃ©jÃ  Ã©chappÃ©
 	if (strpos($convention->getSujetDeStage(), '\\') === false) {
-		/* Pas sur de la conversion mysql vers mysqli */
-		//$convention->setSujetDeStage(mysql_real_escape_string($convention->getSujetDeStage()));
 	    $convention->setSujetDeStage(mysqli_real_escape_string($db, $convention->getSujetDeStage()));
 	}
 
-	// Permet de vérifier si la Convention existe déjà dans la BDD
+	// Permet de vÃ©rifier si la Convention existe dÃ©jÃ  dans la BDD
 	if ($convention->getIdentifiantBDD() == "") {
-	    // Création de la Convention
-	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note)
-						VALUES ('" . $parrain->getIdentifiantBDD() . "',
-							'" . $examinateur->getIdentifiantBDD() . "',
-							'" . $etudiant->getIdentifiantBDD() . "',
-							'" . $convention->getIdSoutenance() . "',
-							'" . $contact->getIdentifiantBDD() . "',
-							'" . $convention->getSujetDeStage() . "',
-							'" . $convention->getASonResume() . "',
-							'" . $convention->getNote() . "'
-							)";
+	    // CrÃ©ation de la Convention
+	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note, idTheme)
+			VALUES ('" . $parrain->getIdentifiantBDD() . "',
+				'" . $examinateur->getIdentifiantBDD() . "',
+				'" . $etudiant->getIdentifiantBDD() . "',
+				'" . $convention->getIdSoutenance() . "',
+				'" . $contact->getIdentifiantBDD() . "',
+				'" . $convention->getSujetDeStage() . "',
+				'" . $convention->getASonResume() . "',
+				'" . $convention->getNote() . "',
+				'" . $convention->getIdTheme() . "')";
 	    $db->query($requete);
 
 	    $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab4";
 	    $req = $db->query($sql);
-		$result = mysqli_fetch_array($req);
+	    $result = mysqli_fetch_array($req);
 	    return $result['ID'];
 	} else {
-	    // Mise à jour de la Convention
-
+	    // Mise Ã  jour de la Convention
 	    $requete = "UPDATE $tab4 SET idparrain = '" . $parrain->getIdentifiantBDD() . "',
 					 idexaminateur = '" . $examinateur->getIdentifiantBDD() . "',
 					 idetudiant = '" . $etudiant->getIdentifiantBDD() . "',
@@ -52,21 +49,21 @@ class Convention_BDD {
 					 idcontact = '" . $contact->getIdentifiantBDD() . "',
 					 sujetdestage = '" . $convention->getSujetDeStage() . "',
 					 asonresume ='" . $convention->getASonResume() . "',
-					 note = '" . $convention->getNote() . "'
-				WHERE idconvention = '" . $convention->getIdentifiantBDD() . "'";
+					 note = '" . $convention->getNote() . "',
+					 idtheme = '" . $convention->getIdTheme() . "'
+			WHERE idconvention = '" . $convention->getIdentifiantBDD() . "'";
 
 	    $req = $db->query($requete);
-
 	    if (!$req) { return FALSE; }
 
 	    return $convention->getIdentifiantBDD();
 	}
     }
 
-    // $id : Un int, représentant un identifiant dans la BDD
+    // $id : Un int, reprÃ©sentant un identifiant dans la BDD
     public static function getConvention($id) {
-	global $tab4;
 	global $db;
+	global $tab4;
 
 	$requete = "SELECT * FROM $tab4 WHERE idconvention='$id'";
 	$convention = $db->query($requete);
@@ -74,39 +71,43 @@ class Convention_BDD {
     }
 
     public static function getConvention2($idetudiant, $idpromotion) {
+	global $db;
 	global $tab19;
 	global $tab4;
-	global $db;
 
-	$requete = "SELECT $tab4.idconvention FROM $tab19, $tab4 WHERE $tab19.idetudiant = $idetudiant AND $tab19.idpromotion = $idpromotion AND $tab4.idconvention=$tab19.idconvention";
+	$requete = "SELECT $tab4.idconvention
+		    FROM $tab19, $tab4
+		    WHERE $tab19.idetudiant = $idetudiant AND
+			  $tab19.idpromotion = $idpromotion AND
+			  $tab4.idconvention=$tab19.idconvention";
 	$result = $db->query($requete);
 	$dConvention = mysqli_fetch_array($result);
 	return Convention_BDD::getConvention($dConvention["idconvention"]);
     }
 
     public static function getListeConvention($filtres) {
-	global $tab3;
+	global $db;
 	global $tab4;
-	global $tab9;
 	global $tab15;
 	global $tab19;
-	global $db;
 
 	if ($filtres == "") {
 	    $requete = "SELECT * FROM $tab4 ORDER BY $tab4.idparrain";
 	} else {
-	    $requete = "SELECT * FROM $tab4, $tab15, $tab19 WHERE $tab4.idconvention=$tab19.idconvention AND
-			$tab15.idpromotion=$tab19.idpromotion AND " . $filtres->getStrFiltres() . " ORDER BY $tab4.idparrain ";
+	    $requete = "SELECT *
+			FROM $tab4, $tab15, $tab19
+			WHERE $tab4.idconvention=$tab19.idconvention AND
+			      $tab15.idpromotion=$tab19.idpromotion AND
+			      ". $filtres->getStrFiltres() ."
+			ORDER BY $tab4.idparrain ";
 	}
 
-	//echo $requete."<br/>";
 	$result = $db->query($requete);
 
 	$tabC = array();
 
 	while ($ods = mysqli_fetch_array($result)) {
 	    $tab = array();
-
 	    array_push($tab, $ods['idconvention']);
 	    array_push($tab, $ods['sujetdestage']);
 	    array_push($tab, $ods['asonresume']);
@@ -116,6 +117,7 @@ class Convention_BDD {
 	    array_push($tab, $ods['idetudiant']);
 	    array_push($tab, $ods['idsoutenance']);
 	    array_push($tab, $ods['idcontact']);
+	    array_push($tab, $ods['idtheme']);
 
 	    array_push($tabC, $tab);
 	}
@@ -128,10 +130,12 @@ class Convention_BDD {
 	global $tab15;
 	global $tab19;
 
-	$requete = "SELECT $tab19.idconvention FROM $tab15, $tab19 WHERE $tab15.anneeuniversitaire='$annee' AND $tab15.idfiliere='$filiere'
-		    AND $tab15.idparcours='$parcours' AND $tab19.idpromotion=$tab15.idpromotion";
-
-	//echo $requete."<br/>";
+	$requete = "SELECT $tab19.idconvention
+		    FROM $tab15, $tab19
+		    WHERE $tab15.anneeuniversitaire='$annee' AND
+			  $tab15.idfiliere='$filiere' AND
+			  $tab15.idparcours='$parcours' AND
+			  $tab19.idpromotion=$tab15.idpromotion";
 
 	$result = $db->query($requete);
 
@@ -145,8 +149,8 @@ class Convention_BDD {
     }
 
     public static function existe($conv, $annee) {
-	global $tab19;
 	global $db;
+	global $tab19;
 
 	$etu = $conv->getEtudiant();
 	$promo = $etu->getPromotion($annee);
@@ -154,14 +158,13 @@ class Convention_BDD {
 	if ($promo == "")
 	    return false;
 
-	$sql = "SELECT idconvention FROM $tab19
-		WHERE idpromotion='" . $promo->getIdentifiantBDD() . "'
-		AND idetudiant='" . $etu->getIdentifiantBDD() . "'
-		AND idconvention <> 0";
+	$sql = "SELECT idconvention
+		FROM $tab19
+		WHERE idpromotion='" . $promo->getIdentifiantBDD() . "' AND
+		      idetudiant='" . $etu->getIdentifiantBDD() . "' AND
+		      idconvention <> 0";
 
-	// echo "REQUETE : $sql<br/>";
-
-	$result = $db->query($sql);// echo "RESULT : ".$result['idconvention']."<br/>";
+	$result = $db->query($sql);
 
 	if (mysqli_num_rows($result) == 0)
 	    return false;
@@ -175,11 +178,13 @@ class Convention_BDD {
 	global $tab19;
 
 	if ($filtre != '')
-	    $requete = "SELECT $tab19.idconvention FROM $tab15, $tab19 WHERE " . $filtre->getStrFiltres() . " AND $tab19.idpromotion=$tab15.idpromotion";
+	    $requete = "SELECT $tab19.idconvention
+			FROM $tab15, $tab19
+			WHERE " . $filtre->getStrFiltres() . " AND
+			      $tab19.idpromotion=$tab15.idpromotion";
 	else
 	    $requete = "SELECT $tab19.idconvention FROM $tab19";
 
-	//echo "Requete Convention_BDD::existe2 : ".$requete."<br/>";
 	$result = $db->query($requete);
 
 	$compte = 0;
@@ -195,53 +200,60 @@ class Convention_BDD {
     }
 
     public static function supprimerConvention($identifiantBDD, $idEtu, $idPromo) {
+	global $db;
 	global $tab19;
 	global $tab4;
-	global $db;
 
-	$sql1 = "UPDATE $tab19 SET idconvention = NULL WHERE idetudiant = '" . $idEtu . "' AND idpromotion = '" . $idPromo . "'";
-	//echo $sql1."<br/>";
+	$sql1 = "UPDATE $tab19
+		 SET idconvention = NULL
+		 WHERE idetudiant = $idEtu AND
+		       idpromotion = $idPromo";
 	$db->query($sql1);
+
 	$sql2 = "DELETE FROM $tab4 WHERE idconvention='$identifiantBDD'";
-	//echo $sql2."<br/>";
 	$db->query($sql2);
-	}
+    }
 
     public static function getPromotion($idConvention) {
-	global $tab4; // = 'convention';
-	global $tab19; // = 'relation_promotion_etudiant_convention';
 	global $db;
+	global $tab4;
+	global $tab19;
 
 	$sql = "SELECT $tab19.idpromotion AS idpromo
-			FROM $tab19, $tab4
-			WHERE $tab19.idconvention = $tab4.idconvention AND $tab4.idconvention = $idConvention";
+		FROM $tab19, $tab4
+		WHERE $tab19.idconvention = $tab4.idconvention AND
+		      $tab4.idconvention = $idConvention";
 
-	//echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql);
 	$result = mysqli_fetch_array($req);
-	//echo $result['idpromo']."<br/>";
 	return $result['idpromo'];
     }
 
     public static function getListeEntreprises($annee_in, $annee_fin) {
-	global $tab3; // ='contact'
-	global $tab4; // = 'convention';
-	global $tab5; // = 'datesoutenances';
-	global $tab6; // = 'entreprise';
-	global $tab9; // = 'etudiant';
-	global $tab17; // = 'soutenances'
 	global $db;
+	global $tab3;
+	global $tab4;
+	global $tab5;
+	global $tab6;
+	global $tab9;
+	global $tab17;
 
 	$filtre = "$tab5.annee >= $annee_in AND $tab5.annee <= $annee_fin";
 
 	$sql = "SELECT $tab6.nom, $tab6.adresse, $tab6.ville, $tab6.pays, $tab9.nometudiant, $tab9.prenometudiant
 		FROM $tab3, $tab4, $tab5, $tab6, $tab9, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND $tab17.iddatesoutenance = $tab5.iddatesoutenance AND $filtre AND $tab4.idetudiant = $tab9.idetudiant AND $tab4.idcontact = $tab3.idcontact AND $tab3.identreprise = $tab6.identreprise
+		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
+		     $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
+		     $filtre AND
+		     $tab4.idetudiant = $tab9.idetudiant AND
+		     $tab4.idcontact = $tab3.idcontact AND
+		     $tab3.identreprise = $tab6.identreprise
 		ORDER BY $tab6.pays";
 
-	// echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql);
+
 	$tabConventions = array();
+
 	while ($data = mysqli_fetch_array($req)) {
 	    $infos = array();
 	    array_push($infos, $data['nom']);
@@ -257,21 +269,24 @@ class Convention_BDD {
     }
 
     public static function getListeVillesRepartition($annee_in, $annee_fin) {
-	global $tab3; // ='contact'
-	global $tab4; // = 'convention';
-	global $tab5; // = 'datesoutenances';
-	global $tab6; // = 'entreprise';
-	global $tab17; // = 'soutenances'
 	global $db;
+	global $tab3;
+	global $tab4;
+	global $tab5;
+	global $tab6;
+	global $tab17;
 
 	$filtre = "$tab5.annee >= '$annee_in' AND $tab5.annee <= '$annee_fin'";
 
 	$sql = "SELECT $tab6.ville
 		FROM $tab3, $tab4, $tab5, $tab6, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND $tab17.iddatesoutenance = $tab5.iddatesoutenance AND $filtre AND $tab4.idcontact = $tab3.idcontact AND $tab3.identreprise = $tab6.identreprise
+		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
+		      $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
+		      $filtre AND
+		      $tab4.idcontact = $tab3.idcontact AND
+		      $tab3.identreprise = $tab6.identreprise
 		ORDER BY $tab6.ville";
 
-	// echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql);// Compter le nombre de stage par conventions
 	$infos = array();
 	while ($data = mysqli_fetch_array($req)) {
@@ -286,10 +301,9 @@ class Convention_BDD {
 	    $ville = trim($ville);
 
 	    $infos[$ville] ++;
-	    // echo  $ville." : ".$infos[$ville]."<br/>";
 	}
 
-	// Construire la réponse
+	// Construire la rÃ©ponse
 	$tabVilles = array();
 	foreach ($infos as $ville => $compteur) {
 	    $laville = array();
@@ -313,18 +327,20 @@ class Convention_BDD {
 
 	$sql = "SELECT $tab6.pays
 		FROM $tab3, $tab4, $tab5, $tab6, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND $tab17.iddatesoutenance = $tab5.iddatesoutenance AND $filtre AND $tab4.idcontact = $tab3.idcontact AND $tab3.identreprise = $tab6.identreprise
+		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
+		      $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
+		      $filtre AND
+		      $tab4.idcontact = $tab3.idcontact AND
+		      $tab3.identreprise = $tab6.identreprise
 		ORDER BY $tab6.pays";
 
-	// echo "REQUETE : ".$sql."<br/>";
 	$req = $db->query($sql); // Compter le nombre de stage par conventions
 	$infos = array();
 	while ($data = mysqli_fetch_array($req)) {
 	    $infos[strtoupper($data['pays'])] ++;
-	    // echo  strtoupper($data['pays'])." : ".$infos[strtoupper($data['pays'])]."<br/>";
 	}
 
-	// Construire la réponse
+	// Construire la rÃ©ponse
 	$tabPays = array();
 	foreach ($infos as $ville => $compteur) {
 	    $pays = array();
@@ -335,7 +351,6 @@ class Convention_BDD {
 
 	return $tabPays;
     }
-
 }
 
 ?>

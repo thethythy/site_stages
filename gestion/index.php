@@ -1,19 +1,25 @@
 <?php
+
 $chemin = "../classes/";
 
 include_once($chemin . "bdd/connec.inc");
 include_once($chemin . "ihm/IHM_Generale.php");
+
 include_once($chemin . "bdd/Tache_BDD.php");
 include_once($chemin . "moteur/Tache.php");
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
+
 IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
+
 ?>
+
+<center><a href="./manuel/manuel.php">Manuel d'utilisation en ligne</a></center>
 
 <div id="menuGestion">
     <ul id="ongletsGestion">
-	<li id="li_onglet1" class="active"><a href="#" onclick="cacheOuMontre('onglet1')"> T‚ches </a></li>
+	<li id="li_onglet1" class="active"><a href="#" onclick="cacheOuMontre('onglet1')"> T√¢ches </a></li>
 	<li id="li_onglet2"><a href="#" onclick="cacheOuMontre('onglet2')"> Outils </a></li>
     </ul>
 </div>
@@ -24,7 +30,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
     <table id="menuBdd">
 	<tr>
 	    <td id="titreMenuBdd">
-		T‚ches
+		T√¢ches
 	    </td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
@@ -32,27 +38,30 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 	    <td align="center">
 		<table>
 		    <tr>
-			<th>IntitulÈ</th>
-			<th>PrioritÈ</th>
+			<th>Intitul√©</th>
+			<th>Priorit√©</th>
 			<th>Statut</th>
 			<th>Date limite</th>
 		    </tr>
 		    <td>&nbsp;</td>
 		    <?php
-			foreach (Tache::listerTaches() as $oTache) {
-			    switch ($oTache->getStatut()) {
-			        case 'Finie' : $sStatut = "<img alt='T‚che finie' src='../images/action_check.png'/>"; break;
-				case 'En cours' : $sStatut = "<img alt='T‚che en cours' src='../images/action_remove.png'/>"; break;
-				case 'Finie' : $sStatut = "<img alt='T‚che pas faite' src='../images/action_delete.png'/>"; break;
-				default : $sStatut = "<img alt='T‚che pas faite' src='../images/action_delete.png'/>";
-			    }
-
-			    setlocale(LC_TIME, "fr_FR", "fr");
-			    $sDateLimite = strftime('%A %e %B %Y', strtotime($oTache->getDateLimite()));
-
-			    $sTache = "<td align=center>" . $oTache->getIntitule() . "</td><td align=center>" . $oTache->getPriorite() . "</td><td align=center>$sStatut</td><td align=center>$sDateLimite</td>";
-			    printf("<tr>%s</tr>", $sTache);
+		    foreach (Tache::listerTaches() as $oTache) {
+			switch ($oTache->getStatut()) {
+			    case 'Finie' : $sStatut = "<img alt='T√¢che finie' src='../images/action_check.png'/>";
+				break;
+			    case 'En cours' : $sStatut = "<img alt='T√¢che en cours' src='../images/action_remove.png'/>";
+				break;
+			    case 'Finie' : $sStatut = "<img alt='T√¢che pas faite' src='../images/action_delete.png'/>";
+				break;
+			    default : $sStatut = "<img alt='T√¢che pas faite' src='../images/action_delete.png'/>";
 			}
+
+			setlocale(LC_TIME, "fr_FR", "fr");
+			$sDateLimite = strftime('%A %e %B %Y', strtotime($oTache->getDateLimite()));
+
+			$sTache = "<td align=center>" . $oTache->getIntitule() . "</td><td align=center>" . $oTache->getPriorite() . "</td><td align=center>$sStatut</td><td align=center>$sDateLimite</td>";
+			printf("<tr>%s</tr>", $sTache);
+		    }
 		    ?>
 		</table>
 	    </td>
@@ -67,7 +76,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
-			    Gestion de la base
+			    Base de donn√©es
 			</td>
 		    </tr>
 		    <tr>
@@ -76,39 +85,18 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./gestion/videroffrestage.php">Supprimer les anciennes offres</a></li>
 				<li><a href="./gestion/vidersujetstage.php">Supprimer les anciennes validations</a></li>
 				<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
-				<li><a href="./gestion/editiontache.php">Gestion des t‚ches</a></li>
+				<li><a href="./gestion/editiontache.php">Gestion des t√¢ches</a></li>
 				<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
+				<li><a href="./gestion/exporterBDD.php">Exporter la base</a></li>
+				<li><a href='./gestion/phpInfo.php' target="_blank">Informations PHP</a></li>
 			    </ul>
 			</td>
 		    </tr>
 		</table>
-
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
-			    Gestion des entreprises
-			</td>
-		    </tr>
-		    <tr>
-			<td>
-			    <ul>
-				<li><a href="./entreprises/listeDesEntreprises.php">Liste des entreprises</a></li>
-				<li><a href="./entreprises/saisirEntreprise.php">Saisir une entreprise</a></li>
-				<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
-				<li><a href="./entreprises/listeDesContacts.php">Liste des contacts</a></li>
-				<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
-				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
-				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
-				<li><a href="./entreprises/gestionCompetence.php">Ajouter/Supprimer une compÈtence</a></li>
-			    </ul>
-			</td>
-		    </tr>
-		</table>
-
-		<table id="menuBdd">
-		    <tr>
-			<td id="titreMenuBdd">
-			    Gestion taxe apprentissage
+			    Taxe apprentissage
 			</td>
 		    </tr>
 		    <tr>
@@ -119,23 +107,36 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 			</td>
 		    </tr>
 		</table>
+		<table id="menuBdd">
+		    <tr>
+			<td id="titreMenuBdd">
+			    Couleurs
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    <ul>
+				<li><a href="./couleurs/saisie_couleur.php">Saisir une couleur</a></li>
+				<li><a href="./couleurs/ms_couleur.php">Modifier/Supprimer une couleur</a></li>
+			    </ul>
+			</td>
+		    </tr>
+		</table>
 	    </td>
 
 	    <td>
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
-			    Gestion des promotions
+			    Promotions
 			</td>
 		    </tr>
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./promotions/listeDesEtudiants.php">Liste des Ètudiants</a></li><br />
 				<li><a href="./promotions/ajouterPromotion.php">Ajouter une promotion</a></li>
 				<li><a href="./promotions/modifierPromotion.php">Modifier une promotion</a></li>
-				<li><a href="./promotions/suiviPromotion.php">Suivre la promotion</a></li><br />
-				<li><a href="./promotions/modifierTempsSoutenance.php">Modifier une durÈe de soutenance</a></li>
+				<li><a href="./promotions/suiviPromotion.php">Suivre la promotion</a></li>
 			    </ul>
 			</td>
 		    </tr>
@@ -143,15 +144,16 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
-			    Gestion des Ètudiants
+			    Etudiants
 			</td>
 		    </tr>
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./etudiants/consulterSDS.php">Consulter les sujets validÈs</a></li>
-				<li><a href="./etudiants/validerSDS.php">Valider une sujet de stage</a></li><br/>
-				<li><a href="./etudiants/supprimerEtudiant.php">Supprimer un Ètudiant</a></li>
+				<li><a href="./etudiants/listeDesEtudiants.php">Liste des √©tudiants</a></li>
+				<li><a href="./etudiants/supprimerEtudiant.php">Supprimer un √©tudiant</a></li><br/>
+				<li><a href="./etudiants/consulterSDS.php">Voir les sujets valid√©s</a></li>
+				<li><a href="./etudiants/validerSDS.php">Valider un sujet</a></li>
 			    </ul>
 			</td>
 		    </tr>
@@ -159,16 +161,14 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
-			    Gestion des rÈfÈrents
+			    R√©f√©rents
 			</td>
 		    </tr>
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./parrains/saisie_parrains.php">Saisir un rÈfÈrent</a></li>
-				<li><a href="./parrains/ms_parrains.php">Modifier/Supprimer un rÈfÈrent</a></li><br />
-				<li><a href="./parrains/saisie_couleur.php">Saisir une couleur</a></li>
-				<li><a href="./parrains/ms_couleur.php">Modifier/Supprimer une couleur</a></li>
+				<li><a href="./parrains/saisie_parrains.php">Saisir un r√©f√©rent</a></li>
+				<li><a href="./parrains/ms_parrains.php">Modifier/Supprimer un r√©f√©rent</a></li><br />
 			    </ul>
 			</td>
 		    </tr>
@@ -176,42 +176,6 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 	    </td>
 
 	    <td>
-		<table id="menuBdd">
-		    <tr>
-			<td id="titreMenuBdd">
-			    Gestion des conventions
-			</td>
-		    </tr>
-		    <tr>
-			<td>
-			    <ul>
-				<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
-				<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li>
-				<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li><br/>
-				<li><a href="./conventions/rattacherResumes.php">Rattacher des rÈsumÈs</a></li><br/>
-				<li><a href="./conventions/bilanConventions.php">Bilan des conventions</a></li>
-			    </ul>
-			</td>
-		    </tr>
-		</table>
-		<table id="menuBdd">
-		    <tr>
-			<td id="titreMenuBdd">
-			    Gestion des soutenances
-			</td>
-		    </tr>
-		    <tr>
-			<td>
-			    <ul>
-				<li><a href="./soutenances/saisirSalle.php">Saisir une salle</a></li>
-				<li><a href="./soutenances/modifierSalle.php">Modifier les salles</a></li><br/>
-				<li><a href="./soutenances/saisirDate.php">Saisir une date</a></li>
-				<li><a href="./soutenances/modifierDate.php">Modifier les dates</a></li><br/>
-				<li><a href="./soutenances/planifier.php">Planifier les soutenances</a></li>
-			    </ul>
-			</td>
-		    </tr>
-		</table>
 		<table id="menuBdd">
 		    <tr>
 			<td id="titreMenuBdd">
@@ -222,7 +186,72 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 			<td>
 			    <ul>
 				<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
-				<li><a href="./statistiques/localisationGeographique.php">Localisation gÈographique</a></li>
+				<li><a href="./statistiques/statistiques.php">Visualiser statistiques</a></li>
+			    </ul>
+			</td>
+		    </tr>
+		</table>
+		<table id="menuBdd">
+		    <tr>
+			<td id="titreMenuBdd">
+			    Entreprises
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    <ul>
+				<li><a href="./entreprises/saisirTypeEntreprise.php">Saisir un type d'entreprise</a></li>
+				<li><a href="./entreprises/modifierTypeEntreprise.php">Modifier/Supprimer un type d'entreprise</a></li><br/>
+				<li><a href="./entreprises/listeDesEntreprises.php">Liste des entreprises</a></li>
+				<li><a href="./entreprises/saisirEntreprise.php">Saisir une entreprise</a></li>
+				<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
+				<li><a href="./entreprises/listeDesContacts.php">Liste des contacts</a></li>
+				<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
+				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
+				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
+				<li><a href="./entreprises/gestionCompetence.php">Gestion des comp√©tences</a></li>
+			    </ul>
+			</td>
+		    </tr>
+		</table>
+	    </td>
+
+	    <td>
+		<table id="menuBdd">
+		    <tr>
+			<td id="titreMenuBdd">
+			    Conventions
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    <ul>
+				<li><a href="./conventions/saisirThemeDeStage.php">Saisir un th√®me de stage</a></li>
+				<li><a href="./conventions/modifierThemeDeStage.php">Modifier/Supprimer un th√®me de stage</a></li><br/>
+				<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
+				<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li><br/>
+				<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li>
+				<li><a href="./conventions/rattacherResumes.php">Rattacher des r√©sum√©s</a></li><br/>
+				<li><a href="./conventions/bilanConventions.php">Bilan des conventions</a></li>
+			    </ul>
+			</td>
+		    </tr>
+		</table>
+		<table id="menuBdd">
+		    <tr>
+			<td id="titreMenuBdd">
+			    Soutenances
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    <ul>
+				<li><a href="./soutenances/saisirSalle.php">Saisir une salle</a></li>
+				<li><a href="./soutenances/modifierSalle.php">Modifier les salles</a></li><br/>
+				<li><a href="./soutenances/saisirDate.php">Saisir une date</a></li>
+				<li><a href="./soutenances/modifierDate.php">Modifier les dates</a></li><br/>
+				<li><a href="./soutenances/modifierTempsSoutenance.php">Modifier une dur√©e de soutenance</a></li>
+				<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li>
 			    </ul>
 			</td>
 		    </tr>
@@ -234,10 +263,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 
 <br/>
 
-<center><a href="./manuel/manuel.php">Manuel d'utilisation en ligne</a></center>
-
 <script>
-    // RÈcupÈration de la valeur stockÈe localement sur le client
+    // R√©cup√©ration de la valeur stock√©e localement sur le client
     if (!localStorage.getItem('onglet'))
 	localStorage.setItem('onglet', 'onglet1');
 
@@ -245,7 +272,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
     var anciensOnglets = ['onglet1'];
 
     // Montre ou cache un onglet
-    var cacheOuMontre = function(onglet) {
+    var cacheOuMontre = function (onglet) {
 	ancienOnglet = anciensOnglets.pop();
 	if (onglet != ancienOnglet) {
 
@@ -267,7 +294,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 	} else {
 	    anciensOnglets.push(onglet);
 	}
-    }
+    };
 
     cacheOuMontre(localStorage.getItem('onglet'));
 </script>
