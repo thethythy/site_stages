@@ -116,8 +116,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./couleurs/saisie_couleur.php">Saisir une couleur</a></li>
-				<li><a href="./couleurs/ms_couleur.php">Modifier/Supprimer une couleur</a></li>
+				<li><a href="./couleurs/gestionCouleur.php">Gérer les couleurs</a></li>
 			    </ul>
 			</td>
 		    </tr>

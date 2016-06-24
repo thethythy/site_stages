@@ -5,65 +5,31 @@ class Couleur_IHM {
     public static function afficherFormulaireSaisie() {
 	?>
 	<FORM METHOD="POST" ACTION="">
-	    <table id="table_saisieCouleur">
+	    <table>
 		<tr>
 		    <td colspan=2>
-			<table id="presentation_saisieCouleur">
+			<table>
 			    <tr id="entete2">
 				<td colspan=2>Saisir une couleur</td>
 			    </tr>
 			    <tr>
 				<th width="100">Nom :</th>
-				<td><input type="text" name="nomCouleur" /></td>
+				<td>
+				    <input type="text" id='name' name="nomcouleur" value="Le nom de la couleur"/>
+				</td>
 			    </tr>
 			    <tr>
 				<th>Couleur :</th>
-				<td><input id="colorPicker" type="color" name="codeHexa" value="#FFFFFF"/></td>
-			    </tr>
-			    <tr>
-				<td colspan=2><input type=submit value="Enregistrer les données"/><input type=reset value="Effacer" onclick="effacerCouleur()"/></td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
-	    </table>
-	</FORM>
-	<script>
-	    function effacerCouleur() {
-		document.getElementById("colorPicker").value = '#FFFFFF';
-	    }
-	</script>
-    <?php }
-
-    public static function afficherFormulaireSelection() {
-	?>
-	<FORM id="formModifCouleur" METHOD="POST" ACTION="" name="sd">
-	    <table id="table_msCouleur">
-		<tr>
-		    <td colspan=2>
-			<table id="presentation_msCouleur">
-			    <tr id="entete2">
-				<td colspan=2>Sélection d'une couleur</td>
-			    </tr>
-			    <tr>
-				<th width="220">Sélectionner la couleur : </th>
-				<th>
-				    <?php
-				    $tabCouleur = Couleur::listerCouleur();
-				    echo "<select id='couleur' name='couleur' onchange='showColor()'>";
-				    echo "<option  value='-1' selected></option>";
-				    for ($i = 0; $i < sizeof($tabCouleur); $i++) {
-					echo "<option value='" . $tabCouleur[$i]->getIdentifiantBDD() . "'name='" . $tabCouleur[$i]->getNom() . "' style='color: #" . $tabCouleur[$i]->getCode() . ";'> " . $tabCouleur[$i]->getNom() . "</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input id="couleurActuel" readonly="disabled" style="width: 100px; border-width: 0px;"/>
-				</th>
+				<td>
+				    <input id="colorPicker" type="color" name="codehexa" value="#FFFFFF" oninput='showColor()' />
+				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input id="couleurActuel" readonly="disabled" style="background-color: '#FFFFFF'; width: 100px; border-width: 0px;"/>
+				</td>
 			    </tr>
 			    <tr>
 				<td colspan=2>
-				    <input type=submit value="Modifier une couleur" />
-				    <input type=submit value="Supprimer une couleur" onclick="this.form.action = '../../gestion/couleurs/sup_couleur.php'"/>
+				    <input type=submit value="Enregistrer les données"/>
+				    <input type=reset value="Effacer" onclick="effacer()"/>
 				</td>
 			    </tr>
 			</table>
@@ -72,42 +38,49 @@ class Couleur_IHM {
 	    </table>
 	</FORM>
 	<script>
+	    function effacer() {
+		document.getElementById("name").value = 'Le nom de la couleur';
+		document.getElementById("colorPicker").value = '#FFFFFF';
+	    }
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById("couleurActuel");
-		var couleurHTML = document.getElementById("couleur");
-		couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
+		var couleurHTML = document.getElementById("colorPicker");
+		couleurActuelHTML.style.backgroundColor = couleurHTML.value;
 	    }
 	</script>
-    <?php
+	<?php
     }
 
     public static function afficherFormulaireModification($idCouleur) {
 	$couleur = Couleur::getCouleur($idCouleur);
 	?>
-	<form action='mod_couleur.php' method=post>
+	<form action='' method=post>
 	    <input type=hidden name='id' value=<?php echo $idCouleur;?>>
 	    <table>
 		<tr>
 		    <td colspan="2">
 			<table>
 			    <tr id="entete2">
-				<td colspan="2">Modification d'une couleur</td>
+				<td colspan="2">Modifier d'une couleur</td>
 			    </tr>
 			    <tr>
-				<th width='75'>Nom : </th>
+				<th width='100'>Nom : </th>
 				<td>
-				    <input name='nomCouleur' size=15 value=<?php echo $couleur->getNom();?>>
+				    <input id='name' type="text" name='nomcouleur' value='<?php echo $couleur->getNom();?>'>
 				</td>
 			    </tr>
 			    <tr>
 				<th>Couleur : </th>
 				<td>
-				    <input id='colorPicker' type='color' name='codeHexa' value='<?php echo "#" . $couleur->getCode(); ?>' style='width: 100px;'>
+				    <input id='colorPicker' type='color' name='codehexa' value='<?php echo "#" . $couleur->getCode(); ?>' oninput="showColor()">
+				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input id="couleurActuel" readonly="disabled" style="background-color:<?php echo '#' . $couleur->getCode(); ?>; width: 100px; border-width: 0px;"/>
 				</td>
 			    </tr>
 			    <tr>
-				<td>
+				<td colspan="2">
 				    <input type=submit value='Enregistrer les données'/>
+				    <input type=reset value="Effacer" onclick="effacer()"/>
 				</td>
 			    </tr>
 			</table>
@@ -115,7 +88,62 @@ class Couleur_IHM {
 		</tr>
 	    </table>
 	</form>
+	<script>
+	    function effacer() {
+		document.getElementById("name").value = 'Le nom de la couleur';
+		document.getElementById("colorPicker").value = '#FFFFFF';
+	    }
+	    function showColor() {
+		var couleurActuelHTML = document.getElementById("couleurActuel");
+		var couleurHTML = document.getElementById("colorPicker");
+		couleurActuelHTML.style.backgroundColor = couleurHTML.value;
+	    }
+	</script>
 	<?php
+    }
+
+    public static function afficherListeCouleurAEditer() {
+	$tabCouleurs = Couleur::listerCouleur();
+	if (sizeof($tabCouleurs) > 0) {
+	    echo
+	    "<table>
+		<tr id='entete'>
+		    <td width='50%'>Couleur</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	    for ($i = 0; $i < sizeof($tabCouleurs); $i++) {
+		$coul = $tabCouleurs[$i];
+		?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td>
+			<table >
+			    <tr>
+				<td width='50%'><?php echo $coul->getNom(); ?></td>
+				<td width='50%'>
+				    <input readonly="disabled" style="background-color:<?php echo '#' . $coul->getCode(); ?>; width: 100px; border-width: 0px;"/>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		    <td align="center">
+			<a href="gestionCouleur.php?action=mod&id=<?php echo $coul->getIdentifiantBDD(); ?>">
+			    <img src="../../images/reply.png"/>
+			</a>
+		    </td>
+		    <td align="center">
+			<a href="gestionCouleur.php?action=sup&id=<?php echo $coul->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
+		</tr>
+		<?php
+	    }
+	    echo "</table>";
+	    echo "<br/><br/>";
+	} else {
+	    echo "<br/><center>Aucune couleur n'a été trouvée.</center><br/>";
+	}
     }
 }
 

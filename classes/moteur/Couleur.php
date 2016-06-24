@@ -32,7 +32,8 @@ class Couleur {
 	return $this->identifiant_BDD;
     }
 
-    /** M�thodes statiques * */
+    /** Méthodes statiques **/
+
     public static function getCouleur($idCouleur) {
 	$couleurBDD = Couleur_BDD::getCouleur($idCouleur);
 	return new Couleur($couleurBDD["idcouleur"],
