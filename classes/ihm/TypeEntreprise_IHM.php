@@ -3,114 +3,47 @@
 class TypeEntreprise_IHM {
 
     public static function afficherFormulaireSaisie() {
+	$tabCouleur = Couleur::listerCouleur();
 	?>
-	<FORM METHOD="POST" ACTION="">
-	    <table id="table_saisieType">
+	<form action='' method=post>
+	    <table>
+		<tr id="entete2">
+		    <td colspan=2>Saisir un type d'entreprise</td>
+		</tr>
+		<tr>
+		    <th width="100">Nom :</th>
+		    <td>
+			<input type="text" name="type" value="Saisir un type d'entreprise">
+		    </td>
+		</tr>
+		<tr>
+		    <th>Couleur :</th>
+		    <td>
+			<select id="idcouleur" name="idcouleur" onchange='showColor()'>
+			    <?php
+			    for ($i = 0; $i < sizeof($tabCouleur); $i++)
+				echo "<option value='" . $tabCouleur[$i]->getIdentifiantBDD() . "' style='color: #" . $tabCouleur[$i]->getCode() . ";'>" . $tabCouleur[$i]->getNom() . "</option>";
+			    ?>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input id="couleurActuel" readonly="disabled" style="background-color: <?php echo '#' . $tabCouleur[0]->getCode(); ?>; width: 100px; border-width: 0px;"/>
+		    </td>
+		</tr>
 		<tr>
 		    <td colspan=2>
-			<table id="presentation_saisieType">
-			    <tr id="entete2">
-				<td colspan=2>Saisir un type d'entreprise</td>
-				<td>
-				    <input type="text" name="type" >
-				</td>
-			    </tr>
-			    <tr id="entete2">
-				<th>Sélectionnez la couleur :</th>
-				<td>
-				    <select id="idCouleur" name="idCouleur" onchange='showColor()'>
-					<?php
-					$tabCouleur = Couleur::listerCouleur();
-					for ($i = 0; $i < sizeof($tabCouleur); $i++)
-					    echo "<option value='" . $tabCouleur[$i]->getIdentifiantBDD() . "' style='color: #" . $tabCouleur[$i]->getCode() . ";'>" . $tabCouleur[$i]->getNom() . "</option>";
-					?>
-				    </select>
-				    &nbsp;&nbsp;&nbsp;&nbsp;
-				    <input id="couleurActuel" readonly="disabled" style="background-color: <?php echo '#' . $tabCouleur[0]->getCode(); ?>; width: 100px; border-width: 0px;"/>
-				</td>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Enregistrer le type"/>
-				    <input type=reset value="Effacer"/>
-				</td>
-			    </tr>
-			    <tr id="entete2">
-				<td colspan=2>Liste des types</td>
-			    </tr>
-			</table>
-			<?php
-			$tabType = TypeEntreprise::getListeTypeEntreprise();
-			for ($i = 0; $i < sizeof($tabType); $i++) {
-			    $couleur = $tabType[$i]->getCouleur();
-			    ?>
-			<table id="presentation_type">
-			    <tr>
-				<td width="220" align="right">
-				    <?php
-				    echo "<FONT COLOR=#" . $couleur->getCode() . ">";
-				    echo $tabType[$i]->getType() . " -";
-				    ?>
-				    </FONT>
-				</td>
-				<td>
-				    <?php echo "- " . $couleur->getNom(); ?>
-				</td>
-			    </tr>
-			<?php
-			}
-			?>
-			</table>
+			<input type=submit value="Enregistrer le type"/>
+			<input type=reset value="Effacer"/>
 		    </td>
 		</tr>
 	    </table>
-	</FORM>
+	</form>
 	<script>
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById("couleurActuel");
-		var couleurHTML = document.getElementById("idCouleur");
+		var couleurHTML = document.getElementById("idcouleur");
 		couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
 	    }
 	</script>
-	<?php
-    }
-
-    public static function afficherFormulaireSelection() {
-	?>
-	<FORM id="formModifType" METHOD="POST" ACTION="">
-	    <table id="table_modifType">
-		<tr>
-		    <td colspan=2>
-			<table id="presentation_modifType">
-			    <tr id="entete2">
-				<td colspan=2>Sélection d'un type d'entreprise</td>
-			    </tr>
-			    <tr>
-				<th width="220">Sélectionnez le type : </th>
-				<th>
-				    <?php
-				    $tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise();
-				    echo "<select name='type'>";
-				    echo "<option value='-1' selected>---Type Entreprise---</option>";
-				    for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++) {
-					$couleur = $tabTypeEntreprise[$i]->getCouleur();
-					echo "<option value='" . $tabTypeEntreprise[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTypeEntreprise[$i]->getType() . "</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				</th>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Modifier" />
-				    <input type=submit value="Supprimer" onclick="this.form.action = '../../gestion/entreprises/supTypeEntreprise.php'"/>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
-	    </table>
-	</FORM>
 	<?php
     }
 
@@ -119,44 +52,38 @@ class TypeEntreprise_IHM {
         $couleur = $type->getCouleur();
         $tabCouleur = Couleur::listerCouleur();
 	?>
-	<form action='modTypeEntreprise.php' method=post>
+	<form action='' method=post>
 	    <input type=hidden name='id' value=<?php echo $type->getIdentifiantBDD(); ?>>
 	    <table>
+		<tr id='entete2'>
+		    <td colspan="2">Modification d'un type d'entreprise</td>
+		</tr>
+		<tr>
+		    <th with="100">Nom : </th>
+		    <td>
+			<input type="text" name='type' value='<?php echo $type->getType(); ?>'>
+		    </td>
+		</tr>
+		<tr>
+		    <th>Couleur : </th>
+		    <td>
+			<select id='idcouleur' name='idcouleur' onchange='showColor()'>
+			    <?php
+			    for ($i = 0; $i < sizeof($tabCouleur); $i++) {
+				if ($couleur->getIdentifiantBDD() == $tabCouleur[$i]->getIdentifiantBDD())
+				    echo "<option style='color: #" . $tabCouleur[$i]->getCode() . ";' selected value='" . $tabCouleur[$i]->getIdentifiantBDD() . "'>" . $tabCouleur[$i]->getNom() . "</option>";
+				else
+				    echo "<option style='color: #" . $tabCouleur[$i]->getCode() . ";' value='" . $tabCouleur[$i]->getIdentifiantBDD() . "'>" . $tabCouleur[$i]->getNom() . "</option>";
+			    }
+			    ?>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input id='couleurActuel' readonly='disabled' style='background-color: <?php echo '#' . $couleur->getCode(); ?>; width: 100px; border-width: 0px;'/>
+		    </td>
+		</tr>
 		<tr>
 		    <td colspan="2">
-			<table>
-			    <tr id='entete2'>
-				<td colspan="2">Modification d'un type d'entreprise</td>
-			    </tr>
-			    <tr>
-				<th>Type d'entreprise : </th>
-				<td>
-				    <input name='label' size=100 value='<?php echo $type->getType(); ?>'>
-				</td>
-			    </tr>
-			    <tr>
-				<th>Couleur : </th>
-				    <td>
-					<select id='couleur' name='couleur' onchange='showColor()'>
-					    <?php
-					    for ($i = 0; $i < sizeof($tabCouleur); $i++) {
-						if ($couleur->getIdentifiantBDD() == $tabCouleur[$i]->getIdentifiantBDD())
-						    echo "<option style='color: #" . $tabCouleur[$i]->getCode() . ";' selected value='" . $tabCouleur[$i]->getIdentifiantBDD() . "'>" . $tabCouleur[$i]->getNom() . "</option>";
-						else
-						    echo "<option style='color: #" . $tabCouleur[$i]->getCode() . ";' value='" . $tabCouleur[$i]->getIdentifiantBDD() . "'>" . $tabCouleur[$i]->getNom() . "</option>";
-					    }
-					    ?>
-					</select>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<input id='couleurActuel' readonly='disabled' style='background-color: <?php echo '#' . $couleur->getCode(); ?>; width: 100px; border-width: 0px;'/>
-				    </td>
-			    </tr>
-			    <tr>
-				<td colspan="2">
-				    <input type=submit value='Modifier'/>
-				</td>
-			    </tr>
-			</table>
+			<input type=submit value='Modifier'/>
 		    </td>
 		</tr>
 	    </table>
@@ -164,11 +91,57 @@ class TypeEntreprise_IHM {
 	<script>
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById('couleurActuel');
-		var couleurHTML = document.getElementById('couleur');
+		var couleurHTML = document.getElementById('idcouleur');
 		couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
 	    }
 	</script>
 	<?php
+    }
+
+    public static function afficherListeTypeEntrepriseAEditer() {
+	$tabTypes = TypeEntreprise::getListeTypeEntreprise();
+	if (sizeof($tabTypes) > 0) {
+	    echo
+	    "<table>
+		<tr id='entete'>
+		    <td width='50%'>Type d'entreprise</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	    for ($i = 0; $i < sizeof($tabTypes); $i++) {
+		$couleur = $tabTypes[$i]->getCouleur();
+		?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td>
+			<table >
+			    <tr>
+				<td width="60%"><?php echo $tabTypes[$i]->getType(); ?></td>
+				<td width='20%'><?php echo $couleur->getNom(); ?></td>
+				<td width='20%'>
+				    <input readonly="disabled" style="background-color:<?php echo '#' . $couleur->getCode(); ?>; width: 100px; border-width: 0px;"/>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		    <td align="center">
+			<a href="gestionTypeEntreprise.php?action=mod&id=<?php echo $tabTypes[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/reply.png"/>
+			</a>
+		    </td>
+		    <td align="center">
+			<a href="gestionTypeEntreprise.php?action=sup&id=<?php echo $tabTypes[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
+		</tr>
+		<?php
+	    }
+	    echo "</table>";
+	    echo "<br/><br/>";
+	} else {
+	    echo "<br/><center>Aucune couleur n'a été trouvée.</center><br/>";
+	}
+
     }
 }
 

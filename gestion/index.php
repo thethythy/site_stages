@@ -199,16 +199,15 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./entreprises/saisirTypeEntreprise.php">Saisir un type d'entreprise</a></li>
-				<li><a href="./entreprises/modifierTypeEntreprise.php">Modifier/Supprimer un type d'entreprise</a></li><br/>
-				<li><a href="./entreprises/listeDesEntreprises.php">Liste des entreprises</a></li>
+				<li><a href="./entreprises/gestionTypeEntreprise.php">Gérer les types d'entreprise</a></li><br/>
+				<li><a href="./entreprises/listeDesEntreprises.php">Lister les entreprises</a></li>
 				<li><a href="./entreprises/saisirEntreprise.php">Saisir une entreprise</a></li>
 				<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
-				<li><a href="./entreprises/listeDesContacts.php">Liste des contacts</a></li>
+				<li><a href="./entreprises/listeDesContacts.php">Lister les contacts</a></li>
 				<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
 				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
-				<li><a href="./entreprises/gestionCompetence.php">Gestion des compétences</a></li>
+				<li><a href="./entreprises/gestionCompetence.php">Gérer des compétences</a></li>
 			    </ul>
 			</td>
 		    </tr>
