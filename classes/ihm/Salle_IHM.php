@@ -5,10 +5,10 @@ class Salle_IHM {
     public static function afficherFormulaireSaisie() {
 	?>
 	<FORM METHOD="POST" ACTION="">
-	    <table id="table_saisieSalle">
+	    <table>
 		<tr>
 		    <td colspan=2>
-			<table id="presentation_saisieSalle">
+			<table>
 			    <tr id="entete2">
 				<td colspan=2>Saisir une salle</td>
 			    </tr>
@@ -32,56 +32,17 @@ class Salle_IHM {
 	<?php
     }
 
-    public static function afficherFormulaireChoixSalle() {
-	$tabSalle = Salle::listerSalle();
-	?>
-	<FORM METHOD="POST" ACTION="" name="sd">
-	    <table id="table_modifierSalle">
-		<tr>
-		    <td colspan=2>
-			<table id="presentation_modifierSalle">
-			    <tr id="entete2">
-				<td colspan=2>Choisir la salle</td>
-			    </tr>
-			    <tr>
-				<th width="220">Sélectionnez la salle : </th>
-				<th>
-				    <?php
-				    echo "<select name=salle>";
-				    echo "<option  value='-1' selected></option>";
-				    for ($i = 0; $i < sizeof($tabSalle); $i++) {
-					echo "<option value='" . $tabSalle[$i]->getIdentifiantBDD() . "'
-						      name='" . $tabSalle[$i]->getNom() . "'> " . $tabSalle[$i]->getNom() . "</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				</th>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Modifier une salle" />
-				    <input type=submit value="Supprimer une salle" onclick="this.form.action = '../../gestion/soutenances/supprimerSalle.php'"/>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
-	    </table>
-	</FORM>
-	<?php
-    }
-
     public static function afficherFormulaireModification($idSalle) {
 	$salle = Salle::getSalle($idSalle);
 	?>
-	<form action='modSalle.php' method='post'>
+	<form action='' method='post'>
 	    <input type=hidden name='id' value=<?php echo $salle->getIdentifiantBDD(); ?>>
 	    <table>
 		<tr>
 		    <td colspan="2">
 			<table>
 			    <tr id='entete2'>
-				<td colspan="2">Modification d'une salle</td>
+				<td colspan="2">Modifier une salle</td>
 			    </tr>
 			    <tr>
 				<th>Nom : </th>
@@ -99,6 +60,41 @@ class Salle_IHM {
 	    </table>
 	</form>
 	<?php
+    }
+
+    public static function afficherListeSalleAEditer() {
+	$tabSalles = Salle::listerSalle();
+	if (sizeof($tabSalles) > 0) {
+	    echo
+	    "<table>
+		<tr id='entete'>
+		    <td width='50%'>Salle</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	    for ($i = 0; $i < sizeof($tabSalles); $i++) {
+		$salle = $tabSalles[$i];
+		?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td width='50%'><?php echo $salle->getNom(); ?></td>
+		    <td align="center">
+			<a href="gestionSalle.php?action=mod&id=<?php echo $salle->getIdentifiantBDD(); ?>">
+			    <img src="../../images/reply.png"/>
+			</a>
+		    </td>
+		    <td align="center">
+			<a href="gestionSalle.php?action=sup&id=<?php echo $salle->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
+		</tr>
+		<?php
+	    }
+	    echo "</table>";
+	    echo "<br/><br/>";
+	} else {
+	    echo "<br/><center>Aucune salle n'a été trouvée.</center><br/>";
+	}
     }
 
     public static function afficherPlanningSalles($annee, $listeConvention) {
