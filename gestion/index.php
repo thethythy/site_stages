@@ -82,8 +82,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./gestion/videroffrestage.php">Supprimer les anciennes offres</a></li>
-				<li><a href="./gestion/vidersujetstage.php">Supprimer les anciennes validations</a></li>
+				<li><a href="./gestion/videroffrestage.php">Supprimer les offres</a></li>
+				<li><a href="./gestion/vidersujetstage.php">Supprimer les validations</a></li>
 				<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
 				<li><a href="./gestion/editiontache.php">Gestion des tâches</a></li>
 				<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
@@ -199,6 +199,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
+				<li><a href="./entreprises/gestionCompetence.php">Gérer des compétences</a></li>
 				<li><a href="./entreprises/gestionTypeEntreprise.php">Gérer les types d'entreprise</a></li><br/>
 				<li><a href="./entreprises/listeDesEntreprises.php">Lister les entreprises</a></li>
 				<li><a href="./entreprises/saisirEntreprise.php">Saisir une entreprise</a></li>
@@ -206,8 +207,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 				<li><a href="./entreprises/listeDesContacts.php">Lister les contacts</a></li>
 				<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
 				<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
-				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li><br/>
-				<li><a href="./entreprises/gestionCompetence.php">Gérer des compétences</a></li>
+				<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li>
 			    </ul>
 			</td>
 		    </tr>

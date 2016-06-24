@@ -66,8 +66,8 @@ h4 { font-size: 1.0em; text-transform: none;}
 footer, p, h1, h2, h3, h4 { margin: 10px 15px; }
 
 ul, ol {
-    margin: 10px 30px;
-    padding: 0 15px;
+    margin: 10px 20px;
+    padding: 0 5px;
 }
 
 li { color: #666666; }
