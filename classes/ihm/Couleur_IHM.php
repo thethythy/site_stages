@@ -41,6 +41,7 @@ class Couleur_IHM {
 	    function effacer() {
 		document.getElementById("name").value = 'Le nom de la couleur';
 		document.getElementById("colorPicker").value = '#FFFFFF';
+		document.getElementById("couleurActuel").style.backgroundColor = '#FFFFFF';
 	    }
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById("couleurActuel");

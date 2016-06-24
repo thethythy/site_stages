@@ -16,6 +16,10 @@ class ThemeDeStage {
 
     /* Accesseurs */
 
+    public function getIdentifiantBDD() {
+	return $this->idTheme;
+    }
+
     public function setTheme($label) {
 	$this->theme = $label;
     }

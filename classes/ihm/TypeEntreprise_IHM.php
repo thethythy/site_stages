@@ -141,7 +141,6 @@ class TypeEntreprise_IHM {
 	} else {
 	    echo "<br/><center>Aucune couleur n'a été trouvée.</center><br/>";
 	}
-
     }
 }
 
