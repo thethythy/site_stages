@@ -1,11 +1,47 @@
 <?php
 
-include_once("../../classes/bdd/connec.inc");
-include_once("../../classes/ihm/IHM_Generale.php");
+$chemin = "../../classes/";
 
-include_once("../../classes/ihm/Competence_IHM.php");
-include_once("../../classes/bdd/Competence_BDD.php");
-include_once("../../classes/moteur/Competence.php");
+include_once($chemin . "bdd/connec.inc");
+include_once($chemin . "ihm/IHM_Generale.php");
+
+include_once($chemin . "ihm/Competence_IHM.php");
+include_once($chemin . "bdd/Competence_BDD.php");
+include_once($chemin . "moteur/Competence.php");
+
+// ----------------------------------------------------------------------------
+// Contrôleur
+
+function supprimer() {
+    if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == 'sup') {
+	Competence::deleteCompetence($_GET['id']);
+    }
+}
+
+supprimer();
+
+function modifier() {
+    if (isset($_POST['id']) && isset($_POST['nomcompetence']) && $_POST['nomcompetence'] != "") {
+	$competence = new Competence($_POST['id'], $_POST['nomcompetence']);
+	Competence_BDD::sauvegarder($competence);
+	$_GET['action'] = $_GET['id'] = '';
+    }
+}
+
+modifier();
+
+function save() {
+    if (!isset($_POST['id']) && isset($_POST['nomcompetence']) && $_POST['nomcompetence'] != "") {
+	$tabDonnees = array();
+	array_push($tabDonnees, $_POST['nomcompetence']);
+	Competence::saisirDonneesCompetences($tabDonnees);
+    }
+}
+
+save();
+
+// ----------------------------------------------------------------------------
+// Affichage
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
@@ -13,23 +49,17 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Gestion des", "compétences", "../../", $tabLiens);
 
-if (isset($_GET['id'])) {
-    Competence::deleteCompetence($_GET['id']);
+if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == 'mod') {
+    Competence_IHM::afficherFormulaireModification($_GET['id']);
+} else {
+    Competence_IHM::afficherFormulaireSaisie();
 }
 
-function save() {
-    if (isset($_POST['nomCompetence']) && $_POST['nomCompetence'] != "") {
-	$tabDonnees = array();
-	array_push($tabDonnees, $_POST['nomCompetence']);
-	Competence::saisirDonneesCompetences($tabDonnees);
-    }
-}
+Competence_IHM::afficherListeCompetenceAEditer();
 
-save();
-Competence_IHM::afficherFormulaireSaisie();
-
-deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../../");
+
+deconnexion();
 
 ?>
