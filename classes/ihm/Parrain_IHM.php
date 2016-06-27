@@ -15,20 +15,20 @@ class Parrain_IHM {
 			    </tr>
 			    <tr>
 				<td width="200">Nom</td>
-				<td><input type="text" name="nomParrain" ></td>
+				<td><input type="text" name="nomparrain" ></td>
 			    </tr>
 			    <tr>
 				<td>Prénom</td>
-				<td><input type="text" name="prenomParrain" ></td>
+				<td><input type="text" name="prenomparrain" ></td>
 			    </tr>
 			    <tr>
 				<td>Email</td>
-				<td><input type="text" name="emailParrain" ></td>
+				<td><input type="text" name="emailparrain" ></td>
 			    </tr>
 			    <tr>
-				<td>Sélectionnez la couleur</td>
+				<td>Couleur</td>
 				<td>
-				    <select id="idCouleur" name="idCouleur" onchange='showColor()'>
+				    <select id="idcouleur" name="idcouleur" onchange='showColor()'>
 					<?php
 					for ($i = 0; $i < sizeof($tabCouleur); $i++)
 					    echo "<option value='" . $tabCouleur[$i]->getIdentifiantBDD() . "' style='color: #" . $tabCouleur[$i]->getCode() . ";'>" . $tabCouleur[$i]->getNom() . "</option>";
@@ -51,49 +51,10 @@ class Parrain_IHM {
 	<script>
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById("couleurActuel");
-		var couleurHTML = document.getElementById("idCouleur");
+		var couleurHTML = document.getElementById("idcouleur");
 		couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
 	    }
 	</script>
-	<?php
-    }
-
-    public static function afficherFormulaireModification() {
-	$tabParrain = Parrain::listerParrain();
-	?>
-	<FORM METHOD="POST" ACTION="">
-	    <table>
-		<tr>
-		    <td colspan=2>
-			<table>
-			    <tr id="entete2">
-				<td colspan=2>Modifier/Supprimer un référent</td>
-			    </tr>
-			    <tr>
-				<td width="220">Sélectionnez le référent</td>
-				<td>
-				    <?php
-				    echo "<select name=parrain>";
-				    echo "<option  value='-1' selected></option>";
-				    for ($i = 0; $i < sizeof($tabParrain); $i++) {
-					$couleur = $tabParrain[$i]->getCouleur();
-					echo "<option value='" . $tabParrain[$i]->getIdentifiantBDD() . "'name='" . $tabParrain[$i]->getNom() . "' style='color: #" . $couleur->getCode() . ";'> " . $tabParrain[$i]->getNom() . " " . $tabParrain[$i]->getPrenom() . "</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				</td>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Modifier un référent" />
-				    <input type=submit value="Supprimer un référent" onclick="this.form.action = '../../gestion/parrains/sup_parrains.php'"/>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
-	    </table>
-	</FORM>
 	<?php
     }
 
@@ -103,8 +64,8 @@ class Parrain_IHM {
 	$tabCouleur = Couleur::listerCouleur();
 	?>
 
-	<form action='../../gestion/parrains/mod_parrains.php' method="post">
-	    <input type=hidden name='parrain' value=<?php echo $idParrain; ?>/>
+	<form action='' method="post">
+	    <input type=hidden name='id' value=<?php echo $idParrain; ?>/>
 	    <table>
 		<tr>
 		    <td colspan=2>
@@ -115,25 +76,25 @@ class Parrain_IHM {
 			    <tr>
 				<td width="200">Nom</td>
 				<td>
-				    <input name='nom' size=100 value='<?php echo $parrain->getNom(); ?>'>
+				    <input type="text" name='nomparrain' value='<?php echo $parrain->getNom(); ?>'>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Prénom</td>
 				<td>
-				    <input name='prenom' size=100 value='<?php echo $parrain->getPrenom(); ?>'>
+				    <input type="text" name='prenomparrain' value='<?php echo $parrain->getPrenom(); ?>'>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Email</td>
 				<td>
-				    <input name='email' size=100 value='<?php echo $parrain->getEmail(); ?>'>
+				    <input type="text" name='emailparrain' value='<?php echo $parrain->getEmail(); ?>'>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Couleur</td>
 				<td>
-				    <select id='couleur' name='couleur' onchange='showColor()'>
+				    <select id='idcouleur' name='idcouleur' onchange='showColor()'>
 					<?php
 					for ($i = 0; $i < sizeof($tabCouleur); $i++) {
 					    if ($couleur->getIdentifiantBDD() == $tabCouleur[$i]->getIdentifiantBDD())
@@ -161,11 +122,59 @@ class Parrain_IHM {
 	<script>
 	    function showColor() {
 		var couleurActuelHTML = document.getElementById('couleurActuel');
-		var couleurHTML = document.getElementById('couleur');
+		var couleurHTML = document.getElementById('idcouleur');
 		couleurActuelHTML.style.backgroundColor = couleurHTML.options[couleurHTML.selectedIndex].style.color;
 	    }
 	</script>
 	<?php
+    }
+
+    public static function afficherListeParrainAEditer() {
+	$tabParrains = Parrain::listerParrain();
+	if (sizeof($tabParrains) > 0) {
+	    echo
+	    "<table>
+		<tr id='entete'>
+		    <td width='50%'>Référent</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	    for ($i = 0; $i < sizeof($tabParrains); $i++) {
+		$couleur = $tabParrains[$i]->getCouleur();
+		$nom = $tabParrains[$i]->getNom();
+		$prenom = $tabParrains[$i]->getPrenom();
+		?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td>
+			<table >
+			    <tr>
+				<td width="35%"><?php echo $prenom . " " . $nom; ?></td>
+				<td width="35%"><?php echo $tabParrains[$i]->getEmail(); ?></td>
+				<td width='15%'><?php echo $couleur->getNom(); ?></td>
+				<td width='15%'>
+				    <input readonly="disabled" style="background-color:<?php echo '#' . $couleur->getCode(); ?>; width: 100px; border-width: 0px;"/>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		    <td align="center">
+			<a href="gestionParrain.php?action=mod&id=<?php echo $tabParrains[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/reply.png"/>
+			</a>
+		    </td>
+		    <td align="center">
+			<a href="gestionParrain.php?action=sup&id=<?php echo $tabParrains[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
+		</tr>
+		<?php
+	    }
+	    echo "</table>";
+	    echo "<br/><br/>";
+	} else {
+	    echo "<br/><center>Aucune parrain n'a été trouvé.</center><br/>";
+	}
     }
 
     public static function afficherFormulaireRecherche($fichier) {

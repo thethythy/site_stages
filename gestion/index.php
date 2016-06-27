@@ -166,8 +166,7 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./parrains/saisie_parrains.php">Saisir un référent</a></li>
-				<li><a href="./parrains/ms_parrains.php">Modifier/Supprimer un référent</a></li><br />
+				<li><a href="./parrains/gestionParrain.php">Gérer les référents</a></li>
 			    </ul>
 			</td>
 		    </tr>
