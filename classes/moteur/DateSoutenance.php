@@ -46,6 +46,10 @@ class DateSoutenance {
 	$this->annee = $annee;
     }
 
+    public function getDateComplete() {
+	return $this->annee . '-' . $this->mois . '-' . $this->jour;
+    }
+
     /** Méthodes statiques **/
 
     public static function getDateSoutenance($idDateSoutenance) {

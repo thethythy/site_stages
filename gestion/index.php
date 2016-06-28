@@ -242,9 +242,8 @@ IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
 		    <tr>
 			<td>
 			    <ul>
-				<li><a href="./soutenances/gestionSalle.php">Gérer les salles</a></li><br/>
-				<li><a href="./soutenances/saisirDate.php">Saisir une date</a></li>
-				<li><a href="./soutenances/modifierDate.php">Modifier les dates</a></li><br/>
+				<li><a href="./soutenances/gestionSalle.php">Gérer les salles</a></li>
+				<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li><br/>
 				<li><a href="./soutenances/modifierTempsSoutenance.php">Modifier une durée de soutenance</a></li>
 				<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li>
 			    </ul>

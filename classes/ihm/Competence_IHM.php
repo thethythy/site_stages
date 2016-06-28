@@ -41,7 +41,7 @@ class Competence_IHM {
 		    <td colspan=2>Editer une compétence</td>
 		</tr>
 		<tr>
-		    <th>La compétence : </th>
+		    <th width="200">La compétence : </th>
 		    <td>
 			<input type="text" id='name' name="nomcompetence"value='<?php echo $competence->getNom(); ?>'>
 		    </td>

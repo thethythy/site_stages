@@ -5,91 +5,47 @@ class DateSoutenance_IHM {
     public static function afficherFormulaireSaisie() {
 	?>
 	<form method="POST" action="">
-	    <table id="table_saisieDateSoutenance">
+	    <table>
+		<tr id="entete2">
+		    <td colspan=2>Saisir une date de soutenance</td>
+		</tr>
+		<tr>
+		    <th width="150">Date :</th>
+		    <td>
+			<input type="date" name="date" value="<?php echo date("Y-m-d"); ?>"/>
+		    </td>
+		</tr>
+		<tr>
+		    <th></th>
+		    <td>&nbsp;</td>
+		</tr>
+		<tr>
+		    <th width="200">Sélectionner les<br />promotions associées :</th>
+		    <td>
+			<?php
+			// Recuperation de l'annee promotion (la rentrée)
+			if (date('n') >= 9)
+			    $annee = date('Y');
+			else
+			    $annee = date('Y') - 1;
+			$tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $annee));
+			foreach ($tabPromo as $promo)
+			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '">' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br />';
+			?>
+		    </td>
+		</tr>
+		<tr>
+		    <th></th>
+		    <td>&nbsp;</td>
+		</tr>
 		<tr>
 		    <td colspan=2>
-			<table id="presentation_saisieDateSoutenance">
-			    <tr id="entete2">
-				<td colspan=2>Saisir une date de soutenance</td>
-			    </tr>
-			    <tr>
-				<th width="150">Date :</th>
-				<td>
-				    <input id="date" type="date" name="date" value="<?php echo date("Y-m-d"); ?>" style="width: auto;"/>
-				</td>
-			    </tr>
-			    <tr>
-				<th></th>
-				<td>&nbsp;</td>
-			    </tr>
-			    <tr>
-				<th width="200">Sélectionner les<br />promotions associées :</th>
-				<td>
-				    <?php
-				    // Recuperation de l'annee promotion (la rentrée)
-				    if (date('n') >= 9)
-					$annee = date('Y');
-				    else
-					$annee = date('Y') - 1;
-				    $tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $annee));
-				    foreach ($tabPromo as $promo)
-					echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '">' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br />';
-				    ?>
-				</td>
-			    </tr>
-			    <tr>
-				<th></th>
-				<td>&nbsp;</td>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Enregistrer les données"/>
-				    <input type=reset value="Effacer"/>
-				</td>
-			    </tr>
-			</table>
+			<input type=submit value="Enregistrer les données"/>
+			<input type=reset value="Effacer"/>
 		    </td>
 		</tr>
 	    </table>
 	</form>
-	<?php
-    }
-
-    public static function afficherFormulaireChoixDate() {
-	?>
-	<FORM id="formModifDate" METHOD="POST" ACTION="" name="sd">
-	    <table id="table_msDateSoutenance">
-		<tr>
-		    <td colspan=2>
-			<table id="presentation_msDateSoutenance">
-			    <tr id="entete2">
-				<td colspan=2>Modifier/Supprimer une date de soutenance</td>
-			    </tr>
-			    <tr>
-				<th width="220">Sélectionnez la date : </th>
-				<td>
-				    <?php
-				    $tabDateSoutenance = DateSoutenance::listerDateSoutenance();
-				    echo "<select name=date>";
-				    echo "<option  value='-1' selected></option>";
-				    for ($i = 0; $i < sizeof($tabDateSoutenance); $i++) {
-					echo "<option value='" . $tabDateSoutenance[$i]->getIdentifiantBDD() . "'name='" . $tabDateSoutenance[$i]->getIdentifiantBDD() . "'> " . $tabDateSoutenance[$i]->getJour() . "/" . $tabDateSoutenance[$i]->getMois() . "/" . $tabDateSoutenance[$i]->getAnnee() . "</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				</td>
-			    </tr>
-			    <tr>
-				<td colspan=2>
-				    <input type=submit value="Modifier une date de soutenance" />
-				    <input type=submit value="Supprimer une date de soutenance" onclick="this.form.action = '../../gestion/soutenances/supprimerDate.php'"/>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-		</tr>
-	    </table>
-	</FORM>
 	<?php
     }
 
@@ -99,27 +55,71 @@ class DateSoutenance_IHM {
 	$tabPromoDate = DateSoutenance::listerRelationPromoDate($idDate);
 	$tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $date->getAnnee() - 1));
 	?>
-	<form action='modDate.php' method='post'>
+	<form action='' method='post'>
 	    <input type=hidden name='id' value=<?php echo $date->getIdentifiantBDD(); ?>>
 	    <table>
+		<tr id="entete2">
+		    <td colspan="2">Modification d'une date</td>
+		</tr>
+		<tr>
+		    <th>Date : </th>
+		    <td>
+			<input type='date' name='date' value='<?php echo $date_formatee; ?>'/>
+		    </td>
+		</tr>
+		<tr>
+		    <th></th>
+		    <td>&nbsp;</td>
+		</tr>
+		<tr>
+		    <th width="200">Sélectionner les<br/>promotions associées :</th>
+		    <td>
+			<?php
+			foreach ($tabPromo as $promo) {
+			    $check = "";
+			    foreach ($tabPromoDate as $promo2)
+				if ($promo2 == $promo->getIdentifiantBDD())
+				    $check = "checked";
+			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '>' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
+			}
+			?>
+		    </td>
+		</tr>
+		<tr>
+		    <th></th>
+		    <td>&nbsp;</td>
+		</tr>
 		<tr>
 		    <td colspan="2">
-			<table>
-			    <tr id="entete2">
-				<td colspan="2">Modification d'une date</td>
-			    </tr>
+			<input type=submit value='Enregistrer les données'/>
+		    </td>
+		</tr>
+	    </table>
+	</form>
+	<?php
+    }
+
+    public static function afficherListeDateSoutenanceAEditer() {
+	$tabDates = DateSoutenance::listerDateSoutenance();
+	if (sizeof($tabDates) > 0) {
+	    echo
+	    "<table>
+		<tr id='entete'>
+		    <td width='50%'>Date de soutenance</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	    for ($i = sizeof($tabDates) - 1; $i >= 0; $i--) {
+		$oDate = DateSoutenance::getDateSoutenance($tabDates[$i]->getIdentifiantBDD());
+		$date_formatee = date('Y-m-d', mktime(0, 0, 0, $oDate->getMois(), $oDate->getJour(), $oDate->getAnnee()));
+		$tabPromoDate = DateSoutenance::listerRelationPromoDate($tabDates[$i]->getIdentifiantBDD());
+		$tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $oDate->getAnnee() - 1));
+		?>
+		<tr id="ligne<?php echo $i % 2; ?>">
+		    <td>
+			<table >
 			    <tr>
-				<th>Date : </th>
-				<td>
-				    <input id='newdate' type='date' name='newdate' value='<?php echo $date_formatee; ?>'/>
-				</td>
-			    </tr>
-			    <tr>
-				<th></th>
-				<td>&nbsp;</td>
-			    </tr>
-			    <tr>
-				<th size=200>Sélectionner les<br />promotions associées :</th>
+				<td width='50%'><?php echo $date_formatee; ?></td>
 				<td>
 				    <?php
 				    foreach ($tabPromo as $promo) {
@@ -127,31 +127,31 @@ class DateSoutenance_IHM {
 					foreach ($tabPromoDate as $promo2)
 					    if ($promo2 == $promo->getIdentifiantBDD())
 						$check = "checked";
-					echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '>' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br />';
+				    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '>' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
 				    }
 				    ?>
 				</td>
 			    </tr>
-			    <tr>
-				<th></th>
-				<td>&nbsp;</td>
-			    </tr>
-			    <tr>
-				<td colspan="2">
-				    <input type=submit value='Enregistrer les données'/>
-				</td>
-			    </tr>
 			</table>
 		    </td>
+		    <td align="center">
+			<a href="gestionDate.php?action=mod&id=<?php echo $tabDates[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/reply.png"/>
+			</a>
+		    </td>
+		    <td align="center">
+			<a href="gestionDate.php?action=sup&id=<?php echo $tabDates[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/action_delete.png"/>
+			</a>
+		    </td>
 		</tr>
-	    </table>
-	</form>
-
-	<script>
-	    document.getElementById('formModifDate').hidden = true;
-	</script>
-
-	<?php
+		<?php
+	    }
+	    echo "</table>";
+	    echo "<br/><br/>";
+	} else {
+	    echo "<br/><center>Aucune date n'a été trouvée.</center><br/>";
+	}
     }
 
 }

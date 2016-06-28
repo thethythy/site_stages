@@ -59,7 +59,7 @@ class TypeEntreprise_IHM {
 		    <td colspan="2">Modification d'un type d'entreprise</td>
 		</tr>
 		<tr>
-		    <th with="100">Nom : </th>
+		    <th width="100">Nom : </th>
 		    <td>
 			<input type="text" name='type' value='<?php echo $type->getType(); ?>'>
 		    </td>

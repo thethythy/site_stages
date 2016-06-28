@@ -45,9 +45,9 @@ class Salle_IHM {
 				<td colspan="2">Modifier une salle</td>
 			    </tr>
 			    <tr>
-				<th>Nom : </th>
+				<th width="100">Nom : </th>
 				<td>
-				    <input name='nom' size=100 value='<?php echo $salle->getNom(); ?>'>
+				    <input type="text" name='nom' value='<?php echo $salle->getNom(); ?>'>
 				</td>
 			    </tr>
 			    <tr>
