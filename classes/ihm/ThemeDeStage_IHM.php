@@ -66,7 +66,7 @@ class ThemeDeStage_IHM {
 		<tr>
 		    <th>Nom : </th>
 		    <td>
-			<input name='theme' type="text" value=<?php echo $theme->getTheme(); ?>>
+			<input name='theme' type="text" value="<?php echo $theme->getTheme(); ?>">
 		    </td>
 		</tr>
 		<tr>
