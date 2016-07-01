@@ -119,7 +119,7 @@ input.button {
 }
 
 select {
-    margin-bottom: : 4px;
+    margin-bottom: 4px;
     margin-top: 4px;
 }
 
@@ -592,4 +592,26 @@ section table td {
 #menu li a:hover, #menu li a:focus, #navigation li a:active {
   background: #fec757 ;
   text-decoration: underline ;
+}
+
+.formulaire_saisie_clef {
+  background-color: white;
+  background-clip: padding-box;
+  border: solid 2px black;
+  border-radius: 10px;
+  position: absolute;
+  box-shadow: 15px 15px 10px silver;
+  z-index: 99;
+
+  width:400px;
+  height:140px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin:-70px 0 0 -200px;
+}
+
+.formulaire_saisie_clef table {
+  margin: 5px ;
+  padding: 5px ;
 }

@@ -1,5 +1,7 @@
 <?php
 
+$access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+
 $chemin = "../classes/";
 
 include_once($chemin."bdd/connec.inc");

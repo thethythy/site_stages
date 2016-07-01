@@ -1,9 +1,35 @@
 <?php
 
 // ----------------------------------------------------------------------------
+// Vérification de l'autorisation
+
+global $access_control_target;
+
+if (isset($access_control_target)) {
+    if (!isset($_COOKIE['site_stages_depinfo'])) {
+	include_once('../access_control.php');
+	die();
+    } else {
+	// Récupérer le digest de la clef du cookie
+	$HClef1 = $_COOKIE['site_stages_depinfo'];
+
+	// Récupérer le digest du fichier
+	$f = fopen('../documents/demon/clef', 'r');
+	$HClef2 = fread($f, 500);
+	fclose($f);
+
+	if (!hash_equals($HClef1, $HClef2)) {
+	    include_once('../access_control.php');
+	    die();
+	}
+    }
+}
+
+// ----------------------------------------------------------------------------
 // Connection à la base de données et déclaration des tables
 
 include_once("stages.inc");
+mysqli_set_charset($db,"utf8");
 
 $tab1 = 'relation_promotion_datesoutenance';
 $tab2 = 'competence';
@@ -65,8 +91,6 @@ function filterParameters($param) {
     // Return the filtered result
     return $param;
 }
-
-mysqli_set_charset($db,"utf8");
 
 // Prévention contre les injection SQL dans les variables POST
 foreach ($_POST as $key => $value) {

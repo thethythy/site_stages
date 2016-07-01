@@ -34,6 +34,8 @@ function export() {
 	while ($creationTable = mysqli_fetch_array($listeCreationTable))
 	    $creations .= $creationTable[1] . ";\n\n";
 
+	echo "Script pour la création de la table: $table[0]<br/>";
+
 	$insertions .= "-- -----------------------------\n";
 	$insertions .= "-- insertions dans la table " . $table[0] . "\n";
 	$insertions .= "-- -----------------------------\n";
@@ -54,6 +56,8 @@ function export() {
 	    $insertions .= ");\n";
 	}
 	$insertions .= "\n";
+
+	echo "Script pour l'insertion de données dans la table: $table[0]<br/>";
     }
 
     $zip = new ZipArchive();
@@ -70,7 +74,7 @@ function export() {
 	$zip->close();
 
 	@unlink($backupName);
-	echo "La sauvegarde est terminée.";
+	echo "La sauvegarde est terminée [$backupName].";
     }
     printf("<div><a href='../../gestion/index.php'>Retour</a></div>");
 }

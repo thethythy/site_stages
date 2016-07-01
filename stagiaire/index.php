@@ -1,5 +1,8 @@
 <?php
 
+$access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+
+include_once("../classes/bdd/connec.inc");
 include_once("../classes/ihm/IHM_Generale.php");
 include_once("../classes/ihm/Menu.php");
 
