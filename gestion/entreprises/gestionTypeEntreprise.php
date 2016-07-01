@@ -45,6 +45,7 @@ function save() {
 	array_push($tabDonnees, $_POST['type']);
 	array_push($tabDonnees, $_POST['idcouleur']);
 	TypeEntreprise::saisirDonneesType($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

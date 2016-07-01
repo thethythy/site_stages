@@ -38,6 +38,7 @@ function save() {
 	$tabDonnees = array();
 	array_push($tabDonnees, $_POST['nom']);
 	Salle::saisirDonneesSalle($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

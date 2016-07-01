@@ -53,6 +53,7 @@ function save() {
 	array_push($tabDonnees, $_POST['emailparrain']);
 	array_push($tabDonnees, $_POST['idcouleur']);
 	Parrain::saisirDonneesParrain($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

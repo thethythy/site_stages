@@ -42,6 +42,7 @@ function save() {
 	array_push($tabDonnees, $_POST['nomcouleur']);
 	array_push($tabDonnees, ltrim($_POST['codehexa'], "#"));
 	Couleur::saisirDonneesCouleur($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

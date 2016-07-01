@@ -35,6 +35,7 @@ function save() {
 	$tabDonnees = array();
 	array_push($tabDonnees, $_POST['nomcompetence']);
 	Competence::saisirDonneesCompetences($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

@@ -68,6 +68,8 @@ function save() {
 	array_push($tabDonnees, $_POST['promo']);
 
 	DateSoutenance::saisirDonneesDateSoutenance($tabDonnees);
+
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 

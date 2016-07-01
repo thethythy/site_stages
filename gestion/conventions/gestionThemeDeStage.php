@@ -45,6 +45,7 @@ function save() {
 	array_push($tabDonnees, $_POST['theme']);
 	array_push($tabDonnees, $_POST['idcouleur']);
 	ThemeDeStage::saisirDonneesTheme($tabDonnees);
+	$_GET['action'] = $_GET['id'] = '';
     }
 }
 
