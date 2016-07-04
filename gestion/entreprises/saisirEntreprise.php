@@ -26,12 +26,11 @@ if (isset($_POST['add'])) {
 	Entreprise_IHM::afficherFormulaireSaisie("");
 	IHM_Generale::erreur("Tous les champs sont obligatoires !");
     } else {
-	$idtype = $_POST['typeEntreprise'];
 	$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
 
 	// Si l'entreprise que l'on veut créer n'existe pas déjà
 	if (Entreprise_BDD::existe($newEntreprise) == false) {
-	    $ent = Entreprise_BDD::sauvegarder($newEntreprise);
+	    $idEnt = Entreprise_BDD::sauvegarder($newEntreprise);
 	    ?>
 	    <table align="center">
 	        <tr>
@@ -47,7 +46,7 @@ if (isset($_POST['add'])) {
 	    	</td>
 	    	<td width="50%" align="center">
 	    	    <form method=post action="./saisirContact.php">
-	    		<input type="hidden" value="<?php echo $ent; ?>" name="idEntreprise"/>
+	    		<input type="hidden" value="<?php echo $idEnt; ?>" name="id"/>
 	    		<input type="submit" value="Ajouter un contact"/>
 	    	    </form>
 	    	</td>

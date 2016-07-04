@@ -3,9 +3,11 @@
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
+
 include_once($chemin . "moteur/Filtre.php");
 include_once($chemin . "moteur/FiltreNumeric.php");
 include_once($chemin . "moteur/FiltreString.php");
+
 include_once($chemin . "ihm/IHM_Generale.php");
 
 include_once($chemin . "ihm/Entreprise_IHM.php");
@@ -25,7 +27,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Modifier/Supprimer une", "entreprise", "../../", $tabLiens);
 
 if (isset($_GET['id'])) {
-    // Nécéssaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
+    // Nécessaire pour que dans le formulaire de recherche, on resélectionne les valeurs précédement sélectionnées
     $_POST['nom'] = $_GET['nom'];
     $_POST['cp'] = $_GET['cp'];
     $_POST['ville'] = $_GET['ville'];

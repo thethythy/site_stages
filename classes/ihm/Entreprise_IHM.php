@@ -122,11 +122,15 @@ class Entreprise_IHM {
 				<td>Type de l'entreprise</td>
 				<td>
 				    <?php
-				    echo "<select name='typeEntreprise'>";
+				    echo "<select name='idtype'>";
 				    for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++) {
 					$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
-					$type = $tabTypeEntreprise[$i]->getTypeEntreprise($id)->getType();
-					echo "<option value='$id'>$type</option>";
+					$type = $tabTypeEntreprise[$i]->getType();
+
+					if ($ent != "" && $ent->getType()->getIdentifiantBDD() == $id)
+					    echo "<option value='$id' selected>$type</option>";
+					else
+					    echo "<option value='$id'>$type</option>";
 				    }
 				    echo "</select>";
 				    ?>
@@ -182,8 +186,12 @@ class Entreprise_IHM {
 		    </td>
 		</tr>
 		<tr>
-		    <td colspan="2" id="submit">
-			<input type="hidden" value="1" name="<?php if ($ent != "") echo "edit"; else echo "add"; ?>" />
+		    <td colspan="2">
+			<?php
+			if ($ent != "")
+			    echo "<input type='hidden' name='id' value='".$ent->getIdentifiantBDD()."'/>";
+			?>
+			<input type="hidden" name="<?php if ($ent != "") echo "edit"; else echo "add"; ?>" />
 			<input type="submit" value="Valider" />
 		    </td>
 		</tr>
@@ -204,7 +212,7 @@ class Entreprise_IHM {
 		    <?php echo $tabEntreprises[$i]->getVille(); ?> <br/>
 		    <?php echo $tabEntreprises[$i]->getPays(); ?> <br/>
 		    <?php echo $tabEntreprises[$i]->getEmail(); ?> <br/>
-		    <?php echo "Type de l'entreprise: " . $tabEntreprises[$i]->getType()->getType(); ?>
+		    <?php echo $tabEntreprises[$i]->getType()->getType(); ?>
 		</td>
 		<td width="50%" id="contact">
 		    <?php
@@ -243,53 +251,54 @@ class Entreprise_IHM {
     public static function afficherListeEntrepriseAEditer($tabEntreprises) {
 	for ($i = 0; $i < sizeof($tabEntreprises); $i++) {
 	    ?>
-		<table id="presentation_entreprise">
-		    <tr>
-			<td width="50%">
-			    <div align="right">
-				<a href="modifierEntreprise.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&cp=<?php if (isset($_POST['cp'])) echo $_POST['cp']; ?>&ville=<?php if (isset($_POST['ville'])) echo $_POST['ville']; ?>&pays=<?php if (isset($_POST['pays'])) echo $_POST['pays']; ?>&id=<?php echo $tabEntreprises[$i]->getIdentifiantBDD(); ?>">
-				    <img src="../../images/reply.png"/>
-				</a>
-				<a href="modifierListeEntreprises.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&cp=<?php if (isset($_POST['cp'])) echo $_POST['cp']; ?>&ville=<?php if (isset($_POST['ville'])) echo $_POST['ville']; ?>&pays=<?php if (isset($_POST['pays'])) echo $_POST['pays']; ?>&id=<?php echo $tabEntreprises[$i]->getIdentifiantBDD(); ?>">
-				    <img src="../../images/action_delete.png"/>
-				</a>
-			    </div>
-			    <?php echo $tabEntreprises[$i]->getNom(); ?> <br/>
-			    <?php echo $tabEntreprises[$i]->getAdresse(); ?> <br/>
-			    <?php echo $tabEntreprises[$i]->getCodePostal(); ?>
-			    <?php echo $tabEntreprises[$i]->getVille(); ?> <br/>
-			    <?php echo $tabEntreprises[$i]->getPays(); ?> <br/>
-			    <?php echo $tabEntreprises[$i]->getType()->getType(); ?>
-			</td>
-			<td width="50%" id="contact">
-			    <?php
-			    $contacts = $tabEntreprises[$i]->listeDeContacts();
+	    <table id="presentation_entreprise">
+		<tr>
+		    <td width="50%">
+			<div align="right">
+			    <a href="modifierEntreprise.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&cp=<?php if (isset($_POST['cp'])) echo $_POST['cp']; ?>&ville=<?php if (isset($_POST['ville'])) echo $_POST['ville']; ?>&pays=<?php if (isset($_POST['pays'])) echo $_POST['pays']; ?>&id=<?php echo $tabEntreprises[$i]->getIdentifiantBDD(); ?>">
+				<img src="../../images/reply.png"/>
+			    </a>
+			    <a href="modifierListeEntreprises.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&cp=<?php if (isset($_POST['cp'])) echo $_POST['cp']; ?>&ville=<?php if (isset($_POST['ville'])) echo $_POST['ville']; ?>&pays=<?php if (isset($_POST['pays'])) echo $_POST['pays']; ?>&id=<?php echo $tabEntreprises[$i]->getIdentifiantBDD(); ?>">
+				<img src="../../images/action_delete.png"/>
+			    </a>
+			</div>
+			<?php echo $tabEntreprises[$i]->getNom(); ?> <br/>
+			<?php echo $tabEntreprises[$i]->getAdresse(); ?> <br/>
+			<?php echo $tabEntreprises[$i]->getCodePostal(); ?>
+			<?php echo $tabEntreprises[$i]->getVille(); ?> <br/>
+			<?php echo $tabEntreprises[$i]->getPays(); ?> <br/>
+			<?php echo $tabEntreprises[$i]->getEmail(); ?> <br/>
+			<?php echo $tabEntreprises[$i]->getType()->getType(); ?>
+		    </td>
+		    <td width="50%" id="contact">
+			<?php
+			$contacts = $tabEntreprises[$i]->listeDeContacts();
 
-			    if (sizeof($contacts) >= 2)
-				echo "<b>Contacts</b><br/><br/>";
-			    else if (sizeof($contacts) == 1)
-				echo "<b>Contact</b><br/><br/>";
+			if (sizeof($contacts) >= 2)
+			    echo "<b>Contacts</b><br/><br/>";
+			else if (sizeof($contacts) == 1)
+			    echo "<b>Contact</b><br/><br/>";
 
-			    for ($j = 0; $j < sizeof($contacts); $j++) {
-				echo $contacts[$j]->getNom() . " ";
-				echo $contacts[$j]->getPrenom() . "<br/>";
+			for ($j = 0; $j < sizeof($contacts); $j++) {
+			    echo $contacts[$j]->getNom() . " ";
+			    echo $contacts[$j]->getPrenom() . "<br/>";
 
-				if ($contacts[$j]->getTelephone() != "")
-				    echo "Telephone : " . $contacts[$j]->getTelephone() . "<br/>";
+			    if ($contacts[$j]->getTelephone() != "")
+				echo "Telephone : " . $contacts[$j]->getTelephone() . "<br/>";
 
-				if ($contacts[$j]->getTelecopie() != "")
-				    echo "Fax : " . $contacts[$j]->getTelecopie() . "<br/>";
+			    if ($contacts[$j]->getTelecopie() != "")
+				echo "Fax : " . $contacts[$j]->getTelecopie() . "<br/>";
 
-				if ($contacts[$j]->getEmail() != "")
-				    echo "Email : " . $contacts[$j]->getEmail() . "<br/>";
+			    if ($contacts[$j]->getEmail() != "")
+				echo "Email : " . $contacts[$j]->getEmail() . "<br/>";
 
-				if ($j + 1 < sizeof($contacts))
-				    echo "<br/>";
-			    }
-			    ?>
-	    		</td>
-	    	    </tr>
-	    	</table>
+			    if ($j + 1 < sizeof($contacts))
+				echo "<br/>";
+			}
+			?>
+		    </td>
+		</tr>
+	    </table>
 	    <?php
 	}
     }
