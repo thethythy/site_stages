@@ -53,6 +53,13 @@ class ThemeDeStage {
 				$themeDeStageStr['idcouleur']);
     }
 
+    public static function getThemeDeStageFromNom($nom) {
+	$themeDeStageStr = ThemeDeStage_BDD::getThemeDeStageFromNom($nom);
+	return new ThemeDeStage($themeDeStageStr['idtheme'],
+				$themeDeStageStr['theme'],
+				$themeDeStageStr['idcouleur']);
+    }
+
     public static function getListeTheme() {
 	$tabThemesStr = ThemeDeStage_BDD::getListeTheme();
 

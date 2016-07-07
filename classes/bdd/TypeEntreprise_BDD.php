@@ -26,7 +26,16 @@ class TypeEntreprise_BDD {
 	global $db;
 	global $tab22;
 
-	$sql = "SELECT * FROM $tab22 WHERE idtypeentreprise='" . $identifiant . "'";
+	$sql = "SELECT * FROM $tab22 WHERE idtypeentreprise='$identifiant'";
+	$result = $db->query($sql);
+	return mysqli_fetch_array($result);
+    }
+
+    public static function getTypeEntrepriseFromNom($nom) {
+	global $db;
+	global $tab22;
+
+	$sql = "SELECT * FROM $tab22 WHERE type LIKE '$nom'";
 	$result = $db->query($sql);
 	return mysqli_fetch_array($result);
     }
@@ -55,7 +64,7 @@ class TypeEntreprise_BDD {
 	global $db;
 	global $tab22;
 
-	$sql = "DELETE FROM $tab22 WHERE idtypeentreprise='" . $identifiant . "'";
+	$sql = "DELETE FROM $tab22 WHERE idtypeentreprise='$identifiant'";
 	$db->query($sql);
     }
 

@@ -13,7 +13,7 @@ class IHM_Generale {
 		<meta name="keywords" content="stage,informatique,université du maine"/>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="alternate" type="application/rss+xml" title="Flux RSS" href="http://info-stages.univ-lemans.fr/flux/fluxrss.xml"/>
-		<script src="<?php echo $lienRacine; ?>classes/ihm/util.js"></script>
+		<script src="<?php echo $lienRacine; ?>classes/ihm/util.min.js"></script>
 
 		<?php
 		if ($ext == "planifieur") {
@@ -44,9 +44,7 @@ class IHM_Generale {
 		}
 
 		if ($ext == "statistiques") {
-		    echo "<script src='frameworks/Chart.js'></script>";
-		    echo "<script src='frameworks/jquery.js'></script>";
-		    echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>";
+		    echo "<script src='frameworks/Chart.min.js'></script>";
 		}
 		?>
 

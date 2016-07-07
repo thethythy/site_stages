@@ -44,6 +44,13 @@ class TypeEntreprise {
 				  $typeEntrepriseBDD["idcouleur"]);
     }
 
+    public static function getTypeEntrepriseFromNom($nom) {
+	$typeEntrepriseBDD = TypeEntreprise_BDD::getTypeEntrepriseFromNom($nom);
+	return new TypeEntreprise($typeEntrepriseBDD["idtypeentreprise"],
+				  $typeEntrepriseBDD["type"],
+				  $typeEntrepriseBDD["idcouleur"]);
+    }
+
     public static function getListeTypeEntreprise() {
 	$tabTypeEntreprise = array();
 	$tabTypeEntrepriseString = TypeEntreprise_BDD::getListeTypeEntreprise();
@@ -53,7 +60,7 @@ class TypeEntreprise {
 		    new TypeEntreprise($tabTypeEntrepriseString[$i][0],
 				       $tabTypeEntrepriseString[$i][1],
 				       $tabTypeEntrepriseString[$i][2]));
-	
+
 	return $tabTypeEntreprise;
     }
 

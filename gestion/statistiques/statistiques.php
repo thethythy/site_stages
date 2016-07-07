@@ -44,7 +44,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens, "statistiques");
+IHM_Generale::header("Statistiques", "entreprises", "../../", $tabLiens, "statistiques2");
 
 $tabAU = Promotion_BDD::getAnneesUniversitaires();
 $tabListeTheme = ThemeDeStage::getListeTheme();

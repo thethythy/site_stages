@@ -15,9 +15,9 @@ for ($i = 0; $i < sizeof($tabAU); $i++) {
 	$tabEMaster[$key] = $tabEM1[$key] + $tabEM2[$key];
     }
 
-    $nbsoutenancesM1 = sommeSoutenances($conventionM1);
-    $nbsoutenancesM2 = sommeSoutenances($conventionM2);
-    $nbsoutenancesMaster = sommeSoutenances($convention);
+    //$nbsoutenancesM1 = sommeSoutenances($conventionM1);
+    //$nbsoutenancesM2 = sommeSoutenances($conventionM2);
+    //$nbsoutenancesMaster = sommeSoutenances($convention);
 
     $tabM1 = themeDeStage($conventionM1);
     $tabM2 = themeDeStage($conventionM2);
@@ -51,15 +51,15 @@ for ($i = 0; $i < sizeof($tabAU); $i++) {
     $tabAU[$i] ++;
 }
 
-function sommeSoutenances($convention) {
-    $somme = 0;
-    for ($i = 0; $i < sizeof($convention); $i++) {
-	if ($convention[$i]->getIdSoutenance() != NULL) {
-	    $somme++;
-	}
-    }
-    return $somme;
-}
+//function sommeSoutenances($convention) {
+//    $somme = 0;
+//    for ($i = 0; $i < sizeof($convention); $i++) {
+//	if ($convention[$i]->getIdSoutenance() != NULL) {
+//	    $somme++;
+//	}
+//    }
+//    return $somme;
+//}
 
 function somme($temp) {
     $somme = 0;

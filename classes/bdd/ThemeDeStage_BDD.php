@@ -31,6 +31,15 @@ class ThemeDeStage_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    public static function getThemeDeStageFromNom($nom) {
+	global $db;
+	global $tab23;
+
+	$sql = "SELECT * FROM $tab23 WHERE theme LIKE '$nom';";
+	$result = $db->query($sql);
+	return mysqli_fetch_array($result);
+    }
+
     public static function getListeTheme() {
 	global $db;
 	global $tab23;

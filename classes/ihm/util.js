@@ -124,7 +124,7 @@ function LoadData(sources, adresseData, action) {
 	this.action = action;
 	// Mise en place du comportement
 	this.setBehaviour();
-	// Requete HTTP XMLHttpRequest 
+	// Requete HTTP XMLHttpRequest
 	this.request = this.getRequest();
 }
 
@@ -150,7 +150,7 @@ LoadData.prototype = {
 			}
 		}
 	},
-	
+
 	// Recuperer la requete existante ou une nouvelle si elle vaut null
 	getRequest: function() {
 		var result = this.request;
@@ -165,14 +165,14 @@ LoadData.prototype = {
 		}
 		return result;
 	},
-	
+
 	// Chargement de la page
 	load: function() {
 		// Annuler la requete precedente qui ne sert plus a rien
 		if (this.resquest != null)
 			try {
 				this.request.abort();
-				document.getElementById("data").style.cursor = 'default';
+				document.getElementById("content-wrap").style.cursor = 'default';
 			} catch (exc) {}
 		// Construire une nouvelle requête et l'envoyer
 		this.request = this.getRequest() ;
@@ -194,22 +194,22 @@ LoadData.prototype = {
 					try {
 						if (composantJS.request.readyState == 4 && composantJS.request.status == 200) {
 							document.getElementById("data").innerHTML = composantJS.request.responseText;
-							document.getElementById("data").style.cursor = 'default';
+							document.getElementById("content-wrap").style.cursor = 'default';
 						}
 					} catch (exc) {
-						document.getElementById("data").style.cursor = 'default';
+						document.getElementById("content-wrap").style.cursor = 'default';
 						Log.error(exc);
 					}
 				}
 				// Lancer la requete
 				this.request.send(corps);
-				document.getElementById("data").style.cursor = 'progress';
+				document.getElementById("content-wrap").style.cursor = 'progress';
 			} catch (exc) {
 				Log.error(exc);
 			}
 		}
 	},
-	
+
 	// Gestion des entrées claviers
 	onkeyup: function(aEvent) {
 		// L'evenement selon W3 ou IE
@@ -223,7 +223,7 @@ LoadData.prototype = {
 				this.load(); // Chargement de la page
 		}
 	}
-	 
+
 }
 
 LoadData.prototype.constructor = LoadData;
