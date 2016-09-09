@@ -50,7 +50,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
 	    Ceci est un message automatique.<br/>
 	    Votre offre de stage a été diffusée à nos étudiants.<br/>
 	    Vous pouvez la consulter à l'adresse suivante :<br/>
-	    <a href=" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDeStage . ">" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDeStage . "</a><br/><br/>
+	    <a href=" . $baseSite . "/entreprise/visualiserOffre.php?id=" . $idOffreDeStage . ">" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDeStage . "</a><br/><br/>
 	    Cordialement,<br/><br/>
 	    Le responsable des stages<br/>
 	    Département Informatique<br/>
