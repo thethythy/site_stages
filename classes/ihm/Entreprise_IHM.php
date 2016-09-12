@@ -82,27 +82,23 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Nom de l'entreprise</td>
 				<td>
-				    <input type="text" name="nom"
-					<?php
+				    <input type="text" name="nom" value="<?php
 					if (isset($_POST['nom']))
-					    echo "value='" . $_POST['nom'] . "'";
+					    echo $_POST['nom'];
 					else
 					    if ($ent != "")
-						echo "value='" . $ent->getNom() . "'"; ?>
-				    />
+						echo $ent->getNom(); ?>"/>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Adresse</td>
 				<td>
-				    <input type="text" name="adresse"
-					<?php
+				    <input type="text" name="adresse" value="<?php
 					if (isset($_POST['adresse']))
-					    echo "value='" . $_POST['adresse'] . "'";
+					    echo $_POST['adresse'];
 					else
 					    if ($ent != "")
-						echo "value='" . $ent->getAdresse() . "'"; ?>
-				    />
+						echo $ent->getAdresse(); ?>"/>
 				</td>
 			    </tr>
 			    <tr>
@@ -156,27 +152,23 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Ville</td>
 				<td>
-				    <input type="text" name="ville"
-					<?php
+				    <input type="text" name="ville" value="<?php
 					if (isset($_POST['ville']))
-					    echo "value='" . $_POST['ville'] . "'";
+					    echo $_POST['ville'];
 					else
 					    if ($ent != "")
-						echo "value='" . $ent->getVille() . "'"; ?>
-				    />
+						echo $ent->getVille(); ?>"/>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Pays</td>
 				<td>
-				    <input type="text" name="pays"
-					<?php
+				    <input type="text" name="pays" value="<?php
 					if (isset($_POST['pays']))
-					    echo "value='" . $_POST['pays'] . "'";
+					    echo $_POST['pays'];
 					else
 					    if ($ent != "")
-						echo "value='" . $ent->getPays() . "'"; ?>
-				    />
+						echo $ent->getPays(); ?>"/>
 				</td>
 			    </tr>
 			    <tr>
