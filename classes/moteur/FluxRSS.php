@@ -46,7 +46,7 @@ class FluxRSS {
 	// Création du noeud description
 	$element_description = $file->createElement("description"); // On crée un élément description
 	$element_description = $element_channel->appendChild($element_description); // On ajoute cet élément au channel
-	$texte = utf8_encode("Ce flux RSS donne les nouvelles offres de stage pour les étudiants du Département Informatique de l'Université du Maine");
+	$texte = "Ce flux RSS donne les nouvelles offres de stage pour les étudiants du Département Informatique de l'Université du Maine";
 	$texte_description = $file->createTextNode($texte); // On crée un texte
 	$texte_description = $element_description->appendChild($texte_description); // On insère ce texte dans le noeud description
 
@@ -80,7 +80,7 @@ class FluxRSS {
 	// Création du noeud title et ajout du texte
 	$element_title = $file->createElement("title");
 	$element_title = $element_item->appendChild($element_title);
-	$texte_title = $file->createTextNode(utf8_encode($title));
+	$texte_title = $file->createTextNode($title);
 	$texte_title = $element_title->appendChild($texte_title);
 
 	// Création du noeud link et ajout du texte à l'élément
@@ -110,7 +110,7 @@ class FluxRSS {
 	// Céation du noeud description et ajout du texte à l'élément
 	$element_description = $file->createElement("description");
 	$element_descrption = $element_item->appendChild($element_description);
-	$texte_description = $file->createTextNode(utf8_encode($contents));
+	$texte_description = $file->createTextNode($contents);
 	$texte_description = $element_description->appendChild($texte_description);
     }
 
