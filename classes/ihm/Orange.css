@@ -143,7 +143,7 @@ textarea {
 
 #wrap {
     margin: 0 auto;
-    width: 975px;
+    width: 1024px;
     text-align: left;
     background: #FFF;
     height: auto;
@@ -548,14 +548,27 @@ section {
 }
 
 #section_gauche {
-    margin-left: 19.5%;
+    margin-left: 0%;
+}
+
+#section_gauche h2 {
+    margin: 0;
 }
 
 #section_centre {
-    margin-left: 9.5%;
+    margin-left: 0%;
 }
+
+#section_centre h2 {
+    margin: 0;
+}
+
 #section_droite {
-    margin-left: 9.5%;
+    margin-left: 0%;
+}
+
+#section_droite h2 {
+    margin: 0;
 }
 
 section table td {

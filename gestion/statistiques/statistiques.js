@@ -5,19 +5,24 @@ Chart.defaults.global.legend.display = false;
 // -----------------------------------------------------------------------------
 // Création des éléments de la vue
 
-var afficherNomPromotions = function(data) {
+var afficherNomPromotions = function(data, padding) {
     var promotions = "";
 
     for (var i = 1; i <= data['nbSerie']; i++) {
-	var nom = data["s"+i]['filiere'] + " "+ data["s"+i]['parcours'];
+	var annee_deb = data["s"+i]["annee"];
+	var annee_fin = annee_deb + 1;
+	var periode = " " + annee_deb + "-" + annee_fin;
+	if (annee_deb === '')
+	    periode = '';
+	var nom = data["s"+i]['filiere'] + " "+ data["s"+i]['parcours'] + periode;
 
 	if (i === 1) {
 	    promotions += "<section id='section_gauche'><h2 style='color:LightSkyBlue'>" + nom + "</h2></section>";
 	} else {
 	    if (i === data['nbSerie']) {
-		promotions += "<section style='padding-left:7%' id='section_droite'><h2 style='color:LightSkyBlue'>" + nom + "</h2></section>";
+		promotions += "<section id='section_droite' style='margin-left:" + padding + "px'><h2 style='color:LightSkyBlue'>" + nom + "</h2></section>";
 	    } else {
-		promotions += "<section style='padding-left:7%' id='section_centre'><h2 style='color:LightSkyBlue'>" + nom + "</h2></section>";
+		promotions += "<section id='section_centre' style='margin-left:" + padding + "px'><h2 style='color:LightSkyBlue'>" + nom + "</h2></section>";
 	    }
 	}
     }
@@ -76,7 +81,7 @@ var donneData = function(prefixe, data) {
     return {labels: labels, datasets: [ { data: dataSet, backgroundColor: backgroundColor } ]};
 };
 
-var afficherLegendeCanvas = function(nom, prefixe, data, taille) {
+var afficherLegendeCanvas = function(nom, prefixe, data, taille, padding) {
     var element = "";
 
     element += "<p style='font-size:16px;font-weight: bold;color:grey'>" + nom + "</p>";
@@ -86,15 +91,16 @@ var afficherLegendeCanvas = function(nom, prefixe, data, taille) {
 	    element += "<section id='section_gauche'>";
 	} else {
 	    if (i === data['nbSerie']) {
-		element += "<section id='section_droite'>";
+		element += "<section id='section_droite' style='margin-left:" + padding + "px'>";
 	    } else {
-		element += "<section id='section_centre'>";
+		element += "<section id='section_centre' style='margin-left:" + padding + "px'>";
 	    }
 	}
 
 	element += afficheTable(prefixe, data["s"+i][nom]);
-	element += "</br></br>";
+	element += "</br>";
 	element += "<canvas id=" + donneNomCanvas(prefixe, data, i) + " width=" + taille + " height="+ taille +"></canvas>";
+	element += "</br>";
 	element += "</section>";
     }
 
@@ -106,26 +112,31 @@ var afficherLegendeCanvas = function(nom, prefixe, data, taille) {
 
 var createView = function(data) {
     var element = document.getElementById("data");
-    var taille = 192;
+    var taille = 150;
     element.innerHTML = "";
 
-    var annee = data['annee'];
-    element.innerHTML += "<br/><p style='font-size: 24px;font-weight:bold;color:#910'>Ann&eacute;e " + annee + "-" + (annee + 1) + "</p>";
-    element.innerHTML += afficherNomPromotions(data);
+    var padding = 0;
+    if (data['nbSerie'] > 1)
+	padding = (1024 - taille * data['nbSerie']) / (data['nbSerie'] - 1);
+
+    var annee_deb = data['annee_deb'];
+    var annee_fin = data['annee_fin'] + 1;
+    element.innerHTML += "<br/><p style='font-size: 24px;font-weight:bold;color:#910'>P&eacute;riode " + annee_deb + "-" + annee_fin + "</p>";
+    element.innerHTML += afficherNomPromotions(data, padding);
 
     // Canvas partie 'Lieu du stage'
     element.innerHTML += "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
-    element.innerHTML += afficherLegendeCanvas('Lieu du stage', "l", data, taille);
+    element.innerHTML += afficherLegendeCanvas('Lieu du stage', "l", data, taille, padding);
     element.innerHTML += "</div>";
 
     // Canvas partie 'Thème de stage'
     element.innerHTML += "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
-    element.innerHTML += afficherLegendeCanvas('Thème du stage', "t", data, taille);
+    element.innerHTML += afficherLegendeCanvas('Thème du stage', "t", data, taille, padding);
     element.innerHTML += "</div>";
 
     // Canvas partie 'Type d'entreprise'
     element.innerHTML += "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
-    element.innerHTML += afficherLegendeCanvas("Type d'entreprise", "e", data, taille);
+    element.innerHTML += afficherLegendeCanvas("Type d'entreprise", "e", data, taille, padding);
     element.innerHTML += "</div>";
 
     // Créer les graphiques
@@ -148,9 +159,9 @@ var createView = function(data) {
 // -----------------------------------------------------------------------------
 // Requête Ajax
 
-var loadData = function(annee, filiere, parcours) {
+var loadData = function(annee_deb, annee_fin, filiere, parcours) {
     var data_request = new XMLHttpRequest();
-    data_request.open('GET', 'statistiquesStagesData.php?annee=' + annee + '&filiere=' + filiere + '&parcours=' + parcours, true);
+    data_request.open('GET', 'statistiquesStagesData.php?annee_deb=' + annee_deb + '&annee_fin=' + annee_fin +'&filiere=' + filiere + '&parcours=' + parcours, true);
     data_request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     data_request.onreadystatechange = function () {
 	if (data_request.readyState === 4 && data_request.status === 200) {
@@ -176,11 +187,21 @@ var loadData = function(annee, filiere, parcours) {
 // Surcharge de la fonction définie dans la classe LoadData
 
 LoadData.prototype.load = function() {
-    var annee = document.getElementById('annee').value;
+    var annee_deb = document.getElementById('annee_deb').value;
+    var annee_fin = document.getElementById('annee_fin').value;
     var filiere = document.getElementById('filiere').value;
     var parcours = document.getElementById('parcours').value;
-    if (annee !== '' && filiere !== '' && parcours !== '') {
-	loadData(annee, filiere, parcours);
+
+    if (annee_deb !== '' && annee_fin !== '') {
+	if (annee_deb > annee_fin) {
+	    var temp = annee_deb;
+	    annee_deb = annee_fin;
+	    annee_fin = temp;
+	}
+
+	if (filiere !== '' && parcours !== '') {
+	    loadData(annee_deb, annee_fin, filiere, parcours);
+	}
     }
 };
 

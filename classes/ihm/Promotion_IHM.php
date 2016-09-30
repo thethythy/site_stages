@@ -31,9 +31,99 @@ class Promotion_IHM {
 
 	    <script type="text/javascript">
 		var table = new Array("annee");
-
 		new LoadData(table, "", "onchange");
 	    </script>
+	<?php
+    }
+
+    public static function afficherFormulaireSelectionInterval() {
+	$tabAU = Promotion_BDD::getAnneesUniversitaires();
+	$tabF = Filiere::listerFilieres();
+	$tabP = Parcours::listerParcours();
+	?>
+	<form method=post action="javascript:">
+	    <table width="100%">
+		<tr>
+		    <td>
+			<table width="100%">
+			    <tr>
+				<td align="center">
+				    Année de départ :
+				    <select id="annee_deb" name="annee_deb">
+					<?php
+					    echo "<option value=''>----------</option>";
+					    for ($i=0; $i<sizeof($tabAU); $i++) {
+						if ((isset($_POST['annee_deb'])) && ($_POST['annee_deb'] == $tabAU[$i]))
+						    echo "<option selected value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+						else
+						    echo "<option value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td align="center">
+				    Année de fin :
+				    <select id="annee_fin" name="annee_fin">
+					<?php
+					    echo "<option value=''>----------</option>";
+					    for ($i=0; $i<sizeof($tabAU); $i++) {
+						if ((isset($_POST['annee_fin'])) && ($_POST['annee_fin'] == $tabAU[$i]))
+						    echo "<option selected value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+						else
+						    echo "<option value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		    <td>
+			<table width="100%">
+			    <tr>
+				<td align="center">
+				    Sélectionnez le diplôme :
+				    <select id="filiere" name="filiere">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    for ($i=0; $i<sizeof($tabF); $i++) {
+						if ((isset($_POST['filiere'])) && ($_POST['filiere'] == $tabF[$i]->getIdentifiantBDD()))
+						    echo "<option selected value='".$tabF[$i]->getIdentifiantBDD()."'>".$tabF[$i]->getNom()."</option>";
+						else
+						    echo "<option value='".$tabF[$i]->getIdentifiantBDD()."'>".$tabF[$i]->getNom()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td align="center">
+				    Sélectionnez la spécialité :
+				    <select id="parcours" name="parcours">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    for ($i=0; $i<sizeof($tabP); $i++) {
+						if ((isset($_POST['parcours'])) && ($_POST['parcours'] == $tabP[$i]->getIdentifiantBDD()))
+						    echo "<option selected value='".$tabP[$i]->getIdentifiantBDD()."'>".$tabP[$i]->getNom()."</option>";
+						else
+						    echo "<option value='".$tabP[$i]->getIdentifiantBDD()."'>".$tabP[$i]->getNom()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		</tr>
+	    </table>
+	</form>
+
+	<script type="text/javascript">
+	    var table = new Array("annee_deb", "annee_fin", "filiere", "parcours");
+	    new LoadData(table, "", "onchange");
+	</script>
 	<?php
     }
 

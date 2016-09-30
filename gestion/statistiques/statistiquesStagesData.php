@@ -6,6 +6,8 @@ include_once($chemin.'bdd/connec.inc');
 
 include_once($chemin.'moteur/Filtre.php');
 include_once($chemin.'moteur/FiltreNumeric.php');
+include_once($chemin.'moteur/FiltreInferieur.php');
+include_once($chemin.'moteur/FiltreSuperieur.php');
 
 include_once $chemin.'bdd/Couleur_BDD.php';
 include_once $chemin.'moteur/Couleur.php';
@@ -43,8 +45,11 @@ header("Content-type: application/json; charset=utf-8");
 
 $filtres = array();
 
-if (isset($_GET['annee']) && $_GET['annee'] != '*')
-    array_push($filtres, new FiltreNumeric('anneeuniversitaire', $_GET['annee']));
+if (isset($_GET['annee_deb']))
+    array_push($filtres, new FiltreSuperieur('anneeuniversitaire', $_GET['annee_deb']));
+
+if (isset($_GET['annee_fin']))
+    array_push($filtres, new FiltreInferieur('anneeuniversitaire', $_GET['annee_fin']));
 
 if (isset($_GET['parcours']) && $_GET['parcours'] != '*')
     array_push($filtres, new FiltreNumeric('idparcours', $_GET['parcours']));
@@ -63,7 +68,7 @@ if (sizeof($filtres) > 0) {
 // -----------------------------------------------------------------------------
 // Récupération des promotions
 
-if (isset($_GET['annee'])) {
+if (isset($_GET['annee_deb']) && isset($_GET['annee_fin'])) {
     $tabOPromotions = Promotion::listerPromotions($filtre);
 } else {
     $tabOPromotions = array();
@@ -161,8 +166,9 @@ function donneFiltre($annee, $oFiliere, $oParcours) {
     return $filtre;
 }
 
-function donneUneSerie($tabOConventions, $nomFiliere, $nomParcours) {
+function donneUneSerie($tabOConventions, $annee, $nomFiliere, $nomParcours) {
     $serie = array();
+    $serie['annee'] = $annee;
     $serie['filiere'] = $nomFiliere;
     $serie['parcours'] = $nomParcours;
 
@@ -256,7 +262,7 @@ if ($nbSerie > 0) {
     }
 
     // Spécifier l'année sélectionnée
-    $data = array( "annee" => intval($_GET['annee']) );
+    $data = array( "annee_deb" => intval($_GET['annee_deb']), "annee_fin" => intval($_GET['annee_fin']));
     $data['nbSerie'] = $nbSerie > 1 ? $nbSerie + 1 : $nbSerie ;
 
     // Numéro et nom de la série de données
@@ -267,7 +273,8 @@ if ($nbSerie > 0) {
     foreach ($tabOPromotions as $oPromotion) {
 	$oFiliere = $oPromotion->getFiliere();
 	$oParcours = $oPromotion->getParcours();
-	$filtre = donneFiltre($_GET['annee'], $oFiliere, $oParcours);
+	$pAnnee = $oPromotion->getAnneeUniversitaire();
+	$filtre = donneFiltre($pAnnee, $oFiliere, $oParcours);
 	$tabOConventions = Convention::getListeConvention($filtre);
 
 	// Accumulation des conventions au cas ou il y aura une série 'Total'
@@ -276,7 +283,7 @@ if ($nbSerie > 0) {
 	}
 
 	// Nouvelle série de données (une promotion)
-	$data[$nom_serie] = donneUneSerie($tabOConventions, $oFiliere->getNom(), $oParcours->getNom());
+	$data[$nom_serie] = donneUneSerie($tabOConventions, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
 
 	// Préparation pour la série suivante
 	$num_serie += 1;
@@ -285,7 +292,7 @@ if ($nbSerie > 0) {
 
     // Ajout de la série 'Total' le cas échéant
     if ($nbSerie > 1) {
-	$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "Total", "");
+	$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "", "Total", "");
     }
 
     // Encodage en JSON puis envoie du flux

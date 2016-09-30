@@ -22,7 +22,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Statistiques des", "stages", "../../", $tabLiens, "statistiques");
 
 // Affichage du formulaire de recherche
-Promotion_IHM::afficherFormulaireRecherche("", TRUE, FALSE);
+Promotion_IHM::afficherFormulaireSelectionInterval();
 
 // Chargement des traitements (affichage et contrôle)
 echo "<div id='data'></div>\n";
