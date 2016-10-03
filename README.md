@@ -10,3 +10,5 @@ Il repose essentiellement sur les éléments suivants :
   - Chart.js (https://github.com/chartjs/Chart.js), MIT License
   - PHPExcel (https://github.com/PHPOffice/PHPExcel), GNU LGPL
   - Filemanager (https://github.com/simogeo/Filemanager), MIT License
+
+Ce logiciel est sous licence CeCILL version 2.1.
