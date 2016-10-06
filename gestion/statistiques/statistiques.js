@@ -5,8 +5,25 @@ Chart.defaults.global.legend.display = false;
 // -----------------------------------------------------------------------------
 // Création des éléments de la vue
 
+var donneNomsSeries = function(data) {
+    var nom_series = "";
+
+    if (data['nbSerie'] === 1) {
+	nom_series = '_' + data['s1']['filiere'] + '-' + data['s1']['parcours'];
+    }
+    else
+	for (var i = 1; i < data['nbSerie']; i++) {
+	    var filiere_parcours = data['s'+i]['filiere'] + '-' + data['s'+i]['parcours'];
+	    if (-1 === nom_series.indexOf(filiere_parcours)) {
+		nom_series += '_' + filiere_parcours;
+	    }
+	}
+
+    return nom_series;
+};
+
 var afficherNomPromotions = function(data, padding) {
-    var promotions = "";
+    var promotions = "<br/>";
 
     for (var i = 1; i <= data['nbSerie']; i++) {
 	var annee_deb = data["s"+i]["annee"];
@@ -115,13 +132,20 @@ var createView = function(data) {
     var taille = 150;
     element.innerHTML = "";
 
+    // Ecart entre séries
     var padding = 0;
     if (data['nbSerie'] > 1)
 	padding = (1024 - taille * data['nbSerie']) / (data['nbSerie'] - 1);
 
+    // Lien vers le fichier
     var annee_deb = data['annee_deb'];
     var annee_fin = data['annee_fin'] + 1;
-    element.innerHTML += "<br/><p style='font-size: 24px;font-weight:bold;color:#910'>P&eacute;riode " + annee_deb + "-" + annee_fin + "</p>";
+    var periode = annee_deb + "-" + annee_fin;
+    var nom_fichier = "statistiques_" + periode + donneNomsSeries(data) + ".xlsx";
+    element.innerHTML += "<a href=http://info-stages.univ-lemans.fr/documents/statistiques/"+nom_fichier+">Lien sur le fichier Excel</a><br/>";
+
+    // Afficher les titres
+    element.innerHTML += "<br/><p style='font-size: 24px;font-weight:bold;color:#910'>P&eacute;riode " + periode + "</p>";
     element.innerHTML += afficherNomPromotions(data, padding);
 
     // Canvas partie 'Lieu du stage'

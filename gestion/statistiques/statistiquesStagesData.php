@@ -36,6 +36,8 @@ include_once($chemin . "moteur/ThemeDeStage.php");
 include_once($chemin . "bdd/TypeEntreprise_BDD.php");
 include_once($chemin . "moteur/TypeEntreprise.php");
 
+include_once("statistiquesStagesExcel.php");
+
 // -----------------------------------------------------------------------------
 // En-tête du flux JSON
 header("Content-type: application/json; charset=utf-8");
@@ -294,6 +296,10 @@ if ($nbSerie > 0) {
     if ($nbSerie > 1) {
 	$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "", "Total", "");
     }
+
+    // Génération du fichier Excel
+    $generator = new StatistiquesGenerateurExcel("../../documents/statistiques");
+    $generator->genereFichierExcel($data);
 
     // Encodage en JSON puis envoie du flux
     print(json_encode($data));

@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Acces restreint"
+AuthUserFile /iup/donnees/serveur_http_v2/htdocs/stages/gestion/.users.dat
+Require valid-user
+
