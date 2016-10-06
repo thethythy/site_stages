@@ -64,6 +64,7 @@ class Menu {
 		    <br></br>
 		    <li>Site externes d'offres:</li>
 		    <ul class="sidemenu2">
+			<li><a href="http://univ-lemans.jobteaser.com/" title="Career Center">Career Center</a></li>
 			<li><a href="http://www.ca-recrute-en.sarthe.com/index.asp" title="ca-recrute-en-sarthe.com">ça recrute en Sarthe</a></li>
 			<li><a href="http://offres.monster.fr" title="monster.fr">monster.fr</a></li>
 			<li><a href="http://www.lerucher.com/" title="Le Rucher">Le Rucher</a></li>
