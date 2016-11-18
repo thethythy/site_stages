@@ -197,6 +197,75 @@ class Stage_IHM {
 	<?php
     }
 
+    public static function afficherFicheStage($idEtu, $idPromo, $chemin) {
+	$etudiant = Etudiant::getEtudiant($idEtu);
+	$promotion = Promotion::getPromotion($idPromo);
+	$filiere = $promotion->getFiliere();
+	$parcours = $promotion->getParcours();
+	$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
+	$contact = $convention->getContact();
+	$entreprise = $contact->getEntreprise();
+	$parrain = $convention->getParrain();
+	$annee = $promotion->getAnneeUniversitaire();
+	?>
+
+	<table>
+	    <tr>
+		<td style="border: 1px solid; padding: 15px;">
+		    <h3>L'étudiant(e)</h3>
+		    <?php echo $etudiant->getPrenom()." ".$etudiant->getNom(); ?><br/>
+		    <?php echo "Email : ".$etudiant->getEmailInstitutionel(); ?><br/>
+		    Promotion : <?php echo $filiere->getNom()." ".$parcours->getNom(); ?><br/>
+		    Année : <?php echo $annee."-".($annee + 1); ?>
+		</td>
+		<td style="border: 1px solid; padding: 15px;">
+		    <h3>Le référent universitaire</h3>
+		    <?php echo $parrain->getPreNom()." ".$parrain->getNom(); ?><br/>
+		    <?php echo "Email : ".$parrain->getEmail(); ?>
+		</td>
+	    </tr>
+	    <tr>
+		<td style="border: 1px solid; padding: 15px;">
+		    <h3>L'entreprise</h3>
+		    <?php echo $entreprise->getNom(); ?> <br/>
+		    <?php echo $entreprise->getAdresse(); ?> <br/>
+		    <?php echo $entreprise->getCodePostal(); ?>&nbsp;
+		    <?php echo $entreprise->getVille(); ?> <br/>
+		    <?php echo $entreprise->getPays(); ?>
+		</td>
+		<td style="border: 1px solid; padding: 15px;">
+		    <h3>Le contact dans l'entreprise</h3>
+		    <?php
+			echo $contact->getPrenom()." ".$contact->getNom()."<br/>";
+
+			if ($contact->getTelephone() != "" && strlen($contact->getTelephone()) > 1)
+			    echo "Tél. : ".$contact->getTelephone()."<br/>";
+
+			if ($contact->getTelecopie() != "")
+			    echo "Fax : ".$contact->getTelecopie()."<br/>";
+
+			if ($contact->getEmail() != "")
+			    echo "Email : ".$contact->getEmail();
+		    ?>
+		</td>
+	    </tr>
+	    <tr>
+		<td colspan="2" style="column-span: all; border: 1px solid; padding: 15px;">
+		    <h3>Le stage</h3>
+		    <?php
+			if ($convention->aSonResume == "1"){
+			    echo "<a href='".$chemin.$convention->getSujetDeStage()."'>Résumé du stage</a>";
+			} else {
+			    $chaine = $convention->getSujetDeStage();
+			echo $chaine;
+			}
+		    ?>
+		</td>
+	    </tr>
+	</table>
+	<?php
+    }
+
 }
 
 ?>
