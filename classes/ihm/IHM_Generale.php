@@ -92,8 +92,9 @@ class IHM_Generale {
     public static function footerAccueil() {
 	?>
 		<div id="footerAccueil">
-		    <a href="gestion/" title="Partie réservée">Gestion des stages</a>
-		    <p>Publié : <time datetime="2015-09-28">28/09/2015</time>
+		    <a href="gestion/" title="Partie réservée">Connexion | </a>
+		    <a href="mentions.php" title="Partie réservée">Mentions légales</a>
+		    <p>
 			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
 			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage sur le flux RSS'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
@@ -132,9 +133,10 @@ class IHM_Generale {
 			<a href='<?php echo $lienRacine; ?>parrainage/' title="Partie pour les enseignants">Enseignant référent | </a>
 			<a href='<?php echo $lienRacine; ?>entreprise/' title="Partie pour les entreprises">Déposer un sujet | </a>
 			<a href='<?php echo $lienRacine; ?>soutenances/' title="Accès aux plannings des soutenances">Soutenances | </a>
-			<a href='<?php echo $lienRacine; ?>gestion/' title="Partie réservée au responsable">Gestion des stages</a>
+			<a href='<?php echo $lienRacine; ?>gestion/' title="Partie réservée au responsable">Connexion | </a>
+			<a href='<?php echo $lienRacine; ?>mentions.php' title="Mentiosn légales">Mentions légales</a>
 		    </nav>
-		    <p>Publié : <time datetime="2015-09-28">28/09/2015</time>
+		    <p>
 			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !"><img src='/images/mail.png' align='center' alt='Email' /></a>
 			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
