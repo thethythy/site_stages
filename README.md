@@ -1,9 +1,9 @@
 # site_stages
-Ce projet a pour but de maintenir et développer le site des stages du Département Informatique de la Faculté des Sciences de l'Université du Maine.
+Ce projet a pour but de maintenir et développer le site des stages du Département Informatique de la Faculté des Sciences de l'Université du Maine (http://info-stages.univ-lemans.fr).
 
 Il repose essentiellement sur les éléments suivants :
-- Back office en PHP, architecture MVC
-- Front office HTML5, Javascript, Ajax
+- Partie serveur en PHP, architecture MVC
+- Partie client en HTML5, Javascript, Ajax
 - Utilisation de frameworks open source :
   - dhtmlxTree (http://dhtmlx.com), GNU GPL v2
   - dhtmlxScheduler (http://dhtmlx.com), GNU GPL v2
