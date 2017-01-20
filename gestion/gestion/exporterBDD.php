@@ -66,8 +66,8 @@ function export() {
 	echo "Impossible d'ouvrir le fichier <$zipName>";
     } else {
 	$backup = fopen($backupName, "wb");
-	fwrite($backup, utf8_encode($creations));
-	fwrite($backup, utf8_encode($insertions));
+	fwrite($backup, $creations);
+	fwrite($backup, $insertions);
 
 	$zip->addFile($backupName);
 	fclose($backup);
