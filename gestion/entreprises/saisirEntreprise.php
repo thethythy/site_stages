@@ -46,7 +46,7 @@ if (isset($_POST['add'])) {
 	    	</td>
 	    	<td width="50%" align="center">
 	    	    <form method=post action="./saisirContact.php">
-	    		<input type="hidden" value="<?php echo $idEnt; ?>" name="id"/>
+	    		<input type="hidden" value="<?php echo $idEnt; ?>" name="idEntreprise"/>
 	    		<input type="submit" value="Ajouter un contact"/>
 	    	    </form>
 	    	</td>
