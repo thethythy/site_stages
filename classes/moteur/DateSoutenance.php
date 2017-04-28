@@ -7,16 +7,18 @@ class DateSoutenance {
     var $jour;
     var $mois;
     var $annee;
+    var $convocation;
 
     // Constructeur de classe
-    public function DateSoutenance($identifiantBDD, $jour, $mois, $annee) {
+    public function DateSoutenance($identifiantBDD, $jour, $mois, $annee, $convocation) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->jour = $jour;
 	$this->mois = $mois;
 	$this->annee = $annee;
+	$this->convocation = $convocation;
     }
 
-    // Méthodes diverses
+    // Accesseurs
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
@@ -50,6 +52,14 @@ class DateSoutenance {
 	return $this->annee . '-' . $this->mois . '-' . $this->jour;
     }
 
+    public function getConvocation() {
+	return $this->convocation;
+    }
+
+    public function setConvocation($convocation) {
+	$this->convocation = $convocation;
+    }
+
     /** Méthodes statiques **/
 
     public static function getDateSoutenance($idDateSoutenance) {
@@ -57,15 +67,17 @@ class DateSoutenance {
 	return new DateSoutenance($dateSoutenanceBDD["iddatesoutenance"],
 				  $dateSoutenanceBDD["jour"],
 				  $dateSoutenanceBDD["mois"],
-				  $dateSoutenanceBDD["annee"]);
+				  $dateSoutenanceBDD["annee"],
+				  $dateSoutenanceBDD["convocation"]);
     }
 
     public static function saisirDonneesDateSoutenance($tab_donnees) {
 	$dateSoutenance = new DateSoutenance('', $tab_donnees[0],
 						 $tab_donnees[1],
-						 $tab_donnees[2]);
+						 $tab_donnees[2],
+						 $tab_donnees[3]);
 	$id = DateSoutenance_BDD::sauvegarder($dateSoutenance);
-	DateSoutenance_BDD::sauvegarderRelationPromo($id, $tab_donnees[3]);
+	DateSoutenance_BDD::sauvegarderRelationPromo($id, $tab_donnees[4]);
     }
 
     public static function listerDateSoutenance($filtres = '') {
@@ -77,7 +89,8 @@ class DateSoutenance {
 		    new DateSoutenance($tabDateSoutenanceString[$i][0],
 				       $tabDateSoutenanceString[$i][1],
 				       $tabDateSoutenanceString[$i][2],
-				       $tabDateSoutenanceString[$i][3]));
+				       $tabDateSoutenanceString[$i][3],
+				       $tabDateSoutenanceString[$i][4]));
 
 	return $tabDateSoutenance;
     }

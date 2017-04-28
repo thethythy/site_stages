@@ -20,7 +20,7 @@ class DateSoutenance_IHM {
 		    <td>&nbsp;</td>
 		</tr>
 		<tr>
-		    <th width="200">Sélectionner les<br />promotions associées :</th>
+		    <th width="200">Promotions associées :</th>
 		    <td>
 			<?php
 			// Recuperation de l'annee promotion (la rentrée)
@@ -30,7 +30,7 @@ class DateSoutenance_IHM {
 			    $annee = date('Y') - 1;
 			$tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $annee));
 			foreach ($tabPromo as $promo)
-			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '">' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br />';
+			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '"> ' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br />';
 			?>
 		    </td>
 		</tr>
@@ -72,7 +72,7 @@ class DateSoutenance_IHM {
 		    <td>&nbsp;</td>
 		</tr>
 		<tr>
-		    <th width="200">Sélectionner les<br/>promotions associées :</th>
+		    <th width="200">Promotions associées :</th>
 		    <td>
 			<?php
 			foreach ($tabPromo as $promo) {
@@ -80,8 +80,23 @@ class DateSoutenance_IHM {
 			    foreach ($tabPromoDate as $promo2)
 				if ($promo2 == $promo->getIdentifiantBDD())
 				    $check = "checked";
-			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '>' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
+			    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '> ' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
 			}
+			?>
+		    </td>
+		</tr>
+		<tr>
+		    <th></th>
+		    <td>&nbsp;</td>
+		</tr>
+		<tr>
+		    <th>Convocation faite ou non :</th>
+		    <td>
+			<?php
+			if ($date->getConvocation() == 0)
+			    echo '<input type="checkbox" name="convocation" value="0">';
+			else
+			    echo '<input type="checkbox" name="convocation" value="1" checked>';
 			?>
 		    </td>
 		</tr>
@@ -127,8 +142,16 @@ class DateSoutenance_IHM {
 					foreach ($tabPromoDate as $promo2)
 					    if ($promo2 == $promo->getIdentifiantBDD())
 						$check = "checked";
-				    echo '<input type="checkbox" name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '>' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
+				    echo '<input type="checkbox" disabled name="promo[]" value="' . $promo->getIdentifiantBDD() . '" ' . $check . '> ' . $promo->getFiliere()->getNom() . ' ' . $promo->getParcours()->getNom() . '<br/>';
 				    }
+				    ?>
+				</td>
+				<td>
+				    <?php
+				    if ($oDate->getConvocation() == 0)
+					echo '<input type="checkbox" disabled name="convocation" value="0"> convocation';
+				    else
+					echo '<input type="checkbox" disabled name="convocation" value="1" checked> convocation';
 				    ?>
 				</td>
 			    </tr>

@@ -33,7 +33,7 @@ class Soutenance {
 
     public function getDateSoutenance() {
 	if ($this->identifiantDateSoutenance == 0)
-	    return new DateSoutenance(0, 0, 0, 0);
+	    return new DateSoutenance(0, 0, 0, 0, 0);
 	else
 	    return DateSoutenance::getDateSoutenance($this->identifiantDateSoutenance);
     }

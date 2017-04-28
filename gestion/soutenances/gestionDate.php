@@ -44,6 +44,9 @@ function modifier() {
 	$oDate->setMois($date[1]);
 	$oDate->setAnnee($date[0]);
 
+	$convocation = isset($_POST['convocation']) ? 1 : 0;
+	$oDate->setConvocation($convocation);
+
 	DateSoutenance_BDD::sauvegarder($oDate);
 	DateSoutenance_BDD::sauvegarderRelationPromo($_POST['id'], $_POST['promo']);
 
@@ -65,6 +68,10 @@ function save() {
 	array_push($tabDonnees, $date[2]);
 	array_push($tabDonnees, $date[1]);
 	array_push($tabDonnees, $date[0]);
+
+	$convocation = isset($_POST['convocation']) ? 1 : 0;
+	array_push($tabDonnees, $convocation);
+
 	array_push($tabDonnees, $_POST['promo']);
 
 	DateSoutenance::saisirDonneesDateSoutenance($tabDonnees);

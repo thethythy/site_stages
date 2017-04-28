@@ -9,9 +9,9 @@ class DateSoutenance_BDD {
 	global $tab5;
 
 	if ($dateSoutenance->getIdentifiantBDD() == "") {
-	    $sql = "INSERT INTO $tab5 VALUES ('" . $dateSoutenance->getIdentifiantBDD() . "', '" . $dateSoutenance->getJour() . "','" . $dateSoutenance->getMois() . "','" . $dateSoutenance->getAnnee() . "')";
+	    $sql = "INSERT INTO $tab5 VALUES ('', '" . $dateSoutenance->getJour() . "','" . $dateSoutenance->getMois() . "','" . $dateSoutenance->getAnnee() . "', '". $dateSoutenance->getConvocation() ."')";
 	} else {
-	    $sql = "UPDATE $tab5 SET jour='" . $dateSoutenance->getJour() . "', mois='" . $dateSoutenance->getMois() . "', annee='" . $dateSoutenance->getAnnee() . "'
+	    $sql = "UPDATE $tab5 SET jour='" . $dateSoutenance->getJour() . "', mois='" . $dateSoutenance->getMois() . "', annee='" . $dateSoutenance->getAnnee() . "', convocation='". $dateSoutenance->getConvocation() ."'
 		    WHERE iddatesoutenance=" . $dateSoutenance->getIdentifiantBDD();
 	}
 	$db->query($sql);
@@ -57,6 +57,7 @@ class DateSoutenance_BDD {
 	    array_push($tab, $dateSoutenance["jour"]);
 	    array_push($tab, $dateSoutenance["mois"]);
 	    array_push($tab, $dateSoutenance["annee"]);
+	    array_push($tab, $dateSoutenance["convocation"]);
 	    array_push($tabDateSoutenance, $tab);
 	}
 
