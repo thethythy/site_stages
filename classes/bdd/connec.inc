@@ -54,6 +54,7 @@ $tab20 = 'couleur';
 $tab21 = 'taches';
 $tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
+$tab24 = 'convocation';
 
 function deconnexion() {
     global $db;

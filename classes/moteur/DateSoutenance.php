@@ -3,13 +3,21 @@
 class DateSoutenance {
 
     // Déclaration des attributs de la classe
-    var $identifiantBDD;
-    var $jour;
-    var $mois;
-    var $annee;
-    var $convocation;
 
-    // Constructeur de classe
+    var $identifiantBDD; // Identifiant unique en base
+    var $jour; // Le jour de la soutenance
+    var $mois; // Le mois de la soutenance
+    var $annee; // L'année de la soutenance
+    var $convocation; // Flag de l'envoi des convocations
+
+    /**
+     * Création d'un objet DateSoutenance
+     * @param integer $identifiantBDD
+     * @param integer $jour
+     * @param integer $mois
+     * @param integer $annee
+     * @param integer $convocation
+     */
     public function DateSoutenance($identifiantBDD, $jour, $mois, $annee, $convocation) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->jour = $jour;
@@ -62,6 +70,11 @@ class DateSoutenance {
 
     /** Méthodes statiques **/
 
+    /**
+     * Rechercher un objet DateSoutenance à partir de son identifiant
+     * @param type $idDateSoutenance
+     * @return objet DateSoutenance
+     */
     public static function getDateSoutenance($idDateSoutenance) {
 	$dateSoutenanceBDD = DateSoutenance_BDD::getDateSoutenance($idDateSoutenance);
 	return new DateSoutenance($dateSoutenanceBDD["iddatesoutenance"],
@@ -71,6 +84,11 @@ class DateSoutenance {
 				  $dateSoutenanceBDD["convocation"]);
     }
 
+    /**
+     * Enregistrer un nouvel objet en base.
+     * Mettre à jour la relation avec les promotions.
+     * @param tableau de données $tab_donnees
+     */
     public static function saisirDonneesDateSoutenance($tab_donnees) {
 	$dateSoutenance = new DateSoutenance('', $tab_donnees[0],
 						 $tab_donnees[1],
@@ -80,9 +98,15 @@ class DateSoutenance {
 	DateSoutenance_BDD::sauvegarderRelationPromo($id, $tab_donnees[4]);
     }
 
-    public static function listerDateSoutenance($filtres = '') {
+    /**
+     * Rechercher la liste des objets DateSoutenance
+     * @param string $filtres
+     * @param string $ordre
+     * @return tableau d'objets
+     */
+    public static function listerDateSoutenance($filtres = '', $ordre = 'ASC') {
 	$tabDateSoutenance = array();
-	$tabDateSoutenanceString = DateSoutenance_BDD::listerDateSoutenance($filtres);
+	$tabDateSoutenanceString = DateSoutenance_BDD::listerDateSoutenance($filtres, $ordre);
 
 	for ($i = 0; $i < sizeof($tabDateSoutenanceString); $i++)
 	    array_push($tabDateSoutenance,
@@ -95,16 +119,31 @@ class DateSoutenance {
 	return $tabDateSoutenance;
     }
 
+    /**
+     * Rechercher les promotions associées à une date de soutenance
+     * @param integer $idDateSoutenance
+     * @return tableau des identifiants des promotions associées
+     */
     public static function listerRelationPromoDate($idDateSoutenance) {
 	$tabPromos = DateSoutenance_BDD::listerRelationPromoDate($idDateSoutenance);
 	return $tabPromos;
     }
 
+    /**
+     * Supprimer un enregistrement en base à partir de son identifiant.
+     * Supprimer aussi les relations avec les promotions associées
+     * @param integer $identifiantDateSoutenance
+     */
     public static function deleteDateSoutenance($identifiantDateSoutenance) {
 	DateSoutenance_BDD::delete($identifiantDateSoutenance);
 	DateSoutenance_BDD::deleteDatePromo($identifiantDateSoutenance);
     }
 
+    /**
+     * Supprimer une relation avec une promotion associée à partir de
+     * l'identifiant de la date de soutenance
+     * @param integer $identifiantDateSoutenance
+     */
     public static function deleteDatePromo($identifiantDateSoutenance) {
 	DateSoutenance_BDD::delete($identifiantDateSoutenance);
     }

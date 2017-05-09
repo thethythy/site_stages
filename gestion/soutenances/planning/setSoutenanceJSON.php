@@ -1,21 +1,33 @@
 <?php
 
 $chemin = "../../../classes/";
+
 include_once($chemin."bdd/connec.inc");
+
 include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
+
 include_once($chemin."bdd/Convention_BDD.php");
 include_once($chemin."moteur/Convention.php");
+
+include_once($chemin."bdd/Convocation_BDD.php");
+include_once($chemin."moteur/Convocation.php");
+
 include_once($chemin."bdd/Etudiant_BDD.php");
 include_once($chemin."moteur/Etudiant.php");
+
 include_once($chemin."bdd/Parrain_BDD.php");
 include_once($chemin."moteur/Parrain.php");
+
 include_once($chemin."bdd/Contact_BDD.php");
 include_once($chemin."moteur/Contact.php");
+
 include_once($chemin."bdd/DateSoutenance_BDD.php");
 include_once($chemin."moteur/DateSoutenance.php");
+
 include_once($chemin."bdd/Soutenance_BDD.php");
 include_once($chemin."moteur/Soutenance.php");
+
 include_once($chemin."bdd/Salle_BDD.php");
 include_once($chemin."moteur/Salle.php");
 
@@ -56,11 +68,20 @@ if (sizeof($datesSoutenances) == 1) {
 		$result = Convention_BDD::sauvegarder($convention);
 	}
 
+	// Création de la convocation liée à la soutenance
+	if ($result && $data['id'] != $id) {
+	    $oConvocation = new Convocation('', 0, $id);
+	    $idconvocation = Convocation_BDD::sauvegarder($oConvocation);
+	    if (!$idconvocation)
+		$result = FALSE;
+	}
+
 	// Vérifie que l'association s'est bien faite
 	if (!$result) {
 	    // Renvoie 0 = probleme
 	    print(0);
 	    Soutenance_BDD::supprimer($id);
+	    Convocation_BDD::supprimer($idconvocation);
 	} else {
 	    // Renvoie l'id de la soutenance
 	    print($id);

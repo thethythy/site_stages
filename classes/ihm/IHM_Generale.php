@@ -152,7 +152,7 @@ class IHM_Generale {
 	?>
 	    <div id='erreur'>
 		<br/>
-		<h1 style="border: none;">&nbsp;Erreur&nbsp;</h1>
+		<h1 style="border: none;">&nbsp;Attention&nbsp;</h1>
 		<?php echo $text; ?>
 		<br/><br/>
 	    </div>

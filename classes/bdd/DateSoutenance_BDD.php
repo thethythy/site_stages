@@ -38,14 +38,14 @@ class DateSoutenance_BDD {
 	return mysqli_fetch_array($req);
     }
 
-    public static function listerDateSoutenance($filtres) {
+    public static function listerDateSoutenance($filtres, $ordre) {
 	global $db;
 	global $tab5;
 
 	if ($filtres == '')
-	    $sql = "SELECT * FROM $tab5 ORDER BY annee,mois,jour ASC;";
+	    $sql = "SELECT * FROM $tab5 ORDER BY annee $ordre, mois $ordre, jour $ordre;";
 	else
-	    $sql = "SELECT * FROM $tab5 WHERE " . $filtres->getStrFiltres() . " ORDER BY annee,mois,jour ASC;";
+	    $sql = "SELECT * FROM $tab5 WHERE " . $filtres->getStrFiltres() . " ORDER BY annee $ordre, mois $ordre, jour $ordre;";
 
 	$result = $db->query($sql);
 
