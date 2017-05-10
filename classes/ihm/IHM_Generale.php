@@ -101,10 +101,10 @@ class IHM_Generale {
 			<a href="http://www.viadeo.com/fr/profile/thierry.lemeunier2" title="Suivez-moi sur Viadeo"><img src='/images/Favicon.png' align='center' alt='Profil Viadeo' /></a>
 		    </p>
 		    <p><nav>
-			<a href="http://www-info.univ-lemans.fr"><img src="/images/deptinfo.jpg" width="100" height="64" /></a>
-			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="100" height="64" /></a>
-			<a href="http://ic2.univ-lemans.fr/"><img src="/images/iicc.png" width="140" height="64" /></a>
-			<a href="http://www.univ-lemans.fr"><img src="/images/logouniversite.gif" width="100" height="64" /></a>
+			<a href="http://www-info.univ-lemans.fr"><img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/></a>
+			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc.png" width="120" height="40" align='center'/></a>
+			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="80" height="50" align='center'/></a>
+			<a href="http://www.univ-lemans.fr"><img src="/images/logo_universite.png" width="120" height="30" align='center'/></a>
 		    </nav></p>
 		</div>
 	    </body>
