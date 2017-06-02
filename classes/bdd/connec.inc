@@ -55,6 +55,7 @@ $tab21 = 'taches';
 $tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
 $tab24 = 'convocation';
+$tab25 = 'attribution';
 
 function deconnexion() {
     global $db;

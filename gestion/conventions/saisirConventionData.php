@@ -40,6 +40,9 @@ include_once($chemin . "moteur/Parrain.php");
 include_once($chemin . "bdd/Soutenance_BDD.php");
 include_once($chemin . "moteur/Soutenance.php");
 
+include_once($chemin . "bdd/Attribution_BDD.php");
+include_once($chemin . "moteur/Attribution.php");
+
 include_once($chemin . "bdd/ThemeDeStage_BDD.php");
 include_once($chemin . "moteur/ThemeDeStage.php");
 
@@ -85,6 +88,10 @@ if (isset($_POST['add'])) {
 
 	// Sauvegarde de la convention
 	$idConv = Convention_BDD::sauvegarder($newConvention);
+
+	// Création et sauvegarde de l'attribution liée à la convention
+	$attribution = new Attribution('', 0, $idConv);
+	Attribution_BDD::sauvegarder($attribution);
 
 	// Mise à jour du lien promotion / étudiant / convention
 	if (isset($filiere) && isset($parcours)) {

@@ -229,6 +229,7 @@ class Gestion_IHM {
 					<li><a href="./conventions/gestionThemeDeStage.php">Gérer les thèmes de stage</a></li><br/>
 					<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
 					<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li><br/>
+					<li><a href="./conventions/mailAttribution.php">Notifier les attributions</a></li><br/>
 					<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li>
 					<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
 					<li><a href="./conventions/bilanConventions.php">Bilan des conventions</a></li>

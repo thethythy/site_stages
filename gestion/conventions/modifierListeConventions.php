@@ -33,6 +33,9 @@ include_once($chemin . "moteur/Parrain.php");
 include_once($chemin . "bdd/Soutenance_BDD.php");
 include_once($chemin . "moteur/Soutenance.php");
 
+include_once($chemin . "bdd/Attribution_BDD.php");
+include_once($chemin . "moteur/Attribution.php");
+
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
@@ -48,8 +51,12 @@ if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
     $_POST['parcours'] = $parcours->getIdentifiantBDD();
     $_POST['filiere'] = $filiere->getIdentifiantBDD();
 
-    // Suppression de l'étudiant
+    // Suppression de la convention
     Convention::supprimerConvention($_GET['id'], $_GET['promo']);
+
+    // Suppression de l'attribution liée à la convention
+    $oAttribution = Attribution::getAttributionFromConvention($_GET['id']);
+    Attribution_BDD::supprimer($oAttribution->getIdentifiantBDD());
 }
 
 Promotion_IHM::afficherFormulaireRecherche("modifierListeConventionsData.php", false);

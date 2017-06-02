@@ -75,7 +75,7 @@ function envoyerConvocation($oEtudiant, $oContact, $cadre, $date, $heure, $salle
     mail($emailResponsable . "," . $oEtudiant->getEmailInstitutionel() . "," . $oContact->getEmail(), "Invitation soutenance", $msg, $headers);
 }
 
-// Envoyer les convocations séléectionnées
+// Envoyer les convocations sélectionnées
 // Attention, il faut faire l'envoie qu'une seule fois
 
 if (isset($_POST['convocation']) && isset($_POST['date']) && isset($_POST['convocations'])) {
