@@ -104,23 +104,6 @@ class Etudiant_IHM {
 				    </select>
 				</td>
 			    </tr>
-			    <tr>
-				<td>Référent</td>
-				<td>
-				    <select name="idParrain">
-					<option value="-1"></option>
-					<?php
-					$tabPar = Parrain::listerParrain();
-					for ($i = 0; $i < sizeof($tabPar); $i++) {
-					    if ((isset($_POST['idParrain'])) && ($_POST['idParrain'] == $tabPar[$i]->getIdentifiantBDD()))
-						echo "<option selected value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
-					    else
-						echo "<option value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
-					}
-					?>
-				    </select>
-				</td>
-			    </tr>
 
 			    <tr><td>&nbsp;</td></tr>
 

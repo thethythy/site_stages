@@ -135,13 +135,22 @@ echo "<div id='data'>\n";
 include_once("depot_docData.php");
 echo "\n</div>";
 
+// Vérification sélection d'un étudiant
+if (isset($_POST['idEtudiant']) && $_POST['idEtudiant'] == -1) {
+    IHM_Generale::erreur("Vous devez sélectionner un nom d'étudiant !");
+}
+
 // Dépôt d'un rapport
-if (isset($_POST['submitRapport'])) {
+if (isset($_POST['submitRapport']) && $_POST['idEtudiant'] != -1) {
     if (isset($_FILES['uploadRapport']['name']) && $_FILES['uploadRapport']['name'] != "") { //si un fichier est envoyé
 	$etudiant = Etudiant::getEtudiant($_POST['idEtudiant']);
 	$filename = depotDocument($etudiant, $_POST['annee'], $_POST['filiere'], "rapports");
 	if ($filename != "") {
-	    envoyerNotification($etudiant, $_POST['annee'], $_POST['filiere'], $_POST['parcours'], $_POST['idParrain'], "rapports/" . $filename, "rapport de stage");
+	    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($_POST['annee'], $_POST['filiere'], $_POST['parcours']);
+	    $oConvention = Convention::getConventionFromEtudiantAndPromotion($_POST['idEtudiant'], $oPromotion->getIdentifiantBDD());
+	    $idParrain = $oConvention->getIdParrain();
+	    $chemin = "rapports/" . $filename;
+	    envoyerNotification($etudiant, $_POST['annee'], $_POST['filiere'], $_POST['parcours'], $idParrain, $chemin, "rapport de stage");
 	    echo "<p>Votre rapport de stage a été enregistré et votre référent a été informé de ce dépôt.</p>";
 	}
     } else {
@@ -150,12 +159,16 @@ if (isset($_POST['submitRapport'])) {
 }
 
 // Dépôt d'un résumé
-if (isset($_POST['submitResume'])) {
+if (isset($_POST['submitResume']) && $_POST['idEtudiant'] != -1) {
     if (isset($_FILES['uploadResume']['name']) && $_FILES['uploadResume']['name'] != "") { //si un fichier est envoyé
 	$etudiant = Etudiant::getEtudiant($_POST['idEtudiant']);
 	$filename = depotDocument($etudiant, $_POST['annee'], $_POST['filiere'], "resumes");
 	if ($filename != "") {
-	    envoyerNotification($etudiant, $_POST['annee'], $_POST['filiere'], $_POST['parcours'], $_POST['idParrain'], "resumes/" . $filename, "résumé de stage");
+	    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($_POST['annee'], $_POST['filiere'], $_POST['parcours']);
+	    $oConvention = Convention::getConventionFromEtudiantAndPromotion($_POST['idEtudiant'], $oPromotion->getIdentifiantBDD());
+	    $idParrain = $oConvention->getIdParrain();
+	    $chemin = "resumes/" . $filename;
+	    envoyerNotification($etudiant, $_POST['annee'], $_POST['filiere'], $_POST['parcours'], $idParrain, $chemin, "résumé de stage");
 	    echo "<p>Votre résumé de stage a été enregistré et votre référent a été informé de ce dépôt.</p>";
 	}
     } else {
