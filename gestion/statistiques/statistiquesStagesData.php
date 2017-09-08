@@ -80,12 +80,13 @@ if (isset($_GET['annee_deb']) && isset($_GET['annee_fin'])) {
 // Fonctions pour récupérer les données
 
 function donneTabRepartitionLieuDuStage($tabOConventions) {
-    $mans = 0;
-    $sarthe = 0;
+    $ville = 0;
+    $departement = 0;
     $region = 0;
     $france = 0;
     $monde = 0;
-    $dep = 0;
+
+    $lieux = Utils::getLieuxStage();
 
     if (sizeof($tabOConventions) > 0) {
 	foreach ($tabOConventions as $oConvention) {
@@ -94,18 +95,15 @@ function donneTabRepartitionLieuDuStage($tabOConventions) {
 	    $ville = strtolower($entreprise->getVille());
 	    $pays = strtolower($entreprise->getPays());
 
-	    if (strlen($codepostal) == 5)
-		$dep = $codepostal[0] . $codepostal[1];
+	    $lieu = Utils::getLieuDuStage($codepostal, $ville, $pays);
 
-	    $deps = array("53", "85", "49", "44");
-
-	    if (strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france")) {
-		$mans++;
-	    } else if ($dep == "72" && strstr($pays, "france") && ($codepostal != "72000" || $codepostal != "72100")) {
-		$sarthe++;
-	    } else if (in_array($dep, $deps) && strstr($pays, "france")) {
+	    if ($lieu == $lieux[0]) {
+		$ville++;
+	    } else if ($lieu == $lieux[1]) {
+		$departement++;
+	    } else if ($lieu == $lieux[2]) {
 		$region++;
-	    } else if (strstr($pays, "france")) {
+	    } else if ($lieu == $lieux[3]) {
 		$france++;
 	    } else {
 		$monde++;
@@ -114,11 +112,11 @@ function donneTabRepartitionLieuDuStage($tabOConventions) {
     }
 
     return array(
-	'Le Mans' => $mans,
-	'Sarthe' => $sarthe,
-	'Pays de la Loire' => $region,
-	'France' => $france,
-	'Etranger' => $monde);
+	$lieux[0] => $ville,
+	$lieux[1] => $departement,
+	$lieux[2] => $region,
+	$lieux[3] => $france,
+	$lieux[4] => $monde);
 }
 
 function donneTabRepartitionThemeDuStage($tabOConventions) {

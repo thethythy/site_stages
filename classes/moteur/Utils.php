@@ -106,6 +106,42 @@ class Utils {
 	return $mois;
     }
 
+    /**
+     * Retourne la liste des lieux des stages
+     * @return tableau de chaine
+     */
+    public static function getLieuxStage() {
+	return array('Le Mans', 'Sarthe', 'Pays de la Loire', 'France', 'Etranger');
+    }
+
+    /**
+     * Retourne le lieu selon les informations données
+     * @param entier $codepostal
+     * @param chaine $ville
+     * @param chaine $pays
+     * @return string Le lieu du stage
+     */
+    public static function getLieuDuStage($codepostal, $ville, $pays) {
+	$dep = 0;
+
+	if (strlen($codepostal) == 5)
+	    $dep = $codepostal[0] . $codepostal[1];
+
+	$deps = array("53", "85", "49", "44");
+
+	if (strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france")) {
+	    return 'Le Mans';
+	} else if ($dep == "72" && strstr($pays, "france") && ($codepostal != "72000" || $codepostal != "72100")) {
+	    return 'Sarthe';
+	} else if (in_array($dep, $deps) && strstr($pays, "france")) {
+	    return 'Pays de la Loire';
+	} else if (strstr($pays, "france")) {
+	    return 'France';
+	} else {
+	    return 'Etranger';
+	}
+    }
+
 }
 
 ?>
