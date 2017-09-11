@@ -2,8 +2,137 @@
 
 class Stage_IHM {
 
+    /**
+     * Affiche un formulaire de filtrage sur l'année, le parcours, la filière
+     * le thème de stage, le type d'entreprise et le lieu du stage
+     * @param string $page Indique la page d'action du formulaire
+     */
+    public static function afficherFormulaireRechercheAvancee($page) {
+	$tabAU = Promotion_BDD::getAnneesUniversitaires();
+	$tabF = Filiere::listerFilieres();
+	$tabP = Parcours::listerParcours();
+	$tabT = ThemeDeStage::getListeTheme();
+	$tabTE = TypeEntreprise::getListeTypeEntreprise();
+	?>
+	<form method=post action="javascript:">
+	    <table width="100%">
+		<tr>
+		    <td align="center">
+			Sélectionnez l'année :
+			<select id="annee" name="annee">
+			    <?php
+				echo "<option value=''>----------</option>";
+				for ($i=0; $i<sizeof($tabAU); $i++) {
+				    if ((isset($_POST['annee'])) && ($_POST['annee'] == $tabAU[$i]))
+					echo "<option selected value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+				    else
+					echo "<option value='$tabAU[$i]'>".$tabAU[$i]."-".($tabAU[$i]+1)."</option>";
+				}
+			    ?>
+			</select>
+		    </td>
+		    <td>
+			<table width="100%">
+			    <tr>
+				<td align="center">
+				    Sélectionnez le diplôme :
+				    <select id="filiere" name="filiere">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    for ($i=0; $i<sizeof($tabF); $i++) {
+						$id = $tabF[$i]->getIdentifiantBDD();
+						echo "<option ";
+						if ((isset($_POST['filiere'])) && ($_POST['filiere'] == $id)) echo "selected";
+						echo " value='$id'>".$tabF[$i]->getNom()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td align="center">
+				    Sélectionnez la spécialité :
+				    <select id="parcours" name="parcours">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    for ($i=0; $i<sizeof($tabP); $i++) {
+						$id = $tabP[$i]->getIdentifiantBDD();
+						echo "<option ";
+						if ((isset($_POST['parcours'])) && ($_POST['parcours'] == $id)) echo "selected";
+						echo " value='$id'>".$tabP[$i]->getNom()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		    <td>
+			<table>
+			    <tr>
+				<td align="center">
+				    Sélectionnez la technologie :
+				    <select id="technologie" name="technologie">
+					<?php
+					    echo "<option value='*'>Toutes</option>";
+					    for ($i=0; $i<sizeof($tabT); $i++) {
+						$id = $tabT[$i]->getIdentifiantBDD();
+						echo "<option ";
+						if (isset($_POST['technologie']) && $_POST['technologie'] == $id) echo "selected";
+						echo " value='$id'>".$tabT[$i]->getTheme()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td align="center">
+				    Sélectionnez le type entreprise :
+				    <select id="typeEntreprise" name="typentreprise">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    for ($i=0; $i<sizeof($tabTE); $i++) {
+						$id = $tabTE[$i]->getIdentifiantBDD();
+						echo "<option ";
+						if (isset($_POST['typeEntreprise']) && $_POST['typeEntreprise'] == $id) echo "selected";
+						echo " value='$id'>".$tabTE[$i]->getType()."</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td align="center">
+				    Sélectionnez le lieu :
+				    <select id="lieustage" name="lieustage">
+					<?php
+					    echo "<option value='*'>Tous</option>";
+					    foreach (Utils::getLieuxStage() as $key => $lieu) {
+						echo "<option value='$key'>$lieu";
+						if ($key > 0) echo " (précédents exclus)";
+						echo "</option>";
+					    }
+					?>
+				    </select>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		</tr>
+	    </table>
+	</form>
+
+	<script type="text/javascript">
+	    var table = new Array("annee", "filiere", "parcours", "technologie", "typeEntreprise", "lieustage");
+	    new LoadData(table, "<?php echo $page; ?>", "onchange");
+	</script>
+	<?php
+    }
+
     public static function afficherListeAncienStages($tabEtuWithConv, $annee) {
 	?>
+	<?php echo sizeof($tabEtuWithConv) . " stage(s) trouvé(s) :"?>
+	<br/><br/>
 	<table>
 	    <tr id='entete'>
 		<td width='35%'>Entreprise</td>

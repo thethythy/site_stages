@@ -3,6 +3,7 @@
 $chemin = '../../classes/';
 
 include_once($chemin.'bdd/connec.inc');
+include_once($chemin.'moteur/Utils.php');
 
 include_once($chemin.'moteur/Filtre.php');
 include_once($chemin.'moteur/FiltreNumeric.php');
@@ -92,10 +93,10 @@ function donneTabRepartitionLieuDuStage($tabOConventions) {
 	foreach ($tabOConventions as $oConvention) {
 	    $entreprise = $oConvention->getEntreprise();
 	    $codepostal = $entreprise->getCodePostal();
-	    $ville = strtolower($entreprise->getVille());
-	    $pays = strtolower($entreprise->getPays());
+	    $laville = $entreprise->getVille();
+	    $lepays = $entreprise->getPays();
 
-	    $lieu = Utils::getLieuDuStage($codepostal, $ville, $pays);
+	    $lieu = Utils::getLieuDuStage($codepostal, $laville, $lepays);
 
 	    if ($lieu == $lieux[0]) {
 		$ville++;

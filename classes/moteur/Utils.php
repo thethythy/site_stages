@@ -122,20 +122,22 @@ class Utils {
      * @return string Le lieu du stage
      */
     public static function getLieuDuStage($codepostal, $ville, $pays) {
-	$dep = 0;
+	$laville = strtolower($ville);
+	$lepays = strtolower($pays);
+	$ledep = 0;
 
 	if (strlen($codepostal) == 5)
-	    $dep = $codepostal[0] . $codepostal[1];
+	    $ledep = $codepostal[0] . $codepostal[1];
 
 	$deps = array("53", "85", "49", "44");
 
-	if (strstr($ville, "mans") && ($codepostal == "72000" || $codepostal == "72100") && strstr($pays, "france")) {
+	if (strstr($laville, "le mans") && ($ledep == "72" || $codepostal == "72000" || $codepostal == "72100") && strstr($lepays, "france")) {
 	    return 'Le Mans';
-	} else if ($dep == "72" && strstr($pays, "france") && ($codepostal != "72000" || $codepostal != "72100")) {
+	} else if ($ledep == "72" && strstr($lepays, "france") && ($codepostal != "72000" || $codepostal != "72100")) {
 	    return 'Sarthe';
-	} else if (in_array($dep, $deps) && strstr($pays, "france")) {
+	} else if (in_array($ledep, $deps) && strstr($lepays, "france")) {
 	    return 'Pays de la Loire';
-	} else if (strstr($pays, "france")) {
+	} else if (strstr($lepays, "france")) {
 	    return 'France';
 	} else {
 	    return 'Etranger';
