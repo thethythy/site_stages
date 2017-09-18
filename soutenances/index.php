@@ -40,22 +40,33 @@ Menu::menuSoutenance();
 	<tr id="ligne0">
 		<td>Master 1</td>
 		<td>avril à juin</td>
-		<td>7 avril 2015</td>
-		<td>26 juin 2015</td>
+		<td>9 avril 2018</td>
+		<td>29 juin 2018</td>
 		<td>3 mois<br/>
 		(12 sem.)</td>
-		<td>29 juin 2015</td>
+		<td>2 juillet 2018</td>
 	</tr>
 
 	<tr id="ligne1">
-		<td>Master 2</td>
+		<td>Master 2 AFD</td>
 		<td>mars à août</td>
-		<td>2 mars 2015</td>
-		<td>14 août 2015</td>
+		<td>5 mars 2018</td>
+		<td>17 août 2018</td>
 		<td>6 mois<br>
 		(24 sem.)</td>
-		<td>31 août 2015</td>
+		<td>30 août 2018</td>
 	</tr>
+
+	<tr id="ligne1">
+		<td>Master 2 ATAL</td>
+		<td>janvier à juin</td>
+		<td>22 janvier 2018</td>
+		<td>6 juillet 2018</td>
+		<td>6 mois<br>
+		(24 sem.)</td>
+		<td>9 juillet 2018</td>
+	</tr>
+
 </table>
 
 <?php

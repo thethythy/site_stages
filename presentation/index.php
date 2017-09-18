@@ -15,8 +15,8 @@ Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../telechargements/presentation-1617.pdf">Téléchargement</a>
-    <A href="../telechargements/presentation-1617.pdf">
+    <A href="../telechargements/presentation-1718.pdf">Téléchargement</a>
+    <A href="../telechargements/presentation-1718.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
@@ -25,7 +25,6 @@ Menu::menuPresentation();
     Responsable : M. Thierry Lemeunier<br />
     Département Informatique<br />
     Tél. 02 43 83 38 65<br/>
-    Fax. 02 43 83 38 48<br />
     <a href="http://info-stages.univ-lemans.fr">http://info-stages.univ-lemans.fr</a>
 </div>
 
@@ -59,7 +58,7 @@ Menu::menuPresentation();
 
 <p>Le logiciel objet du stage doit être écrit dans un langage structuré (C, langage orienté objet, langage de programmation logique par exemple), ou en assembleur. L'utilisation d'une méthode ou d'une démarche de développement issue du génie logiciel ou de l'intelligence artificielle est fortement recommandée. Un planning du stage est d'ailleurs demandé dans le rapport et à la soutenance.</p>
 
-<div class="titre2"><a name="12">1.2. Planification et durée en 2016-2017</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="12">1.2. Planification et durée en 2017-2018</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>
     <table border=1 align=center cellpadding=5 cellspacing=1>
@@ -67,18 +66,26 @@ Menu::menuPresentation();
 	<tr>
 	    <td align=center valign=center>Master 1</td>
 	    <td align=center valign=center>avril à juin</td>
-	    <td align=center valign=center>10 Avril 2017</td>
-	    <td align=center valign=center>30 Juin 2017</td>
+	    <td align=center valign=center>9 Avril 2018</td>
+	    <td align=center valign=center>29 Juin 2018</td>
 	    <td align=center valign=center>3 mois<br/>(12 semaines)</td>
-	    <td align=center valign=center>3 juillet 2017</td>
+	    <td align=center valign=center>2 juillet 2018<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
-	    <td align=center valign=center>Master 2</td>
+	    <td align=center valign=center>Master 2 AFD</td>
 	    <td align=center valign=center>mars à août</td>
-	    <td align=center valign=center>27 Février 2017</td>
-	    <td align=center valign=center>11 Août 2017</td>
+	    <td align=center valign=center>5 Mars 2018</td>
+	    <td align=center valign=center>17 Août 2018</td>
 	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
-	    <td align=center valign=center>4 Septembre 2017<br/>(suceptible de modification)</td>
+	    <td align=center valign=center>30 Août 2018<br/>(susceptible de modification)</td>
+	</tr>
+	<tr>
+	    <td align=center valign=center>Master 2 ATAL</td>
+	    <td align=center valign=center>janvier à juin</td>
+	    <td align=center valign=center>22 Janvier 2018</td>
+	    <td align=center valign=center>6 Juillet 2018</td>
+	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
+	    <td align=center valign=center>9 Juillet 2018<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
@@ -269,10 +276,12 @@ Menu::menuPresentation();
 
 <div class="titre3">Période de soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Les soutenances ne font pas l'objet d'une convocation : il est de la responsabilité des étudiants de <strong>consulter régulièrement le site des stages pour se tenir informés de la date et de l'heure de leur soutenance</strong>. Des périodes spécifiques sont réservées dans le planning de chaque diplôme. Pour l'année 2016/2017&nbsp;:</p>
+<p>Les soutenances ne font pas l'objet d'une convocation : il est de la responsabilité des étudiants de <strong>consulter régulièrement le site des stages pour se tenir informés de la date et de l'heure de leur soutenance</strong>. Des périodes spécifiques sont réservées dans le planning de chaque diplôme.</p>
+<p>Pour l'année 2017/2018&nbsp;:</p>
 <ul>
-    <li>en Master 1 la date prévue est le 3 juillet 2017&nbsp;;</li>
-    <li>en Master 2 la date prévue est le 4 septembre 2017 (susceptible de modification).</li>
+    <li>en Master 1 la date prévue est le 2 juillet 2018 (susceptible de modification)&nbsp;;</li>
+    <li>en Master 2 AFD la date prévue est le 30 août 2018 (susceptible de modification)&nbsp;;</li>
+    <li>en Master 2 ATAL la date prévue est le 9 juillet 2018 (susceptible de modification).</li>
 </ul>
 
 <p>Si, pour une raison quelconque mais impérieuse (par exemple accident), la soutenance ne peut se faire à la date prévue, une date ultérieure pourra être fixée. Cependant, le diplôme ne peut être décerné qu'après la soutenance orale. Cette solution peut donc être handicapante pour les étudiants désirant poursuivre leurs études. En particulier, même en cas de prolongation du stage au-delà de la durée officielle, les étudiants doivent soutenir à la date prévue.</p>
