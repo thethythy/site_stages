@@ -11,12 +11,6 @@ class Etudiant_BDD {
 	global $db;
 	global $tab9;
 
-	if ($etudiant->getEmailInstitutionel() == "") {
-	    // Tentative pour trouver l'email institutionnel de l'étudiant dans le LDAP
-	    $mailInstitutionnel = Utils::search_ldap($etudiant->getNom(), $etudiant->getPrenom(), $affiche);
-	    $etudiant->setEmailInstitutionel($mailInstitutionnel);
-	}
-
 	if ($etudiant->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab9 (nometudiant, prenometudiant, email_institutionnel, email_personnel, codeetudiant)
 		    VALUES ('" . $etudiant->getNom() . "',

@@ -38,12 +38,12 @@ $parcours = $promo->getParcours();
 if (isset($_POST['add'])) {
     extract($_POST);
 
-    if (($nom == "") || ($prenom == "")) {
+    if (($nom == "") || ($prenom == "") || ($emailinst == "")) {
 	Etudiant_IHM::afficherFormulaireEdition("");
-	IHM_Generale::erreur("Le nom et le prénom de l'étudiant sont obligatoire !");
+	IHM_Generale::erreur("Le nom, le prénom et l'email institutionnel de l'étudiant sont obligatoires !");
     } else {
-	// Si l'email est valide
-	if (($email == "") || Utils::VerifierAdresseMail($email)) {
+	// Si les emails sont valides
+	if (Utils::VerifierAdresseMail($emailinst) && (($email == "") || Utils::VerifierAdresseMail($email))) {
 	    $nom = strtoupper($nom);
 
 	    $tabOEtudiants = Etudiant::searchEtudiants($nom, $prenom);
