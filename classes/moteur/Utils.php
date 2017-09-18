@@ -4,7 +4,7 @@ class Utils {
 
     /** Methodes statiques * */
     public static function VerifierAdresseMail($adresse) {
-	$SyntaxeEmail = '/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/';
+	$SyntaxeEmail = '/^[\w\.\-]+@[\w.-]+\.[a-zA-Z]{2,6}$/';
 	if (preg_match($SyntaxeEmail, $adresse))
 	    return true;
 	else
