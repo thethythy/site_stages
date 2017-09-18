@@ -34,9 +34,9 @@ if (isset($_POST['edit'])) {
 	extract($_POST);
 
 	// Vérification que le nom ou le prénom ne sont pas vide
-	if (($nom == "") || ($prenom == "")) {
+	if (($nom == "") || ($prenom == "") || ($emailinst == "")) {
 		Etudiant_IHM::afficherFormulaireEdition($etu);
-		IHM_Generale::erreur("Le nom et le prénom de l'étudiant sont obligatoire !");
+		IHM_Generale::erreur("Le nom, le prénom et l'adresse institutionnel de l'étudiant sont obligatoires !");
 	} else {
 		// Si les emails sont valides alors ajouter dans la promotion
 		if ( ($email == "" || Utils::VerifierAdresseMail($email)) && ($emailinst == "" || Utils::VerifierAdresseMail($emailinst)) ) {
