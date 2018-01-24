@@ -3,9 +3,11 @@
 // Format de la réponse
 header("Content-type:text/plain; charset=utf-8");
 
-$input = file_get_contents('php://input');
+// Drapeau de succès ou d'échec du droit d'accès
+$access_rigth = false;
 
 // Calcul du condensat
+$input = file_get_contents('php://input');
 include_once("classes/moteur/Clef.php");
 $HClef1 = Clef::calculCondensat($input);
 
@@ -33,8 +35,18 @@ if (hash_equals($HClef1, $HClef2)) {
     $domain = substr_count($_SERVER['HTTP_HOST'], 'localhost') > 0 ? 'localhost' : $_SERVER['HTTP_HOST'];
     setcookie ('site_stages_depinfo', $HClef1, $time, '/', $domain);
 
+    // Mémorisation du succès
+    $access_rigth = true;
+
     // Renvoie l'accord
     echo "OK";
 }
+
+// Journalisation de la tentative d'accès
+$message = $access_rigth ? "\nOK | " : "\nKO | ";
+$message .= strftime("%F | %H:%M | ", $_SERVER['REQUEST_TIME']);
+$message .= $_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'];
+
+error_log($message, 3, "./documents/demon/authentification.log");
 
 ?>
