@@ -9,6 +9,11 @@
 
 global $access_control_target;
 
+// Sauvegarde en session pour la journalisation
+session_start();
+$_SESSION['$access_control_target'] = $access_control_target;
+session_write_close();
+
 include_once("../classes/ihm/IHM_Generale.php");
 include_once("../classes/ihm/Menu.php");
 

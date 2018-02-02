@@ -6,6 +6,12 @@
  * Accès : public
  */
 
+// Récupération de la cible depuis la session PHP
+
+session_start();
+$access_control_target = $_SESSION['$access_control_target'];
+session_write_close();
+
 // Format de la réponse
 header("Content-type:text/plain; charset=utf-8");
 
@@ -51,6 +57,7 @@ if (hash_equals($HClef1, $HClef2)) {
 // Journalisation de la tentative d'accès
 $message = $access_rigth ? "\nOK | " : "\nKO | ";
 $message .= strftime("%F | %H:%M | ", $_SERVER['REQUEST_TIME']);
+$message .= $access_control_target . " | ";
 $message .= $_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'];
 
 error_log($message, 3, "./documents/demon/authentification.log");
