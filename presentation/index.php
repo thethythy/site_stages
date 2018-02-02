@@ -202,14 +202,14 @@ Menu::menuPresentation();
 
 <p>Etant donnée le grand nombre d'étudiants (et nos capacités limitées de stockage), <strong>aucune version papier et/ou sur CD-ROM ne sera délivrée et ne sera acceptée</strong>. Seul le dépôt sur ce site sera pris en compte.</p>
 
-<p>Le résumé de stage est mis en consultation sur le site Web des stages. C'est un court document résumant les éléments principaux du stage. Il doit suivre les spécifications données à l'<a href="../telechargements/Annexe1.pdf">Annexe 1 accessible ici.</a></p>
+<p>Le résumé de stage est mis en consultation sur le site Web des stages. C'est un court document résumant les éléments principaux du stage. Il doit suivre les spécifications données à l'<a href="../documents/telechargements/Annexe1.pdf">Annexe 1 accessible ici.</a></p>
 
 <div class="titre3">Forme&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <ul>
     <li>La rédaction se fait en français, y compris pour les stages se déroulant dans une société étrangère ayant une filiale en France.</li>
     <li>Pour les stages à l'étranger, le rapport peut être écrit en anglais.</li>
-    <li>Le stagiaire doit impérativement suivre la norme de présentation (cf. <a href="../telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
+    <li>Le stagiaire doit impérativement suivre la norme de présentation (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
     <li>L'utilisation d'un traitement de texte est obligatoire (les documents manuscrits ne sont pas acceptés).</li>
     <li>Le format du document numérique doit être le format PDF.</li>
     <li>Le nombre de page (hors annexes) est limité selon l'année du diplôme de l'étudiant :</li>
@@ -228,8 +228,8 @@ Menu::menuPresentation();
 
 <p>Le rapport doit comprendre :</p>
 <ul>
-    <li>Le résumé 4 pages maximum dans un fichier séparé (cf. <a  href="../telechargements/Annexe1.pdf">Annexe 1 accessible ici</a>).</li>
-    <li>Un court résumé inclus dans la page de garde (cf. <a href="../telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
+    <li>Le résumé 4 pages maximum dans un fichier séparé (cf. <a  href="../documents/telechargements/Annexe1.pdf">Annexe 1 accessible ici</a>).</li>
+    <li>Un court résumé inclus dans la page de garde (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
     <li>Un sommaire.</li>
     <li>Le texte (structuré) lui-même décrivant le travail effectué durant le stage.</li>
     <li>Des annexes techniques (non comptées dans le nombre maximum de page).</li>
@@ -259,7 +259,7 @@ Menu::menuPresentation();
 
 <div class="titre3">Fiche d'appréciation&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Cette fiche est <a href="../telechargements/Fiche_Entreprise_1516.doc">accessible ici</a> (version anglaise <a href="../telechargements/Entreprise_Form_1516.doc">ici</a>) ou dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle  sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
+<p>Cette fiche est <a href="../documents/telechargements/Fiche_Entreprise_1718.doc">accessible ici</a> (version anglaise <a href="../documents/telechargements/Entreprise_Form_1718.doc">ici</a>) ou dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle  sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
 
 <div class="titre3">Participants à la soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
