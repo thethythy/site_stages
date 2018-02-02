@@ -2,6 +2,9 @@
 
 class Couleur_IHM {
 
+    /**
+     * Afficher un formulaire de saisie d'une nouvelle couleur (son nom et son code héxadécimal)
+     */
     public static function afficherFormulaireSaisie() {
 	?>
 	<FORM METHOD="POST" ACTION="">
@@ -52,6 +55,10 @@ class Couleur_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'une couleur existante (son nom et son code héxadécimal)
+     * @param integer $idCouleur Identifiant de la couleur à éditer
+     */
     public static function afficherFormulaireModification($idCouleur) {
 	$couleur = Couleur::getCouleur($idCouleur);
 	?>
@@ -103,6 +110,10 @@ class Couleur_IHM {
 	<?php
     }
 
+    /**
+     * Afficher une liste de couleur dans un tableau interactif pour
+     * éditer ou supprimer une couleur
+     */
     public static function afficherListeCouleurAEditer() {
 	$tabCouleurs = Couleur::listerCouleur();
 	if (sizeof($tabCouleurs) > 0) {

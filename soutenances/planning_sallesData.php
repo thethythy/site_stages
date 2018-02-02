@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page planning_sallesData.php
+ * Utilisation : page de traitement Ajax retournant un planning chronologique par salle
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";
@@ -79,7 +85,7 @@ if (isset($date) && isset($salle)) {
 	// Tri des conventions selon l'heure de passage
 	usort($listeConvention, array("Convention", "compareHeureSoutenance"));
 
-	// Affichage du plannging
+	// Affichage du planning
 	Salle_IHM::afficherPlanningSalles($annee, $listeConvention);
 } else
 	echo "<br/><center>Veuillez sélectionner une salle et une date.</center>";

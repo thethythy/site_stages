@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page saisirNotesStages.php
+ * Utilisation : page pour éditer les notes de stages
+ * Dépendance(s) : saisirNotesStagesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

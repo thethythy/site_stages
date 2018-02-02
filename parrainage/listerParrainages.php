@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listerParrainages.php
+ * Utilisation : page de visualisation des suivis de stages des référents
+ * Dépendance(s) : listerParrainagesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

@@ -2,6 +2,10 @@
 
 class Soutenance_IHM {
 
+    /**
+     * Afficher un formulaire de sélection d'un enseignant
+     * @param string $fichierPOST Page de traitement des requêtes Ajax
+     */
     public static function afficherSelectionSoutenancesEnseignant($fichierPOST) {
 	$tabParrain = Parrain::listerParrain();
 	?>
@@ -43,6 +47,10 @@ class Soutenance_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de sélection d'une promotion
+     * @param string $fichierPOST Page de traitement des requêtes Ajax
+     */
     public static function afficherSelectionSoutenancesPromotion($fichierPOST) {
 	?>
 	<form action="javascript:" name="pf">
@@ -99,6 +107,11 @@ class Soutenance_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de sélection d'une salle et d'une date
+     * @param integer $annee L'année concernée
+     * @param string $fichierPOST Page de traitement des requêtes Ajax
+     */
     public static function afficherSelectionSoutenancesSalle($annee, $fichierPOST) {
 	$tabSalle = Salle::listerSalle();
 	?>

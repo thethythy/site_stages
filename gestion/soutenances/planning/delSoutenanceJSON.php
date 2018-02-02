@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page delSoutenanceJSON.php
+ * Utilisation : page pour supprimer une soutenance
+ *		 page appelée par planifier_compresse.js
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 
 include_once($chemin."bdd/connec.inc");

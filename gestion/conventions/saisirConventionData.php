@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page saisirConventionData.php
+ * Utilisation : page qui retourne un formulaire de saisie d'une convention
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

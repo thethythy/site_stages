@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listerOffreDeStage.php
+ * Utilisation : page d'accès aux offres de stages de l'année en cours
+ * Dépendance(s) : listerOffreDeStageData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page editionOffreDeStage.php
+ * Utilisation : page pour éditer, valider ou supprimer une offre de stage
+ *		 page accessible depuis listeDesOffreDeStage.php
+ * Accès : restreint par authentification HTTP
+ */
+
 include_once("../../classes/bdd/connec.inc");
 include_once("../../classes/moteur/Filtre.php");
 include_once("../../classes/moteur/FiltreString.php");
@@ -60,7 +67,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
 
     // ----------------------------------------------------------
     // Envoie d'un mail de notification aux promotions concernées
-    $offreDeStage = offreDeStage::getOffreDeStage($idOffreDeStage);
+    $offreDeStage = OffreDeStage::getOffreDeStage($idOffreDeStage);
     $destinataire = "";
 
     $tabFiliere = $offreDeStage->getListeProfilSouhaite();

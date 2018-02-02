@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Classe FiltreNumeric : un filtre d'égalité stricte entre deux valeurs
+ */
+
 class FiltreNumeric extends Filtre {
 
-    // Constructeur de classe
+    /**
+     * Construction d'un objet Filtre '='
+     * @param string $champ
+     * @param string $valeur
+     */
     public function FiltreNumeric($champ, $valeur) {
-	$this->champ = $champ;
-	$this->valeur = $valeur;
-	$this->strFiltres = $this->champ . " = '" . $this->valeur . "'";
+	$this->strFiltres = $champ . " = '" . $valeur . "'";
     }
 
 }

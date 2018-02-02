@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionSalle.php
+ * Utilisation : page pour gérer les salles (création, édition, suppression)
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

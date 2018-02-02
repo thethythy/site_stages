@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page planning_filieresData.php
+ * Utilisation : page de traitement Ajax retournant un planning chronologique par filière
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

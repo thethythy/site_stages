@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page visualiserOffre.php
+ * Utilisation : page de visualisation détaillée d'une offre de stage
+ * Accès : restreint par cookie ; lien accessible uniquement depuis listerOffreDeStage.php
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

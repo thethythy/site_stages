@@ -1,13 +1,18 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°9 : les étudiants
+ */
+
 class Etudiant_BDD {
-    /** Méthodes statiques **/
 
     /**
-     * Sauvegarde un objet Etudiant
-     * @param $etudiant l'étudiant sauvegardé
+     * Enregistrement ou mise à jour d'un objet Etudiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @param Etudiant $etudiant L'objet à sauvegarder
      */
-    public static function sauvegarder($etudiant, $affiche = true) {
+    public static function sauvegarder($etudiant) {
 	global $db;
 	global $tab9;
 
@@ -39,9 +44,11 @@ class Etudiant_BDD {
     }
 
     /**
-     * Récupérer un étudiant suivant son identifiant
-     * @param $identifiantBDD l'identifiant de l'étudiant récupéré
-     * @return String[] tableau contenant les informations d'un étudiant
+     * Obtenir un enregistrement Etudiant à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @param integer $identifiantBDD L'identifiant de l'étudiant recherché
+     * @return enregistrement
      */
     public static function getEtudiant($identifiantBDD) {
 	global $db;
@@ -51,16 +58,27 @@ class Etudiant_BDD {
 	return mysqli_fetch_array($req);
     }
 
-    // Suppression d'un étudiant dans une promo --> Dans la table 'relation_promotion_etudiant_convention'
-    public static function supprimerEtudiant($identifiantBDD, $idPromo) {
+    /**
+     * Suppression d'un étudiant dans une promotion
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $identifiantBDD Identifiant de l'étudiant concerné
+     * @param integer $idPromo Identifiant de la promotion concernée
+     */
+    public static function supprimerLienPromotionEtudiant($identifiantBDD, $idPromo) {
 	global $db;
 	global $tab19;
 	$sql = "DELETE FROM $tab19 WHERE idetudiant='$identifiantBDD' AND idpromotion='$idPromo'";
 	$db->query($sql);
     }
 
-    // Suppression définitive d'un étudiant --> Dans la table 'etudiant'
-    public static function supprimerDefinitivementEtudiant($identifiantBDD) {
+    /**
+     * Suppression d'un enregistrement Etudiant à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement à supprimer
+     */
+    public static function supprimerEtudiant($identifiantBDD) {
 	global $db;
 	global $tab9;
 	$sql = "DELETE FROM $tab9 WHERE idetudiant='$identifiantBDD'";
@@ -68,9 +86,12 @@ class Etudiant_BDD {
     }
 
     /**
-     * Renvoie la liste des étudiants d'une promotion
-     * @param $identifiantPromo l'identifiant de la promotion
-     * @return String[] tableau contenant tous les étudiants de la promotion
+     * Obtenir la liste des étudiants d'une promotion
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $identifiantPromo L'identifiant de la promotion
+     * @return tableau d'enregistrements
      */
     public static function getListeEtudiants($identifiantPromo) {
 	global $db;
@@ -110,9 +131,11 @@ class Etudiant_BDD {
     }
 
     /**
-     * Permet de rattacher a un étudiant une nouvelle promotion
-     * @param $etu : identifiant de l'étudiant
-     * @param $promo : identifiant de la promotion
+     * Ajouter un étudiant à une promotion
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $etu Identifiant de l'étudiant
+     * @param integer $promo Identifiant de la promotion
      */
     public static function ajouterPromotion($etu, $promo) {
 	global $db;
@@ -123,10 +146,12 @@ class Etudiant_BDD {
     }
 
     /**
-     * Permet de rattacher a un étudiant une nouvelle convention
-     * @param $idetu : identifiant de l'étudiant
-     * @param $idconv : identifiant de la convention
-     * @param $idpromo : identifiant de la promotion
+     * Associer une convention à un étudiant et une promotion existants
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $idetu Identifiant de l'étudiant
+     * @param integer $idconv Identifiant de la convention
+     * @param integer $idpromo Identifiant de la promotion
      */
     public static function ajouterConvention($idetu, $idconv, $idpromo) {
 	global $db;
@@ -137,13 +162,22 @@ class Etudiant_BDD {
 	$db->query($sql);
     }
 
-    public static function recherchePromotion($etu, $annee) {
+    /**
+     * Obtenir la promotion d'un étudiant pour une certaine année
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15  Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $idetu Identifiant de l'étudiant concerné
+     * @param integer $annee Année de la promotion recherchée
+     * @return integer Identifiant de la promotion trouvée
+     */
+    public static function recherchePromotion($idetu, $annee) {
 	global $db;
-	global $tab19;
 	global $tab15;
+	global $tab19;
 
 	$sql = "SELECT $tab19.idpromotion AS idpromo FROM $tab19, $tab15
-		WHERE $tab19.idetudiant LIKE '$etu'
+		WHERE $tab19.idetudiant = '$idetu'
 		AND $tab15.anneeuniversitaire LIKE '$annee'
 		AND $tab19.idpromotion = $tab15.idpromotion";
 
@@ -152,14 +186,24 @@ class Etudiant_BDD {
 	return $result['idpromo'];
     }
 
-    public static function rechercheConvention($etu, $annee) {
+    /**
+     * Obtenir l'identifiant de la convention d'un étudiant et une année donnée
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @global string $tab15 Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $idetu Identifiant de l'étudiant concerné
+     * @param integer $annee Année de la convention recherchée
+     * @return integer ou ""
+     */
+    public static function rechercheConvention($idetu, $annee) {
 	global $db;
-	global $tab19;
-	global $tab15;
 	global $tab4;
+	global $tab15;
+	global $tab19;
 
 	$sql = "SELECT $tab19.idconvention AS idconv FROM $tab19, $tab4, $tab15
-		WHERE $tab19.idetudiant='$etu'
+		WHERE $tab19.idetudiant='$idetu'
 		AND $tab15.anneeuniversitaire='$annee'
 		AND $tab19.idpromotion = $tab15.idpromotion
 		AND $tab19.idconvention = $tab4.idconvention";
@@ -171,11 +215,11 @@ class Etudiant_BDD {
 
     /**
      * Recherche les étudiants s'appelant $nom $prenom
-     * @global type $db
-     * @global type $tab9
-     * @param type $nom Le nom recherché
-     * @param type $prenom Le prénom recherché�
-     * @return array La liste des données des étudiants trouvés
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @param string $nom Le nom recherché
+     * @param string $prenom Le prénom recherché�
+     * @return tableau d'enregistrements
      */
     public static function searchEtudiants($nom, $prenom) {
 	global $db;

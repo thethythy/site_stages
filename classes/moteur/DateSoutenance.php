@@ -1,8 +1,10 @@
 <?php
 
-class DateSoutenance {
+/**
+ * Classe DateSoutenance : les dates de soutenance
+ */
 
-    // Déclaration des attributs de la classe
+class DateSoutenance {
 
     var $identifiantBDD; // Identifiant unique en base
     var $jour; // Le jour de la soutenance
@@ -26,7 +28,8 @@ class DateSoutenance {
 	$this->convocation = $convocation;
     }
 
-    // Accesseurs
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
@@ -36,39 +39,39 @@ class DateSoutenance {
 	return $this->jour;
     }
 
-    public function setJour($jour) {
-	$this->jour = $jour;
-    }
-
     public function getMois() {
 	return $this->mois;
-    }
-
-    public function setMois($mois) {
-	$this->mois = $mois;
     }
 
     public function getAnnee() {
 	return $this->annee;
     }
 
-    public function setAnnee($annee) {
-	$this->annee = $annee;
-    }
-
-    public function getDateComplete() {
-	return $this->annee . '-' . $this->mois . '-' . $this->jour;
-    }
-
     public function getConvocation() {
 	return $this->convocation;
+    }
+
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setJour($jour) {
+	$this->jour = $jour;
+    }
+
+    public function setMois($mois) {
+	$this->mois = $mois;
+    }
+
+    public function setAnnee($annee) {
+	$this->annee = $annee;
     }
 
     public function setConvocation($convocation) {
 	$this->convocation = $convocation;
     }
 
-    /** Méthodes statiques **/
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
 
     /**
      * Rechercher un objet DateSoutenance à partir de son identifiant
@@ -99,14 +102,14 @@ class DateSoutenance {
     }
 
     /**
-     * Rechercher la liste des objets DateSoutenance
-     * @param string $filtres
-     * @param string $ordre
+     * Rechercher la liste des objets DateSoutenance à partir d'un filtre
+     * @param string $filtre
+     * @param string $ordre L'ordre de classement des objets trouvés
      * @return tableau d'objets
      */
-    public static function listerDateSoutenance($filtres = '', $ordre = 'ASC') {
+    public static function listerDateSoutenance($filtre = '', $ordre = 'ASC') {
 	$tabDateSoutenance = array();
-	$tabDateSoutenanceString = DateSoutenance_BDD::listerDateSoutenance($filtres, $ordre);
+	$tabDateSoutenanceString = DateSoutenance_BDD::listerDateSoutenance($filtre, $ordre);
 
 	for ($i = 0; $i < sizeof($tabDateSoutenanceString); $i++)
 	    array_push($tabDateSoutenance,
@@ -137,15 +140,6 @@ class DateSoutenance {
     public static function deleteDateSoutenance($identifiantDateSoutenance) {
 	DateSoutenance_BDD::delete($identifiantDateSoutenance);
 	DateSoutenance_BDD::deleteDatePromo($identifiantDateSoutenance);
-    }
-
-    /**
-     * Supprimer une relation avec une promotion associée à partir de
-     * l'identifiant de la date de soutenance
-     * @param integer $identifiantDateSoutenance
-     */
-    public static function deleteDatePromo($identifiantDateSoutenance) {
-	DateSoutenance_BDD::delete($identifiantDateSoutenance);
     }
 
 }

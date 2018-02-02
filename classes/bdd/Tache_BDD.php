@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°21 : les tâches d'administration
+ */
+
 class Tache_BDD {
 
-    /* Méthodes statiques */
-
+    /**
+     * Enregistrer ou mettre à jour un objet Tache
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab21 Nom de la table 'taches'
+     * @param Tache $tache L'objet à enregistrer
+     */
     public static function save($tache) {
 	global $db;
 	global $tab21;
@@ -27,6 +35,13 @@ class Tache_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir un enregistrement Tache à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab21 Nom de la table 'taches'
+     * @param integer $identifiant Identifiant de la tâche
+     * @return enregistrement
+     */
     public static function getTache($identifiant) {
 	global $db;
 	global $tab21;
@@ -36,6 +51,14 @@ class Tache_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir les enregistrements de tous les objets Taches
+     * classé par date et priorité
+     *
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab21 Nom de la table 'taches'
+     * @return tableau d'enregistrements
+     */
     public static function getTaches() {
 	global $db;
 	global $tab21;
@@ -56,6 +79,12 @@ class Tache_BDD {
 	return $tabTache;
     }
 
+    /**
+     * Suppression d'un enregistrement Tache
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab21 Nom de la table 'taches'
+     * @param integer $identifiantBDD Identifiant de la tâche à supprimer
+     */
     public static function delete($identifiantBDD) {
 	global $db;
 	global $tab21;

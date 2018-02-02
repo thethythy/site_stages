@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°15 : les promotions d'étudiants
+ */
+
 class Promotion_BDD {
 
-    /** Méthodes statiques **/
-
     /**
-     * Sauvegarde d'une promotion
-     * @param $promotion promotion à sauvegarder
+     * Enregistrer ou mettre à jour un objet Promotion
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param Promotion $promotion L'objet à enregistrer
+     * @return integer Identifiant de l'enregistrement
      */
     public static function sauvegarder($promotion) {
 	global $db;
@@ -19,10 +24,10 @@ class Promotion_BDD {
 	$idFiliere = $filiere->getIdentifiantBDD();
 
 	if ($promotion->getIdentifiantBDD() == "") {
-	    $sql = "INSERT INTO " . $tab15 . "(anneeuniversitaire, idparcours, idfiliere, email_promotion)
+	    $sql = "INSERT INTO $tab15(anneeuniversitaire, idparcours, idfiliere, email_promotion)
 		    VALUES ('" . $promotion->getAnneeUniversitaire() . "',
-			    '" . $idParcours . "',
-			    '" . $idFiliere . "',
+			    '$idParcours',
+			    '$idFiliere',
 			    '" . $promotion->getEmailPromotion() . "');";
 	    $db->query($sql);
 
@@ -33,8 +38,8 @@ class Promotion_BDD {
 	} else {
 	    $sql = "UPDATE $tab15
 		    SET anneeuniversitaire='" . $promotion->getAnneeUniversitaire() . "',
-			idparcours='" . $idParcours . "',
-			idfiliere='" . $idFiliere . "',
+			idparcours='$idParcours',
+			idfiliere='$idFiliere',
 			email_promotion='" . $promotion->getEmailPromotion() . "'
 		    WHERE idpromotion ='" . $promotion->getIdentifiantBDD() . "'";
 
@@ -44,9 +49,11 @@ class Promotion_BDD {
     }
 
     /**
-     * Récupére une promotion suivant son identifiant
-     * @param $identifiantBDD l'identifiant de l'entreprise à récupérer
-     * @return String[] tableau contenant les informations d'une entreprise
+     * Obtenir un enregistrement Promotion à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement recherché
+     * @return enregistrement
      */
     public static function getPromotion($identifiantBDD) {
 	global $db;
@@ -56,6 +63,15 @@ class Promotion_BDD {
 	return mysqli_fetch_array($req);
     }
 
+    /**
+     * Obtenir un enregistrement Promotion à partir de l'année, la filière et le parcours
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param integer $annee L'année recherchée
+     * @param integer $idfiliere La filière recherchée
+     * @param integer $idparcours Le parcours recherché
+     * @return enregistrement
+     */
     public static function getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours) {
 	global $db;
 	global $tab15;
@@ -64,6 +80,12 @@ class Promotion_BDD {
 	return mysqli_fetch_array($req);
     }
 
+    /**
+     * Obtenir la liste des années de toutes les promotions
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @return tableau d'integer
+     */
     public static function getAnneesUniversitaires() {
 	global $db;
 	global $tab15;
@@ -79,14 +101,21 @@ class Promotion_BDD {
 	return $tabAU;
     }
 
-    public static function getListePromotions($filtres) {
+    /**
+     * Obtenir les enregistrements des promotions correspondes à un filtre
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param Filtre $filtre Le filtre global à utiliser
+     * @return tableau des enregistrements
+     */
+    public static function getListePromotions($filtre) {
 	global $db;
 	global $tab15;
 
-	if ($filtres == "")
+	if ($filtre == "")
 	    $requete = "SELECT * FROM $tab15";
 	else
-	    $requete = "SELECT * FROM $tab15 WHERE " . $filtres->getStrFiltres();
+	    $requete = "SELECT * FROM $tab15 WHERE " . $filtre->getStrFiltres();
 
 	$res = $db->query($requete);
 
@@ -104,6 +133,12 @@ class Promotion_BDD {
 	return $tabPromos;
     }
 
+    /**
+     * Obtenir l'année de la promotion la plus récente
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @return integer L'année la plus récente trouvée
+     */
     public static function getLastAnnee() {
 	global $db;
 	global $tab15;
@@ -114,6 +149,12 @@ class Promotion_BDD {
 	return $result['maxAU'];
     }
 
+    /**
+     * Suppression d'un enregistrement Promotion à parir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param integer $identifiantBDD Identifant de la promotion à supprimer
+     */
     public static function supprimerPromotion($identifiantBDD) {
 	global $db;
 	global $tab15;
@@ -122,6 +163,13 @@ class Promotion_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Test si une certaine promotion existe déjà en base
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @param Promotion $promo L'objet dont l'existence est à tester
+     * @return boolean
+     */
     public static function existe($promo) {
 	global $db;
 	global $tab15;

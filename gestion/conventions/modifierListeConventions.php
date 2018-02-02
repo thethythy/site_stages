@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page modifierListeConventions.php
+ * Utilisation : page pour éditer ou supprimer une convention
+ * Dépendance(s) : modifierListeConventionsData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

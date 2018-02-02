@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page convocation.php
+ * Utilisation : page pour faire la convocation des étudiants et des entreprises
+ * Dépendance(s) : convocationData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

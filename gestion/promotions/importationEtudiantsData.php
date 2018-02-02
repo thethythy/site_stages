@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page importationEtudiantsData.php
+ * Utilisation : page retournant un tableau des étudiants à importer
+ *		 chaque étudiant est sélectionnable
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

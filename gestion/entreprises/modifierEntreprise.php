@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * Page modifierEntreprise.php
+ * Utilisation : page pour modifier une entreprise existante
+ *		 page accessible depuis modifierListeEntreprises.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

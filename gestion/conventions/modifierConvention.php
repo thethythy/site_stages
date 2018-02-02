@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page modifierConvention.php
+ * Utilisation : page pour éditer une convention existante
+ *		 page accessible depuis modifierListeConventions.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

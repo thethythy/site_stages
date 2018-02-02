@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page saisirConvention.php
+ * Utilisation : page pour saisir une nouvelle convention de stage
+ * Dépendance(s) : saisirConventionData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

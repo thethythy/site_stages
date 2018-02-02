@@ -2,9 +2,10 @@
 
 class Promotion_IHM {
 
-    // Méthodes statiques
-
-    // $vide = permet de savoir si on affiche ou pas une année vide
+    /**
+     * Afficher un formulaire de sélection d'une année universitaire
+     * @param boolean $vide Indicateur à true si on affiche une année vide
+     */
     public static function afficherFormulaireSelectionAnnee($vide) {
 	$tabAU = Promotion_BDD::getAnneesUniversitaires();
 	?>
@@ -36,6 +37,10 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de sélection d'un intervalle d'années ainsi qu'une
+     * filière et un parcours éventuels
+     */
     public static function afficherFormulaireSelectionInterval() {
 	$tabAU = Promotion_BDD::getAnneesUniversitaires();
 	$tabF = Filiere::listerFilieres();
@@ -127,8 +132,12 @@ class Promotion_IHM {
 	<?php
     }
 
-    // $page = nom de la page sur laquelle sera renvoyée le résultat du formulaire
-    // $tous = permet de savoir si on affiche ou pas la proposition "Tous" dans les combobox
+    /**
+     * Afficher un formulaire de sélection d'une promotion (année, filière, parcours)
+     * @param string $page Page de traitement de la requête Ajax
+     * @param boolean $tous Indicateur à true pour afficher a proposition "Tous" dans les combobox
+     * @param boolean $vide Indicateur à true pour obliger à sélectionner une année
+     */
     public static function afficherFormulaireRecherche($page, $tous, $vide=FALSE) {
 	$tabAU = Promotion_BDD::getAnneesUniversitaires();
 	$tabF = Filiere::listerFilieres();
@@ -199,6 +208,9 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire pour créer une nouvelle promotion
+     */
     public static function afficherFormulaireAjout() {
 	$tabF = Filiere::listerFilieres();
 	$tabP = Parcours::listerParcours();
@@ -276,6 +288,10 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire pour importer des étudiants après création d'une promotion
+     * @param integer $idPromo Identifiant de la promotion
+     */
     public static function afficherFormulaireAjoutOK($idPromo) {
 	?>
 	<table align="center">
@@ -301,6 +317,14 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'importation d'étudiants sélectionables depuis
+     * une liste  Après sélection l'utilisateur peut lancer l'importation.
+     * @param integer $annee Année concernée
+     * @param integer $filiere Identifiant de la filière concernée
+     * @param integer $parcours Identifiant du parcours concerné
+     * @param tableau d'objets $tabEtudiants Liste des objets Etudiants concernés
+     */
     public static function afficherEtudiantsAImporter($annee, $filiere, $parcours, $tabEtudiants) {
 	?>
 	<form method=post action="importationEtudiants.php">
@@ -339,6 +363,14 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher la liste des étudiants importés dans une promotion.
+     * Un bouton permet d'afficher la promotion complète.
+     * @param Promotion $promo La promotion concernée
+     * @param Filiere $filiere La filière concernée
+     * @param Parcours $parcours Le parcours concerné
+     * @param tableau d'objets $tabEtudiants Les objets Etudiants concernés
+     */
     public static function afficherEtudiantsImportes($promo, $filiere, $parcours, $tabEtudiants) {
 	echo "Les étudiants ci-dessous ont été ajoutés à la promotion : ";
 	echo $filiere->getNom() . " " . $parcours->getNom() . " - " . $promo->getAnneeUniversitaire() . "<br/>";
@@ -383,6 +415,15 @@ class Promotion_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de modification du statut des étudiants d'une promotion
+     * (stage trouvé ou pas, alternant, etc.) pour le suivi pédagogique
+     * @param type $annee L'année concerné
+     * @param type $filiere La filière concernée
+     * @param type $parcours Le parcours concerné
+     * @param tableau d'objets $tabPromos Les objets Promotion concernés
+     * @param tableau d'objets $tabEtudiants Les objets Etudiant concernés
+     */
     public static function afficherListeStatutSuiviEtudiant($annee, $filiere, $parcours, $tabPromos, $tabEtudiants) {
 	if (sizeof($tabPromos) > 0) {
 	    if (sizeof($tabEtudiants) > 0) {
@@ -494,6 +535,12 @@ class Promotion_IHM {
 	}
     }
 
+    /**
+     * Afficher un formulaire sous forme de liste d'étudiants appartenant
+     * à une promotion à éditer ou à supprimer
+     * @param tableau d'objets $tabPromos Un tableau d'objets Promotion (normalement une seule promotion)
+     * @param tableau d'objets $tabEtudiants Un tableau d'objets Etudiants de la promotion
+     */
     public static function afficherListeEtudiantsAEditer($tabPromos, $tabEtudiants) {
 	if (sizeof($tabPromos) > 0) {
 	    $idPromo = $tabPromos[0][0];
@@ -573,6 +620,13 @@ class Promotion_IHM {
 	}
     }
 
+    /**
+     * Afficher le planning des soutenances par ordre chronologique des étudiants
+     * d'une promotion
+     * @param Promotion $promotion La promotion concernée
+     * @param tableau d'objets $listeDateSoutenance La liste des dates de soutenances
+     * @param tableau d'objets $listeConvention La liste des conventions concernés
+     */
     public static function afficherPlanningPromotions($promotion, $listeDateSoutenance, $listeConvention) {
 	$enteteTableau =
 	"<table>

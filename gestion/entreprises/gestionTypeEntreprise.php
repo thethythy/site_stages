@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionTypeEntreprise.php
+ * Utilisation : page pour gérer les types d'entreprise (création, édition, suppression)
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

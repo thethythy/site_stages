@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listeDesEtudiants.php
+ * Utilisation : page pour visualiser les étudiants d'une ou toutes les promotions
+ * Dépendance(s) : listeDesEtudiantsData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

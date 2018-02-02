@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page convocationData.php
+ * Utilisation : page retournant un tableau de sélection d'envoie d'un courriel
+ *		 de convocation / invitation aux étudiants et aux entreprises
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
@@ -54,8 +61,8 @@ if (isset($_POST['date']) && $_POST['date'] > 0) {
     // Afficher la liste des convocations à envoyer ou déjà envoyées
     $tabOC = Convocation::getListeConvovationFromDateSoutenance($_POST['date']);
     $anneeUniversitaire = DateSoutenance::getDateSoutenance($_POST['date'])->getAnnee() - 1;
-    Convocation_IHM::afficherSelectionDestinairesConvocation($tabOC, $anneeUniversitaire, $_POST['date']);
-    
+    Convocation_IHM::afficherSelectionDestinairesConvocation("convocation.php",$tabOC, $anneeUniversitaire, $_POST['date']);
+
 } else {
     echo "<center>Veuillez sélectioner une date</center>";
 }

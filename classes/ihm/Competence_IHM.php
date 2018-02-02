@@ -2,6 +2,9 @@
 
 class Competence_IHM {
 
+    /**
+     * Afficher un formulaire pour saisir une nouvelle compétence
+     */
     public static function afficherFormulaireSaisie() {
 	?>
 	<FORM METHOD="POST" ACTION="">
@@ -18,7 +21,7 @@ class Competence_IHM {
 		<tr>
 		    <td colspan="2">
 			<input type=submit value="Enregistrer les données">
-			<input type=reset value="Effacer" onclick="effacer()"/>
+			<input type=reset value="Effacer" onclick="effacer()">
 		    </td>
 		</tr>
 	    </table>
@@ -31,11 +34,15 @@ class Competence_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire pour éditer une compétence existante
+     * @param integer $idComp Identifiant de la compétence à modifier
+     */
     public static function afficherFormulaireModification($idComp) {
 	$competence = Competence::getCompetence($idComp);
 	?>
-	<form method=post action=''>
-	    <input type=hidden name='id' value=<?php echo $idComp; ?>/>
+	<FORM METHOD="POST" ACTION="">
+	    <input type=hidden name='id' value=<?php echo $idComp; ?>>
 	    <table>
 		<tr id="entete2">
 		    <td colspan=2>Editer une compétence</td>
@@ -43,13 +50,13 @@ class Competence_IHM {
 		<tr>
 		    <th width="200">La compétence : </th>
 		    <td>
-			<input type="text" id='name' name="nomcompetence"value='<?php echo $competence->getNom(); ?>'>
+			<input type="text" id='name' name="nomcompetence" value='<?php echo $competence->getNom(); ?>'>
 		    </td>
 		</tr>
 		<tr>
 		    <td colspan="2">
 			<input type=submit value="Enregistrer les données">
-			<input type=reset value="Effacer" onclick="effacer()"/>
+			<input type=reset value="Effacer" onclick="effacer()">
 		    </td>
 		</tr>
 	    </table>
@@ -62,6 +69,10 @@ class Competence_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif pour demander l'édition ou supprimer
+     * les compétences une par une
+     */
     public static function afficherListeCompetenceAEditer() {
 	$tabCompetences = Competence::listerCompetences();
 	if (sizeof($tabCompetences) > 0) {

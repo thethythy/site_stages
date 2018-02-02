@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°2 : les compétences nécessaires pour une
+ * offre de stage
+ */
+
 class Competence_BDD {
 
     /**
@@ -27,6 +32,13 @@ class Competence_BDD {
 	}
     }
 
+    /**
+     * Obtenir un objet Competence à partir de son identifiant
+     * @global string $tab2 Le nom de la table 'competence'
+     * @global resource $db Une référence sur la base ouverte
+     * @param integer $identifiantBDD L'identifiant de la compétence
+     * @return enregistrement ou NULL
+     */
     public static function getCompetence($identifiantBDD) {
 	global $tab2;
 	global $db;
@@ -35,6 +47,12 @@ class Competence_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir la liste de toutes compétences
+     * @global string $tab2 Le nom de la table 'competence'
+     * @global resource $db Une référence sur la base ouverte
+     * @return tableau d'enregistrements
+     */
     public static function listerCompetences() {
 	global $tab2;
 	global $db;
@@ -53,6 +71,12 @@ class Competence_BDD {
 	return $tabCompetences;
     }
 
+    /**
+     * Supprimer en base l'enregistrement d'une compétence à partir de son identifiant
+     * @global string $tab2 Le nom de la table 'competence'
+     * @global resource $db Une référence sur la base ouverte
+     * @param integer $identifiant L'identifiant de la compétence
+     */
     public static function delete($identifiant) {
 	global $tab2;
 	global $db;

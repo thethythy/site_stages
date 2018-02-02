@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page saisirContact.php
+ * Utilisation : page pour saisir un nouveau contact
+ *		 page aussi accessible depuis saisirEntreprise.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -2,6 +2,9 @@
 
 class Menu {
 
+    /**
+     * Afficher le menu de la page d'accueil du site
+     */
     public static function menuAccueil() {
 	?>
 	    <div id="sidebar">
@@ -25,6 +28,9 @@ class Menu {
 	<?php
     }
 
+    /**
+     * Afficher le menu de la page présentation
+     */
     public static function menuPresentation() {
 	?>
 	    <div id="sidebar">
@@ -47,8 +53,11 @@ class Menu {
 	    </div>
 	    <div id="main">
 	<?php
-	}
+    }
 
+    /*
+     * Afficher le menu de la page dédiée aux étudiants
+     */
     public static function menuStagiaire() {
 	?>
 	    <div id="sidebar">
@@ -83,6 +92,9 @@ class Menu {
 	<?php
     }
 
+    /**
+     * Afficher le menu de la page dédiée aux enseignants
+     */
     public static function menuParrainage() {
 	?>
 	    <div id="sidebar">
@@ -97,6 +109,9 @@ class Menu {
 	<?php
     }
 
+    /**
+     * Afficher le menu de la page dédiée aux soutenances
+     */
     public static function menuSoutenance() {
 	?>
 	    <div id="sidebar">

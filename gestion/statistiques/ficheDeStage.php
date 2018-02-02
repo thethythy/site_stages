@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page ficheDeStage.php
+ * Utilisation : page de visualisation d'une fiche de stage
+ * Accès : restreint par authentification HTTP ; accessible depuis classementEntreprise.php
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin."bdd/connec.inc");

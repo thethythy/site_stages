@@ -1,9 +1,14 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°25 : mémoriser la notification
+ * des attributions des conventions aux enseignants
+ */
+
 class Attribution_BDD {
 
     /**
-     * Sauvegarder un nouvelle objet ou mise à jour d'un objet existant
+     * Sauvegarder un nouvel objet ou mise à jour d'un objet existant
      * @global resource $db
      * @global string $tab25
      * @param Attribution $attribution
@@ -31,7 +36,7 @@ class Attribution_BDD {
      * @global resource $db
      * @global string $tab25
      * @param integer $idattribution
-     * @return résultat de la requête
+     * @return boolean Résultat de la requête
      */
     public static function supprimer($idattribution) {
 	global $db;

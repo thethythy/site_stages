@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°3 : les contacts en entreprises
+ */
+
 class Contact_BDD {
 
-    // Méthodes statiques
-
+    /**
+     * Sauvegarde ou et met à jour en base un objet Contact
+     * @global string $tab3 Nom de la table 'contact'
+     * @global resource $db Référence sur la base ouverte
+     * @param Contact $contact Un objet contact
+     * @return integer Identifiant en base de l'ojet créé
+     */
     public static function sauvegarder($contact) {
 	global $tab3;
 	global $db;
@@ -41,8 +50,10 @@ class Contact_BDD {
 
     /**
      * Récupère un contact suivant son identifiant
+     * @global string $tab3 Nom de la table 'contact'
+     * @global resource $db Référence sur la base ouverte
      * @param $identifiantBDD l'identifiant du contact à récupérer
-     * @return String[] tableau contenant les informations d'un contact
+     * @return String[] tableau contenant les informations d'un contact ou NULL
      */
     public static function getContact($identifiantBDD) {
 	global $tab3;
@@ -53,6 +64,12 @@ class Contact_BDD {
 	return mysqli_fetch_array($req);
     }
 
+    /**
+     * Suppression en base d'un contact à partir de son identifiant
+     * @global string $tab3 Nom de la table 'contact'
+     * @global resource $db Référence sur la base ouverte
+     * @param integer $identifiantBDD Identifiant en base de l'objet à supprimer
+     */
     public static function supprimerContact($identifiantBDD) {
 	global $tab3;
 	global $db;
@@ -61,9 +78,11 @@ class Contact_BDD {
     }
 
     /**
-     * Renvoie la liste des contacts d'entreprise
-     * @param $identifiantEntreprise l'identifiant de l'entreprise
-     * @return String[] tablrau contenant tous les contacts de l'entreprise
+     * Renvoie la liste des contacts d'une entreprise
+     * @global string $tab3 Nom de la table 'contact'
+     * @global resource $db Référence sur la base ouverte
+     * @param integer $identifiantEntreprise L'identifiant de l'entreprise
+     * @return Tableau d'enregistrements de tous les contacts
      */
     public static function listerContacts($identifiantEntreprise) {
 	global $tab3;
@@ -91,17 +110,19 @@ class Contact_BDD {
 
     /**
      * Retourne une liste de contacts suivant un filtre
-     * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les contacts concernées par le filtre
+     * @global string $tab3 Nom de la table 'contact'
+     * @global resource $db Référence sur la base ouverte
+     * @param Filtre $filtre Le filtre global de la recherche
+     * @return Tableau d'enregistrements des contacts concernés par le filtre
      */
-    public static function getListeContacts($filtres) {
+    public static function getListeContacts($filtre) {
 	global $tab3;
 	global $db;
 
-	if ($filtres == "")
+	if ($filtre == "")
 	    $requete = "SELECT * FROM $tab3 ORDER BY nomcontact ASC;";
 	else
-	    $requete = "SELECT * FROM $tab3 WHERE " . $filtres->getStrFiltres() . " ORDER BY nomcontact ASC;";
+	    $requete = "SELECT * FROM $tab3 WHERE " . $filtre->getStrFiltres() . " ORDER BY nomcontact ASC;";
 
 	$result = $db->query($requete);
 

@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°22 : les types d'entreprises
+ */
+
 class TypeEntreprise_BDD {
 
+    /**
+     * Enregistrer ou mettre à jour un objet TypeEntreprise
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab22 Nom de la table 'type_entreprise'
+     * @param TypeEntreprise $typeEntreprise L'objet à enregistrer
+     */
     public static function sauvegarder($typeEntreprise) {
 	global $db;
 	global $tab22;
@@ -22,6 +32,13 @@ class TypeEntreprise_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir l'enregistrement TypeEntreprise à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab22 Nom de la table 'type_entreprise'
+     * @param integer $identifiant Identifiant de l'enregistrement
+     * @return enregistrement
+     */
     public static function getTypeEntreprise($identifiant) {
 	global $db;
 	global $tab22;
@@ -31,6 +48,13 @@ class TypeEntreprise_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir l'enregistrement TypeEntreprise à partir de son nom
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab22 Nom de la table 'type_entreprise'
+     * @param string $nom Le nom recherché
+     * @return enregistrement
+     */
     public static function getTypeEntrepriseFromNom($nom) {
 	global $db;
 	global $tab22;
@@ -40,6 +64,12 @@ class TypeEntreprise_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir les enregistrements de tous les objets TypeEntreprise
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab22 Nom de la table 'type_entreprise'
+     * @return tableau d'enregistrements
+     */
     public static function getListeTypeEntreprise() {
 	global $db;
 	global $tab22;
@@ -60,6 +90,12 @@ class TypeEntreprise_BDD {
 	return $tabTypeEntreprise;
     }
 
+    /**
+     * Suppression d'un enregistrement TypeEntreprise à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab22 Nom de la table 'type_entreprise'
+     * @param integer $identifiant L'identifiant de l'enregistrement à supprimer
+     */
     public static function supprimerTypeEntreprise($identifiant) {
 	global $db;
 	global $tab22;

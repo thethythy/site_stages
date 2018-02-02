@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * Classe Utils : une classe utilitaire regroupant des méthodes disparates
+ * dont certaines sont spécifiques au lieu de déploiement du site
+ */
+
 class Utils {
 
-    /** Methodes statiques * */
+    /**
+     * Test si une valeur est une adresse de couriel valide
+     * @param string $adresse
+     * @return boolean
+     */
     public static function VerifierAdresseMail($adresse) {
 	$SyntaxeEmail = '/^[\w\.\-]+@[\w.-]+\.[a-zA-Z]{2,6}$/';
 	if (preg_match($SyntaxeEmail, $adresse))
@@ -11,7 +20,12 @@ class Utils {
 	    return false;
     }
 
-    // Fonction qui enlève les caractères accentués
+    /**
+     * Remplace les caractères accentués par leurs équivalents sans accents
+     * ainsi que les espaces par des underscores
+     * @param string $string
+     * @return string
+     */
     public static function removeaccents($string) {
 	return strtr($string, array('À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A' ,'Å' => 'A',
 				    'Ç' => 'C',
@@ -34,10 +48,13 @@ class Utils {
 				    ' ' => '_'));
     }
 
-    // Fonction de recherche d'un étudiant dans le ldap de l'ic2
-    // Arguments : un nom et un prénom
-    // Retour : l'email (si pas trouvée chaine vide)
-    // DMAJ 21/03/06
+    /**
+     * Fonction de recherche d'un étudiant dans le ldap de l'ic2
+     * @param string $nom
+     * @param prénom $prenom
+     * @param boolean $affiche Indicteur pour afficher ou pas si la recherche est un succès
+     * @return string L'email (si pas trouvée chaine vide)
+     */
     public static function search_ldap($nom, $prenom, $affiche) {
 	// Mise en forme avant la recherche
 	// Remplace les caractères bizarres par des soulignés
@@ -75,6 +92,11 @@ class Utils {
 	return $mail;
     }
 
+    /**
+     * Convertir un numéro de mois en toute lettre
+     * @param integer $num
+     * @return string
+     */
     public static function numToMois($num) {
 	switch ($num) {
 	    case 1 : $mois = "janvier";

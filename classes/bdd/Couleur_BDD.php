@@ -1,15 +1,17 @@
 <?php
 
 /**
- * Méthodes d'interfaçage avec la base de données des objets Couleurs
+ * Représentation et accès à la table n°20 : les couleurs utilisables associées
+ * aux parrains, aux thèmes de stage et type d'entreprise
  */
+
 class Couleur_BDD {
 
     /**
      * Sauvegarde en base de données un objet Couleur
      * @global ressource $db Référence sur la base ouverte
-     * @global string $tab20 Nom de la table couleur
-     * @param Couleur $couleur L'objet Couleur à sauvegarder
+     * @global string $tab20 Nom de la table 'couleur'
+     * @param Couleur $couleur L'objet à sauvegarder
      */
     public static function sauvegarder($couleur) {
 	global $db;
@@ -23,6 +25,13 @@ class Couleur_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir un enregistrement Couleur à partir de son identifiant
+     * @global ressource $db Référence sur la base ouverte
+     * @global string $tab20 Nom de la table 'couleur'
+     * @param integer $identifiant Identifiant de la couleur recherchée
+     * @return enregistrement
+     */
     public static function getCouleur($identifiant) {
 	global $db;
 	global $tab20;
@@ -32,6 +41,12 @@ class Couleur_BDD {
 	return mysqli_fetch_array($req);
     }
 
+    /**
+     * Obtenir les enregistrements de toutes les couleurs en base
+     * @global ressource $db Référence sur la base ouverte
+     * @global string $tab20 Nom de la table 'couleur'
+     * @return tableau d'enregistrements
+     */
     public static function listerCouleur() {
 	global $db;
 	global $tab20;
@@ -52,6 +67,12 @@ class Couleur_BDD {
 	return $tabCouleur;
     }
 
+    /**
+     * Suppression d'un enregistrement Couleur à partir de son identifiant
+     * @global ressource $db Référence sur la base ouverte
+     * @global string $tab20 Nom de la table 'couleur'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement concerné
+     */
     public static function delete($identifiantBDD) {
 	global $db;
 	global $tab20;

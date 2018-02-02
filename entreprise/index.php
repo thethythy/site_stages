@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page index.php
+ * Utilisation : page pour déposer une offre de stage
+ * Accès : public
+ */
+
 include_once("../classes/bdd/connec.inc");
 include_once("../classes/ihm/IHM_Generale.php");
 include_once("../classes/moteur/Filtre.php");
@@ -27,6 +33,12 @@ include_once("../classes/moteur/Parcours.php");
 include_once("../classes/bdd/TypeEntreprise_BDD.php");
 include_once("../classes/moteur/TypeEntreprise.php");
 
+/**
+ * Vérification de la présence de toutes les informations nécessaire
+ * pour enregistrer une nouvelle offre de stage dans la base
+ * @global string $emailResponsable
+ * @global string $baseSite
+ */
 function verifier(){
     if (isset($_POST['titre'])) {
 	extract($_POST);

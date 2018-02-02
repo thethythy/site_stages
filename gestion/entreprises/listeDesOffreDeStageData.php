@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page listeDesOffreDeStageData.php
+ * Utilisation : obtenir un tableau des offres en attente et un tableau des offres traitées
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

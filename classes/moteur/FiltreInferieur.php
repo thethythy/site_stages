@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Classe FiltreInferieur : un filtre comparateur entre deux valeurs entières
+ */
+
 class FiltreInferieur extends Filtre {
 
-    // Constructeur de classe
+    /**
+     * Construction d'un objet Filtre '<='
+     * @param string $champ
+     * @param string $valeur
+     */
     public function FiltreInferieur($champ, $valeur) {
-	$this->champ = $champ;
-	$this->valeur = $valeur;
-	$this->strFiltres = $this->champ . " <= '" . $this->valeur . "'";
+	$this->strFiltres = $champ . " <= '" . $valeur . "'";
     }
 
 }

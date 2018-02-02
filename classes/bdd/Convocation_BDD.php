@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°24 : mémoriser les convocations/invitations
+ * aux soutenances de stage
+ */
+
 class Convocation_BDD {
 
     /**
+     * Enregistrement ou mise à jour en base d'une convocation
      * Sauvegarder un nouvelle objet ou mise à jour d'un objet existant
-     * @global resource $db
-     * @global string $tab24
-     * @param Convocation $convocation
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab24 Nom de la table 'convocation'
+     * @param objet Convocation $convocation La covocation à enregistrer
      * @return FALSE ou identifiant de l'objet en base
      */
     public static function sauvegarder($convocation) {
@@ -28,10 +34,10 @@ class Convocation_BDD {
 
     /**
      * Supprimer un enregistrement donné par son identifiant
-     * @global resource $db
-     * @global string $tab24
-     * @param integer $idconvocation
-     * @return résultat de la requête
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab24 Nom de la table 'convocation'
+     * @param integer $idconvocation Identifiant de l'enregistrement
+     * @return boolean Résultat de la requête
      */
     public static function supprimer($idconvocation) {
 	global $db;
@@ -44,9 +50,9 @@ class Convocation_BDD {
 
     /**
      * Rechercher un enregistrement à partir de son identifiant
-     * @global resource $db
-     * @global string $tab24
-     * @param integer $idconvocation
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab24 Nom de la table 'convocation'
+     * @param integer $idconvocation Identifiant de l'enregistrement
      * @return FALSE ou enregistrement
      */
     public static function getConvocation($idconvocation) {
@@ -64,9 +70,9 @@ class Convocation_BDD {
 
     /**
      * Rechercher un enregistrement à partir de la soutenance
-     * @global resource $db
-     * @global string $tab24
-     * @param integer $idsoutenance
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab24 Nom de la table 'convocation'
+     * @param integer $idsoutenance Identifiant de la soutenance concernée
      * @return FALSE ou enregistrement
      */
     public static function getConvocationFromSoutenance($idsoutenance) {
@@ -84,10 +90,10 @@ class Convocation_BDD {
 
     /**
      * Rechercher les enregistrements à partir de la date de soutenance
-     * @global resource $db
-     * @global string $tab17
-     * @global string $tab24
-     * @param integer $iddatesoutenance
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @global string $tab24 Nom de la table 'convocation'
+     * @param integer $iddatesoutenance Identifiant de la date de soutenance
      * @return tableau d'enregistrements
      */
     public static function getConvocationsFromDateSoutenance($iddatesoutenance) {

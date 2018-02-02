@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionCouleur.php
+ * Utilisation : page de gestions des couleurs (création, édition, suppression)
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

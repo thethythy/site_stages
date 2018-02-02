@@ -2,6 +2,9 @@
 
 class Parrain_IHM {
 
+    /**
+     * Afficher un formulaire de saisie d'un nouveu parrain
+     */
     public static function afficherFormulaireSaisie() {
 	$tabCouleur = Couleur::listerCouleur();
 	?>
@@ -58,6 +61,10 @@ class Parrain_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'un parrain existant
+     * @param integer $idParrain Identifiant du parrain édité
+     */
     public static function afficherFormulaireModificationParrain($idParrain) {
 	$parrain = Parrain::getParrain($idParrain);
 	$couleur = $parrain->getCouleur();
@@ -129,6 +136,10 @@ class Parrain_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif de la liste des parrains
+     * à éditer ou à supprimer
+     */
     public static function afficherListeParrainAEditer() {
 	$tabParrains = Parrain::listerParrain();
 	if (sizeof($tabParrains) > 0) {
@@ -177,6 +188,11 @@ class Parrain_IHM {
 	}
     }
 
+    /**
+     * Afficher un formulaire de sélection du parrain (nom du parrain, année,
+     * filière et parcours)
+     * @param string $fichier Page de traitement de la sélection
+     */
     public static function afficherFormulaireRecherche($fichier) {
 	$tabAU = Promotion_BDD::getAnneesUniversitaires();
 	$tabP = Parrain::listerParrain();
@@ -269,6 +285,10 @@ class Parrain_IHM {
 	<?php
     }
 
+    /**
+     * Afficher la liste des parrainages à partir d'une liste de conventions
+     * @param tableau d'objets $tabConventions Les objets Conventions concernées
+     */
     public static function afficherListeParrainage($tabConventions) {
 	if (sizeof($tabConventions) > 0) {
 	?>
@@ -331,6 +351,12 @@ class Parrain_IHM {
 }
     }
 
+    /**
+     * Afficher un décompte des parrainages par promotion pour un parrain
+     * ou tous les parrains
+     * @param tableau d'objets $tabPromotions Les objets promotions concernées
+     * @param tableau d'objets $tabConventions Les conventions concernées
+     */
     public static function afficherListeBilanParrains($tabPromotions, $tabConventions) {
 	if (sizeof($tabConventions) > 0 && sizeof($tabPromotions) > 0) {
 	    ?>
@@ -404,6 +430,13 @@ class Parrain_IHM {
 	}
     }
 
+    /**
+     * Afficher un planning chronologique des soutenances d'un parrain.
+     * Chaque soutenance affichée permet d'accéder à la convention associée.
+     * @param integer $annee L'année concernée
+     * @param tableau d'objets $listeDateSoutenance Les objets DateSoutenance concernés
+     * @param tableau d'objets $listeConvention Les objets Convention concernés
+     */
     public static function afficherPlanningParrains($annee, $listeDateSoutenance, $listeConvention) {
 	$enteteTableau =
 	"<table>

@@ -1,14 +1,25 @@
 <?php
 
+/**
+ * Les compétences nécessaires pour les offres de stage
+ */
+
 class Competence {
 
-    var $identifiantBDD;
-    var $nom;
+    var $identifiantBDD; // Identifiant en base
+    var $nom; // Le nom de la compétence affichable
 
+    /**
+     * Initialisation d'un nouvel objet Competence
+     * @param integer $identifiant
+     * @param string $name
+     */
     public function Competence($identifiant, $name) {
 	$this->nom = $name;
 	$this->identifiantBDD = $identifiant;
     }
+
+    // Accesseurs
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
@@ -22,6 +33,13 @@ class Competence {
 	$this->nom = $name;
     }
 
+    // Méthodes statiques
+
+    /**
+     * Obtenir un objet Competence à partir d'un identifiant
+     * @param integer $identifiantCompetence
+     * @return Competence
+     */
     public static function getCompetence($identifiantCompetence) {
 	$competenceString = Competence_BDD::getCompetence($identifiantCompetence);
 
@@ -31,6 +49,10 @@ class Competence {
 	return $competence;
     }
 
+    /**
+     * Obtenir une liste d'objets Competence
+     * @return tableau d'objets
+     */
     public static function listerCompetences() {
 	$tabCompetences = array();
 	$tabCompetenceString = Competence_BDD::listerCompetences();
@@ -43,11 +65,19 @@ class Competence {
 	return $tabCompetences;
     }
 
+    /**
+     * Enregistrer en base une nouvelle compétence à partir d'informations
+     * @param tableau de valeurs d'attributs $tabDonnees
+     */
     public static function saisirDonneesCompetences($tabDonnees) {
 	$competence = new Competence("", $tabDonnees[0]);
 	Competence_BDD::sauvegarder($competence);
     }
 
+    /**
+     * Supprimer une compétence en base à partir de son identifiant
+     * @param integer $identifiant
+     */
     public static function deleteCompetence($identifiant) {
 	Competence_BDD::delete($identifiant);
     }

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page classementEntreprise.php
+ * Utilisation : page de visualisation du classement des entreprises par nombre de stagiaires
+ * Dépendance(s) : classementEntrepriseData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin."bdd/connec.inc");

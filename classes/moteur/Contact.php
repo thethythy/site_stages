@@ -1,17 +1,29 @@
 <?php
 
+/**
+ * Les contacts en entreprises
+ */
+
 class Contact {
 
-    // Déclaration des attributs de la classe
-    var $identifiantBDD;
-    var $nom;
-    var $prenom;
-    var $telephone;
-    var $telecopie;
-    var $email;
-    var $identifiant_entreprise;
+    var $identifiantBDD; // Identifiant unique en base
+    var $nom; // Nom de famille
+    var $prenom; // Prénom
+    var $telephone; // Numéro de téléphone
+    var $telecopie; // Numéro de fax
+    var $email; // Adresse de courriel
+    var $identifiant_entreprise; // Identifiant de l'entreprise associée
 
-    // Constructeur de classe
+    /**
+     * Constructeur d'un objet Contact
+     * @param integer $identifiantBDD
+     * @param string $nom
+     * @param string $prenom
+     * @param string $telephone
+     * @param string $telecopie
+     * @param string $email
+     * @param integer $identifiant_entreprise
+     */
     public function Contact($identifiantBDD, $nom, $prenom, $telephone,
 	    $telecopie, $email, $identifiant_entreprise) {
 	$this->identifiantBDD = $identifiantBDD;
@@ -23,30 +35,11 @@ class Contact {
 	$this->identifiant_entreprise = $identifiant_entreprise;
     }
 
-    // Méthodes diverses
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
 
-    public function setNom($nom) {
-	$this->nom = $nom;
-    }
-
-    public function setPrenom($prenom) {
-	$this->prenom = $prenom;
-    }
-
-    public function setTelephone($telephone) {
-	$this->telephone = $telephone;
-    }
-
-    public function setTelecopie($telecopie) {
-	$this->telecopie = $telecopie;
-    }
-
-    public function setEmail($email) {
-	$this->email = $email;
-    }
-
-    public function setIdentifiant_entreprise($identifiant_entreprise) {
-	$this->identifiant_entreprise = $identifiant_entreprise;
+    public function getIdentifiantBDD() {
+	return $this->identifiantBDD;
     }
 
     public function getNom() {
@@ -73,16 +66,49 @@ class Contact {
 	return Entreprise::getEntreprise($this->identifiant_entreprise);
     }
 
-    public function getIdentifiantBDD() {
-	return $this->identifiantBDD;
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setNom($nom) {
+	$this->nom = $nom;
     }
 
-    /** Méthodes statiques * */
+    public function setPrenom($prenom) {
+	$this->prenom = $prenom;
+    }
 
+    public function setTelephone($telephone) {
+	$this->telephone = $telephone;
+    }
+
+    public function setTelecopie($telecopie) {
+	$this->telecopie = $telecopie;
+    }
+
+    public function setEmail($email) {
+	$this->email = $email;
+    }
+
+    public function setIdentifiant_entreprise($identifiant_entreprise) {
+	$this->identifiant_entreprise = $identifiant_entreprise;
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
+
+    /**
+     * Suppression d'un contact en base de données
+     * @param integer $idContact
+     */
     public static function supprimerContact($idContact) {
 	Contact_BDD::supprimerContact($idContact);
     }
 
+    /**
+     * Obtenir un objet Contact à partir de son identfiant en base
+     * @param integer $idContact
+     * @return Contact
+     */
     public static function getContact($idContact) {
 	$contactBDD = Contact_BDD::getContact($idContact);
 
@@ -92,8 +118,13 @@ class Contact {
 			   $contactBDD["identreprise"]);
     }
 
-    public static function getListeContacts($filtres) {
-	$tabContactString = Contact_BDD::getListeContacts($filtres);
+    /**
+     * Obtenir une liste d'objets Contact à partir d'un filtre de sélection
+     * @param Filtre $filtre
+     * @return tableau d'objets
+     */
+    public static function getListeContacts($filtre) {
+	$tabContactString = Contact_BDD::getListeContacts($filtre);
 	$tabContacts = array();
 
 	for ($i = 0; $i < sizeof($tabContactString); $i++) {
@@ -109,6 +140,11 @@ class Contact {
 	return $tabContacts;
     }
 
+    /**
+     * Obtenir tous les contacts d'une entreprise
+     * @param integer $identifiant_entreprise
+     * @return tableau d'objets
+     */
     public static function listerContacts($identifiant_entreprise) {
 	$tab_contacts = array();
 	$tabContactsStr = Contact_BDD::listerContacts($identifiant_entreprise);

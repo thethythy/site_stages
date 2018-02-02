@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionClef.php
+ * Utilisation : page de gestion de la clé d'accès aux parties privées
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
@@ -39,7 +45,7 @@ $mois = date('n');
 
 if ($mois == 9 || $mois == 10) { // Il faut être entre le 1/09 et le 31/10
     // Afficher formulaire pour définir une clef
-    Clef_IHM::afficherFormulaireDefiniClef($HClef);
+    Clef_IHM::afficherFormulaireDefinitionClef($HClef);
 } else {
     // Afficher un message d'erreur
     IHM_Generale::erreur("Cette fonctionnalité n'est accessible que durant le mois de septembre et le mois d'octobre.");

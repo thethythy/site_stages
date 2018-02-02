@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page modifierPromotionData.php
+ * Utilisation : page retournant un tableau des étudiants d'une promotion
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin."bdd/connec.inc");

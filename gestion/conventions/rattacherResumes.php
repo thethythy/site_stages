@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page rattacherResumes.php
+ * Utilisation : page pour rattacher les fichiers de résumés aux conventions
+ * Dépendance(s) : rattacherResumesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

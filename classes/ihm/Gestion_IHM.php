@@ -2,6 +2,11 @@
 
 class Gestion_IHM {
 
+    /**
+     * Afficher dans un onglet le tableau des tâches et dans un deuxième onglet
+     * la page principale d'administration (back-office du site)
+     * L'onglet actif est mémoriser en stockage local du navigateur
+     */
     public static function afficherMenuGestion() {
 	?>
 	<center><a href="./manuel/manuel.php">Manuel d'utilisation en ligne</a></center>

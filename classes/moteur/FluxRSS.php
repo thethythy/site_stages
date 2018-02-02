@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * Classe FluxRSS : flux des offres de stage du site
+ */
+
 class FluxRSS {
 
-    // Ouverture du fichier XML contenant le flux RSS
+    /**
+     * Ouverture du fichier XML contenant le flux RSS
+     * @return DOMDocument
+     */
     public static function openFluxXML() {
 	// Ouverture du fichier
 	$file = new DOMDocument();
@@ -11,7 +18,11 @@ class FluxRSS {
 	return $file;
     }
 
-    // Crétion du fichier de flux initial vide (à exécuter une seule fois)
+    /**
+     * Crétion du fichier de flux initial vide (à exécuter une seule fois)
+     * @global string $baseSite
+     * @return DOMDocument
+     */
     public static function createXML() {
 	global $baseSite;
 
@@ -66,7 +77,15 @@ class FluxRSS {
 	return $file;
     }
 
-    // Ajout d'un élément dans le flux
+    /**
+     * Ajout d'un élément dans le flux
+     * @param DOMDocument $file
+     * @param string $title
+     * @param string $link
+     * @param unix time $timestamp
+     * @param string $author
+     * @param string $contents
+     */
     public static function addOneNews($file, $title, $link, $timestamp, $author, $contents) {
 	$file->formatOutput = true;
 
@@ -114,12 +133,19 @@ class FluxRSS {
 	$texte_description = $element_description->appendChild($texte_description);
     }
 
-    // Sauvegarde du fichier XML contenant le flux
+    /**
+     * Sauvegarde du fichier XML contenant le flux
+     * @param DOMDocument $file
+     */
     public static function saveFluxXML($file) {
 	$file->save("../../flux/fluxrss.xml");
     }
 
-    // Suppression du fichier XML contenant le flux et suppression du contenu de la base
+    /**
+     * Suppression du fichier XML contenant le flux et suppression du contenu de la base
+     * @global resource $db Une référence sur la base de donnée ouverte
+     * @return boolean
+     */
     public static function deleteFlux() {
 	global $db;
 	if (@unlink("../../flux/fluxrss.xml")) {
@@ -128,12 +154,18 @@ class FluxRSS {
 	return false;
     }
 
-    // Test si le fichier XML contenant le flux RSS existe déjà
+    /**
+     * Test si le fichier XML contenant le flux RSS existe déjà
+     * @return boolean
+     */
     public static function existe() {
 	return file_exists("../../flux/fluxrss.xml");
     }
 
-    // Initialisation du flux (à exécuter une seule fois)
+    /**
+     * Initialisation du flux (à exécuter une seule fois)
+     * @global resource $db Une référence sur la base de donnée ouverte
+     */
     public static function initialise() {
 	global $db;
 	// Création du fichier XML
@@ -150,7 +182,15 @@ class FluxRSS {
 	FluxRSS::saveFluxXML($file);
     }
 
-    // Mise à jour du flux
+    /**
+     * Mise à jour du flux
+     * @global resource $db Une référence sur la base de donnée ouverte
+     * @param string $title
+     * @param string $link
+     * @param unix time $timestamp
+     * @param string $contents
+     * @param string $author
+     */
     public static function miseAJour($title, $link, $timestamp, $contents, $author) {
 	global $db;
 	// Ajout de la news dans la base de données

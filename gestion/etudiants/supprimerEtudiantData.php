@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page supprimerEtudiantData.php
+ * Utilisation : page pour obtenir un tableau d'étudiants à supprimer de la base
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

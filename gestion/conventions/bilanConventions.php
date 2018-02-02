@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page bilanConventions.php
+ * Utilisation : page visualisant par promotion les étudiants ayant une convention
+ * Dépendance(s) : bilanConventionsData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

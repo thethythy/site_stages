@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page index.php
+ * Utilisation : page d'accès aux documents (résumés, rapports, exportations, etc.
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 include_once($chemin."ihm/IHM_Generale.php");
 

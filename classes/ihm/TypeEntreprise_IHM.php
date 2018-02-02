@@ -2,6 +2,9 @@
 
 class TypeEntreprise_IHM {
 
+    /**
+     * Afficher un formulaire de création d'un nouveau type d'entreprise
+     */
     public static function afficherFormulaireSaisie() {
 	$tabCouleur = Couleur::listerCouleur();
 	?>
@@ -47,6 +50,10 @@ class TypeEntreprise_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'un type d'entreprise
+     * @param integer $idTypeEntreprise Identifiant du type à éditer
+     */
     public static function afficherFormulaireModification($idTypeEntreprise) {
         $type = TypeEntreprise::getTypeEntreprise($idTypeEntreprise);
         $couleur = $type->getCouleur();
@@ -98,6 +105,10 @@ class TypeEntreprise_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif pour éditer ou supprimer un type
+     * d'entreprise parmi la liste affichée
+     */
     public static function afficherListeTypeEntrepriseAEditer() {
 	$tabTypes = TypeEntreprise::getListeTypeEntreprise();
 	if (sizeof($tabTypes) > 0) {
@@ -139,7 +150,7 @@ class TypeEntreprise_IHM {
 	    echo "</table>";
 	    echo "<br/><br/>";
 	} else {
-	    echo "<br/><center>Aucune couleur n'a été trouvée.</center><br/>";
+	    echo "<br/><center>Aucun type d'entreprise n'a été trouvé.</center><br/>";
 	}
     }
 }

@@ -2,8 +2,11 @@
 
 class Etudiant_IHM {
 
-    // $etu = Etudiant qui est modifié et dont les informations sont affichées.
-    // si $etu = "", alors il s'agit d'un formulaire de création (champs vide)
+    /**
+     * Affiche un formulaire d'édition d'un étudiant
+     * Si $etu = "", alors il s'agit d'un formulaire de création (champs vide)
+     * @param Etudiant ou "" $etu L'étudiant à éditer ou rien
+     */
     public static function afficherFormulaireEdition($etu) {
 	?>
 	<form method=post action="">
@@ -81,6 +84,13 @@ class Etudiant_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de dépôt d'un document par un étudiant
+     * @param tableau d'objets $tabEtu Les objets Etudiant concernés
+     * @param integer $annee L'année concernée
+     * @param integer $parcours L'identifiant du parcours concerné
+     * @param integer $filiere L'identifiant de la filière concernée
+     */
     public static function afficherFormulaireDepot($tabEtu, $annee, $parcours, $filiere) {
 	?>
 	<form enctype="multipart/form-data" method=post action="">
@@ -109,7 +119,9 @@ class Etudiant_IHM {
 
 			    <tr>
 				<td>
-				    Les formats acceptés sont : PDF DOC DOCX.<br/>La taille doit être inférieure à 20 Mo.
+				    Les formats acceptés sont : PDF DOC DOCX.<br/>
+				    La taille doit être inférieure à 20 Mo.<br/>
+				    Déposer un seul document à la fois.
 				</td>
 			    </tr>
 
@@ -118,13 +130,20 @@ class Etudiant_IHM {
 			    <tr>
 				<td>Déposer votre rapport ici :</td>
 				<td>
-				    <input name="uploadRapport" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitRapport" value="Déposer le rapport"/>
+				    <input name="uploadRapport" type="file"/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input type="submit" name="submitRapport" value="Déposer le rapport"/>
 				</td>
 			    </tr>
+
+			    <tr><td>&nbsp;</td></tr>
+
 			    <tr>
 				<td>Déposer votre résumé ici :</td>
 				<td>
-				    <input name="uploadResume" type="file"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submitResume" value="Déposer le résumé"/>
+				    <input name="uploadResume" type="file"/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input type="submit" name="submitResume" value="Déposer le résumé"/>
 				</td>
 			    </tr>
 			</table>
@@ -140,6 +159,11 @@ class Etudiant_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau statique d'étudiants
+     * @param integer $annee L'année concernée
+     * @param tableau d'objets $tabEtudiants Tableau d'objets Etudiant
+     */
     public static function afficherListeEtudiants($annee, $tabEtudiants) {
 	$nbEtudiants = sizeof($tabEtudiants);
 	?>
@@ -177,6 +201,12 @@ class Etudiant_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif d'une liste d'étudiants pour supprimer
+     * un étudiant (sans convention)
+     * @param type $idPromo
+     * @param type $tabEtuSansConv
+     */
     public static function afficherListeEtudiantsSansConventions($idPromo, $tabEtuSansConv) {
 	if (sizeof($tabEtuSansConv) > 0) {
 	    ?>

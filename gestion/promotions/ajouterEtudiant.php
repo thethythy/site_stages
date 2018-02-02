@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page ajouterEtudiant.php
+ * Utilisation : page pour ajouter un étudiant à une promotion
+ *		 page accessible depuis modifierPromotion.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

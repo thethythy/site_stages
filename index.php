@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page index.php
+ * Utilisation : page principale du site
+ * Accès : public
+ */
+
 include_once("./classes/ihm/IHM_Generale.php");
 include_once("./classes/ihm/Menu.php");
 

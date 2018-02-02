@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Page getEnseignantICal.php
+ * Utilisation : créer puis retourne un flux (le fichier soutenance.ics)
+ *		 du planning des soutenances au format ICALENDAR
+ * Accès : public (doit être importer sans problème)
+ *	   mais le lien n'est que dans la page bilanParrainages.php
+ */
+
 $chemin = "../classes/";
 
 include_once($chemin . "bdd/connec.inc");

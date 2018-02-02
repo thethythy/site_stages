@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Classe FiltreString : un filtre de ressemblance entre deux chaînes
+ */
+
 class FiltreString extends Filtre {
 
-    // Constructeur de classe
+    /**
+     * Constructeur d'un filtre 'LIKE'
+     * @param string $champ
+     * @param string $valeur
+     */
     public function FiltreString($champ, $valeur) {
-	$this->champ = $champ;
-	$this->valeur = $valeur;
-	$this->strFiltres = $this->champ . " LIKE '" . $this->valeur . "'";
+	$this->strFiltres = $champ . " LIKE '" . $valeur . "'";
     }
 
 }

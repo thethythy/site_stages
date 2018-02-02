@@ -2,8 +2,10 @@
 
 class Contact_IHM {
 
-    // Méthodes statiques
-
+    /**
+     * Afficher un formulaire pour filtrer la liste des contacts
+     * @param string $page La page du traitement du formulaire
+     */
     public static function afficherFormulaireRecherche($page) {
 	?>
 	<form method=post action="<?php echo $page; ?>">
@@ -58,8 +60,12 @@ class Contact_IHM {
 	<?php
     }
 
-    // $cont = Contact qui est modifié et dont les informations son affichées.
-    // si $cont = "", alors il s'agit d'un formulaire de création (champs vide)
+    /**
+     * Affiche un formulaire d'édition d'un contact.
+     * Si $cont est un objet Contact c'est un formulaire de modification
+     * Si $cont = "" alors c'est un formulaire de création
+     * @param Contact ou "" $cont L'objet à éditer ou indicateur de création
+     */
     public static function afficherFormulaireSaisie($cont) {
 
 	if ($cont != "")
@@ -166,6 +172,10 @@ class Contact_IHM {
 	<?php
     }
 
+    /**
+     * Afficher la liste des contacts (et leurs entreprises) sous forme de tableau
+     * @param tableau d'objets $tabContacts Un tableau d'objets Contact
+     */
     public static function afficherListeContacts($tabContacts) {
 	for ($i = 0; $i < sizeof($tabContacts); $i++) {
 	?>
@@ -204,6 +214,11 @@ class Contact_IHM {
 	echo "<br/><br/>";
     }
 
+    /**
+     * Afficher la liste des contacts (et leurs entreprises) dans un tableau
+     * interactif avec un bouton "édition" et un bouton "suppression"
+     * @param tableau d'objets $tabContacts Un tableau d'objets Contact
+     */
     public static function afficherListeContactsAEditer($tabContacts) {
 	for ($i = 0; $i < sizeof($tabContacts); $i++) {
 	?>

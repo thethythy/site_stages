@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page visualiserOffre.php
+ * Utilisation : page pour visualiser une offre de stage
+ * Accès : public mais le lien est uniquement connu par envoi de mail aux entreprises
+ */
+
 $chemin = "../classes/";
 
 include_once($chemin."bdd/connec.inc");
@@ -29,6 +35,9 @@ $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Entreprise');
 
 IHM_Generale::header("Visualiser une", "offre de stage", "../", $tabLiens);
+
+// On visualise une offre si l'identifiant est positionnné et qu'il correspond
+// bien à une offre existante dans la base
 
 if (isset($_GET['id'])) {
     $offreDeStage = OffreDeStage::getOffreDeStage($_GET['id']);

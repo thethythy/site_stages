@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page visualiserSDS.php
+ * Utilisation : page pour consulter une demande de validation d'un sujet
+ *		 page accessible depuis consulterSDS.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

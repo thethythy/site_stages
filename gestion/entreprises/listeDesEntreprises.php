@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listeDesEntreprises.php
+ * Utilisation : page pour visualiser les entreprises selon un filtre de sélection
+ * Accès : restreint par authentification HTTP
+ */
+
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -2,6 +2,14 @@
 
 class IHM_Generale {
 
+    /**
+     * Afficher l'entête de page commune à toutes les pages du site
+     * @param string $titreGris Titre affiché en gris
+     * @param string $titreOrange Titre affiché en orange
+     * @param string $lienRacine Chemin relatif de la racine du site
+     * @param tableau de string $liens Tableau des liens de navigation internes
+     * @param string $ext Indicateur pour personnaliser les scripts à utiliser
+     */
     public static function header($titreGris, $titreOrange, $lienRacine, $liens, $ext = false) {
 	?>
 	<!DOCTYPE HTML>
@@ -81,37 +89,10 @@ class IHM_Generale {
 	<?php
     }
 
-    public static function endHeaderAccueil() {
-	?>
-		    </div>
-		    <br/><br/>
-		</div>
-	<?php
-    }
-
-    public static function footerAccueil() {
-	?>
-		<div id="footerAccueil">
-		    <a href="gestion/" title="Partie réservée">Connexion | </a>
-		    <a href="mentions.php" title="Partie réservée">Mentions légales</a>
-		    <p>
-			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
-			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage sur le flux RSS'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
-			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
-			<a href="http://www.viadeo.com/fr/profile/thierry.lemeunier2" title="Suivez-moi sur Viadeo"><img src='/images/Favicon.png' align='center' alt='Profil Viadeo' /></a>
-		    </p>
-		    <p><nav>
-			<a href="http://www-info.univ-lemans.fr"><img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/></a>
-			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc.png" width="120" height="40" align='center'/></a>
-			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="80" height="50" align='center'/></a>
-			<a href="http://www.univ-lemans.fr"><img src="/images/logo_universite.png" width="120" height="30" align='center'/></a>
-		    </nav></p>
-		</div>
-	    </body>
-	</html>
-	<?php
-    }
-
+    /**
+     * Afficher la fin de l'entête commune à toutes les pages du site
+     * @param boolean $pageAvecMenu Indicateur à vrai si la page contient un menu
+     */
     public static function endHeader($pageAvecMenu) {
 	if ($pageAvecMenu)
 	    echo "</div>";
@@ -122,6 +103,21 @@ class IHM_Generale {
 	<?php
     }
 
+    /**
+     * Afficher la fin de l'entête spécifique à la page d'accueil
+     */
+    public static function endHeaderAccueil() {
+	?>
+		    </div>
+		    <br/><br/>
+		</div>
+	<?php
+    }
+
+    /**
+     * Afficher le pied de page commun à toutes les pages du site
+     * @param type $lienRacine
+     */
     public static function footer($lienRacine) {
 	?>
 		<div id="footer">
@@ -148,6 +144,37 @@ class IHM_Generale {
 	<?php
     }
 
+    /**
+     * Afficher le pied de page spécifique à la page d'accueil
+     */
+    public static function footerAccueil() {
+	?>
+		<div id="footerAccueil">
+		    <a href="gestion/" title="Partie réservée">Connexion | </a>
+		    <a href="mentions.php" title="Partie réservée">Mentions légales</a>
+		    <p>
+			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
+			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage sur le flux RSS'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
+			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
+			<a href="http://www.viadeo.com/fr/profile/thierry.lemeunier2" title="Suivez-moi sur Viadeo"><img src='/images/Favicon.png' align='center' alt='Profil Viadeo' /></a>
+		    </p>
+		    <p><nav>
+			<a href="http://www-info.univ-lemans.fr"><img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/></a>
+			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc.png" width="120" height="40" align='center'/></a>
+			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="80" height="50" align='center'/></a>
+			<a href="http://www.univ-lemans.fr"><img src="/images/logo_universite.png" width="120" height="30" align='center'/></a>
+		    </nav></p>
+		</div>
+	    </body>
+	</html>
+	<?php
+    }
+
+    /**
+     * Afficher une erreur dans un cadre rouge avec une grande image
+     * et un message explicatif
+     * @param string $text Le message explicatif
+     */
     public static function erreur($text) {
 	?>
 	    <div id='erreur'>
@@ -159,6 +186,9 @@ class IHM_Generale {
 	<?php
     }
 
+    /**
+     * Afficher un avertissement pour signaler l'absence d'une fonctionnalité
+     */
     public static function enConstruction() {
 	?>
 	    <div id='construction'>

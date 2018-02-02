@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page getDataConventionsXML.php
+ * Utilisation : page pour obtenir une flux XML des conventions
+ *		 page appelée par planifier_compresse.js
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 include_once($chemin."bdd/connec.inc");
 include_once($chemin."moteur/Filtre.php");

@@ -5,7 +5,7 @@ class Stage_IHM {
     /**
      * Affiche un formulaire de filtrage sur l'année, le parcours, la filière
      * le thème de stage, le type d'entreprise et le lieu du stage
-     * @param string $page Indique la page d'action du formulaire
+     * @param string $page Indique la page du traitement des requêtes Ajax
      */
     public static function afficherFormulaireRechercheAvancee($page) {
 	$tabAU = Promotion_BDD::getAnneesUniversitaires();
@@ -129,6 +129,11 @@ class Stage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher une liste de stages passés avec un lien vers le résumé s'il existe.
+     * @param tableau d'objets $tabEtuWithConv Liste des anciens étudiants concernés
+     * @param integer $annee L'année concernée
+     */
     public static function afficherListeAncienStages($tabEtuWithConv, $annee) {
 	?>
 	<?php echo sizeof($tabEtuWithConv) . " stage(s) trouvé(s) :"?>
@@ -197,9 +202,16 @@ class Stage_IHM {
 	        </tr>
 		<?php
 	    }
-	    echo "</table>";
-	}
+	echo "</table>";
+    }
 
+    /**
+     * Afficher un tableau interactif d'attribution des fichiers de résumés
+     * @param integer $annee L'année concernée
+     * @param integer $parcours L'identifiant du parcours concerné
+     * @param integer $filiere L'identifiant de la filière concernée
+     * @param tableau d'objets $tabEtuWithConv Liste des objets Etudiants
+     */
     public static function afficherListeResumes($annee, $parcours, $filiere, $tabEtuWithConv) {
 	?>
 	<form method=post action="">
@@ -263,6 +275,13 @@ class Stage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif d'attribution des notes
+     * @param integer $annee L'année concernée
+     * @param integer $parcours L'identifiant du parcours concerné
+     * @param integer $filiere L'identifiant de la filière concernée
+     * @param tableau d'objets $tabEtuWithConv Liste des objets Etudiants
+     */
     public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtuWithConv) {
 	?>
 	<form method="post" action="saisirNotesStages.php">
@@ -326,6 +345,12 @@ class Stage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher une fiche de stage récapitulative
+     * @param integer $idEtu Identifiant de l'étudiant
+     * @param integer $idPromo Identifiant de la promotion
+     * @param string $chemin Chemin d'accès au fichier résumé s'il existe
+     */
     public static function afficherFicheStage($idEtu, $idPromo, $chemin) {
 	$etudiant = Etudiant::getEtudiant($idEtu);
 	$promotion = Promotion::getPromotion($idPromo);

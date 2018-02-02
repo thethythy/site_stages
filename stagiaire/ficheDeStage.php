@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page ficheDeStage.php
+ * Utilisation : page de visualisation d'un ancien stage
+ * Accès : restreint par cookie ; lien accessible uniquement depuis listerAnciensStages.php
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

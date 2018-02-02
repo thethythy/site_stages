@@ -2,6 +2,10 @@
 
 class DateSoutenance_IHM {
 
+    /**
+     * Afficher un formulaire de saisie d'une nouvelle date de soutenance ainsi
+     * que des promotions associées
+     */
     public static function afficherFormulaireSaisie() {
 	?>
 	<form method="POST" action="">
@@ -49,6 +53,11 @@ class DateSoutenance_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'une date de soutenance déjà existante
+     * ainsi que les promotions associées et la convocation
+     * @param integer $idDate Identifiant de la date de soutenance
+     */
     public static function afficherFormulaireModification($idDate) {
 	$date = DateSoutenance::getDateSoutenance($idDate);
 	$date_formatee = date('Y-m-d', mktime(0, 0, 0, $date->getMois(), $date->getJour(), $date->getAnnee()));
@@ -114,6 +123,9 @@ class DateSoutenance_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif pour éditer ou supprimer les dates de soutenance
+     */
     public static function afficherListeDateSoutenanceAEditer() {
 	$tabDates = DateSoutenance::listerDateSoutenance();
 	if (sizeof($tabDates) > 0) {

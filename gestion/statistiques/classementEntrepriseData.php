@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Page classementEntrepriseData.php
+ * Utilisation : page de traitement Ajax retournant un tableau de classement
+ *		 des entreprises par nombre de stagiaire
+ *		 les fiches de stage sont accessibles
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = '../../classes/';
 
 include_once $chemin.'bdd/connec.inc';

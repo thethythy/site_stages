@@ -2,11 +2,15 @@
 
 class Convention_IHM {
 
-    // Méthodes statiques
-
-    // $conv = Entreprise qui est modifier et dont les informations son affichées.
-    // si $conv = "", alors il s'agit d'un formulaire de création (champs vide)
-    // $tabEtu = tableau contenant les étudiants à afficher
+    /**
+     * Afficher un formulaire de création ou de modification d'une convention de stage
+     * Si $conv = "" alors il s'agit d'un formulaire de création (champs vide)
+     * @param Entreprise $conv Objet qui est modifié et dont les informations son affichées.
+     * @param tableau d'objets $tabEtu Tableau contenant les étudiants à afficher
+     * @param integer $annee Année de la promotion
+     * @param integer $parcours Identifiant du parcours de la promotion
+     * @param integer $filiere Identifiant de la filière de la promotion
+     */
     public static function afficherFormulaireSaisie($conv, $tabEtu, $annee, $parcours, $filiere) {
 
 	if ($conv != "") {
@@ -105,10 +109,10 @@ class Convention_IHM {
 				    $tabTheme = ThemeDeStage::getListeTheme();
 				    for ($i = 0; $i < sizeof($tabTheme); $i++) {
 					$couleur = $tabTheme[$i]->getCouleur();
-					if (($conv != "") && $tabTheme[$i]->getIdTheme() == $conv->getIdTheme())
-					    echo "<option selected value='" . $tabTheme[$i]->getIdTheme() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+					if (($conv != "") && $tabTheme[$i]->getIdentifiantBDD() == $conv->getIdTheme())
+					    echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
 					else
-					    echo "<option value='" . $tabTheme[$i]->getIdTheme() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+					    echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
 				    }
 				    ?>
 				    </select>
@@ -161,6 +165,11 @@ class Convention_IHM {
 	<?php
     }
 
+    /**
+     * Afficher une liste des étudiants avec ou sans convention (tableau statique)
+     * @param integer $annee L'année concernée
+     * @param tableau d'objets $tabEtudiants Les étudiants concernés
+     */
     public static function afficherListeConventions($annee, $tabEtudiants) {
 	?>
 	<table>
@@ -200,6 +209,12 @@ class Convention_IHM {
 	<?php
     }
 
+    /**
+     * Afficher une liste de conventions à éditer ou à supprimer (tableau interactif)
+     * @param integer $annee Année de la promotion concernée
+     * @param integer $idPromo Identifiant de la promotion
+     * @param tableau d'objets $tabEtuWithConv Tableaux d'objets Etudiant
+     */
     public static function afficherListeConventionsAModifier($annee, $idPromo, $tabEtuWithConv) {
 	echo "<table>
 		<tr id='entete'>
@@ -218,7 +233,7 @@ class Convention_IHM {
 	    $examinateur = $conv->getExaminateur();
 	    $contact = $conv->getContact();
 	    $entreprise = $contact->getEntreprise();
-	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
+	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdentifiantBDD());
 	    ?>
 	    <tr id="ligne<?php echo $i % 2; ?>">
 	        <td>

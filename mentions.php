@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page mentions.php
+ * Utilisation : page d'informations légales sur le site
+ * Accès : public
+ */
+
 include_once("classes/ihm/IHM_Generale.php");
 
 $tabLiens = array();

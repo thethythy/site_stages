@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * La classe Attribution sert à mémoriser les notifications
+ * d'attributions des conventions aux enseignants
+ */
+
 class Attribution {
 
     var $idattribution;  // Identifiant unique
@@ -7,7 +12,7 @@ class Attribution {
     var $idconvention;  // Identifiant de la convention concernée
 
     /**
-     * Création d'un objet Attribution
+     * Initialisation d'un objet Attribution
      * @param integer $idattribution
      * @param integer $envoi
      * @param integer $idconvention

@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°17 : les soutenances de stages
+ */
+
 class Soutenance_BDD {
 
     /**
-     * Sauvegarde un objet Soutenance
-     * @param $soutenance la soutenance à sauvegarder
+     * Enregistrer ou mettre à jour un objet Soutenance
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @param Soutenance $soutenance L'objet concerné
+     * @return integer Identifiant de l'enregistrement
      */
     public static function sauvegarder($soutenance) {
 	global $db;
@@ -12,7 +19,7 @@ class Soutenance_BDD {
 
 	$heuredebut = $soutenance->getHeureDebut();
 	$mindebut = $soutenance->getMinuteDebut();
-	$ahuitclos = $soutenance->isAHuitClos();
+	$ahuitclos = $soutenance->isAHuisClos();
 	$iddatesoutenance = $soutenance->getDateSoutenance()->getIdentifiantBDD();
 	$idsalle = $soutenance->getSalle()->getIdentifiantBDD();
 
@@ -46,8 +53,10 @@ class Soutenance_BDD {
     }
 
     /**
-     * Suppression d'une soutenance
-     * @param $id L'identifiant de la soutenance
+     * Suppression d'un enregistrement Soutenance
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @param integer $id L'identifiant de la soutenance
      */
     public static function supprimer($id) {
 	global $db;
@@ -57,7 +66,13 @@ class Soutenance_BDD {
 	$db->query($requete);
     }
 
-    // $id : identifiant dans la BDD
+    /**
+     * Obtenir un enregistrement Soutenance à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @param integer $id Identifiant
+     * @return enregistrement
+     */
     public static function getSoutenance($id) {
 	global $db;
 	global $tab17;
@@ -67,6 +82,13 @@ class Soutenance_BDD {
 	return mysqli_fetch_array($convention);
     }
 
+    /**
+     * Obtenir la convention associée à une soutenance
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @param integer $idsoutenance Identifiant de la soutenance concernée
+     * @return enregistrement
+     */
     public static function getConvention($idsoutenance) {
 	global $db;
 	global $tab4;
@@ -76,6 +98,14 @@ class Soutenance_BDD {
 	return mysqli_fetch_row($convention);
     }
 
+    /**
+     * Obtenir les enregistrements Soutenance à partir de la salle et de la date
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @param integer $idsalle Identifiant de la salle
+     * @param integer $iddate Identifiant de la date de soutenance
+     * @return tableau d'enregistrements
+     */
     public static function listerSoutenanceFromSalleAndDate($idsalle, $iddate) {
 	global $db;
 	global $tab17;
@@ -84,6 +114,14 @@ class Soutenance_BDD {
 	return $db->query($requete);
     }
 
+    /**
+     * Obtenir tous les enregistrements Soutenance d'une année donnée
+     * @global resource $db Référence sur la base ouverte
+     * @global type $tab5 Nom de la table 'datesoutenance'
+     * @global string $tab17 Nom de la table 'soutenances'
+     * @param integer $annee L'année concernée
+     * @return tableau d'enregistrements
+     */
     public static function listerSoutenanceFromAnnee($annee) {
 	global $db;
 	global $tab5;

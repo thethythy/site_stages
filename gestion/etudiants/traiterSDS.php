@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page traiterSDS.php
+ * Utilisation : page pour traiter une demande de validation (acceptée ou refusée)
+ *		 page accessible depuis validerSDS.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

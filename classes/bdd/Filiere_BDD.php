@@ -1,13 +1,18 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°10 : les filières (correspondant
+ * aux formations post-BAC)
+ */
+
 class Filiere_BDD {
 
-    /** Méthodes statiques **/
-
     /**
-     * Récupérer une filière suivant son identifiant
-     * @param $identifiantBDD l'identifiant de la filière réupérée
-     * @return String[] tableau contenant les informations d'une filière
+     * Obtenir un enregistrement Filière à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab10 Nom de la table 'filiere'
+     * @param integer $identifiantBDD Identifiant de la filière recherchée
+     * @return enregistrement
      */
     public static function getFiliere($identifiantBDD) {
 	global $db;
@@ -18,8 +23,10 @@ class Filiere_BDD {
     }
 
     /**
-     * Renvoie la liste de toutes les filières
-     * @return String[] tableau contenant les informations de toutes les filières
+     * Obtenir les enregistrements de toutes les filières
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab10 Nom de la table 'filiere'
+     * @return tableau d'enregistrements
      */
     public static function listerFilieres() {
 	global $db;
@@ -42,7 +49,13 @@ class Filiere_BDD {
 	return $tabFilieres;
     }
 
-    // $f : Un objet Filiere
+    /**
+     * Enregistrer ou mettre à jour un objet Filiere
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab10 Nom de la table 'filiere'
+     * @param Filiere $f L'objet à enregistrer
+     * @return integer L'identifiant de l'enregistrement
+     */
     public static function sauvegarder($f) {
 	global $db;
 	global $tab10;

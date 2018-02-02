@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°18 : les sujets de stages à valider
+ */
+
 class SujetDeStage_BDD {
 
-    // Méthodes statiques
-    //
-    // $sds : Un objet SujetDeStage
+    /**
+     * Enregistrer ou mettre à jour un objet SujetDeStage
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab18 Nom de la table 'sujetdestage'
+     * @param SujetDeStage $sds L'objet à enregistrer
+     */
     public static function sauvegarder($sds) {
 	global $db;
 	global $tab18;
@@ -34,7 +41,13 @@ class SujetDeStage_BDD {
 	}
     }
 
-    // $id : Un int, représentant un identifiant dans la BDD
+    /**
+     * Obtenir un enregistrement SujetDeStage à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab18 Nom de la table 'sujetdestage'
+     * @param integer $id Identifiant de l'enregistrement recherché
+     * @return enregistrement
+     */
     public static function getSujetDeStage($id) {
 	global $db;
 	global $tab18;
@@ -44,14 +57,21 @@ class SujetDeStage_BDD {
 	return mysqli_fetch_array($result);
     }
 
-    public static function getListeSujetDeStage($filtres) {
+    /**
+     * Obtenir les enregistrements SujetDeStage filtrés
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab18 Nom de la table 'sujetdestage'
+     * @param Filtre $filtre Le filtre global à appliquer
+     * @return tableau d'enregistrements
+     */
+    public static function getListeSujetDeStage($filtre) {
 	global $db;
 	global $tab18;
 
-	if ($filtres == "")
+	if ($filtre == "")
 	    $requete = "SELECT * FROM $tab18";
 	else
-	    $requete = "SELECT * FROM $tab18 WHERE " . $filtres->getStrFiltres();
+	    $requete = "SELECT * FROM $tab18 WHERE " . $filtre->getStrFiltres();
 
 	$result = $db->query($requete);
 
@@ -71,16 +91,12 @@ class SujetDeStage_BDD {
 	return $tabSujetDeStage;
     }
 
-    public static function rechercheSujetDeStage($idEtudiant, $idPromotion) {
-	global $db;
-	global $tab18;
-
-	$requete = "SELECT idsujetdestage FROM $tab18 WHERE idpromotion='$idPromotion' AND idetudiant='$idEtudiant'";
-	$result = $db->query($requete);
-	$result2 = mysqli_fetch_array($result);
-	return $result2[0];
-    }
-
+    /**
+     * Supprimer un enregistrement SujetDeStage à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab18 Nom de la table 'sujetdestage'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement
+     */
     public static function delete($identifiantBDD) {
 	global $db;
 	global $tab18;

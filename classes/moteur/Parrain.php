@@ -1,13 +1,25 @@
 <?php
 
+/**
+ * Classe Parrain : l'enseignant référent pour un stage
+ */
+
 class Parrain {
 
-    var $identifiant_BDD;
-    var $nom;
-    var $prenom;
-    var $email;
-    var $identifiant_couleur;
+    var $identifiant_BDD;  // Identifiant unique en base
+    var $nom;  // Nom du parrain
+    var $prenom;  // Prénom du parrain
+    var $email;  // Adresse couriel
+    var $identifiant_couleur;  // Identifiant de la couleur associée au parrain
 
+    /**
+     * Constructeur
+     * @param integer $identifiant_BDD
+     * @param string $nom
+     * @param string $prenom
+     * @param string $email
+     * @param integer $identifiant_couleur
+     */
     public function Parrain($identifiant_BDD, $nom, $prenom, $email, $identifiant_couleur) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
@@ -16,20 +28,11 @@ class Parrain {
 	$this->identifiant_couleur = $identifiant_couleur;
     }
 
-    public function setNom($nom) {
-	$this->nom = $nom;
-    }
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
 
-    public function setPrenom($prenom) {
-	$this->prenom = $prenom;
-    }
-
-    public function setEmail($email) {
-	$this->email = $email;
-    }
-
-    public function setIdentifiant_couleur($identifiant_couleur) {
-	$this->identifiant_couleur = $identifiant_couleur;
+    public function getIdentifiantBDD() {
+	return $this->identifiant_BDD;
     }
 
     public function getNom() {
@@ -48,12 +51,34 @@ class Parrain {
 	return Couleur::getCouleur($this->identifiant_couleur);
     }
 
-    public function getIdentifiantBDD() {
-	return $this->identifiant_BDD;
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setNom($nom) {
+	$this->nom = $nom;
     }
 
-    /** Méthodes statiques **/
+    public function setPrenom($prenom) {
+	$this->prenom = $prenom;
+    }
 
+    public function setEmail($email) {
+	$this->email = $email;
+    }
+
+    public function setIdentifiant_couleur($identifiant_couleur) {
+	$this->identifiant_couleur = $identifiant_couleur;
+
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
+
+    /**
+     * Obtenir un objet Parrain à partir de son identifiant
+     * @param integer $idParrain
+     * @return Parrain
+     */
     public static function getParrain($idParrain) {
 	$parrainBDD = Parrain_BDD::getParrain($idParrain);
 
@@ -64,12 +89,20 @@ class Parrain {
 			   $parrainBDD["idcouleur"]);
     }
 
+    /**
+     * Enregistrer un parrain à partir d'un tableau d'attributs
+     * @param array $tab_donnees
+     */
     public static function saisirDonneesParrain($tab_donnees) {
 	$parrain = new Parrain('', $tab_donnees[0], $tab_donnees[1],
 				   $tab_donnees[2], $tab_donnees[3]);
 	Parrain_BDD::sauvegarder($parrain);
     }
 
+    /**
+     * Obtenir tous les objets Parrain
+     * @return array
+     */
     public static function listerParrain() {
 	$tabParrain = array();
 	$tabParrainString = Parrain_BDD::listerParrain();
@@ -83,6 +116,10 @@ class Parrain {
 	return $tabParrain;
     }
 
+    /**
+     * Supprimer un parrain en base
+     * @param integer $identifiantparr
+     */
     public static function deleteParrain($identifiantparr) {
 	Parrain_BDD::delete($identifiantparr);
     }

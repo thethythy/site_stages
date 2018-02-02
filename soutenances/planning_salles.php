@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page planning_salles.php
+ * Utilisation : page de visualisation du planning par salle
+ * Dépendance(s) : planning_sallesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

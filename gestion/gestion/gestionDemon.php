@@ -1,9 +1,14 @@
 <?php
 
+/**
+ * Classe GestionDemon : gestionnaire du démon de notification des tâches pédagogiques
+ */
+
 class GestionDemon {
 
-    /* Lancer le démon */
-
+    /**
+     * Lancer le démon (processus crontab)
+     */
     public function go() {
 	// Lancement si pas déjà lancé
 	if (!file_exists('/tmp/RUN_CRON_SITE_STAGE')) {
@@ -15,8 +20,9 @@ class GestionDemon {
 	}
     }
 
-    /* Arrêter le démon */
-
+    /**
+     * Arrêter le démon (arrêt du processus crontab)
+     */
     public function stop() {
 	// Rafraîchir au bout de 60 secondes
 	if (!headers_sent())
@@ -31,8 +37,10 @@ class GestionDemon {
 	}
     }
 
-    /* Test si le démon est en fonctionnement */
-
+    /**
+     * Test si le démon est en fonctionnement
+     * @return integer
+     */
     public function test() {
 	$valeur = -1;
 
@@ -49,8 +57,15 @@ class GestionDemon {
 	return $valeur;
     }
 
-    /* Création d'une nouvelle crontab */
-
+    /**
+     * Création d'une nouvelle crontab
+     * @param string $chpMinute
+     * @param string $chpHeure
+     * @param string $chpJourMois
+     * @param string $chpMois
+     * @param string $chpJourSemaine
+     * @param string $chpCommande
+     */
     private function lancerServiceCron($chpMinute, $chpHeure, $chpJourMois, $chpMois, $chpJourSemaine, $chpCommande) {
 
 	$newCrontab = Array(); /* pour chaque cellule une ligne du nouveau crontab */
@@ -63,8 +78,9 @@ class GestionDemon {
 	exec('crontab /tmp/tmpcrontab'); /* on le soumet comme crontab */
     }
 
-    /* Vider la crontab */
-
+    /**
+     * Vider la crontab
+     */
     private function arretServiceCron() {
 	exec('crontab -r');
     }

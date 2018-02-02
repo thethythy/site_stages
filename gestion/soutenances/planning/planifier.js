@@ -1,3 +1,16 @@
+
+/**
+ * Script planifier.js
+ * Utilisation : incorporé à planifier.php
+ *		 création puis envoi des requêtes Ajax traitées par
+ *		    setSoutenanceJSON.php
+ *		    delSoutenanceJSON.php
+ *		    getDataConventionsXML.php
+ *		    getDataSoutenancesXML.php
+ *		    getDatesJSON.php
+ *		 mise en forme et affichage des réponses
+ */
+
 // ------------------------------------------------------------------------------------------
 // La ligne de log
 function Logger(idlogline) {

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page viderfluxrss.php
+ * Utilisation : page pour vider le flux RSS
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

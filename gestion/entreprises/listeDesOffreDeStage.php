@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listeDesOffreDeStage.php
+ * Utilisation : page pour visualiser les offres de stages non-traitées et traitées
+ * Dépendance(s) : listeDesOffreDeStageData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page editiontache.php
+ * Utilisation : page de gestion des tâches pédagogiques
+ * Dépendance(s) : gestionDemon.php --> Classe gestionnaire du démon de notification
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

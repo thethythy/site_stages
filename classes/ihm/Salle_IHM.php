@@ -2,6 +2,9 @@
 
 class Salle_IHM {
 
+    /**
+     * Afficher un formulaire de création d'une nouvelle salle
+     */
     public static function afficherFormulaireSaisie() {
 	?>
 	<FORM METHOD="POST" ACTION="">
@@ -32,6 +35,10 @@ class Salle_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de modification d'une salle existante
+     * @param integer $idSalle Identifiant de la salle éditée
+     */
     public static function afficherFormulaireModification($idSalle) {
 	$salle = Salle::getSalle($idSalle);
 	?>
@@ -62,6 +69,10 @@ class Salle_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif pour éditer ou supprimer une salle
+     * parmis la liste des salles affichées
+     */
     public static function afficherListeSalleAEditer() {
 	$tabSalles = Salle::listerSalle();
 	if (sizeof($tabSalles) > 0) {
@@ -97,6 +108,11 @@ class Salle_IHM {
 	}
     }
 
+    /**
+     * Afficher par ordre chronologique les soutenances d'une salle.
+     * @param integer $annee L'année concernée
+     * @param tableau d'objets $listeConvention Liste de Convention triés chronologiquement pour la salle
+     */
     public static function afficherPlanningSalles($annee, $listeConvention) {
 	$enteteTableau =
 	"<table>

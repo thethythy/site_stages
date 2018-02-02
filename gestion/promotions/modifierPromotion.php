@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Page modifierPromotion.php
+ * Utilisation : page d'édition d'une promotion existante
+ *		 suppression de la promotion
+ *		 ajout ou importation d'étudiant
+ *		 suppression d'étudiants
+ *		 édition des étudiants
+ * Dépendance(s) : modifierPromotionData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page mailAttribution.php
+ * Utilisation : page pour notifier l'enseignant-référent d'un étudiant auprès de l'entreprise
+ * Dépendance(s) : mailAttributionData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

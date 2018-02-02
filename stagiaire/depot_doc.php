@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page depot_doc.php
+ * Utilisation : page de dépôt d'un document
+ * Dépendance(s) : depot_docData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

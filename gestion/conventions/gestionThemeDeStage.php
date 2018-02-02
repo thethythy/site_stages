@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionThemeDeStage.php
+ * Utilisation : page pour gérer les thèmes de stage (création, édition, suppression)
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

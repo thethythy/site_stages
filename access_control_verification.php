@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page access_control_verification.php
+ * Utilisation : contrôle le droit d'accès et si OK renvoie un cookie d'accès
+ * Accès : public
+ */
+
 // Format de la réponse
 header("Content-type:text/plain; charset=utf-8");
 

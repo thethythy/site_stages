@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page exporterBDD.php
+ * Utilisation : page d'exportation du schéma et des données de la base
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
@@ -11,6 +17,10 @@ $tabLiens[1] = array('../', 'Gestion des stages');
 
 IHM_Generale::header("Exporter la ", "base de données", "../../", $tabLiens);
 
+/**
+ * Exporter dans un fichier le schéma de la base de données ainsi que les données
+ * @global resource $db Référence sur la base de données ouverte
+ */
 function export() {
     global $db;
 

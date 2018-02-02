@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page bilanParrainages.php
+ * Utilisation : page de visualisation des charges des référents
+ * Dépendance(s) : bilanParrainagesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

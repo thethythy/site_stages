@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page mailAttributionData.php
+ * Utilisation : page retournant une liste de sélection des notifications
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

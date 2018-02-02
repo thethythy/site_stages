@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Classe StatistiquesGenerateurExcel : exportation des statistiques des stages en fichier Excel
+ */
+
 $cheminExcel = "frameworks/PHPExcel/Classes/";
 
 include_once($cheminExcel . "PHPExcel.php");
@@ -8,15 +12,19 @@ include_once($cheminExcel . "PHPExcel/Writer/Excel2007.php");
 
 class StatistiquesGenerateurExcel {
 
-    var $chemin_complet;
-    var $worksheet;
-    var $titre1 = 'B2';
-    var $titre2 = 'B3';
-    var $rowNomSerie = 5;
-    var $colNomSerie = 1; // 'B'
-    var $ecart_horiz = 3; // Ecart horizontal entre les séries de données
-    var $haut_graph = 15; // Hauteur des graphiques
+    var $chemin_complet;  // Chemin d'exportation du fichier Excel
+    var $worksheet;  // La page Excel utilisée
+    var $titre1 = 'B2';  // Cellule du titre général
+    var $titre2 = 'B3';  // Cellule du sous-titre
+    var $rowNomSerie = 5; // Numéro de ligne du début des séries
+    var $colNomSerie = 1;  // 'B'
+    var $ecart_horiz = 3;  // Ecart horizontal entre les séries de données
+    var $haut_graph = 15;  // Hauteur des graphiques
 
+    /**
+     * Constructeur
+     * @param string $chemin_complet Chemin d'exportation du fichier Excel
+     */
     public function StatistiquesGenerateurExcel($chemin_complet) {
 	$this->chemin_complet = $chemin_complet;
 
@@ -31,6 +39,10 @@ class StatistiquesGenerateurExcel {
 	PHPExcel_Cell::setValueBinder( new PHPExcel_Cell_AdvancedValueBinder());
     }
 
+    /**
+     * Générer les titres du document
+     * @param type $periode
+     */
     private function genereTitres($periode) {
 	$styleFont = $this->worksheet->getStyle($this->titre1)->getFont();
 	$styleFont->setBold(true);
@@ -43,6 +55,11 @@ class StatistiquesGenerateurExcel {
 	$this->worksheet->setCellValue($this->titre2, 'Période '.$periode);
     }
 
+    /**
+     * Générer l'entête des séries
+     * @param array $data
+     * @return string
+     */
     private function genereEnteteSeries($data) {
 	$nbSeries = $data["nbSerie"];
 	$nom_series = "";
@@ -80,6 +97,11 @@ class StatistiquesGenerateurExcel {
 	return $nom_series;
     }
 
+    /**
+     * Obtenir le nombre de lignes des 3 séries
+     * @param array $data
+     * @return array
+     */
     private function donneTaillesTableaux($data) {
 	$taille_donnees_lieu_stage = $data['s'.$data['nbSerie']]['Lieu du stage']['nbLieu'];
 	$taille_donnees_theme_stage = $data['s'.$data['nbSerie']]['Thème du stage']['nbTheme'];
@@ -87,17 +109,15 @@ class StatistiquesGenerateurExcel {
 	return array($taille_donnees_lieu_stage, $taille_donnees_theme_stage, $taille_donnees_type_entreprise);
     }
 
-    private function genereUneSerie($index, $data, $tailles_tableaux) {
-	// Génère données du lieu de stage
-	$posFin = $this->genereTableEtGraphique($index, $data["Lieu du stage"], $this->rowNomSerie + 2, "Lieu du stage", $tailles_tableaux[0]);
-
-	// Génère données du thème de stage
-	$posFin = $this->genereTableEtGraphique($index, $data["Thème du stage"], $posFin + 2, "Thème de stage", $tailles_tableaux[1]);
-
-	// Génère données du type d'entreprise
-	$this->genereTableEtGraphique($index, $data["Type d'entreprise"], $posFin + 2, "Type d'entreprise", $tailles_tableaux[2]);
-    }
-
+    /**
+     * Générer le tableau et le graphique pour chaque type de statistique
+     * @param integer $numero
+     * @param array $data
+     * @param integer $posDeb
+     * @param string $nomData
+     * @param integer $tailleTableau
+     * @return integer
+     */
     private function genereTableEtGraphique($numero, $data, $posDeb, $nomData, $tailleTableau) {
 
 	if ($nomData == "Lieu du stage") {
@@ -205,6 +225,27 @@ class StatistiquesGenerateurExcel {
 	return $posDeb + $tailleTableau + $this->haut_graph;
     }
 
+    /**
+     * Générer une série de statistique
+     * @param integer $index
+     * @param array $data
+     * @param integer $tailles_tableaux
+     */
+    private function genereUneSerie($index, $data, $tailles_tableaux) {
+	// Génère données du lieu de stage
+	$posFin = $this->genereTableEtGraphique($index, $data["Lieu du stage"], $this->rowNomSerie + 2, "Lieu du stage", $tailles_tableaux[0]);
+
+	// Génère données du thème de stage
+	$posFin = $this->genereTableEtGraphique($index, $data["Thème du stage"], $posFin + 2, "Thème de stage", $tailles_tableaux[1]);
+
+	// Génère données du type d'entreprise
+	$this->genereTableEtGraphique($index, $data["Type d'entreprise"], $posFin + 2, "Type d'entreprise", $tailles_tableaux[2]);
+    }
+
+    /**
+     * Générer le fichier Excel complet
+     * @param array $data
+     */
     public function genereFichierExcel($data) {
 	// Période
 	//$annee_fin = $data['annee_fin'] + 1;

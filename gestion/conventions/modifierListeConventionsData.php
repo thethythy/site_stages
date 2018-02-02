@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page modifierListeConventionsData.php
+ * Utilisation : page retournant une liste de conventions à éditer ou à supprimer
+ * Accès : restreint par authentification HTTP
+ */
+
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

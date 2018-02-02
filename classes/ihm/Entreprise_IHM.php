@@ -2,8 +2,11 @@
 
 class Entreprise_IHM {
 
-    // Méthodes statiques
-
+    /**
+     * Afficher un formulaire de sélection des entreprises par nom, par ville,
+     * par code postal et par pays
+     * @param string $page La page de traitement du formulaire
+     */
     public static function afficherFormulaireRecherche($page) {
 	?>
 	<form method=post action="<?php echo $page; ?>">
@@ -69,8 +72,11 @@ class Entreprise_IHM {
 	<?php
     }
 
-    // $ent = Entreprise qui est modifier et dont les informations son affichées.
-    // si $ent = "", alors il s'agit d'un formulaire de création (champs vide)
+    /**
+     * Affiche un formulaire de création ou d'édition d'une entreprise
+     * Si $ent = "", alors il s'agit d'un formulaire de création (champs vide)
+     * @param Entreprise ou "" $ent L'entreprise à éditer ou rien
+     */
     public static function afficherFormulaireSaisie($ent) {
 	$tabTypeEntreprise = TypeEntreprise::getListeTypeEntreprise();
 	?>
@@ -192,6 +198,10 @@ class Entreprise_IHM {
 	<?php
     }
 
+    /**
+     * Affiche un tableau statique d'entreprises
+     * @param tableau d'objets $tabEntreprises Tableau d'objets Entreprise
+     */
     public static function afficherListeEntreprise($tabEntreprises) {
 	for ($i = 0; $i < sizeof($tabEntreprises); $i++) {
 	?>
@@ -240,6 +250,11 @@ class Entreprise_IHM {
 	echo "<br/><br/>";
     }
 
+    /**
+     * Afficher un tableau interactif pour éditer ou supprimer une entreprise
+     * parmi la liste des entreprises affichées
+     * @param tableau d'objets $tabEntreprises Tableau d'objets Entreprise
+     */
     public static function afficherListeEntrepriseAEditer($tabEntreprises) {
 	for ($i = 0; $i < sizeof($tabEntreprises); $i++) {
 	    ?>

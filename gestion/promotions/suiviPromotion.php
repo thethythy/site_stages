@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page suiviPromotion.php
+ * Utilisation : page de suivi des étudiants d'une promotion
+ * Dépendance(s) : suiviPromotionData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
@@ -51,7 +58,7 @@ if (isset($_POST['reset']) &&
 
     foreach ($tabEtudiants as $oEtudiant) {
 	$oEtudiant->setCodeEtudiant("0");
-	Etudiant_BDD::sauvegarder($oEtudiant, false);
+	Etudiant_BDD::sauvegarder($oEtudiant);
     }
 }
 
@@ -60,7 +67,7 @@ if (isset($_POST['valider']) && isset($_POST['statut'])) {
     foreach ($_POST['statut'] as $key => $value) {
 	$oEtudiant = Etudiant::getEtudiant($key);
 	$oEtudiant->setCodeEtudiant($value);
-	Etudiant_BDD::sauvegarder($oEtudiant, false);
+	Etudiant_BDD::sauvegarder($oEtudiant);
     }
 }
 

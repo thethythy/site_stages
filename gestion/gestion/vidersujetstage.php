@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page vidersujetstage.php
+ * Utilisation : page de suppression des anciennes demandes de validation
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page listerAnciensStages.php
+ * Utilisation : page d'accès aux stages des années passées
+ * Dépendance(s) : listerAnciensStagesData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

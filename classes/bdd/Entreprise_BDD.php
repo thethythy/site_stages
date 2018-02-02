@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°6 : les entreprises
+ */
+
 class Entreprise_BDD {
 
-    /** Méthodes statiques **/
-
     /**
-     * Sauvegarde d'une entreprise
-     * @param $entreprise l'entreprise à sauvegarder
+     * Enregistrement ou mise à jour d'une entreprise
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @param Entreprise $entreprise L'objet Entreprise à sauvegarder
+     * @return integer Identifiant de l'enregistrement
      */
     public static function sauvegarder($entreprise) {
 	global $db;
@@ -47,9 +52,11 @@ class Entreprise_BDD {
     }
 
     /**
-     * Récupérer une entreprise suivant son identifiant
-     * @param $identifiantBDD l'identifiant de l'entreprise à récupérer
-     * @return String[] tableau contenant les informations d'une entreprise
+     * Obtenir une entreprise à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @param $identifiantBDD Identifiant de l'entreprise recherchée
+     * @return enregistrement ou FALSE
      */
     public static function getEntreprise($identifiantBDD) {
 	global $db;
@@ -64,18 +71,22 @@ class Entreprise_BDD {
     }
 
     /**
-     * Retourne une liste d'entreprise suivant un filtre
-     * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les entreprises concernées par le filtre
+     * Retourne une liste d'entreprise correspondant à un filtre
+     * ordonnée par nom de l'entreprise
+     *
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @param Filtre $filtre Le filtre de la recherche
+     * @return tableau d'enregistrements
      */
-    public static function getListeEntreprises($filtres) {
+    public static function getListeEntreprises($filtre) {
 	global $db;
 	global $tab6;
 
-	if ($filtres == "")
+	if ($filtre == "")
 	    $requete = "SELECT * FROM $tab6 ORDER BY nom ASC;";
 	else
-	    $requete = "SELECT * FROM $tab6 WHERE " . $filtres->getStrFiltres() . " ORDER BY nom ASC;";
+	    $requete = "SELECT * FROM $tab6 WHERE " . $filtre->getStrFiltres() . " ORDER BY nom ASC;";
 
 	$result = $db->query($requete);
 
@@ -97,6 +108,12 @@ class Entreprise_BDD {
 	return $tabEntreprises;
     }
 
+    /**
+     * Suppression d'un enregistrement Entreprise à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement concerné
+     */
     public static function supprimerEntreprise($identifiantBDD) {
 	global $db;
 	global $tab6;
@@ -104,9 +121,18 @@ class Entreprise_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Test si une certaine entreprise existe déjà en base
+     * en utilisant le nom, la ville et le pays
+     *
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @param Entreprise $ent Objet Entreprise recherché
+     * @return boolean
+     */
     public static function existe($ent) {
-	global $tab6;
 	global $db;
+	global $tab6;
 
 	$sql = "SELECT identreprise
 		FROM $tab6

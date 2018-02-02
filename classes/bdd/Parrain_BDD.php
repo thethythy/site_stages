@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°10 : les enseignants
+ */
+
 class Parrain_BDD {
 
-    /** Méthodes statiques* */
-
+    /**
+     * Enregistrer ou mettre à jour un objet Parrain
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab14 Nom de la table 'parrain'
+     * @param Parrain $parrain L'objet à enregistrer
+     */
     public static function sauvegarder($parrain) {
 	global $db;
 	global $tab14;
@@ -12,7 +20,7 @@ class Parrain_BDD {
 
 	if ($parrain->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab14
-		    VALUES ('" . $parrain->getIdentifiantBDD() . "',
+		    VALUES ('',
 			    '" . $parrain->getNom() . "',
 			    '" . $parrain->getPrenom() . "',
 			    '" . $parrain->getEmail() . "',
@@ -28,6 +36,13 @@ class Parrain_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir un enregistrement d'un parrain à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab14 Nom de la table 'parrain'
+     * @param integer $identifiant L'identifiant de l'enregistrement cherché
+     * @return enregsitrement
+     */
     public static function getParrain($identifiant) {
 	global $db;
 	global $tab14;
@@ -37,6 +52,12 @@ class Parrain_BDD {
 	return mysqli_fetch_array($req);
     }
 
+    /**
+     * Obtenir les enregistrements de tous les parrains
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab14 Nom de la table 'parrain'
+     * @return tableau d'enregistrements
+     */
     public static function listerParrain() {
 	global $db;
 	global $tab14;
@@ -59,6 +80,12 @@ class Parrain_BDD {
 	return $tabParrain;
     }
 
+    /**
+     * Supprimer un enregistrement d'un parrain
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab14 Nom de la table 'parrain'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement à supprimer
+     */
     public static function delete($identifiantBDD) {
 	global $db;
 	global $tab14;

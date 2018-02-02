@@ -1,3 +1,11 @@
+
+/**
+ * Script statistiques.js
+ * Utilisation : incorporé à statistiquesStages.php
+ *		 création puis envoi des requêtes Ajax traitées par statistiquesStagesData.php
+ *		 mise en forme et affichage des réponses
+ */
+
 /* global LoadData, Chart */
 
 Chart.defaults.global.legend.display = false;

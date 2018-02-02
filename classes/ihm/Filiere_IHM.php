@@ -2,6 +2,9 @@
 
 class Filiere_IHM {
 
+    /**
+     * Afficher un formulaire de sélection d'une filière d'après son nom
+     */
     public static function afficherFormulaireChoixFiliere() {
 	$tabFiliere = Filiere::listerFilieres();
 	?>
@@ -40,6 +43,10 @@ class Filiere_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition du temps de soutenance d'une filière
+     * @param integer $idFiliere Identifiant de la filière
+     */
     public static function afficherFormulaireModificationTempsSoutenance($idFiliere) {
 	$filiere = Filiere::getFiliere($idFiliere);
 	?>

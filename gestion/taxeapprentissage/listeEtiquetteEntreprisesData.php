@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page listeEtiquetteEntreprisesData.php
+ * Utilisation : page pour obtenir les étiquettes pour publipostage
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Classe Convocation : mémoriser les convocations/invitations
+ * aux soutenances de stage auprès des contacts en entreprise
+ */
+
 class Convocation {
 
     var $idconvocation;  // Identifiant unique
@@ -18,7 +23,7 @@ class Convocation {
 	$this->idsoutenance = $idsoutenance;
     }
 
-    // Accesseurs
+    // Accesseurs en lecture
 
     function getIdentifiantBDD() {
 	return $this->idconvocation;
@@ -31,6 +36,8 @@ class Convocation {
     function getIdsoutenance() {
 	return $this->idsoutenance;
     }
+
+    // Accesseurs en écriture
 
     function setEnvoi($envoi) {
 	$this->envoi = $envoi;

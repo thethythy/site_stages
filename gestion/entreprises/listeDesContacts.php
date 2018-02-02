@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page listeDesContacts.php
+ * Utilisation : page pour visualiser les contacts classés par entreprise
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Page importationEtudiants.php
+ * Utilisation : page pour importer une série d'étudiants depuis une autre promotion
+ *		 page accessible depuis modifierPromotion.php
+ * Dépendance(s) : importationEtudiantsData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 // Début de session
 session_start();
 
@@ -70,7 +78,7 @@ if (isset($_POST['import'])) {
     for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 	if (isset($_POST['etu' . $tabEtudiants[$i]->getIdentifiantBDD()])) {
 	    // Mise à jour de l'étudiant
-	    Etudiant_BDD::sauvegarder($tabEtudiants[$i], false);
+	    Etudiant_BDD::sauvegarder($tabEtudiants[$i]);
 	    // Insertion de l'étudiant dans la promotion
 	    Etudiant_BDD::ajouterPromotion($tabEtudiants[$i]->getIdentifiantBDD(), $promo_modifiee->getIdentifiantBDD());
 	}

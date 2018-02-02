@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°4 : les conventions de stage
+ */
+
 class Convention_BDD {
-    /** Méthodes statiques * */
 
     /**
-     * Sauvegarde un objet Convention
-     * @param $convention la convention à sauvegarder
+     * Sauvegarde ou et met à jour un objet Convention
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @param Convention $convention La convention à sauvegarder
      */
     public static function sauvegarder($convention) {
 	global $db;
@@ -60,7 +65,13 @@ class Convention_BDD {
 	}
     }
 
-    // $id : Un int, représentant un identifiant dans la BDD
+    /**
+     * Obtenir une convention à partir de son identifiant
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @param integer $id Identifiant de la convention
+     * @return Un enregistrement ou NULL
+     */
     public static function getConvention($id) {
 	global $db;
 	global $tab4;
@@ -70,6 +81,15 @@ class Convention_BDD {
 	return mysqli_fetch_array($convention);
     }
 
+    /**
+     * Retourne la convention d'un étudiant d'une certaine promotion
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @global string $tab4 Nom de la table 'convention'
+     * @param integer $idetudiant Identifiant de l'étudiant
+     * @param integer $idpromotion Identifiant de la promotion
+     * @return enregistrement ou NULL
+     */
     public static function getConvention2($idetudiant, $idpromotion) {
 	global $db;
 	global $tab19;
@@ -85,20 +105,29 @@ class Convention_BDD {
 	return Convention_BDD::getConvention($dConvention["idconvention"]);
     }
 
-    public static function getListeConvention($filtres) {
+    /**
+     * Obtenir une liste de conventions filtrées
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @global string $tab15 Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param objet Filtre $filtre Le filtre global à appliquer
+     * @return Tableau d'enregistrements
+     */
+    public static function getListeConvention($filtre) {
 	global $db;
 	global $tab4;
 	global $tab15;
 	global $tab19;
 
-	if ($filtres == "") {
+	if ($filtre == "") {
 	    $requete = "SELECT * FROM $tab4 ORDER BY $tab4.idparrain";
 	} else {
 	    $requete = "SELECT *
 			FROM $tab4, $tab15, $tab19
 			WHERE $tab4.idconvention=$tab19.idconvention AND
 			      $tab15.idpromotion=$tab19.idpromotion AND
-			      ". $filtres->getStrFiltres() ."
+			      ". $filtre->getStrFiltres() ."
 			ORDER BY $tab4.idparrain ";
 	}
 
@@ -125,6 +154,17 @@ class Convention_BDD {
 	return $tabC;
     }
 
+    /**
+     * Calcul le nombre de parrainage pour un référent et pour une promotion
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $annee L'année de la promotion concernée
+     * @param integer $parrain L'identifiant du parrain concerné
+     * @param integer $filiere L'identifiant de la filière concernée
+     * @param integer $parcours L'identifiant du parcours concerné
+     * @return integer
+     */
     public static function compteConvention($annee, $parrain, $filiere, $parcours) {
 	global $db;
 	global $tab15;
@@ -148,6 +188,14 @@ class Convention_BDD {
 	return $compte;
     }
 
+    /**
+     * Test si une convention existe ou pas pour un étudiant pour une certaine année
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param objet Convention $conv Une convention pour un étudiant
+     * @param integer $annee L'année de la convention
+     * @return boolean
+     */
     public static function existe($conv, $annee) {
 	global $db;
 	global $tab19;
@@ -172,6 +220,15 @@ class Convention_BDD {
 	    return true;
     }
 
+    /**
+     * Test si une convention existe ou pas pour un contact
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab15 Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $idcontact Identifiant du contact
+     * @param objet Filtre $filtre Filtre éventuel sur l'année, la filière et le parcours
+     * @return boolean
+     */
     public static function existe2($idcontact, $filtre) {
 	global $db;
 	global $tab15;
@@ -199,21 +256,40 @@ class Convention_BDD {
 	    return false;
     }
 
+    /**
+     * Suppression d'une convention en base
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @global string $tab4 Nom de la table 'convention'
+     * @param integer $identifiantBDD Identifiant de la convention à supprimer
+     * @param integer $idEtu Identifiant de l'étudiant concerné
+     * @param integer $idPromo Identifiant de la promotion de l'étudiant concerné
+     */
     public static function supprimerConvention($identifiantBDD, $idEtu, $idPromo) {
 	global $db;
 	global $tab19;
 	global $tab4;
 
+	// Mise à jour de la table de relation pour supprimer idconvention
 	$sql1 = "UPDATE $tab19
 		 SET idconvention = NULL
 		 WHERE idetudiant = $idEtu AND
 		       idpromotion = $idPromo";
 	$db->query($sql1);
 
+	// Suppression de l'enregistrement dans la table 'convention'
 	$sql2 = "DELETE FROM $tab4 WHERE idconvention='$identifiantBDD'";
 	$db->query($sql2);
     }
 
+    /**
+     * Retourne l'identifiant de la promotion d'un étudiant d'une convention donnée
+     * @global resource $db Référence à la base ouverte
+     * @global string $tab4 Nom de la table 'convention'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param integer $idConvention Identifiant de la convention concernée
+     * @return integer
+     */
     public static function getPromotion($idConvention) {
 	global $db;
 	global $tab4;
@@ -229,128 +305,6 @@ class Convention_BDD {
 	return $result['idpromo'];
     }
 
-    public static function getListeEntreprises($annee_in, $annee_fin) {
-	global $db;
-	global $tab3;
-	global $tab4;
-	global $tab5;
-	global $tab6;
-	global $tab9;
-	global $tab17;
-
-	$filtre = "$tab5.annee >= $annee_in AND $tab5.annee <= $annee_fin";
-
-	$sql = "SELECT $tab6.nom, $tab6.adresse, $tab6.ville, $tab6.pays, $tab9.nometudiant, $tab9.prenometudiant
-		FROM $tab3, $tab4, $tab5, $tab6, $tab9, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
-		     $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
-		     $filtre AND
-		     $tab4.idetudiant = $tab9.idetudiant AND
-		     $tab4.idcontact = $tab3.idcontact AND
-		     $tab3.identreprise = $tab6.identreprise
-		ORDER BY $tab6.pays";
-
-	$req = $db->query($sql);
-
-	$tabConventions = array();
-
-	while ($data = mysqli_fetch_array($req)) {
-	    $infos = array();
-	    array_push($infos, $data['nom']);
-	    array_push($infos, $data['adresse']);
-	    array_push($infos, $data['ville']);
-	    array_push($infos, $data['pays']);
-	    array_push($infos, $data['nometudiant']);
-	    array_push($infos, $data['prenometudiant']);
-	    array_push($tabConventions, $infos);
-	}
-
-	return $tabConventions;
-    }
-
-    public static function getListeVillesRepartition($annee_in, $annee_fin) {
-	global $db;
-	global $tab3;
-	global $tab4;
-	global $tab5;
-	global $tab6;
-	global $tab17;
-
-	$filtre = "$tab5.annee >= '$annee_in' AND $tab5.annee <= '$annee_fin'";
-
-	$sql = "SELECT $tab6.ville
-		FROM $tab3, $tab4, $tab5, $tab6, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
-		      $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
-		      $filtre AND
-		      $tab4.idcontact = $tab3.idcontact AND
-		      $tab3.identreprise = $tab6.identreprise
-		ORDER BY $tab6.ville";
-
-	$req = $db->query($sql);// Compter le nombre de stage par conventions
-	$infos = array();
-	while ($data = mysqli_fetch_array($req)) {
-	    $ville = strtoupper($data['ville']);
-
-	    // Traitement des adresses avec Cedex
-	    if (stripos($ville, 'CEDEX') !== false) {
-		$ville = substr_replace($ville, '', stripos($ville, 'CEDEX') - 1);
-	    }
-
-	    // Suppression des espaces
-	    $ville = trim($ville);
-
-	    $infos[$ville] ++;
-	}
-
-	// Construire la réponse
-	$tabVilles = array();
-	foreach ($infos as $ville => $compteur) {
-	    $laville = array();
-	    array_push($laville, $ville);
-	    array_push($laville, $compteur);
-	    array_push($tabVilles, $laville);
-	}
-
-	return $tabVilles;
-    }
-
-    public static function getListePaysRepartition($annee_in, $annee_fin) {
-	global $tab3; // ='contact'
-	global $tab4; // = 'convention';
-	global $tab5; // = 'datesoutenances';
-	global $tab6; // = 'entreprise';
-	global $tab17; // = 'soutenances'
-	global $db;
-
-	$filtre = "$tab5.annee >= '$annee_in' AND $tab5.annee <= '$annee_fin'";
-
-	$sql = "SELECT $tab6.pays
-		FROM $tab3, $tab4, $tab5, $tab6, $tab17
-		WHERE $tab4.idsoutenance =  $tab17.idsoutenance AND
-		      $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
-		      $filtre AND
-		      $tab4.idcontact = $tab3.idcontact AND
-		      $tab3.identreprise = $tab6.identreprise
-		ORDER BY $tab6.pays";
-
-	$req = $db->query($sql); // Compter le nombre de stage par conventions
-	$infos = array();
-	while ($data = mysqli_fetch_array($req)) {
-	    $infos[strtoupper($data['pays'])] ++;
-	}
-
-	// Construire la réponse
-	$tabPays = array();
-	foreach ($infos as $ville => $compteur) {
-	    $pays = array();
-	    array_push($pays, $ville);
-	    array_push($pays, $compteur);
-	    array_push($tabPays, $pays);
-	}
-
-	return $tabPays;
-    }
 }
 
 ?>

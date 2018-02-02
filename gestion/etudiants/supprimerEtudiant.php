@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page supprimerEtudiant.php
+ * Utilisation : page pour supprimer des étudiants
+ * Dépendance(s) : supprimerEtudiantData.php --> traitement des requêtes Ajax
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

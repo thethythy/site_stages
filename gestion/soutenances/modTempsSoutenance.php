@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page modTempsSoutenance.php
+ * Utilisation : page pour modifier le temps de soutenance d'une filière
+ *		 page accessible depuis modifierTempsSoutenance.php
+ * Accès : restreint par authentification HTTP
+ */
+
 include_once("../../classes/bdd/connec.inc");
 include_once("../../classes/ihm/IHM_Generale.php");
 

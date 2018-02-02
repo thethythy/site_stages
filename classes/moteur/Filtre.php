@@ -1,39 +1,28 @@
 <?php
 
+/**
+ * Classe Filtre : un filtre général servant dans les requêtes SQL
+ */
+
 class Filtre {
 
-    // Déclaration des attributs de la classe
-    var $champ;
-    var $valeur;
-    var $strFiltres;
+    var $strFiltres;  // Le filtre avec une syntaxe SQL
 
-    // Constructeur de classe
+    /**
+     * Constructeur d'un objet Filtre à partir de deux autres objets Filtre
+     * et du lien logique entre les deux
+     * @param Filtre $filtre1
+     * @param Filtre $filtre2
+     * @param string $type Le lien logique
+     */
     public function Filtre($filtre1, $filtre2, $type) {
 	$this->strFiltres = $filtre1->getStrFiltres() . " " . $type . " " . $filtre2->getStrFiltres();
     }
 
-    // Méthodes diverses
-
-    public function getChamp() {
-	return $this->champ;
-    }
-
-    public function setChamp($champ) {
-	$this->champ = $champ;
-    }
-
-    public function getValeur() {
-	return $this->valeur;
-    }
-
-    public function setValeur($valeur) {
-	$this->valeur = $valeur;
-    }
-
-    public function addNewFiltre($filtre, $type) {
-	$this->strFiltres = $this->strFiltres . " " . $type . " " . $filtre->getStrFiltres();
-    }
-
+    /**
+     * Obtenir le filtre sous forme de chaîne SQL
+     * @return string
+     */
     public function getStrFiltres() {
 	if ((substr_count($this->strFiltres, "=") <= 1) &&
 	    (substr_count($this->strFiltres, "ILIKE") <= 1))

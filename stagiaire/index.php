@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page index.php
+ * Utilisation : page principale d'accès aux fonctionnalités des étudiants
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 include_once("../classes/bdd/connec.inc");

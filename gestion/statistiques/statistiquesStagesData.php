@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Page statistiquesStagesData.php
+ * Utilisation : page de traitement des requêtes Ajax
+ *		 créer un fichier Excel
+ *		 retourner un flux json de valeurs statistiques
+ * Dépendance(s) : statistiquesStagesExcel.php --> exportation fichier Excel
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = '../../classes/';
 
 include_once($chemin.'bdd/connec.inc');
@@ -41,6 +50,7 @@ include_once("statistiquesStagesExcel.php");
 
 // -----------------------------------------------------------------------------
 // En-tête du flux JSON
+
 header("Content-type: application/json; charset=utf-8");
 
 // -----------------------------------------------------------------------------

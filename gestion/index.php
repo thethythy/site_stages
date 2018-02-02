@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page index.php
+ * Utilisation : page principale des outils pour les référents
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../classes/";
 
 include_once($chemin . "bdd/connec.inc");

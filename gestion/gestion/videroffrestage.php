@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page videroffrestage.php
+ * Utilisation : page de suppression des anciennes offres de stage
+ *		 ainsi que les contacts et les entreprises superflues
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

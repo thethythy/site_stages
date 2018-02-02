@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page saisirNotesStagesData.php
+ * Utilisation : page retournant un tableau d'édition des notes de stages
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");
@@ -68,7 +74,6 @@ $tabEtudiants = Promotion::listerEtudiants($filtre);
 $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
-    $idPromo = $tabPromos[0][0];
 
     // Récupération des étudiants ayant une convention
     $tabEtuWithConv = array();

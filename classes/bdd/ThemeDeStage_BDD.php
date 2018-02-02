@@ -1,27 +1,44 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°23 : les thèmes de stages
+ */
+
 class ThemeDeStage_BDD {
 
+    /**
+     * Enregistrer ou mettre à jour un objet ThemeDeStage
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab23 Nom de la table 'theme_destage'
+     * @param ThemeDeStage $themeDeStage L'objet à enregistrer
+     */
     public static function sauvegarder($themeDeStage) {
 	global $db;
 	global $tab23;
 
 	$couleur = $themeDeStage->getCouleur();
 
-	if ($themeDeStage->getIdTheme() == "") {
+	if ($themeDeStage->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab23
-		    VALUES ('" . $themeDeStage->getIdTheme() . "',
+		    VALUES ('" . $themeDeStage->getIdentifiantBDD() . "',
 			    '" . $themeDeStage->getTheme() . "',
 			    '" . $couleur->getIdentifiantBDD() . "')";
 	} else {
 	    $sql = "UPDATE $tab23
 		    SET theme = '" . $themeDeStage->getTheme() . "',
 			idcouleur = '" . $couleur->getIdentifiantBDD() . "'
-		    WHERE idtheme = '" . $themeDeStage->getIdTheme() . "'";
+		    WHERE idtheme = '" . $themeDeStage->getIdentifiantBDD() . "'";
 	}
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir un enregistrement ThemeDeStage à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab23 Nom de la table 'theme_destage'
+     * @param integer $id Identifiant de l'enregistrement recherché
+     * @return enregistrement
+     */
     public static function getThemeDeStage($id) {
 	global $db;
 	global $tab23;
@@ -31,6 +48,13 @@ class ThemeDeStage_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir un enregistrement ThemeDeStage à partir de son nom
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab23 Nom de la table 'theme_destage'
+     * @param string $nom Le nom du thème de stage recherché
+     * @return enregistrement
+     */
     public static function getThemeDeStageFromNom($nom) {
 	global $db;
 	global $tab23;
@@ -40,6 +64,12 @@ class ThemeDeStage_BDD {
 	return mysqli_fetch_array($result);
     }
 
+    /**
+     * Obtenir les enregistrements de tous les thèmes de stage
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab23 Nom de la table 'theme_destage'
+     * @return tableau d'enregistrements
+     */
     public static function getListeTheme() {
 	global $db;
 	global $tab23;
@@ -60,6 +90,12 @@ class ThemeDeStage_BDD {
 	return $tabThemes;
     }
 
+    /**
+     * Suppression d'un enregistrement ThemeDeStage
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab23 Nom de la table 'theme_destage'
+     * @param integer $themeDeStage Identifiant de l'enregistrement à supprimer
+     */
     public static function delete($themeDeStage) {
 	global $db;
 	global $tab23;

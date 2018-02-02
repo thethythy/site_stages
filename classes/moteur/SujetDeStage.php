@@ -1,16 +1,27 @@
 <?php
 
+/**
+ * Classe SujetDeStage : les sujets de stage proposés par les étudiants et à valider
+ */
+
 class SujetDeStage {
 
-    // Déclaration des attributs de la classe
-    var $identifiantBDD;
-    var $identifiantEtudiant;
-    var $identifiantPromotion;
-    var $description;
-    var $valide;
-    var $enAttenteDeValidation;
+    var $identifiantBDD;  // Identifiant unique en base
+    var $description;  // Description du sujet
+    var $valide;  // Statut valide ou invalide
+    var $enAttenteDeValidation;  // Indicateur de traitement fait ou en attente
+    var $identifiantEtudiant;  // Identifiant de l'étudiant
+    var $identifiantPromotion;  // Identifiant de la promotion
 
-    // Constructeur de classe
+    /**
+     * Constructeur
+     * @param integer $identifiantBDD
+     * @param integer $identifiantEtudiant
+     * @param integer $identifiantPromotion
+     * @param string $description
+     * @param boolean $valide
+     * @param boolean $enAttenteDeValidation
+     */
     public function SujetDeStage($identifiantBDD, $identifiantEtudiant,
 	    $identifiantPromotion, $description, $valide, $enAttenteDeValidation) {
 	$this->identifiantBDD = $identifiantBDD;
@@ -21,26 +32,15 @@ class SujetDeStage {
 	$this->enAttenteDeValidation = $enAttenteDeValidation;
     }
 
-    /** Méthodes diverses **/
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
     }
 
-    public function getEtudiant() {
-	return Etudiant::getEtudiant($this->identifiantEtudiant);
-    }
-
-    public function getPromotion() {
-	return Promotion::getPromotion($this->identifiantPromotion);
-    }
-
     public function getDescription() {
 	return $this->description;
-    }
-
-    public function setDescription($description) {
-	$this->description = $description;
     }
 
     public function isValide() {
@@ -51,30 +51,49 @@ class SujetDeStage {
 	return $valid;
     }
 
-    public function setValide($valide) {
-	$this->valide = $valide;
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setDescription($description) {
+	$this->description = $description;
     }
 
-    public function isEnAttenteDeValidation() {
-	$attenteDeValidation = 0;
-	if ($this->enAttenteDeValidation == true) {
-	    $attenteDeValidation = 1;
-	}
-	return $attenteDeValidation;
+    public function setValide($valide) {
+	$this->valide = $valide;
     }
 
     public function setEnAttenteDeValidation($enAttenteDeValidation) {
 	$this->enAttenteDeValidation = $enAttenteDeValidation;
     }
 
-    /** Méthodes statiques * */
+    // ------------------------------------------------------------------------
+    // Méthodes dérivées
 
+    public function getEtudiant() {
+	return Etudiant::getEtudiant($this->identifiantEtudiant);
+    }
+
+    public function getPromotion() {
+	return Promotion::getPromotion($this->identifiantPromotion);
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
+
+    /**
+     * Enregistrer un sujet de stage à partir d'un tableau d'attributs
+     * @param array $tab_donnees
+     */
     public static function saisirDonnees($tab_donnees) {
 	$sds = new SujetDeStage("", $tab_donnees[0], $tab_donnees[1],
 				    $tab_donnees[2], false, true);
 	SujetDeStage_BDD::sauvegarder($sds);
     }
 
+    /**
+     * Obtenir la liste des objets SujetDeStage à traiter
+     * @return array
+     */
     public static function getSujetDeStageAValider() {
 	$filtre = new FiltreNumeric("enattente", 1);
 	$tabSdS = SujetDeStage_BDD::getListeSujetDeStage($filtre);
@@ -89,6 +108,10 @@ class SujetDeStage {
 	return $tabSujetDeStage;
     }
 
+    /**
+     * Obtenir la liste des objets SujetDeStage valides
+     * @return array
+     */
     public static function getSujetDeStageValide() {
 	$filtre = new FiltreNumeric("valide", 1);
 	$tabSdS = SujetDeStage_BDD::getListeSujetDeStage($filtre);
@@ -103,8 +126,13 @@ class SujetDeStage {
 	return $tabSujetDeStage;
     }
 
-    public static function getListeSujetDeStage($filtres) {
-	$tabSdS = SujetDeStage_BDD::getListeSujetDeStage($filtres);
+    /**
+     * Obtenir la liste des objets SujetDeStage corresponds au filtre de sélection
+     * @param Filtre $filtre
+     * @return array
+     */
+    public static function getListeSujetDeStage($filtre) {
+	$tabSdS = SujetDeStage_BDD::getListeSujetDeStage($filtre);
 	$tabSujetDeStage = array();
 
 	for ($i = 0; $i < sizeof($tabSdS); $i++)
@@ -116,6 +144,11 @@ class SujetDeStage {
 	return $tabSujetDeStage;
     }
 
+    /**
+     * Obtenir un objet SujetDeStage à partir d'un identifiant
+     * @param integer $identifiant
+     * @return SujetDeStage
+     */
     public static function getSujetDeStage($identifiant) {
 	$sds = SujetDeStage_BDD::getSujetDeStage($identifiant);
 	return new SujetDeStage($sds["idsujetdestage"],
@@ -126,12 +159,10 @@ class SujetDeStage {
 				$sds["enattente"]);
     }
 
-    public static function rechercheSujetDeStage($etudiant, $promotion) {
-	return SujetDeStage::getSujetDeStage(
-		SujetDeStage_BDD::rechercheSujetDeStage($etudiant->getIdentifiantBDD(),
-							$promotion->getIdentifiantBDD()));
-    }
-
+    /**
+     * Supprimer un sujet de stage à partir de son identifiant
+     * @param integer $idSujetDeStage
+     */
     public static function supprimeSujetDeStage($idSujetDeStage) {
 	SujetDeStage_BDD::delete($idSujetDeStage);
     }

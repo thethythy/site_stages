@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Classe FiltreSuperieur : un filtre de comparaison entre deux valeurs
+ */
+
 class FiltreSuperieur extends Filtre {
 
-    // Constructeur de classe
+    /**
+     * Constructeur d'un filtre '>='
+     * @param string $champ
+     * @param string $valeur
+     */
     public function FiltreSuperieur($champ, $valeur) {
-	$this->champ = $champ;
-	$this->valeur = $valeur;
-	$this->strFiltres = $this->champ . " >= '" . $this->valeur . "'";
+	$this->strFiltres = $champ . " >= '" . $valeur . "'";
     }
 
 }

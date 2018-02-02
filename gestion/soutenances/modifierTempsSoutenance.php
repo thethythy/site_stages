@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page modifierTempsSoutenance.php
+ * Utilisation : page pour éditer le temps de soutenance par filière
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

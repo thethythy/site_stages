@@ -2,6 +2,10 @@
 
 class Tache_IHM {
 
+    /**
+     * Affiche le formulaire de l'administration des tâches
+     * @param boolean $test Indicateur de l'état actuel du démon de notification
+     */
     public static function afficherFormulaireSaisie($test) {
 	?>
 	<form method="POST" action="">

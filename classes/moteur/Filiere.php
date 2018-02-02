@@ -1,12 +1,23 @@
 <?php
 
+/**
+ * Classe Filiere : les filières (correspondant aux formations post-BAC)
+ */
+
 class Filiere {
 
-    var $identifiant_BDD;
-    var $nom;
-    var $tempsSoutenance;
-    var $affDepot;
+    var $identifiant_BDD;  // Identifiant unique en base
+    var $nom;  // Nom de la filière
+    var $tempsSoutenance;  // Temps de soutenance de la filière
+    var $affDepot;  // Indicateur d'affichage lors du dépôt d'une offre de stage
 
+    /**
+     * Constructeur
+     * @param integer $identifiant_BDD
+     * @param string $nom
+     * @param integer $tempsSoutenance
+     * @param boolean $affDepot
+     */
     public function Filiere($identifiant_BDD, $nom, $tempsSoutenance = 20, $affDepot = 1) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
@@ -14,30 +25,44 @@ class Filiere {
 	$this->affDepot = $affDepot;
     }
 
-    public function setNom($nom) {
-	$this->nom = $nom;
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
+
+    public function getIdentifiantBDD() {
+	return $this->identifiant_BDD;
     }
 
     public function getNom() {
 	return $this->nom;
     }
 
-    public function setTempsSoutenance($temps) {
-	$this->tempsSoutenance = $temps;
-    }
-
     public function getTempsSoutenance() {
 	return $this->tempsSoutenance;
-    }
-
-    public function getIdentifiantBDD() {
-	return $this->identifiant_BDD;
     }
 
     public function getAffDepot() {
 	return $this->affDepot;
     }
 
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
+
+    public function setNom($nom) {
+	$this->nom = $nom;
+    }
+
+    public function setTempsSoutenance($temps) {
+	$this->tempsSoutenance = $temps;
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
+
+    /**
+     * Obtenir un objet Filiere à partir d'un identifant
+     * @param integer $identifiantFiliere
+     * @return Filiere
+     */
     public static function getFiliere($identifiantFiliere) {
 	$filiereString = Filiere_BDD::getFiliere($identifiantFiliere);
 	$filiere = new Filiere($filiereString['idfiliere'],
@@ -48,8 +73,8 @@ class Filiere {
     }
 
     /**
-     * Renvoie une liste de toutes les filières
-     * @return Filiere[] tableau contenant toutes les filières
+     * Obtenir la liste de toutes les filières
+     * @return tableau d'objets Filière
      */
     public static function listerFilieres() {
 	$tabFilieres = array();

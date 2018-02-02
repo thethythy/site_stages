@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page gestionCompetence.php
+ * Utilisation : page pour gérer les compétences (création, édition, suppression)
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

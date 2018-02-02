@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page listeDesEtudiantsData.php
+ * Utilisation : page pour obtenir la liste des étudiants d'une ou toutes les promotions
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

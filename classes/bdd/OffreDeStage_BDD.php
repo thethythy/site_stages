@@ -1,13 +1,30 @@
 <?php
 
+/**
+ * Représentation et accès à la table n°12 : les offres de stage proposées par
+ * les entreprises
+ */
+
 class offreDeStage_BDD {
 
+    /**
+     * Enregistrer ou mettre à jour un objet OffreDeStage ansi que les associations
+     * avec les compétences, les filières et les parcours
+     *
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
+     * @global string $tab8 Nom de la table 'theme_offredestage'
+     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
+     * @global string $tab12 Nom de la table 'offredestage'
+     * @param OffreDeStage $offreDeStage L'objet à enregistrer
+     * @return integer L'identifiant de l'enregistrement
+     */
     public static function sauvegarder($offreDeStage) {
 	global $db;
-	global $tab12;
-	global $tab8;
 	global $tab7;
+	global $tab8;
 	global $tab11;
+	global $tab12;
 
 	$lastId = "0";
 	$estVisible = 0;
@@ -87,12 +104,21 @@ class offreDeStage_BDD {
 	return $lastId;
     }
 
+    /**
+     * Suppression d'un enregistrement à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
+     * @global string $tab8 Nom de la table 'theme_offredestage'
+     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
+     * @global string $tab12 Nom de la table 'offredestage'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement à supprimer
+     */
     public static function delete($identifiantBDD) {
 	global $db;
-	global $tab12;
-	global $tab8;
 	global $tab7;
+	global $tab8;
 	global $tab11;
+	global $tab12;
 
 	$sql = "DELETE FROM $tab12 WHERE idoffre='$identifiantBDD'";
 	$db->query($sql);
@@ -110,12 +136,22 @@ class offreDeStage_BDD {
 	$db->query($sql);
     }
 
+    /**
+     * Obtenir un enregistrement OffreDeStage à partir de son identifiant
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
+     * @global string $tab8 Nom de la table 'theme_offredestage'
+     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
+     * @global string $tab12 Nom de la table 'offredestage'
+     * @param integer $identifiantBDD Identifiant de l'enregistrement cherché
+     * @return enregistrement
+     */
     public static function getOffreDeStage($identifiantBDD) {
 	global $db;
 	global $tab7;
+	global $tab8;
 	global $tab11;
 	global $tab12;
-	global $tab8;
 
 	$sql = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
 	$res = $db->query($sql);
@@ -163,11 +199,18 @@ class offreDeStage_BDD {
     }
 
     /**
-     * Retourne une liste d'offre de stage suivant un filtre
-     * @param $filtres le filtre de la recherche
-     * @return String[] tableau contenant les offres de stage concernées par le filtre
+     * Obtenir une liste d'offres de stage correspondant à un filtre
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab3 Nom de la table 'contact'
+     * @global string $tab6 Nom de la table 'entreprise'
+     * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
+     * @global string $tab8 Nom de la table 'theme_offredestage'
+     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
+     * @global string $tab12 Nom de la table 'offredestage'
+     * @param Filtre $filtre Le filtre de la recherche
+     * @return tableau d'enregistrements
      */
-    public static function getListeOffreDeStage($filtres) {
+    public static function getListeOffreDeStage($filtre) {
 	global $db;
 	global $tab3;
 	global $tab6;
@@ -176,17 +219,20 @@ class offreDeStage_BDD {
 	global $tab11;
 	global $tab12;
 
-	if ($filtres == "") {
-	    $requete = "SELECT * FROM $tab12";
+	// --------------------------------------------------------------------
+	// Recherche des identifiants des offres de stage selon le filtre
+
+	if ($filtre == "") {
+	    $requete = "SELECT $tab12.idoffre FROM $tab12";
 	} else {
 
 	    $table = "FROM $tab12,$tab3,$tab6";
 
 	    $requete = "WHERE $tab12.idcontact=$tab3.idcontact AND $tab6.identreprise=$tab3.identreprise";
 
-	    $pos1 = strripos($filtres->getStrFiltres(), "idfiliere");
-	    $pos2 = strripos($filtres->getStrFiltres(), "idparcours");
-	    $pos3 = strripos($filtres->getStrFiltres(), "idcompetence");
+	    $pos1 = strripos($filtre->getStrFiltres(), "idfiliere");
+	    $pos2 = strripos($filtre->getStrFiltres(), "idparcours");
+	    $pos3 = strripos($filtre->getStrFiltres(), "idcompetence");
 
 	    if ($pos1 !== false) {
 		$requete = $requete . " AND $tab7.idoffre=$tab12.idoffre";
@@ -203,54 +249,19 @@ class offreDeStage_BDD {
 		$table = $table . "," . $tab11;
 	    }
 
-	    $requete = "SELECT * $table $requete AND " . $filtres->getStrFiltres() . " ORDER BY $tab12.idoffre";
+	    $requete = "SELECT $tab12.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab12.idoffre";
 	}
 
 	$result = $db->query($requete);
 
+	// --------------------------------------------------------------------
+	// Construire le tableau des enregistrements trouvés
+
 	$tabODS = array();
 
-	while ($result != FALSE && $ods = mysqli_fetch_array($result)) {
-	    $tab = array();
-
-	    array_push($tab, $ods['idoffre']);
-	    array_push($tab, $ods['sujet']);
-	    array_push($tab, $ods['titre']);
-	    array_push($tab, $ods['listeenvironnement']);
-
-	    $sql1 = "SELECT * FROM " . $tab8 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res1 = $db->query($sql1);
-	    $tabThemes = array();
-	    while ($theme = mysqli_fetch_array($res1)) {
-		array_push($tabThemes, $theme['idparcours']);
-	    }
-	    array_push($tab, $tabThemes);
-
-	    $sql2 = "SELECT * FROM " . $tab7 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res2 = $db->query($sql2);
-	    $tabProfils = array();
-	    while ($profil = mysqli_fetch_array($res2)) {
-		array_push($tabProfils, $profil['idfiliere']);
-	    }
-	    array_push($tab, $tabProfils);
-
-	    array_push($tab, $ods['dureemin']);
-	    array_push($tab, $ods['dureemax']);
-	    array_push($tab, $ods['indemnite']);
-	    array_push($tab, $ods['remarques']);
-	    array_push($tab, $ods['estVisible']);
-
-	    $sql3 = "SELECT * FROM " . $tab11 . " WHERE idoffre=" . $ods['idoffre'];
-	    $res3 = $db->query($sql3);
-	    $tabCompetences = array();
-	    while ($competence = mysqli_fetch_array($res3)) {
-		array_push($tabCompetences, $competence['idcompetence']);
-	    }
-	    array_push($tab, $tabCompetences);
-
-	    array_push($tab, $ods['idcontact']);
-
-	    array_push($tabODS, $tab);
+	while ($result != FALSE && $idods = mysqli_fetch_array($result)) {
+	    $ods = offreDeStage_BDD::getOffreDeStage($idods['idoffre']);
+	    array_push($tabODS, $ods);
 	}
 
 	return $tabODS;

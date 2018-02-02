@@ -2,13 +2,18 @@
 
 class Clef_IHM {
 
-    public static function afficherFormulaireDefiniClef($HClef) {
+    /**
+     * Afficher un formulaire permettant de définir une nouvelle valeur de clef
+     * sachant que la clé actuelle est affichée pour information
+     * @param string $HClef Le condensat de la clé actuelle
+     */
+    public static function afficherFormulaireDefinitionClef($HClef) {
 	?>
 	<script type="text/javascript">
 	    var auchargement = function() {
 		// Si la clef est définie alors la sauvegarder sur le poste gestionnaire
-		var clef = '<?php echo isset($_POST["clef"]) ? $_POST["clef"] : "" ; ?>';
-		if (clef != "") {
+		var clef = '<?php echo isset($_POST["clef"]) ? $_POST["clef"] : FALSE ; ?>';
+		if (clef != FALSE) {
 		    localStorage.setItem('clef', clef);
 		}
 
@@ -60,6 +65,10 @@ class Clef_IHM {
 	<?php
     }
 
+    /**
+     * Afficher la valeur de la clée actuelle est la valeur de son condensat
+     * @param string $HClef Le condensat de la clé actuelle
+     */
     public static function afficherClef($HClef) {
 	?>
 	<script type="text/javascript">

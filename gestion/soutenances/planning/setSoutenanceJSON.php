@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page setSoutenanceJSON.php
+ * Utilisation : page pour enregistrer une soutenance
+ *		 page appelée par planifier_compresse.js
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 
 include_once($chemin."bdd/connec.inc");
@@ -39,7 +46,9 @@ $data = json_decode($input, true);
 
 // Récupérer l'objet datesoutenance
 $date = new DateTime($data["start_date"]);
-$filtre = new Filtre(new FiltreNumeric("jour", $date->format('d')), new Filtre(new FiltreNumeric("mois", $date->format('m')), new FiltreNumeric("annee",$date->format('Y')), "AND"), "AND");
+$filtre = new Filtre(new FiltreNumeric("jour", $date->format('d')),
+		     new Filtre(new FiltreNumeric("mois", $date->format('m')),
+			        new FiltreNumeric("annee",$date->format('Y')), "AND"), "AND");
 $datesSoutenances = DateSoutenance::listerDateSoutenance($filtre);
 
 // Si la date est OK, on peut sauvegarder

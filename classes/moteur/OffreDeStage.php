@@ -1,22 +1,42 @@
 <?php
 
-class offreDeStage {
+/**
+ * Classe OffreDeStage : les offres de stage des entreprises
+ */
 
-    var $identifiantBDD;
-    var $sujet;
-    var $titre;
-    var $listeEnvironnement;
-    var $theme; // Tableau d'identifiants de Parcours
-    var $listeProfilSouhaite; // Tableau d'identifiants de Filières
-    var $dureeMin;
-    var $dureeMax;
-    var $indemnite;
-    var $remarques;
-    var $estVisible;
-    var $competences;  //Tableau des compétences
-    var $maitreDeStage;
+class OffreDeStage {
 
-    public function offreDeStage($identifiantBDD, $sujet, $titre, $listeEnvironnement,
+    var $identifiantBDD;  // Identifiant unique en base
+    var $sujet;  // Texte descriptif de l'offre
+    var $titre;  // Titre de l'offre
+    var $listeEnvironnement;  // SE utilisés
+    var $theme;  // Tableau d'identifiants des parcours
+    var $listeProfilSouhaite; // Tableau d'identifiants des filières
+    var $dureeMin;  // Durée minimale
+    var $dureeMax;  // Durée maximale
+    var $indemnite;  // Valeurde la gratification
+    var $remarques;  // Remarques divers sur les conditsions du stage
+    var $estVisible;  // Indicateur de visibilite sur la vue des étudiants
+    var $competences;  // Tableau des identifiants des compétences
+    var $maitreDeStage;  // Identifiant du contact
+
+    /**
+     * Constructeur
+     * @param integer $identifiantBDD
+     * @param string $sujet
+     * @param string $titre
+     * @param string $listeEnvironnement
+     * @param array $theme
+     * @param array $listeProfilSouhaite
+     * @param integer $dureeMin
+     * @param integer $dureeMax
+     * @param double $indemnite
+     * @param string $remarques
+     * @param boolean $estVisible
+     * @param array $listeCompetences
+     * @param integer $maitreDeStage
+     */
+    public function OffreDeStage($identifiantBDD, $sujet, $titre, $listeEnvironnement,
 	    $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques,
 	    $estVisible, $listeCompetences, $maitreDeStage) {
 	$this->identifiantBDD = $identifiantBDD;
@@ -34,6 +54,9 @@ class offreDeStage {
 	$this->maitreDeStage = $maitreDeStage;
     }
 
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
+
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
     }
@@ -42,105 +65,83 @@ class offreDeStage {
 	return $this->sujet;
     }
 
-    public function setSujet($sujet) {
-	$this->sujet = $sujet;
-    }
-
     public function getTitre() {
 	return $this->titre;
-    }
-
-    public function setTitre($titre) {
-	$this->titre = $titre;
     }
 
     public function getListeEnvironnements() {
 	return $this->listeEnvironnement;
     }
 
-    public function setListeEnvironnements($listeEnvironnement) {
-	$this->listeEnvironnement = $listeEnvironnement;
-    }
-
-    public function getThemes() {
-	$tabTheme = array();
-
-	for ($i = 0; $i < sizeof($this->theme); $i++) {
-	    array_push($tabTheme, Parcours::getParcours($this->theme[$i]));
-	}
-
-	return $tabTheme;
-    }
-
-    public function setThemes($theme) {
-	$this->theme = $theme;
-    }
-
-    public function getListeProfilSouhaite() {
-	$tabProfil = array();
-
-	for ($i = 0; $i < sizeof($this->listeProfilSouhaite); $i++) {
-	    array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
-	}
-
-	return $tabProfil;
-    }
-
-    public function setListeProfilSouhaite($listeProfilSouhaite) {
-	$this->listeProfilSouhaite = $listeProfilSouhaite;
-    }
-
     public function getDureeMinimale() {
 	return $this->dureeMin;
-    }
-
-    public function setDureeMinimale($dureeMin) {
-	$this->dureeMin = $dureeMin;
     }
 
     public function getDureeMaximale() {
 	return $this->dureeMax;
     }
 
-    public function setDureeMaximale($dureeMax) {
-	$this->dureeMax = $dureeMax;
-    }
-
     public function getIndemnite() {
 	return $this->indemnite;
-    }
-
-    public function setIndemnite($indemnite) {
-	$this->indemnite = $indemnite;
     }
 
     public function getRemarques() {
 	return $this->remarques;
     }
 
-    public function setRemarques($remarques) {
-	$this->remarques = $remarques;
-    }
-
     public function estVisible() {
 	return $this->estVisible;
-    }
-
-    public function setEstVisible($estVisible) {
-	$this->estVisible = $estVisible;
     }
 
     public function getIdContact() {
 	return $this->maitreDeStage;
     }
 
-    public function getEntreprise() {
-	$contact = Contact::getContact($this->maitreDeStage);
-	return $contact->getEntreprise();
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setSujet($sujet) {
+	$this->sujet = $sujet;
     }
+
+    public function setTitre($titre) {
+	$this->titre = $titre;
+    }
+
+    public function setListeEnvironnements($listeEnvironnement) {
+	$this->listeEnvironnement = $listeEnvironnement;
+    }
+
+    public function setDureeMinimale($dureeMin) {
+	$this->dureeMin = $dureeMin;
+    }
+
+    public function setDureeMaximale($dureeMax) {
+	$this->dureeMax = $dureeMax;
+    }
+
+    public function setIndemnite($indemnite) {
+	$this->indemnite = $indemnite;
+    }
+
+    public function setRemarques($remarques) {
+	$this->remarques = $remarques;
+    }
+
+    public function setEstVisible($estVisible) {
+	$this->estVisible = $estVisible;
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes dérivées
 
     public function getContact() {
 	return Contact::getContact($this->maitreDeStage);
+    }
+
+    public function getEntreprise() {
+	$contact = Contact::getContact($this->maitreDeStage);
+	return $contact->getEntreprise();
     }
 
     public function getListesCompetences() {
@@ -153,8 +154,36 @@ class offreDeStage {
 	return $tabCompetence;
     }
 
+    public function getThemes() {
+	$tabTheme = array();
+
+	for ($i = 0; $i < sizeof($this->theme); $i++) {
+	    array_push($tabTheme, Parcours::getParcours($this->theme[$i]));
+	}
+
+	return $tabTheme;
+    }
+
+    public function getListeProfilSouhaite() {
+	$tabProfil = array();
+
+	for ($i = 0; $i < sizeof($this->listeProfilSouhaite); $i++) {
+	    array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
+	}
+
+	return $tabProfil;
+    }
+
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
+
+    /**
+     * Enregistrement d'une offre de stage à partir d'un tableau d'attributs
+     * @param array $tab_donnees
+     * @return integer Identifiant en base
+     */
     public static function saisirDonnees($tab_donnees) {
-	$ods = new offreDeStage("", $tab_donnees[0], $tab_donnees[1],
+	$ods = new OffreDeStage("", $tab_donnees[0], $tab_donnees[1],
 				    $tab_donnees[2], $tab_donnees[3],
 				    $tab_donnees[4], $tab_donnees[5],
 				    $tab_donnees[6], $tab_donnees[7],
@@ -163,8 +192,13 @@ class offreDeStage {
 	return offreDeStage_BDD::sauvegarder($ods);
     }
 
+    /**
+     * Mettre à jour une offre de stage à partir d'un tableau d'attributs
+     * @param array $tab_donnees
+     * @return integer Identifiant en base
+     */
     public static function modifierDonnees($tab_donnees) {
-	$ods = new offreDeStage($tab_donnees[0], $tab_donnees[1],
+	$ods = new OffreDeStage($tab_donnees[0], $tab_donnees[1],
 				$tab_donnees[2], $tab_donnees[3],
 				$tab_donnees[4], $tab_donnees[5],
 				$tab_donnees[6], $tab_donnees[7],
@@ -174,10 +208,19 @@ class offreDeStage {
 	return offreDeStage_BDD::sauvegarder($ods);
     }
 
+    /**
+     * Supprimer en base une offre de stage à partir de son identifiant
+     * @param integer $identifiantBDD
+     */
     public static function supprimerDonnees($identifiantBDD) {
 	offreDeStage_BDD::delete($identifiantBDD);
     }
 
+    /**
+     * Obtenir un objet OffreDeStage à partir de son identifiant
+     * @param integer $identifiantBDD
+     * @return OffreDeStage
+     */
     public static function getOffreDeStage($identifiantBDD) {
 	$offreDeStage = OffreDeStage_BDD::getOffreDeStage($identifiantBDD);
 
@@ -190,8 +233,13 @@ class offreDeStage {
 				$offreDeStage[12]);
     }
 
-    public static function getListeOffreDeStage($filtres) {
-	$tabODSString = OffreDeStage_BDD::getListeOffreDeStage($filtres);
+    /**
+     * Obtenir une liste d'objets OffreDeStage à partir d'un filtre
+     * @param Filtre $filtre
+     * @return array
+     */
+    public static function getListeOffreDeStage($filtre) {
+	$tabODSString = OffreDeStage_BDD::getListeOffreDeStage($filtre);
 
 	$tabODS = array();
 	for ($i = 0; $i < sizeof($tabODSString); $i++) {

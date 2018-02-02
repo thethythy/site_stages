@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page demanderValidationSDS.php
+ * Utilisation : page de demande de validation d'un sujet de stage
+ * Dépendance(s) : demanderValidationSDSData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

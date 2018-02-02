@@ -1,18 +1,32 @@
 <?php
 
+/**
+ * La classe Entreprise : l'entreprise des contacts d'une offre de stage
+ * ou d'une convention de stage
+ */
+
 class Entreprise {
 
-    // Déclaration des attributs de la classe
-    var $identifiantBDD;
-    var $nom;
-    var $adresse;
-    var $codePostal;
-    var $ville;
-    var $pays;
-    var $email;
-    var $idTypeEntreprise;
+    var $identifiantBDD;  // Identifiant unique en base
+    var $nom;  // Nom officiel de l'entreprise
+    var $adresse;  // Adresse de l'entreprise (lieu du stage ou siège social)
+    var $codePostal;  // Code postal
+    var $ville;  // Ville
+    var $pays;  // Pays
+    var $email;  // Adresse mail du DRH ou équivalent
+    var $idTypeEntreprise;  // Identifiant du type d'entreprise
 
-    // Constructeur de classe
+    /**
+     * Constructeur de classe
+     * @param integer $identifiantBDD
+     * @param string $nom
+     * @param string $adresse
+     * @param string $codePostal
+     * @param string $ville
+     * @param string $pays
+     * @param string $email
+     * @param integer $idTypeEntreprise
+     */
     public function Entreprise($identifiantBDD, $nom, $adresse, $codePostal,
 	    $ville, $pays, $email, $idTypeEntreprise) {
 	$this->identifiantBDD = $identifiantBDD;
@@ -25,7 +39,8 @@ class Entreprise {
 	$this->idTypeEntreprise = $idTypeEntreprise;
     }
 
-    // Méthodes diverses
+    // ------------------------------------------------------------------------
+    // Accesseurs en lecture
 
     public function getIdentifiantBDD() {
 	return $this->identifiantBDD;
@@ -35,68 +50,84 @@ class Entreprise {
 	return $this->nom;
     }
 
-    public function setNom($nom) {
-	$this->nom = $nom;
-    }
-
     public function getAdresse() {
 	return $this->adresse;
-    }
-
-    public function setAdresse($adresse) {
-	$this->adresse = $adresse;
     }
 
     public function getCodePostal() {
 	return $this->codePostal;
     }
 
-    public function setCodePostal($codePostal) {
-	$this->codePostal = $codePostal;
-    }
-
     public function getVille() {
 	return $this->ville;
-    }
-
-    public function setVille($ville) {
-	$this->ville = $ville;
     }
 
     public function getPays() {
 	return $this->pays;
     }
 
-    public function setPays($pays) {
-	$this->pays = $pays;
-    }
-
     public function getEmail() {
 	return $this->email;
-    }
-
-    public function setEmail($email) {
-	$this->email = $email;
     }
 
     public function getType() {
 	return TypeEntreprise::getTypeEntreprise($this->idTypeEntreprise);
     }
 
+    // ------------------------------------------------------------------------
+    // Accesseurs en écriture
+
+    public function setNom($nom) {
+	$this->nom = $nom;
+    }
+
+    public function setAdresse($adresse) {
+	$this->adresse = $adresse;
+    }
+
+    public function setCodePostal($codePostal) {
+	$this->codePostal = $codePostal;
+    }
+
+    public function setVille($ville) {
+	$this->ville = $ville;
+    }
+
+    public function setPays($pays) {
+	$this->pays = $pays;
+    }
+
+    public function setEmail($email) {
+	$this->email = $email;
+    }
+
     public function setTypeEntreprise($idTypeEntreprise) {
 	$this->idTypeEntreprise = $idTypeEntreprise;
     }
+
+    // ------------------------------------------------------------------------
+    // Méthodes d'accés dérivés
 
     public function listeDeContacts() {
 	return Contact::listerContacts($this->identifiantBDD);
     }
 
-    /** Méthodes statiques **/
+    // ------------------------------------------------------------------------
+    // Méthodes statiques
 
+    /**
+     * Supprimer un entreprise en base
+     * @param integer $idEntreprise
+     */
     public static function supprimerEntreprise($idEntreprise) {
 	Entreprise_BDD::supprimerEntreprise($idEntreprise);
     }
 
+    /**
+     * Obtenir un objet Entreprise à partir d'un identifiant
+     * @param integer $idEntreprise
+     * @return Entreprise
+     */
     public static function getEntreprise($idEntreprise) {
 	$entrepriseBDD = Entreprise_BDD::getEntreprise($idEntreprise);
 	return new Entreprise($entrepriseBDD["identreprise"],
@@ -109,8 +140,13 @@ class Entreprise {
 			      $entrepriseBDD["idtypeentreprise"]);
     }
 
-    public static function getListeEntreprises($filtres) {
-	$tabEntrepriseString = Entreprise_BDD::getListeEntreprises($filtres);
+    /**
+     * Obtenir une liste d'entreprises selon un filtre
+     * @param Filtre $filtre
+     * @return tableau d'objets Entreprise
+     */
+    public static function getListeEntreprises($filtre) {
+	$tabEntrepriseString = Entreprise_BDD::getListeEntreprises($filtre);
 	$tabEntreprise = array();
 	for ($i = 0; $i < sizeof($tabEntrepriseString); $i++)
 	    array_push($tabEntreprise,
@@ -123,15 +159,6 @@ class Entreprise {
 				   $tabEntrepriseString[$i][6],
 				   $tabEntrepriseString[$i][7]));
 	return $tabEntreprise;
-    }
-
-    // $tab_donnees : Un tableau de String contenant les champs du formulaire de saisie
-    public static function saisisrDonneesEntreprise($tab_donnees) {
-	$entreprise = new Entreprise("", $tab_donnees[0], $tab_donnees[1],
-					 $tab_donnees[2], $tab_donnees[3],
-					 $tab_donnees[4], $tab_donnees[5],
-					 $tab_donnees[6]);
-	return Entreprise_BDD::sauvegarder($entreprise);
     }
 
 }

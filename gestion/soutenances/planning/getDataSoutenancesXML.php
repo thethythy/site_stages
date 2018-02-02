@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page getDataSoutenancesXML.php
+ * Utilisation : page pour obtenir une flux XML des soutenances
+ *		 page appelée par planifier_compresse.js
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 include_once($chemin."bdd/connec.inc");
 include_once($chemin."moteur/Filtre.php");
@@ -108,7 +115,7 @@ if (sizeof($tabSoutenances) > 0) {
 		print("\t\t<idsalle>".$tabSoutenances[$i]->getSalle()->getIdentifiantBDD()."</idsalle>\n");
 
 		// Soutenance à huis clos
-		print("\t\t<ahuisclos>".$tabSoutenances[$i]->isAHuitClos()."</ahuisclos>\n");
+		print("\t\t<ahuisclos>".$tabSoutenances[$i]->isAHuisClos()."</ahuisclos>\n");
 
 		// Evénement en lecture seulement ?
 		if ($annee < (Promotion_BDD::getLastAnnee() + 1)) {

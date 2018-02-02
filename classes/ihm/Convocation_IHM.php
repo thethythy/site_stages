@@ -4,7 +4,7 @@ class Convocation_IHM {
 
     /**
      * Afficher un formulaire de sélection de la date de soutenance
-     * @param string $page
+     * @param string $page La page du traitement du formulaire
      */
     public static function afficherSelectionDateSoutenance($page) {
 	$tabODS = DateSoutenance::listerDateSoutenance('', 'DESC');
@@ -41,15 +41,16 @@ class Convocation_IHM {
 
     /**
      * Afficher un formulaire de sélection des convocations à envoyer
-     * Seul les convocations par encore envoyées sont sélectionnables.
-     * @param tableau d'objet $tabOConvocation
-     * @param integer $annee
-     * @param integer $iddate
+     * Seules les convocations pas encore envoyées sont sélectionnables.
+     * @param string $page La page de traitement du formulaire
+     * @param tableau d'objet $tabOConvocation Tableau d'objets Convocation
+     * @param integer $annee L'année des étudiants concernés
+     * @param integer $iddate Identifiant de l'objet DateSoutenance
      */
-    public static function afficherSelectionDestinairesConvocation($tabOConvocation, $annee, $iddate) {
+    public static function afficherSelectionDestinairesConvocation($page, $tabOConvocation, $annee, $iddate) {
 	if (sizeof($tabOConvocation) > 0) {
 	    ?>
-	    <form method="post" action="convocation.php">
+	    <form method="post" action="<?php echo $page; ?>">
 		<table>
 		    <tr id='entete'>
 			<td width="20%">Promotion</td>

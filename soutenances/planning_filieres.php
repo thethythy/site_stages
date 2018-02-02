@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page planning_filieres.php
+ * Utilisation : page de visualisation du planning par filière
+ * Dépendance(s) : planning_filieresData.php --> traitement des requêtes Ajax
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";

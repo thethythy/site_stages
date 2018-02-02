@@ -1,4 +1,11 @@
 ﻿<?php
+
+/**
+ * Page manuel.php
+ * Utilisation : page pour visualiser l'aide en ligne interactive
+ * Accès : restreint par authentification HTTP
+ */
+
 include_once("./../../classes/bdd/connec.inc");
 include_once("./../../classes/ihm/IHM_Generale.php");
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page saisirEntreprise.php
+ * Utilisation : page pour saisir une nouvelle entreprise
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

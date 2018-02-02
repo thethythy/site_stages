@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page modifierContact.php
+ * Utilisation : page pour modifier un contact existant
+ *		 page accessible depuis modifierListeContacts.php
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../classes/";
 
 include_once($chemin . "bdd/connec.inc");

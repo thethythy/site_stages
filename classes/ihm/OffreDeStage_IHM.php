@@ -2,6 +2,10 @@
 
 class OffreDeStage_IHM {
 
+    /**
+     * Afficher un formulaire de sélection des offres de stage
+     * @param string $fichier La page de traitement du formulaire
+     */
     public static function afficherFormulaireRecherche($fichier) {
 	$tabF = Filiere::listerFilieres();
 	$tabP = Parcours::listerParcours();
@@ -119,6 +123,9 @@ class OffreDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire de saisie d'une nouvelle offre de stage
+     */
     public static function afficherFormulaireSaisie() {
 	$tabCompetences = Competence::listerCompetences();
 	$tabFilieres = Filiere::listerFilieres();
@@ -340,6 +347,10 @@ class OffreDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'une offre de stage
+     * (utiliser notamment pour valider une offre)
+     */
     public static function afficherFormulaireModification() {
 	?>
 	<script language="javascript">
@@ -795,6 +806,19 @@ class OffreDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher le contenu d'une offre de stage (sans modification possible)
+     * @param OffreDeStage $offreDeStage L'objet à visualiser
+     * @param string $page La page de retour
+     * @param string $nom_init Nom de l'entreprise
+     * @param string $ville_init Nom de la ville de l'entreprise
+     * @param string $cp_init Code postal de l'entreprise
+     * @param string $pays_init Le pays du lieu du stage
+     * @param string $filiere_init La filière concernée
+     * @param string $parcours_init Le parcours concerné
+     * @param string $duree_init La durée du stage
+     * @param string $competence_init Les compétences demandées
+     */
     public static function visualiserOffre($offreDeStage, $page, $nom_init,
 	    $ville_init, $cp_init, $pays_init, $filiere_init, $parcours_init,
 	    $duree_init, $competence_init) {
@@ -987,6 +1011,11 @@ class OffreDeStage_IHM {
     <?php
     }
 
+    /**
+     * Afficher un tableau interactif des stages disponibles
+     * (utilisé pour sélection une offre puis la visualiser)
+     * @param tableau d'objets $tabOffreDeStages Tableau des objets OffreDeStage
+     */
     public static function afficherListeOffres($tabOffreDeStages) {
 	?>
 	<br/>
@@ -1061,6 +1090,13 @@ class OffreDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher deux listes :
+     * - une liste des offres de stage pas encore validées
+     * - une liste des offres de stage déjà validées
+     * Dans les cas, la sélection permet d'éditer l'offre
+     * @param tableau d'objets $tabOffreDeStages Les objets OffreDeStage concernés
+     */
     public static function afficherListeOffresAEditer($tabOffreDeStages) {
 	$cpt = 0;
 	$enteteAffichee = false;

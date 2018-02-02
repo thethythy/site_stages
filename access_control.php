@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page access_control.php
+ * Utilisation : page de contrôle d'accès aux pages privées
+ * Dépendance(s) : access_control_verification.php --> traitement des requêtes Ajax
+ * Accès : public
+ */
+
 global $access_control_target;
 
 include_once("../classes/ihm/IHM_Generale.php");

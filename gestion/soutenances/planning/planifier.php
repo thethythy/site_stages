@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Page planifier.php
+ * Utilisation : page pour planifier les soutenances de stage
+ * Dépendance(s) : planifier_compresse.js --> affichage et gestion des interactions
+ * Accès : restreint par authentification HTTP
+ */
+
 $chemin = "../../../classes/";
 
 include_once($chemin."bdd/connec.inc");

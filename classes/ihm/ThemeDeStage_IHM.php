@@ -2,6 +2,9 @@
 
 class ThemeDeStage_IHM {
 
+    /**
+     * Afficher un formulaire de création d'un thème de stage
+     */
     public static function afficherFormulaireSaisie() {
 	$tabCouleur = Couleur::listerCouleur();
 	?>
@@ -52,6 +55,10 @@ class ThemeDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un formulaire d'édition d'un thème existant
+     * @param integer $idtheme Identifiant du thème à éditer
+     */
     public static function afficherFormulaireModification($idtheme) {
 	$theme = ThemeDeStage::getThemeDeStage($idtheme);
 	$couleur = $theme->getCouleur();
@@ -103,6 +110,10 @@ class ThemeDeStage_IHM {
 	<?php
     }
 
+    /**
+     * Afficher un tableau interactif des thèmes de stages pour édition
+     * ou suppression
+     */
     public static function afficherListeThemeDeStageAEditer() {
 	$tabThemes = ThemeDeStage::getListeTheme();
 	if (sizeof($tabThemes) > 0) {

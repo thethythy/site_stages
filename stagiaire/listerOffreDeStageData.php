@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Page listerOffreDeStageData.php
+ * Utilisation : page de traitement Ajax retournant un tableau des offres
+ * Accès : restreint par cookie
+ */
+
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
 $chemin = "../classes/";
