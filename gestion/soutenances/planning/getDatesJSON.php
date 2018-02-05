@@ -13,6 +13,7 @@ include_once($chemin."moteur/Filtre.php");
 include_once($chemin."moteur/FiltreNumeric.php");
 include_once($chemin."bdd/DateSoutenance_BDD.php");
 include_once($chemin."moteur/DateSoutenance.php");
+include_once($chemin."bdd/Promotion_BDD.php");;
 
 // En-tête du flux JSON
 header("Content-type: application/json; charset=utf-8");
