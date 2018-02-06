@@ -21,8 +21,8 @@ Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../telechargements/presentation-1718.pdf">Téléchargement</a>
-    <A href="../telechargements/presentation-1718.pdf">
+    <A href="../documents/telechargements/presentation-1718.pdf">Téléchargement</a>
+    <A href="../documents/telechargements/presentation-1718.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
