@@ -10,7 +10,7 @@ De la documentation est accessible dans plusieurs endroits du dépôt :
 - le plan du site est accessible dans classes/ihm/synoptique.png ;
 - le schéma de la base de données est accessible dans classes/bdd/schema_base.png
 - tous les scripts comportent (normalement) des commentaires auto-suffisants ;
-- une aide en ligne () est accessible à l'administrateur.
+- une aide en ligne (en cours !) est accessible à l'administrateur.
 
 Développement
 ==============
@@ -26,7 +26,7 @@ Le répertoire classes/moteur/ contient les scripts de manipulation des entités
 Chaque entité est représentée par un script différent qui délègue une partie du travail
 au script associée dans classes/bdd/ ; par exemple le script Etudiant.php utilise le script Etudiant_BDD.php.
 
-Le répertoire classes/ihm/ contient les scripts de création des flux HTML.
+Le répertoire classes/ihm/ contient les scripts de création des flux HTML (tableaux et formulaires).
 Chaque script est responsable des flux liées à un entité spécique. Par exemple,
 le script Etudiant_IHM.php génère les flux liés à l'entité Etudiant.php
 
