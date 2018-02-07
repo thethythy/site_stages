@@ -124,12 +124,12 @@ class IHM_Generale {
 		    <nav>
 			<a href='<?php echo $lienRacine; ?>index.php' title="Accueil du site">Accueil | </a>
 			<a href='<?php echo $lienRacine; ?>presentation/' title="Présentation détaillée">Présentation | </a>
-			<a href='<?php echo $lienRacine; ?>stagiaire/' title="Outils pour rechercher un stage">Rechercher un stage | </a>
-			<a href='<?php echo $lienRacine; ?>stagiaire/' title="Validation d'un stage par le responsable">Valider un stage | </a>
-			<a href='<?php echo $lienRacine; ?>parrainage/' title="Partie pour les enseignants">Enseignant référent | </a>
+			<a href='<?php echo $lienRacine; ?>stagiaire/' title="Outils pour rechercher un stage">Rechercher un stage<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/>| </a>
+			<a href='<?php echo $lienRacine; ?>stagiaire/' title="Validation d'un stage par le responsable">Valider un stage<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/>| </a>
+			<a href='<?php echo $lienRacine; ?>parrainage/' title="Partie pour les enseignants">Enseignant référent<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/>| </a>
 			<a href='<?php echo $lienRacine; ?>entreprise/' title="Partie pour les entreprises">Déposer un sujet | </a>
-			<a href='<?php echo $lienRacine; ?>soutenances/' title="Accès aux plannings des soutenances">Soutenances | </a>
-			<a href='<?php echo $lienRacine; ?>gestion/' title="Partie réservée au responsable">Connexion | </a>
+			<a href='<?php echo $lienRacine; ?>soutenances/' title="Accès aux plannings des soutenances">Soutenances<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/>| </a>
+			<a href='<?php echo $lienRacine; ?>gestion/' title="Partie réservée au responsable">Connexion<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/>| </a>
 			<a href='<?php echo $lienRacine; ?>mentions.php' title="Mentiosn légales">Mentions légales</a>
 		    </nav>
 		    <p>
@@ -150,7 +150,7 @@ class IHM_Generale {
     public static function footerAccueil() {
 	?>
 		<div id="footerAccueil">
-		    <a href="gestion/" title="Partie réservée">Connexion | </a>
+		    <a href="gestion/" title="Partie réservée">Connexion<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/> | </a>
 		    <a href="mentions.php" title="Partie réservée">Mentions légales</a>
 		    <p>
 			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
@@ -163,6 +163,32 @@ class IHM_Generale {
 			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc.png" width="120" height="40" align='center'/></a>
 			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="80" height="50" align='center'/></a>
 			<a href="http://www.univ-lemans.fr"><img src="/images/logo_universite.png" width="120" height="30" align='center'/></a>
+		    </nav></p>
+		</div>
+	    </body>
+	</html>
+	<?php
+    }
+
+    /**
+     * Afficher le pied de page spécifique à la page d'accueil
+     */
+    public static function footerAccueilAccessControl() {
+	?>
+		<div id="footerAccueil">
+		    <a>Connexion<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/> | </a>
+		    <a>Mentions légales</a>
+		    <p>
+			<img src='/images/mail.png' align='center' alt='Email' />
+			<img src='/images/feed.png' align='center' alt='Flux RSS' />
+			<img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' />
+			<img src='/images/Favicon.png' align='center' alt='Profil Viadeo' />
+		    </p>
+		    <p><nav>
+			<img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/>
+			<img src="/images/logo_iicc.png" width="120" height="40" align='center'/>
+			<img src="/images/logo_sciences.gif" width="80" height="50" align='center'/>
+			<img src="/images/logo_universite.png" width="120" height="30" align='center'/>
 		    </nav></p>
 		</div>
 	    </body>

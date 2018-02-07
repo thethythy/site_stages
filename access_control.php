@@ -18,7 +18,7 @@ include_once("../classes/ihm/IHM_Generale.php");
 include_once("../classes/ihm/Menu.php");
 
 IHM_Generale::header("Les stages", "étudiants", "/", array(), "auchargement");
-Menu::menuAccueil();
+Menu::menuAccueilAccessControl();
 ?>
 
 <br></br>
@@ -67,7 +67,7 @@ Menu::menuAccueil();
 <?php
 
 IHM_Generale::endHeaderAccueil();
-IHM_Generale::footerAccueil();
+IHM_Generale::footerAccueilAccessControl();
 
 ?>
 
@@ -80,7 +80,7 @@ IHM_Generale::footerAccueil();
 	    <td>
 		<label>Cette partie du site est réservée aux personnes ayant un droit d'accès.<br/><br/></label>
 		<center>
-		    <label>Saisissez la clef d'accès pour y accéder :<br/><br/></label>
+		    <label>Saisissez la clef d'accès :<br/><br/></label>
 		    <input type="password" id="clef"/>
 		</center>
 	    </td>

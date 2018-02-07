@@ -13,15 +13,41 @@ class Menu {
 		<ul class="sidemenu">
 		    <li><a href="./presentation/" title="Présentation détaillée">Présentation</a></li>
 		    <br></br>
-		    <li><a href="./stagiaire/" title="Zone d'accès aux outils pour les étudiants">Stagiaire</a></li>
+		    <li><a href="./stagiaire/" title="Zone d'accès aux outils pour les étudiants">Stagiaire<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
-		    <li><a href="./parrainage/" title="Informations sur les enseignants référents">Enseignants référents</a></li>
+		    <li><a href="./parrainage/" title="Informations sur les enseignants référents">Enseignants référents<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
 		    <li><a href="./entreprise/" title="Partie réservée aux entreprises pour saisir les offres de stage">Déposer une offre de stage</a></li>
 		    <br></br>
-		    <li><a href="./soutenances/" title="Planning des soutenances">Soutenances</a></li>
+		    <li><a href="./soutenances/" title="Planning des soutenances">Soutenances<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
-		    <li><a href="./telechargements/" title="Zone de documents téléchargeables">Téléchargement</a></li>
+		    <li><a href="./telechargements/" title="Zone de documents téléchargeables">Téléchargement<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		</ul>
+	    </div>
+	    <div id="main">
+	<?php
+    }
+
+    /**
+     * Afficher le menu de la page d'accueil du site
+     */
+    public static function menuAccueilAccessControl() {
+	?>
+	    <div id="sidebar">
+		<h1>Accueil</h1>
+		<br/>
+		<ul class="sidemenu">
+		    <li><a>Présentation</a></li>
+		    <br></br>
+		    <li><a>Stagiaire<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		    <br></br>
+		    <li><a>Enseignants référents<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		    <br></br>
+		    <li><a>Déposer une offre de stage</a></li>
+		    <br></br>
+		    <li><a>Soutenances<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		    <br></br>
+		    <li><a>Téléchargement<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		</ul>
 	    </div>
 	    <div id="main">
