@@ -30,7 +30,7 @@ function createTableSTache(&$tabSTache) {
 // Notification par email des tâches à effectuer
 function notifier($iTache) {
     $headers = "From: thierry.lemeunier@univ-lemans.fr\n";
-    $headers .= "Content-Type: text/html; charset=\"utf-8\"\n";
+    $headers .= "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit";
     $msg = "Date limite atteinte pour la tâche : " . $iTache;
     mail("thierry.lemeunier@univ-lemans.fr", 'Site des stages : tâche à effectuer', $msg, $headers);

@@ -161,7 +161,7 @@ function verifier(){
 	    global $emailResponsable;
 	    global $baseSite;
 
-	    $headers ='Content-Type:  text/html; charset="utf-8"'."\n";
+	    $headers ='Content-Type:  text/html; charset=utf-8'."\n";
 	    $headers .='Content-Transfer-Encoding: 8bit'."\n";
 	    $headers .= 'From: '.$emailResponsable."\n";
 	    $headers .= 'Reply-To: '.$emailResponsable."\n";

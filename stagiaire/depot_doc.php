@@ -60,8 +60,7 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
     $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $idFiliere, $idParcours);
     $oConvention = Convention::getConventionFromEtudiantAndPromotion($oEtudiant->getIdentifiantBDD(), $oPromotion->getIdentifiantBDD());
 
-    $headers = 'Content-Type:  text/html; charset="utf-8'
-	    . '"' . "\n";
+    $headers = 'Content-Type: text/html; charset=utf-8'. "\n";
     $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
     $headers .= 'From: ' . $emailResponsable . "\n";
     $headers .= 'Reply-To: ' . $emailResponsable . "\n";

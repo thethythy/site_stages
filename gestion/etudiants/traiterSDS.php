@@ -49,7 +49,7 @@ function envoyerNotification($message, $sds) {
     $reponse = $expediteur;
 
     $headers = "From: $expediteur\nReply-To: $reponse\nCc: $expediteur\n";
-    $headers .="Content-Type: text/html; charset=\"utf-8\"\n";
+    $headers .="Content-Type: text/html; charset=utf-8\n";
     $headers .="Content-Transfer-Encoding: 8bit";
     mail($destinataire, 'Site des stages : reponse demande de validation', $message, $headers);
 }

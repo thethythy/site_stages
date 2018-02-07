@@ -50,7 +50,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
     $expediteur = $emailResponsable;
     $reponse = $emailResponsable;
     $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
-    $headers .= "Content-Type: text/html; charset=\"UTF-8\"\n";
+    $headers .= "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit";
 
     $msg = "Bonjour,<br/><br/>
