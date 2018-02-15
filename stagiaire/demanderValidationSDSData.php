@@ -35,10 +35,6 @@ if (!headers_sent())
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
-if (!isset($_POST['annee']))
-    array_push($filtres, new FiltreNumeric("anneeuniversitaire", Promotion_BDD::getLastAnnee()));
-
 // Si une recherche sur l'année est demandée
 if (isset($_POST['annee']) && $_POST['annee'] != "")
     array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
@@ -51,16 +47,20 @@ if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
     array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
-$filtre = $filtres[0];
+if (sizeof($filtres) > 0) {
+    $filtre = $filtres[0];
 
-for ($i = 1; $i < sizeof($filtres); $i++)
-    $filtre = new Filtre($filtre, $filtres[$i], "AND");
+    for ($i = 1; $i < sizeof($filtres); $i++)
+	$filtre = new Filtre($filtre, $filtres[$i], "AND");
 
-$tabEtudiants = Promotion::listerEtudiants($filtre);
+    $tabEtudiants = Promotion::listerEtudiants($filtre);
+} else {
+    $tabEtudiants = array();
+}
 
-if (sizeof($tabEtudiants) > 0)
+if (sizeof($tabEtudiants) > 0) {
     SujetDeStage_IHM::afficherDemandeValidation($tabEtudiants);
-else {
+} else {
     ?>
     <br/>
     <p>Aucun étudiant ne correspond aux critères de recherche.</p>

@@ -98,6 +98,8 @@ function depotSujet($identifiant) {
     return $nomFichier;
 }
 
+$traitement = false; // Flag de traitement ou pas
+
 if (isset($_POST['idetudiant']) && $_POST['idetudiant'] != -1) {
     $tabDonnees = array();
     // identifiant etudiant
@@ -114,18 +116,22 @@ if (isset($_POST['idetudiant']) && $_POST['idetudiant'] != -1) {
 	    SujetDeStage::saisirDonnees($tabDonnees);
 	    envoyerNotification();
 	    echo "<p>Votre demande de validation a été envoyée.</p>";
+	    $traitement = true;
 	}
     } else if (isset($_POST['desc']) && $_POST['desc'] != "") {
 	array_push($tabDonnees, $_POST['desc']);
 	SujetDeStage::saisirDonnees($tabDonnees);
 	envoyerNotification();
 	echo "<p>Votre demande de validation a été envoyée.</p>";
+	$traitement = true;
     } else {
 	IHM_Generale::erreur("Vous devez soit saisir une description soit déposer un fichier avant de soumettre votre sujet !");
     }
-} else {
+}
+
+if (!$traitement) {
     // Affichage du formulaire de filtrage
-    Promotion_IHM::afficherFormulaireRecherche("demanderValidationSDSData.php", false);
+    Promotion_IHM::afficherFormulaireRecherche("demanderValidationSDSData.php", false, true);
 
     // Affichage des données
     echo "<div id='data'>\n";

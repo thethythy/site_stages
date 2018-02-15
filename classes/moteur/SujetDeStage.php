@@ -43,6 +43,10 @@ class SujetDeStage {
 	return $this->description;
     }
 
+    public function isEnAttenteDeValidation() {
+	return $this->enAttenteDeValidation;
+    }
+
     public function isValide() {
 	$valid = 0;
 	if ($this->valide == true) {

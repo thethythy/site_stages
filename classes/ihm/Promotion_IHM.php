@@ -168,6 +168,7 @@ class Promotion_IHM {
 				    Sélectionnez le diplôme :
 				    <select id="filiere" name="filiere">
 					<?php
+					    if ($vide) echo "<option value=''>----------</option>";
 					    if ($tous) echo "<option value='*'>Tous</option>";
 					    for ($i=0; $i<sizeof($tabF); $i++) {
 						if ((isset($_POST['filiere'])) && ($_POST['filiere'] == $tabF[$i]->getIdentifiantBDD()))
@@ -184,6 +185,7 @@ class Promotion_IHM {
 				    Sélectionnez la spécialité :
 				    <select id="parcours" name="parcours">
 					<?php
+					    if ($vide) echo "<option value=''>----------</option>";
 					    if ($tous) echo "<option value='*'>Tous</option>";
 					    for ($i=0; $i<sizeof($tabP); $i++) {
 						if ((isset($_POST['parcours'])) && ($_POST['parcours'] == $tabP[$i]->getIdentifiantBDD()))
