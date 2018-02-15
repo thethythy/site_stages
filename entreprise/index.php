@@ -103,11 +103,16 @@ function verifier(){
 	    //Competences
 	    $tabCompetences = Competence::listerCompetences();
 	    $competences = array();
-	    for ($i=1; $i<=sizeof($tabCompetences); $i++) {
-		if (isset($_POST['competence'.$i])) {
-		    array_push($competences, $_POST['competence'.$i]);
+
+	    for ($i = 1, $j = 0; $j != sizeof($tabCompetences);$i++) {
+		if (Competence::getCompetence($i)) {
+		    $j++;
+		    if (isset($_POST['competence' . $i])) {
+			array_push($competences, $_POST['competence' . $i]);
+		    }
 		}
 	    }
+
 	    if (isset($_POST['competence_ajout0'])) {
 		//On ajoute les nouvelles compétences
 		$i = 0;

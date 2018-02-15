@@ -117,13 +117,18 @@ function verifier() {
 	    $tel_contact != "" && $email_contact != "") {
 
 	    $tabDonnees = array();
-	    //identifiant
+
+	    // Identifiant
 	    array_push($tabDonnees, $idOffreDeStage);
-	    //sujet
+
+	    // Sujet
 	    array_push($tabDonnees, $sujet);
-	    //titre
+
+	    // Titre
 	    array_push($tabDonnees, $titre);
-	    //liste des environnements
+
+	    // ----------------------------------------------------------------
+	    // Liste des environnements
 	    $listeEnvironnements = "";
 	    if (isset($environnementMac)) {
 		$listeEnvironnements = $listeEnvironnements . "mac;";
@@ -135,7 +140,9 @@ function verifier() {
 		$listeEnvironnements = $listeEnvironnements . "unix;";
 	    }
 	    array_push($tabDonnees, $listeEnvironnements);
-	    //Theme
+
+	    // ----------------------------------------------------------------
+	    // Theme
 	    $tabParcours = Parcours::listerParcours();
 	    $tabThemes = array();
 	    for ($i = 0; $i < sizeof($tabParcours); $i++) {
@@ -145,7 +152,9 @@ function verifier() {
 		}
 	    }
 	    array_push($tabDonnees, $tabThemes);
-	    //Profils
+
+	    // ----------------------------------------------------------------
+	    // Profils
 	    $tabFilieres = Filiere::listerFilieres();
 	    $tabProfils = array();
 	    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
@@ -155,27 +164,39 @@ function verifier() {
 		}
 	    }
 	    array_push($tabDonnees, $tabProfils);
-	    //DureeMin
+
+	    // DureeMin
 	    array_push($tabDonnees, $dureeMin);
-	    //DureeMax
+
+	    // DureeMax
 	    array_push($tabDonnees, $dureeMax);
-	    //Indemnites
+
+	    // Indemnites
 	    array_push($tabDonnees, $indemnites);
-	    //Remarques
+
+	    // Remarques
 	    array_push($tabDonnees, $rmq);
 
-	    //estVisible
+	    // estVisible
 	    if (isset($_POST['valider']))
 		array_push($tabDonnees, true);
 
-	    //Competences
+	    //-----------------------------------------------------------------
+	    // Competences
 	    $tabCompetences = Competence::listerCompetences();
 	    $competences = array();
-	    for ($i = 1; $i <= sizeof($tabCompetences); $i++) {
-		if (isset($_POST['competence' . $i])) {
-		    array_push($competences, $_POST['competence' . $i]);
+
+	    // Ancienne compétences
+	    for ($i = 1, $j = 0; $j != sizeof($tabCompetences);$i++) {
+		if (Competence::getCompetence($i)) {
+		    $j++;
+		    if (isset($_POST['competence' . $i])) {
+			array_push($competences, $_POST['competence' . $i]);
+		    }
 		}
 	    }
+
+	    // Nouvelles compétences
 	    if ($compteur_competence) {//On ajoute les compétences
 		for ($i = 0; $i < $compteur_competence; $i++) {
 		    $nouvelleCompetence = new Competence("", $_POST['competence_ajout' . $i]);
@@ -183,8 +204,11 @@ function verifier() {
 		    array_push($competences, $idCompetence);
 		}
 	    }
+
 	    array_push($tabDonnees, $competences);
-	    //MaitreDeStage
+
+	    // ----------------------------------------------------------------
+	    // Entreprise et contact
 	    $filtreNom = new FiltreString("nom", $nom_entreprise);
 	    $filtreVille = new FiltreString("ville", $ville);
 	    $filtre = new Filtre($filtreNom, $filtreVille, "AND");

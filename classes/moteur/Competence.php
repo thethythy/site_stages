@@ -38,15 +38,16 @@ class Competence {
     /**
      * Obtenir un objet Competence à partir d'un identifiant
      * @param integer $identifiantCompetence
-     * @return Competence
+     * @return Competence ou NULL
      */
     public static function getCompetence($identifiantCompetence) {
 	$competenceString = Competence_BDD::getCompetence($identifiantCompetence);
 
-	$competence = new Competence($competenceString['idcompetence'],
-				     $competenceString['nomcompetence']);
-
-	return $competence;
+	if ($competenceString != NULL)
+	    return new Competence($competenceString['idcompetence'],
+				  $competenceString['nomcompetence']);
+	else
+	    return NULL;
     }
 
     /**
