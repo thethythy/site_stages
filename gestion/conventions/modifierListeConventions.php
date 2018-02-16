@@ -58,12 +58,8 @@ if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
     $_POST['parcours'] = $parcours->getIdentifiantBDD();
     $_POST['filiere'] = $filiere->getIdentifiantBDD();
 
-    // Suppression de la convention
+    // Suppression de la convention (et de l'attribution automatiquement)
     Convention::supprimerConvention($_GET['id'], $_GET['promo']);
-
-    // Suppression de l'attribution liée à la convention
-    $oAttribution = Attribution::getAttributionFromConvention($_GET['id']);
-    Attribution_BDD::supprimer($oAttribution->getIdentifiantBDD());
 }
 
 Promotion_IHM::afficherFormulaireRecherche("modifierListeConventionsData.php", false);

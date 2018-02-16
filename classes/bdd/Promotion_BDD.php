@@ -151,6 +151,13 @@ class Promotion_BDD {
 
     /**
      * Suppression d'un enregistrement Promotion à parir de son identifiant
+     *
+     * La table relation_promotion_etudiant_convention est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
+     * La table relation_promotion_datesoutenance est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
      * @global resource $db Référence sur la base ouverte
      * @global string $tab15 Nom de la table 'promotion'
      * @param integer $identifiantBDD Identifant de la promotion à supprimer

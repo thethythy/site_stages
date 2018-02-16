@@ -29,15 +29,12 @@ class Convention_BDD {
 	// Permet de vérifier si la Convention existe déjà dans la BDD
 	if ($convention->getIdentifiantBDD() == "") {
 	    // Création de la Convention
-	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idsoutenance, idcontact, sujetdestage, asonresume, note, idTheme)
+	    $requete = "INSERT INTO $tab4(idparrain, idexaminateur, idetudiant, idcontact, sujetdestage, idTheme)
 			VALUES ('" . $parrain->getIdentifiantBDD() . "',
 				'" . $examinateur->getIdentifiantBDD() . "',
 				'" . $etudiant->getIdentifiantBDD() . "',
-				'" . $convention->getIdSoutenance() . "',
 				'" . $contact->getIdentifiantBDD() . "',
 				'" . $convention->getSujetDeStage() . "',
-				'" . $convention->getASonResume() . "',
-				'" . $convention->getNote() . "',
 				'" . $convention->getIdTheme() . "')";
 	    $db->query($requete);
 

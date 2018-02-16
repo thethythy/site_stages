@@ -87,7 +87,7 @@ $tabEtudiants = Promotion::listerEtudiants($filtre);
 if (isset($_POST['add'])) {
     extract($_POST);
 
-    $newConvention = new Convention("", $sujet, 0, 0, $idPar, $idExam, $idEtu, "NULL", $idCont, $idTheme);
+    $newConvention = new Convention("", $sujet, 0, 0, $idPar, $idExam, $idEtu, NULL, $idCont, $idTheme);
 
     // Si la convention que l'on veut créer n'existe pas déjà
     if (Convention_BDD::existe($newConvention, $annee) == false) {

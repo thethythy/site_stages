@@ -73,6 +73,10 @@ class Competence_BDD {
 
     /**
      * Supprimer en base l'enregistrement d'une compétence à partir de son identifiant
+     *
+     * La table relation_competence_offredestage est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
      * @global string $tab2 Le nom de la table 'competence'
      * @global resource $db Une référence sur la base ouverte
      * @param integer $identifiant L'identifiant de la compétence

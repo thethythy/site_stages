@@ -106,33 +106,25 @@ class offreDeStage_BDD {
 
     /**
      * Suppression d'un enregistrement à partir de son identifiant
+     *
+     * La table relation_competence_offredestage est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
+     * La table profilsouhaite_offredestage est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
+     * La table theme_offredestage est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
      * @global resource $db Référence sur la base ouverte
-     * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
-     * @global string $tab8 Nom de la table 'theme_offredestage'
-     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
      * @global string $tab12 Nom de la table 'offredestage'
      * @param integer $identifiantBDD Identifiant de l'enregistrement à supprimer
      */
     public static function delete($identifiantBDD) {
 	global $db;
-	global $tab7;
-	global $tab8;
-	global $tab11;
 	global $tab12;
 
 	$sql = "DELETE FROM $tab12 WHERE idoffre='$identifiantBDD'";
-	$db->query($sql);
-
-	//Themes
-	$sql = "DELETE FROM $tab8 WHERE idoffre='$identifiantBDD'";
-	$db->query($sql);
-
-	//Profils
-	$sql = "DELETE FROM $tab7 WHERE idoffre='$identifiantBDD'";
-	$db->query($sql);
-
-	//Competences
-	$sql = "DELETE FROM $tab11 WHERE idoffre='$identifiantBDD'";
 	$db->query($sql);
     }
 
