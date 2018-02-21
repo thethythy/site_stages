@@ -255,6 +255,13 @@ class Convention_BDD {
 
     /**
      * Suppression d'une convention en base
+     *
+     * Du fait des contraintes d'intégrité référentielle, la table n°19
+     * 'relation_promotion_etudiant_convention' est mise à jour automatiquement
+     *
+     * Du fait des contraintes d'intégrité référentielle, la table n°25
+     * 'attribution' est mise à jour automatiquement
+     *
      * @global resource $db Référence à la base ouverte
      * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
      * @global string $tab4 Nom de la table 'convention'
@@ -262,17 +269,9 @@ class Convention_BDD {
      * @param integer $idEtu Identifiant de l'étudiant concerné
      * @param integer $idPromo Identifiant de la promotion de l'étudiant concerné
      */
-    public static function supprimerConvention($identifiantBDD, $idEtu, $idPromo) {
+    public static function supprimerConvention($identifiantBDD) {
 	global $db;
-	global $tab19;
 	global $tab4;
-
-	// Mise à jour de la table de relation pour supprimer idconvention
-	$sql1 = "UPDATE $tab19
-		 SET idconvention = NULL
-		 WHERE idetudiant = $idEtu AND
-		       idpromotion = $idPromo";
-	$db->query($sql1);
 
 	// Suppression de l'enregistrement dans la table 'convention'
 	$sql2 = "DELETE FROM $tab4 WHERE idconvention='$identifiantBDD'";

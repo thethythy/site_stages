@@ -233,7 +233,7 @@ class Convention_IHM {
 	    $examinateur = $conv->getExaminateur();
 	    $contact = $conv->getContact();
 	    $entreprise = $contact->getEntreprise();
-	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdentifiantBDD());
+	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
 	    ?>
 	    <tr id="ligne<?php echo $i % 2; ?>">
 	        <td>

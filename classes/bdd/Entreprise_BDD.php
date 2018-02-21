@@ -18,6 +18,7 @@ class Entreprise_BDD {
 	global $tab6;
 
 	$typeEntreprise = $entreprise->getType();
+	$idtype_entreprise = $typeEntreprise->getIdentifiantBDD() ? $typeEntreprise->getIdentifiantBDD() : "NULL";
 
 	if ($entreprise->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab6
@@ -28,7 +29,7 @@ class Entreprise_BDD {
 			    '" . $entreprise->getVille() . "',
 			    '" . $entreprise->getPays() . "',
 			    '" . $entreprise->getEmail() . "',
-			    '" . $typeEntreprise->getIdentifiantBDD() . "');";
+			    $idtype_entreprise);";
 	    $db->query($sql);
 
 	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
@@ -43,7 +44,7 @@ class Entreprise_BDD {
 			ville='" . $entreprise->getVille() . "',
 			pays='" . $entreprise->getPays() . "',
 			email='" . $entreprise->getEmail() . "',
-			idtypeentreprise='" . $typeEntreprise->getIdentifiantBDD() . "'
+			idtypeentreprise=$idtype_entreprise
 		    WHERE identreprise='" . $entreprise->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 

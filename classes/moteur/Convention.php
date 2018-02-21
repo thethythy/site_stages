@@ -171,10 +171,8 @@ class Convention {
      * @param integer $idConvention
      * @param integer $idPromo
      */
-    public static function supprimerConvention($idConvention, $idPromo) {
-	$conv = Convention::getConvention($idConvention);
-	$etu = $conv->getEtudiant();
-	Convention_BDD::supprimerConvention($idConvention, $etu->getIdentifiantBDD(), $idPromo);
+    public static function supprimerConvention($idConvention) {
+	Convention_BDD::supprimerConvention($idConvention);
     }
 
     /**

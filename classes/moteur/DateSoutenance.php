@@ -134,12 +134,14 @@ class DateSoutenance {
 
     /**
      * Supprimer un enregistrement en base à partir de son identifiant.
-     * Supprimer aussi les relations avec les promotions associées
+     *
+     * La table relation_promotion_datesoutenance est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
      * @param integer $identifiantDateSoutenance
      */
     public static function deleteDateSoutenance($identifiantDateSoutenance) {
 	DateSoutenance_BDD::delete($identifiantDateSoutenance);
-	DateSoutenance_BDD::deleteDatePromo($identifiantDateSoutenance);
     }
 
 }

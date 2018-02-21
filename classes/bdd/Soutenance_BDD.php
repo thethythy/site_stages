@@ -54,6 +54,14 @@ class Soutenance_BDD {
 
     /**
      * Suppression d'un enregistrement Soutenance
+     *
+     * Du fait de la contrainte d'intégrité référentielle, la table 'convention'
+     * est mise à jour automatiquement
+     *
+     * Du fait de la contrainte d'intégrité référentielle, la table 'convocation'
+     * est mise à jour automatiquement
+     *
+     *
      * @global resource $db Référence sur la base ouverte
      * @global string $tab17 Nom de la table 'soutenances'
      * @param integer $id L'identifiant de la soutenance
