@@ -59,13 +59,6 @@ if (!headers_sent())
 // Prise en compte des paramètres
 $filtres = array();
 
-if (!isset($_POST['annee']))
-    $annee = Promotion_BDD::getLastAnnee();
-else
-    $annee = $_POST['annee'];
-
-array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
-
 if (isset($_POST['parcours']) && $_POST['parcours'] != '*' && $_POST['parcours'] != '') {
     $parcours = $_POST['parcours'];
     array_push($filtres, new FiltreNumeric("idparcours", $parcours));
@@ -76,15 +69,26 @@ if (isset($_POST['filiere']) && $_POST['filiere'] != '*' && $_POST['filiere'] !=
     array_push($filtres, new FiltreNumeric("idfiliere", $filiere));
 }
 
-$filtre = $filtres[0];
+// On ajoute l'année que si le parcours et la filière sont sélectionnés
+if (isset($filiere) && isset($parcours) && isset($_POST['annee'])) {
+    $annee = $_POST['annee'];
+    array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
+}
 
-for ($i = 1; $i < sizeof($filtres); $i++)
-    $filtre = new Filtre($filtre, $filtres[$i], "AND");
+// On affiche la liste des étudiants que si l'année est sélectionnée
+if (isset($annee)) {
+    $filtre = $filtres[0];
 
-$tabEtudiants = Promotion::listerEtudiants($filtre);
+    for ($i = 1; $i < sizeof($filtres); $i++)
+	$filtre = new Filtre($filtre, $filtres[$i], "AND");
+
+    $tabEtudiants = Promotion::listerEtudiants($filtre);
+} else {
+    $tabEtudiants = array();
+}
 
 // Si un ajout a été effectué
-if (isset($_POST['add'])) {
+if (isset($_POST['add']) && isset($_POST['idEtu'])) {
     extract($_POST);
 
     $newConvention = new Convention("", $sujet, 0, 0, $idPar, $idExam, $idEtu, NULL, $idCont, $idTheme);

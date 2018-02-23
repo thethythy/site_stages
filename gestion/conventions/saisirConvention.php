@@ -49,7 +49,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Saisir une", "convention", "../../", $tabLiens);
 
-Promotion_IHM::afficherFormulaireRecherche("saisirConventionData.php", false);
+Promotion_IHM::afficherFormulaireRecherche("saisirConventionData.php", false, true);
 
 // Affichage des données
 echo "<div id='data'>\n";
