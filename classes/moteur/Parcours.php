@@ -14,7 +14,7 @@ class Parcours {
      * @param integer $identifiant_BDD
      * @param string $nom
      */
-    public function Parcours($identifiant_BDD, $nom) {
+    public function __construct($identifiant_BDD, $nom) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
     }

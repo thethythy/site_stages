@@ -22,7 +22,7 @@ class Etudiant {
      * @param string $emailPersonnel
      * @param integer $codeEtudiant
      */
-    public function Etudiant($identifiantBDD, $nom, $prenom, $emailInstitutionel,
+    public function __construct($identifiantBDD, $nom, $prenom, $emailInstitutionel,
 	    $emailPersonnel, $codeEtudiant = "") {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;

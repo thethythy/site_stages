@@ -22,7 +22,7 @@ class SujetDeStage {
      * @param boolean $valide
      * @param boolean $enAttenteDeValidation
      */
-    public function SujetDeStage($identifiantBDD, $identifiantEtudiant,
+    public function __construct($identifiantBDD, $identifiantEtudiant,
 	    $identifiantPromotion, $description, $valide, $enAttenteDeValidation) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->identifiantEtudiant = $identifiantEtudiant;

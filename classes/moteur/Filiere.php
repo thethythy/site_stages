@@ -18,7 +18,7 @@ class Filiere {
      * @param integer $tempsSoutenance
      * @param boolean $affDepot
      */
-    public function Filiere($identifiant_BDD, $nom, $tempsSoutenance = 20, $affDepot = 1) {
+    public function __construct($identifiant_BDD, $nom, $tempsSoutenance = 20, $affDepot = 1) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
 	$this->tempsSoutenance = $tempsSoutenance;

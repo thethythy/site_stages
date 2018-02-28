@@ -36,7 +36,7 @@ class OffreDeStage {
      * @param array $listeCompetences
      * @param integer $maitreDeStage
      */
-    public function OffreDeStage($identifiantBDD, $sujet, $titre, $listeEnvironnement,
+    public function __construct($identifiantBDD, $sujet, $titre, $listeEnvironnement,
 	    $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques,
 	    $estVisible, $listeCompetences, $maitreDeStage) {
 	$this->identifiantBDD = $identifiantBDD;

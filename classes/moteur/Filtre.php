@@ -15,7 +15,7 @@ class Filtre {
      * @param Filtre $filtre2
      * @param string $type Le lien logique
      */
-    public function Filtre($filtre1, $filtre2, $type) {
+    public function __construct($filtre1, $filtre2, $type) {
 	$this->strFiltres = $filtre1->getStrFiltres() . " " . $type . " " . $filtre2->getStrFiltres();
     }
 

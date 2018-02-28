@@ -11,7 +11,7 @@ class FiltreNumeric extends Filtre {
      * @param string $champ
      * @param string $valeur
      */
-    public function FiltreNumeric($champ, $valeur) {
+    public function __construct($champ, $valeur) {
 	$this->strFiltres = $champ . " = '" . $valeur . "'";
     }
 

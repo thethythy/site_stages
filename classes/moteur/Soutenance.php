@@ -22,7 +22,7 @@ class Soutenance {
      * @param integer $minuteDebut
      * @param boolean $aHuitClos
      */
-    public function Soutenance($identifiantBDD, $identifiantDateSoutenance,
+    public function __construct($identifiantBDD, $identifiantDateSoutenance,
 	    $identifiantSalle, $heureDebut, $minuteDebut, $aHuitClos) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->identifiantDateSoutenance = $identifiantDateSoutenance;

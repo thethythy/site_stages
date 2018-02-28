@@ -17,7 +17,7 @@ class Couleur {
      * @param string $nom
      * @param string $code
      */
-    public function Couleur($identifiant_BDD, $nom, $code) {
+    public function __construct($identifiant_BDD, $nom, $code) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
 	$this->code = $code;

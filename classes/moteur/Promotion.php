@@ -20,7 +20,7 @@ class Promotion {
      * @param integer $idFiliere
      * @param string $emailPromotion
      */
-    public function Promotion($identifiant_BDD, $anneeUniversitaire,
+    public function __construct($identifiant_BDD, $anneeUniversitaire,
 	    $idParcours, $idFiliere, $emailPromotion) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->anneeUniversitaire = $anneeUniversitaire;

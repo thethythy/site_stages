@@ -24,7 +24,7 @@ class Contact {
      * @param string $email
      * @param integer $identifiant_entreprise
      */
-    public function Contact($identifiantBDD, $nom, $prenom, $telephone,
+    public function __construct($identifiantBDD, $nom, $prenom, $telephone,
 	    $telecopie, $email, $identifiant_entreprise) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;

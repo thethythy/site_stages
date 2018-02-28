@@ -14,7 +14,7 @@ class Salle {
      * @param integer $identifiantBDD
      * @param string $nom
      */
-    public function Salle($identifiantBDD, $nom) {
+    public function __construct($identifiantBDD, $nom) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;
     }

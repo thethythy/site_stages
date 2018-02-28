@@ -17,7 +17,7 @@ class Convocation {
      * @param integer $envoi
      * @param integer $idsoutenance
      */
-    public function Convocation($idconvocation, $envoi, $idsoutenance) {
+    public function __construct($idconvocation, $envoi, $idsoutenance) {
 	$this->idconvocation = $idconvocation;
 	$this->envoi = $envoi;
 	$this->idsoutenance = $idsoutenance;

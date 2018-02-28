@@ -20,7 +20,7 @@ class Parrain {
      * @param string $email
      * @param integer $identifiant_couleur
      */
-    public function Parrain($identifiant_BDD, $nom, $prenom, $email, $identifiant_couleur) {
+    public function __construct($identifiant_BDD, $nom, $prenom, $email, $identifiant_couleur) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
 	$this->prenom = $prenom;

@@ -30,7 +30,7 @@ class Convention {
      * @param integer $idContact
      * @param integer $idTheme
      */
-    public function Convention($identifiant_BDD, $sujetDeStage, $aSonResume,
+    public function __construct($identifiant_BDD, $sujetDeStage, $aSonResume,
 	    $note, $idParrain, $idExaminateur, $idEtudiant, $idSoutenance,
 	    $idContact, $idTheme) {
 	$this->identifiant_BDD = $identifiant_BDD;

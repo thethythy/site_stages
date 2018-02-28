@@ -11,7 +11,7 @@ class FiltreString extends Filtre {
      * @param string $champ
      * @param string $valeur
      */
-    public function FiltreString($champ, $valeur) {
+    public function __construct($champ, $valeur) {
 	$this->strFiltres = $champ . " LIKE '" . $valeur . "'";
     }
 

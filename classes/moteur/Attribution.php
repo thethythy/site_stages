@@ -17,7 +17,7 @@ class Attribution {
      * @param integer $envoi
      * @param integer $idconvention
      */
-    public function Attribution($idattribution, $envoi, $idconvention) {
+    public function __construct($idattribution, $envoi, $idconvention) {
 	$this->idattribution = $idattribution;
 	$this->envoi = $envoi;
 	$this->idconvention = $idconvention;

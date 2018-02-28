@@ -11,7 +11,7 @@ class FiltreInferieur extends Filtre {
      * @param string $champ
      * @param string $valeur
      */
-    public function FiltreInferieur($champ, $valeur) {
+    public function __construct($champ, $valeur) {
 	$this->strFiltres = $champ . " <= '" . $valeur . "'";
     }
 

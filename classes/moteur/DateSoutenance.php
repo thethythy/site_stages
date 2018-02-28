@@ -20,7 +20,7 @@ class DateSoutenance {
      * @param integer $annee
      * @param integer $convocation
      */
-    public function DateSoutenance($identifiantBDD, $jour, $mois, $annee, $convocation) {
+    public function __construct($identifiantBDD, $jour, $mois, $annee, $convocation) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->jour = $jour;
 	$this->mois = $mois;

@@ -20,7 +20,7 @@ class Tache {
      * @param integer $priorite
      * @param unix time $datelimite
      */
-    public function Tache($identifiant_BDD, $intitule, $statut, $priorite, $datelimite) {
+    public function __construct($identifiant_BDD, $intitule, $statut, $priorite, $datelimite) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->intitule = $intitule;
 	$this->statut = $statut;

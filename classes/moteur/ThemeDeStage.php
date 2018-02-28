@@ -16,7 +16,7 @@ class ThemeDeStage {
      * @param string $theme
      * @param integer $identifiant_couleur
      */
-    public function ThemeDeStage($idtheme, $theme, $identifiant_couleur) {
+    public function __construct($idtheme, $theme, $identifiant_couleur) {
 	$this->idTheme = $idtheme;
 	$this->theme = $theme;
 	$this->identifiant_couleur = $identifiant_couleur;

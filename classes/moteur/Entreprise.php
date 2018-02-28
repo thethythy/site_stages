@@ -27,7 +27,7 @@ class Entreprise {
      * @param string $email
      * @param integer $idTypeEntreprise
      */
-    public function Entreprise($identifiantBDD, $nom, $adresse, $codePostal,
+    public function __construct($identifiantBDD, $nom, $adresse, $codePostal,
 	    $ville, $pays, $email, $idTypeEntreprise) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;

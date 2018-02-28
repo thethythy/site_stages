@@ -16,7 +16,7 @@ class TypeEntreprise {
      * @param string $type
      * @param integer $identifiant_couleur
      */
-    public function TypeEntreprise($identifiantBDD, $type, $identifiant_couleur) {
+    public function __construct($identifiantBDD, $type, $identifiant_couleur) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->type = $type;
 	$this->identifiant_couleur = $identifiant_couleur;

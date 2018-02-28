@@ -14,7 +14,7 @@ class Competence {
      * @param integer $identifiant
      * @param string $name
      */
-    public function Competence($identifiant, $name) {
+    public function __construct($identifiant, $name) {
 	$this->nom = $name;
 	$this->identifiantBDD = $identifiant;
     }
