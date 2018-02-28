@@ -31,6 +31,7 @@
             "png",
             "svg",
             "txt",
+            "log",
             "pdf",
             "odp",
             "ods",
