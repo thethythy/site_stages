@@ -61,7 +61,7 @@ cookie est dispensé du recueil du consentement de l'internaute
 (cf. <a href='http://www.cnil.fr'>www.cnil.fr</a>).
 </p>
 <br/>
-<h1>Dernière publication : <time datetime="2016-11-18">18/11/2016</time></h1>
+<h1>Dernière publication : <time datetime="2018-02-28">28/02/2018</time></h1>
 
 <?php
 
