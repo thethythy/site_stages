@@ -9,21 +9,23 @@ class Competence_BDD {
 
     /**
      * Sauvegarder en base un objet Competence
-     * @global string $tab2 Le nom de la table 'competence'
      * @global resource $db Une référence sur la base ouverte
+     * @global string $tab2 Le nom de la table 'competence'
      * @param Competence $competence Une instance de la classe Competence
      * @return integer L'identifiant de la compétence
      */
     public static function sauvegarder($competence) {
-	global $tab2;
 	global $db;
+	global $tab2;
+
 	if ($competence->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab2 VALUES ('" . $competence->getIdentifiantBDD() . "','" . $competence->getNom() . "')";
 	    $db->query($sql);
 
-	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab2";
-	    $req = $db->query($sql2);
-	    $result = mysqli_fetch_array($req);
+	    $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab2";
+	    $res = $db->query($sql);
+	    $result = $res->fetch_array();
+	    $res->free();
 	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab2 SET nomcompetence='" . $competence->getNom() . "' WHERE idcompetence='" . $competence->getIdentifiantBDD() . "';";
@@ -34,38 +36,51 @@ class Competence_BDD {
 
     /**
      * Obtenir un objet Competence à partir de son identifiant
-     * @global string $tab2 Le nom de la table 'competence'
      * @global resource $db Une référence sur la base ouverte
+     * @global string $tab2 Le nom de la table 'competence'
      * @param integer $identifiantBDD L'identifiant de la compétence
-     * @return enregistrement ou NULL
+     * @return enregistrement ou FALSE
      */
     public static function getCompetence($identifiantBDD) {
-	global $tab2;
 	global $db;
+	global $tab2;
+
 	$sql = "SELECT * FROM $tab2 WHERE idcompetence='" . $identifiantBDD . "';";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	$ok = $result != FALSE;
+
+	if ($ok) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	}
+
+	return $ok ? $enreg : FALSE;
     }
 
     /**
      * Obtenir la liste de toutes compétences
-     * @global string $tab2 Le nom de la table 'competence'
      * @global resource $db Une référence sur la base ouverte
+     * @global string $tab2 Le nom de la table 'competence'
      * @return tableau d'enregistrements
      */
     public static function listerCompetences() {
-	global $tab2;
 	global $db;
+	global $tab2;
+
 	$sql = "SELECT * FROM $tab2 ORDER BY nomcompetence ASC;";
 	$result = $db->query($sql);
 
 	$tabCompetences = array();
 
-	while ($competence = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $competence["idcompetence"]);
-	    array_push($tab, $competence["nomcompetence"]);
-	    array_push($tabCompetences, $tab);
+	if ($result) {
+	    while ($competence = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $competence["idcompetence"]);
+		array_push($tab, $competence["nomcompetence"]);
+		array_push($tabCompetences, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabCompetences;
@@ -77,13 +92,14 @@ class Competence_BDD {
      * La table relation_competence_offredestage est mise à jour du fait
      * des contraintes d'intégrité relationnelles
      *
-     * @global string $tab2 Le nom de la table 'competence'
      * @global resource $db Une référence sur la base ouverte
+     * @global string $tab2 Le nom de la table 'competence'
      * @param integer $identifiant L'identifiant de la compétence
      */
     public static function delete($identifiant) {
-	global $tab2;
 	global $db;
+	global $tab2;
+
 	$sql = "DELETE FROM $tab2 WHERE idcompetence='" . $identifiant . "';";
 	$db->query($sql);
     }

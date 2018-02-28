@@ -44,8 +44,7 @@ class Convocation_BDD {
 	global $tab24;
 
 	$sql = "DELETE FROM $tab24 WHERE idconvocation=$idconvocation;";
-	$res = $db->query($sql);
-	return $res;
+	return $db->query($sql);
     }
 
     /**
@@ -62,10 +61,14 @@ class Convocation_BDD {
 	$sql = "SELECT * FROM $tab24 WHERE idconvocation='$idconvocation';";
 	$res = $db->query($sql);
 
-	if ($res)
-	    return mysqli_fetch_array($res);
-	else
-	    return FALSE;
+	$ok = $res != FALSE;
+
+	if ($ok) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	}
+
+	return $ok ? $enreg : FALSE;
     }
 
     /**
@@ -82,8 +85,11 @@ class Convocation_BDD {
 	$sql = "SELECT * FROM $tab24 WHERE idsoutenance = $idsoutenance;";
 	$res = $db->query($sql);
 
-	if ($res)
-	    return mysqli_fetch_array($res);
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	}
 	else
 	    return FALSE;
     }
@@ -108,13 +114,16 @@ class Convocation_BDD {
 
 	$tabC = array();
 
-	while ($ods = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $ods['idconvocation']);
-	    array_push($tab, $ods['envoi']);
-	    array_push($tab, $ods['idsoutenance']);
+	if ($result) {
+	    while ($ods = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $ods['idconvocation']);
+		array_push($tab, $ods['envoi']);
+		array_push($tab, $ods['idsoutenance']);
 
-	    array_push($tabC, $tab);
+		array_push($tabC, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabC;

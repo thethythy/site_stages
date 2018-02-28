@@ -20,7 +20,7 @@ class ThemeDeStage_BDD {
 
 	if ($themeDeStage->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab23
-		    VALUES ('" . $themeDeStage->getIdentifiantBDD() . "',
+		    VALUES ('',
 			    '" . $themeDeStage->getTheme() . "',
 			    '" . $couleur->getIdentifiantBDD() . "')";
 	} else {
@@ -37,7 +37,7 @@ class ThemeDeStage_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab23 Nom de la table 'theme_destage'
      * @param integer $id Identifiant de l'enregistrement recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getThemeDeStage($id) {
 	global $db;
@@ -45,7 +45,13 @@ class ThemeDeStage_BDD {
 
 	$sql = "SELECT * FROM $tab23 WHERE idtheme = '" . $id . "';";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -53,7 +59,7 @@ class ThemeDeStage_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab23 Nom de la table 'theme_destage'
      * @param string $nom Le nom du thème de stage recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getThemeDeStageFromNom($nom) {
 	global $db;
@@ -61,7 +67,13 @@ class ThemeDeStage_BDD {
 
 	$sql = "SELECT * FROM $tab23 WHERE theme LIKE '$nom';";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -75,16 +87,19 @@ class ThemeDeStage_BDD {
 	global $tab23;
 
 	$requete = "SELECT * FROM $tab23;";
-
 	$result = $db->query($requete);
 
 	$tabThemes = array();
-	while ($theme = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $theme["idtheme"]);
-	    array_push($tab, $theme["theme"]);
-	    array_push($tab, $theme["idcouleur"]);
-	    array_push($tabThemes, $tab);
+
+	if ($result){
+	    while ($theme = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $theme["idtheme"]);
+		array_push($tab, $theme["theme"]);
+		array_push($tab, $theme["idcouleur"]);
+		array_push($tabThemes, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabThemes;
@@ -100,7 +115,7 @@ class ThemeDeStage_BDD {
 	global $db;
 	global $tab23;
 
-	$sql = "DELETE FROM $tab23 WHERE idtheme='" . $themeDeStage . "';";
+	$sql = "DELETE FROM $tab23 WHERE idtheme='$themeDeStage';";
 	$db->query($sql);
     }
 

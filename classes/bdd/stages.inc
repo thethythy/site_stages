@@ -8,6 +8,6 @@ if ($db->connect_errno) {
 }
 
 // Indique que la base est codée en UTF-8
-mysqli_set_charset($db, "utf8");
+$db->set_charset("utf8");
 
 ?>

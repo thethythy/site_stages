@@ -127,10 +127,16 @@ class Soutenance {
     public static function listerSoutenanceFromSalleAndDate($salle, $date) {
 	$tabSString = Soutenance_BDD::listerSoutenanceFromSalleAndDate($salle->getIdentifiantBDD(), $date->getIdentifiantBDD());
 	$tabS = array();
-	while ($soutenance = mysqli_fetch_row($tabSString))
-	    array_push($tabS, new Soutenance($soutenance[0], $soutenance[4],
-					     $soutenance[5], $soutenance[1],
-					     $soutenance[2], $soutenance[3]));
+
+	for ($i = 0; $i < sizeof($tabSString); $i++)
+	    array_push($tabS,
+			new Soutenance($tabSString[$i][0],
+				       $tabSString[$i][4],
+				       $tabSString[$i][5],
+				       $tabSString[$i][1],
+				       $tabSString[$i][2],
+				       $tabSString[$i][3]));
+
 	return $tabS;
     }
 
@@ -142,11 +148,16 @@ class Soutenance {
     public static function listerSoutenancesFromAnnee($annee) {
 	$tabSString = Soutenance_BDD::listerSoutenanceFromAnnee($annee);
 	$tabS = array();
-	while ($soutenance = mysqli_fetch_row($tabSString))
+
+	for ($i = 0; $i < sizeof($tabSString); $i++)
 	    array_push($tabS,
-		    new Soutenance($soutenance[0], $soutenance[4],
-				   $soutenance[5], $soutenance[1],
-				   $soutenance[2], $soutenance[3]));
+			new Soutenance($tabSString[$i][0],
+				       $tabSString[$i][4],
+				       $tabSString[$i][5],
+				       $tabSString[$i][1],
+				       $tabSString[$i][2],
+				       $tabSString[$i][3]));
+
 	return $tabS;
     }
 

@@ -173,10 +173,11 @@ class FluxRSS {
 
 	// Ajout des news déjà existantes dans la base
 	$query_news = $db->query("SELECT * FROM fluxrss") or die();
-	while ($data_news = mysqli_fetch_array($query_news)) {
+	while ($data_news = $query_news->fetch_array()) {
 	    FluxRSS::addOneNews($file, $data_news['title'], $data_news['link'],
 		    $data_news['timestamp'], $data_news['author'], $data_news['contents']);
 	}
+	$query_news->free();
 
 	// Sauvegarde du fichier XML
 	FluxRSS::saveFluxXML($file);
@@ -195,7 +196,7 @@ class FluxRSS {
 	global $db;
 	// Ajout de la news dans la base de données
 	$db->query("INSERT INTO fluxrss (title, link, timestamp, contents, author)
-		    VALUES ('" . $title . "','" . $link . "','" . $timestamp . "','" . $contents . "','" . $author . "')")
+		    VALUES ('$title','$link','$timestamp','$contents','$author')")
 		or die();
 
 	// Ouverture du fichier

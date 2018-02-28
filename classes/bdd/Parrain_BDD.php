@@ -41,15 +41,21 @@ class Parrain_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab14 Nom de la table 'parrain'
      * @param integer $identifiant L'identifiant de l'enregistrement cherché
-     * @return enregsitrement
+     * @return enregsitrement ou FALSE
      */
     public static function getParrain($identifiant) {
 	global $db;
 	global $tab14;
 
 	$sql = "SELECT * FROM $tab14 WHERE idparrain='$identifiant';";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -67,14 +73,17 @@ class Parrain_BDD {
 
 	$tabParrain = array();
 
-	while ($parrain = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $parrain["idparrain"]);
-	    array_push($tab, $parrain["nomparrain"]);
-	    array_push($tab, $parrain["prenomparrain"]);
-	    array_push($tab, $parrain["emailparrain"]);
-	    array_push($tab, $parrain["idcouleur"]);
-	    array_push($tabParrain, $tab);
+	if ($result) {
+	    while ($parrain = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $parrain["idparrain"]);
+		array_push($tab, $parrain["nomparrain"]);
+		array_push($tab, $parrain["prenomparrain"]);
+		array_push($tab, $parrain["emailparrain"]);
+		array_push($tab, $parrain["idcouleur"]);
+		array_push($tabParrain, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabParrain;

@@ -29,12 +29,7 @@ class Soutenance_BDD {
 	    $requete = "INSERT INTO $tab17(heuredebut, mindebut, ahuitclos, iddatesoutenance, idsalle)
 			VALUES ('$heuredebut', '$mindebut', '$ahuitclos', '$iddatesoutenance', '$idsalle')";
 	    $db->query($requete);
-
-	    // Chercher l'id de la soutenance
-	    $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab17";
-	    $req = $db->query($sql);
-	    $result = mysqli_fetch_array($req);
-	    $soutenance->setIdentifiantBDD($result['ID']);
+	    $soutenance->setIdentifiantBDD($db->insert_id);
 	} else {
 	    // Mise à jour de la soutenance
 	    $requete = "UPDATE $tab17
@@ -44,7 +39,6 @@ class Soutenance_BDD {
 			    iddatesoutenance = '$iddatesoutenance',
 			    idsalle = '$idsalle'
 			WHERE idsoutenance = " . $soutenance->getIdentifiantBDD();
-
 	    $db->query($requete);
 	}
 
@@ -79,15 +73,21 @@ class Soutenance_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab17 Nom de la table 'soutenances'
      * @param integer $id Identifiant
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getSoutenance($id) {
 	global $db;
 	global $tab17;
 
 	$requete = "SELECT * FROM $tab17 WHERE idsoutenance='$id'";
-	$convention = $db->query($requete);
-	return mysqli_fetch_array($convention);
+	$res = $db->query($requete);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -95,15 +95,21 @@ class Soutenance_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab4 Nom de la table 'convention'
      * @param integer $idsoutenance Identifiant de la soutenance concernée
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getConvention($idsoutenance) {
 	global $db;
 	global $tab4;
 
 	$requete = "SELECT * FROM $tab4 WHERE idsoutenance='$idsoutenance'";
-	$convention = $db->query($requete);
-	return mysqli_fetch_row($convention);
+	$res = $db->query($requete);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -119,7 +125,25 @@ class Soutenance_BDD {
 	global $tab17;
 
 	$requete = "SELECT * FROM $tab17 WHERE iddatesoutenance='$iddate' AND idsalle='$idsalle'";
-	return $db->query($requete);
+	$result = $db->query($requete);
+
+	$tabSout = array();
+
+	if ($result) {
+	    while ($ligne = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $ligne["idsoutenance"]);
+		array_push($tab, $ligne["heuredebut"]);
+		array_push($tab, $ligne["mindebut"]);
+		array_push($tab, $ligne["ahuitclos"]);
+		array_push($tab, $ligne["iddatesoutenance"]);
+		array_push($tab, $ligne["idsalle"]);
+		array_push($tabSout, $tab);
+	    }
+	    $result->free();
+	}
+
+	return $tabSout;
     }
 
     /**
@@ -141,7 +165,25 @@ class Soutenance_BDD {
 		    WHERE $tab17.iddatesoutenance = $tab5.iddatesoutenance AND
 			  $tab5.annee='$annee'";
 
-	return $db->query($requete);
+	$result = $db->query($requete);
+
+	$tabSout = array();
+
+	if ($result) {
+	    while ($ligne = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $ligne["idsoutenance"]);
+		array_push($tab, $ligne["heuredebut"]);
+		array_push($tab, $ligne["mindebut"]);
+		array_push($tab, $ligne["ahuitclos"]);
+		array_push($tab, $ligne["iddatesoutenance"]);
+		array_push($tab, $ligne["idsalle"]);
+		array_push($tabSout, $tab);
+	    }
+	    $result->free();
+	}
+
+	return $tabSout;
     }
 
 }

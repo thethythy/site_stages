@@ -29,15 +29,21 @@ class Salle_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab16 Nom de la table 'salle_soutenance'
      * @param integer $identifiant Identifiant de l'enregistrement à chercher
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getSalle($identifiant) {
 	global $db;
 	global $tab16;
 
 	$sql = "SELECT * FROM $tab16 WHERE idsalle='$identifiant'";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -55,11 +61,14 @@ class Salle_BDD {
 
 	$tabSalle = array();
 
-	while ($salle = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $salle["idsalle"]);
-	    array_push($tab, $salle["nomsalle"]);
-	    array_push($tabSalle, $tab);
+	if ($result) {
+	    while ($salle = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $salle["idsalle"]);
+		array_push($tab, $salle["nomsalle"]);
+		array_push($tabSalle, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabSalle;

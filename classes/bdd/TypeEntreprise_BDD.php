@@ -20,7 +20,7 @@ class TypeEntreprise_BDD {
 
 	if ($typeEntreprise->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab22
-		    VALUES ('" . $typeEntreprise->getIdentifiantBDD() . "',
+		    VALUES ('',
 			    '" . $typeEntreprise->getType() . "',
 			    '" . $couleur->getIdentifiantBDD() . "')";
 	} else {
@@ -37,7 +37,7 @@ class TypeEntreprise_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab22 Nom de la table 'type_entreprise'
      * @param integer $identifiant Identifiant de l'enregistrement
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getTypeEntreprise($identifiant) {
 	global $db;
@@ -45,7 +45,13 @@ class TypeEntreprise_BDD {
 
 	$sql = "SELECT * FROM $tab22 WHERE idtypeentreprise='$identifiant'";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -53,7 +59,7 @@ class TypeEntreprise_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab22 Nom de la table 'type_entreprise'
      * @param string $nom Le nom recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getTypeEntrepriseFromNom($nom) {
 	global $db;
@@ -61,7 +67,13 @@ class TypeEntreprise_BDD {
 
 	$sql = "SELECT * FROM $tab22 WHERE type LIKE '$nom'";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -79,12 +91,15 @@ class TypeEntreprise_BDD {
 
 	$tabTypeEntreprise = array();
 
-	while ($type = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $type["idtypeentreprise"]);
-	    array_push($tab, $type["type"]);
-	    array_push($tab, $type["idcouleur"]);
-	    array_push($tabTypeEntreprise, $tab);
+	if ($result) {
+	    while ($type = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $type["idtypeentreprise"]);
+		array_push($tab, $type["type"]);
+		array_push($tab, $type["idcouleur"]);
+		array_push($tabTypeEntreprise, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabTypeEntreprise;

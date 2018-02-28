@@ -29,7 +29,6 @@ if (isset($access_control_target)) {
 // Connection à la base de données et déclaration des tables
 
 include_once("stages.inc");
-mysqli_set_charset($db,"utf8");
 
 $tab1 = 'relation_promotion_datesoutenance';
 $tab2 = 'competence';
@@ -59,14 +58,13 @@ $tab25 = 'attribution';
 
 function deconnexion() {
     global $db;
-    mysqli_close($db);
+    $db->close();
 }
 
 // ----------------------------------------------------------------------------
 // Préventions contre les injections SQL
 
 function filterParameters($param) {
-
     global $db;
 
     // Est-ce que le paramètre est un tableau ?
@@ -81,7 +79,7 @@ function filterParameters($param) {
 	    // Est-ce que le paramètre est une chaîne ?
 	    if (is_string($param[$key]))
 		// Alors échaper le paramètre
-		$param[$key] = mysqli_real_escape_string($db,$param[$key]);
+		$param[$key] = $db->real_escape_string($param[$key]);
 	}
     }
 
@@ -90,7 +88,7 @@ function filterParameters($param) {
 	// Alors échaper le paramètre
 	$param = $db->real_escape_string($param);
 
-    // Return the filtered result
+    // Retourne le paramètre échappé
     return $param;
 }
 

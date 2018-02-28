@@ -33,7 +33,7 @@ function export() {
     $zipName = $path . "base_stage_" . $date . ".sql.zip";
 
     $listeTables = $db->query("SHOW TABLES");
-    while ($table = mysqli_fetch_array($listeTables)) {
+    while ($table = $listeTables->fetch_array()) {
 
 	$creations .= "-- -----------------------------\n";
 	$creations .= "-- creation de la table " . $table[0] . "\n";
@@ -41,7 +41,7 @@ function export() {
 
 	$listeCreationTable = $db->query("SHOW CREATE TABLE " . $table[0]);
 
-	while ($creationTable = mysqli_fetch_array($listeCreationTable))
+	while ($creationTable = $listeCreationTable->fetch_array())
 	    $creations .= $creationTable[1] . ";\n\n";
 
 	echo "Script pour la création de la table: $table[0]<br/>";
@@ -52,9 +52,9 @@ function export() {
 
 	$donnees = $db->query("SELECT * FROM " . $table[0]);
 
-	while ($nuplet = mysqli_fetch_array($donnees)) {
+	while ($nuplet = $donnees->fetch_array()) {
 	    $insertions .= "INSERT INTO " . $table[0] . " VALUES(";
-	    for ($i = 0; $i < mysqli_num_fields($donnees); $i++) {
+	    for ($i = 0; $i < $donnees->field_count; $i++) {
 		if ($i != 0) {
 		    $insertions .= ", ";
 		}

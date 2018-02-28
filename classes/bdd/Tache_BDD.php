@@ -40,7 +40,7 @@ class Tache_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab21 Nom de la table 'taches'
      * @param integer $identifiant Identifiant de la tâche
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getTache($identifiant) {
 	global $db;
@@ -48,7 +48,13 @@ class Tache_BDD {
 
 	$sql = "SELECT * FROM $tab21 WHERE idtache='$identifiant'";
 	$result = $db->query($sql);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -67,15 +73,20 @@ class Tache_BDD {
 	$result = $db->query($sql);
 
 	$tabTache = array();
-	while ($tache = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $tache["idtache"]);
-	    array_push($tab, $tache["intitule"]);
-	    array_push($tab, $tache["statut"]);
-	    array_push($tab, $tache["priorite"]);
-	    array_push($tab, $tache["datelimite"]);
-	    array_push($tabTache, $tab);
+
+	if ($result) {
+	    while ($tache = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $tache["idtache"]);
+		array_push($tab, $tache["intitule"]);
+		array_push($tab, $tache["statut"]);
+		array_push($tab, $tache["priorite"]);
+		array_push($tab, $tache["datelimite"]);
+		array_push($tabTache, $tab);
+	    }
+	    $result->free();
 	}
+
 	return $tabTache;
     }
 

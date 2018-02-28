@@ -53,15 +53,22 @@ class DateSoutenance_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab5 Nom de la table 'datesoutenance'
      * @param integer $identifiant Identifiant de l'enregistrement cherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getDateSoutenance($identifiant) {
 	global $db;
 	global $tab5;
 
 	$sql = "SELECT * FROM $tab5 WHERE iddatesoutenance='$identifiant';";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	}
+	else
+	    return FALSE;
     }
 
     /**
@@ -85,14 +92,17 @@ class DateSoutenance_BDD {
 
 	$tabDateSoutenance = array();
 
-	while ($dateSoutenance = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $dateSoutenance["iddatesoutenance"]);
-	    array_push($tab, $dateSoutenance["jour"]);
-	    array_push($tab, $dateSoutenance["mois"]);
-	    array_push($tab, $dateSoutenance["annee"]);
-	    array_push($tab, $dateSoutenance["convocation"]);
-	    array_push($tabDateSoutenance, $tab);
+	if ($result) {
+	    while ($dateSoutenance = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $dateSoutenance["iddatesoutenance"]);
+		array_push($tab, $dateSoutenance["jour"]);
+		array_push($tab, $dateSoutenance["mois"]);
+		array_push($tab, $dateSoutenance["annee"]);
+		array_push($tab, $dateSoutenance["convocation"]);
+		array_push($tabDateSoutenance, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabDateSoutenance;
@@ -109,15 +119,16 @@ class DateSoutenance_BDD {
 	global $db;
 	global $tab1;
 
-	$sql = "SELECT idpromotion,iddatesoutenance FROM $tab1 WHERE iddatesoutenance='$idDate';";
+	$sql = "SELECT idpromotion FROM $tab1 WHERE iddatesoutenance='$idDate';";
 	$result = $db->query($sql);
 
-	$tabIdPromo = array();
-	while ($idpromo = mysqli_fetch_row($result)) {
-	    array_push($tabIdPromo, $idpromo[0]);
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else {
+	    return FALSE;
 	}
-
-	return $tabIdPromo;
     }
 
     /**

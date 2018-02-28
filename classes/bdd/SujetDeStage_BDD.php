@@ -46,7 +46,7 @@ class SujetDeStage_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab18 Nom de la table 'sujetdestage'
      * @param integer $id Identifiant de l'enregistrement recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getSujetDeStage($id) {
 	global $db;
@@ -54,7 +54,13 @@ class SujetDeStage_BDD {
 
 	$requete = "SELECT * FROM $tab18 WHERE idsujetdestage='$id'";
 	$result = $db->query($requete);
-	return mysqli_fetch_array($result);
+
+	if ($result) {
+	    $enreg = $result->fetch_array();
+	    $result->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -77,15 +83,18 @@ class SujetDeStage_BDD {
 
 	$tabSujetDeStage = array();
 
-	while ($sds = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-	    $tab = array();
-	    array_push($tab, $sds["idsujetdestage"]);
-	    array_push($tab, $sds["idetudiant"]);
-	    array_push($tab, $sds["idpromotion"]);
-	    array_push($tab, $sds["description"]);
-	    array_push($tab, $sds["valide"]);
-	    array_push($tab, $sds["enattente"]);
-	    array_push($tabSujetDeStage, $tab);
+	if ($result) {
+	    while ($sds = $result->fetch_assoc()) {
+		$tab = array();
+		array_push($tab, $sds["idsujetdestage"]);
+		array_push($tab, $sds["idetudiant"]);
+		array_push($tab, $sds["idpromotion"]);
+		array_push($tab, $sds["description"]);
+		array_push($tab, $sds["valide"]);
+		array_push($tab, $sds["enattente"]);
+		array_push($tabSujetDeStage, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabSujetDeStage;

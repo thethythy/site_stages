@@ -12,14 +12,21 @@ class Filiere_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab10 Nom de la table 'filiere'
      * @param integer $identifiantBDD Identifiant de la filière recherchée
-     * @return enregistrement
+     * @return enregistrementou FALSE
      */
     public static function getFiliere($identifiantBDD) {
 	global $db;
 	global $tab10;
+
 	$sql = "SELECT * FROM $tab10 WHERE idfiliere='$identifiantBDD'";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_assoc();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -37,13 +44,16 @@ class Filiere_BDD {
 
 	$tabFilieres = array();
 
-	while ($filiere = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $filiere["idfiliere"]);
-	    array_push($tab, $filiere["nomfiliere"]);
-	    array_push($tab, $filiere["temps_soutenance"]);
-	    array_push($tab, $filiere["affDepot"]);
-	    array_push($tabFilieres, $tab);
+	if ($result) {
+	    while ($filiere = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $filiere["idfiliere"]);
+		array_push($tab, $filiere["nomfiliere"]);
+		array_push($tab, $filiere["temps_soutenance"]);
+		array_push($tab, $filiere["affDepot"]);
+		array_push($tabFilieres, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabFilieres;
@@ -64,18 +74,15 @@ class Filiere_BDD {
 	    // Création d'une filière
 	    $req = "INSERT INTO $tab10(nomfiliere, temps_soutenance)
 		    VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ")";
-	    $db->query($req);
-	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab10";
-	    $req = $db->query($sql2);
-	    $result = mysqli_fetch_array($req);
-	    return $result['ID'];
 	} else {
 	    // Mise à jour d'une filière
 	    $req = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "'
 		    WHERE idfiliere = '" . $f->getIdentifiantBDD() . "'";
-	    $db->query($req);
-	    return $f->getIdentifiantBDD();
 	}
+
+	$db->query($req);
+
+	return $f->getIdentifiantBDD() ? $f->getIdentifiantBDD() : $db->insert_id;
     }
 
 }

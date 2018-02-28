@@ -29,12 +29,6 @@ class Promotion_BDD {
 			    '$idParcours',
 			    '$idFiliere',
 			    '" . $promotion->getEmailPromotion() . "');";
-	    $db->query($sql);
-
-	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab15";
-	    $req = $db->query($sql2);
-	    $result = mysqli_fetch_array($req);
-	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab15
 		    SET anneeuniversitaire='" . $promotion->getAnneeUniversitaire() . "',
@@ -42,10 +36,11 @@ class Promotion_BDD {
 			idfiliere='$idFiliere',
 			email_promotion='" . $promotion->getEmailPromotion() . "'
 		    WHERE idpromotion ='" . $promotion->getIdentifiantBDD() . "'";
-
-	    $db->query($sql);
-	    return $promotion->getIdentifiantBDD();
 	}
+
+	$db->query($sql);
+
+	return $promotion->getIdentifiantBDD() ? $promotion->getIdentifiantBDD() : $db->insert_id;
     }
 
     /**
@@ -53,14 +48,21 @@ class Promotion_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab15 Nom de la table 'promotion'
      * @param integer $identifiantBDD Identifiant de l'enregistrement recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getPromotion($identifiantBDD) {
 	global $db;
 	global $tab15;
+
 	$sql = "SELECT * FROM $tab15 WHERE idpromotion='$identifiantBDD'";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -70,14 +72,23 @@ class Promotion_BDD {
      * @param integer $annee L'année recherchée
      * @param integer $idfiliere La filière recherchée
      * @param integer $idparcours Le parcours recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours) {
 	global $db;
 	global $tab15;
-	$sql = "SELECT * FROM $tab15 WHERE anneeuniversitaire='$annee' AND idparcours='$idparcours' AND idfiliere='$idfiliere'";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+
+	$sql = "SELECT * FROM $tab15 WHERE anneeuniversitaire='$annee' AND
+					   idparcours='$idparcours' AND
+					   idfiliere='$idfiliere'";
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -91,12 +102,15 @@ class Promotion_BDD {
 	global $tab15;
 
 	$sql = "SELECT DISTINCT anneeuniversitaire FROM $tab15 ORDER BY anneeuniversitaire DESC";
-	$req = $db->query($sql);
+	$res = $db->query($sql);
 
 	$tabAU = array();
 
-	while ($au = mysqli_fetch_array($req))
-	    array_push($tabAU, $au[0]);
+	if ($res) {
+	    while ($au = $res->fetch_array())
+		array_push($tabAU, $au[0]);
+	    $res->free();
+	}
 
 	return $tabAU;
     }
@@ -120,14 +134,18 @@ class Promotion_BDD {
 	$res = $db->query($requete);
 
 	$tabPromos = array();
-	while ($p = mysqli_fetch_array($res)) {
-	    $tab = array();
-	    array_push($tab, $p["idpromotion"]);
-	    array_push($tab, $p["anneeuniversitaire"]);
-	    array_push($tab, $p["idparcours"]);
-	    array_push($tab, $p["idfiliere"]);
-	    array_push($tab, $p["email_promotion"]);
-	    array_push($tabPromos, $tab);
+
+	if ($res) {
+	    while ($p = $res->fetch_array()) {
+		$tab = array();
+		array_push($tab, $p["idpromotion"]);
+		array_push($tab, $p["anneeuniversitaire"]);
+		array_push($tab, $p["idparcours"]);
+		array_push($tab, $p["idfiliere"]);
+		array_push($tab, $p["email_promotion"]);
+		array_push($tabPromos, $tab);
+	    }
+	    $res->free();
 	}
 
 	return $tabPromos;
@@ -144,8 +162,9 @@ class Promotion_BDD {
 	global $tab15;
 
 	$sql = "SELECT MAX(anneeuniversitaire) as maxAU FROM $tab15";
-	$req = $db->query($sql);
-	$result = mysqli_fetch_array($req);
+	$res = $db->query($sql);
+	$result = $res->fetch_array();
+	$res->free();
 	return $result['maxAU'];
     }
 
@@ -187,14 +206,15 @@ class Promotion_BDD {
 	$sql = "SELECT idpromotion FROM $tab15
 		WHERE anneeuniversitaire='" . $promo->getAnneeUniversitaire() . "' AND
 		      idfiliere='" . $filiere->getIdentifiantBDD() . "' AND
-		      idparcours='" . $parcours->getIdentifiantBDD() . "' AND
-		      email_promotion='" . $promo->getEmailPromotion() . "'";
+		      idparcours='" . $parcours->getIdentifiantBDD() . "'";
 	$result = $db->query($sql);
 
-	if (mysqli_num_rows($result) == 0)
-	    return false;
-	else
-	    return true;
+	if ($result) {
+	    $ok = $result->num_rows > 0;
+	    $result->free();
+	    return $ok;
+	} else
+	    return FALSE;
     }
 
 }

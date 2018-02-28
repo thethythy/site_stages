@@ -25,6 +25,7 @@ class Attribution_BDD {
 		    WHERE idattribution=" . $attribution->getIdentifiantBDD() . ";";
 	}
 	$res = $db->query($sql);
+
 	if ($res)
 	    return ($attribution->getIdentifiantBDD() != '') ? $attribution->getIdentifiantBDD() : $db->insert_id;
 	else
@@ -43,8 +44,7 @@ class Attribution_BDD {
 	global $tab25;
 
 	$sql = "DELETE FROM $tab25 WHERE idattribution=$idattribution;";
-	$res = $db->query($sql);
-	return $res;
+	return $db->query($sql);
     }
 
     /**
@@ -61,10 +61,14 @@ class Attribution_BDD {
 	$sql = "SELECT * FROM $tab25 WHERE idattribution='$idattribution';";
 	$res = $db->query($sql);
 
-	if ($res)
-	    return mysqli_fetch_array($res);
-	else
-	    return FALSE;
+	$ok = $res != FALSE;
+
+	if ($ok) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	}
+
+	return $ok ? $enreg : FALSE;
     }
 
     /**
@@ -81,10 +85,14 @@ class Attribution_BDD {
 	$sql = "SELECT * FROM $tab25 WHERE idconvention = $idconvention;";
 	$res = $db->query($sql);
 
-	if ($res)
-	    return mysqli_fetch_array($res);
-	else
-	    return FALSE;
+	$ok = $res != FALSE;
+
+	if ($ok) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	}
+
+	return $ok ? $enreg : FALSE;
     }
 
     /**
@@ -107,22 +115,27 @@ class Attribution_BDD {
 	global $tab25;
 
 	$requete = "SELECT * FROM $tab25 WHERE idconvention IN
-		    (SELECT idconvention FROM $tab4 WHERE idetudiant IN
-			(SELECT idetudiant FROM $tab19 WHERE idpromotion =
-			    (SELECT idpromotion FROM $tab15 WHERE anneeuniversitaire=$annee
-				AND idparcours = $idparcours AND idfiliere = $idfiliere)));";
+		    (SELECT $tab4.idconvention FROM $tab4, $tab19, $tab15
+			WHERE anneeuniversitaire = $annee AND
+			      idparcours = $idparcours AND
+			      idfiliere = $idfiliere AND
+			      $tab15.idpromotion = $tab19.idpromotion AND
+			      $tab19.idconvention = $tab4.idconvention);";
 
 	$result = $db->query($requete);
 
 	$tabA = array();
 
-	while ($ods = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $ods['idattribution']);
-	    array_push($tab, $ods['envoi']);
-	    array_push($tab, $ods['idconvention']);
+	if ($result) {
+	    while ($ods = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $ods['idattribution']);
+		array_push($tab, $ods['envoi']);
+		array_push($tab, $ods['idconvention']);
 
-	    array_push($tabA, $tab);
+		array_push($tabA, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabA;

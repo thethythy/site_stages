@@ -25,11 +25,6 @@ class Etudiant_BDD {
 			    '" . $etudiant->getCodeEtudiant() . "')";
 
 	    $db->query($sql);
-
-	    $sql2 = "SELECT LAST_INSERT_ID() AS ID FROM $tab9";
-	    $req = $db->query($sql2);
-	    $result = mysqli_fetch_array($req);
-	    return $result['ID'];
 	} else {
 	    $sql = "UPDATE $tab9
 		    SET nometudiant='" . $etudiant->getNom() . "',
@@ -39,8 +34,9 @@ class Etudiant_BDD {
 			codeetudiant='" . $etudiant->getCodeEtudiant() . "'
 		    WHERE idetudiant = '" . $etudiant->getIdentifiantBDD() . "'";
 	    $db->query($sql);
-	    return $etudiant->getIdentifiantBDD();
 	}
+
+	return $etudiant->getIdentifiantBDD() ? $etudiant->getIdentifiantBDD() : $db->insert_id;
     }
 
     /**
@@ -48,14 +44,22 @@ class Etudiant_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab9 Nom de la table 'etudiant'
      * @param integer $identifiantBDD L'identifiant de l'étudiant recherché
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getEtudiant($identifiantBDD) {
 	global $db;
 	global $tab9;
 	$sql = "SELECT * FROM $tab9 WHERE idetudiant='$identifiantBDD'";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	$ok = $res != FALSE;
+
+	if ($ok) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -74,6 +78,10 @@ class Etudiant_BDD {
 
     /**
      * Suppression d'un enregistrement Etudiant à partir de son identifiant
+     *
+     * La table relation_promotion_etudiant_convention est mise à jour du fait
+     * des contraintes d'intégrité relationnelles
+     *
      * @global resource $db Référence sur la base ouverte
      * @global string $tab9 Nom de la table 'etudiant'
      * @param integer $identifiantBDD Identifiant de l'enregistrement à supprimer
@@ -98,25 +106,14 @@ class Etudiant_BDD {
 	global $tab9;
 	global $tab19;
 
-	$sql = "SELECT idetudiant FROM $tab19 WHERE idpromotion='$identifiantPromo'";
-	$req = $db->query($sql);
-
-	$sql2 = "SELECT * FROM $tab9 WHERE";
-	$aucunEtudiant = true;
-
-	while ($idEtu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
-	    $aucunEtudiant = false;
-	    $sql2 .= " idetudiant='" . $idEtu["idetudiant"] . "' OR";
-	}
+	$sql = "SELECT * FROM $tab9 WHERE idetudiant IN
+		(SELECT idetudiant FROM $tab19 WHERE idpromotion='$identifiantPromo');";
+	$res = $db->query($sql);
 
 	$listeEtudiants = array();
 
-	if ($aucunEtudiant == false) {
-	    $sql2 = substr_replace($sql2, "", -3, 3);
-	    $sql2 .= " ORDER BY nometudiant ASC;";
-	    $req = $db->query($sql2);
-
-	    while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
+	if ($res) {
+	    while ($etu = $res->fetch_assoc()) {
 		$tab = array();
 		array_push($tab, $etu["idetudiant"]);
 		array_push($tab, $etu["nometudiant"]);
@@ -126,12 +123,16 @@ class Etudiant_BDD {
 		array_push($tab, $etu["codeetudiant"]);
 		array_push($listeEtudiants, $tab);
 	    }
+	    $res->free();
 	}
+
 	return $listeEtudiants;
     }
 
     /**
      * Ajouter un étudiant à une promotion
+     * On vérifie d'abord que la relation étudiant-promotion n'existe pas déjà
+     *
      * @global resource $db Référence sur la base ouverte
      * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
      * @param integer $etu Identifiant de l'étudiant
@@ -141,8 +142,15 @@ class Etudiant_BDD {
 	global $db;
 	global $tab19;
 
-	$sql = "INSERT INTO $tab19(idetudiant, idpromotion) VALUES ('$etu', '$promo')";
-	$db->query($sql);
+	$sql = "SELECT COUNT(idetudiant) AS NB_ETU FROM $tab19 WHERE idetudiant='$etu' AND idpromotion='$promo';";
+	$res = $db->query($sql);
+	$enreg = $res->fetch_assoc();
+	$res->free();
+
+	if ($enreg['NB_ETU'] == 0) {
+	    $sql = "INSERT INTO $tab19(idetudiant, idpromotion) VALUES ('$etu', '$promo')";
+	    $db->query($sql);
+	}
     }
 
     /**
@@ -181,9 +189,10 @@ class Etudiant_BDD {
 		AND $tab15.anneeuniversitaire LIKE '$annee'
 		AND $tab19.idpromotion = $tab15.idpromotion";
 
-	$req = $db->query($sql);
-	$result = mysqli_fetch_array($req);
-	return $result['idpromo'];
+	$res = $db->query($sql);
+	$enreg = $res->fetch_array();
+	$res->free();
+	return $enreg['idpromo'];
     }
 
     /**
@@ -208,9 +217,10 @@ class Etudiant_BDD {
 		AND $tab19.idpromotion = $tab15.idpromotion
 		AND $tab19.idconvention = $tab4.idconvention";
 
-	$req = $db->query($sql);
-	$result = mysqli_fetch_array($req);
-	return $result['idconv'];
+	$res = $db->query($sql);
+	$enreg = $res->fetch_array();
+	$res->free();
+	return $enreg['idconv'];
     }
 
     /**
@@ -226,19 +236,22 @@ class Etudiant_BDD {
 	global $tab9;
 
 	$sql = "SELECT * FROM $tab9 WHERE nometudiant LIKE '$nom' AND prenometudiant LIKE '$prenom'";
-	$req = $db->query($sql);
+	$res = $db->query($sql);
 
 	$tabSEtudiants = array();
 
-	while ($etu = mysqli_fetch_array($req, MYSQL_ASSOC)) {
-	    $tab = array();
-	    array_push($tab, $etu["idetudiant"]);
-	    array_push($tab, $etu["nometudiant"]);
-	    array_push($tab, $etu["prenometudiant"]);
-	    array_push($tab, $etu["email_institutionnel"]);
-	    array_push($tab, $etu["email_personnel"]);
-	    array_push($tab, $etu["codeetudiant"]);
-	    array_push($tabSEtudiants, $tab);
+	if ($res) {
+	    while ($etu = $res->fetch_assoc()) {
+		$tab = array();
+		array_push($tab, $etu["idetudiant"]);
+		array_push($tab, $etu["nometudiant"]);
+		array_push($tab, $etu["prenometudiant"]);
+		array_push($tab, $etu["email_institutionnel"]);
+		array_push($tab, $etu["email_personnel"]);
+		array_push($tab, $etu["codeetudiant"]);
+		array_push($tabSEtudiants, $tab);
+	    }
+	    $res->free();
 	}
 
 	return $tabSEtudiants;

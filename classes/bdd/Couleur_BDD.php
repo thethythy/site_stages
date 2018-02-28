@@ -30,15 +30,21 @@ class Couleur_BDD {
      * @global ressource $db Référence sur la base ouverte
      * @global string $tab20 Nom de la table 'couleur'
      * @param integer $identifiant Identifiant de la couleur recherchée
-     * @return enregistrement
+     * @return enregistrement ou FALSE
      */
     public static function getCouleur($identifiant) {
 	global $db;
 	global $tab20;
 
 	$sql = "SELECT * FROM $tab20 WHERE idcouleur='$identifiant';";
-	$req = $db->query($sql);
-	return mysqli_fetch_array($req);
+	$res = $db->query($sql);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
     }
 
     /**
@@ -56,12 +62,15 @@ class Couleur_BDD {
 
 	$tabCouleur = array();
 
-	while ($couleur = mysqli_fetch_array($result)) {
-	    $tab = array();
-	    array_push($tab, $couleur["idcouleur"]);
-	    array_push($tab, $couleur["nomcouleur"]);
-	    array_push($tab, $couleur["codehexa"]);
-	    array_push($tabCouleur, $tab);
+	if ($result) {
+	    while ($couleur = $result->fetch_array()) {
+		$tab = array();
+		array_push($tab, $couleur["idcouleur"]);
+		array_push($tab, $couleur["nomcouleur"]);
+		array_push($tab, $couleur["codehexa"]);
+		array_push($tabCouleur, $tab);
+	    }
+	    $result->free();
 	}
 
 	return $tabCouleur;
@@ -77,7 +86,7 @@ class Couleur_BDD {
 	global $db;
 	global $tab20;
 
-	$sql = "DELETE FROM $tab20 WHERE idcouleur='" . $identifiantBDD . "';";
+	$sql = "DELETE FROM $tab20 WHERE idcouleur='$identifiantBDD';";
 	$db->query($sql);
     }
 
