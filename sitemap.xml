@@ -17,6 +17,12 @@
   <changefreq>yearly</changefreq>
 </url>
 
+<url>
+  <loc>http://info-stages.univ-lemans.fr/mentions.php</loc>
+  <changefreq>yearly</changefreq>
+</url>
+
+
 <!-- Partie Presentation -->
 
 <url>
