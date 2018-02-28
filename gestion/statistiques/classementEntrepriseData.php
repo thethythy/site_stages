@@ -51,10 +51,13 @@ if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
     array_push($filtres, new FiltreNumeric('idfiliere', $_POST['filiere']));
 
-$filtre = $filtres[0];
-
-for ($i = 1; $i < sizeof($filtres); $i++)
-    $filtre = new Filtre($filtre, $filtres[$i], 'AND');
+if (count($filtres) > 0) {
+    $filtre = $filtres[0];
+    for ($i = 1; $i < sizeof($filtres); $i++)
+	$filtre = new Filtre($filtre, $filtres[$i], 'AND');
+} else {
+    $filtre = "";
+}
 
 // -----------------------------------------------------------------------------
 // Affichage des données
@@ -69,8 +72,10 @@ function trouveEmailEntreprise($oEntreprise) {
     return $email;
 }
 
-if ($_POST['annee'] != '')
+if (isset($_POST['annee']) && $_POST['annee'] != '')
     $tabOConventions = Convention::getListeConvention($filtre);
+else
+    $tabOConventions = array();
 
 if (sizeof($tabOConventions) > 0) {
     // Création du tableau des données
