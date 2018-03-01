@@ -6,15 +6,15 @@
  * Accès : public
  */
 
-include_once("./../classes/ihm/IHM_Generale.php");
-include_once("./../classes/ihm/Menu.php");
+include_once('../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level1');
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 
 IHM_Generale::header("Présentation", "détaillée", "../", $tabLiens);
 
-Menu::menuPresentation();
+IHM_Menu::menuPresentation();
 
 ?>
 

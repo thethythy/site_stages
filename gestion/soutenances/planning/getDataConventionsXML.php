@@ -7,28 +7,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../../classes/";
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."moteur/Filtre.php");
-include_once($chemin."moteur/FiltreNumeric.php");
-include_once($chemin."bdd/Promotion_BDD.php");
-include_once($chemin."moteur/Promotion.php");
-include_once($chemin."bdd/Parcours_BDD.php");
-include_once($chemin."moteur/Parcours.php");
-include_once($chemin."bdd/Filiere_BDD.php");
-include_once($chemin."moteur/Filiere.php");
-include_once($chemin."bdd/Etudiant_BDD.php");
-include_once($chemin."moteur/Etudiant.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."bdd/Parrain_BDD.php");
-include_once($chemin."moteur/Parrain.php");
-include_once($chemin."bdd/Couleur_BDD.php");
-include_once($chemin."moteur/Couleur.php");
-include_once($chemin."bdd/Contact_BDD.php");
-include_once($chemin."moteur/Contact.php");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."moteur/Entreprise.php");
+include_once("../../../classes/bdd/connec.inc");
+
+include_once('../../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level3');
 
 // Format de la réponse
 header("Content-type:text/xml; charset=utf-8");
@@ -96,7 +78,7 @@ if (sizeof($tabPromos) > 0) {
 				$tooltip = "tooltip='Etudiant : ".$nom_prenom." R&#233;f&#233;rent : ".$nom_prenom_parrain."'";
 
 				$contact = $convention->getContact();
-				$nom_lieu_entreprise = $contact->getEntreprise()->getNom()." (".$contact->getEntreprise()->getVille().")";
+				$nom_lieu_entreprise = htmlspecialchars($contact->getEntreprise()->getNom()." (".$contact->getEntreprise()->getVille().")");
 
 				$iditemtree = $idpromotion."_".$filiere->getIdentifiantBDD()."_".$convention->getIdentifiantBDD();
 

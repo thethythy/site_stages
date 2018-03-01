@@ -6,34 +6,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../classes/";
+include_once("../../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-
-include_once($chemin . "moteur/Filtre.php");
-include_once($chemin . "moteur/FiltreSuperieur.php");
-include_once($chemin . "moteur/FiltreInferieur.php");
-include_once($chemin . "moteur/FiltreNumeric.php");
-include_once($chemin . "moteur/FiltreString.php");
-
-include_once($chemin . "ihm/OffreDeStage_IHM.php");
-include_once($chemin . "bdd/OffreDeStage_BDD.php");
-include_once($chemin . "moteur/OffreDeStage.php");
-
-include_once($chemin . "moteur/Contact.php");
-include_once($chemin . "bdd/Contact_BDD.php");
-
-include_once($chemin . "moteur/Entreprise.php");
-include_once($chemin . "bdd/Entreprise_BDD.php");
-
-include_once($chemin . "bdd/Filiere_BDD.php");
-include_once($chemin . "moteur/Filiere.php");
-
-include_once($chemin . "bdd/Parcours_BDD.php");
-include_once($chemin . "moteur/Parcours.php");
-
-include_once($chemin . "bdd/Competence_BDD.php");
-include_once($chemin . "moteur/Competence.php");
+include_once('../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // Précisons l'encodage des données si cela n'est pas déjà fait
 if (!headers_sent())
@@ -92,4 +68,4 @@ if (sizeof($tabOffreDeStages) > 0) {
     } else {
 	echo "<br/><center>Aucune offre de stage ne correspond aux critères de recherche.<center/><br/>";
     }
-    ?>
+?>

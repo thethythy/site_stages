@@ -25,7 +25,7 @@ class StatistiquesGenerateurExcel {
      * Constructeur
      * @param string $chemin_complet Chemin d'exportation du fichier Excel
      */
-    public function StatistiquesGenerateurExcel($chemin_complet) {
+    public function __construct($chemin_complet) {
 	$this->chemin_complet = $chemin_complet;
 
 	// Indication de la méthode de stockage en mémoire

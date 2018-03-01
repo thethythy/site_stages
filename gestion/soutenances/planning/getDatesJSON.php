@@ -7,13 +7,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../../classes/";
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."moteur/Filtre.php");
-include_once($chemin."moteur/FiltreNumeric.php");
-include_once($chemin."bdd/DateSoutenance_BDD.php");
-include_once($chemin."moteur/DateSoutenance.php");
-include_once($chemin."bdd/Promotion_BDD.php");;
+include_once("../../../classes/bdd/connec.inc");
+
+include_once('../../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level3');
 
 // En-tête du flux JSON
 header("Content-type: application/json; charset=utf-8");

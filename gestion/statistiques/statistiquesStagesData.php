@@ -9,44 +9,12 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = '../../classes/';
-
-include_once($chemin.'bdd/connec.inc');
-include_once($chemin.'moteur/Utils.php');
-
-include_once($chemin.'moteur/Filtre.php');
-include_once($chemin.'moteur/FiltreNumeric.php');
-include_once($chemin.'moteur/FiltreInferieur.php');
-include_once($chemin.'moteur/FiltreSuperieur.php');
-
-include_once $chemin.'bdd/Couleur_BDD.php';
-include_once $chemin.'moteur/Couleur.php';
-
-include_once $chemin.'bdd/Promotion_BDD.php';
-include_once $chemin.'moteur/Promotion.php';
-
-include_once $chemin.'bdd/Convention_BDD.php';
-include_once $chemin.'moteur/Convention.php';
-
-include_once $chemin.'bdd/Filiere_BDD.php';
-include_once $chemin.'moteur/Filiere.php';
-
-include_once $chemin.'bdd/Parcours_BDD.php';
-include_once $chemin.'moteur/Parcours.php';
-
-include_once $chemin.'bdd/Entreprise_BDD.php';
-include_once $chemin.'moteur/Entreprise.php';
-
-include_once $chemin.'bdd/Contact_BDD.php';
-include_once $chemin.'moteur/Contact.php';
-
-include_once($chemin . "bdd/ThemeDeStage_BDD.php");
-include_once($chemin . "moteur/ThemeDeStage.php");
-
-include_once($chemin . "bdd/TypeEntreprise_BDD.php");
-include_once($chemin . "moteur/TypeEntreprise.php");
-
 include_once("statistiquesStagesExcel.php");
+
+include_once("../../classes/bdd/connec.inc");
+
+include_once('../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // -----------------------------------------------------------------------------
 // En-tête du flux JSON

@@ -9,28 +9,10 @@
 
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-$chemin = "../classes/";
+include_once("../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-include_once($chemin . "ihm/IHM_Generale.php");
-include_once($chemin . 'moteur/Utils.php');
-
-include_once($chemin . "ihm/Stage_IHM.php");
-
-include_once($chemin . "bdd/Promotion_BDD.php");
-include_once($chemin . "moteur/Promotion.php");
-
-include_once($chemin . "bdd/Filiere_BDD.php");
-include_once($chemin . "moteur/Filiere.php");
-
-include_once($chemin . "bdd/Parcours_BDD.php");
-include_once($chemin . "moteur/Parcours.php");
-
-include_once($chemin . "bdd/ThemeDeStage_BDD.php");
-include_once($chemin . "moteur/ThemeDeStage.php");
-
-include_once($chemin . "bdd/TypeEntreprise_BDD.php");
-include_once($chemin . "moteur/TypeEntreprise.php");
+include_once('../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level1');
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');

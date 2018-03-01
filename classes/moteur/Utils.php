@@ -2,10 +2,66 @@
 
 /**
  * Classe Utils : une classe utilitaire regroupant des méthodes disparates
- * dont certaines sont spécifiques au lieu de déploiement du site
+ * dont certaines sont spécifiques au lieu géographique de déploiement du site
  */
 
 class Utils {
+
+    /**
+     * Fonction pour auto-charger les classes depuis la racine
+     * @param string $name
+     */
+    public static function my_autoloader_from_root($name) {
+	if (strpos($name, 'IHM') !== FALSE) {
+	    include_once("./classes/ihm/$name.php");
+	} elseif (strpos($name, 'BDD') !== FALSE) {
+	    include_once("./classes/bdd/$name.php");
+	} else {
+	    include_once("./classes/moteur/$name.php");
+	}
+    }
+
+    /**
+     * Fonction pour auto-charger les classes depuis le niveau 1
+     * @param string $name
+     */
+    public static function my_autoloader_from_level1($name) {
+	if (strpos($name, 'IHM') !== FALSE) {
+	    include_once("../classes/ihm/$name.php");
+	} elseif (strpos($name, 'BDD') !== FALSE) {
+	    include_once("../classes/bdd/$name.php");
+	} else {
+	    include_once("../classes/moteur/$name.php");
+	}
+    }
+
+    /**
+     * Fonction pour auto-charger les classes depuis le niveau 2
+     * @param string $name
+     */
+    public static function my_autoloader_from_level2($name) {
+	if (strpos($name, 'IHM') !== FALSE) {
+	    include_once("../../classes/ihm/$name.php");
+	} elseif (strpos($name, 'BDD') !== FALSE) {
+	    include_once("../../classes/bdd/$name.php");
+	} else {
+	    include_once("../../classes/moteur/$name.php");
+	}
+    }
+
+    /**
+     * Fonction pour auto-charger les classes depuis le niveau 3
+     * @param string $name
+     */
+    public static function my_autoloader_from_level3($name) {
+	if (strpos($name, 'IHM') !== FALSE) {
+	    include_once("../../../classes/ihm/$name.php");
+	} elseif (strpos($name, 'BDD') !== FALSE) {
+	    include_once("../../../classes/bdd/$name.php");
+	} else {
+	    include_once("../../../classes/moteur/$name.php");
+	}
+    }
 
     /**
      * Test si une valeur est une adresse de couriel valide

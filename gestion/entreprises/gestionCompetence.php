@@ -6,14 +6,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../classes/";
+include_once("../../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-include_once($chemin . "ihm/IHM_Generale.php");
-
-include_once($chemin . "ihm/Competence_IHM.php");
-include_once($chemin . "bdd/Competence_BDD.php");
-include_once($chemin . "moteur/Competence.php");
+include_once('../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // ----------------------------------------------------------------------------
 // Contrôleur

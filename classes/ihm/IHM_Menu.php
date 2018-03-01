@@ -1,6 +1,6 @@
 <?php
 
-class Menu {
+class IHM_Menu {
 
     /**
      * Afficher le menu de la page d'accueil du site

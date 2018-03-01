@@ -189,7 +189,7 @@ class OffreDeStage {
 				    $tab_donnees[6], $tab_donnees[7],
 				    $tab_donnees[8], '0',
 				    $tab_donnees[9], $tab_donnees[10]);
-	return offreDeStage_BDD::sauvegarder($ods);
+	return OffreDeStage_BDD::sauvegarder($ods);
     }
 
     /**
@@ -205,7 +205,7 @@ class OffreDeStage {
 				$tab_donnees[8], $tab_donnees[9],
 				$tab_donnees[10], $tab_donnees[11],
 				$tab_donnees[12]);
-	return offreDeStage_BDD::sauvegarder($ods);
+	return OffreDeStage_BDD::sauvegarder($ods);
     }
 
     /**
@@ -213,7 +213,7 @@ class OffreDeStage {
      * @param integer $identifiantBDD
      */
     public static function supprimerDonnees($identifiantBDD) {
-	offreDeStage_BDD::delete($identifiantBDD);
+	OffreDeStage_BDD::delete($identifiantBDD);
     }
 
     /**

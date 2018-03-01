@@ -7,34 +7,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../../classes/";
-include_once($chemin."bdd/connec.inc");
-include_once($chemin."moteur/Filtre.php");
-include_once($chemin."moteur/FiltreNumeric.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."bdd/DateSoutenance_BDD.php");
-include_once($chemin."moteur/DateSoutenance.php");
-include_once($chemin."bdd/Soutenance_BDD.php");
-include_once($chemin."moteur/Soutenance.php");
-include_once($chemin."bdd/Convention_BDD.php");
-include_once($chemin."moteur/Convention.php");
-include_once($chemin."bdd/Promotion_BDD.php");
-include_once($chemin."moteur/Promotion.php");
-include_once($chemin."bdd/Filiere_BDD.php");
-include_once($chemin."moteur/Filiere.php");
-include_once($chemin."bdd/Etudiant_BDD.php");
-include_once($chemin."moteur/Etudiant.php");
-include_once($chemin."bdd/Parrain_BDD.php");
-include_once($chemin."moteur/Parrain.php");
-include_once($chemin."bdd/Couleur_BDD.php");
-include_once($chemin."moteur/Couleur.php");
-include_once($chemin."bdd/Contact_BDD.php");
-include_once($chemin."moteur/Contact.php");
-include_once($chemin."bdd/Entreprise_BDD.php");
-include_once($chemin."moteur/Entreprise.php");
-include_once($chemin."bdd/Salle_BDD.php");
-include_once($chemin."moteur/Salle.php");
+include_once("../../../classes/bdd/connec.inc");
+
+include_once('../../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level3');
 
 // Format de la réponse
 header("Content-type:text/xml; charset=utf-8");

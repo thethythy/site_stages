@@ -6,8 +6,8 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../../classes/";
-include_once($chemin."ihm/IHM_Generale.php");
+include_once('../../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level3');
 
 $tabLiens = array();
 $tabLiens[0] = array('../../../', 'Accueil');

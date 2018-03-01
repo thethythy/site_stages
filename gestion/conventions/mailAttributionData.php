@@ -6,28 +6,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../classes/";
+include_once("../../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-
-include_once($chemin . "ihm/Attribution_IHM.php");
-include_once($chemin . "bdd/Attribution_BDD.php");
-include_once($chemin . "moteur/Attribution.php");
-
-include_once($chemin . "bdd/Convention_BDD.php");
-include_once($chemin . "moteur/Convention.php");
-
-include_once($chemin . "bdd/Etudiant_BDD.php");
-include_once($chemin . "moteur/Etudiant.php");
-
-include_once($chemin . "bdd/Parrain_BDD.php");
-include_once($chemin . "moteur/Parrain.php");
-
-include_once($chemin . "bdd/Contact_BDD.php");
-include_once($chemin . "moteur/Contact.php");
-
-include_once($chemin . "bdd/Entreprise_BDD.php");
-include_once($chemin . "moteur/Entreprise.php");
+include_once('../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // Précisons l'encodage des données si cela n'est pas déjà fait
 if (!headers_sent())

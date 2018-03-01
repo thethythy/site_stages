@@ -6,11 +6,11 @@
  * Accès : public
  */
 
-include_once("./classes/ihm/IHM_Generale.php");
-include_once("./classes/ihm/Menu.php");
+include_once('classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_root');
 
 IHM_Generale::header("Les stages", "étudiants", "", array());
-Menu::menuAccueil();
+IHM_Menu::menuAccueil();
 ?>
 <br></br>
 <p>Ce site est dédié à la gestion et à l'accès aux informations concernant les stages des étudiants en informatique de la Faculté des Sciences et Techniques de l'Université du Maine. Il est l'outil principal de communication entre les différentes personnes concernées : les étudiants, l'équipe enseignante, les entreprises, et le responsable pédagogique des stages.</p>

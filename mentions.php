@@ -6,7 +6,8 @@
  * Accès : public
  */
 
-include_once("classes/ihm/IHM_Generale.php");
+include_once('./classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_root');
 
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');

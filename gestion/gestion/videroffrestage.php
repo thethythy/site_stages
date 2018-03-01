@@ -7,22 +7,10 @@
  * Accès : restreint par authentification HTTP
  */
 
-$chemin = "../../classes/";
+include_once("../../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-include_once($chemin . "ihm/IHM_Generale.php");
-
-include_once($chemin . "bdd/OffreDeStage_BDD.php");
-include_once($chemin . "moteur/OffreDeStage.php");
-
-include_once($chemin . "bdd/Convention_BDD.php");
-include_once($chemin . "moteur/Convention.php");
-
-include_once($chemin . "bdd/Contact_BDD.php");
-include_once($chemin . "moteur/Contact.php");
-
-include_once($chemin . "bdd/Entreprise_BDD.php");
-include_once($chemin . "moteur/Entreprise.php");
+include_once('../../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');

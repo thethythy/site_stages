@@ -9,45 +9,10 @@
 
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-$chemin = "../classes/";
+include_once("../classes/bdd/connec.inc");
 
-include_once($chemin . "bdd/connec.inc");
-include_once($chemin . 'moteur/Utils.php');
-
-include_once($chemin . "moteur/Filtre.php");
-include_once($chemin . "moteur/FiltreNumeric.php");
-
-include_once($chemin . "ihm/Stage_IHM.php");
-
-include_once($chemin . "bdd/Contact_BDD.php");
-include_once($chemin . "moteur/Contact.php");
-
-include_once($chemin . "bdd/Convention_BDD.php");
-include_once($chemin . "moteur/Convention.php");
-
-include_once($chemin . "bdd/Entreprise_BDD.php");
-include_once($chemin . "moteur/Entreprise.php");
-
-include_once($chemin . "bdd/TypeEntreprise_BDD.php");
-include_once($chemin . "moteur/TypeEntreprise.php");
-
-include_once($chemin . "bdd/Etudiant_BDD.php");
-include_once($chemin . "moteur/Etudiant.php");
-
-include_once($chemin . "bdd/Filiere_BDD.php");
-include_once($chemin . "moteur/Filiere.php");
-
-include_once($chemin . "bdd/Parcours_BDD.php");
-include_once($chemin . "moteur/Parcours.php");
-
-include_once($chemin . "bdd/Promotion_BDD.php");
-include_once($chemin . "moteur/Promotion.php");
-
-include_once($chemin . "bdd/Parrain_BDD.php");
-include_once($chemin . "moteur/Parrain.php");
-
-include_once($chemin . "bdd/Soutenance_BDD.php");
-include_once($chemin . "moteur/Soutenance.php");
+include_once('../classes/moteur/Utils.php');
+spl_autoload_register('Utils::my_autoloader_from_level1');
 
 if (!headers_sent())
     header("Content-type:text/html; charset=utf-8");
@@ -71,6 +36,8 @@ if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
 if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
     array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
 
+$tabOEtuWithConv = array();
+
 if (sizeof($filtres) > 0) {
     $filtre = $filtres[0];
     for ($i = 1; $i < sizeof($filtres); $i++)
@@ -82,7 +49,7 @@ if (sizeof($filtres) > 0) {
 	$tabOEtudiants = Promotion::listerEtudiants($filtre);
 
 	// Récupération des étudiants ayant une convention
-	$tabOEtuWithConv = array();
+	//$tabOEtuWithConv = array();
 	for ($i = 0; $i < sizeof($tabOEtudiants); $i++) {
 	    if ($tabOEtudiants[$i]->getConvention($annee) != null)
 		array_push($tabOEtuWithConv, $tabOEtudiants[$i]);
