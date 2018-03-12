@@ -1,2 +1,10 @@
 Sitemap : http://info-stages.univ-lemans.fr/sitemap.xml
 User-Agent: *
+Disallow: /classes
+Disallow: /documents
+Disallow: /gestion
+Disallow: /images
+Disallow: /parrainage
+Disallow: /soutenances
+Disallow: /stagiaire
+Disallow: /telechargements
