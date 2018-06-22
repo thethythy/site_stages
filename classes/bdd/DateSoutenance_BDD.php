@@ -122,13 +122,16 @@ class DateSoutenance_BDD {
 	$sql = "SELECT idpromotion FROM $tab1 WHERE iddatesoutenance='$idDate';";
 	$result = $db->query($sql);
 
+	$tabIdPromotion = array();
+
 	if ($result) {
-	    $enreg = $result->fetch_array();
+	    while ($ligne = $result->fetch_row()) {
+		array_push($tabIdPromotion, $ligne[0]);
+	    }
 	    $result->free();
-	    return $enreg;
-	} else {
-	    return FALSE;
 	}
+
+	return $tabIdPromotion;
     }
 
     /**
