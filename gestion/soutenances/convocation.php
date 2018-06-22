@@ -73,10 +73,11 @@ if (isset($_POST['convocation']) && isset($_POST['date']) && isset($_POST['convo
 	    $oEtudiant = $oConvention->getEtudiant();
 	    $oContact = $oConvention->getContact();
 
-	    if ($oEtudiant->getCodeEtudiant() != 5)
-		$cadre = "du stage";
-	    else
+	    $statut = $oEtudiant->getCodeEtudiant();
+	    if ($statut == 5 || $statut == 51 || $statut == 52)
 		$cadre = "de l'alternance";
+	    else
+		$cadre = "du stage";
 
 	    $date = $oDS->getJour()." ".Utils::numToMois($oDS->getMois())." ".$oDS->getAnnee();
 

@@ -183,13 +183,13 @@ class Convention_BDD {
      * @param integer $parcours L'identifiant du parcours concerné
      * @return integer
      */
-    public static function compteConvention($annee, $parrain, $filiere, $parcours) {
+    public static function getListeConventionFromParrainAndPromotion($annee, $parrain, $filiere, $parcours) {
 	global $db;
 	global $tab4;
 	global $tab15;
 	global $tab19;
 
-	$requete = "SELECT $tab19.idconvention
+	$requete = "SELECT *
 		    FROM $tab15, $tab19, $tab4
 		    WHERE $tab15.anneeuniversitaire='$annee' AND
 			  $tab15.idfiliere='$filiere' AND
@@ -198,16 +198,30 @@ class Convention_BDD {
 			  $tab4.idconvention = $tab19.idconvention AND
 			  $tab4.idparrain = '$parrain';";
 
-	$result = $db->query($requete);
+	$res = $db->query($requete);
 
-	$compte = 0;
+	$tabC = array();
 
-	if ($result) {
-	    $compte = $result->num_rows;
-	    $result->free();
+	if ($res) {
+	    while ($ods = $res->fetch_array()) {
+		$tab = array();
+		array_push($tab, $ods['idconvention']);
+		array_push($tab, $ods['sujetdestage']);
+		array_push($tab, $ods['asonresume']);
+		array_push($tab, $ods['note']);
+		array_push($tab, $ods['idparrain']);
+		array_push($tab, $ods['idexaminateur']);
+		array_push($tab, $ods['idetudiant']);
+		array_push($tab, $ods['idsoutenance']);
+		array_push($tab, $ods['idcontact']);
+		array_push($tab, $ods['idtheme']);
+
+		array_push($tabC, $tab);
+	    }
+	    $res->free();
 	}
 
-	return $compte;
+	return $tabC;
     }
 
     /**

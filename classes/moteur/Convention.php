@@ -205,6 +205,29 @@ class Convention {
     }
 
     /**
+     * Obtenir une liste de conventions à partir de l'année, d'un parrain et d'une promotion
+     * @param integer $annee
+     * @param integer $idparrain
+     * @param integer $idfiliere
+     * @param integer $idparcours
+     * @return tableau d'objets Convention
+     */
+    public static function getListeConventionFromParrainAndPromotion($annee, $idparrain, $idfiliere, $idparcours) {
+	$tabLCString = Convention_BDD::getListeConventionFromParrainAndPromotion($annee, $idparrain, $idfiliere, $idparcours);
+
+	$tabLC = array();
+	for ($i = 0; $i < sizeof($tabLCString); $i++)
+	    array_push($tabLC,
+		    new Convention($tabLCString[$i][0], $tabLCString[$i][1],
+				   $tabLCString[$i][2], $tabLCString[$i][3],
+				   $tabLCString[$i][4], $tabLCString[$i][5],
+				   $tabLCString[$i][6], $tabLCString[$i][7],
+				   $tabLCString[$i][8], $tabLCString[$i][9]));
+
+	return $tabLC;
+    }
+
+    /**
      * Obtenir une liste de conventions à partir d'un filtre de sélection
      * @param Filtre $filtre
      * @return tableau d'objets Convention

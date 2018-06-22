@@ -433,12 +433,14 @@ class Promotion_IHM {
 		<form method="POST">
 		    <table>
 			<tr id="entete">
-			    <td width="25%">Etudiant</td>
-			    <td width="75%" align="center">Statut</td>
+			    <td width="20%">Etudiant</td>
+			    <td width="70%" align="center">Statut</td>
 			</tr>
 			<?php
 			$nbEtudiants = sizeof($tabEtudiants);
 			$nbAlters = 0;
+			$nbAltersPRO = 0;
+			$nbAltersAPP = 0;
 			$nbRechs = 0;
 			$nbConvSignees = 0;
 			$nbConvEnCours = 0;
@@ -470,6 +472,14 @@ class Promotion_IHM {
 				case "5":
 				    $nbAlters++;
 				    break;
+				case "51":
+				    $nbAlters++;
+				    $nbAltersPRO++;
+				    break;
+				case "52":
+				    $nbAlters++;
+				    $nbAltersAPP++;
+				    break;
 				case "6":
 				    $nbRechs++;
 				    break;
@@ -489,6 +499,8 @@ class Promotion_IHM {
 				    <option value="3" <?php if ($statut == "3") echo "selected"; ?> >En signature</option>
 				    <option value="4" <?php if ($statut == "4") echo "selected"; ?> >Signée</option>
 				    <option value="5" <?php if ($statut == "5") echo "selected"; ?> >Alternant</option>
+				    <option value="51" <?php if ($statut == "51") echo "selected"; ?> >Alt Pro</option>
+				    <option value="52" <?php if ($statut == "52") echo "selected"; ?> >Alt App</option>
 				    <option value="6" <?php if ($statut == "6") echo "selected"; ?> >Recherche</option>
 				</select>
 			    </td>
@@ -501,13 +513,13 @@ class Promotion_IHM {
 				Total : <?php echo $nbEtudiants; ?>
 			    </td>
 			    <td align="center">
-				Indéfini : <?php echo $nbIndefinis; ?>&nbsp;&nbsp;&nbsp;
-				Rien : <?php echo $nbRiens; ?>&nbsp;&nbsp;&nbsp;
-				Des pistes : <?php echo $nbDesPistes; ?>&nbsp;&nbsp;&nbsp
-				En cours : <?php echo $nbConvEnCours; ?>&nbsp;&nbsp;&nbsp
-				Signées : <?php echo $nbConvSignees; ?>&nbsp;&nbsp;&nbsp
-				Alternants : <?php echo $nbAlters; ?>&nbsp;&nbsp;&nbsp;
-				Recherche : <?php echo $nbRechs; ?>
+				Indéfini : <?php echo $nbIndefinis; ?>&nbsp;|&nbsp;
+				Rien : <?php echo $nbRiens; ?>&nbsp;|&nbsp;
+				Des pistes : <?php echo $nbDesPistes; ?>&nbsp;|&nbsp
+				En cours : <?php echo $nbConvEnCours; ?>&nbsp;|&nbsp
+				Signées : <?php echo $nbConvSignees; ?>&nbsp;|&nbsp
+				Alternants : <?php echo $nbAlters . " [".$nbAltersPRO." Pro | ".$nbAltersAPP." App]"; ?>&nbsp;|&nbsp;
+				Rech. : <?php echo $nbRechs; ?>
 			    </td>
 			</tr>
 		    </table>

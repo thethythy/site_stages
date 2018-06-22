@@ -27,9 +27,9 @@ class Attribution_IHM {
 			$oConvention = Convention::getConvention($tabOAttribution[$i]->getIdconvention());
 
 			$etudiant = $oConvention->getEtudiant();
-			if ($etudiant->getCodeEtudiant() != 5)
-			    $alternant = FALSE;
-			else
+			$alternant = FALSE;
+			$statut = $etudiant->getCodeEtudiant();
+			if ($statut == 5 || $statut == 51 || $statut == 52)
 			    $alternant = TRUE;
 
 			$referent = $oConvention->getParrain();

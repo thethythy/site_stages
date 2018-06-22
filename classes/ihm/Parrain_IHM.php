@@ -362,13 +362,13 @@ class Parrain_IHM {
 	    ?>
 	    <table id="data" width='60%'>
 		<tr id="entete">
-		<td width="20%">Référent</td>
+		<td width="22%">Référent</td>
 		<?php
 		for ($i = 0; $i < sizeof($tabPromotions); $i++) {
-		    echo "<td width='10%'>" . $tabPromotions[$i]->getFiliere()->getNom() . " " . $tabPromotions[$i]->getParcours()->getNom() . "</td>";
+		    echo "<td>" . $tabPromotions[$i]->getFiliere()->getNom() . " " . $tabPromotions[$i]->getParcours()->getNom() . "</td>";
 		}
 
-		echo "<td width='6%'>Total</td><td width='7%'>ICalendar</td></tr>";
+		echo "<td>Total</td><td>ICalendar</td></tr>";
 
 		$cpt = 0;
 		$oldparrain = 0;
@@ -393,19 +393,68 @@ class Parrain_IHM {
 				    </td>
 				    <?php
 				    $total = 0;
+				    $nbAltersTotal = 0;
+				    $nbAltersPROTotal = 0;
+				    $nbAltersAPPTotal = 0;
+				    $nbRechsTotal = 0;
+				    $nbInitiauxTotal = 0;
+
 				    for ($j = 0; $j < sizeof($tabPromotions); $j++) {
 
 					$filiere = $tabPromotions[$j]->getFiliere();
 					$parcours = $tabPromotions[$j]->getParcours();
 
-					$nbParrainage = Convention_BDD::compteConvention($annee, $parrain->getIdentifiantBDD(), $filiere->getIdentifiantBDD(), $parcours->getIdentifiantBDD());
-					$total = $total + $nbParrainage;
-					echo "<td>$nbParrainage</td>";
+					$taboConv = Convention::getListeConventionFromParrainAndPromotion($annee, $parrain->getIdentifiantBDD(), $filiere->getIdentifiantBDD(), $parcours->getIdentifiantBDD());
+					$nbConv = sizeof($taboConv);
+					$total += $nbConv;
+
+					$nbAlters = 0;
+					$nbAltersPRO = 0;
+					$nbAltersAPP = 0;
+					$nbRechs = 0;
+					$nbInitiaux = 0;
+
+					for ($k = 0; $k < $nbConv; $k++) {
+					    $oEtu = $taboConv[$k]->getEtudiant();
+					    $statut = $oEtu->getCodeEtudiant();
+
+					    switch ($statut) {
+						case "5":
+						    $nbAlters++;
+						    break;
+						case "51":
+						    $nbAlters++;
+						    $nbAltersPRO++;
+						    break;
+						case "52":
+						    $nbAlters++;
+						    $nbAltersAPP++;
+						    break;
+						case "6":
+						    $nbRechs++;
+						    break;
+						default:
+						    $nbInitiaux++;
+						    break;
+					    }
+					}
+
+					$nbAltersTotal += $nbAlters;
+					$nbAltersPROTotal += $nbAltersPRO;
+					$nbAltersAPPTotal += $nbAltersAPP;
+					$nbRechsTotal += $nbRechs;
+					$nbInitiauxTotal += $nbInitiaux;
+
+					$detail = "$nbInitiaux Init | $nbAltersPRO Alt Pro | $nbAltersAPP Alt App | $nbRechs Rech";
+					echo "<td>$nbConv<br/>$detail</td>";
 				    }
+
+				    $detail = "$nbInitiauxTotal Init | $nbAltersPROTotal Alt Pro | $nbAltersAPPTotal Alt App | $nbRechsTotal Rech";
+				    echo "<td>$total<br/>$detail</td>";
+
 				    ?>
-				    <td><?php echo $total; ?></td>
 				    <td>
-					<a href='getEnseignantICal.php?id=<?php echo $parrain->getIdentifiantBDD(); ?>'>Import</a> |
+					<a href='getEnseignantICal.php?id=<?php echo $parrain->getIdentifiantBDD(); ?>'>Import</a><br/>
 					<a href='webcal://info-stages.univ-lemans.fr/parrainage/getEnseignantICal.php?id=<?php echo $parrain->getIdentifiantBDD(); ?>'>Abonnement</a>
 				    </td>
 				</tr>
