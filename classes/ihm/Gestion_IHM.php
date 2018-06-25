@@ -253,7 +253,7 @@ class Gestion_IHM {
 				    <ul>
 					<li><a href="./soutenances/gestionSalle.php">Gérer les salles</a></li>
 					<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li><br/>
-					<li><a href="./soutenances/modifierTempsSoutenance.php">Modifier une durée de soutenance</a></li>
+					<li><a href="./soutenances/gestionTempsSoutenance.php">Gérer les durées de soutenance</a></li>
 					<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li><br/>
 					<li><a href="./soutenances/convocation.php">Convocation aux soutenances</a></li>
 				    </ul>
