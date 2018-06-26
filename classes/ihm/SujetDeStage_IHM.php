@@ -73,7 +73,7 @@ class SujetDeStage_IHM {
 	    if (!$enteteAffichee) {
 		$enteteAffichee = true;
 		?>
-		<p>Voici la liste des sujets de stage qui restent à traiter : </p>
+		<p>Voici la liste des demandes qui restent à traiter : </p>
 		<table width="100%">
 		    <tr id="entete">
 			<td width="30%">Nom</td>
@@ -94,7 +94,7 @@ class SujetDeStage_IHM {
 			<td><?php echo $parcours->getNom(); ?></td>
 			<td><?php echo $promotion->getAnneeUniversitaire() ?></td>
 			<td align="center">
-			    <a href="./traiterSDS.php?id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>">
+			    <a href="./gestionSujetDeStage.php?action=trait&id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>">
 				<img src="../../images/search.png">
 			    </a>
 			</td>
@@ -105,19 +105,19 @@ class SujetDeStage_IHM {
     }
 
     /**
-     * Afficher un formulaire de validation ou de refus d'une proposition
+     * Afficher un formulaire de traitement d'une demande
      * de stage faite par un étudiant
-     * @param SujetDeStage $sds L'objet SujeDestage à traiter
-     * @param boolean $afficherBoutton Indicateur à true pour les boutons de traitement
+     * @param integer $idSDS Identifiant de la demande à traiter
      */
-    public static function afficherSDS($sds, $afficherBoutton) {
-	$etudiant = $sds->getEtudiant();
-	$promotion = $sds->getPromotion();
+    public static function traiterSDS($idSDS) {
+	$oSDS = SujetDeStage::getSujetDeStage($idSDS);
+	$etudiant = $oSDS->getEtudiant();
+	$promotion = $oSDS->getPromotion();
 	$filiere = $promotion->getFiliere();
 	$parcours = $promotion->getParcours();
 	?>
-	<form method=post action="./traiterSDS.php">
-	    <input type="hidden" value="<?php echo $_GET['id']; ?>" name="idSds">
+	<form method=post action="gestionSujetDeStage.php">
+	    <input type="hidden" value="<?php echo $_GET['id']; ?>" name="id">
 	    <table width="100%">
 		<tr>
 		    <th width="10%">Nom</th>
@@ -143,75 +143,138 @@ class SujetDeStage_IHM {
 		    <th>Sujet</th>
 		    <td>
 			<?php
-			$filename = explode(".", $sds->getDescription());
+			$filename = explode(".", $oSDS->getDescription());
 			if (sizeof($filename) != 0)
 			    $extension = $filename[sizeof($filename) - 1];
 			if ($extension == "pdf" || $extension == "doc" || $extension == "odt" || $extension == "docx" || $extension == "txt") {
-			    echo "<a href='../../documents/sujetsDeStages/" . $sds->getDescription() . "' target='_blank'>" . $sds->getDescription() . "</a>";
+			    echo "<a href='../../documents/sujetsDeStages/" . $oSDS->getDescription() . "' target='_blank'>" . $oSDS->getDescription() . "</a>";
 			} else {
-			    echo $sds->getDescription();
+			    echo $oSDS->getDescription();
 			}
 			?>
 		    </td>
 		</tr>
-	<?php if ($afficherBoutton) { ?>
 		<tr>
 		    <td colspan=2>
 			<input type="submit" name="accept" value="Accepter">
 			<input type="submit" name="refus" value="Refuser">
 		    </td>
 		</tr>
-	<?php } ?>
 	    </table>
 	</form>
 	<?php
     }
 
     /**
+     * Afficher une demande déjà traitée
+     * @param integer $idSDS Identifiant de la demande
+     */
+    public static function afficherSDS($idSDS) {
+	$oSDS = SujetDeStage::getSujetDeStage($idSDS);
+	$etudiant = $oSDS->getEtudiant();
+	$promotion = $oSDS->getPromotion();
+	$filiere = $promotion->getFiliere();
+	$parcours = $promotion->getParcours();
+	?>
+	<form method=post action='gestionSujetDeStage.php'>
+	    <table width="100%">
+		<tr>
+		    <th width="10%">Nom</th>
+		    <td><?php echo $etudiant->getNom(); ?></td>
+		</tr>
+		<tr>
+		    <th>Prenom</th>
+		    <td><?php echo $etudiant->getPrenom(); ?></td>
+		</tr>
+		<tr>
+		    <th>Diplôme</th>
+		    <td><?php echo $filiere->getNom(); ?></td>
+		</tr>
+		<tr>
+		    <th>Spécialité</th>
+		    <td><?php echo $parcours->getNom(); ?></td>
+		</tr>
+		<tr>
+		    <th>Année</th>
+		    <td><?php echo $promotion->getAnneeUniversitaire(); ?></td>
+		</tr>
+		<tr>
+		    <th>Sujet</th>
+		    <td>
+			<?php
+			$filename = explode(".", $oSDS->getDescription());
+			if (sizeof($filename) != 0)
+			    $extension = $filename[sizeof($filename) - 1];
+			if ($extension == "pdf" || $extension == "doc" || $extension == "odt" || $extension == "docx" || $extension == "txt") {
+			    echo "<a href='../../documents/sujetsDeStages/" . $oSDS->getDescription() . "' target='_blank'>" . $oSDS->getDescription() . "</a>";
+			} else {
+			    echo $oSDS->getDescription();
+			}
+			?>
+		    </td>
+		</tr>
+		<tr>
+		    <th>Décision</th>
+		    <td><?php echo $oSDS->isValide() ? "Accepté" : "Refusé" ; ?></td>
+		</tr>
+		<tr>
+		    <td colspan=2>
+			<input type="submit" value="Fermer">
+		    </td>
+		</tr>
+	    </table>
+	</form>
+	<?php
+    }
+
+   /**
      * Afficher un tableau des demandes de validation déjà traitées
      * Un lien permet d'accéder à chaque demande déjà validée
-     * @param tableau d'objets $tabSDS Les objets SujetDeStage validés
+     * @param tableau d'objets $tabSDS Les objets SujetDeStage traités
      */
-    public static function afficherTableauSDSValide($tabSDS) {
+    public static function afficherTableauSDSTraite($tabSDS) {
 	$cpt = 0;
-	$enteteAffichee = false;
+
+	?>
+	<p>Voici la liste des demandes qui ont été traitées : </p>
+	<table width="100%">
+	    <tr id="entete">
+		<td width="25%">Nom</td>
+		<td width="25%">Prenom</td>
+		<td width="10%">Diplôme</td>
+		<td width="10%">Spécialité</td>
+		<td width="5%">Année</td>
+		<td width="10%">Décision</td>
+		<td width="15%">Visualiser</td>
+	    </tr>
+	<?php
+
 	for ($i = 0; $i < sizeof($tabSDS); $i++) {
 	    $etudiant = $tabSDS[$i]->getEtudiant();
 	    $promotion = $tabSDS[$i]->getPromotion();
 	    $filiere = $promotion->getFiliere();
 	    $parcours = $promotion->getParcours();
-	    if (!$enteteAffichee) {
-		$enteteAffichee = true;
-		?>
-		<p>Voici la liste des sujets de stage qui ont été validés : </p>
-		<table width="100%">
-		    <tr id="entete">
-			<td width="30%">Nom</td>
-			<td width="30%">Prenom</td>
-			<td width="10%">Diplôme</td>
-			<td width="10%">Spécialité</td>
-			<td width="5%">Année</td>
-			<td width="15%">Visualiser</td>
-		    </tr>
-	    <?php
-	}
-	?>
+
+	    ?>
 	    <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
 		<td><?php echo $etudiant->getNom(); ?></td>
 		<td><?php echo $etudiant->getPrenom(); ?></td>
 		<td><?php echo $filiere->getNom(); ?></td>
 		<td><?php echo $parcours->getNom(); ?></td>
 		<td><?php echo $promotion->getAnneeUniversitaire() ?></td>
+		<td><?php echo $tabSDS[$i]->isValide() ? "Accepté" : "Refusé" ; ?></td>
 		<td align="center">
-		    <a href="./visualiserSDS.php?id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>">
-			<img src="../../images/search.png">
+		    <a href="gestionSujetDeStage.php?action=visua&id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>">
+			<img src="../../images/search.png"/>
 		    </a>
 		</td>
 	    </tr>
-		<?php
-	    }
-	    echo "</table>";
+	  <?php
 	}
+	?>
+	</table>
+	<?php
+    }
 
 }
 

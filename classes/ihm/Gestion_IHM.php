@@ -160,8 +160,7 @@ class Gestion_IHM {
 				    <ul>
 					<li><a href="./etudiants/listeDesEtudiants.php">Liste des étudiants</a></li>
 					<li><a href="./etudiants/supprimerEtudiant.php">Supprimer un étudiant</a></li><br/>
-					<li><a href="./etudiants/consulterSDS.php">Voir les sujets validés</a></li>
-					<li><a href="./etudiants/validerSDS.php">Valider un sujet</a></li>
+					<li><a href="./etudiants/gestionSujetDeStage.php">Gérer les demandes de validation</a></li>
 				    </ul>
 				</td>
 			    </tr>

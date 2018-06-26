@@ -113,11 +113,11 @@ class SujetDeStage {
     }
 
     /**
-     * Obtenir la liste des objets SujetDeStage valides
+     * Obtenir la liste des objets SujetDeStage traités
      * @return array
      */
-    public static function getSujetDeStageValide() {
-	$filtre = new FiltreNumeric("valide", 1);
+    public static function getSujetDeStageTraite() {
+	$filtre = new FiltreNumeric("enattente", 0);
 	$tabSdS = SujetDeStage_BDD::getListeSujetDeStage($filtre);
 
 	$tabSujetDeStage = array();

@@ -31,7 +31,7 @@ function envoyerNotification() {
     $headers .= 'Reply-To: ' . $emailResponsable . "\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
-    $msg = "Un nouveau sujet de stage a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/validerSDS.php'>ici</a>";
+    $msg = "Un nouveau sujet de stage a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/gestionSujetDeStage.php'>ici</a>";
     mail($emailResponsable, 'Site des stages : Demande de validation !', $msg, $headers);
 }
 
