@@ -9,7 +9,7 @@ class Entreprise_IHM {
      */
     public static function afficherFormulaireRecherche($page) {
 	?>
-	<form method=post action="<?php echo $page; ?>">
+	<form method=post action="javascript:">
 	    <table width="100%">
 		<tr>
 		    <td width="50%" align="center">
@@ -17,7 +17,7 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Nom de l'entreprise</td>
 				<td>
-				    <input type="text" name="nom"
+				    <input id="nom" type="text" name="nom"
 					<?php
 					if (isset($_POST['nom']))
 					    echo "value='" . $_POST['nom'] . "'"; ?>
@@ -27,7 +27,7 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Code Postal</td>
 				<td>
-				    <input type="text" name="cp"
+				    <input id="cp" type="text" name="cp"
 					<?php
 					if (isset($_POST['cp']))
 					    echo "value='" . $_POST['cp'] . "'"; ?>
@@ -41,7 +41,7 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Ville</td>
 				<td>
-				    <input type="text" name="ville"
+				    <input id="ville" type="text" name="ville"
 					<?php
 					if (isset($_POST['ville']))
 					    echo "value='" . $_POST['ville'] . "'"; ?>
@@ -51,7 +51,7 @@ class Entreprise_IHM {
 			    <tr>
 				<td>Pays</td>
 				<td>
-				    <input type="text" name="pays"
+				    <input id="pays" type="text" name="pays"
 					<?php
 					if (isset($_POST['pays']))
 					    echo "value='" . $_POST['pays'] . "'"; ?>
@@ -61,14 +61,14 @@ class Entreprise_IHM {
 			</table>
 		    </td>
 		</tr>
-		<tr>
-		    <td colspan="2" id="submit">
-			<input type="hidden" value="1" name="rech" />
-			<input type="submit" value="Afficher" />
-		    </td>
-		</tr>
 	    </table>
 	</form>
+
+	<script type="text/javascript">
+	    var table = new Array("nom", "cp", "ville", "pays");
+	    new LoadData(table, "<?php echo $page; ?>", "onkeyup");
+	</script>
+
 	<?php
     }
 
