@@ -24,7 +24,7 @@ Promotion_IHM::afficherFormulaireSelectionInterval();
 
 // Chargement des traitements (affichage et contrôle)
 echo "<div id='data'></div>\n";
-echo "<script type='text/javascript' src='statistiques.js'></script>\n";
+echo "<script type='text/javascript' src='statistiquesStages.js'></script>\n";
 
 deconnexion();
 
