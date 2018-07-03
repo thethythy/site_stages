@@ -152,6 +152,40 @@ class Entreprise_BDD {
 	    return false;
     }
 
-}
+    /**
+     * Retourne une liste de conventions liées à une entreprise donnée
+     * classées par ordre descendant (les plus récentes en premier)
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab3 Nom de la table 'contact'
+     * @global string $tab4 Nom de la table 'convention'
+     * @param integer $idEnt Identifiant de l'entreprise
+     * @return tableau Identifiants des conventions trouvées
+     */
+    public static function getListeConventionFromEntreprise($idEnt) {
+	global $db;
+	global $tab3;
+	global $tab4;
+
+	$sql = "SELECT idconvention
+		FROM $tab3, $tab4
+		WHERE $tab3.identreprise='$idEnt' AND
+		      $tab3.idcontact=$tab4.idcontact
+		ORDER BY idconvention DESC;";
+
+	$result = $db->query($sql);
+
+	$tabIDConventions = array();
+
+	if ($result) {
+	    while ($row = $result->fetch_array()) {
+		array_push($tabIDConventions, $row["idconvention"]);
+	    }
+	    $result->free();
+	}
+
+	return $tabIDConventions;
+    }
+
+	}
 
 ?>

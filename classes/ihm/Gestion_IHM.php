@@ -111,6 +111,7 @@ class Gestion_IHM {
 				<td>
 				    <ul>
 					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
+					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
 					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
 				    </ul>
 				</td>

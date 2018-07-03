@@ -208,6 +208,11 @@ class Entreprise_IHM {
 	<table id="presentation_entreprise">
 	    <tr>
 		<td width="50%">
+		    <div align="right">
+			<a href="../statistiques/statistiquesEntreprise.php?id=<?php echo $tabEntreprises[$i]->getIdentifiantBDD(); ?>">
+			    <img src="../../images/search.png" alt="Statistiques" title="Statistiques de l'entreprise"/>
+			</a>
+		    </div>
 		    <?php echo $tabEntreprises[$i]->getNom(); ?> <br/>
 		    <?php echo $tabEntreprises[$i]->getAdresse(); ?> <br/>
 		    <?php echo $tabEntreprises[$i]->getCodePostal(); ?>
