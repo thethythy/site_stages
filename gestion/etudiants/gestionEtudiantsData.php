@@ -17,13 +17,12 @@ if (!headers_sent())
 
 $filtres = array();
 
-// Si pas d'année sélectionnée
-if (!isset($_POST['annee'])) {
-    $annee = Promotion_BDD::getLastAnnee();
+// Si une année est sélectionnée
+if (isset($_POST['annee']) && $_POST['annee'] != '*') {
+    $annee = $_POST['annee'];
     array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
 } else {
-    $annee = $_POST['annee'];
-    array_push($filtres, new FiltreNumeric("anneeuniversitaire", $_POST['annee']));
+    $annee = '';
 }
 
 if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
@@ -37,18 +36,13 @@ $filtre = $filtres[0];
 for ($i = 1; $i < sizeof($filtres); $i++)
     $filtre = new Filtre($filtre, $filtres[$i], "AND");
 
-$tabEtudiants = Promotion::listerEtudiants($filtre);
-$tabPromos = Promotion_BDD::getListePromotions($filtre);
+$tabEtudiants = Etudiant::getEtudiants($filtre);
 
-if (sizeof($tabPromos) > 0) {
-    // Si il y a au moins un étudiant
-    if (sizeof($tabEtudiants) > 0) {
-	// Affichage des étudiants correspondants aux critères de recherches
-	Etudiant_IHM::afficherListeEtudiants($annee, $tabEtudiants);
-    } else {
-	echo "<br/><center>Aucun étudiant n'a été trouvé.</center><br/>";
-    }
+if (sizeof($tabEtudiants) > 0) {
+    // Affichage des étudiants correspondants aux critères de recherches
+    Etudiant_IHM::afficherListeEtudiants($annee, $tabEtudiants);
 } else {
-    echo "<br/><center>Aucune promotion ne correspond aux critères de recherche.</center><br/>";
+    echo "<br/><center>Aucun étudiant n'a été trouvé.</center><br/>";
 }
+
 ?>

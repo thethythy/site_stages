@@ -9,7 +9,7 @@ class Gestion_IHM {
      */
     public static function afficherMenuGestion() {
 	?>
-	<center><a href="./manuel/manuel.php">Manuel d'utilisation en ligne</a></center>
+	<center><a href="./manuel/manuel.php">Manuel d'utilisation</a></center>
 
 	<div id="menuGestion">
 	    <ul id="ongletsGestion">
@@ -101,22 +101,6 @@ class Gestion_IHM {
 				</td>
 			    </tr>
 			</table>
-			<table id="menuBdd">
-			    <tr>
-				<td id="titreMenuBdd">
-				    Statistiques
-				</td>
-			    </tr>
-			    <tr>
-				<td>
-				    <ul>
-					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
-					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
-					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
-				    </ul>
-				</td>
-			    </tr>
-			</table>
 		    </td>
 
 		    <td>
@@ -159,8 +143,7 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./etudiants/listeDesEtudiants.php">Liste des étudiants</a></li>
-					<li><a href="./etudiants/supprimerEtudiant.php">Supprimer un étudiant</a></li><br/>
+					<li><a href="./etudiants/gestionEtudiants.php">Gérer les étudiants</a></li>
 					<li><a href="./etudiants/gestionSujetDeStage.php">Gérer les demandes de validation</a></li>
 				    </ul>
 				</td>
@@ -201,6 +184,22 @@ class Gestion_IHM {
 					<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
 					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li>
+				    </ul>
+				</td>
+			    </tr>
+			</table>
+			<table id="menuBdd">
+			    <tr>
+				<td id="titreMenuBdd">
+				    Statistiques
+				</td>
+			    </tr>
+			    <tr>
+				<td>
+				    <ul>
+					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
+					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
+					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
 				    </ul>
 				</td>
 			    </tr>

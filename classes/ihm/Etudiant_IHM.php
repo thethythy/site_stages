@@ -160,7 +160,7 @@ class Etudiant_IHM {
     }
 
     /**
-     * Afficher un tableau statique d'étudiants
+     * Afficher un tableau d'étudiants
      * @param integer $annee L'année concernée
      * @param tableau d'objets $tabEtudiants Tableau d'objets Etudiant
      */
@@ -170,28 +170,64 @@ class Etudiant_IHM {
 	Nombre d'étudiants sélectionnés : <?php echo $nbEtudiants; ?><p/>
 	<table>
 	    <tr id='entete'>
-		<td width='40%'>Nom et Prénom</td>
-		<td width='40%'>Mail institutionnel</td>
+		<td width='50%'>Nom, Prénom, Email</td>
 		<td width='10%'>Diplôme</td>
 		<td width='10%'>Spécialité</td>
+		<td width='10%'>Convention</td>
+		<td width='10%'>Dernière promotion</td>
+		<td width='10%'>Supression</td>
 	    </tr>
 	<?php
 	for ($i = 0; $i < $nbEtudiants; $i++) {
-	    $promo = $tabEtudiants[$i]->getPromotion($annee);
+	    $anneePromo = $conv = NULL;
+
+	    if (! $annee) {
+		$lastannee = Promotion_BDD::getLastAnnee();
+		$promo = $tabEtudiants[$i]->getLastPromotion($lastannee);
+		if ($promo) {
+		    $anneePromo = $promo->getAnneeUniversitaire();
+		    $conv = $tabEtudiants[$i]->getLastConvention($anneePromo);
+		}
+	    } else {
+		$anneePromo = $annee;
+		$promo = $tabEtudiants[$i]->getPromotion($anneePromo);
+		$conv = $tabEtudiants[$i]->getLastConvention($anneePromo);
+	    }
 	?>
 	    <tr id="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
-	        </td>
-	        <td>
+		    <br/>
 		    <?php echo $tabEtudiants[$i]->getEmailInstitutionel(); ?>
 	        </td>
 	        <td>
-		    <?php echo $promo->getFiliere()->getNom(); ?>
+		    <?php if ($promo) echo $promo->getFiliere()->getNom(); ?>
 	        </td>
 	        <td>
-		    <?php echo $promo->getParcours()->getNom(); ?>
+		    <?php if ($promo) echo $promo->getParcours()->getNom(); ?>
 	        </td>
+		<td>
+		    <?php
+			if ($conv)
+			    echo '<img src="../../images/action_check.png"/>';
+			else
+			    echo '<img src="../../images/action_remove.png"/>';
+		    ?>
+		</td>
+		<td>
+		    <?php if ($anneePromo) echo $anneePromo.'-'.($anneePromo+1); ?>
+		</td>
+		<td>
+		    <?php
+		    if (!$anneePromo) {
+			echo '<a href="gestionEtudiants.php?id='. $tabEtudiants[$i]->getIdentifiantBDD().'&supprime&">
+				<img src="../../images/action_delete.png"/>
+			      </a>';
+		    } else {
+			echo 'Impossible';
+		    }
+		    ?>
+		</td>
 	    </tr>
 	<?php
 	}
@@ -201,50 +237,6 @@ class Etudiant_IHM {
 	<?php
     }
 
-    /**
-     * Afficher un tableau interactif d'une liste d'étudiants pour supprimer
-     * un étudiant (sans convention)
-     * @param type $idPromo
-     * @param type $tabEtuSansConv
-     */
-    public static function afficherListeEtudiantsSansConventions($idPromo, $tabEtuSansConv) {
-	if (sizeof($tabEtuSansConv) > 0) {
-	    ?>
-	    <table>
-		<tr id='entete'>
-		    <td width='90%'>Etudiant</td>
-		    <td width='10%' align='center'>Supprimer</td>
-		</tr>
-	    <?php
-	    for ($i = 0; $i < sizeof($tabEtuSansConv); $i++) {
-	    ?>
-		<tr id="ligne<?php echo $i % 2; ?>">
-		    <td>
-			<?php echo $tabEtuSansConv[$i]->getNom() . " " . $tabEtuSansConv[$i]->getPrenom(); ?>
-		    </td>
-		    <td align="center">
-			<a href="supprimerEtudiant.php?promo=<?php echo $idPromo; ?>&id=<?php echo $tabEtuSansConv[$i]->getIdentifiantBDD(); ?>">
-			    <img src="../../images/action_delete.png"/>
-			</a>
-		    </td>
-		</tr>
-	    <?php
-	    }
-	    ?>
-	    </table>
-	    <?php
-	} else {
-	    ?>
-	    <br/>
-		<center>
-		    Aucune étudiant ne peut être supprimé dans cette promotion.
-		    <br/>
-		    Tous les étudiants de cette promotion ont déjà réalisé au moins un stage.
-		</center>
-	     <br/>
-	    <?php
-	}
-    }
 }
 
 ?>

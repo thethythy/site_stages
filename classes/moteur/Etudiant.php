@@ -100,6 +100,20 @@ class Etudiant {
     }
 
     /**
+     * Obtenir la dernière promotion de l'étudiant à partir de l'année donnée
+     * @param integer $annee
+     * @return Promotion ou null
+     */
+    public function getLastPromotion($annee) {
+	do {
+	    $oPromo = $this->getPromotion($annee);
+	    $annee -= 1;
+	} while ($annee > 1970 && ! $oPromo);
+
+	return $oPromo;
+    }
+
+    /**
      * Obtenir la convention de l'étudiant suivant une année�donnée
      * @param integer $annee
      * @return Convention ou null
@@ -111,6 +125,20 @@ class Etudiant {
 	    return null;
 
 	return Convention::getConvention($idConv);
+    }
+
+    /**
+     * Obtenir la dernière convention de l'étudiant à partir de l'année donnée
+     * @param integer $annee
+     * @return Convention ou null
+     */
+    public function getLastConvention($annee) {
+	do {
+	    $oConv = $this->getConvention($annee);
+	    $annee -= 1;
+	} while ($annee > 1970 && ! $oConv);
+
+	return $oConv;
     }
 
     // ------------------------------------------------------------------------
@@ -155,6 +183,31 @@ class Etudiant {
      */
     public static function getListeEtudiants($idPromotion) {
 	$tabEtudiantString = Etudiant_BDD::getListeEtudiants($idPromotion);
+	$tabEtudiant = array();
+
+	for ($i = 0; $i < sizeof($tabEtudiantString); $i++)
+	    array_push($tabEtudiant,
+		    new Etudiant($tabEtudiantString[$i][0],
+				 $tabEtudiantString[$i][1],
+				 $tabEtudiantString[$i][2],
+				 $tabEtudiantString[$i][3],
+				 $tabEtudiantString[$i][4],
+				 $tabEtudiantString[$i][5]));
+
+	return $tabEtudiant;
+    }
+
+    /**
+     * Obtenir une liste d'étudiants correspondant au filtre
+     * @param chaîne $filtre Un filtre de sélection des étudiants
+     *@return tableau d'étudiants
+     */
+    public static function getEtudiants($filtre) {
+	// Si le filtre existe c'est un objet Filtre
+	if ($filtre)
+	    $filtre = $filtre->getStrFiltres();
+
+	$tabEtudiantString = Etudiant_BDD::getEtudiants($filtre);
 	$tabEtudiant = array();
 
 	for ($i = 0; $i < sizeof($tabEtudiantString); $i++)

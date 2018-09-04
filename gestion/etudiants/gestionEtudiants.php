@@ -2,7 +2,7 @@
 
 /**
  * Page listeDesEtudiants.php
- * Utilisation : page pour visualiser les étudiants d'une ou toutes les promotions
+ * Utilisation : page pour visualiser les étudiants d'une ou plusieurs promotions
  * Dépendance(s) : listeDesEtudiantsData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
@@ -18,12 +18,18 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Liste des", "étudiants", "../../", $tabLiens);
 
+// Traitement d'une demande de suppression définitive d'un étudiant
+if (isset($_GET['id']) && isset($_GET['supprime'])) {
+    // Suppression définitive de l'étudiant
+    Etudiant::supprimerDefinitivementEtudiant($_GET['id']);
+}
+
 // Affichage du formulaire de recherche
-Promotion_IHM::afficherFormulaireRecherche("listeDesEtudiantsData.php", true);
+Promotion_IHM::afficherFormulaireRecherche("gestionEtudiantsData.php", true);
 
 // Affichage des données
 echo "<div id='data'>\n";
-include_once("listeDesEtudiantsData.php");
+include_once("gestionEtudiantsData.php");
 echo "\n</div>";
 
 IHM_Generale::endHeader(false);

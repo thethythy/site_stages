@@ -130,6 +130,49 @@ class Etudiant_BDD {
     }
 
     /**
+     * Obtenir une liste d'étudiants selon le filtre (année / parcours / filiere)
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab9 Nom de la table 'etudiant'
+     * @global string $tab15 Nom de la table 'promotion'
+     * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
+     * @param string $filtre
+     * @return tableau d'enregistrements
+     */
+    public static function getEtudiants($filtre) {
+	global $db;
+	global $tab9;
+	global $tab15;
+	global $tab19;
+
+	if ($filtre) {
+	    $sql = "SELECT * FROM $tab9 WHERE idetudiant IN
+		    (SELECT idetudiant FROM $tab19, $tab15 WHERE $tab19.idpromotion=$tab15.idpromotion AND $filtre);";
+	} else {
+	    $sql = "SELECT * FROM $tab9;";
+	}
+
+	$res = $db->query($sql);
+
+	$listeEtudiants = array();
+
+	if ($res) {
+	    while ($etu = $res->fetch_assoc()) {
+		$tab = array();
+		array_push($tab, $etu["idetudiant"]);
+		array_push($tab, $etu["nometudiant"]);
+		array_push($tab, $etu["prenometudiant"]);
+		array_push($tab, $etu["email_institutionnel"]);
+		array_push($tab, $etu["email_personnel"]);
+		array_push($tab, $etu["codeetudiant"]);
+		array_push($listeEtudiants, $tab);
+	    }
+	    $res->free();
+	}
+
+	return $listeEtudiants;
+    }
+
+    /**
      * Ajouter un étudiant à une promotion
      * On vérifie d'abord que la relation étudiant-promotion n'existe pas déjà
      *
