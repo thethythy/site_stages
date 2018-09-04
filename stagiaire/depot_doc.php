@@ -62,11 +62,13 @@ function depotDocument($etudiant, $annee, $filiere, $repertoire) {
 	$size = $_FILES['uploadRapport']['size'];
 	$filename = explode(".", $_FILES['uploadRapport']['name']);
 	$tmp_name = $_FILES['uploadRapport']['tmp_name'];
+	$type_doc = 'Rapport';
     } else {
 	$file = $_FILES['uploadResume']['name'];
 	$size = $_FILES['uploadResume']['size'];
 	$filename = explode(".", $_FILES['uploadResume']['name']);
 	$tmp_name = $_FILES['uploadResume']['tmp_name'];
+	$type_doc = 'Resume';
     }
 
     if (sizeof($filename) != 0)
@@ -82,7 +84,9 @@ function depotDocument($etudiant, $annee, $filiere, $repertoire) {
 	$nomFiliere = Filiere::getFiliere($filiere)->getNom();
 	$annees = ($annee - 2000) . ($annee - 2000 + 1);
 
-	$nomFichier = $etudiant->getIdentifiantBDD() . "_" . $nomFiliere . "_" . Utils::removeaccents($etudiant->getNom()) . "_" . Utils::removeaccents($etudiant->getPrenom()) . "_" . $annees . "." . $extension;
+	$nomFichier = $etudiant->getIdentifiantBDD() . "_" . $nomFiliere . "_" .
+		      Utils::removeaccents($etudiant->getNom()) . "_" . Utils::removeaccents($etudiant->getPrenom()) . "_" .
+		      $annees . "_" . $type_doc ."." . $extension;
 
 	if ($size > $file_size_max) {
 	    IHM_Generale::erreur("Désolé, votre fichier est trop volumineux (supérieur à 20 Mo) !");
