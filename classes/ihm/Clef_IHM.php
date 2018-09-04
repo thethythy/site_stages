@@ -12,8 +12,8 @@ class Clef_IHM {
 	<script type="text/javascript">
 	    var auchargement = function() {
 		// Si la clef est définie alors la sauvegarder sur le poste gestionnaire
-		var clef = '<?php echo isset($_POST["clef"]) ? $_POST["clef"] : FALSE ; ?>';
-		if (clef != 'FALSE') {
+		var clef = '<?php echo $_POST["clef"]; ?>';
+		if (clef !== '') {
 		    localStorage.setItem('clef', clef);
 		}
 
