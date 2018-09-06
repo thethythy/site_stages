@@ -63,7 +63,8 @@ class Etudiant_BDD {
     }
 
     /**
-     * Suppression d'un étudiant dans une promotion
+     * Suppression d'un étudiant dans une promotion.
+     * L'étudiant ne doit pas avoir de convention.
      * @global resource $db Référence sur la base ouverte
      * @global string $tab19 Nom de la table 'relation_promotion_etudiant_convention'
      * @param integer $identifiantBDD Identifiant de l'étudiant concerné
@@ -72,7 +73,7 @@ class Etudiant_BDD {
     public static function supprimerLienPromotionEtudiant($identifiantBDD, $idPromo) {
 	global $db;
 	global $tab19;
-	$sql = "DELETE FROM $tab19 WHERE idetudiant='$identifiantBDD' AND idpromotion='$idPromo'";
+	$sql = "DELETE FROM $tab19 WHERE idetudiant='$identifiantBDD' AND idpromotion='$idPromo' AND idconvention is NULL";
 	$db->query($sql);
     }
 

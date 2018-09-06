@@ -89,11 +89,14 @@ class Promotion {
      */
     public static function getPromotion($idPromotion) {
 	$tab_donnees = Promotion_BDD::getPromotion($idPromotion);
-	return new Promotion($tab_donnees["idpromotion"],
-			     $tab_donnees["anneeuniversitaire"],
-			     $tab_donnees["idparcours"],
-			     $tab_donnees["idfiliere"],
-			     $tab_donnees["email_promotion"]);
+	if ($tab_donnees)
+	    return new Promotion($tab_donnees["idpromotion"],
+				 $tab_donnees["anneeuniversitaire"],
+				 $tab_donnees["idparcours"],
+				 $tab_donnees["idfiliere"],
+				 $tab_donnees["email_promotion"]);
+	else
+	    return FALSE;
     }
 
     /**
@@ -105,11 +108,14 @@ class Promotion {
      */
     public static function getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours) {
 	$tab_donnees = Promotion_BDD::getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours);
-	return new Promotion($tab_donnees["idpromotion"],
-			     $tab_donnees["anneeuniversitaire"],
-			     $tab_donnees["idparcours"],
-			     $tab_donnees["idfiliere"],
-			     $tab_donnees["email_promotion"]);
+	if ($tab_donnees)
+	    return new Promotion($tab_donnees["idpromotion"],
+				 $tab_donnees["anneeuniversitaire"],
+				 $tab_donnees["idparcours"],
+				 $tab_donnees["idfiliere"],
+				 $tab_donnees["email_promotion"]);
+	else
+	    return FALSE;
     }
 
     /**

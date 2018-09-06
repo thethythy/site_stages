@@ -25,10 +25,12 @@ IHM_Generale::header("Modifier/Supprimer une", "promotion", "../../", $tabLiens)
 if (isset($_POST['delpromo'])) {
     // Suppression de la promotion
     Promotion::supprimerPromotion($_POST['delpromo']);
-    ?>
-    Promotion supprimée avec succès.
-    <br/><br/>
-    <?php
+
+    if (Promotion::getPromotion($_POST['delpromo']))
+	echo 'Impossible de supprimer cette promotion car des étudiants y sont rattachés.';
+    else
+	echo 'Promotion supprimée avec succès.';
+    echo '<br/><br/>';
 } else {
 
     if (isset($_POST['promo']) && isset($_POST['email']) && Utils::VerifierAdresseMail($_POST['email'])) {

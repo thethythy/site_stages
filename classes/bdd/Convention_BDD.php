@@ -289,7 +289,8 @@ class Convention_BDD {
     }
 
     /**
-     * Suppression d'une convention en base
+     * Suppression d'une convention en base.
+     * La suppression est possible s'il n'y a pas de soutenane associée.
      *
      * Du fait des contraintes d'intégrité référentielle, la table n°19
      * 'relation_promotion_etudiant_convention' est mise à jour automatiquement
@@ -309,7 +310,7 @@ class Convention_BDD {
 	global $tab4;
 
 	// Suppression de l'enregistrement dans la table 'convention'
-	$sql2 = "DELETE FROM $tab4 WHERE idconvention='$identifiantBDD'";
+	$sql2 = "DELETE FROM $tab4 WHERE idconvention='$identifiantBDD' AND idsoutenance is NULL";
 	$db->query($sql2);
     }
 

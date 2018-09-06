@@ -255,14 +255,20 @@ class Convention_IHM {
 		    <?php echo $theme->getTheme(); ?>
 	        </td>
 	        <td align="center">
-	    	<a href="modifierConvention.php?promo=<?php echo $idPromo; ?>&id=<?php echo $conv->getIdentifiantBDD(); ?>">
-	    	    <img src="../../images/reply.png"/>
-	    	</a>
+		    <a href="modifierConvention.php?promo=<?php echo $idPromo; ?>&id=<?php echo $conv->getIdentifiantBDD(); ?>">
+		        <img src="../../images/reply.png"/>
+		    </a>
 	        </td>
 	        <td align="center">
-	    	<a href="modifierListeConventions.php?promo=<?php echo $idPromo; ?>&id=<?php echo $conv->getIdentifiantBDD(); ?>">
-	    	    <img src="../../images/action_delete.png"/>
-	    	</a>
+		    <?php
+		    if (!$conv->getSoutenance()->getIdentifiantBDD()) {
+			echo '<a href="modifierListeConventions.php?promo='.$idPromo.'&id='.$conv->getIdentifiantBDD().'">
+				<img src="../../images/action_delete.png"/>
+			      </a>';
+		    } else {
+			echo '<img src="../../images/action_remove.png"/>';
+		    }
+		    ?>
 	        </td>
 	    </tr>
 	    <?php
