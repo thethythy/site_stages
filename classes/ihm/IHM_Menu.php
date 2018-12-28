@@ -15,6 +15,8 @@ class IHM_Menu {
 		    <br></br>
 		    <li><a href="./stagiaire/" title="Zone d'accès aux outils pour les étudiants">Stagiaire<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
+        <li><a href="./alternant/" title="Zone d'accès aux outils pour les étudiants">Alternant<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		    <br></br>
 		    <li><a href="./parrainage/" title="Informations sur les enseignants référents">Enseignants référents<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
 		    <li><a href="./entreprise/" title="Partie réservée aux entreprises pour saisir les offres de stage">Déposer une offre de stage</a></li>
@@ -40,6 +42,8 @@ class IHM_Menu {
 		    <li><a>Présentation</a></li>
 		    <br></br>
 		    <li><a>Stagiaire<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
+		    <br></br>
+        <li><a>Alternant<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
 		    <li><a>Enseignants référents<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
@@ -117,6 +121,40 @@ class IHM_Menu {
 	    <div id="main">
 	<?php
     }
+
+  public static function menuAlternant() {
+    ?>
+    <div id="sidebar">
+      <ul class="sidemenu">
+        <li><a>1-Rechercher</a></li>
+        <ul class="sidemenu2">
+          <li><a href="./listerOffreDeStage.php">Offres d'alternance</a></li>
+          <li><a href="./listerAnciensStages.php">Les anciennes alternances</a></li>
+        </ul>
+        <li><a href="./demanderValidationSDS.php">2-Valider le sujet d'alternance'</a></li>
+        <br/>
+        <li><a href="./depot_doc.php">3-Déposer des documents</a></li>
+        <br></br>
+        <!--<li>Site externes d'offres:</li>
+        <ul class="sidemenu2">
+        <li><a href="http://univ-lemans.jobteaser.com/" title="Career Center">Career Center</a></li>
+        <li><a href="http://offres.monster.fr" title="monster.fr">monster.fr</a></li>
+        <li><a href="http://www.lerucher.com/" title="Le Rucher">Le Rucher</a></li>
+        <li><a href="http://www.letudiant.fr" title="L'&Eacute;tudiant">L'&Eacute;tudiant</a></li>
+        <li><a href="http://www.stage.fr" title="Stage.fr">Stage.fr</a></li>
+        <li><a href="http://www.capcampus.com/" title="Capcampus">Capcampus</a></li>
+        <li><a href="http://www.kapstages.com/" title="Kap'stages">Kap'stages</a></li>
+        <li><a href="http://www.ofqj.org/" alt="Office Franco Québécois pour la Jeunesse" title="Office Franco Québécois pour la Jeunesse">OFQJ</a></li>
+        <li><a href="http://www.europlacement.fr" alt="stage, stages, volontaire, stagiaire, stagiaires" title="stages internationaux, internships, internship, stages et travaille volontaire internationaux" >Europlacement</a></li>
+        <li><a href="http://www.iquesta.com/" alt="iquesta.com" title="iquesta.com">iquesta.com</a></li>
+        <li><a href="http://remixjobs.com/" alt="remixjobs.com" title="Relix Jobs">Remix Jobs</a></li>
+        <li><a href="http://neuvoo.fr/fr" alt="neuvoo.fr" title="neuvoo">Neuvoo</a></li>
+      </ul> -->
+    </ul>
+  </div>
+<div id="main">
+    <?php
+      }
 
     /**
      * Afficher le menu de la page dédiée aux enseignants

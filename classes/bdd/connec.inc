@@ -4,25 +4,31 @@
 // Vérification de l'autorisation
 
 global $access_control_target;
+global $type_etudiant;
 
 if (isset($access_control_target)) {
-    if (!isset($_COOKIE['site_stages_depinfo'])) {
-	include_once('../access_control.php');
-	die();
+  // Vérifier si on arrive de l'alternance ou des stages
+  if(isset($type_etudiant)){
+    $type_etudiant = str_replace("/","",$type_etudiant);
+    $type_etudiant = str_replace("index.php","",$type_etudiant);
+    if (!isset($_COOKIE['site_stages_depinfo_'.$type_etudiant])) {
+      include_once('../access_control.php');
+      die();
     } else {
-	// Récupérer le digest de la clef du cookie
-	$HClef1 = $_COOKIE['site_stages_depinfo'];
+      // Récupérer le digest de la clef du cookie
+      $HClef1 = $_COOKIE['site_stages_depinfo_'.$type_etudiant];
 
-	// Récupérer le digest du fichier
-	$f = fopen('../documents/demon/clef', 'r');
-	$HClef2 = fread($f, 500);
-	fclose($f);
+      // Récupérer le digest du fichier
+      $f = fopen('../documents/demon/clef_'.$type_etudiant, 'r');
+      $HClef2 = fread($f, 500);
+      fclose($f);
 
-	if (!hash_equals($HClef1, $HClef2)) {
-	    include_once('../access_control.php');
-	    die();
-	}
+      if (!hash_equals($HClef1, $HClef2)) {
+        include_once('../access_control.php');
+        die();
+      }
     }
+  }
 }
 
 // ----------------------------------------------------------------------------

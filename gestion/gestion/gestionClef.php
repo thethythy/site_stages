@@ -18,13 +18,13 @@ if (isset($_POST['genere']) && isset($_POST['clef']) && $_POST['clef'] != '') {
     $HClef = Clef::calculCondensat($_POST['clef']);
 
     // Sauvegarde sur fichier le condensat
-    $f = fopen('../../documents/demon/clef', 'w');
+    $f = fopen('../../documents/demon/clef_stagiaire', 'w');
     fwrite($f, $HClef);
     fclose($f);
 }
 
 // Récupérer le condensat de la clef
-$f = fopen('../../documents/demon/clef', 'r');
+$f = fopen('../../documents/demon/clef_stagiaire', 'r');
 $HClef = fread($f, 100);
 fclose($f);
 
@@ -40,7 +40,7 @@ IHM_Generale::header("Gestion de la", "clef d'accès", "../../", $tabLiens, "auc
 // Vérification de la période pour exécuter cette page
 $mois = date('n');
 
-if ($mois == 9 || $mois == 10) { // Il faut être entre le 1/09 et le 31/10
+if ($mois == 9 || $mois == 10 || $mois == 12) { // Il faut être entre le 1/09 et le 31/10
     // Afficher formulaire pour définir une clef
     Clef_IHM::afficherFormulaireDefinitionClef($HClef);
 } else {

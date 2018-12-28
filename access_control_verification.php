@@ -10,12 +10,15 @@
 
 session_start();
 $access_control_target = $_SESSION['$access_control_target'];
+$type_etudiant = $_SESSION['$type_etudiant'];
 session_write_close();
 
 // Format de la réponse
 header("Content-type:text/plain; charset=utf-8");
 
 // Drapeau de succès ou d'échec du droit d'accès
+$type_etudiant = str_replace("/","",$type_etudiant);
+
 $access_rigth = false;
 
 // Calcul du condensat
@@ -24,9 +27,10 @@ include_once("classes/moteur/Clef.php");
 $HClef1 = Clef::calculCondensat($input);
 
 // Récupérer le condensat de la clef
-$f = fopen('documents/demon/clef', 'r');
-$HClef2 = fread($f, 500);
-fclose($f);
+
+  $f = fopen('documents/demon/clef_'.$type_etudiant, 'r');
+  $HClef2 = fread($f, 500);
+  fclose($f);
 
 // Vérifier les deux condensats
 if (hash_equals($HClef1, $HClef2)) {
@@ -45,7 +49,7 @@ if (hash_equals($HClef1, $HClef2)) {
 
     // Enregistre le cookie
     $domain = substr_count($_SERVER['HTTP_HOST'], 'localhost') > 0 ? 'localhost' : $_SERVER['HTTP_HOST'];
-    setcookie ('site_stages_depinfo', $HClef1, $time, '/', $domain);
+    setcookie ('site_stages_depinfo_'.$type_etudiant, $HClef1, $time, '/', $domain);
 
     // Mémorisation du succès
     $access_rigth = true;
