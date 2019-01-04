@@ -24,8 +24,6 @@ IHM_Menu::menuAccueilAccessControl();
 ?>
 
 <br></br>
-<?php echo $_SESSION['$access_control_target'];
-      echo $_SESSION['$type_etudiant']; ?>
 <p>Ce site est dédié à la gestion et à l'accès aux informations concernant les stages des étudiants en informatique de la Faculté des Sciences et Techniques de l'Université du Maine. Il est l'outil principal de communication entre les différentes personnes concernées : les étudiants, l'équipe enseignante, les entreprises, et le responsable pédagogique des stages.</p>
 <p>Il permet aux étudiants de prendre connaissance d'un certain nombre d'offres de stages et de faire des demandes de validation de sujet de stage. Il liste également les entreprises ayant déjà accueillies des stagiaires. </p>
 <p>En ce qui concernent l'équipe enseignante, il permet d'accéder à la liste des enseignants-référents et à la liste des conventions pas section et par année. Les plannings des soutenances des différentes sections sont accessibles durant les périodes concernées.</p>

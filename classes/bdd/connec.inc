@@ -19,9 +19,8 @@ if (isset($access_control_target)) {
       $HClef1 = $_COOKIE['site_stages_depinfo_'.$type_etudiant];
 
       // Récupérer le digest du fichier
-      $f = fopen('../documents/demon/clef_'.$type_etudiant, 'r');
-      $HClef2 = fread($f, 500);
-      fclose($f);
+      $json = json_decode(file_get_contents('../documents/demon/clef.json'));
+      $HClef2 = $json->$type_etudiant;
 
       if (!hash_equals($HClef1, $HClef2)) {
         include_once('../access_control.php');

@@ -14,19 +14,29 @@ class Clef_IHM {
     var auchargement = function() {
       // Si la clef est définie alors la sauvegarder sur le poste gestionnaire
       var clef = '<?php echo $_POST["clef"]; ?>';
+      var type = '<?php echo $_POST["type"]; ?>';
+
       if (clef !== '') {
         localStorage.setItem('clef', clef);
+        localStorage.setItem('type', type);
+      }
+      // Récupérer la valeur du bouton coché : Stagiaire ou Alternant
+      var radios = document.getElementsByName('type');
+      var value;
+
+      for(var i = 0 ; i < radios.length; i++){
+        if(radios[i].checked) { value = radios[i].value; }
       }
 
-      if (!localStorage.getItem('clef')) {
-        // Pas de stockage sur le poste gestionnaire
-        var cleActuelle = document.getElementById('clefactuelle');
-        document.getElementById('clefactuelle').value = 'clef pas encore définie';
-        document.getElementById('condensat').value = 'condensat pas encore calculé';
+      if(localStorage.getItem('clef') && localStorage.getItem('type') === value){
+          // Stockage sur le poste gestionnaire existant
+          document.getElementById('clefactuelle').value = localStorage.getItem('clef');
+          document.getElementById('condensat').value = '<?php echo $HClef; ?>';
       } else {
-        // Stockage sur le poste gestionnaire existant
-        document.getElementById('clefactuelle').value = localStorage.getItem('clef');
-        document.getElementById('condensat').value = '<?php echo $HClef; ?>';
+          // Pas de stockage sur le poste gestionnaire
+          var cleActuelle = document.getElementById('clefactuelle');
+          document.getElementById('clefactuelle').value = 'clef pas encore définie';
+          document.getElementById('condensat').value = 'condensat pas encore calculé';
       }
 
       // Rendre les deux champs non modifiables
@@ -40,6 +50,14 @@ class Clef_IHM {
       <table>
         <tr id="entete2">
           <td colspan="2">Définir une nouvelle clef</td> <!--Titre -->
+        </tr>
+        <tr>
+          <tr><td>&nbsp;</td></tr>
+          <td colspan="2" class="align-center">
+            <input type="radio" name="type" value="stagiaire" checked> Stage
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="type" value="alternant"> Alternant
+          </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
@@ -69,14 +87,23 @@ class Clef_IHM {
   }
 
   /**
-  * Afficher la valeur de la clée actuelle est la valeur de son condensat
+  * Afficher la valeur de la clée actuelle et la valeur de son condensat
   * @param string $HClef Le condensat de la clé actuelle
   */
   public static function afficherClef($HClef) {
     ?>
     <script type="text/javascript">
     var auchargement = function() {
-      if (!localStorage.getItem('clef')) {
+
+      // Récupérer la valeur du bouton coché : Stagiaire ou Alternant
+      var radios = document.getElementsByName('type');
+      var value;
+
+      for(var i = 0 ; i < radios.length; i++){
+        if(radios[i].checked) { value = radios[i].value; }
+      }
+
+      if (!localStorage.getItem('clef') || localStorage.getItem('type') !== value) {
         // Pas de stockage sur le poste gestionnaire
         var cleActuelle = document.getElementById('clefactuelle');
         document.getElementById('clefactuelle').value = 'clef pas encore définie';
