@@ -13,6 +13,7 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // ----------------------------------------------------------------------------
 // Contrôleur
+$type_etudiant = 'stagiaire'; // par défaut
 if (isset($_POST['genere']) && isset($_POST['clef']) && $_POST['clef'] != '') {
     // Génère le condensat
     $HClef = Clef::calculCondensat($_POST['clef']);
@@ -30,9 +31,15 @@ if (isset($_POST['genere']) && isset($_POST['clef']) && $_POST['clef'] != '') {
 }
 
 // Récupérer le condensat de la clef
-$f = fopen('../../documents/demon/clef_stagiaire', 'r');
-$HClef = fread($f, 100);
-fclose($f);
+if( !file_exists('../../documents/demon/clef.json')) {
+  $tab_json = ['stagiaire'=>'', 'alternant'=>''];
+  $tab_json_encode = json_encode($tab_json);
+  $fichier_clef = fopen('../../documents/demon/clef.json', 'w+');
+  fwrite($fichier_clef, $tab_json_encode);
+  fclose($fichier_clef);
+}
+$json = json_decode(file_get_contents('../../documents/demon/clef.json'));
+$HClef = $json->$type_etudiant;
 
 // ----------------------------------------------------------------------------
 // Affichage
