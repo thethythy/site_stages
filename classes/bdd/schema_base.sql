@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`entreprise` (
   `pays` VARCHAR(100) NOT NULL,
   `email` VARCHAR(256) NOT NULL,
   `idtypeentreprise` INT(10) NULL DEFAULT NULL,
+  `siret` BIGINT(14) NULL, 
   PRIMARY KEY (`identreprise`),
   INDEX `idtypeentreprise_idx` (`idtypeentreprise` ASC),
   CONSTRAINT `fk_entreprise_type_entreprise_idtypeentreprise`

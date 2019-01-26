@@ -60,6 +60,10 @@ $tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
 $tab24 = 'convocation';
 $tab25 = 'attribution';
+$tab26 = 'profilsouhaite_offredalternance';
+$tab27 = 'theme_offredalternance';
+$tab28 = 'relation_competence_offredalternance';
+$tab29 = 'offredalternance';
 
 function deconnexion() {
     global $db;
@@ -127,7 +131,7 @@ foreach ($_FILES as $key => $value) {
 // ----------------------------------------------------------------------------
 // Variables globales
 
-$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
-$baseSite = "http://localhost:8888/";
+$emailResponsable = "allistair.swarig@gmail.com";
+$baseSite = "http://testvirtualhost/";
 
 ?>
