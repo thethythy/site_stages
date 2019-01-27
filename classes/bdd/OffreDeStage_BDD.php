@@ -29,8 +29,9 @@ class offreDeStage_BDD {
 	$estVisible = $offreDeStage->estVisible() ? 1 : 0;
 
 	if ($offreDeStage->getIdentifiantBDD() == "") {
+
 	    $sql = "INSERT INTO $tab12
-		    VALUES ('" . $offreDeStage->getIdentifiantBDD() . "',
+		    VALUES ('0',
 			    '" . $offreDeStage->getSujet() . "',
 			    '" . $offreDeStage->getTitre() . "',
 			    '" . $offreDeStage->getListeEnvironnements() . "',

@@ -21,7 +21,7 @@ class Contact_BDD {
 
 	if ($contact->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO " . $tab3 . " VALUES (
-			'" . $contact->getIdentifiantBDD() . "',
+			'0',
 			'" . $contact->getNom() . "',
 			'" . $contact->getPrenom() . "',
 			'" . $contact->getTelephone() . "',

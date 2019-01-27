@@ -1,0 +1,14 @@
+alternant
+->0<-
+
+->INSERT INTO offredalternance
+		    VALUES ('0',
+			    'Sujet',
+			    'Testounet',
+			    'unix;',
+			    '1',
+			    '9',
+			    '0',
+			    '',
+			    '0',
+			    '887');<-
