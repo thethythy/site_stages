@@ -12,13 +12,13 @@ class OffreDAlternance {
   var $listeEnvironnement;  // SE utilisés
   var $theme;  // Tableau d'identifiants des parcours
   var $listeProfilSouhaite; // Tableau d'identifiants des filières
-  var $dureeMin;  // Durée minimale
-  var $dureeMax;  // Durée maximale
+  var $duree;  // Durée
   var $indemnite;  // Valeurde la gratification
   var $remarques;  // Remarques divers sur les conditsions du alternance
   var $estVisible;  // Indicateur de visibilite sur la vue des étudiants
   var $competences;  // Tableau des identifiants des compétences
   var $maitreDAlternance;  // Identifiant du contact
+  var $typeContrat;
 
   /**
   * Constructeur
@@ -37,20 +37,21 @@ class OffreDAlternance {
   * @param integer $maitreDAlternance
   */
   public function __construct($identifiantBDD, $sujet, $titre, $listeEnvironnement,
-  $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques,
-  $estVisible, $listeCompetences, $maitreDAlternance) {
+  $theme, $listeProfilSouhaite, $duree, $indemnite, $remarques,
+  $estVisible, $listeCompetences, $maitreDAlternance, $typeContrat) {
     $this->identifiantBDD = $identifiantBDD;
     $this->sujet = $sujet;
     $this->titre = $titre;
     $this->listeEnvironnement = $listeEnvironnement;
     $this->theme = $theme;
     $this->listeProfilSouhaite = $listeProfilSouhaite;
-    $this->dureeMin = $duree;
+    $this->duree = $duree;
     $this->indemnite = $indemnite;
     $this->remarques = $remarques;
     $this->estVisible = $estVisible;
     $this->competences = $listeCompetences;
     $this->maitreDAlternance = $maitreDAlternance;
+    $this->typeContrat = $typeContrat;
   }
 
   // ------------------------------------------------------------------------
@@ -72,12 +73,8 @@ class OffreDAlternance {
     return $this->listeEnvironnement;
   }
 
-  public function getDureeMinimale() {
-    return $this->dureeMin;
-  }
-
-  public function getDureeMaximale() {
-    return $this->dureeMax;
+  public function getDuree() {
+    return $this->duree;
   }
 
   public function getIndemnite() {
@@ -96,6 +93,10 @@ class OffreDAlternance {
     return $this->maitreDAlternance;
   }
 
+  public function getTypeContrat() {
+    return $this->typeContrat;
+  }
+
   // ------------------------------------------------------------------------
   // Accesseurs en écriture
 
@@ -111,12 +112,8 @@ class OffreDAlternance {
     $this->listeEnvironnement = $listeEnvironnement;
   }
 
-  public function setDureeMinimale($dureeMin) {
-    $this->dureeMin = $dureeMin;
-  }
-
-  public function setDureeMaximale($dureeMax) {
-    $this->dureeMax = $dureeMax;
+  public function setDuree($duree) {
+    $this->dureeMin = $duree;
   }
 
   public function setIndemnite($indemnite) {
@@ -129,6 +126,10 @@ class OffreDAlternance {
 
   public function setEstVisible($estVisible) {
     $this->estVisible = $estVisible;
+  }
+
+  public function setTypeContrat($typeContrat) {
+    $this->typeContrat = $typeContrat;
   }
 
   // ------------------------------------------------------------------------
@@ -186,8 +187,9 @@ class OffreDAlternance {
     $tab_donnees[2], $tab_donnees[3],
     $tab_donnees[4], $tab_donnees[5],
     $tab_donnees[6], $tab_donnees[7],
-    $tab_donnees[8], '0',
+    '0', $tab_donnees[8],
     $tab_donnees[9], $tab_donnees[10]);
+
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 

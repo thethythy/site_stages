@@ -1,14 +1,48 @@
-alternant
-->0<-
 
 ->INSERT INTO offredalternance
 		    VALUES ('0',
 			    'Sujet',
-			    'Testounet',
+			    'Titre',
 			    'unix;',
 			    '1',
-			    '9',
 			    '0',
 			    '',
 			    '0',
-			    '887');<-
+			    '902',
+          'alternant');<-
+
+->INSERT INTO offredalternance
+		    VALUES ('0',
+			    'Sujet',
+			    'Titre',
+			    'unix;',
+			    '1',
+			    '0',
+			    '',
+			    '0',
+			    '903',
+          'false');<-
+
+->INSERT INTO offredalternance
+		    VALUES ('0',
+			    'Sujet',
+			    'Titre',
+			    'unix;',
+			    '1',
+			    '0',
+			    '',
+			    '0',
+			    '904',
+          'false');<-
+
+->INSERT INTO offredalternance
+		    VALUES ('0',
+			    'Sujet',
+			    'Titre',
+			    'unix;',
+			    '1',
+			    '0',
+			    '',
+			    '0',
+			    '905',
+          '0');<-

@@ -27,37 +27,34 @@ class offreDAlternance_BDD {
 	global $tab29;
 
 	$estVisible = $offreDAlternance->estVisible() ? 1 : 0;
-  $d = fopen("log.txt", "a+");
-  fwrite($d, "\n->$estVisible<-\n");
-  fclose($d);
 	if ($offreDAlternance->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab29
 		    VALUES ('0',
 			    '" . $offreDAlternance->getSujet() . "',
 			    '" . $offreDAlternance->getTitre() . "',
 			    '" . $offreDAlternance->getListeEnvironnements() . "',
-			    '" . $offreDAlternance->getDureeMinimale() . "',
-			    '" . $offreDAlternance->getDureeMaximale() . "',
+			    '" . $offreDAlternance->getDuree() . "',
 			    '" . $offreDAlternance->getIndemnite() . "',
 			    '" . $offreDAlternance->getRemarques() . "',
 			    '$estVisible',
-			    '" . $offreDAlternance->getIdContact() . "');";
-          $d = fopen("log.txt", "a+");
-          fwrite($d, "\n->$sql<-\n");
-          fclose($d);
+			    '" . $offreDAlternance->getIdContact() . "',
+          '" . $offreDAlternance->getTypeContrat() . "');";
 	    $db->query($sql);
+      $d = fopen("log.txt", "a+");
+      fwrite($d, "\n->$sql<-\n");
+      fclose($d);
 	    $lastId = $db->insert_id;
 	} else {
 	    $sql = "UPDATE $tab29
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
 			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
-			dureemin='" . $offreDAlternance->getDureeMinimale() . "',
-			dureemax='" . $offreDAlternance->getDureeMaximale() . "',
+			duree='" . $offreDAlternance->getDuree() . "',
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
 			estVisible='$estVisible',
-			idcontact='" . $offreDAlternance->getIdContact() . "'
+			idcontact='" . $offreDAlternance->getIdContact() . "',
+      typedecontrat='" . $offreDAlternance->getTypeContrat() . "'
 		    WHERE idoffre='" . $offreDAlternance->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
@@ -170,8 +167,7 @@ class offreDAlternance_BDD {
 	$res3->free();
 	array_push($tabOffreDAlternance, $tabProfils);
 
-	array_push($tabOffreDAlternance, $data['dureemin']);
-	array_push($tabOffreDAlternance, $data['dureemax']);
+	array_push($tabOffreDAlternance, $data['duree']);
 	array_push($tabOffreDAlternance, $data['indemnite']);
 	array_push($tabOffreDAlternance, $data['remarques']);
 	array_push($tabOffreDAlternance, $data['estVisible']);
@@ -186,6 +182,8 @@ class offreDAlternance_BDD {
 	array_push($tabOffreDAlternance, $tabCompetences);
 
 	array_push($tabOffreDAlternance, $data['idcontact']);
+
+  array_push($tabOffreDAlternance, $data['typedecontrat']);
 
 	return $tabOffreDAlternance;
     }

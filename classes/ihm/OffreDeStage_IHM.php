@@ -296,9 +296,9 @@ class OffreDeStage_IHM {
                 <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
                 <th>Type de contrat (*) :</th>
                 <td>
-                  <input type="radio" id="" name ="typeContrat" value="stagiaire" onclick=""> Apprentissage
+                  <input type="radio" id="" name ="typeContrat" value="1" onclick=""> Apprentissage
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type="radio"  id="" name ="typeContrat" value="alternant" onclick=""> Professionnalisation
+                  <input type="radio"  id="" name ="typeContrat" value="0" onclick=""> Professionnalisation
                 </td>
                 </tr>
 

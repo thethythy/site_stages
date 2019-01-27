@@ -23,7 +23,7 @@ function verifier(){
     if ($titre!="" && $sujet!="" && $nom_entreprise!="" && $adresse!="" &&
     $ville!="" && $codePostal!="" && is_numeric($codePostal) &&
     $pays!="" && $nom_contact!="" && $prenom_contact!="" &&
-    $tel_contact!="" && $email_contact!="") {
+    $tel_contact!="" && $email_contact!="" && $typeContrat!="") {
 
       $tabDonnees = array();
 
@@ -66,11 +66,17 @@ function verifier(){
       }
       array_push($tabDonnees, $tabProfils);
 
-      //DureeMin
-      array_push($tabDonnees, $dureeMin);
+      // Choix de la durée en fonction de l'alternance (1 ou 2 ans) ou du stage (entre 1 et 12 mois)
+      if(isset($_POST['type']) && $_POST['type'] === "alternant"){
+        //Durée
+        array_push($tabDonnees, $duree);
+      } else {
+        //DureeMin
+        array_push($tabDonnees, $dureeMin);
+        //DureeMax
+        array_push($tabDonnees, $dureeMax);
+      }
 
-      //DureeMax
-      array_push($tabDonnees, $dureeMax);
 
       //Indemnites
       array_push($tabDonnees, $indemnites);
@@ -138,13 +144,13 @@ function verifier(){
         $idContact = Contact_BDD::sauvegarder($nouveauContact);
       }
       array_push($tabDonnees, $idContact);
-      $d = fopen("log.txt", "a+");
-      fwrite($d, $_POST['type']);
-      fclose($d);
-      if($_POST['type'] === "alternant"){
+
+      if(isset($_POST['type']) && $_POST['type'] === "alternant"){
+        if(isset($_POST['typeContrat'])) {
+          array_push($tabDonnees, $typeContrat);
+        }
         $idOffreDeStage = OffreDAlternance::saisirDonnees($tabDonnees);
       } else {
-
         $idOffreDeStage = OffreDeStage::saisirDonnees($tabDonnees);
       }
 
