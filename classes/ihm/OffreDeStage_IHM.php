@@ -270,42 +270,42 @@ class OffreDeStage_IHM {
                 </tr>
                 <tr>
                   <th>Durée (*) :</th>
-                                      <td id="dureeStage">Entre
-                                        <select name="dureeMin">
-                                          <?php
-                                          for ($i = 1; $i <= 12; $i++) {
-                                            if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
-                                              echo"<option selected value='$i'>$i</option>";
-                                            } else {
-                                              echo"<option value='$i'>$i</option>";
-                                            }
-                                          }
-                                          ?>
-                                        </select> et <select name="dureeMax">
-                                          <?php
-                                          for ($i = 1; $i <= 12; $i++) {
-                                            if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
-                                              echo"<option selected value='$i'>$i</option>";
-                                            } else {
-                                              echo"<option value='$i'>$i</option>";
-                                            }
-                                          }
-                                          ?>
-                                        </select> mois
-                                      </td>
-                                      <td id="dureeAlt">
-                                        <select name="duree">
-                                          <?php
-                                          for ($i = 1; $i <= 2; $i++) {
-                                            if (isset($_POST['duree']) && $_POST['duree'] == $i) {
-                                              echo"<option selected value='$i'>$i</option>";
-                                            } else {
-                                              echo"<option value='$i'>$i</option>";
-                                            }
-                                          }
-                                          ?>
-                                        </select> an(s)
-                                      </td>
+                  <td id="dureeStage">Entre
+                    <select name="dureeMin">
+                      <?php
+                      for ($i = 1; $i <= 12; $i++) {
+                        if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
+                          echo"<option selected value='$i'>$i</option>";
+                        } else {
+                          echo"<option value='$i'>$i</option>";
+                        }
+                      }
+                      ?>
+                    </select> et <select name="dureeMax">
+                      <?php
+                      for ($i = 1; $i <= 12; $i++) {
+                        if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
+                          echo"<option selected value='$i'>$i</option>";
+                        } else {
+                          echo"<option value='$i'>$i</option>";
+                        }
+                      }
+                      ?>
+                    </select> mois
+                  </td>
+                  <td id="dureeAlt">
+                    <select name="duree">
+                      <?php
+                      for ($i = 1; $i <= 2; $i++) {
+                        if (isset($_POST['duree']) && $_POST['duree'] == $i) {
+                          echo"<option selected value='$i'>$i</option>";
+                        } else {
+                          echo"<option value='$i'>$i</option>";
+                        }
+                      }
+                      ?>
+                    </select> an(s)
+                  </td>
                 </tr>
                 <tr>
                   <th>Indemnités :</th>
