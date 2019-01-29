@@ -1,15 +1,67 @@
-alternant
+
 ->0<-
 
-->INSERT INTO offredalternance
-		    VALUES ('0',
-			    'Sujet',
-			    'Testounet',
-			    'unix;',
-			    '1',
-			    '9',
-			    '0',
-			    '',
-			    '0',
-			    '887');<-
-stagiairestagiaire
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+Nouvelle entreprise
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'539');
+->0<-

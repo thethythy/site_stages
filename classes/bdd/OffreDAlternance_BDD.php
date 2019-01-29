@@ -36,15 +36,12 @@ class offreDAlternance_BDD {
 			    '" . $offreDAlternance->getSujet() . "',
 			    '" . $offreDAlternance->getTitre() . "',
 			    '" . $offreDAlternance->getListeEnvironnements() . "',
-			    '" . $offreDAlternance->getDureeMinimale() . "',
-			    '" . $offreDAlternance->getDureeMaximale() . "',
+			    '" . $offreDAlternance->getDuree() . "',
 			    '" . $offreDAlternance->getIndemnite() . "',
 			    '" . $offreDAlternance->getRemarques() . "',
 			    '$estVisible',
-			    '" . $offreDAlternance->getIdContact() . "');";
-          $d = fopen("log.txt", "a+");
-          fwrite($d, "\n->$sql<-\n");
-          fclose($d);
+			    '" . $offreDAlternance->getIdContact() . "',
+          '" . $offreDAlternance->getTypeContrat() . "');";
 	    $db->query($sql);
 	    $lastId = $db->insert_id;
 	} else {
@@ -52,8 +49,7 @@ class offreDAlternance_BDD {
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
 			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
-			dureemin='" . $offreDAlternance->getDureeMinimale() . "',
-			dureemax='" . $offreDAlternance->getDureeMaximale() . "',
+			dureemin='" . $offreDAlternance->getDuree() . "',
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
 			estVisible='$estVisible',

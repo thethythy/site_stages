@@ -146,22 +146,32 @@ class OffreDeStage_IHM {
     }
 
 
-    function swap_offre(){//Permet de changer le titre
+    function swap_offre(){//Permet de changer le titre && de faire apparaitres les elements pour chaque type d'offre.
       var title = document.getElementById('title');
       var altRad = 	document.getElementById('radioAlternance');
-
+      var divContrat = document.getElementById('divTypeContrat');
       var dureeStage = document.getElementById('dureeStage');
       var dureeAlt = document.getElementById('dureeAlt');
       if(altRad.checked){
         title.innerHTML = "Offre d'alternance";
         dureeStage.style.display = 'none';
         dureeAlt.style.display = 'block';
+        divContrat.style.visibility = 'visible';
       }else{
         title.innerHTML = "Offre de stage";
         dureeAlt.style.display = 'none';
         dureeStage.style.display = 'block';
+        divContrat.style.visibility  = 'hidden';
       }
     }
+
+
+
+        window.addEventListener('load', function() {//par default offre de stage
+          var stgRad = 	document.getElementById('radioStage');
+          stgRad.checked = true;
+          swap_offre();
+        })
 
     </script>
 
@@ -180,18 +190,24 @@ class OffreDeStage_IHM {
                 <input type="radio" id="radioAlternance" name ="type" value="alternant" onclick="swap_offre()"> Alternant
               </td>
             </tr>
+
+
             <table id="presentation_saisieOffreDeStage">
               <tr id="entete2">
                 <td colspan="2"><p id='title'>Offre</p></td>
               </tr>
+
+
               <tr>
                 <th><span id="title2"> Titre du stage (*) :</th>
                   <td><input type="text" name="titre" size="100" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } ?>"/></td>
                 </tr>
                 <tr>
+
                   <th>Sujet du stage (*) :</th>
                   <td><textarea name="sujet"><?php if (isset($_POST['sujet'])) { echo $_POST['sujet']; } ?></textarea></td>
                 </tr>
+
                 <tr>
                   <th colspan="2"><p/><hr/><p/></th>
                 </tr>
@@ -265,47 +281,66 @@ class OffreDeStage_IHM {
                     </table>
                   </td>
                 </tr>
+
+
+
+
+
+
+
                 <tr>
                   <th colspan="2"><p/><hr/><p/></th>
                 </tr>
+
+
+                <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
+                <th>Type de contrat (*) :</th>
+                <td>
+                  <input type="radio" id="" name ="typeContrat" value="1" onclick=""> Apprentissage
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio"  id="" name ="typeContrat" value="0" onclick=""> Professionnalisation
+                </td>
+                </tr>
+
                 <tr>
+
                   <th>Durée (*) :</th>
-                  <td id="dureeStage">Entre
-                    <select name="dureeMin">
-                      <?php
-                      for ($i = 1; $i <= 12; $i++) {
-                        if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
-                          echo"<option selected value='$i'>$i</option>";
-                        } else {
-                          echo"<option value='$i'>$i</option>";
-                        }
-                      }
-                      ?>
-                    </select> et <select name="dureeMax">
-                      <?php
-                      for ($i = 1; $i <= 12; $i++) {
-                        if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
-                          echo"<option selected value='$i'>$i</option>";
-                        } else {
-                          echo"<option value='$i'>$i</option>";
-                        }
-                      }
-                      ?>
-                    </select> mois
-                  </td>
-                  <td id="dureeAlt">
-                    <select name="duree">
-                      <?php
-                      for ($i = 1; $i <= 2; $i++) {
-                        if (isset($_POST['duree']) && $_POST['duree'] == $i) {
-                          echo"<option selected value='$i'>$i</option>";
-                        } else {
-                          echo"<option value='$i'>$i</option>";
-                        }
-                      }
-                      ?>
-                    </select> an(s)
-                  </td>
+                                      <td id="dureeStage">Entre
+                                        <select name="dureeMin">
+                                          <?php
+                                          for ($i = 1; $i <= 12; $i++) {
+                                            if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
+                                              echo"<option selected value='$i'>$i</option>";
+                                            } else {
+                                              echo"<option value='$i'>$i</option>";
+                                            }
+                                          }
+                                          ?>
+                                        </select> et <select name="dureeMax">
+                                          <?php
+                                          for ($i = 1; $i <= 12; $i++) {
+                                            if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
+                                              echo"<option selected value='$i'>$i</option>";
+                                            } else {
+                                              echo"<option value='$i'>$i</option>";
+                                            }
+                                          }
+                                          ?>
+                                        </select> mois
+                                      </td>
+                                      <td id="dureeAlt">
+                                        <select name="duree">
+                                          <?php
+                                          for ($i = 1; $i <= 2; $i++) {
+                                            if (isset($_POST['duree']) && $_POST['duree'] == $i) {
+                                              echo"<option selected value='$i'>$i</option>";
+                                            } else {
+                                              echo"<option value='$i'>$i</option>";
+                                            }
+                                          }
+                                          ?>
+                                        </select> an(s)
+                                      </td>
                 </tr>
                 <tr>
                   <th>Indemnités :</th>

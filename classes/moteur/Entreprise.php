@@ -27,6 +27,7 @@ class Entreprise {
   * @param string $pays
   * @param string $email
   * @param integer $idTypeEntreprise
+  * @param integer $siret
   */
   public function __construct($identifiantBDD, $nom, $adresse, $codePostal,
   $ville, $pays, $email, $idTypeEntreprise, $siret) {
