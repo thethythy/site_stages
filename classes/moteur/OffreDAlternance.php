@@ -224,6 +224,11 @@ class OffreDAlternance {
   public static function getOffreDAlternance($identifiantBDD) {
     $offreDAlternance = OffreDAlternance_BDD::getOffreDAlternance($identifiantBDD);
 
+    $log = fopen("log.txt", "a+");
+    fwrite($log, "> $offreDAlternance[0] $offreDAlternance[1] $offreDAlternance[2] $offreDAlternance[3] $offreDAlternance[4] $offreDAlternance[5]
+    $offreDAlternance[6] $offreDAlternance[7] $offreDAlternance[8] $offreDAlternance[9] $offreDAlternance[10] $offreDAlternance[11] $offreDAlternance[12]");
+    fclose($log);
+
     return new OffreDAlternance($offreDAlternance[0], $offreDAlternance[1],
     $offreDAlternance[2], $offreDAlternance[3],
     $offreDAlternance[4], $offreDAlternance[5],

@@ -11,40 +11,109 @@ class Clef_IHM {
     ?>
 
     <script type="text/javascript">
-    var auchargement = function() {
-      // Si la clef est définie alors la sauvegarder sur le poste gestionnaire
-      var clef = '<?php echo $_POST["clef"]; ?>';
-      var type = '<?php echo $_POST["type"]; ?>';
+    //Change l'attribut readOnly de l'élément dont l'id est spécifiée
+    function swapReadOnly(id) {
+      (document.getElementById(id).readOnly === true) ?
+      document.getElementById(id).readOnly = false :
+      document.getElementById(id).readOnly = true;
+    }
 
-      if (clef !== '') {
-        localStorage.setItem('clef', clef);
-        localStorage.setItem('type', type);
-      }
+    // Coche le bouton radio passé en paramètre
+    function checkType(rad) {
+      rad.checked = true;
+    }
+
+    function afficherCondensat(){
       // Récupérer la valeur du bouton coché : Stagiaire ou Alternant
-      var radios = document.getElementsByName('type');
-      var value;
+      var typeActuel = (document.getElementById('radioAlt').checked === true) ?
+      document.getElementById('radioAlt').value :
+      document.getElementById('radioStage').value;
+      console.log('p5 : typeActuel = ' + typeActuel);
 
-      for(var i = 0 ; i < radios.length; i++){
-        if(radios[i].checked) { value = radios[i].value; }
+      document.getElementById('clefactuelle').value = '';
+      document.getElementById('condensat').value = '';
+
+      if (typeActuel === "alternant") {
+        // Stockage sur le poste gestionnaire existant
+        document.getElementById('clefactuelle').value = localStorage.getItem('clefAlt');
+        document.getElementById('condensat').value = '<?php echo $HClef; ?>';
+      }
+      if (typeActuel === "stagiaire") {
+        // Stockage sur le poste gestionnaire existant
+        document.getElementById('clefactuelle').value = localStorage.getItem('clefStage');
+        document.getElementById('condensat').value = '<?php echo $HClef; ?>';
       }
 
-      if(localStorage.getItem('clef') && localStorage.getItem('type') === value){
-          // Stockage sur le poste gestionnaire existant
-          document.getElementById('clefactuelle').value = localStorage.getItem('clef');
-          document.getElementById('condensat').value = '<?php echo $HClef; ?>';
-      } else {
-          // Pas de stockage sur le poste gestionnaire
-          var cleActuelle = document.getElementById('clefactuelle');
-          document.getElementById('clefactuelle').value = 'clef pas encore définie';
-          document.getElementById('condensat').value = 'condensat pas encore calculé';
-      }
 
-      // Rendre les deux champs non modifiables
-      document.getElementById('condensat').readOnly = true;
-      document.getElementById('clefactuelle').readOnly = true;
+
+
+
+      // if(localStorage.getItem('clef') && localStorage.getItem('type') === typeActuel) {
+      //   console.log('p6 existe');
+      //   // Stockage sur le poste gestionnaire existant
+      //   document.getElementById('clefactuelle').value = localStorage.getItem('clef');
+      //   document.getElementById('condensat').value = '<?php echo $HClef; ?>';
+      // } else {
+      //   // Pas de stockage sur le poste gestionnaire
+      //   console.log('p6 n\'existe pas');
+      //   var cleActuelle = document.getElementById('clefactuelle');
+      //   document.getElementById('clefactuelle').value = '';
+      //   document.getElementById('condensat').value = '';
+      // }
+    }
+    var auchargement = function() {
+
+      // Rendre les champs d'affichage modifiables
+      swapReadOnly("condensat");
+      swapReadOnly("clefactuelle");
+      console.log('p1');
+
+      // Si la clef est définie alors la sauvegarder sur le poste gestionnaire
+      // Récupération de la dernière clef entrée
+      var clef = '<?php echo $_POST["clef"]; ?>';
+      //Récupération du dernier type de clef entré
+      var type = '<?php echo $_POST["type"]; ?>';
+      var radioAlt = document.getElementById('radioAlt');
+      var radioStage = document.getElementById('radioStage');
+
+      console.log('p2');
+      // Cocher le bouton alternant si c'est le dernier qu'on a utilisé
+      type === "alternant" ? checkType(radioAlt) : checkType(radioStage);
+      console.log('p3');
+      if (clef !== '') {
+        localStorage.setItem('type', type);
+        localStorage.setItem('clef', clef);
+        if (type === 'alternant') {
+          localStorage.setItem('clefAlt', clef);
+        } else {
+          localStorage.setItem('clefStage', clef);
+        }
+      }
+      console.log('p4');
+      afficherCondensat();
+      console.log('p7');
+      // La clef est mise
+      // if(localStorage.getItem('clef') && localStorage.getItem('type') === typeActuel) {
+      //   // Stockage sur le poste gestionnaire existant
+      //   document.getElementById('clefactuelle').value = localStorage.getItem('clef');
+      //   document.getElementById('condensat').value = '<?php echo $HClef; ?>';
+      // } else {
+      //   // Pas de stockage sur le poste gestionnaire
+      //   var cleActuelle = document.getElementById('clefactuelle');
+      //   document.getElementById('clefactuelle').value = 'clef pas encore définie';
+      //   document.getElementById('condensat').value = 'condensat pas encore calculé';
+      // }
+      // Rendre les champs d'affichage non-modifiables
+      swapReadOnly("condensat");
+      swapReadOnly("clefactuelle");
     };
-    </script>
 
+    // var auchargement = function() {
+    //   f1();
+    //   f2();
+    //   f3();
+    // }
+    </script>
 
     <form method="post" action="">
       <table>
@@ -54,18 +123,18 @@ class Clef_IHM {
         <tr>
           <tr><td>&nbsp;</td></tr>
           <td colspan="2" class="align-center">
-            <input type="radio" name="type" value="stagiaire" checked> Stage
+            <input type="radio" id="radioStage" name="type" value="stagiaire" onchange="afficherCondensat()" checked > Stage
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="type" value="alternant"> Alternant
+            <input type="radio" id="radioAlt" name="type" value="alternant" onchange="afficherCondensat()"> Alternant
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
           <th width="100">Clef actuelle</th>
           <td>
-            <input id="clefactuelle" type="text"/>
+            <input id="clefactuelle" placeholder="Clef pas encore définie" readOnly="true"  type="text"/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="condensat" type="text"/>
+            <input id="condensat" placeholder="Condensat pas encore généré" readOnly="true"  type="text"/>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
@@ -95,6 +164,10 @@ class Clef_IHM {
     <script type="text/javascript">
     var auchargement = function() {
 
+      // Rendre les champs d'affichage modifiables
+      document.getElementById('condensat').readOnly = false;
+      document.getElementById('clefactuelle').readOnly = false;
+
       // Récupérer la valeur du bouton coché : Stagiaire ou Alternant
       var radios = document.getElementsByName('type');
       var value;
@@ -114,7 +187,7 @@ class Clef_IHM {
         document.getElementById('condensat').value = '<?php echo $HClef; ?>';
       }
 
-      // Rendre les deux champs non modifiables
+      // Rendre les champs d'affichage non-modifiables
       document.getElementById('condensat').readOnly = true;
       document.getElementById('clefactuelle').readOnly = true;
     };
