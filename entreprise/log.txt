@@ -1,0 +1,87 @@
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+Nouvelle entreprise
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'539');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-

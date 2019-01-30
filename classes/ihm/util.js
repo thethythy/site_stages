@@ -145,6 +145,12 @@ LoadData.prototype = {
 						composantJS.onkeyup(aEvent);
 					}
 					break;
+				case "onclick" :
+					var composantJS = this;
+					document.getElementById(this.idSources[i]).onclick = function(aEvent) {
+						composantJS.onclick(aEvent));
+					}
+				break;
 				default:
 					break;
 			}

@@ -4,25 +4,30 @@
 // Vérification de l'autorisation
 
 global $access_control_target;
+global $type_etudiant;
 
 if (isset($access_control_target)) {
-    if (!isset($_COOKIE['site_stages_depinfo'])) {
-	include_once('../access_control.php');
-	die();
+  // Vérifier si on arrive de l'alternance ou des stages
+  if(isset($type_etudiant)){
+    $type_etudiant = str_replace("/","",$type_etudiant);
+    $type_etudiant = str_replace("index.php","",$type_etudiant);
+    if (!isset($_COOKIE['site_stages_depinfo_'.$type_etudiant])) {
+      include_once('../access_control.php');
+      die();
     } else {
-	// Récupérer le digest de la clef du cookie
-	$HClef1 = $_COOKIE['site_stages_depinfo'];
+      // Récupérer le digest de la clef du cookie
+      $HClef1 = $_COOKIE['site_stages_depinfo_'.$type_etudiant];
 
-	// Récupérer le digest du fichier
-	$f = fopen('../documents/demon/clef', 'r');
-	$HClef2 = fread($f, 500);
-	fclose($f);
+      // Récupérer le digest du fichier
+      $json = json_decode(file_get_contents('../documents/demon/clef.json'));
+      $HClef2 = $json->$type_etudiant;
 
-	if (!hash_equals($HClef1, $HClef2)) {
-	    include_once('../access_control.php');
-	    die();
-	}
+      if (!hash_equals($HClef1, $HClef2)) {
+        include_once('../access_control.php');
+        die();
+      }
     }
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -55,6 +60,10 @@ $tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
 $tab24 = 'convocation';
 $tab25 = 'attribution';
+$tab26 = 'profilsouhaite_offredalternance';
+$tab27 = 'theme_offredalternance';
+$tab28 = 'relation_competence_offredalternance';
+$tab29 = 'offredalternance';
 
 function deconnexion() {
     global $db;
@@ -122,7 +131,7 @@ foreach ($_FILES as $key => $value) {
 // ----------------------------------------------------------------------------
 // Variables globales
 
-$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
-$baseSite = "http://localhost:8888/";
+$emailResponsable = "allistair.swarig@gmail.com";
+$baseSite = "http://testvirtualhost/";
 
 ?>
