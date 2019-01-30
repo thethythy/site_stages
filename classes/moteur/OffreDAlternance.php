@@ -12,7 +12,7 @@ class OffreDAlternance {
   var $listeEnvironnement;  // SE utilisés
   var $theme;  // Tableau d'identifiants des parcours
   var $listeProfilSouhaite; // Tableau d'identifiants des filières
-  var $duree;  // Durée
+  var $duree;  // Durée minimale
   var $indemnite;  // Valeurde la gratification
   var $remarques;  // Remarques divers sur les conditsions du alternance
   var $estVisible;  // Indicateur de visibilite sur la vue des étudiants
@@ -28,13 +28,13 @@ class OffreDAlternance {
   * @param string $listeEnvironnement
   * @param array $theme
   * @param array $listeProfilSouhaite
-  * @param integer $dureeMin
-  * @param integer $dureeMax
+  * @param integer $duree
   * @param double $indemnite
   * @param string $remarques
   * @param boolean $estVisible
   * @param array $listeCompetences
   * @param integer $maitreDAlternance
+  * @param integer $typeContrat
   */
   public function __construct($identifiantBDD, $sujet, $titre, $listeEnvironnement,
   $theme, $listeProfilSouhaite, $duree, $indemnite, $remarques,
@@ -112,7 +112,7 @@ class OffreDAlternance {
     $this->listeEnvironnement = $listeEnvironnement;
   }
 
-  public function setDuree($duree) {
+  public function setDureeMinimale($duree) {
     $this->dureeMin = $duree;
   }
 
@@ -150,7 +150,7 @@ class OffreDAlternance {
     for ($i = 0; $i < sizeof($this->competences); $i++) {
       array_push($tabCompetence, Competence::getCompetence($this->competences[$i]));
     }
-
+    error_log("Couco");
     return $tabCompetence;
   }
 
@@ -168,7 +168,7 @@ class OffreDAlternance {
     $tabProfil = array();
 
     for ($i = 0; $i < sizeof($this->listeProfilSouhaite); $i++) {
-      array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
+        array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
     }
 
     return $tabProfil;
@@ -189,7 +189,6 @@ class OffreDAlternance {
     $tab_donnees[6], $tab_donnees[7],
     '0', $tab_donnees[8],
     $tab_donnees[9], $tab_donnees[10]);
-
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 
@@ -251,7 +250,7 @@ class OffreDAlternance {
       $tabODSString[$i][6], $tabODSString[$i][7],
       $tabODSString[$i][8], $tabODSString[$i][9],
       $tabODSString[$i][10], $tabODSString[$i][11],
-      $tabODSString[$i][12]));
+      NULL));//Si on veut faire un filtre avec le type de contrat ??
     }
 
     return $tabODS;

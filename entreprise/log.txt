@@ -1,48 +1,128 @@
 
-->INSERT INTO offredalternance
-		    VALUES ('0',
-			    'Sujet',
-			    'Titre',
-			    'unix;',
-			    '1',
-			    '0',
-			    '',
-			    '0',
-			    '902',
-          'alternant');<-
+->0<-
 
-->INSERT INTO offredalternance
-		    VALUES ('0',
-			    'Sujet',
-			    'Titre',
-			    'unix;',
-			    '1',
-			    '0',
-			    '',
-			    '0',
-			    '903',
-          'false');<-
+->0<-
 
-->INSERT INTO offredalternance
-		    VALUES ('0',
-			    'Sujet',
-			    'Titre',
-			    'unix;',
-			    '1',
-			    '0',
-			    '',
-			    '0',
-			    '904',
-          'false');<-
+->0<-
 
-->INSERT INTO offredalternance
-		    VALUES ('0',
-			    'Sujet',
-			    'Titre',
-			    'unix;',
-			    '1',
-			    '0',
-			    '',
-			    '0',
-			    '905',
-          '0');<-
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+Nouvelle entreprise
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'539');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'SWCW',
+      'WSW',
+      '72210',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'sqqs',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'540');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-

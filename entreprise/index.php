@@ -23,7 +23,7 @@ function verifier(){
     if ($titre!="" && $sujet!="" && $nom_entreprise!="" && $adresse!="" &&
     $ville!="" && $codePostal!="" && is_numeric($codePostal) &&
     $pays!="" && $nom_contact!="" && $prenom_contact!="" &&
-    $tel_contact!="" && $email_contact!="" && $typeContrat!="") {
+    $tel_contact!="" && $email_contact!="") {
 
       $tabDonnees = array();
 
@@ -66,9 +66,9 @@ function verifier(){
       }
       array_push($tabDonnees, $tabProfils);
 
-      // Choix de la durée en fonction de l'alternance (1 ou 2 ans) ou du stage (entre 1 et 12 mois)
-      if(isset($_POST['type']) && $_POST['type'] === "alternant"){
-        //Durée
+      // Ajout durée contrat en fonction de l'aternance ou du stage
+      if(isset($_POST['type']) && $_POST['type'] === 'alternant') {
+        //Duree
         array_push($tabDonnees, $duree);
       } else {
         //DureeMin
@@ -76,7 +76,6 @@ function verifier(){
         //DureeMax
         array_push($tabDonnees, $dureeMax);
       }
-
 
       //Indemnites
       array_push($tabDonnees, $indemnites);
@@ -119,7 +118,9 @@ function verifier(){
 
       if (sizeof($entreprise) == 1) {
         // On récupère les informations sur l'entreprise
-
+        $log = fopen("log.txt", "a+");
+        fwrite($log, "\nEntreprise connue");
+        fclose($log);
         $idEntreprise=$entreprise[0]->getIdentifiantBDD();
         $filtreNom = new FiltreString("nomcontact", $nom_contact);
         $filtrePrenom = new FiltreString("prenomcontact", $prenom_contact);
@@ -129,13 +130,22 @@ function verifier(){
         $contact = Contact::getListeContacts($filtre);
         if (sizeof($contact) == 1) {
           // On récupère les informations sur le contact
+          $log = fopen("log.txt", "a+");
+          fwrite($log, "\nContact déjà présent");
+          fclose($log);
           $idContact = $contact[0]->getIdentifiantBDD();
         } else {
+          $log = fopen("log.txt", "a+");
+          fwrite($log, "\nNouveau contact");
+          fclose($log);
           // On enregistre le contact dans la base de données
           $nouveauContact = new Contact("0", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
           $idContact = Contact_BDD::sauvegarder($nouveauContact);
         }
       } else {
+        $log = fopen("log.txt", "a+");
+        fwrite($log, "\nNouvelle entreprise");
+        fclose($log);
         // On enregistre l'entreprise et le contact dans la base de données
         if ($email_entreprise == "") $email_entreprise = $email_contact;
         $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL, $siret);
@@ -146,9 +156,7 @@ function verifier(){
       array_push($tabDonnees, $idContact);
 
       if(isset($_POST['type']) && $_POST['type'] === "alternant"){
-        if(isset($_POST['typeContrat'])) {
-          array_push($tabDonnees, $typeContrat);
-        }
+        array_push($tabDonnees, $typeContrat);
         $idOffreDeStage = OffreDAlternance::saisirDonnees($tabDonnees);
       } else {
         $idOffreDeStage = OffreDeStage::saisirDonnees($tabDonnees);
@@ -158,14 +166,14 @@ function verifier(){
       global $emailResponsable;
       global $baseSite;
 
-      $headers ='Content-Type:  text/html; charset=utf-8'."\n";
-      $headers .='Content-Transfer-Encoding: 8bit'."\n";
-      $headers .= 'From: '.$emailResponsable."\n";
-      $headers .= 'Reply-To: '.$emailResponsable."\n";
-      $headers .= 'X-Mailer: PHP/'.phpversion();
-
-      $msg = "Une nouvelle offre de stage a été ajoutée.<br/>Vous pouvez la visualiser <a href=".$baseSite."gestion/entreprises/editionOffreDeStage.php?id=".$idOffreDeStage.">ici</a>";
-      mail($emailResponsable, 'Site des stages : nouvelle offre de stage !', $msg, $headers);
+      // $headers ='Content-Type:  text/html; charset=utf-8'."\n";
+      // $headers .='Content-Transfer-Encoding: 8bit'."\n";
+      // $headers .= 'From: '.$emailResponsable."\n";
+      // $headers .= 'Reply-To: '.$emailResponsable."\n";
+      // $headers .= 'X-Mailer: PHP/'.phpversion();
+      //
+      // $msg = "Une nouvelle offre de stage a été ajoutée.<br/>Vous pouvez la visualiser <a href=".$baseSite."gestion/entreprises/editionOffreDeStage.php?id=".$idOffreDeStage.">ici</a>";
+      // mail($emailResponsable, 'Site des stages : nouvelle offre de stage !', $msg, $headers);
       echo "<p>Votre annonce a bien été enregistrée !</p><p>Après validation par le responsable des stages, un mail de confirmation de diffusion vous sera envoyé.</p><p><a href='../index.php'>Retour</a></p>";
     } else {
       IHM_Generale::erreur("Vous devez saisir tous les champs marqués d'une * !");
@@ -180,7 +188,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Entreprise');
 
-IHM_Generale::header("Dépôt d'une", "offre de stage", "../", $tabLiens);
+IHM_Generale::header("Dépôt d'une", "offre", "../", $tabLiens);
 
 verifier();
 deconnexion();
