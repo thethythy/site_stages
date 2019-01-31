@@ -569,5 +569,62 @@ class OffreDAlternance_IHM {
     </table>
     <?php
   }
+
+
+  /**
+  * Afficher un formulaire de sélection des offres de stage
+  * @param string $fichier La page de traitement du formulaire
+  */
+  public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere) {
+    $tabE = Entreprise::getListeEntreprises('');
+    ?>
+    <form action="javascript:">
+      <table width="100%">
+        <tr>
+          <td width="50%" align="center">
+            <table>
+              <tr>
+                <td>Nom de l'etudiant</td>
+                <td>
+                  <select name="idEtudiant">
+                    <option value="-1"></option>
+                      <?php
+                      for ($i = 0; $i < sizeof($tabEtu); $i++) {
+                          if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
+                        echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+                          else
+                        echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+                      }
+                      ?>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="50%">
+            <table>
+              <tr>
+                <td>Nom de l'entreprise</td>
+                <td>
+                  <select id="filiere" name="filiere">
+                    <?php
+                    echo "<option value='*'>Tous</option>";
+                    for ($i = 0; $i < sizeof($tabE); $i++) {
+                      if (isset($_POST['filiere']) && $_POST['filiere'] == $tabE[$i]->getIdentifiantBDD())
+                      echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getNom() . "</option>";
+                      else
+                      echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getNom() . "</option>";
+                    }
+                    ?>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <?php
+  }
 }
 ?>

@@ -176,3 +176,24 @@ INSERT INTO contact VALUES (
 			'thomaslarmignat72@gmail.com',
 			'542');
 ->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'univ le mans12',
+      'test',
+      '22222',
+      'test',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'543');
+->0<-

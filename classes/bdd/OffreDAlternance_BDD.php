@@ -169,7 +169,7 @@ class offreDAlternance_BDD {
   array_push($tabOffreDAlternance, $tabProfils);
 
 
-  array_push($tabOffreDAlternance, $data['duree']);
+  array_push($tabOffreDAlternance, $data['duree']);//Erreur ici
   array_push($tabOffreDAlternance, $data['indemnite']);
   array_push($tabOffreDAlternance, $data['remarques']);
   array_push($tabOffreDAlternance, $data['estVisible']);

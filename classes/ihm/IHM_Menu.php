@@ -131,7 +131,7 @@ class IHM_Menu {
           <li><a href="./listerOffreAlternance.php">Les offres d'alternance</a></li>
           <li><a href="./listerAncienneAlternance.php">Les anciennes alternances</a></li>
         </ul>
-        <li><a href="./demanderValidationSDS.php">2-Suivi des candidatures</a></li>
+        <li><a href="./suiviCandidatures.php">2-Suivi des candidatures</a></li>
         <br/>
         <!--<li>Site externes d'offres:</li>
         <ul class="sidemenu2">
