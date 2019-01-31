@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
 	$parcours = isset($_GET['parcours']) ? $_GET['parcours'] : "";
 	$duree = isset($_GET['duree']) ? $_GET['duree'] : "";
 	$competence = isset($_GET['competence']) ? $_GET['competence'] : "";
-	OffreDAlternance_IHM::visualiserOffre($offreDAlt, "./listerOffreDeStage.php", $nom, $ville, $cp, $pays, $filiere, $parcours, $duree, $competence);
+	OffreDAlternance_IHM::visualiserOffre($offreDAlt, "./listerOffreAlternance.php", $nom, $ville, $cp, $pays, $filiere, $parcours, $duree, $competence);
     } else {
 	echo "Cette offre de stage a été retirée du site.<br/>";
     }

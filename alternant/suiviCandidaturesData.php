@@ -51,8 +51,16 @@ for ($i = 1; $i < sizeof($filtres); $i++)
 
 $tabEtudiants = Promotion::listerEtudiants($filtre);
 
-if (sizeof($tabEtudiants) > 0)
-    OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtudiants, $annee, $parcours, $filiere);
+
+
+if (sizeof($tabEtudiants) > 0){
+  OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtudiants, $annee, $parcours, $filiere,"listerOffreDeStageSuiviData.php");
+
+  echo "<div id='data1'>\n";
+  include_once("listerOffreDeStageSuiviData.php");
+  echo "\n</div>";
+}
+
 else {
     ?>
     <br/>
@@ -60,4 +68,5 @@ else {
     <br/>
     <?php
 }
+
 ?>

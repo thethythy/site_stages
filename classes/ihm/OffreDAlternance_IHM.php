@@ -575,8 +575,8 @@ class OffreDAlternance_IHM {
   * Afficher un formulaire de sélection des offres de stage
   * @param string $fichier La page de traitement du formulaire
   */
-  public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere) {
-    $tabE = Entreprise::getListeEntreprises('');
+  public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere, $page) {
+    $tabE = OffreDAlternance::getListeOffreDAlternance("");//a bouger, création interface ?
     ?>
     <form action="javascript:">
       <table width="100%">
@@ -604,16 +604,16 @@ class OffreDAlternance_IHM {
           <td width="50%">
             <table>
               <tr>
-                <td>Nom de l'entreprise</td>
+                <td>Titre de l'offre d'alternance</td>
                 <td>
-                  <select id="filiere" name="filiere">
+                  <select id="nom" type="text" name="nom"/>
                     <?php
                     echo "<option value='*'>Tous</option>";
                     for ($i = 0; $i < sizeof($tabE); $i++) {
-                      if (isset($_POST['filiere']) && $_POST['filiere'] == $tabE[$i]->getIdentifiantBDD())
-                      echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getNom() . "</option>";
+                      if (isset($_POST['nom']) && $_POST['nom'] == $tabE[$i]->getIdentifiantBDD())
+                      echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
                       else
-                      echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getNom() . "</option>";
+                      echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
                     }
                     ?>
                   </select>
@@ -624,7 +624,59 @@ class OffreDAlternance_IHM {
         </tr>
       </table>
     </form>
+    <script type="text/javascript">
+        var table = new Array("nom");
+        new LoadData(table, "<?php echo $page; ?>", "onchange");
+    </script>
     <?php
   }
+
+
+
+    /**
+    * Afficher un tableau interactif des stages disponibles
+    * (utilisé pour sélection une offre puis la visualiser)
+    * @param tableau d'objets $tabOffreDAlt Tableau des objets OffreDAlternance
+    */
+
+    public static function afficherListeOffresSuivi($tabOffreDAlt) {
+      ?>
+      <br/>
+      <table width="100%">
+        <tr id="entete">
+          <td width="30%">Titre</td>
+          <td width="35%">Entreprise</td>
+          <td width="15%">Etat</td>
+        </tr>
+
+        <?php
+        $cpt = 0;
+        for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
+          if (!$tabOffreDAlt[$i]->estVisible()) {//A changer ...
+            ?>
+            <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+              <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
+              <td>
+                <?php
+
+                $entreprise = $tabOffreDAlt[$i]->getEntreprise();
+                echo $entreprise->getNom();
+                ?>
+              </td>
+              <td align="center">
+                <select ></select>
+              </td>
+            </tr>
+            <?php
+          }
+        }
+        ?>
+
+      </table>
+
+      <br/><br/>
+        <div class="align-center"><input type="submit" value="Enregistrer"></div>
+      <?php
+    }
 }
 ?>

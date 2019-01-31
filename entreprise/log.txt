@@ -197,3 +197,24 @@ INSERT INTO contact VALUES (
 			'thomaslarmignat72@gmail.com',
 			'543');
 ->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'univ le mans123',
+      'wsfvw',
+      '00141122',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'1235423212',
+			'thomaslarmignat72@gmail.com',
+			'544');
+->0<-
