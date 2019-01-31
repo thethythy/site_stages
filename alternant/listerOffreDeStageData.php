@@ -68,7 +68,7 @@ $tabOffreDAlt = OffreDAlternance::getListeOffreDAlternance($filtre);
 
 // Si il y a au moins une offre de stage
 if (sizeof($tabOffreDAlt) > 0) {
-    OffreDeStage_IHM::afficherListeOffres($tabOffreDAlt);
+    OffreDAlternance_IHM::afficherListeOffres($tabOffreDAlt);
 } else {
     ?>
     <br/>

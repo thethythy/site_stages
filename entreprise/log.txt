@@ -126,3 +126,53 @@ Contact déjà présent
 Entreprise connue
 Contact déjà présent
 ->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'larmi inc',
+      'test',
+      '22222',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmi',
+			'wccvw',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'541');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'larmi inc2',
+      'test',
+      '22222',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmi',
+			'wccvw',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'542');
+->0<-

@@ -49,7 +49,7 @@ class offreDAlternance_BDD {
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
 			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
-			dureemin='" . $offreDAlternance->getDuree() . "',
+			duree='" . $offreDAlternance->getDuree() . "',
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
 			estVisible='$estVisible',
@@ -169,9 +169,7 @@ class offreDAlternance_BDD {
   array_push($tabOffreDAlternance, $tabProfils);
 
 
-	array_push($tabOffreDAlternance, $data['duree']);
   array_push($tabOffreDAlternance, $data['duree']);
-
   array_push($tabOffreDAlternance, $data['indemnite']);
   array_push($tabOffreDAlternance, $data['remarques']);
   array_push($tabOffreDAlternance, $data['estVisible']);
@@ -183,9 +181,9 @@ class offreDAlternance_BDD {
 	    array_push($tabCompetences, $competence['idcompetence']);
 	}
 	$res4->free();
-  array_push($tabOffreDAlternance, $data['idcontact']);
 	array_push($tabOffreDAlternance, $tabCompetences);
-
+  array_push($tabOffreDAlternance, $data['idcontact']);
+  array_push($tabOffreDAlternance, $data['typedecontrat']);
 
 
 	return $tabOffreDAlternance;

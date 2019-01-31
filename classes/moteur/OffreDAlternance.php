@@ -97,6 +97,17 @@ class OffreDAlternance {
     return $this->typeContrat;
   }
 
+  public function getTypeContratStr(){
+    if($this->typeContrat == 1){
+      return("Apprentissage");
+    }
+    else if($this->typeContrat == 0){
+      return("Professionnalisation");
+    }else{
+      return("N/A");
+    }
+  }
+
   // ------------------------------------------------------------------------
   // Accesseurs en écriture
 
@@ -132,6 +143,9 @@ class OffreDAlternance {
     $this->typeContrat = $typeContrat;
   }
 
+
+
+
   // ------------------------------------------------------------------------
   // Méthodes dérivées
 
@@ -150,7 +164,6 @@ class OffreDAlternance {
     for ($i = 0; $i < sizeof($this->competences); $i++) {
       array_push($tabCompetence, Competence::getCompetence($this->competences[$i]));
     }
-    error_log("Couco");
     return $tabCompetence;
   }
 
@@ -173,6 +186,7 @@ class OffreDAlternance {
 
     return $tabProfil;
   }
+
 
   // ------------------------------------------------------------------------
   // Méthodes statiques
