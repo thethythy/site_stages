@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`entreprise` (
   `pays` VARCHAR(100) NOT NULL,
   `email` VARCHAR(256) NOT NULL,
   `idtypeentreprise` INT(10) NULL DEFAULT NULL,
-  `siret` BIGINT(14) NULL, 
+  `siret` BIGINT(14) NULL,
   PRIMARY KEY (`identreprise`),
   INDEX `idtypeentreprise_idx` (`idtypeentreprise` ASC),
   CONSTRAINT `fk_entreprise_type_entreprise_idtypeentreprise`
@@ -161,6 +161,24 @@ CREATE TABLE IF NOT EXISTS `stages`.`theme_destage` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `stages`.`theme_dalternance`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stages`.`theme_dalternance` (
+  `idtheme` INT(10) NOT NULL AUTO_INCREMENT,
+  `theme` VARCHAR(20) NOT NULL,
+  `idcouleur` INT(10) NOT NULL,
+  PRIMARY KEY (`idtheme`),
+  INDEX `idcouleur_idx` (`idcouleur` ASC),
+  CONSTRAINT `fk_theme_dalternance_couleur_idcouleur`
+    FOREIGN KEY (`idcouleur`)
+    REFERENCES `stages`.`couleur` (`idcouleur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 
 
 -- -----------------------------------------------------
