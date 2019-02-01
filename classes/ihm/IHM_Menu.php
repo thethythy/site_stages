@@ -128,21 +128,11 @@ class IHM_Menu {
       <ul class="sidemenu">
         <li><a>1-Rechercher</a></li>
         <ul class="sidemenu2">
-<<<<<<< HEAD
-          <li><a href="./listerOffreDeStage.php">Offres d'alternance</a></li>
-          <li><a href="./listerAnciensStages.php">Les anciennes alternances</a></li>
-        </ul>
-        <li><a href="./demanderValidationSDS.php">2-Valider le sujet d'alternance'</a></li>
-        <br/>
-        <li><a href="./depot_doc.php">3-Déposer des documents</a></li>
-        <br></br>
-=======
           <li><a href="./listerOffreAlternance.php">Les offres d'alternance</a></li>
           <li><a href="./listerAncienneAlternance.php">Les anciennes alternances</a></li>
         </ul>
         <li><a href="./suiviCandidatures.php">2-Suivi des candidatures</a></li>
         <br/>
->>>>>>> thomas
         <!--<li>Site externes d'offres:</li>
         <ul class="sidemenu2">
         <li><a href="http://univ-lemans.jobteaser.com/" title="Career Center">Career Center</a></li>
