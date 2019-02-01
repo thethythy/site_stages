@@ -803,8 +803,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`candidature_alternance` (
     FOREIGN KEY (`identreprise`)
     REFERENCES `stages`.`entreprise` (`identreprise`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  )
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
