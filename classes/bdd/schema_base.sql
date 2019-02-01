@@ -778,6 +778,36 @@ CREATE TABLE IF NOT EXISTS `stages`.`attribution` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `stages`.`candidaturealternance`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stages`.`candidature_alternance` (
+  `idcandidature` INT(10) NOT NULL AUTO_INCREMENT,
+  `idetudiant` INT(10) NOT NULL,
+  `idoffre` INT(10) NOT NULL,
+  `identreprise`, INT(10) NOT NULL,
+  `statut`, VARCHAR(40) NOT NULL DEFAULT "--",
+  PRIMARY KEY (`idcandidature`),
+  UNIQUE INDEX `idcandidature_idx` (`idcandidature` ASC),
+  CONSTRAINT `fk_candidature_alternance_etudiant_idetudiant`
+    FOREIGN KEY (`idetudiant`)
+    REFERENCES `stages`.`etudiant` (`idetudiant`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_candidature_alternance_offredalternance_idoffre`
+    FOREIGN KEY (`idetudiant`)
+    REFERENCES `stages`.`offredalternance` (`idoffre`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_candidature_alternance_entreprise_identreprise`
+    FOREIGN KEY (`identreprise`)
+    REFERENCES `stages`.`entreprise` (`identreprise`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
