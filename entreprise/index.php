@@ -188,7 +188,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Entreprise');
 
-IHM_Generale::header("Dépôt d'une", "offre", "../", $tabLiens);
+IHM_Generale::header("Dépôt d'une", "offre de stage", "../", $tabLiens);
 
 verifier();
 deconnexion();

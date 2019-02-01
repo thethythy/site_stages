@@ -49,11 +49,7 @@ class offreDAlternance_BDD {
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
 			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
-<<<<<<< HEAD
 			dureemin='" . $offreDAlternance->getDuree() . "',
-=======
-			duree='" . $offreDAlternance->getDuree() . "',
->>>>>>> thomas
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
 			estVisible='$estVisible',
@@ -161,7 +157,6 @@ class offreDAlternance_BDD {
 	$res2->free();
 	array_push($tabOffreDAlternance, $tabThemes);
 
-<<<<<<< HEAD
 	$sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
 	$res3 = $db->query($sql3);
 	$tabProfils = array();
@@ -176,24 +171,6 @@ class offreDAlternance_BDD {
 	array_push($tabOffreDAlternance, $data['indemnite']);
 	array_push($tabOffreDAlternance, $data['remarques']);
 	array_push($tabOffreDAlternance, $data['estVisible']);
-=======
-
-
-  $sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
-	$res3 = $db->query($sql3);
-  $tabProfils = array();
-  while ($profil = $res3->fetch_array()) {
-      array_push($tabProfils, $profil['idfiliere']);
-  }
-  $res3->free();
-  array_push($tabOffreDAlternance, $tabProfils);
-
-
-  array_push($tabOffreDAlternance, $data['duree']);//Erreur ici
-  array_push($tabOffreDAlternance, $data['indemnite']);
-  array_push($tabOffreDAlternance, $data['remarques']);
-  array_push($tabOffreDAlternance, $data['estVisible']);
->>>>>>> thomas
 
 	$sql4 = "SELECT * FROM $tab28 WHERE idoffre='$identifiantBDD'";
 	$res4 = $db->query($sql4);
@@ -203,14 +180,8 @@ class offreDAlternance_BDD {
 	}
 	$res4->free();
 	array_push($tabOffreDAlternance, $tabCompetences);
-<<<<<<< HEAD
 
 	array_push($tabOffreDAlternance, $data['idcontact']);
-=======
-  array_push($tabOffreDAlternance, $data['idcontact']);
-  array_push($tabOffreDAlternance, $data['typedecontrat']);
-
->>>>>>> thomas
 
 	return $tabOffreDAlternance;
     }
@@ -269,19 +240,8 @@ class offreDAlternance_BDD {
 	    $requete = "SELECT $tab29.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab29.idoffre";
 	}
 
-<<<<<<< HEAD
 	$result = $db->query($requete);
 
-=======
-
-
-
-	$result = $db->query($requete);
-
-
-
-
->>>>>>> thomas
 	// --------------------------------------------------------------------
 	// Construire le tableau des enregistrements trouvés
 

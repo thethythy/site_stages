@@ -19,7 +19,7 @@ class IHM_Menu {
 		    <br></br>
 		    <li><a href="./parrainage/" title="Informations sur les enseignants référents">Enseignants référents<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
-		    <li><a href="./entreprise/" title="Partie réservée aux entreprises pour saisir les offres de stage">Déposer une offre</a></li>
+		    <li><a href="./entreprise/" title="Partie réservée aux entreprises pour saisir les offres de stage">Déposer une offre de stage</a></li>
 		    <br></br>
 		    <li><a href="./soutenances/" title="Planning des soutenances">Soutenances<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/></a></li>
 		    <br></br>
@@ -128,7 +128,6 @@ class IHM_Menu {
       <ul class="sidemenu">
         <li><a>1-Rechercher</a></li>
         <ul class="sidemenu2">
-<<<<<<< HEAD
           <li><a href="./listerOffreDeStage.php">Offres d'alternance</a></li>
           <li><a href="./listerAnciensStages.php">Les anciennes alternances</a></li>
         </ul>
@@ -136,13 +135,6 @@ class IHM_Menu {
         <br/>
         <li><a href="./depot_doc.php">3-Déposer des documents</a></li>
         <br></br>
-=======
-          <li><a href="./listerOffreAlternance.php">Les offres d'alternance</a></li>
-          <li><a href="./listerAncienneAlternance.php">Les anciennes alternances</a></li>
-        </ul>
-        <li><a href="./suiviCandidatures.php">2-Suivi des candidatures</a></li>
-        <br/>
->>>>>>> thomas
         <!--<li>Site externes d'offres:</li>
         <ul class="sidemenu2">
         <li><a href="http://univ-lemans.jobteaser.com/" title="Career Center">Career Center</a></li>

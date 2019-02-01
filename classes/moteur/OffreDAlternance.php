@@ -97,20 +97,6 @@ class OffreDAlternance {
     return $this->typeContrat;
   }
 
-<<<<<<< HEAD
-=======
-  public function getTypeContratStr(){
-    if($this->typeContrat == 1){
-      return("Apprentissage");
-    }
-    else if($this->typeContrat == 0){
-      return("Professionnalisation");
-    }else{
-      return("N/A");
-    }
-  }
-
->>>>>>> thomas
   // ------------------------------------------------------------------------
   // Accesseurs en écriture
 
@@ -146,12 +132,6 @@ class OffreDAlternance {
     $this->typeContrat = $typeContrat;
   }
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> thomas
   // ------------------------------------------------------------------------
   // Méthodes dérivées
 
@@ -170,10 +150,7 @@ class OffreDAlternance {
     for ($i = 0; $i < sizeof($this->competences); $i++) {
       array_push($tabCompetence, Competence::getCompetence($this->competences[$i]));
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> thomas
     return $tabCompetence;
   }
 
@@ -191,20 +168,12 @@ class OffreDAlternance {
     $tabProfil = array();
 
     for ($i = 0; $i < sizeof($this->listeProfilSouhaite); $i++) {
-<<<<<<< HEAD
       array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
-=======
-        array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
->>>>>>> thomas
     }
 
     return $tabProfil;
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> thomas
   // ------------------------------------------------------------------------
   // Méthodes statiques
 
@@ -255,14 +224,11 @@ class OffreDAlternance {
   public static function getOffreDAlternance($identifiantBDD) {
     $offreDAlternance = OffreDAlternance_BDD::getOffreDAlternance($identifiantBDD);
 
-<<<<<<< HEAD
     $log = fopen("log.txt", "a+");
     fwrite($log, "> $offreDAlternance[0] $offreDAlternance[1] $offreDAlternance[2] $offreDAlternance[3] $offreDAlternance[4] $offreDAlternance[5]
     $offreDAlternance[6] $offreDAlternance[7] $offreDAlternance[8] $offreDAlternance[9] $offreDAlternance[10] $offreDAlternance[11] $offreDAlternance[12]");
     fclose($log);
 
-=======
->>>>>>> thomas
     return new OffreDAlternance($offreDAlternance[0], $offreDAlternance[1],
     $offreDAlternance[2], $offreDAlternance[3],
     $offreDAlternance[4], $offreDAlternance[5],
@@ -289,11 +255,7 @@ class OffreDAlternance {
       $tabODSString[$i][6], $tabODSString[$i][7],
       $tabODSString[$i][8], $tabODSString[$i][9],
       $tabODSString[$i][10], $tabODSString[$i][11],
-<<<<<<< HEAD
       $tabODSString[$i][12]));
-=======
-      NULL));//Si on veut faire un filtre avec le type de contrat ??
->>>>>>> thomas
     }
 
     return $tabODS;
