@@ -1,0 +1,220 @@
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+->0<-
+
+Nouvelle entreprise
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'Nom',
+      'Adresse',
+      '72000',
+      'Ville',
+      'FRANCE',
+      'xx',
+      NULL,
+      '01234567890123');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom',
+			'Sion',
+			'xx',
+			'',
+			'xx',
+			'539');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'SWCW',
+      'WSW',
+      '72210',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'sqqs',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'540');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'larmi inc',
+      'test',
+      '22222',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmi',
+			'wccvw',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'541');
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'larmi inc2',
+      'test',
+      '22222',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmi',
+			'wccvw',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'542');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'univ le mans12',
+      'test',
+      '22222',
+      'test',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'543');
+->0<-
+
+Nouvelle entreprise
+INSERT INTO entreprise
+      VALUES ('0',
+      'univ le mans123',
+      'wsfvw',
+      '00141122',
+      'La suze sur sarthe',
+      'FRANCE',
+      'test',
+      NULL,
+      '12213503023');
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'1235423212',
+			'thomaslarmignat72@gmail.com',
+			'544');
+->0<-
