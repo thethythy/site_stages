@@ -218,3 +218,7 @@ INSERT INTO contact VALUES (
 			'thomaslarmignat72@gmail.com',
 			'544');
 ->0<-
+
+Entreprise connue
+Contact déjà présent
+->0<-
