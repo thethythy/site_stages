@@ -58,26 +58,6 @@ if (isset($access_control_target)) {
         }
       }
     }
-    // if(isset($type_etudiant)){
-    //   $type_etudiant = str_replace("/","",$type_etudiant);
-    //   $type_etudiant = str_replace("index.php","",$type_etudiant);
-    //   if (!isset($_COOKIE['site_stages_depinfo_alternant'])) {
-    //     include_once('../access_control.php');
-    //     die();
-    //   } else {
-    //     // Récupérer le digest de la clef du cookie
-    //     $HClef1 = $_COOKIE['site_stages_depinfo_'.$type_etudiant];
-    //
-    //     // Récupérer le digest du fichier
-    //     $json = json_decode(file_get_contents('../documents/demon/clef.json'));
-    //     $HClef2 = $json->$type_etudiant;
-    //
-    //     if (!hash_equals($HClef1, $HClef2)) {
-    //       include_once('../access_control.php');
-    //       die();
-    //     }
-    //   }
-    // }
   }
 }
 
