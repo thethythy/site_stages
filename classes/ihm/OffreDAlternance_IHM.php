@@ -585,29 +585,29 @@ public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $fili
         </td>
         <td width="50%">
           <table>
-            <tr>
+            <!-- <tr>
               <td>Titre de l'offre d'alternance</td>
               <td>
                 <select id="offre" type="text" name="offre"/>
                 <?php
-                echo "<option value='*'>Tous</option>";
-                for ($i = 0; $i < sizeof($tabE); $i++) {
-                  if (isset($_POST['offre']) && $_POST['offre'] == $tabE[$i]->getIdentifiantBDD())
-                  echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
-                  else
-                  echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
-                }
+                //echo "<option value='*'>Tous</option>";
+                //for ($i = 0; $i < sizeof($tabE); $i++) {
+                //  if (isset($_POST['offre']) && $_POST['offre'] == $tabE[$i]->getIdentifiantBDD())
+                //  echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
+                //  else
+                  //echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
+                //}
                 ?>
               </select>
             </td>
-          </tr>
+          </tr> -->
         </table>
       </td>
     </tr>
   </table>
 </form>
 <script type="text/javascript">
-new Array("offre", "annee", "filiere", "parcours");
+new Array("annee", "filiere", "parcours");
 new LoadData(table, "<?php echo $page; ?>", "onchange");
 </script>
 <?php
@@ -659,10 +659,9 @@ public static function afficherListeOffresSuivi($tabOffreDAlt) {
           <?php
       }
       ?>
-
     </table>
     <br/><br/>
-    <div class="align-center"><input id="enregistrer" type="submit" value="Enregistrer"></div>
+    <div class="align-center"><input type="submit" value="Submit"></div>
   </form>
   <?php
 }

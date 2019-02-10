@@ -1,24 +1,8 @@
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
+SELECT offredalternance.idoffre FROM offredalternance
+SELECT offredalternance.idoffre FROM offredalternance,contact,entreprise,profilsouhaite_offredalternance,theme_offredalternance
+WHERE offredalternance.idcontact=contact.idcontact
+  AND entreprise.identreprise=contact.identreprise
+  AND profilsouhaite_offredalternance.idoffre=offredalternance.idoffre
+  AND theme_offredalternance.idoffre=offredalternance.idoffre
+  AND (idparcours = '11' AND idfiliere = '4')
+ORDER BY offredalternance.idoffre

@@ -17,16 +17,8 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 if (!headers_sent())
     header("Content-type: text/html; charset=utf-8");
 
-    $offre = "";
-    // if (!isset($_POST['offre'])) {
-    //     $offre = "";
-    // } else {
-    //     $offre = $_POST['offre'];
-    // }
-    // $filtreOffre = new FiltreNumeric("offre", $offre);
-
-  $tabE = OffreDAlternance::getListeOffreDAlternance($offre);
-  OffreDAlternance_IHM::afficherListeOffresSuivi($tabE);
+    $tabE = OffreDAlternance::getListeOffreDAlternance("");
+    OffreDAlternance_IHM::afficherListeOffresSuivi($tabE);
 
 
 

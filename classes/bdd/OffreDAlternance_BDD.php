@@ -27,9 +27,6 @@ class offreDAlternance_BDD {
 	global $tab29;
 
 	$estVisible = $offreDAlternance->estVisible() ? 1 : 0;
-  $d = fopen("log.txt", "a+");
-  fwrite($d, "\n->$estVisible<-\n");
-  fclose($d);
 	if ($offreDAlternance->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab29
 		    VALUES ('0',
@@ -76,6 +73,7 @@ class offreDAlternance_BDD {
 	$tabThemes = $offreDAlternance->getThemes();
 	for ($i = 0; $i < sizeof($tabThemes); $i++) {
 	    $sql = "INSERT INTO $tab27 VALUES('" . $tabThemes[$i]->getIdentifiantBDD() . "', '" . $lastId . "');";
+      Utils::printLog($sql);
 	    $db->query($sql);
 	}
 
@@ -242,8 +240,6 @@ class offreDAlternance_BDD {
 
 	    $requete = "SELECT $tab29.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab29.idoffre";
 	}
-
-
 
 
 	$result = $db->query($requete);

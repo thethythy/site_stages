@@ -16,7 +16,8 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 if (!headers_sent())
     header("Content-type:text/html; charset=utf-8");
 
-$filtres = array();
+$filtresEtu = array();
+$filtresOffres = array();
 
 // Si pas d'ann�e s�lectionn�e
 if (!isset($_POST['annee'])) {
@@ -24,7 +25,7 @@ if (!isset($_POST['annee'])) {
 } else {
     $annee = $_POST['annee'];
 }
-array_push($filtres, new FiltreNumeric("anneeuniversitaire", $annee));
+array_push($filtresEtu, new FiltreNumeric("anneeuniversitaire", $annee));
 
 // Si une recherche sur le parcours est demand�
 if (!isset($_POST['parcours'])) {
@@ -33,7 +34,8 @@ if (!isset($_POST['parcours'])) {
 } else {
     $parcours = $_POST['parcours'];
 }
-array_push($filtres, new FiltreNumeric("idparcours", $parcours));
+array_push($filtresEtu, new FiltreNumeric("idparcours", $parcours));
+array_push($filtresOffres, new FiltreNumeric("idparcours", $parcours));
 
 // Si une recherche sur la filiere est demand�e
 if (!isset($_POST['filiere'])) {
@@ -42,34 +44,33 @@ if (!isset($_POST['filiere'])) {
 } else {
     $filiere = $_POST['filiere'];
 }
-array_push($filtres, new FiltreNumeric("idfiliere", $filiere));
+array_push($filtresEtu, new FiltreNumeric("idfiliere", $filiere));
+array_push($filtresOffres, new FiltreNumeric("idfiliere", $filiere));
 
-$filtre = $filtres[0];
+$filtreEtu = $filtresEtu[0];
 
-for ($i = 1; $i < sizeof($filtres); $i++)
-    $filtre = new Filtre($filtre, $filtres[$i], "AND");
+for ($i = 1; $i < sizeof($filtresEtu); $i++)
+    $filtreEtu = new Filtre($filtreEtu, $filtresEtu[$i], "AND");
 
-$tabEtudiants = Promotion::listerEtudiants($filtre);
+$tabEtudiants = Promotion::listerEtudiants($filtreEtu);
 
-$log = fopen("log.txt", "a+");
-fwrite($log, print_r($_POST)."\n");
-fclose($log);
+$filtreOffres = $filtresOffres[0];
+for ($i = 1; $i < sizeof($filtresOffres); $i++)
+    $filtreOffres = new Filtre($filtreOffres, $filtresOffres[$i], "AND");
 
 
-// -------------------------------
-// -------------------------------
-// -------------------------------
-if (sizeof($tabEtudiants) > 0){
+if (sizeof($tabEtudiants) == 0){
+  ?>
+Aucun étudiant ne correspond à cette recherche.
+  <?php
 
+} else {
   OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtudiants, $annee, $parcours, $filiere,"listerOffreDeStageSuiviData.php");
 
   echo "<div id='data1'>\n";
-  include_once("listerOffreDeStageSuiviData.php");
+  $tabE = OffreDAlternance::getListeOffreDAlternance($filtreOffres);
+  OffreDAlternance_IHM::afficherListeOffresSuivi($tabE);
   echo "\n</div>";
-} else {
-  ?>
-  Aucun étudiant ne correspond à cette recherche.
-  <?php
 
 }
 ?>

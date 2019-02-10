@@ -1,101 +1,31 @@
 
-Entreprise connue
-Nouveau contact
-UPDATE contact SET nomcontact = 'Nom 1',
-				     prenomcontact = 'Prénom 1',
-				     telephone = 'xx',
-				     telecopie = '',
-				     email = 'sdf',
-				     identreprise = '539'
-			    WHERE idcontact = '0'INSERT INTO offredestage
-		    VALUES ('0',
-			    'vb nv',
-			    'sfsdf',
-			    'unix;',
-			    '3',
-			    '5',
-			    '',
-			    '',
-			    '0',
-			    '0');
-Nouvelle entreprise
-INSERT INTO entreprise
+INSERT INTO offredestage
       VALUES ('0',
-      'Simon corp',
-      'Adresse',
-      '72000',
-      'Ville',
-      'FRANCE',
-      'sdfjj@htgjhj.com',
-      NULL,
-      '12345678901235');
-INSERT INTO contact VALUES (
-			'0',
-			'Nom 2',
-			'Prénom 2',
-			'xx',
-			'',
-			'sdfjj@htgjhj.com',
-			'541');INSERT INTO offredestage
-		    VALUES ('0',
-			    'ghf',
-			    'Offre 1',
-			    'unix;',
-			    '1',
-			    '5',
-			    '24',
-			    '',
-			    '0',
-			    '886');
-Entreprise connue
-Nouveau contact
+        'vcbcvbvc',
+        'lkjbv',
+        'unix;',
+        '1',
+        '3',
+        '',
+        'cvbvcbc',
+        '0',
+        '0');
 UPDATE contact SET nomcontact = 'Nom 1',
 				     prenomcontact = 'Prénom 1',
 				     telephone = 'xx',
 				     telecopie = '',
 				     email = 'sdf',
-				     identreprise = '539'
+				     identreprise = '547'
 			    WHERE idcontact = '0'
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
+INSERT INTO offredestage
       VALUES ('0',
-      'Entreprise 3',
-      'Adresse',
-      '72000',
-      'Ville',
-      'FRANCE',
-      'sdf',
-      NULL,
-      '12345678901236');
-INSERT INTO contact VALUES (
-			'0',
-			'Nom 3',
-			'Prénom 1',
-			'xx',
-			'',
-			'sdf',
-			'542');
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
-      VALUES ('0',
-      'Entreprise 4',
-      'Adresse',
-      '72000',
-      'Ville',
-      'FRANCE',
-      'sdf',
-      NULL,
-      '12345678901237');
-INSERT INTO contact VALUES (
-			'0',
-			'Nom 4',
-			'Prénom 1',
-			'xx',
-			'',
-			'sdf',
-			'543');
-->0<-
+        'vcbcvbvc',
+        'lkjbv',
+        'unix;',
+        '1',
+        '3',
+        '',
+        'cvbvcbc',
+        '0',
+        '0');
+ >> 1

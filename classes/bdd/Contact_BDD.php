@@ -29,13 +29,10 @@ class Contact_BDD {
 			'" . $contact->getEmail() . "',
 			'" . $entreprise->getIdentifiantBDD() . "');";
 	    $db->query($sql);
-
-      $log = fopen("log.txt", "a+");
-      fwrite($log, "\n$sql");
-      fclose($log);
-
+      Utils::printLog("\n".$sql);
 	    $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab3";
 	    $res = $db->query($sql);
+      Utils::printLog("\n".$sql);
 	    $enreg = $res->fetch_array();
 	    $res->free();
 	    return $enreg['ID'];
@@ -47,9 +44,7 @@ class Contact_BDD {
 				     email = '" . $contact->getEmail() . "',
 				     identreprise = '" . $entreprise->getIdentifiantBDD() . "'
 			    WHERE idcontact = '" . $contact->getIdentifiantBDD() . "'";
-          $log = fopen("log.txt", "a+");
-          fwrite($log, "\n$sql");
-          fclose($log);
+          Utils::printLog("\n".$sql);
 	    $db->query($sql);
 	    return $contact->getIdentifiantBDD();
 	}

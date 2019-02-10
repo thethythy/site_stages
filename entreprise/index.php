@@ -118,9 +118,6 @@ function verifier(){
 
       if (sizeof($entreprise) == 1) {
         // On récupère les informations sur l'entreprise
-        $log = fopen("log.txt", "a+");
-        fwrite($log, "\nEntreprise connue");
-        fclose($log);
         $idEntreprise=$entreprise[0]->getIdentifiantBDD();
         $filtreNom = new FiltreString("nomcontact", $nom_contact);
         $filtrePrenom = new FiltreString("prenomcontact", $prenom_contact);
@@ -130,22 +127,13 @@ function verifier(){
         $contact = Contact::getListeContacts($filtre);
         if (sizeof($contact) == 1) {
           // On récupère les informations sur le contact
-          $log = fopen("log.txt", "a+");
-          fwrite($log, "\nContact déjà présent");
-          fclose($log);
           $idContact = $contact[0]->getIdentifiantBDD();
         } else {
-          $log = fopen("log.txt", "a+");
-          fwrite($log, "\nNouveau contact");
-          fclose($log);
           // On enregistre le contact dans la base de données
           $nouveauContact = new Contact("0", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
           $idContact = Contact_BDD::sauvegarder($nouveauContact);
         }
       } else {
-        $log = fopen("log.txt", "a+");
-        fwrite($log, "\nNouvelle entreprise");
-        fclose($log);
         // On enregistre l'entreprise et le contact dans la base de données
         if ($email_entreprise == "") $email_entreprise = $email_contact;
         $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL, $siret);
