@@ -184,6 +184,7 @@ class Gestion_IHM {
 					<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
 					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
 					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li>
+          <li><a href="./entreprises/listeDesOffreDAlternance.php">Valider des offres d'alternance</a></li>
 				    </ul>
 				</td>
 			    </tr>

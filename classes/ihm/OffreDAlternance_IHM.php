@@ -3,7 +3,7 @@
 class OffreDAlternance_IHM {
 
   /**
-  * Afficher un formulaire de sélection des offres de stage
+  * Afficher un formulaire de sélection des offres d'alternance
   * @param string $fichier La page de traitement du formulaire
   */
   public static function afficherFormulaireRecherche($fichier) {
@@ -124,7 +124,7 @@ class OffreDAlternance_IHM {
   }
 
   /**
-  * Afficher un tableau interactif des stages disponibles
+  * Afficher un tableau interactif des alternances disponibles
   * (utilisé pour sélection une offre puis la visualiser)
   * @param tableau d'objets $tabOffreDAlt Tableau des objets OffreDAlternance
   */
@@ -206,10 +206,10 @@ class OffreDAlternance_IHM {
 
   /**
   * Afficher deux listes :
-  * - une liste des offres de stage pas encore validées
-  * - une liste des offres de stage déjà validées
+  * - une liste des offres d'alternance pas encore validées
+  * - une liste des offres d'alternance déjà validées
   * Dans les cas, la sélection permet d'éditer l'offre
-  * @param tableau d'objets $tabOffreDAlt Les objets OffreDeStage concernés
+  * @param tableau d'objets $tabOffreDAlt Les objets OffreDAlternance concernés
   */
   public static function afficherListeOffresAEditer($tabOffreDAlt) {
     $cpt = 0;
@@ -220,7 +220,7 @@ class OffreDAlternance_IHM {
         if (!$enteteAffichee) {
           $enteteAffichee = true;
           ?>
-          <p>Voici la liste des offres de stage qui restent à traiter :</p>
+          <p>Voici la liste des offres d'alternance qu'il reste à traiter :</p>
           <table width="100%">
             <tr id="entete">
               <td width="30%">Titre</td>
@@ -262,7 +262,7 @@ class OffreDAlternance_IHM {
         ?>
       </td>
       <td align="center">
-        <a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
+        <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
           <img src="../../images/search.png">
         </a>
       </td>
@@ -272,7 +272,7 @@ class OffreDAlternance_IHM {
 }
 
 if ($cpt == 0) {
-  echo "<p>Toutes les offres de stages ont été validées.</p>";
+  echo "<p>Toutes les offres d'alternance ont été validées.</p>";
 }
 
 ?>
@@ -287,7 +287,7 @@ if ($cpt == 0) {
 
   <?php
   $cpt = 0;
-  echo "<p>Voici la liste des offres de stage disponibles sur le site des stages : </p>";
+  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances : </p>";
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
@@ -321,7 +321,7 @@ if ($cpt == 0) {
     ?>
   </td>
   <td align="center">
-    <a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
+    <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
       <img src="../../images/search.png">
     </a>
   </td>
@@ -337,21 +337,481 @@ if ($cpt == 0) {
 
 
 /**
-* Afficher le contenu d'une offre de stage (sans modification possible)
-* @param OffreDeStage $offreDeStage L'objet à visualiser
+* Afficher un formulaire d'édition d'une offre d'alternance
+* (utiliser notamment pour valider une offre)
+*/
+public static function afficherFormulaireModification() {
+  ?>
+  <script language="javascript">
+  function ajout_competence() {
+    var code = "";
+    var compteur = parseInt(document.getElementById('compteur_competence').value);
+    code = "Nom : <input type='text' name='competence_ajout" + compteur + "'/><br/> ";
+    compteur += 1;
+    document.getElementById('compteur_competence').value = compteur;
+    document.getElementById('ajout_competence').innerHTML += code;
+  }
+  </script>
+
+  <p>Les champs marqués d'une * sont obligatoires</p>
+
+  <FORM METHOD="POST" ACTION="">
+    <!-- Dans le cas d'une modification d'une offre d'alternance -->
+    <?php
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+      ?>
+      <input type="hidden" value="<?php echo $_GET['id']; ?>" name="idOffreDAlternance"/>
+
+      <?php
+      $modificationOffreDAlternance = OffreDAlternance::getOffreDAlternance($_GET['id']);
+      $modificationCompetences = $modificationOffreDAlternance->getListesCompetences();
+      $modificationThemes = $modificationOffreDAlternance->getThemes();
+      $modificationProfils = $modificationOffreDAlternance->getListeProfilSouhaite();
+      $modificationContact = $modificationOffreDAlternance->getContact();
+      $modificationEntreprise = $modificationContact->getEntreprise();
+      $environnement = explode(";", $modificationOffreDAlternance->getListeEnvironnements());
+    }
+    ?>
+
+    <input type="hidden" name="estVisible" value="<?php if (isset($modificationOffreDAlternance)) { echo $modificationOffreDAlternance->estVisible(); } ?>"/>
+
+    <table id="table_saisieOffreDAlternance">
+      <tr>
+        <td colspan=2>
+          <table id="presentation_saisieOffreDAlternance">
+            <tr id="entete2">
+              <td colspan=2>Alternance</td>
+            </tr>
+            <tr>
+              <th>Titre de l'alternance (*) :</th>
+              <td>
+                <input type="text" name="titre" size="100" value="<?php
+                if (isset($_POST['titre'])) {
+                  echo $_POST['titre'];
+                } else if (isset($modificationOffreDAlternance)) {
+                  echo htmlentities($modificationOffreDAlternance->getTitre(), ENT_QUOTES, 'utf-8');
+                }
+                ?>">
+              </td>
+            </tr>
+            <tr>
+              <th>Sujet de l'alternance (*) :</th>
+              <td>
+                <textarea name="sujet"><?php
+                if (isset($_POST['sujet'])) {
+                  echo $_POST['sujet'];
+                } else if (isset($modificationOffreDAlternance)) {
+                  echo $modificationOffreDAlternance->getSujet();
+                }
+                ?></textarea>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">Profil souhaité :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <!-- Récupération des filières -->
+                  <?php
+                  $tabFilieres = Filiere::listerFilieres();
+                  for ($i = 0; $i < sizeof($tabFilieres); $i++) {
+                    if ($i % 5 == 0) { echo "<tr>"; }
+
+                    if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
+                      echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+                    } else {
+                      $profilTrouve = false;
+                      if (isset($modificationProfils)) {
+                        for ($j = 0; $j < sizeof($modificationProfils); $j++) {
+                          if ($modificationProfils[$j]->getIdentifiantBDD() == $tabFilieres[$i]->getIdentifiantBDD()) {
+                            $profilTrouve = true;
+                          }
+                        }
+                      }
+                      if ($profilTrouve) {
+                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+                      } else {
+                        echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+                      }
+                    }
+                    if ($i % 5 == 5) { echo "</tr>"; }
+                  }
+                  ?>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Copier/coller le texte suivant pour insérer un lien html vers un document descriptif :<br/>
+                <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDAlternances/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2"><p/><hr/><p/></th>
+            </tr>
+            <tr>
+              <th>Durée (*) :</th>
+              <td><select name="duree">
+                <?php
+                for ($i = 1; $i <= 2; $i++) {
+                  if ((isset($modificationOffreDAlternance) && $modificationOffreDAlternance->getDuree() == $i) ||
+                  (isset($_POST['duree']) && $_POST['duree'] == $i)) {
+                    echo"<option selected value='$i'>$i</option>";
+                  } else {
+                    echo"<option value='$i'>$i</option>";
+                  }
+                }
+                ?>
+              </select> an(s)
+            </td>
+          </tr>
+          <tr>
+            <th>Indemnités :</th>
+            <td>
+              <input type="text" name="indemnites" size="50" value="<?php
+              if (isset($_POST['indemnites'])) {
+                echo $_POST['indemnites'];
+              } else if (isset($modificationOffreDAlternance)) {
+                echo $modificationOffreDAlternance->getIndemnite();
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
+            <th>Type de contrat (*) :</th>
+            <td>
+              <input type="radio" id="" name ="typeContrat" <?php if((isset($modificationAlternance) && $modificationAlternance.getTypeContratStr() == "Apprentissage") ||
+              (isset($_POST['typeContrat']) && $_POST['typeContrat'] == 1)) { echo 'checked="checked"';} ?> value="1"> Apprentissage
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="radio"  id="" name ="typeContrat" <?php if((isset($modificationAlternance) && $modificationAlternance.getTypeContratStr() == "Professionnalisation") ||
+              (isset($_POST['typeContrat']) && $_POST['typeContrat'] == 0)) { echo 'checked="checked"';} ?> value="0"> Professionnalisation
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2"><p/><hr/><p/></th>
+          </tr>
+            <tr>
+              <th colspan="2">Compétence(s) (*) :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <!-- Récupération des compétences -->
+                  <?php
+                  $tabCompetences = Competence::listerCompetences();
+                  for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+                    if ($i % 6 == 0) { echo "<tr>";}
+
+                    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+                      echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                    } else {
+                      $competenceTrouve = false;
+                      if (isset($modificationCompetences)) {
+                        for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
+                          if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
+                            $competenceTrouve = true;
+                          }
+                        }
+                      }
+                      if ($competenceTrouve) {
+                        echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                      } else {
+                        echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                      }
+                    }
+
+                    if ($i % 6 == 6) { echo "</tr>"; }
+                  }
+                  ?>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
+                <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
+                <div id="ajout_competence"></div>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">Environnement(s) :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <tr>
+                    <?php
+                    $winTrouve = false;
+                    $unixTrouve = false;
+                    $macTrouve = false;
+                    if (isset($environnement)) {
+                      for ($i = 0; $i < sizeof($environnement); $i++) {
+                        if ($environnement[$i] == "win")
+                        $winTrouve = true;
+                        if ($environnement[$i] == "unix")
+                        $unixTrouve = true;
+                        if ($environnement[$i] == "mac")
+                        $macTrouve = true;
+                      }
+                    }
+                    ?>
+                    <td width="100">
+                      <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
+                    </td>
+                    <td width="100">
+                      <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
+                    </td>
+                    <td width="100">
+                      <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">Thème de l'alternance :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <!-- Récupération des parcours -->
+                  <?php
+                  $tabParcours = Parcours::listerParcours();
+                  for ($i = 0; $i < sizeof($tabParcours); $i++) {
+                    if ($i % 5 == 0) { echo "<tr>"; }
+
+                    if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
+                      echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                    } else {
+                      $themeTrouve = false;
+                      if (isset($modificationThemes)) {
+                        for ($j = 0; $j < sizeof($modificationThemes); $j++) {
+                          if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
+                            $themeTrouve = true;
+                          }
+                        }
+                      }
+                      if ($themeTrouve) {
+                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                      } else {
+                        echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                      }
+                    }
+                    if ($i % 5 == 5) { echo "</tr>"; }
+                  }
+                  ?>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2"><p/><hr/><p/></th>
+            </tr>
+
+          <tr>
+            <th>Remarques diverses :</th>
+            <td>
+              <textarea name="rmq"><?php
+              if (isset($_POST['rmq'])) {
+                echo $_POST['rmq'];
+              } else if (isset($modificationOffreDAlternance)) {
+                echo $modificationOffreDAlternance->getRemarques();
+              }
+              ?></textarea>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <table id="presentation_saisieOffreDAlternance">
+          <tr id="entete2">
+            <td colspan=2>Entreprise</td>
+          </tr>
+          <tr>
+            <th width="170">Nom (*) :</th>
+            <td>
+              <input type="text" name="nom_entreprise" size="50" value="<?php
+              if (isset($_POST['nom_entreprise'])) {
+                echo $_POST['nom_entreprise'];
+              } else if (isset($modificationEntreprise)) {
+                echo htmlentities($modificationEntreprise->getNom(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Adresse (*) :</th>
+            <td>
+              <input type="text" name="adresse" size="50" value="<?php
+              if (isset($_POST['adresse'])) {
+                echo $_POST['adresse'];
+              } else if (isset($modificationEntreprise)) {
+                echo htmlentities($modificationEntreprise->getAdresse(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Ville (*) :</th>
+            <td>
+              <input type="text" name="ville" size="50" value="<?php
+              if (isset($_POST['ville'])) {
+                echo $_POST['ville'];
+              } else if (isset($modificationEntreprise)) {
+                echo htmlentities($modificationEntreprise->getVille(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Code postal (*) :</th>
+            <td>
+              <input type="text" name="codePostal" size="50" value="<?php
+              if (isset($_POST['codePostal'])) {
+                echo $_POST['codePostal'];
+              } else if (isset($modificationEntreprise)) {
+                echo htmlentities($modificationEntreprise->getcodePostal(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Pays :</th>
+            <td>
+              <input type="text" name="pays" size="50" value="<?php
+              if (isset($_POST['pays'])) {
+                echo $_POST['pays'];
+              } else if (isset($modificationEntreprise)) {
+                echo $modificationEntreprise->getPays();
+              } else {
+                echo 'FRANCE';
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Email DRH ou équivalent :</th>
+            <td>
+              <input type="text" name="email_entreprise" size="50" value="<?php
+              if (isset($_POST['email_entreprise'])) {
+                echo $_POST['email_entreprise'];
+              } else {
+                echo "";
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table id="presentation_saisieOffreDAlternance">
+          <tr id="entete2">
+            <td colspan=2>Contact ou Maître d'alternance</td>
+          </tr>
+          <tr>
+            <th width="170">Nom (*) :</th>
+            <td>
+              <input type="text" name="nom_contact" size="50" value="<?php
+              if (isset($_POST['nom_contact'])) {
+                echo $_POST['nom_contact'];
+              } else if (isset($modificationContact)) {
+                echo htmlentities($modificationContact->getNom(), ENT_QUOTES, 'utf-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Prénom (*) :</th>
+            <td>
+              <input type="text" name="prenom_contact" size="50" value="<?php
+              if (isset($_POST['prenom_contact'])) {
+                echo $_POST['prenom_contact'];
+              } else if (isset($modificationContact)) {
+                echo htmlentities($modificationContact->getPrenom(), ENT_QUOTES, 'utf-8');
+              } ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Tel (*) :</th>
+            <td>
+              <input type="text" name="tel_contact" size="50" value="<?php
+              if (isset($_POST['tel_contact'])) {
+                echo $_POST['tel_contact'];
+              } else if (isset($modificationContact)) {
+                echo htmlentities($modificationContact->getTelephone(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Fax :</th>
+            <td>
+              <input type="text" name="fax_contact" size="50" value="<?php
+              if (isset($_POST['fax_contact'])) {
+                echo $_POST['fax_contact'];
+              } else if (isset($modificationContact)) {
+                echo htmlentities($modificationContact->getTelecopie(), ENT_QUOTES, 'UTF-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Email (*) :</th>
+            <td>
+              <input type="text" name="email_contact" size="50" value="<?php
+              if (isset($_POST['email_contact'])) {
+                echo $_POST['email_contact'];
+              } else if (isset($modificationContact)) {
+                echo htmlentities($modificationContact->getEmail(), ENT_QUOTES, 'utf-8');
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" name="valider" value="Valider l'offre d'alternance">
+        <input type="submit" name="cancel" value="Effacer l'offre d'alternance">
+      </td>
+    </tr>
+  </table>
+</FORM>
+<br/><br/>
+<?php
+}
+
+
+/**
+* Afficher le contenu d'une offre d'alternance (sans modification possible)
+* @param OffreDAlternance $offreDAlternance L'objet à visualiser
 * @param string $page La page de retour
 * @param string $nom_init Nom de l'entreprise
 * @param string $ville_init Nom de la ville de l'entreprise
 * @param string $cp_init Code postal de l'entreprise
-* @param string $pays_init Le pays du lieu du stage
+* @param string $pays_init Le pays du lieu de l'alternance
 * @param string $filiere_init La filière concernée
 * @param string $parcours_init Le parcours concerné
-* @param string $duree_init La durée du stage
+* @param string $duree_init La durée de l'alternance
 * @param string $competence_init Les compétences demandées
 */
-
-
-
 
 
 public static function visualiserOffre($offreDAlt, $page, $nom_init,
@@ -367,7 +827,7 @@ $duree_init, $competence_init) {
   <table>
     <tr>
       <td colspan=2>
-        <table id="presentation_saisieOffreDeStage">
+        <table id="presentation_saisieOffreDAlternance">
           <tr id="entete2">
             <td colspan="2">Alternance</td>
           </tr>
@@ -476,7 +936,7 @@ $duree_init, $competence_init) {
     </tr>
     <tr>
       <td colspan=2>
-        <table id="presentation_saisieOffreDeStage">
+        <table id="presentation_saisieOffreDAlternance">
           <tr id="entete2">
             <td colspan="2">Entreprise</td>
           </tr>
@@ -505,7 +965,7 @@ $duree_init, $competence_init) {
     </tr>
     <tr>
       <td colspan="2">
-        <table id="presentation_saisieOffreDeStage">
+        <table id="presentation_saisieOffreDAlternance">
           <tr id="entete2">
             <td colspan="2">Contact ou tuteur/maître d’apprentissage</td>
           </tr>
@@ -554,7 +1014,7 @@ $duree_init, $competence_init) {
 
 
 /**
-* Afficher un formulaire de sélection des offres de stage
+* Afficher un formulaire de sélection des offres d'alternance
 * @param string $fichier La page de traitement du formulaire
 */
 public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere, $page) {
@@ -616,7 +1076,7 @@ new LoadData(table, "<?php echo $page; ?>", "onchange");
 
 
 /**
-* Afficher un tableau interactif des stages disponibles
+* Afficher un tableau interactif des alternances disponibles
 * (utilisé pour sélection une offre puis la visualiser)
 * @param tableau d'objets $tabOffreDAlt Tableau des objets OffreDAlternance
 */

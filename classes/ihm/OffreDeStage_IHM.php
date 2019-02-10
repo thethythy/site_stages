@@ -387,7 +387,7 @@ class OffreDeStage_IHM {
                 <th>Email DRH ou équivalent :</th>
                 <td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
               </tr>
-              <th>Siret (*) :</th>
+              <th>SIRET (*) :</th>
               <td><input type="text" value="<?php if (isset($_POST['siret'])) { echo $_POST['siret']; } else { echo ""; } ?>" name="siret" size="50"></td>
             </tr>
           </table>
