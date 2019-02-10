@@ -18,15 +18,13 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Alternant');
 
-IHM_Generale::header("Suvi des", "candidatures", "../", $tabLiens);
-
-
+IHM_Generale::header("Suivi des", "candidatures", "../", $tabLiens);
 
 Promotion_IHM::afficherFormulaireRecherche("suiviCandidaturesData.php", false);
 
-echo "<div id='data'>\n";
+?> <div id='data'> <p id="Start here"><?php
 include_once("suiviCandidaturesData.php");
-echo "\n</div>";
+?></p></div><?php
 
 
 

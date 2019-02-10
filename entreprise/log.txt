@@ -1,224 +1,101 @@
 
-->0<-
-
-->0<-
-
-->0<-
-
-->0<-
-
-->0<-
-
-->0<-
-
-->0<-
-
-Nouvelle entreprise
-INSERT INTO contact VALUES (
-			'0',
-			'Nom',
-			'Sion',
-			'xx',
-			'',
-			'xx',
-			'');
-->0<-
-
+Entreprise connue
+Nouveau contact
+UPDATE contact SET nomcontact = 'Nom 1',
+				     prenomcontact = 'Prénom 1',
+				     telephone = 'xx',
+				     telecopie = '',
+				     email = 'sdf',
+				     identreprise = '539'
+			    WHERE idcontact = '0'INSERT INTO offredestage
+		    VALUES ('0',
+			    'vb nv',
+			    'sfsdf',
+			    'unix;',
+			    '3',
+			    '5',
+			    '',
+			    '',
+			    '0',
+			    '0');
 Nouvelle entreprise
 INSERT INTO entreprise
       VALUES ('0',
-      'Nom',
+      'Simon corp',
       'Adresse',
       '72000',
       'Ville',
       'FRANCE',
-      'xx',
+      'sdfjj@htgjhj.com',
       NULL,
-      '01234567890123');
+      '12345678901235');
 INSERT INTO contact VALUES (
 			'0',
-			'Nom',
-			'Sion',
+			'Nom 2',
+			'Prénom 2',
 			'xx',
 			'',
-			'xx',
-			'');
+			'sdfjj@htgjhj.com',
+			'541');INSERT INTO offredestage
+		    VALUES ('0',
+			    'ghf',
+			    'Offre 1',
+			    'unix;',
+			    '1',
+			    '5',
+			    '24',
+			    '',
+			    '0',
+			    '886');
+Entreprise connue
+Nouveau contact
+UPDATE contact SET nomcontact = 'Nom 1',
+				     prenomcontact = 'Prénom 1',
+				     telephone = 'xx',
+				     telecopie = '',
+				     email = 'sdf',
+				     identreprise = '539'
+			    WHERE idcontact = '0'
 ->0<-
 
 Nouvelle entreprise
 INSERT INTO entreprise
       VALUES ('0',
-      'Nom',
+      'Entreprise 3',
       'Adresse',
       '72000',
       'Ville',
       'FRANCE',
-      'xx',
+      'sdf',
       NULL,
-      '01234567890123');
+      '12345678901236');
 INSERT INTO contact VALUES (
 			'0',
-			'Nom',
-			'Sion',
+			'Nom 3',
+			'Prénom 1',
 			'xx',
 			'',
-			'xx',
-			'539');
-->0<-
-
-Entreprise connue
-Contact déjà présent
-Entreprise connue
-Contact déjà présent
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
-      VALUES ('0',
-      'SWCW',
-      'WSW',
-      '72210',
-      'La suze sur sarthe',
-      'FRANCE',
-      'test',
-      NULL,
-      '12213503023');
-INSERT INTO contact VALUES (
-			'0',
-			'Larmignat',
-			'sqqs',
-			'0660246678',
-			'00141122',
-			'thomaslarmignat72@gmail.com',
-			'540');
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
-      VALUES ('0',
-      'larmi inc',
-      'test',
-      '22222',
-      'La suze sur sarthe',
-      'FRANCE',
-      'test',
-      NULL,
-      '12213503023');
-INSERT INTO contact VALUES (
-			'0',
-			'Larmi',
-			'wccvw',
-			'0660246678',
-			'00141122',
-			'thomaslarmignat72@gmail.com',
-			'541');
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Entreprise connue
-Contact déjà présent
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
-      VALUES ('0',
-      'larmi inc2',
-      'test',
-      '22222',
-      'La suze sur sarthe',
-      'FRANCE',
-      'test',
-      NULL,
-      '12213503023');
-INSERT INTO contact VALUES (
-			'0',
-			'Larmi',
-			'wccvw',
-			'0660246678',
-			'00141122',
-			'thomaslarmignat72@gmail.com',
+			'sdf',
 			'542');
 ->0<-
 
 Nouvelle entreprise
 INSERT INTO entreprise
       VALUES ('0',
-      'univ le mans12',
-      'test',
-      '22222',
-      'test',
+      'Entreprise 4',
+      'Adresse',
+      '72000',
+      'Ville',
       'FRANCE',
-      'test',
+      'sdf',
       NULL,
-      '12213503023');
+      '12345678901237');
 INSERT INTO contact VALUES (
 			'0',
-			'Larmignat',
-			'bkdqb',
-			'0660246678',
-			'00141122',
-			'thomaslarmignat72@gmail.com',
+			'Nom 4',
+			'Prénom 1',
+			'xx',
+			'',
+			'sdf',
 			'543');
-->0<-
-
-Nouvelle entreprise
-INSERT INTO entreprise
-      VALUES ('0',
-      'univ le mans123',
-      'wsfvw',
-      '00141122',
-      'La suze sur sarthe',
-      'FRANCE',
-      'test',
-      NULL,
-      '12213503023');
-INSERT INTO contact VALUES (
-			'0',
-			'Larmignat',
-			'bkdqb',
-			'0660246678',
-			'1235423212',
-			'thomaslarmignat72@gmail.com',
-			'544');
-->0<-
-
-Entreprise connue
-Contact déjà présent
 ->0<-

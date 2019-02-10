@@ -765,8 +765,8 @@ CREATE TABLE IF NOT EXISTS `stages`.`candidature_alternance` (
   `idcandidature` INT(10) NOT NULL AUTO_INCREMENT,
   `idetudiant` INT(10) NOT NULL,
   `idoffre` INT(10) NOT NULL,
-  `identreprise`, INT(10) NOT NULL,
-  `statut`, VARCHAR(40) NOT NULL DEFAULT "--",
+  `identreprise` INT(10) NOT NULL,
+  `statut` VARCHAR(40) NOT NULL DEFAULT "--",
   PRIMARY KEY (`idcandidature`),
   UNIQUE INDEX `idcandidature_idx` (`idcandidature` ASC),
   CONSTRAINT `fk_candidature_alternance_etudiant_idetudiant`
@@ -783,9 +783,9 @@ CREATE TABLE IF NOT EXISTS `stages`.`candidature_alternance` (
     FOREIGN KEY (`identreprise`)
     REFERENCES `stages`.`entreprise` (`identreprise`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE
-  )
-
+    ON UPDATE CASCADE )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

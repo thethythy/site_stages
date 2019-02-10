@@ -51,22 +51,25 @@ for ($i = 1; $i < sizeof($filtres); $i++)
 
 $tabEtudiants = Promotion::listerEtudiants($filtre);
 
+$log = fopen("log.txt", "a+");
+fwrite($log, print_r($_POST)."\n");
+fclose($log);
 
 
+// -------------------------------
+// -------------------------------
+// -------------------------------
 if (sizeof($tabEtudiants) > 0){
+
   OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtudiants, $annee, $parcours, $filiere,"listerOffreDeStageSuiviData.php");
 
   echo "<div id='data1'>\n";
   include_once("listerOffreDeStageSuiviData.php");
   echo "\n</div>";
-}
+} else {
+  ?>
+  Aucun étudiant ne correspond à cette recherche.
+  <?php
 
-else {
-    ?>
-    <br/>
-    <p>Aucun étudiant ne correspond aux critères de recherche.</p>
-    <br/>
-    <?php
 }
-
 ?>

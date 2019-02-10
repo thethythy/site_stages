@@ -41,6 +41,9 @@ class offreDeStage_BDD {
 			    '" . $offreDeStage->getRemarques() . "',
 			    '$estVisible',
 			    '" . $offreDeStage->getIdContact() . "');";
+          $log = fopen("log.txt", "a+");
+          fwrite($log, $sql);
+          fclose($log);
 	    $db->query($sql);
 	    $lastId = $db->insert_id;
 	} else {
