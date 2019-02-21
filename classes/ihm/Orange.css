@@ -629,3 +629,27 @@ section table td {
   margin: 5px ;
   padding: 5px ;
 }
+
+/* Utilisé sur la page de Suivi des Alternances pour garder
+la logique de l'IHM
+Un form ne peut pas être mis dans une table alors on passe le style
+de la table au form et le style du form à la table
+*/
+
+.tableToFormCheatStyle {
+    padding: 0;
+    border: 1px solid #dcdbda;
+    border-collapse: collapse;
+    background-color: #ededec;
+    text-align: center;
+}
+
+.formToTableCheatStyle {
+      width: 100%;
+      background-color= white;
+      border: medium none white;
+}
+
+.cellBordersCheatStyle {
+  border:2px solid white;
+}

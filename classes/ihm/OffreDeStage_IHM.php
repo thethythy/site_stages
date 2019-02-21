@@ -187,247 +187,242 @@ class OffreDeStage_IHM {
           </tr>
           <tr>
 
-        <table id="presentation_saisieOffreDeStage">
-            <th>Type d'offre (*) :</th>
-            <td>
-              <input type="radio" id="radioStage" name ="type" value="stagiaire" onclick="swap_offre()"> Stage
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio" id="radioAlternance" name ="type" value="alternant" onclick="swap_offre()"> Alternant
-            </td>
-          </tr>
-        </table>
+            <table id="presentation_saisieOffreDeStage">
+              <th>Type d'offre (*) :</th>
+              <td>
+                <input type="radio" id="radioStage" name ="type" value="stagiaire" onclick="swap_offre()"> Stage
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="radioAlternance" name ="type" value="alternant" onclick="swap_offre()"> Alternant
+              </td>
+            </tr>
+          </table>
 
           <table id="presentation_saisieOffreDeStage">
             <!--  mis en haut
             <tr id="entete2">
-              <td colspan="2"><p id='title'>Offre</p></td>
-            </tr>
-            -->
+            <td colspan="2"><p id='title'>Offre</p></td>
+          </tr>
+        -->
 
-            <tr>
-              <th><span id="title2"> Titre (*) :</th>
-                <td><input type="text" name="titre" size="100" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } ?>"/></td>
-              </tr>
-              <tr>
+        <tr>
+          <th><span id="title2"> Titre (*) :</th>
+            <td><input type="text" name="titre" size="100" value="<?php if (isset($_POST['titre'])) { echo $_POST['titre']; } ?>"/></td>
+          </tr>
+          <tr>
 
-                <th>Mission (*) :</th>
-                <td><textarea name="sujet" style="resize:none;"><?php if (isset($_POST['sujet'])) { echo $_POST['sujet']; } ?></textarea></td>
-              </tr>
-              <tr>
-                <th>Profil souhaité (*) :</th>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <table>
-                    <!-- Récupération des filières -->
-                    <?php
-                    for ($i = 0; $i < sizeof($tabFilieres); $i++) {
-                      if ($i % 5 == 0) {
-                        echo "<tr>";
-                      }
-                      if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
-                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-                      } else if ($tabFilieres[$i]->getAffDepot() == 1) {
-                        echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
-                      }
-                      if ($i % 5 == 5) {
-                        echo "</tr>";
-                      }
-                    }
-                    ?>
-                  </table>
-                </td>
-              </tr>
-
-              <tr>
-                <th colspan="2"><p/><hr/><p/></th>
-              </tr>
-              <th>Durée (*) :</th>
-              <td id="dureeStage">Entre
-                <select name="dureeMin">
-                  <?php
-                  for ($i = 1; $i <= 12; $i++) {
-                    if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
-                      echo"<option selected value='$i'>$i</option>";
-                    } else {
-                      echo"<option value='$i'>$i</option>";
-                    }
+            <th>Mission (*) :</th>
+            <td><textarea name="sujet" style="resize:none;"><?php if (isset($_POST['sujet'])) { echo $_POST['sujet']; } ?></textarea></td>
+          </tr>
+          <tr>
+            <th>Profil souhaité (*) :</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table>
+                <!-- Récupération des filières -->
+                <?php
+                for ($i = 0; $i < sizeof($tabFilieres); $i++) {
+                  if ($i % 5 == 0) {
+                    echo "<tr>";
                   }
-                  ?>
-                </select> et <select name="dureeMax">
-                  <?php
-                  for ($i = 1; $i <= 12; $i++) {
-                    if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
-                      echo"<option selected value='$i'>$i</option>";
-                    } else {
-                      echo"<option value='$i'>$i</option>";
-                    }
+                  if (isset($_POST['filiere' . $tabFilieres[$i]->getIdentifiantBDD()])) {
+                    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
+                  } else if ($tabFilieres[$i]->getAffDepot() == 1) {
+                    echo "<td width='150'><input type='checkbox' value='" . $tabFilieres[$i]->getIdentifiantBDD() . "'name='filiere" . $tabFilieres[$i]->getIdentifiantBDD() . "'> " . $tabFilieres[$i]->getNom() . "</td>";
                   }
-                  ?>
-                </select> mois
-              </td>
-              <td id="dureeAlt">
-                <select name="duree">
-                  <?php
-                  for ($i = 1; $i <= 2; $i++) {
-                    if (isset($_POST['duree']) && $_POST['duree'] == $i) {
-                      echo"<option selected value='$i'>$i</option>";
-                    } else {
-                      echo"<option value='$i'>$i</option>";
-                    }
+                  if ($i % 5 == 5) {
+                    echo "</tr>";
                   }
-                  ?>
-                </select> an(s)
-              </td>
-            </tr>
-            <tr>
-              <th>Indemnités :</th>
-              <td><input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } ?>" name="indemnites" size="100"/></td>
-            </tr>
-                <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
-                  <th>Type de contrat (*) :</th>
-                  <td>
-                    <input type="radio" id="" name ="typeContrat" checked="checked" value="1" onclick=""> Apprentissage
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio"  id="" name ="typeContrat" value="0" onclick=""> Professionnalisation
-                  </td>
-                </tr>
+                }
+                ?>
+              </table>
+            </td>
+          </tr>
 
-            <tr>
+          <tr>
+            <th colspan="2"><p/><hr/><p/></th>
+          </tr>
+          <th>Durée (*) :</th>
+          <td id="dureeStage">Entre
+            <select name="dureeMin">
+              <?php
+              for ($i = 1; $i <= 12; $i++) {
+                if (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i) {
+                  echo"<option selected value='$i'>$i</option>";
+                } else {
+                  echo"<option value='$i'>$i</option>";
+                }
+              }
+              ?>
+            </select> et <select name="dureeMax">
+              <?php
+              for ($i = 1; $i <= 12; $i++) {
+                if (isset($_POST['dureeMax']) && $_POST['dureeMax'] == $i) {
+                  echo"<option selected value='$i'>$i</option>";
+                } else {
+                  echo"<option value='$i'>$i</option>";
+                }
+              }
+              ?>
+            </select> mois
+          </td>
+          <td id="dureeAlt">
+            <select name="duree">
+              <?php
+              for ($i = 1; $i <= 2; $i++) {
+                if (isset($_POST['duree']) && $_POST['duree'] == $i) {
+                  echo"<option selected value='$i'>$i</option>";
+                } else {
+                  echo"<option value='$i'>$i</option>";
+                }
+              }
+              ?>
+            </select> an(s)
+          </td>
+        </tr>
+        <tr>
+          <th>Indemnités :</th>
+          <td><input type="text" value="<?php if (isset($_POST['indemnites'])) { echo $_POST['indemnites']; } ?>" name="indemnites" size="100"/></td>
+        </tr>
+        <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
+          <th>Type de contrat (*) :</th>
+          <td>
+            <input type="radio" id="" name ="typeContrat" checked="checked" value="1" onclick=""> Apprentissage
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio"  id="" name ="typeContrat" value="0" onclick=""> Professionnalisation
+          </td>
+        </tr>
+
+        <tr>
+          <tr>
+            <th colspan="2"><p/><hr/><p/></th>
+          </tr>
+          <th>Compétence(s) (*) :</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table>
+              <!-- Récupération des compétences -->
+              <?php
+              for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+                if ($i % 6 == 0) {
+                  echo "<tr>";
+                }
+                if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+                  echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                } else {
+                  echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                }
+                if ($i % 6 == 6) {
+                  echo "</tr>";
+                }
+              }
+              ?>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" value="Ajouter une compétence" onClick="ajout_competence()"/>
+            <div id="ajout_competence"></div>
+          </td>
+        </tr>
+        <tr>
+          <th>Environnement(s) :</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table>
               <tr>
-                <th colspan="2"><p/><hr/><p/></th>
-              </tr>
-              <th>Compétence(s) (*) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <!-- Récupération des compétences -->
-                  <?php
-                  for ($i = 0; $i < sizeof($tabCompetences); $i++) {
-                    if ($i % 6 == 0) {
-                      echo "<tr>";
-                    }
-                    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
-                      echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                    } else {
-                      echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                    }
-                    if ($i % 6 == 6) {
-                      echo "</tr>";
-                    }
-                  }
-                  ?>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="button" value="Ajouter une compétence" onClick="ajout_competence()"/>
-                <div id="ajout_competence"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>Environnement(s) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'";} ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
-                    <td width="100"><input <?php if (isset($_POST['environnementUnix'])) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"> Unix/Linux</td>
-                    <td width="100"><input <?php if (isset($_POST['environnementMac'])) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"> Macintosh</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2"><p/><hr/><p/></th>
-            </tr>
-
-
-
-              <tr>
-
-
-              <tr>
-                <th>Remarques diverses :</th>
-                <td><textarea style ="resize:none;" name="rmq"><?php if (isset($_POST['rmq'])) { echo $_POST['rmq']; } ?></textarea></td>
+                <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'";} ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
+                <td width="100"><input <?php if (isset($_POST['environnementUnix'])) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"> Unix/Linux</td>
+                <td width="100"><input <?php if (isset($_POST['environnementMac'])) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"> Macintosh</td>
               </tr>
             </table>
           </td>
         </tr>
         <tr>
-          <td>
-            <table id="presentation_saisieOffreDeStage">
-              <tr id="entete2">
-                <td colspan=2>L'entreprise</td>
-              </tr>
-              <tr>
-                <th width="170">Nom (*) :</th>
-                <td><input type="text" value="<?php if (isset($_POST['nom_entreprise'])) { echo $_POST['nom_entreprise']; } ?>" name="nom_entreprise" size="50"/></td>
-              </tr>
-              <tr>
-                <th>Adresse (*) :</th>
-                <td><input type="text" value="<?php if (isset($_POST['adresse'])) { echo $_POST['adresse']; } ?>" name="adresse" size="50"/></td>
-              </tr>
-              <tr>
-                <th>Ville (*) :</th>
-                <td><input type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>" name="ville" size="50"/></td>
-              </tr>
-              <tr>
-                <th>Code postal (*) :</th>
-                <td><input type="text" value="<?php if (isset($_POST['codePostal'])) { echo $_POST['codePostal']; } ?>" name="codePostal" size="50"/></td>
-              </tr>
-              <tr>
-                <th>Pays :</th>
-                <td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
-              </tr>
-              <tr>
-                <th>Email DRH ou équivalent :</th>
-                <td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
-              </tr>
-              <th>SIRET (*) :</th>
-              <td><input type="text" value="<?php if (isset($_POST['siret'])) { echo $_POST['siret']; } else { echo ""; } ?>" name="siret" size="50"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table id="presentation_saisieOffreDeStage">
-            <tr id="entete2">
-              <td colspan=2>Contact ou maître de stage</td>
-            </tr>
-            <tr>
-              <th width='170'>Nom (*) :</th>
-              <td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } ?>" name="nom_contact" size="50"/></td>
-            </tr>
-            <tr>
-              <th>Prénom (*) :</th>
-              <td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } ?>" name="prenom_contact" size="50"/></td>
-            </tr>
-            <tr>
-              <th>Tel (*) :</th>
-              <td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
-            </tr>
-            <tr>
-              <th>Fax :</th>
-              <td><input type="text" value="<?php if (isset($_POST['fax_contact'])) { echo $_POST['fax_contact']; } ?>" name="fax_contact" size="50"/></td>
-            </tr>
-            <tr>
-              <th>Email (*) :</th>
-              <td><input type="text" value="<?php if (isset($_POST['email_contact'])) { echo $_POST['email_contact']; } ?>" name="email_contact" size="50"/></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <div class="align-center"><input type="submit" value="Envoyer"></div>
-      </tr>
-    </table>
-  </FORM>
-  <?php
+          <th colspan="2"><p/><hr/><p/></th>
+        </tr>
+        <tr>
+          <tr>
+            <th>Remarques diverses :</th>
+            <td><textarea style ="resize:none;" name="rmq"><?php if (isset($_POST['rmq'])) { echo $_POST['rmq']; } ?></textarea></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table id="presentation_saisieOffreDeStage">
+          <tr id="entete2">
+            <td colspan=2>L'entreprise</td>
+          </tr>
+          <tr>
+            <th width="170">Nom (*) :</th>
+            <td><input type="text" value="<?php if (isset($_POST['nom_entreprise'])) { echo $_POST['nom_entreprise']; } ?>" name="nom_entreprise" size="50"/></td>
+          </tr>
+          <tr>
+            <th>Adresse (*) :</th>
+            <td><input type="text" value="<?php if (isset($_POST['adresse'])) { echo $_POST['adresse']; } ?>" name="adresse" size="50"/></td>
+          </tr>
+          <tr>
+            <th>Ville (*) :</th>
+            <td><input type="text" value="<?php if (isset($_POST['ville'])) { echo $_POST['ville']; } ?>" name="ville" size="50"/></td>
+          </tr>
+          <tr>
+            <th>Code postal (*) :</th>
+            <td><input type="text" value="<?php if (isset($_POST['codePostal'])) { echo $_POST['codePostal']; } ?>" name="codePostal" size="50"/></td>
+          </tr>
+          <tr>
+            <th>Pays :</th>
+            <td><input type="text" value="<?php if (isset($_POST['pays'])) { echo $_POST['pays']; } else { echo 'FRANCE'; } ?>" name="pays" size="50"/></td>
+          </tr>
+          <tr>
+            <th>Email DRH ou équivalent :</th>
+            <td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
+          </tr>
+          <th>SIRET (*) :</th>
+          <td><input type="text" value="<?php if (isset($_POST['siret'])) { echo $_POST['siret']; } else { echo ""; } ?>" name="siret" size="50"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table id="presentation_saisieOffreDeStage">
+        <tr id="entete2">
+          <td colspan=2>Contact ou maître de stage</td>
+        </tr>
+        <tr>
+          <th width='170'>Nom (*) :</th>
+          <td><input type="text" value="<?php if (isset($_POST['nom_contact'])) { echo $_POST['nom_contact']; } ?>" name="nom_contact" size="50"/></td>
+        </tr>
+        <tr>
+          <th>Prénom (*) :</th>
+          <td><input type="text" value="<?php if (isset($_POST['prenom_contact'])) { echo $_POST['prenom_contact']; } ?>" name="prenom_contact" size="50"/></td>
+        </tr>
+        <tr>
+          <th>Tel (*) :</th>
+          <td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
+        </tr>
+        <tr>
+          <th>Fax :</th>
+          <td><input type="text" value="<?php if (isset($_POST['fax_contact'])) { echo $_POST['fax_contact']; } ?>" name="fax_contact" size="50"/></td>
+        </tr>
+        <tr>
+          <th>Email (*) :</th>
+          <td><input type="text" value="<?php if (isset($_POST['email_contact'])) { echo $_POST['email_contact']; } ?>" name="email_contact" size="50"/></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <div class="align-center"><input type="submit" value="Envoyer"></div>
+  </tr>
+</table>
+</FORM>
+<?php
 }
 
 /**
