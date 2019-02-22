@@ -1023,53 +1023,24 @@ public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $fili
   <form action="javascript:">
     <table width="100%">
       <tr>
-        <td width="50%" align="center">
-          <table>
-            <tr>
-              <td>Nom de l'etudiant</td>
-              <td>
-                <select name="idEtudiant">
-                  <option value="-1"></option>
-                  <?php
-                  for ($i = 0; $i < sizeof($tabEtu); $i++) {
-                    if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
-                    echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-                    else
-                    echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-                  }
-                  ?>
-                </select>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td width="50%">
-          <table>
-            <!-- <tr>
-              <td>Titre de l'offre d'alternance</td>
-              <td>
-                <select id="offre" type="text" name="offre"/>
-                <?php
-                //echo "<option value='*'>Tous</option>";
-                //for ($i = 0; $i < sizeof($tabE); $i++) {
-                //  if (isset($_POST['offre']) && $_POST['offre'] == $tabE[$i]->getIdentifiantBDD())
-                //  echo "<option selected value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
-                //  else
-                  //echo "<option value='" . $tabE[$i]->getIdentifiantBDD() . "'>" . $tabE[$i]->getTitre() . "</option>";
-                //}
-                ?>
-              </select>
-            </td>
-          </tr> -->
-        </table>
-      </td>
-    </tr>
+          <td width='50%' align='center'>Nom de l'etudiant :
+             <!-- <select name="idEtudiant" id="idEtudiant"> -->
+            <select name="idEtudiant" id="idEtudiant" onchange='postForm()'>
+              <option value="-1">-------------------------</option>
+              <?php
+              for ($i = 0; $i < sizeof($tabEtu); $i++) {
+                if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
+                echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+                else
+                echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+              }
+              ?>
+            </select>
+          </td>
+          <td width = '50%'></td>
+        </tr>
   </table>
 </form>
-<script type="text/javascript">
-new Array("annee", "filiere", "parcours");
-new LoadData(table, "<?php echo $page; ?>", "onchange");
-</script>
 <?php
 }
 
@@ -1084,29 +1055,28 @@ new LoadData(table, "<?php echo $page; ?>", "onchange");
 public static function afficherListeOffresSuivi($tabOffreDAlt) {
   ?>
 
-  <br/>
-  <table width="100%">
+  <form action='' method='POST' class='formToTableCheatStyle' onsubmit="postForm()">
+  <table class='tableToFormCheatStyle'>
     <tr id="entete">
-      <td width="30%">Titre</td>
-      <td width="35%">Entreprise</td>
-      <td width="15%">Etat</td>
+      <td width="30%" class='cellBordersCheatStyle'>Titre</td>
+      <td width="35%" class='cellBordersCheatStyle'>Entreprise</td>
+      <td width="15%" class='cellBordersCheatStyle'>Etat</td>
     </tr>
-    <form action='' method="post">
       <?php
-
+      $cpt = 0;
       for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
           ?>
-          <tr id="<?php echo $i ?>">
-            <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
-            <td>
+          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+            <td class='cellBordersCheatStyle' id="idOffre-<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
+            <td class='cellBordersCheatStyle' id="idEntreprise-<?php echo $tabOffreDAlt[$i]->getEntreprise()->getIdentifiantBDD(); ?>">
               <?php
                 $entreprise = $tabOffreDAlt[$i]->getEntreprise();
                 echo $entreprise->getNom();
                 ?>
             </td>
-            <td align="center">
-              <select <?php echo 'name="statut'.$i; ?> >
-                <option value="--">--</option>
+            <td align="center"  class='cellBordersCheatStyle'>
+              <select <?php echo 'id="idStatut-'.$i.'" name="statut'.$i.'"'; ?> >
+                <option value="-------------">-------------</option>
                 <option value="Pas intéressé">Pas intéressé</option>
                 <option value="Postulé">Postulé</option>
                 <option value="Entretien">Entretien</option>
@@ -1120,8 +1090,7 @@ public static function afficherListeOffresSuivi($tabOffreDAlt) {
       }
       ?>
     </table>
-    <br/><br/>
-    <div class="align-center"><input type="submit" value="Submit"></div>
+    <div class="align-center" style='background-color:white;'><input type="submit" value="Enregistrer"></div>
   </form>
   <?php
 }

@@ -95,6 +95,7 @@ if (isset($access_control_target)) {
   $tab27 = 'theme_offredalternance';
   $tab28 = 'relation_competence_offredalternance';
   $tab29 = 'offredalternance';
+  $tab30 = 'candidature_alternance';
 
   function deconnexion() {
     global $db;
@@ -162,7 +163,7 @@ if (isset($access_control_target)) {
   // ----------------------------------------------------------------------------
   // Variables globales
 
-  $emailResponsable = "allistair.swarig@gmail.com";
+  $emailResponsable = "";
   $baseSite = "http://testvirtualhost/";
 
   ?>

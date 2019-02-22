@@ -135,7 +135,7 @@ LoadData.prototype = {
 			switch(this.action) {
 				case "onchange" :
 					var composantJS = this;
-					console.log("Ypdating : "+this.idSources[i]);
+					console.log("Updating : "+this.idSources[i]);
 					document.getElementById(this.idSources[i]).onchange = function() {
 						composantJS.load();
 					}

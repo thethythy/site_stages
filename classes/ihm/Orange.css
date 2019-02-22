@@ -642,10 +642,11 @@ de la table au form et le style du form à la table
     border-collapse: collapse;
     background-color: #ededec;
     text-align: center;
+    width:100%;
 }
 
 .formToTableCheatStyle {
-      width: 100%;
+      text-align: center;
       background-color= white;
       border: medium none white;
 }

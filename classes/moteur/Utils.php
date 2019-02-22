@@ -228,7 +228,7 @@ class Utils {
   */
   public static function printLog($string){
     $log = fopen("log.txt", "a+");
-    fwrite($log, $string);
+    fwrite($log, "\n".$string);
     fclose($log);
   }
 
