@@ -1112,7 +1112,7 @@ public static function afficherListeOffres($tabOffreDeStages) {
     for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
       if ($tabOffreDeStages[$i]->estVisible()) {
         ?>
-        <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
           <td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
           <td>
             <?php
@@ -1197,7 +1197,7 @@ public static function afficherListeOffresAEditer($tabOffreDeStages) {
           <?php
         }
         ?>
-        <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
           <td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
           <td><?php
           $entreprise = $tabOffreDeStages[$i]->getEntreprise();
@@ -1256,7 +1256,7 @@ if ($cpt == 0) {
   for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
     if ($tabOffreDeStages[$i]->estVisible()) {
       ?>
-      <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+      <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
         <td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
         <td><?php
         $entreprise = $tabOffreDeStages[$i]->getEntreprise();

@@ -66,47 +66,64 @@ $filtreOffres = new Filtre($filtreOffres, $filtresOffres[$i], "AND");
 
 ?>
 <script>
-
 function jsonParse(text) {
-        console.log(text);
-        try {
-            var json = JSON.parse(text);
-            console.log(json);
+	console.log(text);
+	try {
+		var json = JSON.parse(text);
+		//console.log(json);
+	}
+	catch(e) {
+		return false;
+	}
+	return json;
+}
+
+function getEtudiant(){
+  var id_etu = document.getElementById('idEtudiant').value;
+  xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var json = jsonParse(this.responseText);
+            //console.log("!json (print erreur si false) = "+json)
+            if (!json || json.requestStatus !== true) {
+                document.getElementById('erreurAjax').innerHTML = (json.error || "Une erreur est survenue.") + "\nVous pouvez réactualiser la page et recommencer.";
+                return;
+            }
         }
-        catch(e) {
-            return false;
-        }
-        return json;
     }
+    var urlEncodeData = 'idetudiant=' + id_etu;
+
+  xhr.open('POST', 'etudiantHandler.php', true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send(urlEncodeData);
+}
 
 function postForm(){
-
-
-
   var id_etu = document.getElementById('idEtudiant').value;
-  console.log(id_etu);
-  var idEntreprises = document.querySelectorAll('[id^="idEntreprise-"]');
-  var idOffres = document.querySelectorAll('[id^="idOffre-"]');
-  var idStatuts = document.querySelectorAll('[id^="idStatut-"]');
+  //console.log(id_etu);
+  var idOffres = document.querySelectorAll('[id^="idOffre-"]'); // Récupère tous les éléments du document dont l'id commence par idOffre-
+  var idEntreprises = document.querySelectorAll('[id^="idEntreprise-"]'); // Récupère tous les éléments du document dont l'id commence par idEntreprise-
+  var idStatuts = document.querySelectorAll('[id^="idStatut-"]'); // Récupère tous les éléments du document dont l'id commence par idStatut-
   var entreprises = [];
   var offres = [];
   var statuts = [];
-  var urlEncodeData = 'idetudiant='+id_etu;
+  var urlEncodeData = 'idetudiant=' + id_etu;
+  urlEncodeData = urlEncodeData + '&' + 'length=' + idEntreprises.length;
 
   for(var i = 0; i < idEntreprises.length; i++){
-    entreprises.push(idEntreprises[i].id);
-    entreprises[i] = (entreprises[i].split('-'))[1];
+    offres.push(idOffres[i].id); // Ajoute l'id en fin de tableau
+    offres[i] = (offres[i].split('-'))[1]; // Coupe la chaine idOffre-xxx et ne garde que la véritable id de l'offre
 
-    offres.push(idOffres[i].id);
-    offres[i] = (offres[i].split('-'))[1];
+    entreprises.push(idEntreprises[i].id); // Ajoute l'id en fin de tableau
+    entreprises[i] = (entreprises[i].split('-'))[1]; // Coupe la chaine idOffre-xxx et ne garde que la véritable id de l'offre
 
-    statuts.push(idStatuts[i].id);
-    statuts[i] = (statuts[i].split('-'))[1];
+    statuts.push(idStatuts[i].value); // Ajoute la valeur du statut en fin de tableau
 
     urlEncodeData = urlEncodeData
-    + '&' + 'identreprise' + i + '=' + entreprises[i]
     + '&' + 'idoffre'      + i + '=' + offres[i]
-    + '&' + 'idstatut'     + i + '=' + statuts[i];
+    + '&' + 'identreprise' + i + '=' + entreprises[i]
+    + '&' + 'statut'       + i + '=' + statuts[i];
   }
 
   //Remplacer les espaces, ormalement il n'y en a pas mais au cas où
@@ -116,13 +133,11 @@ function postForm(){
   xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var json = jsonParse(this.responseText);
-            console.log(!json);
-            console.log(json.requestStatus);
+            console.log("!json (print erreur si false) = "+json)
             if (!json || json.requestStatus !== true) {
-                console.log(json.error || 'Something Bad Happened');
+                document.getElementById('erreurAjax').innerHTML = (json.error || "Une erreur est survenue.") + "\nVous pouvez réactualiser la page et recommencer.";
                 return;
             }
-            alert('Is working');
         }
     }
 
@@ -141,11 +156,9 @@ if (sizeof($tabEtu) == 0){
 
 
 } else {
-  OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere,"listerOffreDeStageSuiviData.php");
-
   echo "<div id='data1'>\n";
   $tabO = OffreDAlternance::getListeOffreDAlternance($filtreOffres);
-  OffreDAlternance_IHM::afficherListeOffresSuivi($tabO);
+  OffreDAlternance_IHM::afficherFormulaireSuivi($tabO, $tabEtu, $annee, $parcours, $filiere,"listerOffreDeStageSuiviData.php");
   echo "\n</div>";
 
 }

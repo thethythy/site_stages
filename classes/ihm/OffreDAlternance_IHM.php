@@ -146,7 +146,7 @@ class OffreDAlternance_IHM {
       for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
         if (!$tabOffreDAlt[$i]->estVisible()) {//A changer ...
           ?>
-          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
             <td>
               <?php
@@ -232,7 +232,7 @@ class OffreDAlternance_IHM {
             <?php
           }
           ?>
-          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
             <td><?php
             $entreprise = $tabOffreDAlt[$i]->getEntreprise();
@@ -291,7 +291,7 @@ if ($cpt == 0) {
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
-      <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+      <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
         <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
         <td><?php
         $entreprise = $tabOffreDAlt[$i]->getEntreprise();
@@ -1017,7 +1017,7 @@ $duree_init, $competence_init) {
 * Afficher un formulaire de sélection des offres d'alternance
 * @param string $fichier La page de traitement du formulaire
 */
-public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $filiere, $page) {
+public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu, $annee, $parcours, $filiere, $page) {
   $tabE = OffreDAlternance::getListeOffreDAlternance("");//a bouger, création interface ?
   ?>
   <form action="javascript:">
@@ -1025,7 +1025,7 @@ public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $fili
       <tr>
           <td width='50%' align='center'>Nom de l'etudiant :
              <!-- <select name="idEtudiant" id="idEtudiant"> -->
-            <select name="idEtudiant" id="idEtudiant" onchange='postForm()'>
+            <select name="idEtudiant" id="idEtudiant" onchange='getEtudiant()'>
               <option value="-1">-------------------------</option>
               <?php
               for ($i = 0; $i < sizeof($tabEtu); $i++) {
@@ -1041,6 +1041,44 @@ public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $fili
         </tr>
   </table>
 </form>
+<form action='' method='POST' class='formToTableCheatStyle'>
+<table class='tableToFormCheatStyle'>
+  <tr id="entete">
+    <td width="30%" class='cellBordersCheatStyle'>Titre</td>
+    <td width="35%" class='cellBordersCheatStyle'>Entreprise</td>
+    <td width="15%" class='cellBordersCheatStyle'>Etat</td>
+  </tr>
+    <?php
+    $cpt = 0;
+    for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
+        ?>
+        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <td class='cellBordersCheatStyle' id="idOffre-<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
+          <td class='cellBordersCheatStyle' id="idEntreprise-<?php echo $tabOffreDAlt[$i]->getEntreprise()->getIdentifiantBDD(); ?>">
+            <?php
+              $entreprise = $tabOffreDAlt[$i]->getEntreprise();
+              echo $entreprise->getNom();
+              ?>
+          </td>
+          <td align="center"  class='cellBordersCheatStyle'>
+            <select <?php echo 'id="idStatut-'.$i.'" name="statut'.$i.'"'; ?> >
+              <option value="-------------">-------------</option>
+              <option value="Pas intéressé">Pas intéressé</option>
+              <option value="Postulé">Postulé</option>
+              <option value="Entretien">Entretien</option>
+              <option value="Entrenu">Entretenu</option>
+              <option value="Pris">Pris</option>
+              <option value="Refusé">Refusé</option>
+            </select>
+          </td>
+        </tr>
+        <?php
+    }
+    ?>
+  </table>
+</form>
+<div class="align-center"><button type="button" onclick="postForm()">Enregistrer</button></div>
+
 <?php
 }
 
@@ -1055,43 +1093,7 @@ public static function afficherFormulaireSuivi($tabEtu, $annee, $parcours, $fili
 public static function afficherListeOffresSuivi($tabOffreDAlt) {
   ?>
 
-  <form action='' method='POST' class='formToTableCheatStyle' onsubmit="postForm()">
-  <table class='tableToFormCheatStyle'>
-    <tr id="entete">
-      <td width="30%" class='cellBordersCheatStyle'>Titre</td>
-      <td width="35%" class='cellBordersCheatStyle'>Entreprise</td>
-      <td width="15%" class='cellBordersCheatStyle'>Etat</td>
-    </tr>
-      <?php
-      $cpt = 0;
-      for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
-          ?>
-          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
-            <td class='cellBordersCheatStyle' id="idOffre-<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
-            <td class='cellBordersCheatStyle' id="idEntreprise-<?php echo $tabOffreDAlt[$i]->getEntreprise()->getIdentifiantBDD(); ?>">
-              <?php
-                $entreprise = $tabOffreDAlt[$i]->getEntreprise();
-                echo $entreprise->getNom();
-                ?>
-            </td>
-            <td align="center"  class='cellBordersCheatStyle'>
-              <select <?php echo 'id="idStatut-'.$i.'" name="statut'.$i.'"'; ?> >
-                <option value="-------------">-------------</option>
-                <option value="Pas intéressé">Pas intéressé</option>
-                <option value="Postulé">Postulé</option>
-                <option value="Entretien">Entretien</option>
-                <option value="Entrenu">Entretenu</option>
-                <option value="Pris">Pris</option>
-                <option value="Refusé">Refusé</option>
-              </select>
-            </td>
-          </tr>
-          <?php
-      }
-      ?>
-    </table>
-    <div class="align-center" style='background-color:white;'><input type="submit" value="Enregistrer"></div>
-  </form>
+
   <?php
 }
 }

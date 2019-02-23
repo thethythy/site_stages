@@ -19,6 +19,8 @@ $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Alternant');
 
 IHM_Generale::header("Suivi des", "candidatures", "../", $tabLiens);
+
+echo "<div id='erreurAjax'></div>";
 Promotion_IHM::afficherFormulaireRecherche("suiviCandidaturesData.php", false, false);
 
 echo "<div id='data'>";

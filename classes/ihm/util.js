@@ -104,6 +104,7 @@ Keys = {
 	DOWN: 40
 }
 
+
 /** Afficher un message dans une boîte d'alerte */
 Log = {
 	error: function(msg) {

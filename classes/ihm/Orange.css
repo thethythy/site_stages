@@ -409,7 +409,7 @@ textarea {
     padding: 4px;
 }
 
-#entete td, #ligne0 td, #ligne1 td {
+#entete td, .ligne0 td, .ligne1 td {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
@@ -426,16 +426,16 @@ textarea {
     padding: 4px;
 }
 
-#entete2 td, #ligne0 td, #ligne1 td {
+#entete2 td, .ligne0 td, .ligne1 td {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-#ligne0 {
+.ligne0 {
     background: #DDDDDD;
 }
 
-#ligne1 {
+.ligne1 {
     background: #ededec;
 }
 

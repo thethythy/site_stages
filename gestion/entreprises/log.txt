@@ -22,3 +22,4 @@ INSERT INTO contact VALUES (
 			'sdf',
 			'539');
 SELECT LAST_INSERT_ID() AS ID FROM contactINSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');
+INSERT INTO theme_offredalternance VALUES('11', '320');

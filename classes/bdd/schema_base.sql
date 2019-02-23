@@ -775,7 +775,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`candidature_alternance` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_candidature_alternance_offredalternance_idoffre`
-    FOREIGN KEY (`idetudiant`)
+    FOREIGN KEY (`idoffre`)
     REFERENCES `stages`.`offredalternance` (`idoffre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,

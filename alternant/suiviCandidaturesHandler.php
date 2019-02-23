@@ -12,33 +12,42 @@ try {
 
     throw new Exception('Invalid Request', 2000);
   } else {
-    Utils::PrintLog(print_r($_POST));
+
+
+    for( $i = 0 ; $i < $_POST['length'] ; $i++){
+      // echo "\nDébut";
+      // echo "\netudiant ".$_POST['idetudiant'];
+      // echo "\nOffre ".$i." ".$_POST['idoffre'.$i];
+      // echo "\nEntreprise ".$i." ".$_POST['identreprise'.$i];
+      // echo "\nStatut ".$i." ".$_POST['statut'.$i];
+      // echo "\nFin";
+      $tabCndtr = array();
+      $cndtr = Candidature::getCandidature($_POST['idetudiant'], $_POST['idoffre'.$i], $_POST['identreprise'.$i]);
+
+      // Chercher si cette candidature existe dans la BDD
+      if($cndtr){
+         //La candidature existe, on la met à jour
+        array_push($tabCndtr, $cndtr->getIdentifiantBDD());
+        array_push($tabCndtr, $cndtr->getEtudiant());
+        array_push($tabCndtr, $cndtr->getOffre());
+        array_push($tabCndtr, $cndtr->getEntreprise());
+        array_push($tabCndtr, $_POST['statut'.$i]);
+        Candidature::modifierDonnees($tabCndtr);
+      } else {
+        //La candidature n'existe pas, on la crée
+        array_push($tabCndtr, $_POST['idetudiant']);
+        array_push($tabCndtr, $_POST['idoffre'.$i]);
+        array_push($tabCndtr, $_POST['identreprise'.$i]);
+        array_push($tabCndtr, $_POST['statut'.$i]);
+        Candidature::saisirDonnees($tabCndtr);
+      }
+    }
+
     $result = true;
-    // global $db;
-    // global $tab9;
-    //
-    // if ($etudiant->getIdentifiantBDD() == "") {
-    //   $sql = "INSERT INTO $tab9 (nometudiant, prenometudiant, email_institutionnel, email_personnel, codeetudiant)
-    //   VALUES ('" . $etudiant->getNom() . "',
-    //   '" . $etudiant->getPrenom() . "',
-    //   '" . $etudiant->getEmailInstitutionel() . "',
-    //   '" . $etudiant->getEmailPersonnel() . "',
-    //   '" . $etudiant->getCodeEtudiant() . "')";
-    //
-    //   $db->query($sql);
-    // } else {
-    //   $sql = "UPDATE $tab9
-    //   SET nometudiant='" . $etudiant->getNom() . "',
-    //   prenometudiant='" . $etudiant->getPrenom() . "',
-    //   email_institutionnel='" . $etudiant->getEmailInstitutionel() . "',
-    //   email_personnel='" . $etudiant->getEmailPersonnel() . "',
-    //   codeetudiant='" . $etudiant->getCodeEtudiant() . "'
-    //   WHERE idetudiant = '" . $etudiant->getIdentifiantBDD() . "'";
-    //   $db->query($sql);
-    // }
+
 
     if ($result === false) {
-      throw new Exception('DB Query Failed', 202);
+      throw new Exception('Erreur lors de l\'enregistrement en base de données.', 202);
     } else  {
       // requestStatus à true si tout s'est bien passé
       exit(json_encode(
