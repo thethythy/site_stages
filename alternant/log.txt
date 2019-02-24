@@ -1,21 +1,32 @@
 
+413
+4302317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-SELECT * FROM candidature_alternance WHERE idetudiant=425 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=425 AND idoffre=323 AND identreprise=545
+4302317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4312317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=323 AND identreprise=545
-SELECT * FROM candidature_alternance WHERE idetudiant=433 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=433 AND idoffre=323 AND identreprise=545
+4302317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4302317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4302317539323545
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4302317539323545
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4302317539323545
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
+SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
+4312317539323545
+SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=317 AND identreprise=539
+SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=323 AND identreprise=545
+4302317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545

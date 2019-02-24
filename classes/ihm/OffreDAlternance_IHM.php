@@ -1025,7 +1025,7 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu, $annee, $
       <tr>
           <td width='50%' align='center'>Nom de l'etudiant :
              <!-- <select name="idEtudiant" id="idEtudiant"> -->
-            <select name="idEtudiant" id="idEtudiant" onchange='getEtudiant()'>
+            <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant()'>
               <option value="-1">-------------------------</option>
               <?php
               for ($i = 0; $i < sizeof($tabEtu); $i++) {

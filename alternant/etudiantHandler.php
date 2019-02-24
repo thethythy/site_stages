@@ -12,15 +12,26 @@ try {
 
     throw new Exception('Invalid Request', 2000);
   } else {
+    Utils::printLog(implode($_POST));
+    $tabResponse = array();
+    for( $i = 0 ; $i < $_POST['length'] ; $i++){
+      $cndtr = Candidature::getCandidature($_POST['idetudiant'], $_POST['idoffre'.$i], $_POST['identreprise'.$i]);
 
-    
-
+      // Chercher si cette candidature existe dans la BDD
+      if($cndtr){
+         //La candidature existe, on récupère son statut
+        $tabResponse[$i] = $cndtr->statut;
+      } else {
+        //La candidature n'existe pas, on renvoit une chaine vide
+        $tabResponse[$i] = "-------------";
+      }
+    }
+    $tabResponse['length'] = $_POST['length'];
     // requestStatus à true si tout s'est bien passé
-    exit(json_encode(
-      array(
-        'requestStatus' => true
-      )
-    )); // fin json encode
+    $tabResponse['requestStatus'] = true;
+
+    echo json_encode($tabResponse);
+    exit;
   }
 } catch(Exception $e) {
   echo json_encode(

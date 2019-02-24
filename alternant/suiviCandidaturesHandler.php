@@ -15,12 +15,6 @@ try {
 
 
     for( $i = 0 ; $i < $_POST['length'] ; $i++){
-      // echo "\nDébut";
-      // echo "\netudiant ".$_POST['idetudiant'];
-      // echo "\nOffre ".$i." ".$_POST['idoffre'.$i];
-      // echo "\nEntreprise ".$i." ".$_POST['identreprise'.$i];
-      // echo "\nStatut ".$i." ".$_POST['statut'.$i];
-      // echo "\nFin";
       $tabCndtr = array();
       $cndtr = Candidature::getCandidature($_POST['idetudiant'], $_POST['idoffre'.$i], $_POST['identreprise'.$i]);
 
