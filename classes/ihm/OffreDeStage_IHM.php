@@ -325,28 +325,10 @@ class OffreDeStage_IHM {
                 <div id="ajout_competence"></div>
               </td>
             </tr>
-            <tr>
-              <th>Environnement(s) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'";} ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
-                    <td width="100"><input <?php if (isset($_POST['environnementUnix'])) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"> Unix/Linux</td>
-                    <td width="100"><input <?php if (isset($_POST['environnementMac'])) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"> Macintosh</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
+
             <tr>
               <th colspan="2"><p/><hr/><p/></th>
             </tr>
-
-
-
-              <tr>
-
 
               <tr>
                 <th>Remarques diverses :</th>
@@ -409,10 +391,7 @@ class OffreDeStage_IHM {
               <th>Tel (*) :</th>
               <td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
             </tr>
-            <tr>
-              <th>Fax :</th>
-              <td><input type="text" value="<?php if (isset($_POST['fax_contact'])) { echo $_POST['fax_contact']; } ?>" name="fax_contact" size="50"/></td>
-            </tr>
+
             <tr>
               <th>Email (*) :</th>
               <td><input type="text" value="<?php if (isset($_POST['email_contact'])) { echo $_POST['email_contact']; } ?>" name="email_contact" size="50"/></td>
