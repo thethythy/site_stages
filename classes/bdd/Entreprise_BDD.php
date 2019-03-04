@@ -32,12 +32,7 @@ class Entreprise_BDD {
       '" . $entreprise->getEmail() . "',
       $idtype_entreprise,
       '" . $entreprise->getSiret() . "');";
-
-      $log = fopen("log.txt", "a+");
-      fwrite($log, "\n$sql");
-      fclose($log);
       $db->query($sql);
-
     } else {
       $sql = "UPDATE $tab6
       SET nom='" . $entreprise->getNom() . "',

@@ -104,6 +104,7 @@ Keys = {
 	DOWN: 40
 }
 
+
 /** Afficher un message dans une boîte d'alerte */
 Log = {
 	error: function(msg) {
@@ -135,6 +136,7 @@ LoadData.prototype = {
 			switch(this.action) {
 				case "onchange" :
 					var composantJS = this;
+					console.log("Updating : "+this.idSources[i]);
 					document.getElementById(this.idSources[i]).onchange = function() {
 						composantJS.load();
 					}
