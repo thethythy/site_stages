@@ -287,17 +287,17 @@ if ($cpt == 0) {
 
   <?php
   $cpt = 0;
-  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances : </p>";
+  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances :</p>";
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
       <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
         <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
         <td><?php
-        $entreprise = $tabOffreDAlt[$i]->getEntreprise();
-        echo $entreprise->getNom();
-        ?>
-      </td>
+          $entreprise = $tabOffreDAlt[$i]->getEntreprise();
+          echo $entreprise->getNom();
+          ?>
+        </td>
       <td><?php
       $profil = $tabOffreDAlt[$i]->getListeProfilSouhaite();
       for ($j = 0; $j < sizeof($profil); $j++) {
@@ -310,25 +310,25 @@ if ($cpt == 0) {
       ?>
     </td>
     <td><?php
-    $themes = $tabOffreDAlt[$i]->getThemes();
-    for ($j = 0; $j < sizeof($themes); $j++) {
-      if ($j == (sizeof($themes) - 1)) {
-        echo $themes[$j]->getNom();
-      } else {
-        echo $themes[$j]->getNom() . " / ";
-      }
-    }
-    ?>
+          $themes = $tabOffreDAlt[$i]->getThemes();
+          for ($j = 0; $j < sizeof($themes); $j++) {
+            if ($j == (sizeof($themes) - 1)) {
+              echo $themes[$j]->getNom();
+            } else {
+              echo $themes[$j]->getNom() . " / ";
+            }
+          }
+        ?>
   </td>
   <td align="center">
-    <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
-      <img src="../../images/search.png">
-    </a>
+    <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><img src="../../images/search.png"></a>
   </td>
 </tr>
+
 <?php
 }
 }
+echo "</table>"
 ?>
 
 <br/><br/>
@@ -492,122 +492,122 @@ public static function afficherFormulaireModification() {
           <tr>
             <th colspan="2"><p/><hr/><p/></th>
           </tr>
-            <tr>
-              <th colspan="2">Compétence(s) (*) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <!-- Récupération des compétences -->
-                  <?php
-                  $tabCompetences = Competence::listerCompetences();
-                  for ($i = 0; $i < sizeof($tabCompetences); $i++) {
-                    if ($i % 6 == 0) { echo "<tr>";}
+          <tr>
+            <th colspan="2">Compétence(s) (*) :</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table>
+                <!-- Récupération des compétences -->
+                <?php
+                $tabCompetences = Competence::listerCompetences();
+                for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+                  if ($i % 6 == 0) { echo "<tr>";}
 
-                    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+                  if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+                    echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                  } else {
+                    $competenceTrouve = false;
+                    if (isset($modificationCompetences)) {
+                      for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
+                        if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
+                          $competenceTrouve = true;
+                        }
+                      }
+                    }
+                    if ($competenceTrouve) {
                       echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
                     } else {
-                      $competenceTrouve = false;
-                      if (isset($modificationCompetences)) {
-                        for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
-                          if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
-                            $competenceTrouve = true;
-                          }
-                        }
-                      }
-                      if ($competenceTrouve) {
-                        echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                      } else {
-                        echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                      }
+                      echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
                     }
+                  }
 
-                    if ($i % 6 == 6) { echo "</tr>"; }
+                  if ($i % 6 == 6) { echo "</tr>"; }
+                }
+                ?>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
+              <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
+              <div id="ajout_competence"></div>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">Environnement(s) :</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table>
+                <tr>
+                  <?php
+                  $winTrouve = false;
+                  $unixTrouve = false;
+                  $macTrouve = false;
+                  if (isset($environnement)) {
+                    for ($i = 0; $i < sizeof($environnement); $i++) {
+                      if ($environnement[$i] == "win")
+                      $winTrouve = true;
+                      if ($environnement[$i] == "unix")
+                      $unixTrouve = true;
+                      if ($environnement[$i] == "mac")
+                      $macTrouve = true;
+                    }
                   }
                   ?>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
-                <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
-                <div id="ajout_competence"></div>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2">Environnement(s) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <?php
-                    $winTrouve = false;
-                    $unixTrouve = false;
-                    $macTrouve = false;
-                    if (isset($environnement)) {
-                      for ($i = 0; $i < sizeof($environnement); $i++) {
-                        if ($environnement[$i] == "win")
-                        $winTrouve = true;
-                        if ($environnement[$i] == "unix")
-                        $unixTrouve = true;
-                        if ($environnement[$i] == "mac")
-                        $macTrouve = true;
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
+                  </td>
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
+                  </td>
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">Thème de l'alternance :</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table>
+                <!-- Récupération des parcours -->
+                <?php
+                $tabParcours = Parcours::listerParcours();
+                for ($i = 0; $i < sizeof($tabParcours); $i++) {
+                  if ($i % 5 == 0) { echo "<tr>"; }
+
+                  if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
+                    echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                  } else {
+                    $themeTrouve = false;
+                    if (isset($modificationThemes)) {
+                      for ($j = 0; $j < sizeof($modificationThemes); $j++) {
+                        if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
+                          $themeTrouve = true;
+                        }
                       }
                     }
-                    ?>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
-                    </td>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
-                    </td>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2">Thème de l'alternance :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <!-- Récupération des parcours -->
-                  <?php
-                  $tabParcours = Parcours::listerParcours();
-                  for ($i = 0; $i < sizeof($tabParcours); $i++) {
-                    if ($i % 5 == 0) { echo "<tr>"; }
-
-                    if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
+                    if ($themeTrouve) {
                       echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
                     } else {
-                      $themeTrouve = false;
-                      if (isset($modificationThemes)) {
-                        for ($j = 0; $j < sizeof($modificationThemes); $j++) {
-                          if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
-                            $themeTrouve = true;
-                          }
-                        }
-                      }
-                      if ($themeTrouve) {
-                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-                      } else {
-                        echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-                      }
+                      echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
                     }
-                    if ($i % 5 == 5) { echo "</tr>"; }
                   }
-                  ?>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2"><p/><hr/><p/></th>
-            </tr>
+                  if ($i % 5 == 5) { echo "</tr>"; }
+                }
+                ?>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2"><p/><hr/><p/></th>
+          </tr>
 
           <tr>
             <th>Remarques diverses :</th>
@@ -1023,42 +1023,42 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu, $annee, $
   <form action="javascript:">
     <table width="100%">
       <tr>
-          <td width='50%' align='center'>Nom de l'etudiant :
-             <!-- <select name="idEtudiant" id="idEtudiant"> -->
-            <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant()'>
-              <option value="-1">-------------------------</option>
-              <?php
-              for ($i = 0; $i < sizeof($tabEtu); $i++) {
-                if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
-                echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-                else
-                echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-              }
-              ?>
-            </select>
-          </td>
-          <td width = '50%'></td>
-        </tr>
-  </table>
-</form>
-<form action='' method='POST' class='formToTableCheatStyle'>
-<table class='tableToFormCheatStyle'>
-  <tr id="entete">
-    <td width="30%" class='cellBordersCheatStyle'>Titre</td>
-    <td width="35%" class='cellBordersCheatStyle'>Entreprise</td>
-    <td width="15%" class='cellBordersCheatStyle'>Etat</td>
-  </tr>
-    <?php
-    $cpt = 0;
-    for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
+        <td width='50%' align='center'>Nom de l'etudiant :
+          <!-- <select name="idEtudiant" id="idEtudiant"> -->
+          <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant()'>
+            <option value="-1">-------------------------</option>
+            <?php
+            for ($i = 0; $i < sizeof($tabEtu); $i++) {
+              if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
+              echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+              else
+              echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+            }
+            ?>
+          </select>
+        </td>
+        <td width = '50%'></td>
+      </tr>
+    </table>
+  </form>
+  <form action='' method='POST' class='formToTableCheatStyle'>
+    <table class='tableToFormCheatStyle'>
+      <tr id="entete">
+        <td width="30%" class='cellBordersCheatStyle'>Titre</td>
+        <td width="35%" class='cellBordersCheatStyle'>Entreprise</td>
+        <td width="15%" class='cellBordersCheatStyle'>Etat</td>
+      </tr>
+      <?php
+      $cpt = 0;
+      for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
         ?>
         <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
           <td class='cellBordersCheatStyle' id="idOffre-<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
           <td class='cellBordersCheatStyle' id="idEntreprise-<?php echo $tabOffreDAlt[$i]->getEntreprise()->getIdentifiantBDD(); ?>">
             <?php
-              $entreprise = $tabOffreDAlt[$i]->getEntreprise();
-              echo $entreprise->getNom();
-              ?>
+            $entreprise = $tabOffreDAlt[$i]->getEntreprise();
+            echo $entreprise->getNom();
+            ?>
           </td>
           <td align="center"  class='cellBordersCheatStyle'>
             <select <?php echo 'id="idStatut-'.$i.'" name="statut'.$i.'"'; ?> >
@@ -1073,28 +1073,14 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu, $annee, $
           </td>
         </tr>
         <?php
-    }
-    ?>
-  </table>
-</form>
-<div class="align-center"><button type="button" onclick="postForm()">Enregistrer</button></div>
-
-<?php
-}
-
-
-
-/**
-* Afficher un tableau interactif des alternances disponibles
-* (utilisé pour sélection une offre puis la visualiser)
-* @param tableau d'objets $tabOffreDAlt Tableau des objets OffreDAlternance
-*/
-
-public static function afficherListeOffresSuivi($tabOffreDAlt) {
-  ?>
-
+      }
+      ?>
+    </table>
+  </form>
+  <div class="align-center"><button type="button" onclick="postForm()">Enregistrer</button></div>
 
   <?php
 }
+
 }
 ?>
