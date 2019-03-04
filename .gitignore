@@ -4,6 +4,7 @@ nbproject
 *.db
 *.zip
 .DS_Store
+log.txt
 documents/statistiques/*
 documents/exportations/*
 documents/demon/*

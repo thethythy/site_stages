@@ -79,6 +79,7 @@ class Gestion_IHM {
 					<li><a href="./gestion/gestionClef.php">Gérer la clef d'accès</a></li>
 					<li><a href="./gestion/exporterBDD.php">Exporter la base</a></li>
 					<li><a href='./gestion/phpInfo.php' target="_blank">Informations PHP</a></li>
+          <li><a href="./couleurs/gestionCouleur.php">Gérer les couleurs</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -92,48 +93,32 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./gestion/videroffrestage.php">Supprimer les offres</a></li>
-					<li><a href="./gestion/vidersujetstage.php">Supprimer les validations</a></li>
-					<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li><br/>
+					<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
 					<li><a href="./gestion/editiontache.php">Gestion des tâches</a></li>
 					<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
 				    </ul>
 				</td>
 			    </tr>
 			</table>
+      <table id="menuBdd">
+          <tr>
+        <td id="titreMenuBdd">
+            Promotions
+        </td>
+          </tr>
+          <tr>
+        <td>
+            <ul>
+          <li><a href="./promotions/ajouterPromotion.php">Ajouter une promotion</a></li>
+          <li><a href="./promotions/modifierPromotion.php">Modifier une promotion</a></li>
+          <li><a href="./promotions/suiviPromotion.php">Suivre la promotion</a></li>
+            </ul>
+        </td>
+          </tr>
+      </table>
 		    </td>
 
 		    <td>
-			<table id="menuBdd">
-			    <tr>
-				<td id="titreMenuBdd">
-				    Couleurs
-				</td>
-			    </tr>
-			    <tr>
-				<td>
-				    <ul>
-					<li><a href="./couleurs/gestionCouleur.php">Gérer les couleurs</a></li>
-				    </ul>
-				</td>
-			    </tr>
-			</table>
-			<table id="menuBdd">
-			    <tr>
-				<td id="titreMenuBdd">
-				    Promotions
-				</td>
-			    </tr>
-			    <tr>
-				<td>
-				    <ul>
-					<li><a href="./promotions/ajouterPromotion.php">Ajouter une promotion</a></li>
-					<li><a href="./promotions/modifierPromotion.php">Modifier une promotion</a></li>
-					<li><a href="./promotions/suiviPromotion.php">Suivre la promotion</a></li>
-				    </ul>
-				</td>
-			    </tr>
-			</table>
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
@@ -145,6 +130,7 @@ class Gestion_IHM {
 				    <ul>
 					<li><a href="./etudiants/gestionEtudiants.php">Gérer les étudiants</a></li>
 					<li><a href="./etudiants/gestionSujetDeStage.php">Gérer les demandes de validation</a></li>
+          <li><a href="./gestion/vidersujetstage.php">Supprimer les validations</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -163,6 +149,38 @@ class Gestion_IHM {
 				</td>
 			    </tr>
 			</table>
+      <table id="menuBdd">
+          <tr>
+        <td id="titreMenuBdd">
+            Stages
+        </td>
+          </tr>
+          <tr>
+        <td>
+            <ul>
+                 <li><a href="./entreprises/listeDesOffreDeStage.php">Valider/Editer des offres de stage</a></li>
+                 <li><a href="">Supprimer des offres de stage</a></li>
+            </ul>
+        </td>
+          </tr>
+      </table>
+      <table id="menuBdd">
+          <tr>
+        <td id="titreMenuBdd">
+            Alternance
+        </td>
+          </tr>
+          <tr>
+        <td>
+            <ul>
+                <li><a href="./entreprises/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
+                <li><a href="">Supprimer des offres d'alternance</a></li>
+                <li><a href="">Suivi des démarches alternants</a></li>
+                <li><a href="">Exporter étudiant/contrat</a></li>
+            </ul>
+        </td>
+          </tr>
+      </table>
 		    </td>
 
 		    <td>
@@ -182,9 +200,7 @@ class Gestion_IHM {
 					<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
 					<li><a href="./entreprises/listeDesContacts.php">Lister les contacts</a></li>
 					<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
-					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
-					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li>
-          <li><a href="./entreprises/listeDesOffreDAlternance.php">Valider des offres d'alternance</a></li>
+					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -198,9 +214,10 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
-					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
-					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
+      					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
+      					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
+      					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
+                <li><a href="">Statistiques alternant</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -225,7 +242,7 @@ class Gestion_IHM {
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
-				    Conventions
+				    Conventions/Contrats
 				</td>
 			    </tr>
 			    <tr>

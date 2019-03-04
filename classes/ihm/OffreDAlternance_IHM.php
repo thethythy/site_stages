@@ -287,7 +287,7 @@ if ($cpt == 0) {
 
   <?php
   $cpt = 0;
-  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances :</p>";
+  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances :</>";
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
