@@ -140,6 +140,34 @@ class Etudiant {
 
     return $oConv;
   }
+  /**
+  * Obtenir le contrat de l'étudiant suivant une année�donnée
+  * @param integer $annee
+  * @return Contrat ou null
+  */
+  public function getContrat($annee) {
+    $idContrat = Etudiant_BDD::rechercheContrat($this->identifiantBDD, $annee);
+
+    if ($idContrat == "")
+    return null;
+
+    return Contrat::getContrat($idContrat);
+  }
+
+  /**
+  * Obtenir le dernier contrat de l'étudiant à partir de l'année donnée
+  * @param integer $annee
+  * @return Contrat ou null
+  */
+  public function getLastContrat($annee) {
+    do {
+      $oContrat = $this->getContrat($annee);
+      $annee -= 1;
+    } while ($annee > 1970 && ! $oContrat);
+
+    return $oContrat;
+  }
+
 
   // ------------------------------------------------------------------------
   // Méthodes statiques

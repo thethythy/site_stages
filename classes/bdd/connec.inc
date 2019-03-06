@@ -96,6 +96,8 @@ if (isset($access_control_target)) {
   $tab28 = 'relation_competence_offredalternance';
   $tab29 = 'offredalternance';
   $tab30 = 'candidature_alternance';
+  $tab31 = 'contrat';
+  $tab32 = 'relation_promotion_etudiant_contrat';
 
   function deconnexion() {
     global $db;

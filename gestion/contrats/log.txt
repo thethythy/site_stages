@@ -1,0 +1,4 @@
+
+UPDATE relation_promotion_etudiant_contrat SET idcontrat = '5'
+    WHERE idetudiant = '425' AND idpromotion = '32'
+SELECT LAST_INSERT_ID() AS ID FROM contrat
