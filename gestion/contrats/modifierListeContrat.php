@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page modifierListeConventions.php
+ * Page modifierListeContrat.php
  * Utilisation : page pour éditer ou supprimer une convention
  * Dépendance(s) : modifierListeConventionsData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP

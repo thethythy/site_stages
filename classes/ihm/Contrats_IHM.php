@@ -121,31 +121,23 @@ class Contrats_IHM {
 
 
 			    <tr>
-            <td>Thème de stage</td>
+            <td>Type Offre</td>
     				<td>
-    				    <select name="idTheme" style="width: 300px;">
-    				    <?php
-    				    $tabTheme = ThemeDeStage::getListeTheme();
-    				    for ($i = 0; $i < sizeof($tabTheme); $i++) {
-    					$couleur = $tabTheme[$i]->getCouleur();
-    					if (($contrat != "") && $tabTheme[$i]->getIdentifiantBDD() == $contrat->getIdTheme())
-    					    echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-    					else
-    					    echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-    				    }
-    				    ?>
-    				    </select>
+
+              <?php
+  				    if (($contrat != "") && ($contrat->getTypeDeContrat() == 0)) {
+  					         echo "<input type='radio' id='' name ='typeContrat'  value='1' onclick=''> Apprentissage
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio'  id='' name ='typeContrat' checked='checked' value='0' onclick=''> Professionnalisation";
+  				    } else {
+                echo "<input type='radio' id='' name ='typeContrat' checked='checked' value='1' onclick=''> Apprentissage
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type='radio'  id='' name ='typeContrat'  value='0' onclick=''> Professionnalisation";
+  				    }
+  				    ?>
+
     				</td>
-    			    </tr>
-
-
-
-
-
-
-
-
-
+          </tr>
 
 				<td>
 				    <?php
@@ -290,7 +282,7 @@ class Contrats_IHM {
 	        <td align="center">
 		    <?php
 		    if (!$contrat->getSoutenance()->getIdentifiantBDD()) {
-			echo '<a href="modifierListeContrats.php?promo='.$idPromo.'&id='.$contrat->getIdentifiantBDD().'">
+			echo '<a href="modifierListeContrat.php?promo='.$idPromo.'&id='.$contrat->getIdentifiantBDD().'">
 				<img src="../../images/action_delete.png"/>
 			      </a>';
 		    } else {
