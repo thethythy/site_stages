@@ -151,9 +151,9 @@ class Contrats_IHM {
 				<td>
 				    <?php
 				    if (($contrat != "") && ($contrat->getASonResume() == 1)) {
-					echo "<a href='../../documents/resumes/" . $contrat->getSujetDeStage() . "'>" . $contrat->getSujetDeStage() . "</a>";
+					echo "<a href='../../documents/resumes/" . $contrat->getSujetDeContrat() . "'>" . $contrat->getSujetDeContrat() . "</a>";
 				    } else if ($contrat != "") {
-					echo "<textarea name='sujet' style='width: 85%;'>" . $contrat->getSujetDeStage() . "</textarea>";
+					echo "<textarea name='sujet' style='width: 85%;'>" . $contrat->getSujetDeContrat() . "</textarea>";
 				    } else {
 					echo "<textarea name='sujet' style='width: 85%;'></textarea>";
 				    }

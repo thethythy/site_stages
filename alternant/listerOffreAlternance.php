@@ -21,11 +21,11 @@ $tabLiens[1] = array('./', 'Alternant');
 IHM_Generale::header("Liste des", "offres d'alternance", "../", $tabLiens);
 
 // Affichage du formulaire de recherche
-OffreDAlternance_IHM::afficherFormulaireRecherche("listerOffreDeStageData.php");
+OffreDAlternance_IHM::afficherFormulaireRecherche("listerOffreDAltData.php");
 
 // Affichage des données
 echo "<div id='data'>\n";
-include_once("listerOffreDeStageData.php");
+include_once("listerOffreDAltData.php");
 echo "\n</div>";
 
 deconnexion();

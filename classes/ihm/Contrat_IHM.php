@@ -1,10 +1,10 @@
 <?php
 
-class Stage_IHM {
+class Contrat_IHM {
 
     /**
      * Affiche un formulaire de filtrage sur l'année, le parcours, la filière
-     * le thème de stage, le type d'entreprise et le lieu du stage
+     * le thème de contrat, le type d'entreprise et le lieu du contrat
      * @param string $page Indique la page du traitement des requêtes Ajax
      */
     public static function afficherFormulaireRechercheAvancee($page) {
@@ -104,7 +104,7 @@ class Stage_IHM {
 			    <tr>
 				<td align="center">
 				    Sélectionnez le lieu :
-				    <select id="lieustage" name="lieustage">
+				    <select id="lieucontrat" name="lieucontrat">
 					<?php
 					    echo "<option value='*'>Tous</option>";
 					    foreach (Utils::getLieuxStage() as $key => $lieu) {
@@ -123,34 +123,35 @@ class Stage_IHM {
 	</form>
 
 	<script type="text/javascript">
-	    var table = new Array("annee", "filiere", "parcours", "technologie", "typeEntreprise", "lieustage");
+	    var table = new Array("annee", "filiere", "parcours", "technologie", "typeEntreprise", "lieucontrat");
 	    new LoadData(table, "<?php echo $page; ?>", "onchange");
 	</script>
 	<?php
     }
 
     /**
-     * Afficher une liste de stages passés avec un lien vers le résumé s'il existe.
-     * @param tableau d'objets $tabEtuWithConv Liste des anciens étudiants concernés
+     * Afficher une liste de contrats passés avec un lien vers le résumé s'il existe.
+     * @param tableau d'objets $tabEtuWithContrat Liste des anciens étudiants concernés
      * @param integer $annee L'année concernée
      */
-    public static function afficherListeAncienStages($tabEtuWithConv, $annee) {
+    public static function afficherListeAncienContrats($tabEtuWithContrat, $annee) {
 	?>
-	<?php echo sizeof($tabEtuWithConv) . " stage(s) trouvé(s) :"?>
+	<?php echo sizeof($tabEtuWithContrat) . " contrat(s) trouvé(s) :"?>
 	<br/><br/>
 	<table>
 	    <tr id='entete'>
 		<td width='35%'>Entreprise</td>
 		<td width='35%'>Contact</td>
-		<td width='30%'>Stagiaire</td>
+		<td width='30%'>Alternant</td>
 	    </tr>
 	    <?php
-	    for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
-		$promotion = $tabEtuWithConv[$i]->getPromotion($annee);
+	    for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
+		$promotion = $tabEtuWithContrat[$i]->getPromotion($annee);
 		$promo_parcours = $promotion->getParcours();
 		$promo_filiere = $promotion->getFiliere();
-		$conv = $tabEtuWithConv[$i]->getConvention($annee);
-		$contact = $conv->getContact();
+		$contrat = $tabEtuWithContrat[$i]->getContrat($annee);
+		$contact = $contrat->getContact();
+    $typeDeContrat = $contrat->getTypeDeContrat();
 		$entreprise = $contact->getEntreprise();
 		?>
 	        <tr id="ligne<?php echo $i % 2; ?>">
@@ -192,7 +193,7 @@ class Stage_IHM {
 				    Résumé :
 				</td>
 				<td width="50%">
-				    <a href="./ficheDeStage.php?annee=<?php echo $annee; ?>&parcours=<?php echo $promo_parcours->getIdentifiantBDD(); ?>&filiere=<?php echo $promo_filiere->getIdentifiantBDD(); ?>&idEtu=<?php echo $tabEtuWithConv[$i]->getIdentifiantBDD(); ?>&idPromo=<?php echo $promotion->getIdentifiantBDD(); ?>" target="_blank">
+				    <a href="./ficheDeContrat.php?annee=<?php echo $annee; ?>&parcours=<?php echo $promo_parcours->getIdentifiantBDD(); ?>&filiere=<?php echo $promo_filiere->getIdentifiantBDD(); ?>&idEtu=<?php echo $tabEtuWithContrat[$i]->getIdentifiantBDD(); ?>&idPromo=<?php echo $promotion->getIdentifiantBDD(); ?>" target="_blank">
 					<img src="../images/resume.png" />
 				    </a>
 				</td>
@@ -210,9 +211,9 @@ class Stage_IHM {
      * @param integer $annee L'année concernée
      * @param integer $parcours L'identifiant du parcours concerné
      * @param integer $filiere L'identifiant de la filière concernée
-     * @param tableau d'objets $tabEtuWithConv Liste des objets Etudiants
+     * @param tableau d'objets $tabEtuWithContrat Liste des objets Etudiants
      */
-    public static function afficherListeResumes($annee, $parcours, $filiere, $tabEtuWithConv) {
+    public static function afficherListeResumes($annee, $parcours, $filiere, $tabEtuWithContrat) {
 	?>
 	<form method=post action="">
 	    <table>
@@ -222,31 +223,31 @@ class Stage_IHM {
 		    <td width='25%'>Nouveau résumé</td>
 		</tr>
 		<?php
-		$idConventions = "";
-		for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
-		    $conv = $tabEtuWithConv[$i]->getConvention($annee);
+		$idContrats = "";
+		for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
+		    $contrat = $tabEtuWithContrat[$i]->getContrat($annee);
 
-		    if ($idConventions == "")
-			$idConventions = $conv->getIdentifiantBDD();
+		    if ($idContrats == "")
+			$idContrats = $contrat->getIdentifiantBDD();
 		    else
-			$idConventions .= ";" . $conv->getIdentifiantBDD();
+			$idContrats .= ";" . $contrat->getIdentifiantBDD();
 
 		?>
 		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td>
-			<?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
+			<?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
 		    </td>
-		    <td><?php echo $conv->getSujetDeStage(); ?></td>
+		    <td><?php echo $contrat->getSujetDeContrat(); ?></td>
 		    <td align="center">
 			<?php
-			$tabRes = Convention::getResumesPossible($tabEtuWithConv[$i]->getIdentifiantBDD(), "../../documents/resumes/");
+			$tabRes = Contrat::getResumesPossible($tabEtuWithContrat[$i]->getIdentifiantBDD(), "../../documents/resumes/");
 			if (sizeof($tabRes) == 0) {
-			    echo "<input style='width: 250px;' name='conv" . $conv->getIdentifiantBDD() . "' type='text' value='" . htmlentities($conv->getSujetDeStage(), ENT_QUOTES, 'utf-8') . "'/>";
+			    echo "<input style='width: 250px;' name='conv" . $contrat->getIdentifiantBDD() . "' type='text' value='" . htmlentities($contrat->getSujetDeContrat(), ENT_QUOTES, 'utf-8') . "'/>";
 			} else {
-			    echo "<select name='conv" . $conv->getIdentifiantBDD() . "' style='width: 250px;'>";
+			    echo "<select name='conv" . $contrat->getIdentifiantBDD() . "' style='width: 250px;'>";
 			    echo "<option value=''></option>";
 			    for ($j = 0; $j < sizeof($tabRes); $j++) {
-				if (($conv->getASonResume() == "1") && ($conv->getSujetDeStage() == $tabRes[$j]))
+				if (($contrat->getASonResume() == "1") && ($contrat->getSujetDeContrat() == $tabRes[$j]))
 				    echo "<option selected value='$tabRes[$j]'>" . $tabRes[$j] . "</option>";
 				else
 				    echo "<option value='$tabRes[$j]'>" . $tabRes[$j] . "</option>";
@@ -266,7 +267,7 @@ class Stage_IHM {
 			<input type="hidden" value="<?php echo $annee; ?>" name="annee" />
 			<input type="hidden" value="<?php echo $parcours; ?>" name="parcours" />
 			<input type="hidden" value="<?php echo $filiere; ?>" name="filiere" />
-			<input type="hidden" name="idConventions" value="<?php echo $idConventions; ?>" />
+			<input type="hidden" name="idContrats" value="<?php echo $idContrats; ?>" />
 			<input type="submit" value="Enregistrer" />
 		    </td>
 		</tr>
@@ -280,11 +281,11 @@ class Stage_IHM {
      * @param integer $annee L'année concernée
      * @param integer $parcours L'identifiant du parcours concerné
      * @param integer $filiere L'identifiant de la filière concernée
-     * @param tableau d'objets $tabEtuWithConv Liste des objets Etudiants
+     * @param tableau d'objets $tabEtuWithContrat Liste des objets Etudiants
      */
-    public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtuWithConv) {
+    public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtuWithContrat) {
 	?>
-	<form method="post" action="saisirNotesStages.php">
+	<form method="post" action="saisirNotesContrats.php">
 	    <table>
 		<tr id='entete'>
 		    <td width='60%'>Etudiant</td>
@@ -292,28 +293,28 @@ class Stage_IHM {
 		    <td width='20%'>Nouvelle note</td>
 		</tr>
 		<?php
-		$idConventions = "";
+		$idContrats = "";
 		$somme = 0;
 
-		for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
-		    $conv = $tabEtuWithConv[$i]->getConvention($annee);
+		for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
+		    $contrat = $tabEtuWithContrat[$i]->getContrat($annee);
 
-		    if ($idConventions == "")
-			$idConventions = $conv->getIdentifiantBDD();
+		    if ($idContrats == "")
+			$idContrats = $contrat->getIdentifiantBDD();
 		    else
-			$idConventions .= ";" . $conv->getIdentifiantBDD();
+			$idContrats .= ";" . $contrat->getIdentifiantBDD();
 
-		    $somme = $somme + $conv->getNote();
+		    $somme = $somme + $contrat->getNote();
 		?>
 		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td>
-		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
+		    <?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
 		    </td>
 		    <td align="center">
-			    <?php echo $conv->getNote(); ?>
+			    <?php echo $contrat->getNote(); ?>
 		    </td>
 		    <td align="center">
-			<input style="width: 50px;" name="conv<?php echo $conv->getIdentifiantBDD(); ?>" type="text" value="<?php echo $conv->getNote(); ?>" />
+			<input style="width: 50px;" name="conv<?php echo $contrat->getIdentifiantBDD(); ?>" type="text" value="<?php echo $contrat->getNote(); ?>" />
 		    </td>
 		</tr>
 		<?php
@@ -336,7 +337,7 @@ class Stage_IHM {
 			<?php if (isset($filiere)) { ?>
 			    <input type="hidden" value="<?php echo $filiere; ?>" name="filiere" />
 			<?php } ?>
-			<input type="hidden" name="idConventions" value="<?php echo $idConventions; ?>" />
+			<input type="hidden" name="idContrats" value="<?php echo $idContrats; ?>" />
 			<input type="submit" value="Enregistrer" />
 		    </td>
 		</tr>
@@ -346,20 +347,20 @@ class Stage_IHM {
     }
 
     /**
-     * Afficher une fiche de stage récapitulative
+     * Afficher une fiche de contrat récapitulative
      * @param integer $idEtu Identifiant de l'étudiant
      * @param integer $idPromo Identifiant de la promotion
      * @param string $chemin Chemin d'accès au fichier résumé s'il existe
      */
-    public static function afficherFicheStage($idEtu, $idPromo, $chemin) {
+    public static function afficherFicheContrat($idEtu, $idPromo, $chemin) {
 	$etudiant = Etudiant::getEtudiant($idEtu);
 	$promotion = Promotion::getPromotion($idPromo);
 	$filiere = $promotion->getFiliere();
 	$parcours = $promotion->getParcours();
-	$convention = $etudiant->getConvention($promotion->getAnneeUniversitaire());
-	$contact = $convention->getContact();
+	$contratention = $etudiant->getContrat($promotion->getAnneeUniversitaire());
+	$contact = $contratention->getContact();
 	$entreprise = $contact->getEntreprise();
-	$parrain = $convention->getParrain();
+	$parrain = $contratention->getParrain();
 	$annee = $promotion->getAnneeUniversitaire();
 	?>
 
@@ -405,12 +406,12 @@ class Stage_IHM {
 	    </tr>
 	    <tr>
 		<td colspan="2" style="column-span: all; border: 1px solid; padding: 15px;">
-		    <h3>Le stage</h3>
+		    <h3>Le contrat</h3>
 		    <?php
-			if ($convention->aSonResume == "1"){
-			    echo "<a href='".$chemin.$convention->getSujetDeStage()."'>Résumé du stage</a>";
+			if ($contratention->aSonResume == "1"){
+			    echo "<a href='".$chemin.$contratention->getSujetDeContrat()."'>Résumé du contrat</a>";
 			} else {
-			    $chaine = $convention->getSujetDeStage();
+			    $chaine = $contratention->getSujetDeContrat();
 			echo $chaine;
 			}
 		    ?>

@@ -36,7 +36,7 @@ class Contrat {
 	    $note, $idParrain, $idExaminateur, $idEtudiant, $idSoutenance,
 	    $idContact, $idTheme) {
 	$this->identifiant_BDD = $identifiant_BDD;
-	$this->sujetDeStage = $sujetDeStage;
+	$this->sujetDeContrat = $sujetDeStage;
   $this->typeDeContrat = $typeDeContrat;
 	$this->aSonResume = $aSonResume;
 	$this->note = $note;
@@ -55,8 +55,8 @@ class Contrat {
 	return $this->identifiant_BDD;
     }
 
-    public function getSujetDeStage() {
-	return $this->sujetDeStage;
+    public function getSujetDeContrat() {
+	return $this->sujetDeContrat;
     }
 
     public function getTypeDeContrat() {
@@ -98,8 +98,8 @@ class Contrat {
     // ------------------------------------------------------------------------
     // Accesseurs en écriture
 
-    public function setSujetDeStage($sds) {
-	$this->sujetDeStage = $sds;
+    public function setSujetDeContrat($sds) {
+	$this->sujetDeContrat = $sds;
     }
 
     public function setTypeDeContrat($sds) {
