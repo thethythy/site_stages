@@ -3,7 +3,7 @@
 /**
  * Page modifierContrat.php
  * Utilisation : page pour éditer un contrat existante
- *		 page accessible depuis modifierListeConventions.php
+ *		 page accessible depuis modifierListeContrat.php
  * Accès : restreint par authentification HTTP
  */
 

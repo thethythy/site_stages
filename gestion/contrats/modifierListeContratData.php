@@ -58,7 +58,7 @@ if (sizeof($tabPromos) > 0) {
 	// Affichage des conventions des étudiants
 	Contrats_IHM::afficherListeContratsAModifier($annee, $idPromo, $tabEtuWithConv);
     } else {
-	echo "<br/><center>Aucune convention n'a été trouvée.</center><br/>";
+	echo "<br/><center>Aucun contrat n'a été trouvée.</center><br/>";
     }
 } else {
     echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.</center><br/>";
