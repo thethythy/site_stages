@@ -97,6 +97,17 @@ class OffreDAlternance {
     return $this->typeContrat;
   }
 
+  public function getTypeContratStr(){
+    if($this->typeContrat == 1){
+      return("Apprentissage");
+    }
+    else if($this->typeContrat == 0){
+      return("Professionnalisation");
+    }else{
+      return("N/A");
+    }
+  }
+
   // ------------------------------------------------------------------------
   // Accesseurs en écriture
 
@@ -132,6 +143,9 @@ class OffreDAlternance {
     $this->typeContrat = $typeContrat;
   }
 
+
+
+
   // ------------------------------------------------------------------------
   // Méthodes dérivées
 
@@ -150,7 +164,6 @@ class OffreDAlternance {
     for ($i = 0; $i < sizeof($this->competences); $i++) {
       array_push($tabCompetence, Competence::getCompetence($this->competences[$i]));
     }
-
     return $tabCompetence;
   }
 
@@ -168,11 +181,12 @@ class OffreDAlternance {
     $tabProfil = array();
 
     for ($i = 0; $i < sizeof($this->listeProfilSouhaite); $i++) {
-      array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
+        array_push($tabProfil, Filiere::getFiliere($this->listeProfilSouhaite[$i]));
     }
 
     return $tabProfil;
   }
+
 
   // ------------------------------------------------------------------------
   // Méthodes statiques
@@ -250,7 +264,7 @@ class OffreDAlternance {
       $tabODSString[$i][6], $tabODSString[$i][7],
       $tabODSString[$i][8], $tabODSString[$i][9],
       $tabODSString[$i][10], $tabODSString[$i][11],
-      $tabODSString[$i][12]));
+      NULL));//Si on veut faire un filtre avec le type de contrat ??
     }
 
     return $tabODS;

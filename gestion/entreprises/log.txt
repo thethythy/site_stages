@@ -1,0 +1,92 @@
+
+
+Am updating
+ tab 8 DELETE FROM theme_offredestage WHERE idoffre='19';
+ >> 1
+INSERT INTO theme_offredestage VALUES('11', '19');
+INSERT INTO contact VALUES (
+			'0',
+			'Nom 1',
+			'Prénom 1',
+			'xx',
+			'',
+			'sdf',
+			'539');
+SELECT LAST_INSERT_ID() AS ID FROM contact
+INSERT INTO contact VALUES (
+			'0',
+			'Nom 1',
+			'Prénom 1',
+			'xx',
+			'',
+			'sdf',
+			'539');
+SELECT LAST_INSERT_ID() AS ID FROM contactINSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');INSERT INTO theme_offredalternance VALUES('11', '320');
+INSERT INTO theme_offredalternance VALUES('11', '320');
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'539');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'539');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmi',
+			'wccvw',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'541');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'539');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'540');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+
+INSERT INTO contact VALUES (
+			'0',
+			'Larmignat',
+			'bkdqb',
+			'0660246678',
+			'00141122',
+			'thomaslarmignat72@gmail.com',
+			'540');
+
+SELECT LAST_INSERT_ID() AS ID FROM contact
+INSERT INTO theme_offredalternance VALUES('11', '318');

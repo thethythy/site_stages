@@ -385,7 +385,7 @@ class Parrain_IHM {
 
 			if ($parrain->getIdentifiantBDD() != $oldparrain) {
 			    ?>
-				<tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
+				<tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
 				    <td>
 					<?php
 					echo $parrain->getNom() . " " . $parrain->getPrenom();

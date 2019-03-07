@@ -27,9 +27,6 @@ class offreDAlternance_BDD {
 	global $tab29;
 
 	$estVisible = $offreDAlternance->estVisible() ? 1 : 0;
-  $d = fopen("log.txt", "a+");
-  fwrite($d, "\n->$estVisible<-\n");
-  fclose($d);
 	if ($offreDAlternance->getIdentifiantBDD() == "") {
 	    $sql = "INSERT INTO $tab29
 		    VALUES ('0',
@@ -49,7 +46,7 @@ class offreDAlternance_BDD {
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
 			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
-			dureemin='" . $offreDAlternance->getDuree() . "',
+			duree='" . $offreDAlternance->getDuree() . "',
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
 			estVisible='$estVisible',
@@ -76,6 +73,7 @@ class offreDAlternance_BDD {
 	$tabThemes = $offreDAlternance->getThemes();
 	for ($i = 0; $i < sizeof($tabThemes); $i++) {
 	    $sql = "INSERT INTO $tab27 VALUES('" . $tabThemes[$i]->getIdentifiantBDD() . "', '" . $lastId . "');";
+      Utils::printLog($sql);
 	    $db->query($sql);
 	}
 
@@ -157,20 +155,22 @@ class offreDAlternance_BDD {
 	$res2->free();
 	array_push($tabOffreDAlternance, $tabThemes);
 
-	$sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
-	$res3 = $db->query($sql3);
-	$tabProfils = array();
-	while ($profil = $res3->fetch_array()) {
-	    array_push($tabProfils, $profil['idfiliere']);
-	}
-	$res3->free();
-	array_push($tabOffreDAlternance, $tabProfils);
 
-	array_push($tabOffreDAlternance, $data['dureemin']);
-	array_push($tabOffreDAlternance, $data['dureemax']);
-	array_push($tabOffreDAlternance, $data['indemnite']);
-	array_push($tabOffreDAlternance, $data['remarques']);
-	array_push($tabOffreDAlternance, $data['estVisible']);
+
+  $sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
+	$res3 = $db->query($sql3);
+  $tabProfils = array();
+  while ($profil = $res3->fetch_array()) {
+      array_push($tabProfils, $profil['idfiliere']);
+  }
+  $res3->free();
+  array_push($tabOffreDAlternance, $tabProfils);
+
+
+  array_push($tabOffreDAlternance, $data['duree']);//Erreur ici
+  array_push($tabOffreDAlternance, $data['indemnite']);
+  array_push($tabOffreDAlternance, $data['remarques']);
+  array_push($tabOffreDAlternance, $data['estVisible']);
 
 	$sql4 = "SELECT * FROM $tab28 WHERE idoffre='$identifiantBDD'";
 	$res4 = $db->query($sql4);
@@ -180,8 +180,9 @@ class offreDAlternance_BDD {
 	}
 	$res4->free();
 	array_push($tabOffreDAlternance, $tabCompetences);
+  array_push($tabOffreDAlternance, $data['idcontact']);
+  array_push($tabOffreDAlternance, $data['typedecontrat']);
 
-	array_push($tabOffreDAlternance, $data['idcontact']);
 
 	return $tabOffreDAlternance;
     }
@@ -240,7 +241,11 @@ class offreDAlternance_BDD {
 	    $requete = "SELECT $tab29.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab29.idoffre";
 	}
 
+
 	$result = $db->query($requete);
+
+
+
 
 	// --------------------------------------------------------------------
 	// Construire le tableau des enregistrements trouvés
