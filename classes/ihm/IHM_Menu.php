@@ -129,7 +129,7 @@ class IHM_Menu {
         <li><a>1-Rechercher</a></li>
         <ul class="sidemenu2">
           <li><a href="./listerOffreAlternance.php">Les offres d'alternance</a></li>
-          <li><a href="./listerAncienneAlternance.php">Les anciennes alternances</a></li>
+          <li><a href="./listerAnciensContrats.php">Les anciennes alternances</a></li>
         </ul>
         <li><a href="./suiviCandidatures.php">2-Suivi des candidatures</a></li>
         <br/>

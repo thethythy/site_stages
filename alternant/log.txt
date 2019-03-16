@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 4492317539323545
 SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND identreprise=545
@@ -9,59 +8,19 @@ SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND id
 SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=317 AND identreprise=539
 SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND identreprise=545
 =======
-413
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4312317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4312317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=431 AND idoffre=323 AND identreprise=545
-4302317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=430 AND idoffre=323 AND identreprise=545
-4430
-4390
-4410
-4370
+4310
 4300
 4310
-4130
-4300
 4250
-4130
-4370
-4310
-4300
-4300
-4310
-4300
-4300
-4300
-4310
-4300
-4070
 3940
+4310
+4050
+4210
 3850
-3840
->>>>>>> thomas
+4300
+4210
+4310
+4310
+4300
+4210
+>>>>>>> origin/thomas

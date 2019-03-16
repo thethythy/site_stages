@@ -185,6 +185,7 @@ class Etudiant_BDD {
   public static function ajouterPromotion($etu, $promo) {
     global $db;
     global $tab19;
+    global $tab32;
 
     $sql = "SELECT COUNT(idetudiant) AS NB_ETU FROM $tab19 WHERE idetudiant='$etu' AND idpromotion='$promo';";
     $res = $db->query($sql);
@@ -196,6 +197,9 @@ class Etudiant_BDD {
       $db->query($sql);
     }
   }
+
+
+
 
   /**
   * Associer une convention à un étudiant et une promotion existants
@@ -213,6 +217,28 @@ class Etudiant_BDD {
     WHERE idetudiant = '$idetu' AND idpromotion = '$idpromo'";
     $db->query($sql);
   }
+
+
+  /**
+  * Associer une convention à un étudiant et une promotion existants
+  * @global resource $db Référence sur la base ouverte
+  * @global string $tab32 Nom de la table 'relation_promotion_etudiant_contrat'
+  * @param integer $idetu Identifiant de l'étudiant
+  * @param integer $idconv Identifiant de la convention
+  * @param integer $idpromo Identifiant de la promotion
+  */
+  public static function ajouterContrat($idetu, $idcontrat, $idpromo) {
+    global $db;
+    global $tab32;
+
+    $sql = "INSERT INTO $tab32 (idcontrat, idpromotion, idetudiant)
+    VALUES('" . $idcontrat . "',
+    '" . $idpromo . "',
+    '" . $idetu . "')";
+
+    $db->query($sql);
+  }
+
 
   /**
   * Obtenir la promotion d'un étudiant pour une certaine année
@@ -266,6 +292,36 @@ class Etudiant_BDD {
     $res->free();
     return $enreg['idconv'];
   }
+
+  /**
+  * Obtenir l'identifiant du contrat d'un étudiant et une année donnée
+  * @global resource $db Référence sur la base ouverte
+  * @global string $tab31 Nom de la table 'contrat'
+  * @global string $tab15 Nom de la table 'promotion'
+  * @global string $tab32 Nom de la table 'relation_promotion_etudiant_contrat'
+  * @param integer $idetu Identifiant de l'étudiant concerné
+  * @param integer $annee Année de la convention recherchée
+  * @return integer ou ""
+  */
+  public static function rechercheContrat($idetu, $annee) {
+    global $db;
+    global $tab31;
+    global $tab15;
+    global $tab32;
+
+    $sql = "SELECT $tab32.idcontrat FROM $tab32, $tab31, $tab15
+    WHERE $tab32.idetudiant='$idetu'
+    AND $tab15.anneeuniversitaire='$annee'
+    AND $tab32.idpromotion = $tab15.idpromotion
+    AND $tab32.idcontrat = $tab31.idcontrat";
+
+    $res = $db->query($sql);
+    $enreg = $res->fetch_array();
+    $res->free();
+    return $enreg['idcontrat'];
+  }
+
+
 
   /**
   * Recherche les étudiants s'appelant $nom $prenom
