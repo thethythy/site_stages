@@ -56,7 +56,6 @@ class Promotion_BDD {
 
     $sql = "SELECT * FROM $tab15 WHERE idpromotion='$identifiantBDD'";
     $res = $db->query($sql);
-
     if ($res) {
       $enreg = $res->fetch_array();
       $res->free();
@@ -132,7 +131,6 @@ class Promotion_BDD {
     $requete = "SELECT * FROM $tab15 WHERE " . $filtre->getStrFiltres();
 
     $res = $db->query($requete);
-
     $tabPromos = array();
 
     if ($res) {
