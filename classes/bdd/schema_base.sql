@@ -280,10 +280,13 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   `idcontrat` INT(10) NOT NULL AUTO_INCREMENT,
   `sujetcontrat` MEDIUMTEXT NOT NULL,
   `typedecontrat` BOOLEAN NOT NULL,
+  `duree` INT(4) NOT NULL,
+  `indemnite` INT(4) NOT NULL,
+  `typedecontrat` BOOLEAN NOT NULL,
   `asonresume` TINYINT(4) NOT NULL DEFAULT '0',
   `note` DECIMAL(4,2) NOT NULL DEFAULT '0.00',
   `idparrain` INT(10) NOT NULL,
-  `idexaminateur` INT(10) NOT NULL,
+  `idreferent` INT(10) NOT NULL,
   `idetudiant` INT(10) NOT NULL,
   `idsoutenance` INT(10) NULL DEFAULT NULL,
   `idcontact` INT(10) NOT NULL,
@@ -291,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   PRIMARY KEY (`idcontrat`),
   INDEX `idetudiant_idx` (`idetudiant` ASC),
   INDEX `idparrain_idx` (`idparrain` ASC),
-  INDEX `idexaminateur_idx` (`idexaminateur` ASC),
+  INDEX `idreferent_idx` (`idreferent` ASC),
   INDEX `idcontact_idx` (`idcontact` ASC),
   INDEX `idtheme_idx` (`idtheme` ASC),
   UNIQUE INDEX `idsoutenance_idx` (`idsoutenance` ASC),
@@ -305,9 +308,9 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
     REFERENCES `stages`.`parrain` (`idparrain`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contrat_parrain_idexaminateur`
-    FOREIGN KEY (`idexaminateur`)
-    REFERENCES `stages`.`parrain` (`idparrain`)
+  CONSTRAINT `fk_contrat_contact_idreferent`
+    FOREIGN KEY (`idreferent`)
+    REFERENCES `stages`.`contact` (`idcontact`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contrat_contact_idcontact`
