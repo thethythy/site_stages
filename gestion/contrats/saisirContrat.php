@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Page saisirConvention.php
+ * Page saisirCotrat.php
  * Utilisation : page pour saisir une nouvelle convention de stage
- * Dépendance(s) : saisirConventionData.php --> traitement des requêtes Ajax
+ * Dépendance(s) : saisirContratData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
 

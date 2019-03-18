@@ -15,7 +15,6 @@ class Contrats_IHM {
 
 	if ($contrat != "") {
 	    $parrain = $contrat->getParrain();
-	    $examinateur = $contrat->getExaminateur();
 	    $etudiant = $contrat->getEtudiant();
 	    $contact = $contrat->getContact();
 	}
@@ -66,22 +65,117 @@ class Contrats_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Examinateur</td>
-				<td>
-				    <select name="idExam" style="width: 300px;">
-					<?php
-					$tabExam = Parrain::listerParrain();
-					for ($i = 0; $i < sizeof($tabExam); $i++) {
-					    if ((($contrat != "") && ($examinateur->getIdentifiantBDD() == $tabExam[$i]->getIdentifiantBDD())) ||
-						((isset($_POST['idExam'])) && ($_POST['idExam'] == $tabPar[$i]->getIdentifiantBDD())))
-						echo "<option selected value='" . $tabExam[$i]->getIdentifiantBDD() . "'>" . $tabExam[$i]->getNom() . " " . $tabExam[$i]->getPrenom() . "</option>";
-					    else
-						echo "<option value='" . $tabExam[$i]->getIdentifiantBDD() . "'>" . $tabExam[$i]->getNom() . " " . $tabExam[$i]->getPrenom() . "</option>";
-					}
-					?>
-				    </select>
-				</td>
-			    </tr>
+				<td>Durée</td>
+        <td>
+           <select name="dureeMin">
+          <?php
+          for ($i = 1; $i <= 24; $i++) {
+            if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+            (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i)) {
+              echo"<option selected value='$i'>$i</option>";
+            } else {
+              echo"<option value='$i'>$i</option>";
+            }
+          }
+          ?>
+        </select> mois
+      </td>
+    </tr>
+    <tr>
+  <td>Date début</td>
+  <td>
+     <select name="jour">
+    <?php
+    for ($i = 1; $i <= 31; $i++) {
+      if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+      (isset($_POST['jour']) && $_POST['jour'] == $i)) {
+        echo"<option selected value='$i'>$i</option>";
+      } else {
+        echo"<option value='$i'>$i</option>";
+      }
+    }
+    ?>
+  </select> /
+  <select name="mois">
+     <?php
+     for ($i = 1; $i <= 12; $i++) {
+       if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+       (isset($_POST['mois']) && $_POST['mois'] == $i)) {
+         echo"<option selected value='$i'>$i</option>";
+       } else {
+         echo"<option value='$i'>$i</option>";
+       }
+     }
+     ?>
+    </select> /
+    <select name="annee">
+       <?php
+       for ($i = 2010; $i <= 2025; $i++) {
+         if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+         (isset($_POST['annee']) && $_POST['annee'] == $i)) {
+           echo"<option selected value='$i'>$i</option>";
+         } else {
+           echo"<option value='$i'>$i</option>";
+         }
+       }
+       ?>
+      </select>
+    </td>
+  </tr>
+  <tr>
+<td>Date fin</td>
+<td>
+   <select name="jour">
+  <?php
+  for ($i = 1; $i <= 31; $i++) {
+    if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+    (isset($_POST['jour']) && $_POST['jour'] == $i)) {
+      echo"<option selected value='$i'>$i</option>";
+    } else {
+      echo"<option value='$i'>$i</option>";
+    }
+  }
+  ?>
+</select> /
+<select name="mois">
+   <?php
+   for ($i = 1; $i <= 12; $i++) {
+     if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+     (isset($_POST['mois']) && $_POST['mois'] == $i)) {
+       echo"<option selected value='$i'>$i</option>";
+     } else {
+       echo"<option value='$i'>$i</option>";
+     }
+   }
+   ?>
+  </select> /
+  <select name="annee">
+     <?php
+     for ($i = 2010; $i <= 2025; $i++) {
+       if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
+       (isset($_POST['annee']) && $_POST['annee'] == $i)) {
+         echo"<option selected value='$i'>$i</option>";
+       } else {
+         echo"<option value='$i'>$i</option>";
+       }
+     }
+     ?>
+    </select>
+  </td>
+</tr>
+    <tr>
+      <td>Indemnités</td>
+      <td>
+        <input type="text" name="indemnites" size="50" value="<?php
+        if (isset($_POST['indemnites'])) {
+          echo $_POST['indemnites'];
+        } else if (isset($modificationOffreDeStage)) {
+          echo $modificationOffreDeStage->getIndemnite();
+        }
+        ?>"
+        />
+      </td>
+    </tr>
 			    <tr>
 				<td>Contact</td>
 				<td>
@@ -121,31 +215,23 @@ class Contrats_IHM {
 
 
 			    <tr>
-            <td>Thème de stage</td>
+            <td>Type Offre</td>
     				<td>
-    				    <select name="idTheme" style="width: 300px;">
-    				    <?php
-    				    $tabTheme = ThemeDeStage::getListeTheme();
-    				    for ($i = 0; $i < sizeof($tabTheme); $i++) {
-    					$couleur = $tabTheme[$i]->getCouleur();
-    					if (($contrat != "") && $tabTheme[$i]->getIdentifiantBDD() == $contrat->getIdTheme())
-    					    echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-    					else
-    					    echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-    				    }
-    				    ?>
-    				    </select>
+
+              <?php
+  				    if (($contrat != "") && ($contrat->getTypeDeContrat() == 0)) {
+  					         echo "<input type='radio' id='' name ='typeContrat'  value='1' onclick=''> Apprentissage
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio'  id='' name ='typeContrat' checked='checked' value='0' onclick=''> Professionnalisation";
+  				    } else {
+                echo "<input type='radio' id='' name ='typeContrat' checked='checked' value='1' onclick=''> Apprentissage
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type='radio'  id='' name ='typeContrat'  value='0' onclick=''> Professionnalisation";
+  				    }
+  				    ?>
+
     				</td>
-    			    </tr>
-
-
-
-
-
-
-
-
-
+          </tr>
 
 				<td>
 				    <?php
@@ -159,9 +245,9 @@ class Contrats_IHM {
 				<td>
 				    <?php
 				    if (($contrat != "") && ($contrat->getASonResume() == 1)) {
-					echo "<a href='../../documents/resumes/" . $contrat->getSujetDeStage() . "'>" . $contrat->getSujetDeStage() . "</a>";
+					echo "<a href='../../documents/resumes/" . $contrat->getSujetDeContrat() . "'>" . $contrat->getSujetDeContrat() . "</a>";
 				    } else if ($contrat != "") {
-					echo "<textarea name='sujet' style='width: 85%;'>" . $contrat->getSujetDeStage() . "</textarea>";
+					echo "<textarea name='sujet' style='width: 85%;'>" . $contrat->getSujetDeContrat() . "</textarea>";
 				    } else {
 					echo "<textarea name='sujet' style='width: 85%;'></textarea>";
 				    }
@@ -248,7 +334,7 @@ class Contrats_IHM {
 		<tr id='entete'>
 			<td width='20%'>Etudiant</td>
 			<td width='15%'>Référent</td>
-			<td width='15%'>Examinateur</td>
+			<td width='15%'>Durée</td>
 			<td width='15%'>Contact</td>
 			<td width='15%'>Entreprise</td>
 			<td width='15%'>Thème</td>
@@ -258,7 +344,6 @@ class Contrats_IHM {
 	for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
 	    $contrat = $tabEtuWithConv[$i]->getContrat($annee);
 	    $parrain = $contrat->getParrain();
-	    $examinateur = $contrat->getExaminateur();
 	    $contact = $contrat->getContact();
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
@@ -269,9 +354,6 @@ class Contrats_IHM {
 	        </td>
 	        <td>
 		    <?php echo $parrain->getNom() . " " . $parrain->getPrenom(); ?>
-	        </td>
-	        <td>
-		    <?php echo $examinateur->getNom() . " " . $examinateur->getPrenom(); ?>
 	        </td>
 	        <td>
 		    <?php echo $contact->getNom() . " " . $contact->getPrenom(); ?>
@@ -290,7 +372,7 @@ class Contrats_IHM {
 	        <td align="center">
 		    <?php
 		    if (!$contrat->getSoutenance()->getIdentifiantBDD()) {
-			echo '<a href="modifierListeContrats.php?promo='.$idPromo.'&id='.$contrat->getIdentifiantBDD().'">
+			echo '<a href="modifierListeContrat.php?promo='.$idPromo.'&id='.$contrat->getIdentifiantBDD().'">
 				<img src="../../images/action_delete.png"/>
 			      </a>';
 		    } else {

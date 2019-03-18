@@ -23,7 +23,6 @@ class Candidature_BDD {
       '" . $candidature->getOffre() . "',
       '" . $candidature->getEntreprise() . "',
       '" . $candidature->getStatut() . "')";
-      //Utils::printLog($sql);
       $db->query($sql);
     } else {
       $sql = "UPDATE $tab30
@@ -52,7 +51,6 @@ class Candidature_BDD {
     global $db;
     global $tab30;
     $sql = "SELECT * FROM $tab30 WHERE idetudiant=$idetudiant AND idoffre=$idoffre AND identreprise=$identreprise";
-    Utils::printLog($sql);
     $res = $db->query($sql);
 
     $ok = $res != FALSE;

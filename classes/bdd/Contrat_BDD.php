@@ -22,8 +22,8 @@ class Contrat_BDD {
 	$contact = $contrat->getContact();
 
 	// Test si la chaîne contenant le sujet n'est pas déjà échappé
-	if (strpos($contrat->getSujetDeStage(), '\\') === false) {
-	    $contrat->setSujetDeStage($db->escape_string($contrat->getSujetDeStage()));
+	if (strpos($contrat->getSujetDeContrat(), '\\') === false) {
+	    $contrat->setSujetDeContrat($db->escape_string($contrat->getSujetDeContrat()));
 	}
 
 	// Permet de vérifier si le Contrat existe déjà dans la BDD
@@ -34,7 +34,7 @@ class Contrat_BDD {
 				'" . $examinateur->getIdentifiantBDD() . "',
 				'" . $etudiant->getIdentifiantBDD() . "',
 				'" . $contact->getIdentifiantBDD() . "',
-				'" . $contrat->getSujetDeStage() . "',
+				'" . $contrat->getSujetDeContrat() . "',
         '" . $contrat->getTypeDeContrat() . "',
 				'" . $contrat->getIdTheme() . "')";
 	    $db->query($requete);
@@ -53,7 +53,7 @@ class Contrat_BDD {
 					 idetudiant = '" . $etudiant->getIdentifiantBDD() . "',
 					 idsoutenance = $idsoutenance,
 					 idcontact = '" . $contact->getIdentifiantBDD() . "',
-					 sujetcontrat = '" . $contrat->getSujetDeStage() . "',
+					 sujetcontrat = '" . $contrat->getSujetDeContrat() . "',
            typedecontrat = '" . $contrat->getTypeDeContrat() . "',
 					 asonresume ='" . $contrat->getASonResume() . "',
 					 note = '" . $contrat->getNote() . "',

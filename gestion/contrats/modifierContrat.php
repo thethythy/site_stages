@@ -2,8 +2,8 @@
 
 /**
  * Page modifierContrat.php
- * Utilisation : page pour éditer une convention existante
- *		 page accessible depuis modifierListeConventions.php
+ * Utilisation : page pour éditer un contrat existante
+ *		 page accessible depuis modifierListeContrat.php
  * Accès : restreint par authentification HTTP
  */
 
@@ -18,7 +18,7 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 
 IHM_Generale::header("Modifier un ", "contrat", "../../", $tabLiens);
 
-$oConv = Contrat::getContrat($_GET['id']);
+$oContrat = Contrat::getContrat($_GET['id']);
 $oPromo = Promotion::getPromotion($_GET['promo']);
 $oFiliere = $oPromo->getFiliere();
 $oParcours = $oPromo->getParcours();
@@ -28,24 +28,24 @@ if (isset($_POST['edit'])) {
     extract($_POST);
 
     if (isset($sujet))
-	$oConv->setSujetDeStage($sujet);
+	$oContrat->setSujetDeStage($sujet);
     if (isset($idTheme))
-	$oConv->setIdTheme($idTheme);
+	$oContrat->setIdTheme($idTheme);
+    $oContrat->setTypeDeContrat($typeContrat);
+    $oContrat->setIdParrain($idPar);
+    $oContrat->setIdExaminateur($idExam);
+    $oContrat->setIdContact($idCont);
 
-    $oConv->setIdParrain($idPar);
-    $oConv->setIdExaminateur($idExam);
-    $oConv->setIdContact($idCont);
+    $idContrat = Contrat_BDD::sauvegarder($oContrat);
 
-    $idConv = Convention_BDD::sauvegarder($oConv);
+    $oEtu = $oContrat->getEtudiant();
 
-    $oEtu = $oConv->getEtudiant();
-
-    echo "Les informations sur la convention de " . $oEtu->getNom() . " " . $oEtu->getPrenom() . " ont été mises à jour.";
+    echo "Les informations sur le contrat de " . $oEtu->getNom() . " " . $oEtu->getPrenom() . " ont été mises à jour.";
     ?>
     <table>
         <tr>
     	<td width="50%" align="center">
-    	    <form method=post action="modifierListeConventions.php">
+    	    <form method=post action="modifierListeContrat.php">
     		<input type="hidden" value="1" name="rech"/>
     		<input type="hidden" value="<?php echo $oPromo->getAnneeUniversitaire(); ?>" name="annee"/>
     		<input type="hidden" value="<?php echo $oFiliere->getIdentifiantBDD(); ?>" name="filiere"/>
@@ -62,7 +62,7 @@ if (isset($_POST['edit'])) {
     </table>
     <?php
 } else {
-    Convention_IHM::afficherFormulaireSaisie($oConv, array(),
+    Contrats_IHM::afficherFormulaireSaisie($oContrat, array(),
 	    $oPromo->getAnneeUniversitaire(),
 	    $oParcours->getIdentifiantBDD(),
 	    $oFiliere->getIdentifiantBDD());

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Page modifierListeConventions.php
- * Utilisation : page pour éditer ou supprimer une convention
- * Dépendance(s) : modifierListeConventionsData.php --> traitement des requêtes Ajax
+ * Page modifierListeContrat.php
+ * Utilisation : page pour éditer ou supprimer un contrat
+ * Dépendance(s) : modifierListeContratData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
 
@@ -27,7 +27,7 @@ if ((isset($_GET['id'])) && (isset($_GET['promo']))) {
     $_POST['parcours'] = $parcours->getIdentifiantBDD();
     $_POST['filiere'] = $filiere->getIdentifiantBDD();
 
-    // Suppression de la convention (et de l'attribution automatiquement)
+    // Suppression du contrat (et de l'attribution automatiquement)
     Contrat::supprimerContrat($_GET['id']);
 }
 

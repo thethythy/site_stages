@@ -1,8 +1,8 @@
 
 /**
  * Script statistiques.js
- * Utilisation : incorporé à statistiquesStages.php
- *		 création puis envoi des requêtes Ajax traitées par statistiquesStagesData.php
+ * Utilisation : incorporé à statistiquesAlternance.php
+ *		 création puis envoi des requêtes Ajax traitées par statistiquesalternanceData.php
  *		 mise en forme et affichage des réponses
  */
 
@@ -156,14 +156,14 @@ var createView = function(data) {
     element.innerHTML += "<br/><p style='font-size: 24px;font-weight:bold;color:#910'>P&eacute;riode " + periode + "</p>";
     element.innerHTML += afficherNomPromotions(data, padding);
 
-    // Canvas partie 'Lieu du stage'
+    // Canvas partie 'Lieu de l alternance'
     element.innerHTML += "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
-    element.innerHTML += afficherLegendeCanvas('Lieu du stage', "l", data, taille, padding);
+    element.innerHTML += afficherLegendeCanvas('Lieu de l alternance', "l", data, taille, padding);
     element.innerHTML += "</div>";
 
-    // Canvas partie 'Thème de stage'
+    // Canvas partie 'Thème de l alternance'
     element.innerHTML += "<div style='border-bottom : 1px solid #555;padding-bottom:10px'>";
-    element.innerHTML += afficherLegendeCanvas('Thème du stage', "t", data, taille, padding);
+    element.innerHTML += afficherLegendeCanvas('Thème de l alternance', "t", data, taille, padding);
     element.innerHTML += "</div>";
 
     // Canvas partie 'Type d'entreprise'
@@ -174,11 +174,11 @@ var createView = function(data) {
     // Créer les graphiques
     for (var i = 1; i <= data['nbSerie']; i++ ) {
 	var ctx = document.getElementById(donneNomCanvas("l", data, i)).getContext("2d");
-	var dataLieu = donneData("l", data["s"+i]['Lieu du stage']);
+	var dataLieu = donneData("l", data["s"+i]['Lieu de l alternance']);
 	new Chart(ctx, { type: "doughnut", data: dataLieu, animation:{ animateScale:true } });
 
 	ctx = document.getElementById(donneNomCanvas("t", data, i)).getContext("2d");
-	var dataTheme = donneData("t", data["s"+i]['Thème du stage']);
+	var dataTheme = donneData("t", data["s"+i]['Thème de l alternance']);
 	new Chart(ctx, { type: "doughnut", data: dataTheme, animation:{ animateScale:true } });
 
 	ctx = document.getElementById(donneNomCanvas("e", data, i)).getContext("2d");
@@ -193,7 +193,7 @@ var createView = function(data) {
 
 var loadData = function(annee_deb, annee_fin, filiere, parcours) {
     var data_request = new XMLHttpRequest();
-    data_request.open('GET', 'statistiquesStagesData.php?annee_deb=' + annee_deb + '&annee_fin=' + annee_fin +'&filiere=' + filiere + '&parcours=' + parcours, true);
+    data_request.open('GET', 'statistiquesalternanceData.php?annee_deb=' + annee_deb + '&annee_fin=' + annee_fin +'&filiere=' + filiere + '&parcours=' + parcours, true);
     data_request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     data_request.onreadystatechange = function () {
 	if (data_request.readyState === 4 && data_request.status === 200) {
