@@ -41,7 +41,6 @@ class offreDeStage_BDD {
         '" . $offreDeStage->getRemarques() . "',
         '$estVisible',
         '" . $offreDeStage->getIdContact() . "');";
-        Utils::printLog("\n".$sql);
         $db->query($sql);
         $lastId = $db->insert_id;
       } else {
@@ -56,12 +55,10 @@ class offreDeStage_BDD {
         estVisible='$estVisible',
         idcontact='" . $offreDeStage->getIdContact() . "'
         WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
-        Utils::printLog("\nAm updating");
         $db->query($sql);
 
         //Themes
         $sql = "DELETE FROM $tab8 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
-        Utils::printLog("\n tab 8 ".$sql);
         $db->query($sql);
 
         //Profils
@@ -77,10 +74,8 @@ class offreDeStage_BDD {
 
       // Themes = Parcours
       $tabThemes = $offreDeStage->getThemes();
-      Utils::printLog("\n >> ".print_r($tabThemes));
       for ($i = 0; $i < sizeof($tabThemes); $i++) {
         $sql = "INSERT INTO $tab8 VALUES('" . $tabThemes[$i]->getIdentifiantBDD() . "', '" . $lastId . "');";
-        Utils::printLog("\n".$sql);
         $db->query($sql);
       }
 

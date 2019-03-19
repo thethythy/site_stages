@@ -19,7 +19,9 @@ $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Top", "entreprises", "../../", $tabLiens);
 
 // Affichage du formulaire de recherche
-Promotion_IHM::afficherFormulaireRecherche("classementEntrepriseData.php", TRUE, TRUE);
+
+Promotion_IHM::afficherFormulaireSelectionInterval2("classementEntrepriseData.php");
+// Promotion_IHM::afficherFormulaireRecherche("classementEntrepriseData.php", TRUE, TRUE);
 
 // Affichage des données
 echo "<div id='data'>\n";

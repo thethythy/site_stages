@@ -329,6 +329,7 @@ if ($cpt == 0) {
 <?php
 }
 }
+echo "</table>";
 ?>
 
 <br/><br/>

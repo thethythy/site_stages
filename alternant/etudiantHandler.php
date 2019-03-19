@@ -12,7 +12,6 @@ try {
 
     throw new Exception('Invalid Request', 2000);
   } else {
-    Utils::printLog(implode($_POST));
     $tabResponse = array();
     for( $i = 0 ; $i < $_POST['length'] ; $i++){
       $cndtr = Candidature::getCandidature($_POST['idetudiant'], $_POST['idoffre'.$i], $_POST['identreprise'.$i]);

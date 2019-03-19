@@ -73,7 +73,6 @@ class offreDAlternance_BDD {
 	$tabThemes = $offreDAlternance->getThemes();
 	for ($i = 0; $i < sizeof($tabThemes); $i++) {
 	    $sql = "INSERT INTO $tab27 VALUES('" . $tabThemes[$i]->getIdentifiantBDD() . "', '" . $lastId . "');";
-      Utils::printLog($sql);
 	    $db->query($sql);
 	}
 
@@ -243,8 +242,6 @@ class offreDAlternance_BDD {
 
 
 	$result = $db->query($requete);
-
-
 
 
 	// --------------------------------------------------------------------

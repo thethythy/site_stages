@@ -17,9 +17,8 @@ class Contrat_BDD {
 	global $tab31;
 
 	$parrain = $contrat->getParrain();
-	$examinateur = $contrat->getExaminateur();
 	$etudiant = $contrat->getEtudiant();
-	$contact = $contrat->getContact();
+	$referent = $contrat->getContact();
 
 	// Test si la chaîne contenant le sujet n'est pas déjà échappé
 	if (strpos($contrat->getSujetDeContrat(), '\\') === false) {
@@ -29,13 +28,14 @@ class Contrat_BDD {
 	// Permet de vérifier si le Contrat existe déjà dans la BDD
 	if ($contrat->getIdentifiantBDD() == "") {
 	    // Création de la Contrat
-	    $requete = "INSERT INTO $tab31(idparrain, idexaminateur, idetudiant, idcontact, sujetcontrat, typedecontrat, idTheme)
+	    $requete = "INSERT INTO $tab31(idparrain, idetudiant, idreferent, sujetcontrat, typedecontrat, duree, indemnite, idTheme)
 			VALUES ('" . $parrain->getIdentifiantBDD() . "',
-				'" . $examinateur->getIdentifiantBDD() . "',
 				'" . $etudiant->getIdentifiantBDD() . "',
-				'" . $contact->getIdentifiantBDD() . "',
+				'" . $referent->getIdentifiantBDD() . "',
 				'" . $contrat->getSujetDeContrat() . "',
         '" . $contrat->getTypeDeContrat() . "',
+        '" . $contrat->getDuree() . "',
+        '" . $contrat->getIndemnites() . "',
 				'" . $contrat->getIdTheme() . "')";
 	    $db->query($requete);
 
@@ -49,12 +49,13 @@ class Contrat_BDD {
 
 	    // Mise à jour de la Contrat
 	    $requete = "UPDATE $tab31 SET idparrain = '" . $parrain->getIdentifiantBDD() . "',
-					 idexaminateur = '" . $examinateur->getIdentifiantBDD() . "',
 					 idetudiant = '" . $etudiant->getIdentifiantBDD() . "',
 					 idsoutenance = $idsoutenance,
-					 idcontact = '" . $contact->getIdentifiantBDD() . "',
+					 idreferent = '" . $referent->getIdentifiantBDD() . "',
 					 sujetcontrat = '" . $contrat->getSujetDeContrat() . "',
            typedecontrat = '" . $contrat->getTypeDeContrat() . "',
+           duree =  '" . $contrat->getDuree() . "',
+           indemnite = '" . $contrat->getIndemnites() . "',
 					 asonresume ='" . $contrat->getASonResume() . "',
 					 note = '" . $contrat->getNote() . "',
 					 idtheme = '" . $contrat->getIdTheme() . "'
@@ -157,13 +158,14 @@ class Contrat_BDD {
 		array_push($tab, $ods['idcontrat']);
 		array_push($tab, $ods['sujetcontrat']);
     array_push($tab, $ods['typedecontrat']);
+    array_push($tab, $ods['duree']);
+    array_push($tab, $ods['indemnite']);
 		array_push($tab, $ods['asonresume']);
 		array_push($tab, $ods['note']);
 		array_push($tab, $ods['idparrain']);
-		array_push($tab, $ods['idexaminateur']);
 		array_push($tab, $ods['idetudiant']);
 		array_push($tab, $ods['idsoutenance']);
-		array_push($tab, $ods['idcontact']);
+		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idtheme']);
 
 		array_push($tabC, $tab);
@@ -211,13 +213,14 @@ class Contrat_BDD {
 		array_push($tab, $ods['idcontrat']);
 		array_push($tab, $ods['sujetcontrat']);
     array_push($tab, $ods['typedecontrat']);
+    array_push($tab, $ods['duree']);
+    array_push($tab, $ods['indemnite']);
 		array_push($tab, $ods['asonresume']);
 		array_push($tab, $ods['note']);
 		array_push($tab, $ods['idparrain']);
-		array_push($tab, $ods['idexaminateur']);
 		array_push($tab, $ods['idetudiant']);
 		array_push($tab, $ods['idsoutenance']);
-		array_push($tab, $ods['idcontact']);
+		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idtheme']);
 
 		array_push($tabC, $tab);
@@ -260,16 +263,16 @@ class Contrat_BDD {
     }
 
     /**
-     * Test si une contrat existe ou pas pour un contact
+     * Test si une contrat existe ou pas pour un referent
      * @global resource $db Référence à la base ouverte
      * @global string $tab31 Nom de la table 'contrat'
      * @global string $tab15 Nom de la table 'promotion'
      * @global string $tab32 Nom de la table 'relation_promotion_etudiant_contrat'
-     * @param integer $idcontact Identifiant du contact
+     * @param integer $idreferent Identifiant du referent
      * @param objet Filtre $filtre Filtre éventuel sur l'année, la filière et le parcours
      * @return boolean
      */
-    public static function existe2($idcontact, $filtre) {
+    public static function existe2($idreferent, $filtre) {
 	global $db;
 	global $tab31;
 	global $tab15;
@@ -281,9 +284,9 @@ class Contrat_BDD {
 			WHERE " . $filtre->getStrFiltres() . "
 			      AND $tab32.idpromotion=$tab15.idpromotion
 			      AND $tab31.idcontrat=$tab32.idcontrat
-			      AND $tab31.idcontact='$idcontact'";
+			      AND $tab31.idreferent='$idreferent'";
 	else
-	    $requete = "SELECT idcontact FROM $tab31 WHERE idcontact='$idcontact';";
+	    $requete = "SELECT idreferent FROM $tab31 WHERE idreferent='$idreferent';";
 
 	$result = $db->query($requete);
 	$compte = $result->num_rows;

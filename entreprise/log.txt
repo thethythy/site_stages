@@ -29,3 +29,11 @@ INSERT INTO offredestage
         '0',
         '0');
  >> 1
+
+UPDATE contact SET nomcontact = 'fcxgvxdv',
+				     prenomcontact = 'xcvxcvcxv',
+				     telephone = 'xvxc',
+				     telecopie = '',
+				     email = 'vxcvxvx',
+				     identreprise = '547'
+			    WHERE idcontact = '0'
