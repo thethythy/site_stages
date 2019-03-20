@@ -214,11 +214,21 @@ class Promotion_IHM {
             </table>
           </td>
         </tr>
+        <tr>
+          <td class='align-center'>
+            Sélectionnez le type d'offre :
+            <select id="offre" name="offre">
+              <option value='Tous'>Tous</option>
+              <option value='Stage'>Stage</option>
+              <option value='Alternance'>Alternance</option>
+            </select>
+          </td>
+        </tr>
       </table>
     </form>
 
     <script type="text/javascript">
-    var table = new Array("annee_deb", "annee_fin", "filiere", "parcours");
+    var table = new Array("annee_deb", "annee_fin", "filiere", "parcours", "offre");
     new LoadData(table, "<?php echo $page; ?>", "onchange");
     </script>
     <?php

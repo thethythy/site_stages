@@ -186,7 +186,7 @@ if (sizeof($tabOEntreprise) > 0) {
           $k = 1; // Numéro de la fiche
           $fiches = '';
           foreach ($value4 as $key5 => $value5) {
-            $fiches .= '<a href="./ficheDAternance.php?idEtu=' . $value5->getIdEtudiant() . '&idPromo=' . $oPromotion->getIdentifiantBDD() .'" target="_blank">F'.$k.'</a>';
+            $fiches .= '<a href="./ficheDAlternance.php?idEtu=' . $value5->getIdEtudiant() . '&idPromo=' . $oPromotion->getIdentifiantBDD() .'" target="_blank">F'.$k.'</a>';
             if ($k++ < sizeof($value4)) $fiches .= ' ';
           }
 
