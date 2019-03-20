@@ -23,7 +23,6 @@ header('Content-type: text/html; charset=utf-8');
 $filtres = array();
 
 
-//Utils::printLog("0 ".implode($_POST));
 
 if (isset($_POST['annee_deb']))
     array_push($filtres, new FiltreSuperieur('anneeuniversitaire', $_POST['annee_deb']));

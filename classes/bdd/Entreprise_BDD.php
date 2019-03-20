@@ -211,17 +211,16 @@ class Entreprise_BDD {
     ORDER BY idcontrat DESC;";
 
     $result = $db->query($sql);
-
-    $tabIDConventions = array();
+    $tabIDContrats = array();
 
     if ($result) {
       while ($row = $result->fetch_array()) {
-        array_push($tabIDConventions, $row["idconvention"]);
+        array_push($tabIDContrats, $row["idcontrat"]);
       }
       $result->free();
     }
 
-    return $tabIDConventions;
+    return $tabIDContrats;
   }
 
 }

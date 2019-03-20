@@ -31,7 +31,6 @@ class Candidature_BDD {
       identreprise='" . $candidature->getEntreprise() . "',
       statut='" . $candidature->getStatut() . "'
       WHERE idcandidature = '" . $candidature->getIdentifiantBDD() . "'";
-    //  Utils.printLog($sql);
       $db->query($sql);
     }
 

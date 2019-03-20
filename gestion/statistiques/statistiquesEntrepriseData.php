@@ -68,7 +68,6 @@ function trouveEmailEntreprise($oEntreprise) {
 
 // Les entreprises sélectionnées
 $tabOEntreprise = Entreprise::getListeEntreprises($filtre);
-
 if (sizeof($tabOEntreprise) > 0) {
 
   echo "Nombre d'entreprises sélectionnées : ".sizeof($tabOEntreprise)."<br/><br/>";
@@ -81,21 +80,31 @@ if (sizeof($tabOEntreprise) > 0) {
   for($i = 0; $i < sizeof($tabOEntreprise); $i++) {
     $idEnt = $tabOEntreprise[$i]->getIdentifiantBDD();
     $tabIdConventions = Entreprise_BDD::getListeConventionFromEntreprise($idEnt);
+    $tabIdContrats = Entreprise_BDD::getListeContratFromEntreprise($idEnt);
 
-    $tabIdContrats = Entreprise_BDD::getListeConventionFromEntreprise($idEnt);
-
+    // Création du tableau des données
+    $tabData = array();
     if (sizeof($tabIdConventions) > 0) {
 
-      // Création du tableau des données
-      $tabData = array();
       foreach ($tabIdConventions as $idConvention) {
         $oConvention = Convention::getConvention($idConvention);
-        $idPromotion = $oConvention->getPromotion()->getIdentifiantBDD();
+        $idPromotionCV = $oConvention->getPromotion()->getIdentifiantBDD();
 
         $tabData[$idEnt]['nbConventions']++;
-        $tabData[$idEnt]['promotions'][$idPromotion]++;
-        $tabData[$idEnt]['promotions']['conventions'][$idPromotion][$idConvention] = $oConvention;
+        $tabData[$idEnt]['promotions'][$idPromotionCV]++;
+        $tabData[$idEnt]['promotions']['conventions'][$idPromotionCV][$idConvention] = $oConvention;
       }
+    }
+    if(sizeof($tabIdContrats) > 0){
+      Utils::printLog($idEnt);
+      foreach ($tabIdContrats as $idContrat) {
+        $oContrat = Contrat::getContrat($idContrat);
+        $idPromotionCN = $oContrat->getPromotion()->getIdentifiantBDD();
+        $tabData[$idEnt]['nbContrats']++;
+        $tabData[$idEnt]['promotions'][$idPromotionCN]++;
+        $tabData[$idEnt]['promotions']['contrats'][$idPromotionCN][$idContrat] = $oContrat;
+      }
+    }
 
 
       if ($entete == 1) {
@@ -156,13 +165,39 @@ if (sizeof($tabOEntreprise) > 0) {
 
           echo '<br/>';
         }
-
+        if($value['nbConventions'] > 0)
         echo "<br/>Nombre total : ".$value['nbConventions'];
+        else
+        echo "Aucun stagiaire pour cette entreprise";
 
         echo '</td>';
 
-
+        // ALTERNANCE
         echo '<td>';
+
+        $anneeUniversitaire = '';
+        foreach ($value['promotions']['contrats'] as $key4 => $value4) {
+
+          $oPromotion = Promotion::getPromotion($key4);
+
+          if ($anneeUniversitaire == '') $anneeUniversitaire = $oPromotion->anneeUniversitaire;
+          $annees = $oPromotion->anneeUniversitaire . '-' . ($oPromotion->anneeUniversitaire + 1) ;
+
+          $k = 1; // Numéro de la fiche
+          $fiches = '';
+          foreach ($value4 as $key5 => $value5) {
+            $fiches .= '<a href="./ficheDAternance.php?idEtu=' . $value5->getIdEtudiant() . '&idPromo=' . $oPromotion->getIdentifiantBDD() .'" target="_blank">F'.$k.'</a>';
+            if ($k++ < sizeof($value4)) $fiches .= ' ';
+          }
+
+          echo sprintf('%d&nbsp;&nbsp;%s %s&nbsp;&nbsp;[%s]&nbsp;&nbsp;{%s}', sizeof($value4), $oPromotion->getFiliere()->getNom(), $oPromotion->getParcours()->getNom(), $annees, $fiches);
+
+          echo '<br/>';
+        }
+        if($value['nbContrats'] > 0)
+        echo "<br/>Nombre total : ".$value['nbContrats'];
+        else
+        echo "Aucun alternant pour cette entreprise";
 
         echo '</td>';
 
@@ -172,13 +207,14 @@ if (sizeof($tabOEntreprise) > 0) {
         $j++;
       }
       $nbTotalConventions += sizeof($tabIdConventions);
+      $nbTotalContrats += sizeof($tabIdContrats);
     }
-  }
 
-  if ($nbTotalConventions > 0)
+
+  if ($nbTotalConventions > 0 || $nbTotalContrats > 0)
   echo "</table>";
   else
-  echo "Aucune entreprise sélectionnée n'a pris de stagiaire.";
+  echo "Aucune entreprise sélectionnée n'a pris de stagiaire ou d'alternant.";
 
 } else {
   echo '<br/><center>Aucune entreprise ne correspond aux critères de recherche.</center><br/>';

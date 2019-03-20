@@ -65,7 +65,6 @@ if (isset($_POST['edit'])) {
     </table>
     <?php
 } else {
-    Utils::printLog("4");
     Contrats_IHM::afficherFormulaireSaisie($oContrat, array(),
 	    $oPromo->getAnneeUniversitaire(),
 	    $oParcours->getIdentifiantBDD(),
