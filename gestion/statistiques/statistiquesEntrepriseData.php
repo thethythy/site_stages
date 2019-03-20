@@ -81,9 +81,11 @@ if (sizeof($tabOEntreprise) > 0) {
   for($i = 0; $i < sizeof($tabOEntreprise); $i++) {
     $idEnt = $tabOEntreprise[$i]->getIdentifiantBDD();
     $tabIdConventions = Entreprise_BDD::getListeConventionFromEntreprise($idEnt);
+
     $tabIdContrats = Entreprise_BDD::getListeConventionFromEntreprise($idEnt);
 
-    if (sizeof($tabIdConventions) > 0 || sizeof($tabIdContrats) > 0) {
+    if (sizeof($tabIdConventions) > 0) {
+
       // Création du tableau des données
       $tabData = array();
       foreach ($tabIdConventions as $idConvention) {
@@ -94,16 +96,7 @@ if (sizeof($tabOEntreprise) > 0) {
         $tabData[$idEnt]['promotions'][$idPromotion]++;
         $tabData[$idEnt]['promotions']['conventions'][$idPromotion][$idConvention] = $oConvention;
       }
-      $tabDataCon;
-      foreach($tabIdContrats as $idContrat){
-        $oContrat = Contrat::getContrat($idContrat);
-        $idPromotion = $oContrat->getPromotion()->getIdentifiantBDD();
 
-        $tabDataCon[$idEnt]['nbContrats']++;
-        $tabDataCon[$idEnt]['promotions'][$idPromotion]++;
-        $tabDataCon[$idEnt]['promotions']['contrats'][$idPromotion][$idContrat] = $oContrat;
-
-      }
 
       if ($entete == 1) {
         echo "Liste des entreprises ayant pris des étudiants :<br/><br/>";
@@ -168,30 +161,8 @@ if (sizeof($tabOEntreprise) > 0) {
 
         echo '</td>';
 
-        // ALTERNANCE
+
         echo '<td>';
-        $anneeUniversitaire = '';
-        foreach ($value['promotions']['contrats'] as $key2 => $value2) {
-
-          $oPromotion = Promotion::getPromotion($key2);
-
-          if ($anneeUniversitaire == '') $anneeUniversitaire = $oPromotion->anneeUniversitaire;
-          $annees = $oPromotion->anneeUniversitaire . '-' . ($oPromotion->anneeUniversitaire + 1) ;
-
-          $k = 1; // Numéro de la fiche
-          $fiches = '';
-          foreach ($value2 as $key3 => $value3) {
-            $fiches .= '<a href="./ficheDeStage.php?idEtu=' . $value3->getIdEtudiant() . '&idPromo=' . $oPromotion->getIdentifiantBDD() .'" target="_blank">F'.$k.'</a>';
-            if ($k++ < sizeof($value2)) $fiches .= ' ';
-          }
-
-          echo sprintf('%d&nbsp;&nbsp;%s %s&nbsp;&nbsp;[%s]&nbsp;&nbsp;{%s}', sizeof($value2), $oPromotion->getFiliere()->getNom(), $oPromotion->getParcours()->getNom(), $annees, $fiches);
-
-          echo '<br/>';
-        }
-
-        echo "<br/>Nombre total : ".$value['nbConventions'];
-
 
         echo '</td>';
 

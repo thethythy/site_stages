@@ -357,10 +357,10 @@ class Contrat_IHM {
 	$promotion = Promotion::getPromotion($idPromo);
 	$filiere = $promotion->getFiliere();
 	$parcours = $promotion->getParcours();
-	$contratention = $etudiant->getContrat($promotion->getAnneeUniversitaire());
-	$contact = $contratention->getContact();
+	$contrat = $etudiant->getContrat($promotion->getAnneeUniversitaire());
+	$contact = $contrat->getContact();
 	$entreprise = $contact->getEntreprise();
-	$parrain = $contratention->getParrain();
+	$parrain = $contrat->getParrain();
 	$annee = $promotion->getAnneeUniversitaire();
 	?>
 
@@ -396,9 +396,6 @@ class Contrat_IHM {
 			if ($contact->getTelephone() != "" && strlen($contact->getTelephone()) > 1)
 			    echo "Tél. : ".$contact->getTelephone()."<br/>";
 
-			if ($contact->getTelecopie() != "")
-			    echo "Fax : ".$contact->getTelecopie()."<br/>";
-
 			if ($contact->getEmail() != "")
 			    echo "Email : ".$contact->getEmail();
 		    ?>
@@ -408,11 +405,13 @@ class Contrat_IHM {
 		<td colspan="2" style="column-span: all; border: 1px solid; padding: 15px;">
 		    <h3>Le contrat</h3>
 		    <?php
-			if ($contratention->aSonResume == "1"){
-			    echo "<a href='".$chemin.$contratention->getSujetDeContrat()."'>Résumé du contrat</a>";
+			if ($contrat->aSonResume == "1"){
+			    echo "<a href='".$chemin.$contrat->getSujetDeContrat()."'>Résumé du contrat</a>";
 			} else {
-			    $chaine = $contratention->getSujetDeContrat();
-			echo $chaine;
+
+			   echo "Sujet de l'aternance : ".$contrat->getSujetDeContrat()."<br/>";
+         echo "Durée du contrat : ".$contrat->getDuree()." an(s)<br/>";
+         echo "Indemnités mensuelles : ".$contrat->getIndemnites()." €<br/>";
 			}
 		    ?>
 		</td>

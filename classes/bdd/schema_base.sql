@@ -282,7 +282,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   `typedecontrat` BOOLEAN NOT NULL,
   `duree` INT(4) NOT NULL,
   `indemnite` INT(4) NOT NULL,
-  `typedecontrat` BOOLEAN NOT NULL,
   `asonresume` TINYINT(4) NOT NULL DEFAULT '0',
   `note` DECIMAL(4,2) NOT NULL DEFAULT '0.00',
   `idparrain` INT(10) NOT NULL,
@@ -310,11 +309,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contrat_contact_idreferent`
     FOREIGN KEY (`idreferent`)
-    REFERENCES `stages`.`contact` (`idcontact`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contrat_contact_idcontact`
-    FOREIGN KEY (`idcontact`)
     REFERENCES `stages`.`contact` (`idcontact`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,

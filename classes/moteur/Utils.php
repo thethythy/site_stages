@@ -5,7 +5,9 @@
 * dont certaines sont spécifiques au lieu géographique de déploiement du site
 */
 
-//ini_set('display_errors', 'off');
+
+ini_set('display_errors', 'off');
+
 
 class Utils {
 
