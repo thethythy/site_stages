@@ -1,0 +1,26 @@
+
+4
+Entrée en sauvegarde
+A
+B
+C
+4
+4
+Entrée en sauvegarde
+A
+B
+C
+D
+MAJ
+UPDATE contrat SET idparrain = '12',
+					 idetudiant = '430',
+					 idsoutenance = NULL,
+					 idreferent = '892',
+					 sujetcontrat = 'huyguyg',
+           typedecontrat = '0',
+           duree =  '1',
+           indemnite = '800',
+					 asonresume ='0',
+					 note = '0.00',
+					 idtheme = '1'
+			WHERE idcontrat = '387'

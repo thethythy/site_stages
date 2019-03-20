@@ -15,11 +15,9 @@ class Contrat_BDD {
     public static function sauvegarder($contrat) {
 	global $db;
 	global $tab31;
-
 	$parrain = $contrat->getParrain();
 	$etudiant = $contrat->getEtudiant();
 	$referent = $contrat->getContact();
-
 	// Test si la chaîne contenant le sujet n'est pas déjà échappé
 	if (strpos($contrat->getSujetDeContrat(), '\\') === false) {
 	    $contrat->setSujetDeContrat($db->escape_string($contrat->getSujetDeContrat()));
@@ -27,7 +25,7 @@ class Contrat_BDD {
 
 	// Permet de vérifier si le Contrat existe déjà dans la BDD
 	if ($contrat->getIdentifiantBDD() == "") {
-	    // Création de la Contrat
+	    // Création du Contrat
 	    $requete = "INSERT INTO $tab31(idparrain, idetudiant, idreferent, sujetcontrat, typedecontrat, duree, indemnite, idTheme)
 			VALUES ('" . $parrain->getIdentifiantBDD() . "',
 				'" . $etudiant->getIdentifiantBDD() . "',
@@ -47,7 +45,7 @@ class Contrat_BDD {
 	} else {
 	    $idsoutenance = $contrat->getIdSoutenance() ? $contrat->getIdSoutenance() : "NULL";
 
-	    // Mise à jour de la Contrat
+	    // Mise à jour du Contrat
 	    $requete = "UPDATE $tab31 SET idparrain = '" . $parrain->getIdentifiantBDD() . "',
 					 idetudiant = '" . $etudiant->getIdentifiantBDD() . "',
 					 idsoutenance = $idsoutenance,
@@ -62,6 +60,7 @@ class Contrat_BDD {
 			WHERE idcontrat = '" . $contrat->getIdentifiantBDD() . "'";
 
 	    $res = $db->query($requete);
+      Utils::printLog($requete);
 	    if (!$res) { return FALSE; }
 
 	    return $contrat->getIdentifiantBDD();

@@ -122,8 +122,6 @@ class Contrat {
       $this->indemnite = $i;
     }
 
-
-
     public function setASonResume($asr) {
 	$this->aSonResume = $asr;
     }
