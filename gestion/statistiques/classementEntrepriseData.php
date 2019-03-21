@@ -57,7 +57,6 @@ if(isset($_POST['offre'])){
   else
   $displayFlag = 2;
 }
-echo $displayFlag;
 
 // -----------------------------------------------------------------------------
 // Affichage des données
@@ -81,14 +80,21 @@ else{
   $tabOConventions = array();
 }
 
+$nbEntreprisesSelectionneesSta = 0;
+$nbEntreprisesSelectionneesAlt = 0;
+
 $tabData = array();
 if (sizeof($tabOConventions) > 0) {
   // Création du tableau des données
   foreach ($tabOConventions as $oConvention) {
+
     $idEntreprise = $oConvention->getEntreprise()->getIdentifiantBDD();
     $idPromotionCV = $oConvention->getPromotion()->getIdentifiantBDD();
 
     $tabData[$idEntreprise]['nbConventions']++;
+    if($tabData[$idEntreprise]['nbConventions'] == 1){
+      $nbEntreprisesSelectionneesSta++;
+    }
     $tabData[$idEntreprise]['promotions'][$idPromotionCV]++;
     $tabData[$idEntreprise]['promotions']['conventions'][$idPromotionCV][$oConvention->getIdentifiantBDD()] = $oConvention;
   }
@@ -100,6 +106,9 @@ if(sizeof($tabOContrats) > 0){
     $idPromotionCN = $oContrat->getPromotion()->getIdentifiantBDD();
 
     $tabData[$idEntreprise]['nbContrats']++;
+    if($tabData[$idEntreprise]['nbContrats'] == 1){
+      $nbEntreprisesSelectionneesAlt++;
+    }
     $tabData[$idEntreprise]['promotions'][$idPromotionCN]++;
     $tabData[$idEntreprise]['promotions']['contrats'][$idPromotionCN][$oContrat->getIdentifiantBDD()] = $oContrat;
   }
@@ -145,9 +154,10 @@ foreach ($tabData as $key => $value) {
 
 
 // Affichage du tableau trié
-echo "Nombre d'entreprises sélectionnées : ".sizeof($tabData)."<p/>";
+
 switch($displayFlag){
   case 0:
+  echo "Nombre d'entreprises sélectionnées : ".$nbEntreprisesSelectionneesSta."<p/>";
   echo '<table>
   <tr id="entete">
   <td width="40%">Entreprise</td>
@@ -156,6 +166,7 @@ switch($displayFlag){
   </tr>';
   break;
   case 1:
+  echo "Nombre d'entreprises sélectionnées : ".$nbEntreprisesSelectionneesAlt."<p/>";
   echo '<table>
   <tr id="entete">
   <td width="40%">Entreprise</td>
@@ -164,6 +175,7 @@ switch($displayFlag){
   </tr>';
   break;
   case 2:
+  echo "Nombre d'entreprises sélectionnées : ".sizeof($tabData)."<p/>";
   echo '<table>
   <tr id="entete">
   <td width="30%">Entreprise</td>
@@ -282,7 +294,7 @@ foreach ($tabData as $key => $value) {
         }
 
         echo '</td>';
-      
+
 
 
     }

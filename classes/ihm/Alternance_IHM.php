@@ -53,9 +53,6 @@ class Alternance_IHM {
           if ($contact->getTelephone() != "" && strlen($contact->getTelephone()) > 1)
           echo "Tél. : ".$contact->getTelephone()."<br/>";
 
-          if ($contact->getTelecopie() != "")
-          echo "Fax : ".$contact->getTelecopie()."<br/>";
-
           if ($contact->getEmail() != "")
           echo "Email : ".$contact->getEmail();
           ?>

@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`contact` (
   `nomcontact` VARCHAR(100) NOT NULL,
   `prenomcontact` VARCHAR(100) NOT NULL,
   `telephone` VARCHAR(20) NOT NULL,
-  `telecopie` VARCHAR(20) NULL DEFAULT NULL,
   `email` VARCHAR(200) NULL DEFAULT NULL,
   `identreprise` INT(10) NOT NULL,
   PRIMARY KEY (`idcontact`),

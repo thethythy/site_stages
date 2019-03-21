@@ -269,7 +269,7 @@ class OffreDAlternance_IHM {
     </tr>
     <?php
   }
-}
+  }
 
 if ($cpt == 0) {
   echo "<p>Toutes les offres d'alternance ont été validées.</p>";
@@ -483,10 +483,10 @@ public static function afficherFormulaireModification() {
           <tr id="divTypeContrat"><!--Choisir le type de contrat  -->
             <th>Type de contrat (*) :</th>
             <td>
-              <input type="radio" id="" name ="typeContrat" <?php if((isset($modificationAlternance) && $modificationAlternance.getTypeContratStr() == "Apprentissage") ||
+              <input type="radio" name ="typeContrat" <?php if((isset($modificationOffreDAlternance) && $modificationOffreDAlternance->getTypeContrat() == 1) ||
               (isset($_POST['typeContrat']) && $_POST['typeContrat'] == 1)) { echo 'checked="checked"';} ?> value="1"> Apprentissage
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio"  id="" name ="typeContrat" <?php if((isset($modificationAlternance) && $modificationAlternance.getTypeContratStr() == "Professionnalisation") ||
+              <input type="radio" name ="typeContrat" <?php if((isset($modificationOffreDAlternance) && $modificationOffreDAlternance->getTypeContrat() == 0) ||
               (isset($_POST['typeContrat']) && $_POST['typeContrat'] == 0)) { echo 'checked="checked"';} ?> value="0"> Professionnalisation
             </td>
           </tr>
@@ -759,19 +759,6 @@ public static function afficherFormulaireModification() {
             </td>
           </tr>
           <tr>
-            <th>Fax :</th>
-            <td>
-              <input type="text" name="fax_contact" size="50" value="<?php
-              if (isset($_POST['fax_contact'])) {
-                echo $_POST['fax_contact'];
-              } else if (isset($modificationContact)) {
-                echo htmlentities($modificationContact->getTelecopie(), ENT_QUOTES, 'UTF-8');
-              }
-              ?>"
-              />
-            </td>
-          </tr>
-          <tr>
             <th>Email (*) :</th>
             <td>
               <input type="text" name="email_contact" size="50" value="<?php
@@ -981,10 +968,6 @@ $duree_init, $competence_init) {
           <tr>
             <th>Tel :</th>
             <td><?php echo $contact->getTelephone(); ?></td>
-          </tr>
-          <tr>
-            <th>Fax :</th>
-            <td><?php echo $contact->getTelecopie(); ?></td>
           </tr>
           <tr>
             <th>Email :</th>

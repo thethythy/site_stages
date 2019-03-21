@@ -34,10 +34,6 @@ if (isset($_POST['rech'])) {
     if (isset($_POST['tel']) && $_POST['tel'] != "")
 	array_push($filtres, new FiltreString("telephone", $_POST['tel'] . "%"));
 
-    // Si une recherche sur le fax est demandée
-    if (isset($_POST['fax']) && $_POST['fax'] != "")
-	array_push($filtres, new FiltreString("telecopie", $_POST['fax'] . "%"));
-
     // Si une recherche sur l'entreprise est demandée
     if (isset($_POST['entreprise']) && $_POST['entreprise'] != "")
 	array_push($filtres, new FiltreNumeric("identreprise", $_POST['entreprise']));

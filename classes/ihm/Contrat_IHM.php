@@ -171,8 +171,6 @@ class Contrat_IHM {
 			    if ($contact->getTelephone() != "")
 				echo "Tel : " . $contact->getTelephone() . "<br/>";
 
-			    if ($contact->getTelecopie() != "")
-				echo "Fax : " . $contact->getTelecopie() . "<br/>";
 
 			    if ($contact->getEmail() != "")
 				echo "Email : " . $contact->getEmail();

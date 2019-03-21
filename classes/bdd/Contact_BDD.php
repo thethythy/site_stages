@@ -25,7 +25,6 @@ class Contact_BDD {
 			'" . $contact->getNom() . "',
 			'" . $contact->getPrenom() . "',
 			'" . $contact->getTelephone() . "',
-			'" . $contact->getTelecopie() . "',
 			'" . $contact->getEmail() . "',
 			'" . $entreprise->getIdentifiantBDD() . "');";
 	    $db->query($sql);
@@ -38,7 +37,6 @@ class Contact_BDD {
 	    $sql = "UPDATE $tab3 SET nomcontact = '" . $contact->getNom() . "',
 				     prenomcontact = '" . $contact->getPrenom() . "',
 				     telephone = '" . $contact->getTelephone() . "',
-				     telecopie = '" . $contact->getTelecopie() . "',
 				     email = '" . $contact->getEmail() . "',
 				     identreprise = '" . $entreprise->getIdentifiantBDD() . "'
 			    WHERE idcontact = '" . $contact->getIdentifiantBDD() . "'";
@@ -107,7 +105,6 @@ class Contact_BDD {
 		array_push($tab, $data["nomcontact"]);
 		array_push($tab, $data["prenomcontact"]);
 		array_push($tab, $data["telephone"]);
-		array_push($tab, $data["telecopie"]);
 		array_push($tab, $data["email"]);
 		array_push($tab, $data["identreprise"]);
 		array_push($listeContacts, $tab);
@@ -145,7 +142,6 @@ class Contact_BDD {
 		array_push($tab, $contact["nomcontact"]);
 		array_push($tab, $contact["prenomcontact"]);
 		array_push($tab, $contact["telephone"]);
-		array_push($tab, $contact["telecopie"]);
 		array_push($tab, $contact["email"]);
 		array_push($tab, $contact["identreprise"]);
 		array_push($tabContacts, $tab);
