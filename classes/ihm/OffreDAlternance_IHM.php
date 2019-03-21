@@ -1066,9 +1066,9 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu, $annee, $
               <option value="-------------">-------------</option>
               <option value="Pas intéressé">Pas intéressé</option>
               <option value="Postulé">Postulé</option>
-              <option value="Entretien">Entretien</option>
-              <option value="Entrenu">Entretenu</option>
-              <option value="Pris">Pris</option>
+              <option value="Entretien">Entretien en attente</option>
+              <option value="Entretien passé">Entretien passé</option>
+              <option value="Accepté">Accepté</option>
               <option value="Refusé">Refusé</option>
             </select>
           </td>
