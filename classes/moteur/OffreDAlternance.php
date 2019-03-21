@@ -253,6 +253,7 @@ class OffreDAlternance {
   * @return array
   */
   public static function getListeOffreDAlternance($filtre) {
+    Utils::printLog("AA");
     $tabODSString = OffreDAlternance_BDD::getListeOffreDAlternance($filtre);
 
     $tabODS = array();
@@ -264,11 +265,16 @@ class OffreDAlternance {
       $tabODSString[$i][6], $tabODSString[$i][7],
       $tabODSString[$i][8], $tabODSString[$i][9],
       $tabODSString[$i][10], $tabODSString[$i][11],
-      NULL));//Si on veut faire un filtre avec le type de contrat ??
+      NULL));
     }
 
     return $tabODS;
   }
+
+
+    public static function supprimerSuivi($idOffre) {
+      OffreDAlternance_BDD::supprimerSuivi($idOffre);
+    }
 
 }
 
