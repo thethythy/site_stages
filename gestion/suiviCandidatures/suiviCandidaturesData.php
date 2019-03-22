@@ -74,4 +74,3 @@ if (sizeof($tabEtu) == 0){
 }
 ?>
 
-<script> setColor() </script>

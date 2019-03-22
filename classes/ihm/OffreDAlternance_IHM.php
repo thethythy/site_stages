@@ -1108,7 +1108,7 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
           <?php echo '<td id="idEtu-'.$tabC[$i]->getEtudiant().'"  name="nomEtu-'.$cpt.'">'. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getNom().' '. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getPrenom().'</td>';?>
           <?php echo '<td>'. OffreDAlternance::getOffreDAlternance($tabC[$i]->getOffre())->getTitre().'</td>'; ?>
           <?php echo '<td>'.Entreprise::getEntreprise($tabC[$i]->getEntreprise())->getNom().'</td>'; ?>
-          <?php echo '<td id="statut-<?php echo $cpt;?>" onreadystatechange="setColor()">'.$tabC[$i]->getStatut().'</td>' ?>
+          <?php echo '<td id="statut-<?php echo $cpt;?>">'.$tabC[$i]->getStatut().'</td>' ?>
         </tr>
         <?php
       }
