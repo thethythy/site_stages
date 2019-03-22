@@ -287,13 +287,11 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   `idreferent` INT(10) NOT NULL,
   `idetudiant` INT(10) NOT NULL,
   `idsoutenance` INT(10) NULL DEFAULT NULL,
-  `idcontact` INT(10) NOT NULL,
   `idtheme` INT(10) NOT NULL,
   PRIMARY KEY (`idcontrat`),
   INDEX `idetudiant_idx` (`idetudiant` ASC),
   INDEX `idparrain_idx` (`idparrain` ASC),
   INDEX `idreferent_idx` (`idreferent` ASC),
-  INDEX `idcontact_idx` (`idcontact` ASC),
   INDEX `idtheme_idx` (`idtheme` ASC),
   UNIQUE INDEX `idsoutenance_idx` (`idsoutenance` ASC),
   CONSTRAINT `fk_contrat_etudiant_idetudiant`

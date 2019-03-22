@@ -7,18 +7,16 @@
 * Accès : restreint par cookie
 */
 
-$access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+include_once("../../classes/bdd/connec.inc");
+include_once('../../classes/moteur/Utils.php');
 
-include_once("../classes/bdd/connec.inc");
-include_once('../classes/moteur/Utils.php');
-
-spl_autoload_register('Utils::my_autoloader_from_level1');
+spl_autoload_register('Utils::my_autoloader_from_level2');
 
 $tabLiens = array();
-$tabLiens[0] = array('../', 'Accueil');
-$tabLiens[1] = array('./', 'Alternant');
+$tabLiens[0] = array('../../', 'Accueil');
+$tabLiens[1] = array('../', 'Gestion');
 
-IHM_Generale::header("Suivi des", "candidatures", "../", $tabLiens);
+IHM_Generale::header("Suivi des", "candidatures", "../../", $tabLiens);
 
 echo "<script type='text/javascript' src='suiviCandidatures.js'></script>\n";
 
