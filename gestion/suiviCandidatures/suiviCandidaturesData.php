@@ -63,10 +63,15 @@ if (sizeof($tabEtu) == 0){
   } else {
     $tabC = Candidature::getCandidaturesEtudiant($tabEtu);
   }
-  if(!is_array($tabC))
-    $tabC = array();
+  if(!is_array($tabC)){
+    echo "Il ny'a pas de candidature qui réponde aux critères.";
+  } else {
   OffreDAlternance_IHM::afficherFormulaireSuiviGestion($tabC, $tabEtu);
+}
+
   echo "\n</div>";
 
 }
 ?>
+
+<script> setColor() </script>

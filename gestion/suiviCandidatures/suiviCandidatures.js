@@ -29,17 +29,20 @@ function populateEtudiant(){
 				return;
 			}
 			/* Traitement de la réponse */
+
 			if(json.idEtudiant == 0){
 				for(var i = 1 ; i < json.length +1; i++){
 					document.getElementById('ligneCandidature-'+i).style.display = '';
 				}
 			} else {
+				setColor();
 				for(var i = 1 ; i < json.length +1; i++){
 					if((document.getElementsByName('nomEtu-'+i)[0].id.split('-')[1]) != json.idEtudiant){
 						document.getElementById('ligneCandidature-'+i).style.display = 'none';
 					} else {
 						document.getElementById('ligneCandidature-'+i).style.display = '';
 					}
+
 				}
 			}
 		}
@@ -48,4 +51,46 @@ function populateEtudiant(){
 	xhr.open('POST', 'etudiantData.php', true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send(urlEncodeData);
+}
+
+function setColor(){
+	var statuts = document.querySelectorAll('[id^="statut-"]');
+	for(var i = 0 ; i < statuts.length; ++i){
+		var item = statuts[i];
+
+		switch(item.innerHTML){
+			case "Pas intéressé":
+				item.style.fontWeight = 'bold';
+				item.style.color = '#000';
+				break;
+			case "Postulé":
+				item.style.background = '#FFFF00';
+				item.style.fontWeight = 'bold';
+				item.style.color = '#000';
+				break;
+			case "Entretien en attente":
+				item.style.background = '#FF7F50';
+				item.style.fontWeight = 'bold';
+				item.style.color = '#000';
+				break;
+			case "Entretien passé":
+				item.style.background = '#FFA500';
+				item.style.fontWeight = 'bold';
+				item.style.color = '#000';
+				break;
+			case "Accepté":
+				item.style.background = '#008000';
+				item.style.fontWeight = 'bold';
+				item.style.color = '#FFF';
+				break;
+			case "Refusé":
+				item.style.background = '#FF0000';
+				item.style.fontWeight = 'bold';
+				item.style.color = '#FFF';
+				break;
+
+
+
+		}
+	}
 }

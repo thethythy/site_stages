@@ -1048,7 +1048,7 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
               <option value="-------------">-------------</option>
               <option value="Pas intéressé">Pas intéressé</option>
               <option value="Postulé">Postulé</option>
-              <option value="Entretien">Entretien en attente</option>
+              <option value="Entretien en attente">Entretien en attente</option>
               <option value="Entretien passé">Entretien passé</option>
               <option value="Accepté">Accepté</option>
               <option value="Refusé">Refusé</option>
@@ -1108,12 +1108,12 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
           <?php echo '<td id="idEtu-'.$tabC[$i]->getEtudiant().'"  name="nomEtu-'.$cpt.'">'. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getNom().' '. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getPrenom().'</td>';?>
           <?php echo '<td>'. OffreDAlternance::getOffreDAlternance($tabC[$i]->getOffre())->getTitre().'</td>'; ?>
           <?php echo '<td>'.Entreprise::getEntreprise($tabC[$i]->getEntreprise())->getNom().'</td>'; ?>
-          <?php echo '<td>'.$tabC[$i]->getStatut().'</td>' ?>
+          <?php echo '<td id="statut-<?php echo $cpt;?>" onreadystatechange="setColor()">'.$tabC[$i]->getStatut().'</td>' ?>
         </tr>
         <?php
       }
       ?>
-    </table>
+    </table >
 
   <?php
 }

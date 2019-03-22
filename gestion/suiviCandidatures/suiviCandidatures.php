@@ -25,7 +25,9 @@ Promotion_IHM::afficherFormulaireRecherche("suiviCandidaturesData.php", false, f
 
 echo "<div id='data'>";
 include_once("suiviCandidaturesData.php");
-echo "</div><div id=\"Fin Data\"></div>";
+echo "</div>";
+
+
 
 
 
@@ -33,3 +35,5 @@ deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../");
 ?>
+
+
