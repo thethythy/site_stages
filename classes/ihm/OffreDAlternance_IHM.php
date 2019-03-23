@@ -711,6 +711,22 @@ public static function afficherFormulaireModification() {
               />
             </td>
           </tr>
+          <tr>
+            <th>SIRET (*) : </th>
+            <td>
+              <input type="text" name="siret" size="50" value="<?php
+              if (isset($_POST['siret'])) {
+                echo $_POST['siret'];
+              } else if (isset($modificationEntreprise)) {
+                echo $modificationEntreprise->getSiret();
+              } else {
+                echo 'SIRET VIDE';
+              }
+              ?>"
+              />
+            </td>
+          </tr>
+
         </table>
       </td>
     </tr>
