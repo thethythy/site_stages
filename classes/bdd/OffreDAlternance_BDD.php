@@ -260,6 +260,14 @@ class offreDAlternance_BDD {
 	return $tabODS;
     }
 
+    public static function supprimerSuivi($idOffre){
+      global $db;
+      global $tab30;
+
+      $sql = "DELETE FROM $tab30 WHERE idoffre='$idOffre'";
+      $db->query($sql);
+    }
+
 }
 
 ?>

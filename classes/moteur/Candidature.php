@@ -119,10 +119,31 @@ class Candidature {
     );
   }
 
+public static function getListeCandidatures($idetudiant){
+  $cndtrs = Candidature_BDD::getListeCandidatures($idetudiant);
+  if(!$cndtrs)
+    return false;
+  return $cndtrs;
+}
+
 /**
-* Obtenir la liste des candidatures d'un étudiant
+* Obtenir la liste des candidatures de tous les étudiants d'un tableau d'étudiants
+* @param tableau d'objets étudiant
 */
-public static function getListeCandidatures($etudiant){}
+public static function getCandidaturesEtudiant($tabE){
+  $candidatures = array();
+  foreach($tabE as $etu){
+    $cndtrs = Candidature::getListeCandidatures($etu->getIdentifiantBDD());
+    if(is_array($cndtrs)){
+      foreach($cndtrs as $cndtr){
+        array_push($candidatures, $cndtr);
+      }
+    }
+  }
+  if(!$candidatures)
+    return false;
+  return $candidatures;
+}
 }
 
 

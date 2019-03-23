@@ -31,7 +31,6 @@ if (isset($_POST['edit'])) {
 	$contact->setNom($nom);
 	$contact->setPrenom($prenom);
 	$contact->setTelephone($tel);
-	$contact->setTelecopie($fax);
 	$contact->setEmail($email);
 	$contact->setIdentifiant_entreprise($idEntreprise);
 
@@ -49,7 +48,6 @@ if (isset($_POST['edit'])) {
 			<input type="hidden" value="<?php echo $_GET['nom']; ?>" name="nom"/>
 			<input type="hidden" value="<?php echo $_GET['prenom']; ?>" name="prenom"/>
 			<input type="hidden" value="<?php echo $_GET['tel']; ?>" name="tel"/>
-			<input type="hidden" value="<?php echo $_GET['fax']; ?>" name="fax"/>
 			<input type="submit" value="Retourner à la liste"/>
 		    </form>
 		</td>

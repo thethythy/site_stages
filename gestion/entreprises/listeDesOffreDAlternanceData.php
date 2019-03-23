@@ -56,11 +56,13 @@ if (sizeof($filtres) > 0) {
     $filtre = $filtres[0];
     for ($i = 1; $i < sizeof($filtres); $i++)
 	$filtre = new Filtre($filtre, $filtres[$i], "AND");
-} else
+} else {
     $filtre = "";
+}
 
+Utils::printLog("A");
 $tabOffreDAlternance = OffreDAlternance::getListeOffreDAlternance($filtre);
-
+Utils::printLog("B");
 // Si il y a au moins une offre de stage à traiter
 if (sizeof($tabOffreDAlternance) > 0) {
     // Affichage des entreprises correspondants aux critères de recherches

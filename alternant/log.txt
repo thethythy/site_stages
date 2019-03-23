@@ -24,3 +24,25 @@ SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND id
 4300
 4210
 >>>>>>> origin/thomas
+
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA

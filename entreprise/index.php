@@ -130,7 +130,7 @@ function verifier(){
           $idContact = $contact[0]->getIdentifiantBDD();
         } else {
           // On enregistre le contact dans la base de données
-          $nouveauContact = new Contact("0", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
+          $nouveauContact = new Contact("0", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
           $idContact = Contact_BDD::sauvegarder($nouveauContact);
         }
       } else {
@@ -138,7 +138,7 @@ function verifier(){
         if ($email_entreprise == "") $email_entreprise = $email_contact;
         $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL, $siret);
         $idEntreprise = Entreprise_BDD::sauvegarder($nouvelleEntreprise);
-        $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $fax_contact, $email_contact, $idEntreprise);
+        $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
         $idContact = Contact_BDD::sauvegarder($nouveauContact);
       }
       array_push($tabDonnees, $idContact);

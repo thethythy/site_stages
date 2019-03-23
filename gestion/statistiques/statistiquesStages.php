@@ -17,14 +17,18 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Statistiques des", "stages", "../../", $tabLiens, "statistiques");
+IHM_Generale::header("Statistiques des", "stages/alternances", "../../", $tabLiens, "statistiques");
 
 // Affichage du formulaire de recherche
-Promotion_IHM::afficherFormulaireSelectionInterval();
+Promotion_IHM::afficherFormulaireSelectionInterval2("statistiquesStagesData.php");
+//Promotion_IHM::afficherFormulaireSelectionInterval();
+
 
 // Chargement des traitements (affichage et contrôle)
+
 echo "<div id='data'></div>\n";
-echo "<script type='text/javascript' src='statistiquesAlternance.js'></script>\n";
+//include_once("statistiquesStagesData.php");
+echo "<script type='text/javascript' src='statistiquesStages.js'></script>\n";
 
 deconnexion();
 

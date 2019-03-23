@@ -31,7 +31,6 @@ class Candidature_BDD {
       identreprise='" . $candidature->getEntreprise() . "',
       statut='" . $candidature->getStatut() . "'
       WHERE idcandidature = '" . $candidature->getIdentifiantBDD() . "'";
-    //  Utils.printLog($sql);
       $db->query($sql);
     }
 
@@ -67,21 +66,20 @@ class Candidature_BDD {
   * Obtenir la liste des candidatures pour un étudiant donné
   * @global resource $db Référence sur la base ouverte
   * @global string $tab30 Nom de la table 'candidature_alternance'
-  * @param integer $idetudiant L'identifiant de l'étudiant
+  * @param entier $idetudiant l'id d'un étudiant de la base
   * @return tableau d'enregistrements
   */
   public static function getListeCandidatures($idetudiant) {
     global $db;
     global $tab30;
-
-    $sql = "SELECT idcandidature FROM $tab30 WHERE idetudiant = '$idetudiant';";
+    $sql = "SELECT * FROM $tab30 WHERE idetudiant = '$idetudiant';";
     $res = $db->query($sql);
-
+    
     $candidatures = array();
 
     if ($res) {
       while ($cndtr = $res->fetch_assoc()) {
-        array_push($candidatures, $cndtr);
+        array_push($candidatures, new Candidature($cndtr['idcandidature'], $cndtr['idetudiant'], $cndtr['idoffre'], $cndtr['identreprise'], $cndtr['statut']));
       }
       $res->free();
     }

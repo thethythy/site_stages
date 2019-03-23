@@ -65,119 +65,9 @@ class Contrats_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Durée</td>
-        <td>
-           <select name="dureeMin">
-          <?php
-          for ($i = 1; $i <= 24; $i++) {
-            if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-            (isset($_POST['dureeMin']) && $_POST['dureeMin'] == $i)) {
-              echo"<option selected value='$i'>$i</option>";
-            } else {
-              echo"<option value='$i'>$i</option>";
-            }
-          }
-          ?>
-        </select> mois
-      </td>
-    </tr>
-    <tr>
-  <td>Date début</td>
-  <td>
-     <select name="jour">
-    <?php
-    for ($i = 1; $i <= 31; $i++) {
-      if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-      (isset($_POST['jour']) && $_POST['jour'] == $i)) {
-        echo"<option selected value='$i'>$i</option>";
-      } else {
-        echo"<option value='$i'>$i</option>";
-      }
-    }
-    ?>
-  </select> /
-  <select name="mois">
-     <?php
-     for ($i = 1; $i <= 12; $i++) {
-       if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-       (isset($_POST['mois']) && $_POST['mois'] == $i)) {
-         echo"<option selected value='$i'>$i</option>";
-       } else {
-         echo"<option value='$i'>$i</option>";
-       }
-     }
-     ?>
-    </select> /
-    <select name="annee">
-       <?php
-       for ($i = 2010; $i <= 2025; $i++) {
-         if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-         (isset($_POST['annee']) && $_POST['annee'] == $i)) {
-           echo"<option selected value='$i'>$i</option>";
-         } else {
-           echo"<option value='$i'>$i</option>";
-         }
-       }
-       ?>
-      </select>
-    </td>
-  </tr>
-  <tr>
-<td>Date fin</td>
-<td>
-   <select name="jour">
-  <?php
-  for ($i = 1; $i <= 31; $i++) {
-    if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-    (isset($_POST['jour']) && $_POST['jour'] == $i)) {
-      echo"<option selected value='$i'>$i</option>";
-    } else {
-      echo"<option value='$i'>$i</option>";
-    }
-  }
-  ?>
-</select> /
-<select name="mois">
-   <?php
-   for ($i = 1; $i <= 12; $i++) {
-     if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-     (isset($_POST['mois']) && $_POST['mois'] == $i)) {
-       echo"<option selected value='$i'>$i</option>";
-     } else {
-       echo"<option value='$i'>$i</option>";
-     }
-   }
-   ?>
-  </select> /
-  <select name="annee">
-     <?php
-     for ($i = 2010; $i <= 2025; $i++) {
-       if ((isset($modificationOffreDeStage) && $modificationOffreDeStage->getDureeMinimale() == $i) ||
-       (isset($_POST['annee']) && $_POST['annee'] == $i)) {
-         echo"<option selected value='$i'>$i</option>";
-       } else {
-         echo"<option value='$i'>$i</option>";
-       }
-     }
-     ?>
-    </select>
-  </td>
-</tr>
-    <tr>
-      <td>Indemnités</td>
-      <td>
-        <input type="text" name="indemnites" size="50" value="<?php
-        if (isset($_POST['indemnites'])) {
-          echo $_POST['indemnites'];
-        } else if (isset($modificationOffreDeStage)) {
-          echo $modificationOffreDeStage->getIndemnite();
-        }
-        ?>"
-        />
-      </td>
-    </tr>
+			    </tr>
 			    <tr>
-				<td>Contact</td>
+				<td>Référent entreprise</td>
 				<td>
 				    <select name="idCont" style="width: 300px;">
 					<?php
@@ -233,6 +123,42 @@ class Contrats_IHM {
     				</td>
           </tr>
 
+          <tr>
+            <td>Durée du contrat</td>
+    				<td>
+
+              <?php
+  				    if (($contrat != "") && ($contrat->getDuree() == 2)) {
+  					         echo "<input type='radio' id='' name ='dureeContrat'  value='1' onclick=''> 1 an
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio'  id='' name ='dureeContrat' checked='checked' value='2' onclick=''> 2 ans";
+  				    } else {
+                echo "<input type='radio' id='' name ='dureeContrat' checked='checked' value='1' onclick=''> 1 an
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type='radio'  id='' name ='dureeContrat'  value='2' onclick=''> 2 ans";
+  				    }
+  				    ?>
+
+    				</td>
+          </tr>
+
+
+          <tr>
+            <td>Indemnités mensuelles</td>
+    				<td>
+
+              <?php
+              if ($contrat != "") {
+              echo "<input type='text' name='indemnite' size='100' value =". $contrat->getIndemnites() ." >";
+              } else {
+              echo "<input type='text' name='indemnite' size='100' >";
+              }
+  				    ?>
+
+    				</td>
+          </tr>
+
+
 				<td>
 				    <?php
 				    if (($contrat != "") && ($contrat->getASonResume() == 1)) {
@@ -264,7 +190,7 @@ class Contrats_IHM {
 			<input type="hidden" name="parcours" value="<?php echo $parcours; ?>"/>
 			<input type="hidden" name="filiere" value="<?php echo $filiere; ?>"/>
 			<input type="hidden" value="1" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
-			<input type="submit" value="Enregistrer" />
+			<input type="submit" value="Enregistrer" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
 		    </td>
 		</tr>
 	    </table>
@@ -334,7 +260,6 @@ class Contrats_IHM {
 		<tr id='entete'>
 			<td width='20%'>Etudiant</td>
 			<td width='15%'>Référent</td>
-			<td width='15%'>Durée</td>
 			<td width='15%'>Contact</td>
 			<td width='15%'>Entreprise</td>
 			<td width='15%'>Thème</td>
@@ -344,6 +269,7 @@ class Contrats_IHM {
 	for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
 	    $contrat = $tabEtuWithConv[$i]->getContrat($annee);
 	    $parrain = $contrat->getParrain();
+
 	    $contact = $contrat->getContact();
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
@@ -385,6 +311,58 @@ class Contrats_IHM {
 	}
 	echo "</table>";
     }
+
+    /**
+     * Afficher une liste des contrats à exporter
+     * @param integer $annee Année de la promotion concernée
+     * @param integer $idPromo Identifiant de la promotion
+     * @param tableau d'objets $tabEtuWithContrats Tableaux d'objets Etudiant
+     */
+    public static function afficherListeContratsAExporter($annee, $idPromo, $tabEtuWithConv) {
+	echo "<table>
+		<tr id='entete'>
+			<td width='20%'>Etudiant</td>
+			<td width='15%'>Référent</td>
+			<td width='15%'>Contact</td>
+			<td width='15%'>Entreprise</td>
+			<td width='15%'>Thème</td>
+			<td width='10%' align='center'>Exporter</td>
+		</tr>";
+	for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
+	    $contrat = $tabEtuWithConv[$i]->getContrat($annee);
+	    $parrain = $contrat->getParrain();
+
+	    $contact = $contrat->getContact();
+	    $entreprise = $contact->getEntreprise();
+	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
+	    ?>
+	    <tr id="ligne<?php echo $i % 2; ?>">
+	        <td>
+		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $parrain->getNom() . " " . $parrain->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $contact->getNom() . " " . $contact->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $entreprise->getNom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $theme->getTheme(); ?>
+	        </td>
+	        <td align="center">
+		    <a href="exporterContrat.php?promo=<?php echo $idPromo; ?>&id=<?php echo $contrat->getIdentifiantBDD(); ?>">
+		        <img src="../../images/download.png"/>
+		    </a>
+	        </td>
+	    </tr>
+	    <?php
+	}
+	echo "</table>";
+    }
+
 
 }
 ?>

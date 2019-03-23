@@ -16,6 +16,8 @@ include_once("../../classes/bdd/connec.inc");
 include_once('../../classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level2');
 
+
+
 // -----------------------------------------------------------------------------
 // En-tête du flux JSON
 
@@ -44,6 +46,18 @@ if (sizeof($filtres) > 0) {
 	$filtre = new Filtre($filtre, $filtres[$i], 'AND');
 } else {
     $filtre = "";
+}
+
+
+
+//mon offre n'existe pas apparemment
+if(isset($_GET['offre'])){
+  if ($_GET['offre'] === 'Stage')
+  $displayFlag = 2;
+  else if($_GET['offre'] === 'Alternance')
+  $displayFlag = 1;
+  else
+  $displayFlag = 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -209,15 +223,15 @@ function donneUneSerie($tabOConventions, $annee, $nomFiliere, $nomParcours) {
 
     $tabTypeEntreprise = donneTabRepartitionTypeEntreprise($tabOConventions);
     foreach ($tabTypeEntreprise as $nom => $nombre) {
-	$type_ent = array();
-	$type_ent['couleur'] = '#'.TypeEntreprise::getTypeEntrepriseFromNom($nom)->getCouleur()->getCode();
-	$type_ent['nom'] = $nom;
-	$type_ent['nombre'] = $nombre;
-	$typeEnt[$nom_type] = $type_ent;
+    	$type_ent = array();
+    	$type_ent['couleur'] = '#'.TypeEntreprise::getTypeEntrepriseFromNom($nom)->getCouleur()->getCode();
+    	$type_ent['nom'] = $nom;
+    	$type_ent['nombre'] = $nombre;
+    	$typeEnt[$nom_type] = $type_ent;
 
-	$somme += $nombre;
-	$num_type += 1;
-	$nom_type = "e".$num_type;
+    	$somme += $nombre;
+    	$num_type += 1;
+    	$nom_type = "e".$num_type;
     }
 
     $typeEnt['nbType'] = sizeof($tabTypeEntreprise);
@@ -237,7 +251,8 @@ if ($nbSerie > 0) {
 
     // Si il a plusieurs séries à traiter prévoir de faire le total
     if ($nbSerie > 1) {
-	$tabTotalOConventions = array();
+    	$tabTotalOConventions = array();
+      $tabTotalOContrat = array();
     }
 
     // Spécifier l'année sélectionnée
@@ -254,16 +269,58 @@ if ($nbSerie > 0) {
 	$oParcours = $oPromotion->getParcours();
 	$pAnnee = $oPromotion->getAnneeUniversitaire();
 	$filtre = donneFiltre($pAnnee, $oFiliere, $oParcours);
-	$tabOConventions = Convention::getListeConvention($filtre);
+
+  switch($displayFlag){
+    case 0:
+	     $tabOConventions = Convention::getListeConvention($filtre);
+       $tabOContrats = Contrat::getListeContrat($filtre);
+       $tabOTotal = array_merge($tabOContrats,$tabOConventions);
+
+       break;
+    case 1:
+   	   $tabOContrats = Contrat::getListeContrat($filtre);
+       break;
+    case 2:
+       $tabOConventions = Convention::getListeConvention($filtre);
+       break;
+
+  }
 
 	// Accumulation des conventions au cas ou il y aura une série 'Total'
 	if ($nbSerie > 1) {
-	    $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOConventions);
+    switch($displayFlag){
+      case 0:
+	       $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOConventions);
+         $tabTotalOContrat = array_merge($tabTotalOContrat, $tabOContrats);
+         //$tabTotalOTotal = array_merge($tabTotalOTotal, $tabOTotal);
+         break;
+      case 1:
+   	     $tabTotalOContrat = array_merge($tabTotalOContrat, $tabOContrats);
+         break;
+      case 2:
+         $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOConventions);
+         break;
+
+
+    }
 	}
 
 	// Nouvelle série de données (une promotion)
-	$data[$nom_serie] = donneUneSerie($tabOConventions, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+  switch($displayFlag){
+    case 0:
+       $data[$nom_serie] = donneUneSerie($tabOTotal, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+       //$data[$nom_serie] = donneUneSerie($tabOContrats, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+	     //$data[$nom_serie] = donneUneSerie($tabOConventions, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+       break;
+    case 1:
+       $data[$nom_serie] = donneUneSerie($tabOContrats, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+       break;
+    case 2:
+       $data[$nom_serie] = donneUneSerie($tabOConventions, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+       break;
 
+
+  }
 	// Préparation pour la série suivante
 	$num_serie += 1;
 	$nom_serie = "s".$num_serie;
@@ -271,7 +328,21 @@ if ($nbSerie > 0) {
 
     // Ajout de la série 'Total' le cas échéant
     if ($nbSerie > 1) {
-	$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "", "Total", "");
+      switch($displayFlag){
+        case 0:
+    	     //$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "", "Total", "");
+           //$data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOContrat, "", "Total", "");
+           $tabTotalOTotal = array_merge($tabTotalOContrat,$tabTotalOConventions);
+           $data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOTotal, "", "Total", "");
+           break;
+        case 1:
+       	   $data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOContrat, "", "Total", "");
+           break;
+        case 2:
+           $data["s".($nbSerie + 1)] = donneUneSerie($tabTotalOConventions, "", "Total", "");
+           break;
+
+      }
     }
 
     // Génération du fichier Excel

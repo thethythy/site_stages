@@ -38,13 +38,7 @@ class Contact_IHM {
 					<?php if (isset($_POST['tel'])) echo "value='" . $_POST['tel'] . "'"; ?> />
 				</td>
 			    </tr>
-			    <tr>
-				<td>Fax</td>
-				<td>
-				    <input type="text" name="fax"
-					<?php if (isset($_POST['fax'])) echo "value='" . $_POST['fax'] . "'"; ?> />
-				</td>
-			    </tr>
+
 			</table>
 		    </td>
 		</tr>
@@ -118,18 +112,6 @@ class Contact_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Fax</td>
-				<td>
-				    <input type="text" name="fax"
-					<?php
-					if (isset($_POST['fax']))
-					    echo "value='" . $_POST['fax'] . "'";
-					else if ($cont != "")
-					    echo "value='" . $cont->getTelecopie() . "'";
-					?> />
-				</td>
-			    </tr>
-			    <tr>
 				<td>Email</td>
 				<td>
 				    <input type="text" name="email"
@@ -188,9 +170,6 @@ class Contact_IHM {
 		    if ($tabContacts[$i]->getTelephone() != "")
 			echo "Tel : " . $tabContacts[$i]->getTelephone() . "<br/>";
 
-		    if ($tabContacts[$i]->getTelecopie() != "")
-			echo "Fax : " . $tabContacts[$i]->getTelecopie() . "<br/>";
-
 		    if ($tabContacts[$i]->getEmail() != "")
 			echo "Email : " . $tabContacts[$i]->getEmail();
 		    ?>
@@ -226,10 +205,10 @@ class Contact_IHM {
 	    <tr>
 		<td width="50%">
 		    <div align="right">
-			<a href="modifierContact.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&prenom=<?php if (isset($_POST['prenom'])) echo $_POST['prenom']; ?>&tel=<?php if (isset($_POST['tel'])) echo $_POST['tel']; ?>&fax=<?php if (isset($_POST['fax'])) echo $_POST['fax']; ?>&id=<?php echo $tabContacts[$i]->getIdentifiantBDD(); ?>">
+			<a href="modifierContact.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&prenom=<?php if (isset($_POST['prenom'])) echo $_POST['prenom']; ?>&tel=<?php if (isset($_POST['tel'])) echo $_POST['tel']; ?>&id=<?php echo $tabContacts[$i]->getIdentifiantBDD(); ?>">
 			    <img src="../../images/reply.png"/>
 			</a>
-			<a href="modifierListeContacts.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&prenom=<?php if (isset($_POST['prenom'])) echo $_POST['prenom']; ?>&tel=<?php if (isset($_POST['tel'])) echo $_POST['tel']; ?>&fax=<?php if (isset($_POST['fax'])) echo $_POST['fax']; ?>&id=<?php echo $tabContacts[$i]->getIdentifiantBDD(); ?>">
+			<a href="modifierListeContacts.php?nom=<?php if (isset($_POST['nom'])) echo $_POST['nom']; ?>&prenom=<?php if (isset($_POST['prenom'])) echo $_POST['prenom']; ?>&tel=<?php if (isset($_POST['tel'])) echo $_POST['tel']; ?>&id=<?php echo $tabContacts[$i]->getIdentifiantBDD(); ?>">
 			    <img src="../../images/action_delete.png"/>
 			</a>
 		    </div>
@@ -238,9 +217,6 @@ class Contact_IHM {
 
 		    if ($tabContacts[$i]->getTelephone() != "")
 			echo "Tel : " . $tabContacts[$i]->getTelephone() . "<br/>";
-
-		    if ($tabContacts[$i]->getTelecopie() != "")
-			echo "Fax : " . $tabContacts[$i]->getTelecopie() . "<br/>";
 
 		    if ($tabContacts[$i]->getEmail() != "")
 			echo "Email : " . $tabContacts[$i]->getEmail();
