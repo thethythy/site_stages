@@ -10,7 +10,6 @@ class Contact {
     var $nom; // Nom de famille
     var $prenom; // Prénom
     var $telephone; // Numéro de téléphone
-    var $telecopie; // Numéro de fax
     var $email; // Adresse de courriel
     var $identifiant_entreprise; // Identifiant de l'entreprise associée
 
@@ -20,17 +19,15 @@ class Contact {
      * @param string $nom
      * @param string $prenom
      * @param string $telephone
-     * @param string $telecopie
      * @param string $email
      * @param integer $identifiant_entreprise
      */
     public function __construct($identifiantBDD, $nom, $prenom, $telephone,
-	    $telecopie, $email, $identifiant_entreprise) {
+	    $email, $identifiant_entreprise) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->nom = $nom;
 	$this->prenom = $prenom;
 	$this->telephone = $telephone;
-	$this->telecopie = $telecopie;
 	$this->email = $email;
 	$this->identifiant_entreprise = $identifiant_entreprise;
     }
@@ -54,10 +51,6 @@ class Contact {
 	return $this->telephone;
     }
 
-    public function getTelecopie() {
-	return $this->telecopie;
-    }
-
     public function getEmail() {
 	return $this->email;
     }
@@ -79,10 +72,6 @@ class Contact {
 
     public function setTelephone($telephone) {
 	$this->telephone = $telephone;
-    }
-
-    public function setTelecopie($telecopie) {
-	$this->telecopie = $telecopie;
     }
 
     public function setEmail($email) {
@@ -114,7 +103,7 @@ class Contact {
 
 	return new Contact($contactBDD["idcontact"], $contactBDD["nomcontact"],
 			   $contactBDD["prenomcontact"], $contactBDD["telephone"],
-			   $contactBDD["telecopie"], $contactBDD["email"],
+			  $contactBDD["email"],
 			   $contactBDD["identreprise"]);
     }
 
@@ -128,13 +117,13 @@ class Contact {
 	$tabContacts = array();
 
 	for ($i = 0; $i < sizeof($tabContactString); $i++) {
-	    array_push($tabContacts, new Contact($tabContactString[$i][0],
+	    array_push($tabContacts, new Contact(
+              $tabContactString[$i][0],
 						 $tabContactString[$i][1],
 						 $tabContactString[$i][2],
 						 $tabContactString[$i][3],
 						 $tabContactString[$i][4],
-						 $tabContactString[$i][5],
-						 $tabContactString[$i][6]));
+						 $tabContactString[$i][5]));
 	}
 
 	return $tabContacts;
@@ -155,8 +144,7 @@ class Contact {
 						  $tabContactsStr[$i][2],
 						  $tabContactsStr[$i][3],
 						  $tabContactsStr[$i][4],
-						  $tabContactsStr[$i][5],
-						  $tabContactsStr[$i][6]));
+						  $tabContactsStr[$i][5]));
 	}
 
 	return $tab_contacts;

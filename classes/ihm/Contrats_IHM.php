@@ -190,7 +190,7 @@ class Contrats_IHM {
 			<input type="hidden" name="parcours" value="<?php echo $parcours; ?>"/>
 			<input type="hidden" name="filiere" value="<?php echo $filiere; ?>"/>
 			<input type="hidden" value="1" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
-			<input type="submit" value="Enregistrer" />
+			<input type="submit" value="Enregistrer" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
 		    </td>
 		</tr>
 	    </table>

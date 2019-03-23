@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`contact` (
   `nomcontact` VARCHAR(100) NOT NULL,
   `prenomcontact` VARCHAR(100) NOT NULL,
   `telephone` VARCHAR(20) NOT NULL,
-  `telecopie` VARCHAR(20) NULL DEFAULT NULL,
   `email` VARCHAR(200) NULL DEFAULT NULL,
   `identreprise` INT(10) NOT NULL,
   PRIMARY KEY (`idcontact`),
@@ -288,13 +287,11 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   `idreferent` INT(10) NOT NULL,
   `idetudiant` INT(10) NOT NULL,
   `idsoutenance` INT(10) NULL DEFAULT NULL,
-  `idcontact` INT(10) NOT NULL,
   `idtheme` INT(10) NOT NULL,
   PRIMARY KEY (`idcontrat`),
   INDEX `idetudiant_idx` (`idetudiant` ASC),
   INDEX `idparrain_idx` (`idparrain` ASC),
   INDEX `idreferent_idx` (`idreferent` ASC),
-  INDEX `idcontact_idx` (`idcontact` ASC),
   INDEX `idtheme_idx` (`idtheme` ASC),
   UNIQUE INDEX `idsoutenance_idx` (`idsoutenance` ASC),
   CONSTRAINT `fk_contrat_etudiant_idetudiant`
@@ -309,11 +306,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contrat_contact_idreferent`
     FOREIGN KEY (`idreferent`)
-    REFERENCES `stages`.`contact` (`idcontact`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contrat_contact_idcontact`
-    FOREIGN KEY (`idcontact`)
     REFERENCES `stages`.`contact` (`idcontact`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,

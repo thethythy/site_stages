@@ -27,14 +27,17 @@ $oParcours = $oPromo->getParcours();
 if (isset($_POST['edit'])) {
     extract($_POST);
 
-    if (isset($sujet))
-	$oContrat->setSujetDeStage($sujet);
+    if (isset($sujet)){
+      $oContrat->setSujetDeContrat($sujet);
+    }
+
+
     if (isset($idTheme))
 	$oContrat->setIdTheme($idTheme);
+
     $oContrat->setTypeDeContrat($typeContrat);
     $oContrat->setIdParrain($idPar);
-    $oContrat->setIdExaminateur($idExam);
-    $oContrat->setIdContact($idCont);
+    $oContrat->setIdReferent($idCont);
 
     $idContrat = Contrat_BDD::sauvegarder($oContrat);
 

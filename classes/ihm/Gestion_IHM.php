@@ -175,7 +175,7 @@ class Gestion_IHM {
             <ul>
                 <li><a href="./entreprises/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
                 <li><a href="">Supprimer des offres d'alternance</a></li>
-                <li><a href="">Suivi des démarches alternants</a></li>
+                <li><a href="./SuiviCandidatures/SuiviCandidatures.php">Suivi des démarches alternants</a></li>
                 <li><a href="">Exporter étudiant/contrat</a></li>
             </ul>
         </td>

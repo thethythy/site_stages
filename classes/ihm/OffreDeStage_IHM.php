@@ -407,10 +407,6 @@ class OffreDeStage_IHM {
           <td><input type="text" value="<?php if (isset($_POST['tel_contact'])) { echo $_POST['tel_contact']; } ?>" name="tel_contact" size="50"/></td>
         </tr>
         <tr>
-          <th>Fax :</th>
-          <td><input type="text" value="<?php if (isset($_POST['fax_contact'])) { echo $_POST['fax_contact']; } ?>" name="fax_contact" size="50"/></td>
-        </tr>
-        <tr>
           <th>Email (*) :</th>
           <td><input type="text" value="<?php if (isset($_POST['email_contact'])) { echo $_POST['email_contact']; } ?>" name="email_contact" size="50"/></td>
         </tr>
@@ -844,19 +840,6 @@ public static function afficherFormulaireModification() {
             </td>
           </tr>
           <tr>
-            <th>Fax :</th>
-            <td>
-              <input type="text" name="fax_contact" size="50" value="<?php
-              if (isset($_POST['fax_contact'])) {
-                echo $_POST['fax_contact'];
-              } else if (isset($modificationContact)) {
-                echo htmlentities($modificationContact->getTelecopie(), ENT_QUOTES, 'UTF-8');
-              }
-              ?>"
-              />
-            </td>
-          </tr>
-          <tr>
             <th>Email (*) :</th>
             <td>
               <input type="text" name="email_contact" size="50" value="<?php
@@ -1058,10 +1041,6 @@ $duree_init, $competence_init) {
           <tr>
             <th>Tel :</th>
             <td><?php echo $contact->getTelephone(); ?></td>
-          </tr>
-          <tr>
-            <th>Fax :</th>
-            <td><?php echo $contact->getTelecopie(); ?></td>
           </tr>
           <tr>
             <th>Email :</th>

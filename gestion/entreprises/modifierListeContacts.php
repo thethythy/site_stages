@@ -22,7 +22,6 @@ if (isset($_GET['id'])) {
     $_POST['nom'] = $_GET['nom'];
     $_POST['prenom'] = $_GET['prenom'];
     $_POST['tel'] = $_GET['tel'];
-    $_POST['fax'] = $_GET['fax'];
 
     // Suppression du Contact
     Contact::supprimerContact($_GET['id']);
@@ -35,9 +34,8 @@ if ((isset($_POST['rech'])) || (isset($_GET['id']))) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $tel = $_POST['tel'];
-    $fax = $_POST['fax'];
 } else {
-    $nom = $prenom = $tel = $fax = "";
+    $nom = $prenom = $tel = "";
 }
 
 $filtres = array();
@@ -53,10 +51,6 @@ if ($prenom != "")
 // Si une recherche sur le téléphone est demandée
 if ($tel != "")
     array_push($filtres, new FiltreString("telephone", $_POST['tel'] . "%"));
-
-// Si une recherche sur le fax est demandée
-if ($fax != "")
-    array_push($filtres, new FiltreString("telecopie", $_POST['fax'] . "%"));
 
 $nbFiltres = sizeof($filtres);
 

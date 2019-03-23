@@ -237,9 +237,6 @@ class Entreprise_IHM {
 			if ($contacts[$j]->getTelephone() != "")
 			    echo "Telephone : " . $contacts[$j]->getTelephone() . "<br/>";
 
-			if ($contacts[$j]->getTelecopie() != "")
-			    echo "Fax : " . $contacts[$j]->getTelecopie() . "<br/>";
-
 			if ($contacts[$j]->getEmail() != "")
 			    echo "Email : " . $contacts[$j]->getEmail() . "<br/>";
 
@@ -298,8 +295,6 @@ class Entreprise_IHM {
 			    if ($contacts[$j]->getTelephone() != "")
 				echo "Telephone : " . $contacts[$j]->getTelephone() . "<br/>";
 
-			    if ($contacts[$j]->getTelecopie() != "")
-				echo "Fax : " . $contacts[$j]->getTelecopie() . "<br/>";
 
 			    if ($contacts[$j]->getEmail() != "")
 				echo "Email : " . $contacts[$j]->getEmail() . "<br/>";

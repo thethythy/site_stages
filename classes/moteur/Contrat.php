@@ -25,7 +25,7 @@ class Contrat {
      * @param string $sujetDAlt
      * @param integer $typeDeContrat
      * @param integer $duree
-      * @param integer $indemnite
+    * @param integer $indemnite
      * @param boolean $aSonResume
      * @param decimal $note
      * @param integer $idParrain
@@ -34,9 +34,18 @@ class Contrat {
      * @param integer $idreferent
      * @param integer $idTheme
      */
-    public function __construct($identifiant_BDD, $sujetDAlt,$typeDeContrat,$duree,$indemnite, $aSonResume,
-	    $note, $idParrain, $idEtudiant, $idSoutenance,
-	    $idreferent, $idTheme) {
+    public function __construct($identifiant_BDD,
+    $sujetDAlt,
+    $typeDeContrat,
+    $duree,
+    $indemnite,
+    $aSonResume,
+    $note,
+    $idParrain,
+    $idEtudiant,
+    $idSoutenance,
+	  $idreferent,
+    $idTheme) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->sujetDeContrat = $sujetDAlt;
   $this->typeDeContrat = $typeDeContrat;
@@ -122,8 +131,6 @@ class Contrat {
       $this->indemnite = $i;
     }
 
-
-
     public function setASonResume($asr) {
 	$this->aSonResume = $asr;
     }
@@ -203,11 +210,18 @@ class Contrat {
      */
     public static function getContrat($idContrat) {
 	$contratBDD = Contrat_BDD::getContrat($idContrat);
-	return new Contrat($contratBDD["idcontrat"], $contratBDD["sujetcontrat"],$contratBDD["typedecontrat"],$contratBDD["duree"],$contratBDD["indemnite"],
-			      $contratBDD["asonresume"], $contratBDD["note"],
-			      $contratBDD["idparrain"],
-			      $contratBDD["idetudiant"], $contratBDD["idsoutenance"],
-			      $contratBDD["idreferent"], $contratBDD["idtheme"]);
+	return new Contrat($contratBDD["idcontrat"],
+                    $contratBDD["sujetcontrat"],
+                    $contratBDD["typedecontrat"],
+                    $contratBDD["duree"],
+                    $contratBDD["indemnite"],
+                    $contratBDD["asonresume"],
+                    $contratBDD["note"],
+                    $contratBDD["idparrain"],
+                    $contratBDD["idetudiant"],
+                    $contratBDD["idsoutenance"],
+                    $contratBDD["idreferent"],
+                    $contratBDD["idtheme"]);
     }
 
     /**

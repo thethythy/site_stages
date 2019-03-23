@@ -190,6 +190,39 @@ class Entreprise_BDD {
     return $tabIDConventions;
   }
 
+  /**
+  * Retourne une liste de contrats liés à une entreprise donnée
+  * classés par ordre descendant (les plus récents en premier)
+  * @global resource $db Référence sur la base ouverte
+  * @global string $tab3 Nom de la table 'contact'
+  * @global string $tab31 Nom de la table 'contrat'
+  * @param integer $idEnt Identifiant de l'entreprise
+  * @return tableau Identifiants des conventions trouvées
+  */
+  public static function getListeContratFromEntreprise($idEnt) {
+    global $db;
+    global $tab3;
+    global $tab31;
+
+    $sql = "SELECT idcontrat
+    FROM $tab3, $tab31
+    WHERE $tab3.identreprise='$idEnt' AND
+    $tab3.idcontact=$tab31.idreferent
+    ORDER BY idcontrat DESC;";
+
+    $result = $db->query($sql);
+    $tabIDContrats = array();
+
+    if ($result) {
+      while ($row = $result->fetch_array()) {
+        array_push($tabIDContrats, $row["idcontrat"]);
+      }
+      $result->free();
+    }
+
+    return $tabIDContrats;
+  }
+
 }
 
 ?>
