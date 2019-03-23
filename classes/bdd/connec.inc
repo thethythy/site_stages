@@ -99,6 +99,8 @@ if (isset($access_control_target)) {
   $tab31 = 'contrat';
   $tab32 = 'relation_promotion_etudiant_contrat';
 
+
+
   function deconnexion() {
     global $db;
     $db->close();

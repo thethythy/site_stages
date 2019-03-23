@@ -370,7 +370,6 @@ public static function afficherFormulaireModification() {
       $modificationProfils = $modificationOffreDAlternance->getListeProfilSouhaite();
       $modificationContact = $modificationOffreDAlternance->getContact();
       $modificationEntreprise = $modificationContact->getEntreprise();
-      $environnement = explode(";", $modificationOffreDAlternance->getListeEnvironnements());
     }
     ?>
 
@@ -536,41 +535,7 @@ public static function afficherFormulaireModification() {
               <div id="ajout_competence"></div>
             </td>
           </tr>
-          <tr>
-            <th colspan="2">Environnement(s) :</th>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <table>
-                <tr>
-                  <?php
-                  $winTrouve = false;
-                  $unixTrouve = false;
-                  $macTrouve = false;
-                  if (isset($environnement)) {
-                    for ($i = 0; $i < sizeof($environnement); $i++) {
-                      if ($environnement[$i] == "win")
-                      $winTrouve = true;
-                      if ($environnement[$i] == "unix")
-                      $unixTrouve = true;
-                      if ($environnement[$i] == "mac")
-                      $macTrouve = true;
-                    }
-                  }
-                  ?>
-                  <td width="100">
-                    <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
-                  </td>
-                  <td width="100">
-                    <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
-                  </td>
-                  <td width="100">
-                    <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+
           <tr>
             <th colspan="2">Thème de l'alternance :</th>
           </tr>
@@ -826,7 +791,6 @@ $duree_init, $competence_init) {
   $profils = $offreDAlt->getListeProfilSouhaite();
   $contact = $offreDAlt->getContact();
   $entreprise = $offreDAlt->getEntreprise();
-  $environnement = explode(";", $offreDAlt->getListeEnvironnements());
   ?>
   <table>
     <tr>
@@ -857,27 +821,6 @@ $duree_init, $competence_init) {
                   echo $competence->getNom();
                 } else {
                   echo $competence->getNom() . ", ";
-                }
-              }
-              ?>
-            </td>
-          </tr>
-
-          <tr>
-            <th width="160">Environnement(s) :</th>
-            <td>
-              <?php
-              $winTrouve = false;
-              $unixTrouve = false;
-              $macTrouve = false;
-              if (isset($environnement)) {
-                for ($i = 0; $i < sizeof($environnement); $i++) {
-                  if ($environnement[$i] == "win")
-                  echo " Windows ";
-                  if ($environnement[$i] == "unix")
-                  echo " Unix/Linux ";
-                  if ($environnement[$i] == "mac")
-                  echo " Macintosh ";
                 }
               }
               ?>

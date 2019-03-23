@@ -30,6 +30,7 @@ class Contact {
 	$this->telephone = $telephone;
 	$this->email = $email;
 	$this->identifiant_entreprise = $identifiant_entreprise;
+
     }
 
     // ------------------------------------------------------------------------

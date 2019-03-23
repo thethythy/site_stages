@@ -9,7 +9,6 @@ class OffreDeStage {
     var $identifiantBDD;  // Identifiant unique en base
     var $sujet;  // Texte descriptif de l'offre
     var $titre;  // Titre de l'offre
-    var $listeEnvironnement;  // SE utilisés
     var $theme;  // Tableau d'identifiants des parcours
     var $listeProfilSouhaite; // Tableau d'identifiants des filières
     var $dureeMin;  // Durée minimale
@@ -25,7 +24,6 @@ class OffreDeStage {
      * @param integer $identifiantBDD
      * @param string $sujet
      * @param string $titre
-     * @param string $listeEnvironnement
      * @param array $theme
      * @param array $listeProfilSouhaite
      * @param integer $dureeMin
@@ -36,13 +34,12 @@ class OffreDeStage {
      * @param array $listeCompetences
      * @param integer $maitreDeStage
      */
-    public function __construct($identifiantBDD, $sujet, $titre, $listeEnvironnement,
+    public function __construct($identifiantBDD, $sujet, $titre,
 	    $theme, $listeProfilSouhaite, $dureeMin, $dureeMax, $indemnite, $remarques,
 	    $estVisible, $listeCompetences, $maitreDeStage) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->sujet = $sujet;
 	$this->titre = $titre;
-	$this->listeEnvironnement = $listeEnvironnement;
 	$this->theme = $theme;
 	$this->listeProfilSouhaite = $listeProfilSouhaite;
 	$this->dureeMin = $dureeMin;
@@ -67,10 +64,6 @@ class OffreDeStage {
 
     public function getTitre() {
 	return $this->titre;
-    }
-
-    public function getListeEnvironnements() {
-	return $this->listeEnvironnement;
     }
 
     public function getDureeMinimale() {
@@ -106,10 +99,6 @@ class OffreDeStage {
 
     public function setTitre($titre) {
 	$this->titre = $titre;
-    }
-
-    public function setListeEnvironnements($listeEnvironnement) {
-	$this->listeEnvironnement = $listeEnvironnement;
     }
 
     public function setDureeMinimale($dureeMin) {
@@ -185,10 +174,10 @@ class OffreDeStage {
     public static function saisirDonnees($tab_donnees) {
 	$ods = new OffreDeStage("", $tab_donnees[0], $tab_donnees[1],
 				    $tab_donnees[2], $tab_donnees[3],
-				    $tab_donnees[4], $tab_donnees[5],
-				    $tab_donnees[6], $tab_donnees[7],
-				    $tab_donnees[8], '0',
-				    $tab_donnees[9], $tab_donnees[10]);
+            $tab_donnees[4], $tab_donnees[5],
+            $tab_donnees[6], $tab_donnees[7],
+            '0',
+				    $tab_donnees[8], $tab_donnees[9]);
 	return OffreDeStage_BDD::sauvegarder($ods);
     }
 
@@ -203,8 +192,7 @@ class OffreDeStage {
 				$tab_donnees[4], $tab_donnees[5],
 				$tab_donnees[6], $tab_donnees[7],
 				$tab_donnees[8], $tab_donnees[9],
-				$tab_donnees[10], $tab_donnees[11],
-				$tab_donnees[12]);
+				$tab_donnees[10], $tab_donnees[11]);
 	return OffreDeStage_BDD::sauvegarder($ods);
     }
 
@@ -229,8 +217,7 @@ class OffreDeStage {
 				$offreDeStage[4], $offreDeStage[5],
 				$offreDeStage[6], $offreDeStage[7],
 				$offreDeStage[8], $offreDeStage[9],
-				$offreDeStage[10], $offreDeStage[11],
-				$offreDeStage[12]);
+				$offreDeStage[10], $offreDeStage[11]);
     }
 
     /**
@@ -249,8 +236,7 @@ class OffreDeStage {
 				     $tabODSString[$i][4], $tabODSString[$i][5],
 				     $tabODSString[$i][6], $tabODSString[$i][7],
 				     $tabODSString[$i][8], $tabODSString[$i][9],
-				     $tabODSString[$i][10], $tabODSString[$i][11],
-				     $tabODSString[$i][12]));
+				     $tabODSString[$i][10], $tabODSString[$i][11]));
 	}
 
 	return $tabODS;

@@ -35,6 +35,7 @@ class Contrat_BDD {
       '" . $contrat->getDuree() . "',
       '" . $contrat->getIndemnites() . "',
       '" . $contrat->getIdTheme() . "')";
+
       $db->query($requete);
 
       $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab31";

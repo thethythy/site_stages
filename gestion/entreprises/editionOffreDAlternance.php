@@ -102,20 +102,7 @@ function verifier() {
 
       // Titre
       array_push($tabDonnees, $titre);
-
-      // ----------------------------------------------------------------
-      // Liste des environnements
-      $listeEnvironnements = "";
-      if (isset($environnementMac)) {
-        $listeEnvironnements = $listeEnvironnements . "mac;";
-      }
-      if (isset($environnementWin)) {
-        $listeEnvironnements = $listeEnvironnements . "win;";
-      }
-      if (isset($environnementUnix)) {
-        $listeEnvironnements = $listeEnvironnements . "unix;";
-      }
-      array_push($tabDonnees, $listeEnvironnements);
+      
 
       // ----------------------------------------------------------------
       // Theme

@@ -1,39 +1,29 @@
 
-INSERT INTO offredestage
+Going in
+Entreprise existe
+Entreprise existe, Contact aussi
+Création offre
+Nouvelle offre : INSERT INTO offredestage
       VALUES ('0',
-        'vcbcvbvc',
-        'lkjbv',
-        'unix;',
+        'fh,j,nhk',
+        'jkhjkfjk',
         '1',
-        '3',
-        '',
-        'cvbvcbc',
+        '1',
+        '1200',
+        'hj,kj,',
         '0',
-        '0');
-UPDATE contact SET nomcontact = 'Nom 1',
-				     prenomcontact = 'Prénom 1',
-				     telephone = 'xx',
-				     telecopie = '',
-				     email = 'sdf',
-				     identreprise = '547'
-			    WHERE idcontact = '0'
-INSERT INTO offredestage
+        '907');
+Going in
+Entreprise existe
+Entreprise existe, Contact aussi
+Création offre
+Nouvelle offre : INSERT INTO offredestage
       VALUES ('0',
-        'vcbcvbvc',
-        'lkjbv',
-        'unix;',
+        'fh,j,nhk',
+        'jkhjkfjk',
         '1',
-        '3',
-        '',
-        'cvbvcbc',
+        '1',
+        '1200',
+        'hj,kj,',
         '0',
-        '0');
- >> 1
-
-UPDATE contact SET nomcontact = 'fcxgvxdv',
-				     prenomcontact = 'xcvxcvcxv',
-				     telephone = 'xvxc',
-				     telecopie = '',
-				     email = 'vxcvxvx',
-				     identreprise = '547'
-			    WHERE idcontact = '0'
+        '907');

@@ -60,9 +60,7 @@ if (sizeof($filtres) > 0) {
     $filtre = "";
 }
 
-Utils::printLog("A");
 $tabOffreDAlternance = OffreDAlternance::getListeOffreDAlternance($filtre);
-Utils::printLog("B");
 // Si il y a au moins une offre de stage à traiter
 if (sizeof($tabOffreDAlternance) > 0) {
     // Affichage des entreprises correspondants aux critères de recherches

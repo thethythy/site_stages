@@ -19,11 +19,12 @@ class Entreprise_BDD {
 
     $typeEntreprise = $entreprise->getType();
     $idtype_entreprise = $typeEntreprise->getIdentifiantBDD() ? $typeEntreprise->getIdentifiantBDD() : "NULL";
+    $siret = $entreprise->getSiret() ? $entreprise->getSiret() : "NULL";
 
 
     if ($entreprise->getIdentifiantBDD() == "") {
-      $sql = "INSERT INTO $tab6
-      VALUES ('0',
+      $sql = "INSERT INTO $tab6 (nom, adresse, codepostal, ville, pays, email, idtypeentreprise, siret)
+      VALUES (
       '" . $entreprise->getNom() . "',
       '" . $entreprise->getAdresse() . "',
       '" . $entreprise->getCodePostal() . "',
@@ -31,8 +32,15 @@ class Entreprise_BDD {
       '" . $entreprise->getPays() . "',
       '" . $entreprise->getEmail() . "',
       $idtype_entreprise,
-      '" . $entreprise->getSiret() . "');";
+      $siret);";
+
       $db->query($sql);
+      $sql = "SELECT LAST_INSERT_ID() AS ID FROM $tab6";
+
+	    $res = $db->query($sql);
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg['ID'];
     } else {
       $sql = "UPDATE $tab6
       SET nom='" . $entreprise->getNom() . "',
@@ -42,12 +50,13 @@ class Entreprise_BDD {
       pays='" . $entreprise->getPays() . "',
       email='" . $entreprise->getEmail() . "',
       idtypeentreprise=$idtype_entreprise,
-      siret ='" . $entreprise->getSiret() . "',
+      siret ='" . $siret . "',
       WHERE identreprise='" . $entreprise->getIdentifiantBDD() . "';";
+
       $db->query($sql);
+      return $entreprise->getIdentifiantBDD();
     }
 
-    return $entreprise->getIdentifiantBDD() ? $entreprise->getIdentifiantBDD() : $db->insert_id;
   }
 
   /**

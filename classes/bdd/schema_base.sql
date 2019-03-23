@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`entreprise` (
   `idtypeentreprise` INT(10) NULL DEFAULT NULL,
   `siret` BIGINT(14) NULL,
   PRIMARY KEY (`identreprise`),
+  INDEX `identreprise_idx` (`identreprise` DESC),
   INDEX `idtypeentreprise_idx` (`idtypeentreprise` ASC),
   CONSTRAINT `fk_entreprise_type_entreprise_idtypeentreprise`
     FOREIGN KEY (`idtypeentreprise`)
@@ -361,7 +362,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`offredestage` (
   `idoffre` INT(10) NOT NULL AUTO_INCREMENT,
   `sujet` TEXT NOT NULL,
   `titre` VARCHAR(120) NOT NULL,
-  `listeenvironnement` TEXT NOT NULL,
   `dureemin` VARCHAR(50) NOT NULL,
   `dureemax` VARCHAR(50) NOT NULL,
   `indemnite` DOUBLE NOT NULL DEFAULT '0',
@@ -386,7 +386,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`offredalternance` (
   `idoffre` INT(10) NOT NULL AUTO_INCREMENT,
   `sujet` TEXT NOT NULL,
   `titre` VARCHAR(120) NOT NULL,
-  `listeenvironnement` TEXT NOT NULL,
   `duree` VARCHAR(50) NOT NULL,
   `indemnite` DOUBLE NOT NULL DEFAULT '0',
   `remarques` TEXT NOT NULL,
