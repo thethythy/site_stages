@@ -51,8 +51,9 @@ if ($nbFiltres >= 2) {
 }
 
 $tabConventions = Convention::getListeConvention($filtre);
+$tabContrats = Contrat::getListeContrat($filtre);
 
 // Afficher le résultat de la recherche
-Parrain_IHM::afficherListeParrainage($tabConventions);
+Parrain_IHM::afficherListeParrainage($tabConventions, $tabContrats);
 
 ?>
