@@ -14,7 +14,7 @@ function jsonParse(text) {
 function populateEtudiant(){
 	var id_etu = document.getElementById('idEtudiant').value;
 	var length = document.querySelectorAll('[id^="ligneCandidature-"]').length;
-
+	var test ;
 	var urlEncodeData = 'idEtudiant=' + id_etu + '&' +
 	'length=' + length;
 
@@ -35,7 +35,6 @@ function populateEtudiant(){
 					document.getElementById('ligneCandidature-'+i).style.display = '';
 				}
 			} else {
-				setColor();
 				for(var i = 1 ; i < json.length +1; i++){
 					if((document.getElementsByName('nomEtu-'+i)[0].id.split('-')[1]) != json.idEtudiant){
 						document.getElementById('ligneCandidature-'+i).style.display = 'none';
@@ -93,4 +92,20 @@ function setColor(){
 
 		}
 	}
+
 }
+
+
+
+
+var mutationObserver = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    console.log(mutation);
+		setColor();
+  });
+});
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  subtree: true,
+});
+

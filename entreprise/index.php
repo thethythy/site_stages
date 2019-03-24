@@ -128,7 +128,6 @@ function verifier(){
         $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, $siret, NULL);
 
         $idEntreprise = Entreprise_BDD::sauvegarder($nouvelleEntreprise);
-
         $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
         $idContact = Contact_BDD::sauvegarder($nouveauContact);
       }

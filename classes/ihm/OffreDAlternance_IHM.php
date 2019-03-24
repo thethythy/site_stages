@@ -520,6 +520,13 @@ public static function afficherFormulaireModification() {
                     } else {
                       echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
                     }
+
+                  }
+
+                  if ($i % 6 == 6) { echo "</tr>"; }
+                }
+                ?>
+
                   }
 
                   if ($i % 6 == 6) { echo "</tr>"; }
@@ -529,6 +536,44 @@ public static function afficherFormulaireModification() {
             </td>
           </tr>
           <tr>
+            <td colspan="2">
+              <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
+              <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
+              <div id="ajout_competence"></div>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">Environnement(s) :</th>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table>
+                <tr>
+                  <?php
+                  $winTrouve = false;
+                  $unixTrouve = false;
+                  $macTrouve = false;
+                  if (isset($environnement)) {
+                    for ($i = 0; $i < sizeof($environnement); $i++) {
+                      if ($environnement[$i] == "win")
+                      $winTrouve = true;
+                      if ($environnement[$i] == "unix")
+                      $unixTrouve = true;
+                      if ($environnement[$i] == "mac")
+                      $macTrouve = true;
+                    }
+                  }
+                  ?>
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
+                  </td>
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
+                  </td>
+                  <td width="100">
+                    <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
+                  </td>
+                </tr>
             <td colspan="2">
               <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
               <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
@@ -1035,7 +1080,7 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
       <tr>
         <td width='50%' align='center'>Nom de l'etudiant :
           <!-- <select name="idEtudiant" id="idEtudiant"> -->
-          <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant()'>
+          <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant();'>
             <option value="0">Tous</option>
             <?php
             for ($i = 0; $i < sizeof($tabEtu); $i++) {
