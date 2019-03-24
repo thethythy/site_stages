@@ -96,7 +96,6 @@ if (sizeof($tabOEntreprise) > 0) {
       }
     }
     if(sizeof($tabIdContrats) > 0){
-      Utils::printLog($idEnt);
       foreach ($tabIdContrats as $idContrat) {
         $oContrat = Contrat::getContrat($idContrat);
         $idPromotionCN = $oContrat->getPromotion()->getIdentifiantBDD();

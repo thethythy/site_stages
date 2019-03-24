@@ -9,7 +9,7 @@
 include_once('classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_root');
 
-IHM_Generale::header("Les stages", "étudiants", "", array());
+IHM_Generale::header("alternance et stages", "étudiants", "", array());
 IHM_Menu::menuAccueil();
 ?>
 <br></br>

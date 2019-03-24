@@ -9,7 +9,6 @@ class OffreDAlternance {
   var $identifiantBDD;  // Identifiant unique en base
   var $sujet;  // Texte descriptif de l'offre
   var $titre;  // Titre de l'offre
-  var $listeEnvironnement;  // SE utilisés
   var $theme;  // Tableau d'identifiants des parcours
   var $listeProfilSouhaite; // Tableau d'identifiants des filières
   var $duree;  // Durée minimale
@@ -25,7 +24,6 @@ class OffreDAlternance {
   * @param integer $identifiantBDD
   * @param string $sujet
   * @param string $titre
-  * @param string $listeEnvironnement
   * @param array $theme
   * @param array $listeProfilSouhaite
   * @param integer $duree
@@ -36,13 +34,12 @@ class OffreDAlternance {
   * @param integer $maitreDAlternance
   * @param integer $typeContrat
   */
-  public function __construct($identifiantBDD, $sujet, $titre, $listeEnvironnement,
+  public function __construct($identifiantBDD, $sujet, $titre,
   $theme, $listeProfilSouhaite, $duree, $indemnite, $remarques,
   $estVisible, $listeCompetences, $maitreDAlternance, $typeContrat) {
     $this->identifiantBDD = $identifiantBDD;
     $this->sujet = $sujet;
     $this->titre = $titre;
-    $this->listeEnvironnement = $listeEnvironnement;
     $this->theme = $theme;
     $this->listeProfilSouhaite = $listeProfilSouhaite;
     $this->duree = $duree;
@@ -67,10 +64,6 @@ class OffreDAlternance {
 
   public function getTitre() {
     return $this->titre;
-  }
-
-  public function getListeEnvironnements() {
-    return $this->listeEnvironnement;
   }
 
   public function getDuree() {
@@ -117,10 +110,6 @@ class OffreDAlternance {
 
   public function setTitre($titre) {
     $this->titre = $titre;
-  }
-
-  public function setListeEnvironnements($listeEnvironnement) {
-    $this->listeEnvironnement = $listeEnvironnement;
   }
 
   public function setDureeMinimale($duree) {
@@ -198,11 +187,11 @@ class OffreDAlternance {
   */
   public static function saisirDonnees($tab_donnees) {
     $ods = new OffreDAlternance("", $tab_donnees[0], $tab_donnees[1],
-    $tab_donnees[2], $tab_donnees[3],
-    $tab_donnees[4], $tab_donnees[5],
-    $tab_donnees[6], $tab_donnees[7],
-    '0', $tab_donnees[8],
-    $tab_donnees[9], $tab_donnees[10]);
+    $tab_donnees[2],
+    $tab_donnees[3], $tab_donnees[4],
+    $tab_donnees[5], $tab_donnees[6],
+    '0', $tab_donnees[7],
+    $tab_donnees[8], $tab_donnees[9]);
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 
@@ -217,8 +206,7 @@ class OffreDAlternance {
     $tab_donnees[4], $tab_donnees[5],
     $tab_donnees[6], $tab_donnees[7],
     $tab_donnees[8], $tab_donnees[9],
-    $tab_donnees[10], $tab_donnees[11],
-    $tab_donnees[12]);
+    $tab_donnees[10], $tab_donnees[11]);
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 
@@ -243,8 +231,7 @@ class OffreDAlternance {
     $offreDAlternance[4], $offreDAlternance[5],
     $offreDAlternance[6], $offreDAlternance[7],
     $offreDAlternance[8], $offreDAlternance[9],
-    $offreDAlternance[10], $offreDAlternance[11],
-    $offreDAlternance[12]);
+    $offreDAlternance[10], $offreDAlternance[11]);
   }
 
   /**
@@ -264,8 +251,7 @@ class OffreDAlternance {
       $tabODSString[$i][4], $tabODSString[$i][5],
       $tabODSString[$i][6], $tabODSString[$i][7],
       $tabODSString[$i][8], $tabODSString[$i][9],
-      $tabODSString[$i][10], $tabODSString[$i][11],
-      NULL));
+      $tabODSString[$i][10], NULL));
     }
 
     return $tabODS;

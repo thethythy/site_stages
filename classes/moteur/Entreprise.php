@@ -30,7 +30,7 @@ class Entreprise {
   * @param integer $siret
   */
   public function __construct($identifiantBDD, $nom, $adresse, $codePostal,
-  $ville, $pays, $email, $idTypeEntreprise, $siret) {
+  $ville, $pays, $email, $siret, $idTypeEntreprise) {
     $this->identifiantBDD = $identifiantBDD;
     $this->nom = $nom;
     $this->adresse = $adresse;

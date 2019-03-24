@@ -1,26 +1,22 @@
 
-4492317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND identreprise=545
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND identreprise=545
-4492317539323545
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=317 AND identreprise=539
-SELECT * FROM candidature_alternance WHERE idetudiant=449 AND idoffre=323 AND identreprise=545
-=======
-4310
-4300
-4310
-4250
-3940
-4310
-4050
-4210
-3850
-4300
-4210
-4310
-4310
-4300
-4210
->>>>>>> origin/thomas
+
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+AA
+
+AA

@@ -152,21 +152,21 @@ class OffreDeStage_IHM {
     var divContrat = document.getElementById('divTypeContrat');
     var dureeStage = document.getElementById('dureeStage');
     var dureeAlt = document.getElementById('dureeAlt');
+    var siret = document.getElementById('thSiret');
     if(altRad.checked){
       title.innerHTML = "Offre d'alternance";
       dureeStage.style.display = 'none';
       dureeAlt.style.display = 'block';
-      divContrat.style.visibility = 'visible';
+      divContrat.style.display = '';
+      siret.innerHTML = 'SIRET (*) : ';
     }else{
       title.innerHTML = "Offre de stage";
       dureeAlt.style.display = 'none';
       dureeStage.style.display = 'block';
-      divContrat.style.visibility  = 'hidden';
+      divContrat.style.display  = 'none';
+      siret.innerHTML = 'SIRET :';
     }
   }
-
-
-
   window.addEventListener('load', function() {//par default offre de stage
     var stgRad = 	document.getElementById('radioStage');
     stgRad.checked = true;
@@ -328,23 +328,6 @@ class OffreDeStage_IHM {
           </td>
         </tr>
         <tr>
-          <th>Environnement(s) :</th>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <table>
-              <tr>
-                <td width="100"><input <?php if (isset($_POST['environnementWin'])) { echo "checked='checked'";} ?> type="checkbox" value="win" name="environnementWin"> Windows</td>
-                <td width="100"><input <?php if (isset($_POST['environnementUnix'])) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"> Unix/Linux</td>
-                <td width="100"><input <?php if (isset($_POST['environnementMac'])) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"> Macintosh</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <th colspan="2"><p/><hr/><p/></th>
-        </tr>
-        <tr>
           <tr>
             <th>Remarques diverses :</th>
             <td><textarea style ="resize:none;" name="rmq"><?php if (isset($_POST['rmq'])) { echo $_POST['rmq']; } ?></textarea></td>
@@ -382,7 +365,7 @@ class OffreDeStage_IHM {
             <th>Email DRH ou équivalent :</th>
             <td><input type="text" value="<?php if (isset($_POST['email_entreprise'])) { echo $_POST['email_entreprise']; } else { echo ""; } ?>" name="email_entreprise" size="50"></td>
           </tr>
-          <th>SIRET (*) :</th>
+          <th id='thSiret'>SIRET (*) :</th>
           <td><input type="text" value="<?php if (isset($_POST['siret'])) { echo $_POST['siret']; } else { echo ""; } ?>" name="siret" size="50"></td>
         </tr>
       </table>
@@ -454,7 +437,6 @@ public static function afficherFormulaireModification() {
       $modificationProfils = $modificationOffreDeStage->getListeProfilSouhaite();
       $modificationContact = $modificationOffreDeStage->getContact();
       $modificationEntreprise = $modificationContact->getEntreprise();
-      $environnement = explode(";", $modificationOffreDeStage->getListeEnvironnements());
     }
     ?>
 
@@ -492,128 +474,6 @@ public static function afficherFormulaireModification() {
               </td>
             </tr>
             <tr>
-              <td colspan="2">
-                Copier/coller le texte suivant pour insérer un lien html vers un document descriptif :<br/>
-                <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDeStages/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2"><p/><hr/><p/></th>
-            </tr>
-            <tr>
-              <th colspan="2">Compétence(s) (*) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <!-- Récupération des compétences -->
-                  <?php
-                  $tabCompetences = Competence::listerCompetences();
-                  for ($i = 0; $i < sizeof($tabCompetences); $i++) {
-                    if ($i % 6 == 0) { echo "<tr>";}
-
-                    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
-                      echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                    } else {
-                      $competenceTrouve = false;
-                      if (isset($modificationCompetences)) {
-                        for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
-                          if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
-                            $competenceTrouve = true;
-                          }
-                        }
-                      }
-                      if ($competenceTrouve) {
-                        echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                      } else {
-                        echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
-                      }
-                    }
-
-                    if ($i % 6 == 6) { echo "</tr>"; }
-                  }
-                  ?>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
-                <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
-                <div id="ajout_competence"></div>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2">Environnement(s) :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <?php
-                    $winTrouve = false;
-                    $unixTrouve = false;
-                    $macTrouve = false;
-                    if (isset($environnement)) {
-                      for ($i = 0; $i < sizeof($environnement); $i++) {
-                        if ($environnement[$i] == "win")
-                        $winTrouve = true;
-                        if ($environnement[$i] == "unix")
-                        $unixTrouve = true;
-                        if ($environnement[$i] == "mac")
-                        $macTrouve = true;
-                      }
-                    }
-                    ?>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementWin']) || $winTrouve) { echo "checked='checked'"; } ?> type="checkbox" value="win" name="environnementWin"/> Windows
-                    </td>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementUnix']) || $unixTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="unix" name="environnementUnix"/> Unix/Linux
-                    </td>
-                    <td width="100">
-                      <input <?php if (isset($_POST['environnementMac']) || $macTrouve) { echo "checked='checked'"; } ?>type="checkbox" value="mac" name="environnementMac"/> Macintosh
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <th colspan="2">Thème du stage :</th>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <table>
-                  <!-- Récupération des parcours -->
-                  <?php
-                  $tabParcours = Parcours::listerParcours();
-                  for ($i = 0; $i < sizeof($tabParcours); $i++) {
-                    if ($i % 5 == 0) { echo "<tr>"; }
-
-                    if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
-                      echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-                    } else {
-                      $themeTrouve = false;
-                      if (isset($modificationThemes)) {
-                        for ($j = 0; $j < sizeof($modificationThemes); $j++) {
-                          if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
-                            $themeTrouve = true;
-                          }
-                        }
-                      }
-                      if ($themeTrouve) {
-                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-                      } else {
-                        echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
-                      }
-                    }
-                    if ($i % 5 == 5) { echo "</tr>"; }
-                  }
-                  ?>
-                </table>
-              </td>
-            </tr>
-            <tr>
               <th colspan="2">Profil souhaité :</th>
             </tr>
             <tr>
@@ -646,6 +506,12 @@ public static function afficherFormulaireModification() {
                   }
                   ?>
                 </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Copier/coller le texte suivant pour insérer un lien html vers un document descriptif :<br/>
+                <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDeStages/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
               </td>
             </tr>
             <tr>
@@ -691,6 +557,90 @@ public static function afficherFormulaireModification() {
               />
             </td>
           </tr>
+          <tr>
+            <th colspan="2"><p/><hr/><p/></th>
+          </tr>
+            <tr>
+              <th colspan="2">Compétence(s) (*) :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <!-- Récupération des compétences -->
+                  <?php
+                  $tabCompetences = Competence::listerCompetences();
+                  for ($i = 0; $i < sizeof($tabCompetences); $i++) {
+                    if ($i % 6 == 0) { echo "<tr>";}
+
+                    if (isset($_POST['competence' . $tabCompetences[$i]->getIdentifiantBDD()])) {
+                      echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                    } else {
+                      $competenceTrouve = false;
+                      if (isset($modificationCompetences)) {
+                        for ($j = 0; $j < sizeof($modificationCompetences); $j++) {
+                          if ($modificationCompetences[$j]->getIdentifiantBDD() == $tabCompetences[$i]->getIdentifiantBDD()) {
+                            $competenceTrouve = true;
+                          }
+                        }
+                      }
+                      if ($competenceTrouve) {
+                        echo "<td width='100'><input checked='checked' type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                      } else {
+                        echo "<td width='100'><input type='checkbox' value='" . $tabCompetences[$i]->getIdentifiantBDD() . "' name='competence" . $tabCompetences[$i]->getIdentifiantBDD() . "'> " . $tabCompetences[$i]->getNom() . "</td>";
+                      }
+                    }
+
+                    if ($i % 6 == 6) { echo "</tr>"; }
+                  }
+                  ?>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="button" value="Ajouter une compétence" onClick="ajout_competence()">
+                <input type="hidden" value="0" name="compteur_competence" id="compteur_competence"/>
+                <div id="ajout_competence"></div>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">Thème du stage :</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table>
+                  <!-- Récupération des parcours -->
+                  <?php
+                  $tabParcours = Parcours::listerParcours();
+                  for ($i = 0; $i < sizeof($tabParcours); $i++) {
+                    if ($i % 5 == 0) { echo "<tr>"; }
+
+                    if (isset($_POST['parcours' . $tabParcours[$i]->getIdentifiantBDD()])) {
+                      echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                    } else {
+                      $themeTrouve = false;
+                      if (isset($modificationThemes)) {
+                        for ($j = 0; $j < sizeof($modificationThemes); $j++) {
+                          if ($modificationThemes[$j]->getIdentifiantBDD() == $tabParcours[$i]->getIdentifiantBDD()) {
+                            $themeTrouve = true;
+                          }
+                        }
+                      }
+                      if ($themeTrouve) {
+                        echo "<td width='150'><input checked='checked' type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                      } else {
+                        echo "<td width='150'><input type='checkbox' value='" . $tabParcours[$i]->getIdentifiantBDD() . "'name='parcours" . $tabParcours[$i]->getIdentifiantBDD() . "'> " . $tabParcours[$i]->getNom() . "</td>";
+                      }
+                    }
+                    if ($i % 5 == 5) { echo "</tr>"; }
+                  }
+                  ?>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2"><p/><hr/><p/></th>
+            </tr>
           <tr>
             <th>Remarques diverses :</th>
             <td>
@@ -888,7 +838,6 @@ $duree_init, $competence_init) {
   $profils = $offreDeStage->getListeProfilSouhaite();
   $contact = $offreDeStage->getContact();
   $entreprise = $offreDeStage->getEntreprise();
-  $environnement = explode(";", $offreDeStage->getListeEnvironnements());
   ?>
   <table>
     <tr>
@@ -919,27 +868,6 @@ $duree_init, $competence_init) {
                   echo $competence->getNom();
                 } else {
                   echo $competence->getNom() . ", ";
-                }
-              }
-              ?>
-            </td>
-          </tr>
-
-          <tr>
-            <th width="160">Environnement(s) :</th>
-            <td>
-              <?php
-              $winTrouve = false;
-              $unixTrouve = false;
-              $macTrouve = false;
-              if (isset($environnement)) {
-                for ($i = 0; $i < sizeof($environnement); $i++) {
-                  if ($environnement[$i] == "win")
-                  echo " Windows ";
-                  if ($environnement[$i] == "unix")
-                  echo " Unix/Linux ";
-                  if ($environnement[$i] == "mac")
-                  echo " Macintosh ";
                 }
               }
               ?>

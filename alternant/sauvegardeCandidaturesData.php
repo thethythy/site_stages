@@ -29,11 +29,14 @@ try {
         Candidature::modifierDonnees($tabCndtr);
       } else {
         //La candidature n'existe pas, on la crée
-        array_push($tabCndtr, $_POST['idetudiant']);
-        array_push($tabCndtr, $_POST['idoffre'.$i]);
-        array_push($tabCndtr, $_POST['identreprise'.$i]);
-        array_push($tabCndtr, $_POST['statut'.$i]);
-        Candidature::saisirDonnees($tabCndtr);
+        if($_POST['statut'.$i] != "-------------"){
+          //On ne crée que si on a une candidature, et pas un truc laissé par défaut
+          array_push($tabCndtr, $_POST['idetudiant']);
+          array_push($tabCndtr, $_POST['idoffre'.$i]);
+          array_push($tabCndtr, $_POST['identreprise'.$i]);
+          array_push($tabCndtr, $_POST['statut'.$i]);
+          Candidature::saisirDonnees($tabCndtr);
+        }
       }
     }
 

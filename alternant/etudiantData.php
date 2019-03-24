@@ -21,7 +21,7 @@ try {
          //La candidature existe, on récupère son statut
         $tabResponse[$i] = $cndtr->statut;
       } else {
-        //La candidature n'existe pas, on renvoit une chaine vide
+        //La candidature n'existe pas, on renvoit la chaine par défaut
         $tabResponse[$i] = "-------------";
       }
     }

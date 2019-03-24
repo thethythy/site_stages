@@ -19,11 +19,12 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 */
 function verifier(){
   if (isset($_POST['titre'])) {
+
     extract($_POST);
     if ($titre!="" && $sujet!="" && $nom_entreprise!="" && $adresse!="" &&
     $ville!="" && $codePostal!="" && is_numeric($codePostal) &&
     $pays!="" && $nom_contact!="" && $prenom_contact!="" &&
-    $tel_contact!="" && $email_contact!="") {
+    $tel_contact!="" && $email_contact!="" && ($siret != "" && $type == "alternant" || $type =='stagiaire')) {
 
       $tabDonnees = array();
 
@@ -32,19 +33,6 @@ function verifier(){
 
       //titre
       array_push($tabDonnees, $titre);
-
-      //liste des environnements
-      $listeEnvironnements = "";
-      if (isset($environnementMac)) {
-        $listeEnvironnements = $listeEnvironnements."mac;";
-      }
-      if (isset($environnementWin)) {
-        $listeEnvironnements = $listeEnvironnements."win;";
-      }
-      if (isset($environnementUnix)) {
-        $listeEnvironnements =$listeEnvironnements."unix;";
-      }
-      array_push($tabDonnees, $listeEnvironnements);
 
       //Theme
       $tabParcours = Parcours::listerParcours();
@@ -116,6 +104,7 @@ function verifier(){
       $filtre = new Filtre($filtreNom, $filtreVille, "AND");
       $entreprise = Entreprise::getListeEntreprises($filtre);
 
+
       if (sizeof($entreprise) == 1) {
         // On récupère les informations sur l'entreprise
         $idEntreprise=$entreprise[0]->getIdentifiantBDD();
@@ -130,13 +119,14 @@ function verifier(){
           $idContact = $contact[0]->getIdentifiantBDD();
         } else {
           // On enregistre le contact dans la base de données
-          $nouveauContact = new Contact("0", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
+          $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
           $idContact = Contact_BDD::sauvegarder($nouveauContact);
         }
       } else {
         // On enregistre l'entreprise et le contact dans la base de données
         if ($email_entreprise == "") $email_entreprise = $email_contact;
-        $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL, $siret);
+        $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, $siret, NULL);
+
         $idEntreprise = Entreprise_BDD::sauvegarder($nouvelleEntreprise);
         $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
         $idContact = Contact_BDD::sauvegarder($nouveauContact);
@@ -147,6 +137,7 @@ function verifier(){
         array_push($tabDonnees, $typeContrat);
         $idOffreDeStage = OffreDAlternance::saisirDonnees($tabDonnees);
       } else {
+
         $idOffreDeStage = OffreDeStage::saisirDonnees($tabDonnees);
       }
 

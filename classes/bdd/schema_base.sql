@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`entreprise` (
   `idtypeentreprise` INT(10) NULL DEFAULT NULL,
   `siret` BIGINT(14) NULL,
   PRIMARY KEY (`identreprise`),
+  INDEX `identreprise_idx` (`identreprise` DESC),
   INDEX `idtypeentreprise_idx` (`idtypeentreprise` ASC),
   CONSTRAINT `fk_entreprise_type_entreprise_idtypeentreprise`
     FOREIGN KEY (`idtypeentreprise`)
@@ -287,13 +288,11 @@ CREATE TABLE IF NOT EXISTS `stages`.`contrat` (
   `idreferent` INT(10) NOT NULL,
   `idetudiant` INT(10) NOT NULL,
   `idsoutenance` INT(10) NULL DEFAULT NULL,
-  `idcontact` INT(10) NOT NULL,
   `idtheme` INT(10) NOT NULL,
   PRIMARY KEY (`idcontrat`),
   INDEX `idetudiant_idx` (`idetudiant` ASC),
   INDEX `idparrain_idx` (`idparrain` ASC),
   INDEX `idreferent_idx` (`idreferent` ASC),
-  INDEX `idcontact_idx` (`idcontact` ASC),
   INDEX `idtheme_idx` (`idtheme` ASC),
   UNIQUE INDEX `idsoutenance_idx` (`idsoutenance` ASC),
   CONSTRAINT `fk_contrat_etudiant_idetudiant`
@@ -363,7 +362,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`offredestage` (
   `idoffre` INT(10) NOT NULL AUTO_INCREMENT,
   `sujet` TEXT NOT NULL,
   `titre` VARCHAR(120) NOT NULL,
-  `listeenvironnement` TEXT NOT NULL,
   `dureemin` VARCHAR(50) NOT NULL,
   `dureemax` VARCHAR(50) NOT NULL,
   `indemnite` DOUBLE NOT NULL DEFAULT '0',
@@ -388,7 +386,6 @@ CREATE TABLE IF NOT EXISTS `stages`.`offredalternance` (
   `idoffre` INT(10) NOT NULL AUTO_INCREMENT,
   `sujet` TEXT NOT NULL,
   `titre` VARCHAR(120) NOT NULL,
-  `listeenvironnement` TEXT NOT NULL,
   `duree` VARCHAR(50) NOT NULL,
   `indemnite` DOUBLE NOT NULL DEFAULT '0',
   `remarques` TEXT NOT NULL,

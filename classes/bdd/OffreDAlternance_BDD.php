@@ -32,20 +32,19 @@ class offreDAlternance_BDD {
 		    VALUES ('0',
 			    '" . $offreDAlternance->getSujet() . "',
 			    '" . $offreDAlternance->getTitre() . "',
-			    '" . $offreDAlternance->getListeEnvironnements() . "',
 			    '" . $offreDAlternance->getDuree() . "',
 			    '" . $offreDAlternance->getIndemnite() . "',
 			    '" . $offreDAlternance->getRemarques() . "',
 			    '$estVisible',
 			    '" . $offreDAlternance->getIdContact() . "',
           '" . $offreDAlternance->getTypeContrat() . "');";
+
 	    $db->query($sql);
 	    $lastId = $db->insert_id;
 	} else {
 	    $sql = "UPDATE $tab29
 		    SET sujet='" . $offreDAlternance->getSujet() . "',
 			titre='" . $offreDAlternance->getTitre() . "',
-			listeenvironnement='" . $offreDAlternance->getListeEnvironnements() . "',
 			duree='" . $offreDAlternance->getDuree() . "',
 			indemnite='" . $offreDAlternance->getIndemnite() . "',
 			remarques='" . $offreDAlternance->getRemarques() . "',
@@ -143,7 +142,6 @@ class offreDAlternance_BDD {
 	array_push($tabOffreDAlternance, $data['idoffre']);
 	array_push($tabOffreDAlternance, $data['sujet']);
 	array_push($tabOffreDAlternance, $data['titre']);
-	array_push($tabOffreDAlternance, $data['listeenvironnement']);
 
 	$sql2 = "SELECT * FROM $tab27 WHERE idoffre='$identifiantBDD'";
 	$res2 = $db->query($sql2);

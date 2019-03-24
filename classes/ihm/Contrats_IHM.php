@@ -190,7 +190,7 @@ class Contrats_IHM {
 			<input type="hidden" name="parcours" value="<?php echo $parcours; ?>"/>
 			<input type="hidden" name="filiere" value="<?php echo $filiere; ?>"/>
 			<input type="hidden" value="1" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
-			<input type="submit" value="Enregistrer" />
+			<input type="submit" value="Enregistrer" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
 		    </td>
 		</tr>
 	    </table>
@@ -311,6 +311,58 @@ class Contrats_IHM {
 	}
 	echo "</table>";
     }
+
+    /**
+     * Afficher une liste des contrats à exporter
+     * @param integer $annee Année de la promotion concernée
+     * @param integer $idPromo Identifiant de la promotion
+     * @param tableau d'objets $tabEtuWithContrats Tableaux d'objets Etudiant
+     */
+    public static function afficherListeContratsAExporter($annee, $idPromo, $tabEtuWithConv) {
+	echo "<table>
+		<tr id='entete'>
+			<td width='20%'>Etudiant</td>
+			<td width='15%'>Référent</td>
+			<td width='15%'>Contact</td>
+			<td width='15%'>Entreprise</td>
+			<td width='15%'>Thème</td>
+			<td width='10%' align='center'>Exporter</td>
+		</tr>";
+	for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
+	    $contrat = $tabEtuWithConv[$i]->getContrat($annee);
+	    $parrain = $contrat->getParrain();
+
+	    $contact = $contrat->getContact();
+	    $entreprise = $contact->getEntreprise();
+	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
+	    ?>
+	    <tr id="ligne<?php echo $i % 2; ?>">
+	        <td>
+		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $parrain->getNom() . " " . $parrain->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $contact->getNom() . " " . $contact->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $entreprise->getNom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $theme->getTheme(); ?>
+	        </td>
+	        <td align="center">
+		    <a href="exporterContrat.php?promo=<?php echo $idPromo; ?>&id=<?php echo $contrat->getIdentifiantBDD(); ?>">
+		        <img src="../../images/download.png"/>
+		    </a>
+	        </td>
+	    </tr>
+	    <?php
+	}
+	echo "</table>";
+    }
+
 
 }
 ?>

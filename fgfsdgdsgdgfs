@@ -1,9 +1,0 @@
-<!-- <?php
-OffreDAlternance_IHM::afficherFormulaireSuivi($tabEtudiants, $annee, $parcours, $filiere,"suiviCandidatures.php");
-?>
-</div>
-<div id='data1'>
-<?php $tabE = OffreDAlternance::getListeOffreDAlternance($filtreOffres); ?>
-
-  <?php OffreDAlternance_IHM::afficherListeOffresSuivi($tabE); ?>
-   -->

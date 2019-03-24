@@ -34,20 +34,19 @@ class offreDeStage_BDD {
       VALUES ('0',
         '" . $offreDeStage->getSujet() . "',
         '" . $offreDeStage->getTitre() . "',
-        '" . $offreDeStage->getListeEnvironnements() . "',
         '" . $offreDeStage->getDureeMinimale() . "',
         '" . $offreDeStage->getDureeMaximale() . "',
         '" . $offreDeStage->getIndemnite() . "',
         '" . $offreDeStage->getRemarques() . "',
         '$estVisible',
         '" . $offreDeStage->getIdContact() . "');";
+
         $db->query($sql);
         $lastId = $db->insert_id;
       } else {
         $sql = "UPDATE $tab12
         SET sujet='" . $offreDeStage->getSujet() . "',
         titre='" . $offreDeStage->getTitre() . "',
-        listeenvironnement='" . $offreDeStage->getListeEnvironnements() . "',
         dureemin='" . $offreDeStage->getDureeMinimale() . "',
         dureemax='" . $offreDeStage->getDureeMaximale() . "',
         indemnite='" . $offreDeStage->getIndemnite() . "',
@@ -146,7 +145,6 @@ class offreDeStage_BDD {
       array_push($tabOffreDeStage, $data['idoffre']);
       array_push($tabOffreDeStage, $data['sujet']);
       array_push($tabOffreDeStage, $data['titre']);
-      array_push($tabOffreDeStage, $data['listeenvironnement']);
 
       $sql2 = "SELECT * FROM $tab8 WHERE idoffre='$identifiantBDD'";
       $res2 = $db->query($sql2);
