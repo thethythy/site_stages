@@ -38,6 +38,9 @@ if (isset($_GET['parcours']) && $_GET['parcours'] != '*')
 if (isset($_GET['filiere']) && $_GET['filiere'] != '*')
     array_push($filtres, new FiltreNumeric('idfiliere', $_GET['filiere']));
 
+// Si le $_GET n'est pas défini (normalement n'arrive jamais)
+// on affiche tout par défuat
+$dataFlag = 2;
 if(isset($_GET['offre'])){
   switch($_GET['offre']){
     case 'Stage' :

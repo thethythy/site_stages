@@ -144,7 +144,7 @@ class OffreDAlternance_IHM {
       <?php
       $cpt = 0;
       for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
-        if (!$tabOffreDAlt[$i]->estVisible()) {//A changer ...
+        if ($tabOffreDAlt[$i]->estVisible()) {//A changer ...
           ?>
           <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>

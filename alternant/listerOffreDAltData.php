@@ -66,7 +66,7 @@ if ($nbFiltres >= 2) {
 
 $tabOffreDAlt = OffreDAlternance::getListeOffreDAlternance($filtre);
 
-// Si il y a au moins une offre de stage
+// Si il y a au moins une offre d'alternance
 if (sizeof($tabOffreDAlt) > 0) {
     OffreDAlternance_IHM::afficherListeOffres($tabOffreDAlt);
 } else {

@@ -16,7 +16,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion');
 
-IHM_Generale::header("Liste des", "offres d'alternance'", "../../", $tabLiens);
+IHM_Generale::header("Liste des", "offres d'alternance", "../../", $tabLiens);
 
 OffreDeStage_IHM::afficherFormulaireRecherche("listeDesOffreDAlternanceData.php");
 

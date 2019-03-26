@@ -92,14 +92,14 @@ class IHM_Menu {
           ?>
           <div id="sidebar">
             <ul class="sidemenu">
-              <li><a>1-Rechercher</a></li>
+              <li><a>1- Rechercher</a></li>
               <ul class="sidemenu2">
                 <li><a href="./listerOffreDeStage.php">Offres de stages</a></li>
                 <li><a href="./listerAnciensStages.php">Les anciens stages</a></li>
               </ul>
-              <li><a href="./demanderValidationSDS.php">2-Valider le sujet de stage</a></li>
+              <li><a href="./demanderValidationSDS.php">2- Valider le sujet de stage</a></li>
               <br/>
-              <li><a href="./depot_doc.php">3-Déposer des documents</a></li>
+              <li><a href="./depot_doc.php">3- Déposer des documents</a></li>
               <br></br>
               <li>Site externes d'offres:</li>
               <ul class="sidemenu2">
@@ -128,14 +128,14 @@ class IHM_Menu {
             ?>
             <div id="sidebar">
               <ul class="sidemenu">
-                <li><a>1-Rechercher</a></li>
+                <li><a>1- Rechercher</a></li>
                 <ul class="sidemenu2">
-                  <li><a href="./listerOffreAlternance.php">Offres de stages</a></li>
-                  <li><a href="./listerAnciensContrats.php">Les anciens stages</a></li>
+                  <li><a href="./listerOffreAlternance.php">Offres d'alternance</a></li>
+                  <li><a href="./listerAnciensContrats.php">Les anciennes alternances</a></li>
                 </ul>
-                <li><a href="./demanderValidationSDA.php">2-Valider le sujet de stage</a></li>
-                <li><a href="./depot_doc.php">3-Déposer des documents</a></li>
-                <li><a href="./suiviCandidatures.php">4-Suivi des candidatures</a></li>
+                <li><a href="./demanderValidationSDA.php">2- Valider le sujet d'alternance</a></li>
+                <li><a href="./depot_doc.php">3- Déposer des documents</a></li>
+                <li><a href="./suiviCandidatures.php">4- Suivi des candidatures</a></li>
                 <br></br>
                 <li>Site externes d'offres:</li>
                 <ul class="sidemenu2">
