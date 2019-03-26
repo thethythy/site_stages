@@ -33,8 +33,8 @@ if (isset($_POST['edit'])) {
 
 
     if (isset($idTheme))
-	$oContrat->setIdTheme($idTheme);
-
+	   $oContrat->setIdTheme($idTheme);
+     $oContrat->setIndemnites($indemnite);
     $oContrat->setTypeDeContrat($typeContrat);
     $oContrat->setIdParrain($idPar);
     $oContrat->setIdReferent($idCont);

@@ -29,10 +29,10 @@ function verifier(){
       $tabDonnees = array();
 
       //sujet
-      array_push($tabDonnees, $sujet);
+      array_push($tabDonnees, $sujet); // $tabDonnees[0]
 
       //titre
-      array_push($tabDonnees, $titre);
+      array_push($tabDonnees, $titre); // $tabDonnees[1]
 
       //Theme
       $tabParcours = Parcours::listerParcours();
@@ -42,7 +42,7 @@ function verifier(){
           array_push($tabThemes, $_POST['parcours'.$i]);
         }
       }
-      array_push($tabDonnees, $tabThemes);
+      array_push($tabDonnees, $tabThemes); // $tabDonnees[2]
 
       //Profils
       $tabFilieres = Filiere::listerFilieres();
@@ -52,7 +52,7 @@ function verifier(){
           array_push($tabProfils, $_POST['filiere'.$i]);
         }
       }
-      array_push($tabDonnees, $tabProfils);
+      array_push($tabDonnees, $tabProfils); // $tabDonnees[3]
 
       // Ajout durée contrat en fonction de l'aternance ou du stage
       if(isset($_POST['type']) && $_POST['type'] === 'alternant') {

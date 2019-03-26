@@ -127,7 +127,7 @@ class Etudiant {
     return Convention::getConvention($idConv);
   }
 
-  
+
 
   /**
   * Obtenir la dernière convention de l'étudiant à partir de l'année donnée

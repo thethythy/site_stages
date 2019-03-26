@@ -407,19 +407,19 @@ class Parrain_IHM {
           }
 
           echo "<td>Total</td><td>ICalendar</td></tr>";
-
+          $tabC = array_merge($tabConventions, $tabContrats);
           $cpt = 0;
           $oldparrain = 0;
-          for ($i = 0; $i < sizeof($tabConventions); $i++) {
+          for ($i = 0; $i < sizeof($tabC); $i++) {
 
-            if ($tabConventions[$i]->getIdParrain() != '') {
+            if ($tabC[$i]->getIdParrain() != '') {
 
               if (isset($_POST['annee']) && $_POST['annee'] != "")
               $annee = $_POST['annee'];
               else
               $annee = Promotion_BDD::getLastAnnee();
 
-              $parrain = $tabConventions[$i]->getParrain();
+              $parrain = $tabC[$i]->getParrain();
 
               if ($parrain->getIdentifiantBDD() != $oldparrain) {
                 ?>
@@ -443,38 +443,39 @@ class Parrain_IHM {
                     $parcours = $tabPromotions[$j]->getParcours();
 
                     $taboConv = Convention::getListeConventionFromParrainAndPromotion($annee, $parrain->getIdentifiantBDD(), $filiere->getIdentifiantBDD(), $parcours->getIdentifiantBDD());
+                    $taboCont = Contrat::getListeContratFromParrainAndPromotion($annee, $parrain->getIdentifiantBDD(), $filiere->getIdentifiantBDD(), $parcours->getIdentifiantBDD());
                     $nbConv = sizeof($taboConv);
+                    $nbCont = sizeof($taboCont);
+                    $tot = $nbConv + $nbCont;
                     $total += $nbConv;
+                    $total += $nbCont;
+
+
 
                     $nbAlters = 0;
                     $nbAltersPRO = 0;
                     $nbAltersAPP = 0;
                     $nbRechs = 0;
                     $nbInitiaux = 0;
-
                     for ($k = 0; $k < $nbConv; $k++) {
                       $oEtu = $taboConv[$k]->getEtudiant();
                       $statut = $oEtu->getCodeEtudiant();
-
                       switch ($statut) {
-                        case "5":
-                        $nbAlters++;
-                        break;
-                        case "51":
-                        $nbAlters++;
-                        $nbAltersPRO++;
-                        break;
-                        case "52":
-                        $nbAlters++;
-                        $nbAltersAPP++;
-                        break;
                         case "6":
-                        $nbRechs++;
-                        break;
+                          $nbRechs++;
+                          break;
                         default:
-                        $nbInitiaux++;
-                        break;
+                          $nbInitiaux++;
+                          break;
                       }
+                    }
+                      for ($k = 0; $k < $nbCont; $k++) {
+                        if($taboCont[$k]->getTypeDeContrat() == 0)
+                          $nbAltersPRO++;
+                        else
+                          $nbAltersAPP++;
+
+                        $nbAlters++;
                     }
 
                     $nbAltersTotal += $nbAlters;
@@ -483,8 +484,9 @@ class Parrain_IHM {
                     $nbRechsTotal += $nbRechs;
                     $nbInitiauxTotal += $nbInitiaux;
 
+
                     $detail = "$nbInitiaux Init | $nbAltersPRO Alt Pro | $nbAltersAPP Alt App | $nbRechs Rech";
-                    echo "<td>$nbConv<br/>$detail</td>";
+                    echo "<td>".$tot."<br/>$detail</td>";
                   }
 
                   $detail = "$nbInitiauxTotal Init | $nbAltersPROTotal Alt Pro | $nbAltersAPPTotal Alt App | $nbRechsTotal Rech";

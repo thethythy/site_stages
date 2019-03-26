@@ -53,7 +53,10 @@ IHM_Generale::header("Gestion de la", "clef d'accès", "../../", $tabLiens, "auc
 // Vérification de la période pour exécuter cette page
 $mois = date('n');
 
-if ($mois == 9 || $mois == 10 || $mois != 54) { // Il faut être entre le 1/09 et le 31/10
+echo '<div id="error"></div>';
+
+// if ($mois == 9 || $mois == 10 || $mois != 54) { // Il faut être entre le 1/09 et le 31/10
+if ($mois == 9 || $mois == 10) { // Il faut être entre le 1/09 et le 31/10
     // Afficher formulaire pour définir une clef
     Clef_IHM::afficherFormulaireDefinitionClef($HClef);
 } else {
