@@ -159,7 +159,6 @@ class Gestion_IHM {
         <td>
             <ul>
                  <li><a href="./entreprises/listeDesOffreDeStage.php">Valider/Editer des offres de stage</a></li>
-                 <li><a href="">Supprimer des offres de stage</a></li>
             </ul>
         </td>
           </tr>
@@ -174,7 +173,6 @@ class Gestion_IHM {
         <td>
             <ul>
                 <li><a href="./entreprises/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
-                <li><a href="">Supprimer des offres d'alternance</a></li>
                 <li><a href="./SuiviCandidatures/SuiviCandidatures.php">Suivi des démarches alternants</a></li>
                 <li><a href="./exportation/exportListeContrat.php">Exporter étudiant/contrat</a></li>
             </ul>
@@ -217,7 +215,6 @@ class Gestion_IHM {
       					<li><a href="./statistiques/classementEntreprise.php">Top entreprises</a></li>
       					<li><a href="./statistiques/statistiquesEntreprise.php">Statistiques par entreprise</a></li><br/>
       					<li><a href="./statistiques/statistiquesStages.php">Statistiques stages</a></li>
-                <li><a href="">Statistiques alternant</a></li>
 				    </ul>
 				</td>
 			    </tr>

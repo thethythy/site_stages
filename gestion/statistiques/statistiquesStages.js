@@ -191,14 +191,16 @@ var createView = function(data) {
 // -----------------------------------------------------------------------------
 // Requête Ajax
 
-var loadData = function(annee_deb, annee_fin, filiere, parcours) {
+var loadData = function(annee_deb, annee_fin, filiere, parcours, offre) {
   var data_request = new XMLHttpRequest();
-  data_request.open('GET', 'statistiquesStagesData.php?annee_deb=' + annee_deb + '&annee_fin=' + annee_fin +'&filiere=' + filiere + '&parcours=' + parcours, true);
+  data_request.open('GET', 'statistiquesStagesData.php?annee_deb=' + annee_deb + '&annee_fin=' + annee_fin +'&filiere=' + filiere + '&parcours=' + parcours + '&offre=' + offre, true);
   data_request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
   data_request.onreadystatechange = function () {
     if (data_request.readyState === 4 && data_request.status === 200) {
       if (data_request.responseText !== '') {
         // Récupération des données
+        console.log(data_request.responseText);
+
         data = JSON.parse(data_request.responseText);
         // Création des vues
         createView(data);
@@ -223,7 +225,7 @@ LoadData.prototype.load = function() {
   var annee_fin = document.getElementById('annee_fin').value;
   var filiere = document.getElementById('filiere').value;
   var parcours = document.getElementById('parcours').value;
-  //var offre = document.getElementById('offre').value;
+  var offre = document.getElementById('offre').value;
 
   if (annee_deb !== '' && annee_fin !== '') {
     if (annee_deb > annee_fin) {
@@ -233,7 +235,7 @@ LoadData.prototype.load = function() {
     }
 
     if (filiere !== '' && parcours !== '') {
-      loadData(annee_deb, annee_fin, filiere, parcours);
+      loadData(annee_deb, annee_fin, filiere, parcours, offre);
     }
   }
 };
