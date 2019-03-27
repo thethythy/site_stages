@@ -21,25 +21,25 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
   else
   $annee = $_POST['annee'];
 
-  // ------------------------------------------------
-  // Envoie d'un mail de notification à l'entreprise
-  // $expediteur = $emailResponsable;
-  // $reponse = $emailResponsable;
-  // $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
-  // $headers .= "Content-Type: text/html; charset=utf-8\n";
-  // $headers .= "Content-Transfer-Encoding: 8bit";
-  //
-  // $msg = "Bonjour,<br/><br/>
-  //   Ceci est un message automatique.<br/>
-  //   Votre offre d'alternance a été diffusée à nos étudiants.<br/>
-  //   Vous pouvez la consulter à l'adresse suivante :<br/>
-  //   <a href=" . $baseSite . "/entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . ">" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
-  //   Cordialement,<br/><br/>
-  //   Le responsable des stages<br/>
-  //   Département Informatique<br/>
-  //   Université du Maine";
-  // mail($contact->getEmail(), 'Votre offre d'alternance', $msg, $headers);
-  // echo "<p>Un email de notification a été envoyé à l'entreprise.</p>";
+  ------------------------------------------------
+  Envoie d'un mail de notification à l'entreprise
+  $expediteur = $emailResponsable;
+  $reponse = $emailResponsable;
+  $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
+  $headers .= "Content-Type: text/html; charset=utf-8\n";
+  $headers .= "Content-Transfer-Encoding: 8bit";
+
+  $msg = "Bonjour,<br/><br/>
+    Ceci est un message automatique.<br/>
+    Votre offre d'alternance a été diffusée à nos étudiants.<br/>
+    Vous pouvez la consulter à l'adresse suivante :<br/>
+    <a href=" . $baseSite . "/entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt>" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt</a><br/><br/>
+    Cordialement,<br/><br/>
+    Le responsable de l'alternance<br/>
+    Département Informatique<br/>
+    Université du Maine";
+  mail($contact->getEmail(), 'Votre offre d\'alternance', $msg, $headers);
+  echo "<p>Un email de notification a été envoyé à l\'entreprise.</p>";
 
   // ----------------------------------------------------------
   // Envoie d'un mail de notification aux promotions concernées
@@ -51,22 +51,22 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     $tabParcours = $offreDAlternance->getThemes();
     for ($j = 0; $j < sizeof($tabParcours); $j++) {
       $promotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $tabFiliere[$i]->getIdentifiantBDD(), $tabParcours[$j]->getIdentifiantBDD());
-      // if ($destinataire == "")
-      // $destinataire = $promotion->getEmailPromotion();
-      //   else
-      // $destinataire .= "," . $promotion->getEmailPromotion();
+      if ($destinataire == "")
+      $destinataire = $promotion->getEmailPromotion();
+        else
+      $destinataire .= "," . $promotion->getEmailPromotion();
     }
   }
 
-  // $msg = "Bonjour,<br/><br/>
-  // Ceci est un message automatique.<br/>
-  // Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
-  // Vous pouvez directement la consulter à l'adresse suivante :<br/>
-  // <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
-  // Thierry Lemeunier<br>
-  // Responsable des stages<br>";
-  // mail($destinataire, 'Site des stages et de l\'alternance: nouvelle offre sur le site', $msg, $headers);
-  // echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
+  $msg = "Bonjour,<br/><br/>
+  Ceci est un message automatique.<br/>
+  Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
+  Vous pouvez directement la consulter à l'adresse suivante :<br/>
+  <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
+  Thierry Lemeunier<br>
+  Responsable des stages<br>";
+  mail($destinataire, 'Site des stages et de l\'alternance: nouvelle offre sur le site', $msg, $headers);
+  echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
 
   // ------------------------------------------------
   // Mise à jour du flux RSS
@@ -102,7 +102,7 @@ function verifier() {
 
       // Titre
       array_push($tabDonnees, $titre);
-      
+
 
       // ----------------------------------------------------------------
       // Theme
