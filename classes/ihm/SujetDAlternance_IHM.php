@@ -1,9 +1,9 @@
 <?php
 
-class SujetDeStage_IHM {
+class SujetDAlternance_IHM {
 
     /**
-     * Afficher un formulaire de demande de validation d'une proposition de stage
+     * Afficher un formulaire de demande de validation d'une proposition d'alternance
      * La proposition peut être décrite ou donnée dans un fichier à uploader
      * @param tableau d'objets $tabEtu Liste des étudiants concernés
      */
@@ -38,7 +38,7 @@ class SujetDeStage_IHM {
 				</td>
 			    </tr>
 			    <tr>
-				<td>Sujet de stage <br/>
+				<td>Sujet d'alternance <br/>
 				    (extension acceptée .pdf, .doc, .docx, .odt)</td>
 				<td>
 				    <input name="uploadSujet" type="file">
@@ -59,15 +59,15 @@ class SujetDeStage_IHM {
 
     /**
      * Afficher un tableau interactif des demandes de validation
-     * d'une proposition de stage. L'utilisateur doit sélectionner une demande.
-     * @param tableau d'objets $tabSDS La liste des objets SujetDeStage
+     * d'une proposition d'alternance. L'utilisateur doit sélectionner une demande.
+     * @param tableau d'objets $tabSDA La liste des objets SujetDAlternance
      */
-    public static function afficherTableauSDSAValider($tabSDS) {
+    public static function afficherTableauSDAAValider($tabSDA) {
 	$cpt = 0;
 	$enteteAffichee = false;
-	for ($i = 0; $i < sizeof($tabSDS); $i++) {
-	    $etudiant = $tabSDS[$i]->getEtudiant();
-	    $promotion = $tabSDS[$i]->getPromotion();
+	for ($i = 0; $i < sizeof($tabSDA); $i++) {
+	    $etudiant = $tabSDA[$i]->getEtudiant();
+	    $promotion = $tabSDA[$i]->getPromotion();
 	    $filiere = $promotion->getFiliere();
 	    $parcours = $promotion->getParcours();
 	    if (!$enteteAffichee) {
@@ -94,7 +94,7 @@ class SujetDeStage_IHM {
 			<td><?php echo $parcours->getNom(); ?></td>
 			<td><?php echo $promotion->getAnneeUniversitaire() ?></td>
 			<td align="center">
-			    <a href="./gestionSujetDeStage.php?action=trait&id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>&type=sta">
+			    <a href="./gestionSujetDeStage.php?action=trait&id=<?php echo $tabSDA[$i]->getIdentifiantBDD(); ?>&type=alt">
 				<img src="../../images/search.png">
 			    </a>
 			</td>
@@ -106,13 +106,13 @@ class SujetDeStage_IHM {
 
     /**
      * Afficher un formulaire de traitement d'une demande
-     * de stage faite par un étudiant
-     * @param integer $idSDS Identifiant de la demande à traiter
+     * d'alternance faite par un étudiant
+     * @param integer $idSDA Identifiant de la demande à traiter
      */
-    public static function traiterSDS($idSDS) {
-	$oSDS = SujetDeStage::getSujetDeStage($idSDS);
-	$etudiant = $oSDS->getEtudiant();
-	$promotion = $oSDS->getPromotion();
+    public static function traiterSDA($idSDA) {
+	$oSDA = SujetDAlternance::getSujetDAlternance($idSDA);
+	$etudiant = $oSDA->getEtudiant();
+	$promotion = $oSDA->getPromotion();
 	$filiere = $promotion->getFiliere();
 	$parcours = $promotion->getParcours();
 	?>
@@ -143,13 +143,13 @@ class SujetDeStage_IHM {
 		    <th>Sujet</th>
 		    <td>
 			<?php
-			$filename = explode(".", $oSDS->getDescription());
+			$filename = explode(".", $oSDA->getDescription());
 			if (sizeof($filename) != 0)
 			    $extension = $filename[sizeof($filename) - 1];
 			if ($extension == "pdf" || $extension == "doc" || $extension == "odt" || $extension == "docx" || $extension == "txt") {
-			    echo "<a href='../../documents/sujetsDeStages/" . $oSDS->getDescription() . "' target='_blank'>" . $oSDS->getDescription() . "</a>";
+			    echo "<a href='../../documents/sujetsDAlternances/" . $oSDA->getDescription() . "' target='_blank'>" . $oSDA->getDescription() . "</a>";
 			} else {
-			    echo $oSDS->getDescription();
+			    echo $oSDA->getDescription();
 			}
 			?>
 		    </td>
@@ -167,12 +167,12 @@ class SujetDeStage_IHM {
 
     /**
      * Afficher une demande déjà traitée
-     * @param integer $idSDS Identifiant de la demande
+     * @param integer $idSDA Identifiant de la demande
      */
-    public static function afficherSDS($idSDS) {
-	$oSDS = SujetDeStage::getSujetDeStage($idSDS);
-	$etudiant = $oSDS->getEtudiant();
-	$promotion = $oSDS->getPromotion();
+    public static function afficherSDA($idSDA) {
+	$oSDA = SujetDAlternance::getSujetDAlternance($idSDA);
+	$etudiant = $oSDA->getEtudiant();
+	$promotion = $oSDA->getPromotion();
 	$filiere = $promotion->getFiliere();
 	$parcours = $promotion->getParcours();
 	?>
@@ -202,20 +202,20 @@ class SujetDeStage_IHM {
 		    <th>Sujet</th>
 		    <td>
 			<?php
-			$filename = explode(".", $oSDS->getDescription());
+			$filename = explode(".", $oSDA->getDescription());
 			if (sizeof($filename) != 0)
 			    $extension = $filename[sizeof($filename) - 1];
 			if ($extension == "pdf" || $extension == "doc" || $extension == "odt" || $extension == "docx" || $extension == "txt") {
-			    echo "<a href='../../documents/sujetsDeStages/" . $oSDS->getDescription() . "' target='_blank'>" . $oSDS->getDescription() . "</a>";
+			    echo "<a href='../../documents/sujetsDAlternance/" . $oSDA->getDescription() . "' target='_blank'>" . $oSDA->getDescription() . "</a>";
 			} else {
-			    echo $oSDS->getDescription();
+			    echo $oSDA->getDescription();
 			}
 			?>
 		    </td>
 		</tr>
 		<tr>
 		    <th>Décision</th>
-		    <td><?php echo $oSDS->isValide() ? "Accepté" : "Refusé" ; ?></td>
+		    <td><?php echo $oSDA->isValide() ? "Accepté" : "Refusé" ; ?></td>
 		</tr>
 		<tr>
 		    <td colspan=2>
@@ -230,9 +230,9 @@ class SujetDeStage_IHM {
    /**
      * Afficher un tableau des demandes de validation déjà traitées
      * Un lien permet d'accéder à chaque demande déjà validée
-     * @param tableau d'objets $tabSDS Les objets SujetDeStage traités
+     * @param tableau d'objets $tabSDA Les objets SujetDAlternance traités
      */
-    public static function afficherTableauSDSTraite($tabSDS) {
+    public static function afficherTableauSDATraite($tabSDA) {
 	$cpt = 0;
 
 	?>
@@ -249,9 +249,9 @@ class SujetDeStage_IHM {
 	    </tr>
 	<?php
 
-	for ($i = 0; $i < sizeof($tabSDS); $i++) {
-	    $etudiant = $tabSDS[$i]->getEtudiant();
-	    $promotion = $tabSDS[$i]->getPromotion();
+	for ($i = 0; $i < sizeof($tabSDA); $i++) {
+	    $etudiant = $tabSDA[$i]->getEtudiant();
+	    $promotion = $tabSDA[$i]->getPromotion();
 	    $filiere = $promotion->getFiliere();
 	    $parcours = $promotion->getParcours();
 
@@ -262,9 +262,9 @@ class SujetDeStage_IHM {
 		<td><?php echo $filiere->getNom(); ?></td>
 		<td><?php echo $parcours->getNom(); ?></td>
 		<td><?php echo $promotion->getAnneeUniversitaire() ?></td>
-		<td><?php echo $tabSDS[$i]->isValide() ? "Accepté" : "Refusé" ; ?></td>
+		<td><?php echo $tabSDA[$i]->isValide() ? "Accepté" : "Refusé" ; ?></td>
 		<td align="center">
-		    <a href="gestionSujetDeStage.php?action=visua&id=<?php echo $tabSDS[$i]->getIdentifiantBDD(); ?>&type=sta">
+		    <a href="gestionSujetDAlternance.php?action=visua&id=<?php echo $tabSDA[$i]->getIdentifiantBDD(); ?>&type=alt">
 			<img src="../../images/search.png"/>
 		    </a>
 		</td>

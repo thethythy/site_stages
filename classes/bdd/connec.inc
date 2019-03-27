@@ -98,6 +98,7 @@ if (isset($access_control_target)) {
   $tab30 = 'candidature_alternance';
   $tab31 = 'contrat';
   $tab32 = 'relation_promotion_etudiant_contrat';
+  $tab33 = 'sujetdalternance';
 
 
 

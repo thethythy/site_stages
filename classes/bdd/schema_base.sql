@@ -657,6 +657,33 @@ CREATE TABLE IF NOT EXISTS `stages`.`sujetdalternance` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `stages`.`sujetdalternance`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stages`.`sujetdalternance` (
+  `idsujetdalternance` INT(10) NOT NULL AUTO_INCREMENT,
+  `description` TEXT NOT NULL,
+  `valide` TINYINT(4) NOT NULL DEFAULT '0',
+  `enattente` TINYINT(4) NOT NULL DEFAULT '0',
+  `idetudiant` INT(10) NOT NULL,
+  `idpromotion` INT(11) NOT NULL,
+  PRIMARY KEY (`idsujetdalternance`),
+  INDEX `idpromotion_idx` (`idpromotion` ASC),
+  INDEX `idetudiant_idx` (`idetudiant` ASC),
+  CONSTRAINT `fk_sujetdalternance_promotion_idpromotion`
+    FOREIGN KEY (`idpromotion`)
+    REFERENCES `stages`.`promotion` (`idpromotion`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_sujetdalternance_etudiant_idetudiant`
+    FOREIGN KEY (`idetudiant`)
+    REFERENCES `stages`.`etudiant` (`idetudiant`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 AUTO_INCREMENT = 272
 DEFAULT CHARACTER SET = utf8;
 
