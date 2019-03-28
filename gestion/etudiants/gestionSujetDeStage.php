@@ -174,6 +174,8 @@ $tabSDSAValider = SujetDeStage::getSujetDeStageAValider();
 $tabSDAAValider = SujetDalternance::getSujetDAlternanceAValider();
 $tabSDSValide = SujetDeStage::getSujetDeStageTraite();
 $tabSDAValide = SujetDAlternance::getSujetDAlternanceTraite();
+
+echo "<span style='font-size : 18pt;'> STAGE</br></br> </span>";
 if (sizeof($tabSDSAValider) > 0)
 SujetDeStage_IHM::afficherTableauSDSAValider($tabSDSAValider);
 else
@@ -185,7 +187,7 @@ else
 echo "<p>Il n'y a aucune demande de stage traitée.</p>";
 
 echo '</br><hr></br>';
-
+echo "<span style='font-size : 18pt;'> ALTERNANCE</br></br> </span>";
 if(sizeof($tabSDAAValider) > 0)
 SujetDAlternance_IHM::afficherTableauSDAAValider($tabSDAAValider);
 else
