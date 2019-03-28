@@ -526,12 +526,6 @@ public static function afficherFormulaireModification() {
                   if ($i % 6 == 6) { echo "</tr>"; }
                 }
                 ?>
-
-                  }
-
-                  if ($i % 6 == 6) { echo "</tr>"; }
-                }
-                ?>
               </table>
             </td>
           </tr>
