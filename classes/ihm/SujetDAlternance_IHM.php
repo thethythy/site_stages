@@ -118,6 +118,7 @@ class SujetDAlternance_IHM {
 	?>
 	<form method=post action="gestionSujetDeStage.php">
 	    <input type="hidden" value="<?php echo $_GET['id']; ?>" name="id">
+      <input type="hidden" value="<?php echo $_GET['type']; ?>" name="type">
 	    <table width="100%">
 		<tr>
 		    <th width="10%">Nom</th>
@@ -264,7 +265,7 @@ class SujetDAlternance_IHM {
 		<td><?php echo $promotion->getAnneeUniversitaire() ?></td>
 		<td><?php echo $tabSDA[$i]->isValide() ? "Accepté" : "Refusé" ; ?></td>
 		<td align="center">
-		    <a href="gestionSujetDAlternance.php?action=visua&id=<?php echo $tabSDA[$i]->getIdentifiantBDD(); ?>&type=alt">
+		    <a href="gestionSujetDeStage.php?action=visua&id=<?php echo $tabSDA[$i]->getIdentifiantBDD(); ?>&type=alt">
 			<img src="../../images/search.png"/>
 		    </a>
 		</td>

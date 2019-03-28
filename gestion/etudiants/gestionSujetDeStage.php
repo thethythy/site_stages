@@ -67,40 +67,43 @@ function traiter() {
 traiter();
 
 function accepter() {
-  if (isset($_POST["id"]) && isset($_GET["type"]) &&
+  if (isset($_POST["id"]) && isset($_POST["type"]) &&
   isset($_POST["accept"])) {
-    if($_GET["type"] == 'sta'){
+    if($_POST["type"] == 'sta'){
       $sds = SujetDeStage::getSujetDeStage($_POST['id']);
-      $sds->setEnAttenteDeValidation(false);
-      $sds->setValide(true);
+      // Ne pas mettre false, utilisé comme chaine vide dans la $requete
+      // N'est plus compté comme faux avec la nouvelle version de mySQL
+      $sds->setEnAttenteDeValidation(0);
+      $sds->setValide(1);
       SujetDeStage_BDD::sauvegarder($sds);
-
-      global $baseSite;
-      $message = "Bonjour,<br><br>
-      Votre demande de validation d'un sujet de stage a été traitée et le sujet accepté.<br>
-      Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
-      Bon courage<br><br>
-
-      Thierry Lemeunier<br>
-      Responsable pédagogique des stages";
-
-      envoyerNotification($message, $sds);
+      //
+      // global $baseSite;
+      // $message = "Bonjour,<br><br>
+      // Votre demande de validation d'un sujet de stage a été traitée et le sujet accepté.<br>
+      // Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
+      // Bon courage<br><br>
+      //
+      // Thierry Lemeunier<br>
+      // Responsable pédagogique des stages";
+      //
+      // envoyerNotification($message, $sds);
     } else {
       $sda = SujetDAlternance::getSujetDAlternance($_POST['id']);
-      $sda->setEnAttenteDeValidation(false);
-      $sda->setValide(true);
-      SujetDAlternance_BDD::sauvegarder($sds);
+      $sda->setEnAttenteDeValidation(0);
+      $sda->setValide(1);
+      Utils::printLog("A");
+      SujetDAlternance_BDD::sauvegarder($sda);
 
-      global $baseSite;
-      $message = "Bonjour,<br><br>
-      Votre demande de validation d'un sujet d'alternance a été traitée et le sujet accepté.<br>
-      Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
-      Bon courage<br><br>
-
-      Thierry Lemeunier<br>
-      Responsable pédagogique des stages";
-
-      envoyerNotification($message, $sda);
+      // global $baseSite;
+      // $message = "Bonjour,<br><br>
+      // Votre demande de validation d'un sujet d'alternance a été traitée et le sujet accepté.<br>
+      // Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
+      // Bon courage<br><br>
+      //
+      // Thierry Lemeunier<br>
+      // Responsable pédagogique des stages";
+      //
+      // envoyerNotification($message, $sda);
     }
   }
 }
@@ -108,12 +111,13 @@ function accepter() {
 accepter();
 
 function refuser() {
-  if (isset($_POST["id"]) && isset($_GET["type"]) &&
+  if (isset($_POST["id"]) && isset($_POST["type"]) &&
   isset($_POST["refus"])) {
     if($_GET["type"] == 'sta'){
       $sds = SujetDeStage::getSujetDeStage($_POST['id']);
-      $sds->setEnAttenteDeValidation(false);
-      $sds->setValide(false);
+      $sds->setEnAttenteDeValidation(0);
+      $sds->setValide(0);
+      Utils::printLog("A");
       SujetDeStage_BDD::sauvegarder($sds);
 
       // $message = "Bonjour,<br><br>
@@ -121,7 +125,7 @@ function refuser() {
       // Votre demande de validation d'un sujet de stage a été traitée mais le sujet proposé<br>
       // ne peut être accepté tel que vous le présentez actuellement car il ne correspond<br>
       // pas à votre formation.<br><br>
-      // 
+      //
       // Vous avez plusieurs possibilités :<br>
       // - refaire une demande de validation avec un sujet modifié ;<br>
       // - trouver un autre sujet et faire une demande de validation de ce sujet ;<br>
@@ -135,8 +139,9 @@ function refuser() {
       // envoyerNotification($message, $sds);
     } else {
       $sda = SujetDeStage::getSujetDeStage($_POST['id']);
-      $sda->setEnAttenteDeValidation(false);
-      $sda->setValide(false);
+      $sda->setEnAttenteDeValidation(0);
+      $sda->setValide(0);
+      Utils::printLog("A");
       SujetDAlternance_BDD::sauvegarder($sda);
 
       // $message = "Bonjour,<br><br>
@@ -187,7 +192,7 @@ else
 echo "<p>Il n'y a aucune demande d'alternance en attente de traitement.</p>";
 
 if (sizeof($tabSDAValide) > 0)
-SujetDAlternance_IHM::afficherTableauSDSTraite($tabSDAValide);
+SujetDAlternance_IHM::afficherTableauSDATraite($tabSDAValide);
 else
 echo "<p>Il n'y a aucune demande d'alternance traitée.</p>";
 

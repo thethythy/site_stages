@@ -21,8 +21,8 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
   else
   $annee = $_POST['annee'];
 
-  ------------------------------------------------
-  Envoie d'un mail de notification à l'entreprise
+  // ------------------------------------------------
+  // Envoie d'un mail de notification à l'entreprise
   $expediteur = $emailResponsable;
   $reponse = $emailResponsable;
   $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
