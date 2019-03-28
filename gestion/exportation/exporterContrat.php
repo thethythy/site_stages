@@ -18,12 +18,15 @@ $referent = $oContrat -> getContact();
 
 header('Content-Encoding: UTF-8');
 header("Content-Type: text/csv; charset=utf-8");
-header("Content-disposition: attachment; filename=products.csv");
+header("Content-disposition: attachment; filename=".$etudiant->getPrenom()."_".$etudiant->getNom()."_suivi.csv");
 
 $list = array (
 array("NB","Société","Titre","Nom",	"Prénom",	"Fonction",	"Adresse1",	"Adresse2",	"Code_postal",	"Ville",	"E-mail",	"Tel.",	"Prénom étudiant",	"Nom étudiant",	"E-mail etudiant",	"CONTRAT",	"Demande de prise en charge",	"Convention",	"Copie du contrat", "Début du contrat",	"Fin du contrat",	"Nb d'heures",	"Taux en Euro",	"Droits Universitaires",	"TOTAL en Euro"),
 array("",$entreprise->getNom(),"",$referent->getNom(),$referent->getPrenom(),"",$entreprise->getAdresse(),"",$entreprise->getCodePostal(),$entreprise->getVille(),$referent->getEmail(),$referent->getTelephone(),$etudiant->getPrenom(),$etudiant->getNom(),$etudiant->getEmailInstitutionel())
 );
+
+
+
 $fp = fopen('PHP://output', "w");
 foreach($list as $fields):
     fputcsv($fp, $fields);
