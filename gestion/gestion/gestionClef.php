@@ -13,24 +13,22 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 
 // ----------------------------------------------------------------------------
 // Contrôleur
-$type_etudiant = 'stagiaire'; // par défaut
+$type_utilisateur = 'stagiaire'; // par défaut
 if (isset($_POST['genere']) && isset($_POST['clef']) && $_POST['clef'] != '') {
     // Génère le condensat
     $HClef = Clef::calculCondensat($_POST['clef']);
 
     // Récupérer la valeur du bouton coché : Stagiaire ou Alternant
-    $type_etudiant = $_POST['type'];
-
+    $type_utilisateur = $_POST['type'];
 
     // Sauvegarde sur fichier le condensat
     $f = json_decode(file_get_contents('../../documents/demon/clef.json'), true);
-    $f[$type_etudiant] = $HClef;
+    $f[$type_utilisateur] = $HClef;
     $f = json_encode($f);
     file_put_contents('../../documents/demon/clef.json', $f);
-
 }
 
-// Récupérer le condensat de la clef
+// Créer le fichier de condensat s'il n'existe pas
 if( !file_exists('../../documents/demon/clef.json')) {
   $tab_json = ['stagiaire'=>'', 'alternant'=>''];
   $tab_json_encode = json_encode($tab_json);
@@ -38,8 +36,10 @@ if( !file_exists('../../documents/demon/clef.json')) {
   fwrite($fichier_clef, $tab_json_encode);
   fclose($fichier_clef);
 }
+
+// Récupérer le condensat de la clef
 $json = json_decode(file_get_contents('../../documents/demon/clef.json'));
-$HClef = $json->$type_etudiant;
+$HClef = $json->$type_utilisateur;
 
 // ----------------------------------------------------------------------------
 // Affichage
@@ -55,8 +55,7 @@ $mois = date('n');
 
 echo '<div id="error"></div>';
 
-if ($mois == 9 || $mois == 10 || $mois != 54) { // Il faut être entre le 1/09 et le 31/10
-// if ($mois == 9 || $mois == 10 ) { // Il faut être entre le 1/09 et le 31/10
+if ($mois == 9 || $mois == 10) { // Il faut être entre le 1/09 et le 31/10
     // Afficher formulaire pour définir une clef
     Clef_IHM::afficherFormulaireDefinitionClef($HClef);
 } else {

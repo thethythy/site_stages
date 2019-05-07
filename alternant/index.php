@@ -7,7 +7,6 @@
  */
 
 $access_control_target = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-$type_etudiant = $_SERVER['REQUEST_URI'];
 
 include_once("../classes/bdd/connec.inc");
 

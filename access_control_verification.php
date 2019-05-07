@@ -7,11 +7,33 @@
 */
 
 // Récupération de la cible depuis la session PHP
-
 session_start();
 $access_control_target = $_SESSION['$access_control_target'];
-$type_etudiant = str_replace("/","",$_SESSION['$type_etudiant']);
+$baseSite = $_SESSION['$base_site'];
 session_write_close();
+
+// Récupérer les condensats dans le fichier
+$condensats = json_decode(file_get_contents('./documents/demon/clef.json'));
+
+// Récupérer la destination voulue
+$destination = explode("/", str_replace($baseSite, "", $access_control_target))[0];
+
+// Sélection du condensat attendu selon la destination
+$HClef2_alter = "";
+$HClef2_stagi = "";
+
+if (strcmp($destination, "alternant") == 0) {
+    $HClef2_alter = $condensats->alternant;
+} else {
+    if (strcmp($destination, "stagiaire") == 0 || strcmp($destination, "parrainage") == 0) {
+	$HClef2_stagi = $condensats->stagiaire;
+    } else {
+	if (strcmp($destination, "soutenances") == 0 || strcmp($destination, "telechargements") == 0) {
+	    $HClef2_alter = $condensats->alternant;
+	    $HClef2_stagi = $condensats->stagiaire;
+	}
+    }
+}
 
 // Format de la réponse
 header("Content-type:text/plain; charset=utf-8");
@@ -24,12 +46,11 @@ $input = file_get_contents('php://input');
 include_once("classes/moteur/Clef.php");
 $HClef1 = Clef::calculCondensat($input);
 
-// Récupérer le condensat de la clef
-$json = json_decode(file_get_contents('./documents/demon/clef.json'));
-$HClef2 = $json->$type_etudiant;
-
 // Vérifier les deux condensats
-if (hash_equals($HClef1, $HClef2)) {
+$res_comparaison_alter = $HClef2_alter != "" && hash_equals($HClef1, $HClef2_alter);
+$res_comparaison_stagi = $HClef2_stagi != "" && hash_equals($HClef1, $HClef2_stagi);
+
+if ($res_comparaison_alter || $res_comparaison_stagi) {
   // La comparaison s'est bien passée
 
   // Calcul la date d'expiration du cookie
@@ -45,7 +66,8 @@ if (hash_equals($HClef1, $HClef2)) {
 
   // Enregistre le cookie
   $domain = substr_count($_SERVER['HTTP_HOST'], 'localhost') > 0 ? 'localhost' : $_SERVER['HTTP_HOST'];
-  setcookie ('site_stages_depinfo_'.$type_etudiant, $HClef1, $time, '/', $domain);
+  $type_utilisateur = $res_comparaison_alter ? "alternant" : "stagiaire";
+  setcookie ('site_stages_depinfo_'.$type_utilisateur, $HClef1, $time, '/', $domain);
 
   // Mémorisation du succès
   $access_rigth = true;

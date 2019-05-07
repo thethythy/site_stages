@@ -40,12 +40,10 @@ class Clef_IHM {
 
       swap();
 
-
       // Rendre les deux champs non modifiables
       document.getElementById('condensat').readOnly = true;
       document.getElementById('clefactuelle').readOnly = true;
     };
-
 
     function swap(){
 
@@ -135,7 +133,6 @@ class Clef_IHM {
     ?>
     <script type="text/javascript">
     var auchargement = function() {
-
       swap();
     }
 

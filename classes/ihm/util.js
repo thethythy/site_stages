@@ -1,5 +1,5 @@
 // Extension des objets DOM Element
-// On stocke toutes les methodes dans
+
 if (!window.Element) {
 	Element = new Object();
 }
@@ -104,7 +104,6 @@ Keys = {
 	DOWN: 40
 }
 
-
 /** Afficher un message dans une boîte d'alerte */
 Log = {
 	error: function(msg) {
@@ -150,7 +149,7 @@ LoadData.prototype = {
 				case "onclick" :
 					var composantJS = this;
 					document.getElementById(this.idSources[i]).onclick = function(aEvent) {
-						composantJS.onclick(aEvent));
+						composantJS.onclick(aEvent);
 					}
 				break;
 				default:

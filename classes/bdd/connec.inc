@@ -1,64 +1,59 @@
 <?php
 
 // ----------------------------------------------------------------------------
+// Variables globales
+
+$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
+$baseSite = "http://localhost:8888/";
+
+// ----------------------------------------------------------------------------
 // Vérification de l'autorisation
 
-global $access_control_target;
-global $type_etudiant;
+global $access_control_target; // Page désirée
 
 if (isset($access_control_target)) {
-  // Vérifier si on arrive de l'alternance ou des stages
-  if(isset($type_etudiant)){
-    // Nettoyer l'url
-    $type_etudiant = str_replace("/","",$type_etudiant);
-    $type_etudiant = str_replace("index.php","",$type_etudiant);
-    // Si on vient de l'alternance, on a accès à tout le site.
-    if($type_etudiant === "alternant"){
-      // Pas de cookie -> Envoyer la demande de clef
-      if(!isset($_COOKIE['site_stages_depinfo_alternant'])){
+
+    // Si pas de cookie alors --> page connexion
+    if(!isset($_COOKIE['site_stages_depinfo_alternant']) && !isset($_COOKIE['site_stages_depinfo_stagiaire'])){
         include_once('../access_control.php');
         die();
-      } else { //Cookie existe
-        // Récupérer le digest de la clef du cookie
-        $HClef1 = $_COOKIE['site_stages_depinfo_alternant'];
-        // Récupérer le digest du fichier
-        $json = json_decode(file_get_contents('../documents/demon/clef.json'));
-        $HClef2 = $json->alternant;
-
-        //Si la clef n'est pas bonne -> Renvoyer la demande de clef.
-        if (!hash_equals($HClef1, $HClef2)) {
-          include_once('../access_control.php');
-          die();
-        }
-      }
-    } else { // On vient des stages
-      if(!isset($_COOKIE['site_stages_depinfo_alternant']) && !isset($_COOKIE['site_stages_depinfo_stagiaire'])){
-        // Pas de cookie stage / alternance -> Envoyer la demande de clef
-        include_once('../access_control.php');
-        die();
-      } else { //Cookie existe
-        $json = json_decode(file_get_contents('../documents/demon/clef.json'));
-        // Récupérer le digest de la clef du cookie
-        if(isset($_COOKIE['site_stages_depinfo_alternant'])){
-          $HClef1 = $_COOKIE['site_stages_depinfo_alternant'];
-          // Récupérer le digest du fichier
-          $HClef2 = $json->alternant;
-
-        } else {
-          $HClef1 = $_COOKIE['site_stages_depinfo_stagiaire'];
-          // Récupérer le digest du fichier
-          $HClef2 = $json->stagiaire;
-        }
-
-
-        //Si la clef n'est pas bonne -> Renvoyer la demande de clef.
-        if (!hash_equals($HClef1, $HClef2)) {
-          include_once('../access_control.php');
-          die();
-        }
-      }
     }
-  }
+
+    // Il existe un cokkie, il faut le contrôler selon la destination désirée
+    else {
+
+	// Récupérer les condensats depuis les cookies
+	$HClef1_alter = isset($_COOKIE['site_stages_depinfo_alternant']) ? $_COOKIE['site_stages_depinfo_alternant'] : "";
+	$HClef1_stagi = isset($_COOKIE['site_stages_depinfo_stagiaire']) ? $_COOKIE['site_stages_depinfo_stagiaire'] : "";
+
+	// Récupérer les condensats dans le fichier
+	$condensats = json_decode(file_get_contents('../documents/demon/clef.json'));
+
+	// Récupérer la destination voulue
+	$destination = explode("/", str_replace($baseSite, "", $access_control_target))[0];
+
+	// Sélection et comparaison du condensat selon la destination
+	$res_comparaison = FALSE;
+
+	if (strcmp($destination, "alternant") == 0) {
+	    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant);
+	} else {
+	    if (strcmp($destination, "stagiaire") == 0 || strcmp($destination, "parrainage") == 0) {
+		$res_comparaison = $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);
+	    } else {
+		if (strcmp($destination, "soutenances") == 0 || strcmp($destination, "telechargements") == 0) {
+		    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant) ||
+				       $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);
+		}
+	    }
+	}
+
+	//Si la clef n'est pas bonne -> Renvoyer la demande de clef
+	if (!$res_comparaison) {
+	    include_once('../access_control.php');
+	    die();
+	}
+    }
 }
 
   // ----------------------------------------------------------------------------
@@ -99,8 +94,6 @@ if (isset($access_control_target)) {
   $tab31 = 'contrat';
   $tab32 = 'relation_promotion_etudiant_contrat';
   $tab33 = 'sujetdalternance';
-
-
 
   function deconnexion() {
     global $db;
@@ -165,10 +158,4 @@ if (isset($access_control_target)) {
     $_FILES[$key] = filterParameters($value);
   }
 
-  // ----------------------------------------------------------------------------
-  // Variables globales
-
-  $emailResponsable = "";
-  $baseSite = "http://testvirtualhost/";
-
-  ?>
+?>

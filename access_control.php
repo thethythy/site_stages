@@ -8,12 +8,12 @@
  */
 
 global $access_control_target;
-global $type_etudiant;
+global $baseSite;
 
-// Sauvegarde en session pour la journalisation
+// Sauvegarde en session pour récupération dans le contrôleur Ajax
 session_start();
 $_SESSION['$access_control_target'] = $access_control_target;
-$_SESSION['$type_etudiant'] = $_SERVER['REQUEST_URI'];
+$_SESSION['$base_site'] = $baseSite;
 session_write_close();
 
 include_once('classes/moteur/Utils.php');
@@ -41,11 +41,11 @@ IHM_Menu::menuAccueilAccessControl();
     	verification_request.open("POST", "/access_control_verification.php", true);
     	verification_request.setRequestHeader("Content-type", "text/plain; charset=utf-8");
     	verification_request.onreadystatechange = function() {
-    	    if (verification_request.readyState == 4 && verification_request.status == 200) {
-        		if (verification_request.responseText == "OK")
-        		    location.href='<?php echo $access_control_target; ?>';
-    	    }
+	    if (verification_request.readyState == 4 && verification_request.status == 200) {
+		if (verification_request.responseText == "OK")
+		    location.href='<?php echo $access_control_target; ?>';
 	    }
+	};
       verification_request.send(clef);
     };
 
