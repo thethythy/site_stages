@@ -13,7 +13,7 @@ include_once('../../classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level2');
 
 function envoyerNotifications($contact, $idOffreDeStage) {
-  global $emailResponsable;
+  global $emailResponsableStage;
   global $baseSite;
 
   if (!isset($_POST['annee']))
@@ -23,8 +23,8 @@ function envoyerNotifications($contact, $idOffreDeStage) {
 
   // ------------------------------------------------
   // Envoie d'un mail de notification à l'entreprise
-  $expediteur = $emailResponsable;
-  $reponse = $emailResponsable;
+  $expediteur = $emailResponsableStage;
+  $reponse = $emailResponsableStage;
   $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
   $headers .= "Content-Type: text/html; charset=utf-8\n";
   $headers .= "Content-Transfer-Encoding: 8bit";
@@ -79,7 +79,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
   $link = $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDeStage;
   $timestamp = time();
   $contents = htmlspecialchars($offreDeStage->getTitre(), ENT_QUOTES, 'UTF-8');
-  $author = $emailResponsable . " (Thierry Lemeunier)";
+  $author = $emailResponsableStage;
   FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
   echo "<p>Le flux RSS a été mis à jour.</p>";
 }

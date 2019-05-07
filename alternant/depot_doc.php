@@ -24,7 +24,7 @@ Promotion_IHM::afficherFormulaireRecherche("depot_docData.php", false);
 
 //Envoie d'un mail de notification au parrain et au responsable
 function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idParrain, $nomFichier, $typedocument) {
-  global $emailResponsable;
+  global $emailResponsableAlter;
   global $baseSite;
 
   $oParrain = Parrain::getParrain($idParrain);
@@ -34,12 +34,12 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
 
   $headers = 'Content-Type: text/html; charset=utf-8'. "\n";
   $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-  $headers .= 'From: ' . $emailResponsable . "\n";
-  $headers .= 'Reply-To: ' . $emailResponsable . "\n";
+  $headers .= 'From: ' . $emailResponsableAlter . "\n";
+  $headers .= 'Reply-To: ' . $emailResponsableAlter . "\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
 
   $msg = "Ceci est un message automatique concernant le suivi d'alternance.<br/>
-  Un $typedocument a été déposé sur le site des alternances.<br/>
+  Un $typedocument a été déposé sur le site des stages / alternants.<br/>
   <br/>
   Etudiant : " . $oEtudiant->getNom() . " " . $oEtudiant->getPrenom() . "<br/>
   Diplôme : " . $oPromotion->getFiliere()->getNom() . " " . $oPromotion->getParcours()->getNom() . "<br/>
@@ -49,7 +49,7 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
   Bonne lecture<br/>
   Le responsable des alternances";
 
-  mail($oParrain->getEmail() . "," . $emailResponsable . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
+  mail($oParrain->getEmail() . "," . $emailResponsableAlter . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
 }
 
 //Fonction pour copier un document sur le serveur

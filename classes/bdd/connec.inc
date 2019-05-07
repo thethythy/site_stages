@@ -3,7 +3,8 @@
 // ----------------------------------------------------------------------------
 // Variables globales
 
-$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
+$emailResponsableStage = "thierry.lemeunier@univ-lemans.fr";
+$emailResponsableAlter = "valerie.renault@univ-lemans.fr";
 $baseSite = "http://localhost:8888/";
 
 // ----------------------------------------------------------------------------

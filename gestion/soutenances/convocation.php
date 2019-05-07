@@ -18,7 +18,8 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 /**
  * Envoyer l'invitation au contact dans l'entreprise aini qu'à l'étudiant.
  * (copie au responsable des stages)
- * @global string $emailResponsable
+ * @global string $emailResponsableStage
+ * @global string $emailResponsableAlter
  * @param objet Etudiant $oEtudiant
  * @param objet Contact $oContact
  * @param string $cadre
@@ -27,7 +28,11 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
  * @param string $salle
  */
 function envoyerConvocation($oEtudiant, $oContact, $cadre, $date, $heure, $salle) {
-    global $emailResponsable;
+    global $emailResponsableStage;
+    global $emailResponsableAlter;
+
+    $emailResponsable = $cadre === "alternant" ? $emailResponsableAlter : $emailResponsableStage;
+    $contexte = $cadre === "alternant" ? "de l'alternance" : " du stage";
 
     $headers = "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit\n";
@@ -40,7 +45,7 @@ function envoyerConvocation($oEtudiant, $oContact, $cadre, $date, $heure, $salle
 
     $msg =     "Bonjour,<br/>
 		<br/>
-		Dans le cadre du suivi $cadre de $prenom $nom<br/>
+		Dans le cadre du suivi $contexte de $prenom $nom<br/>
 		vous êtes cordialement invité à venir assister à la soutenance prévue<br/>
 		le $date à $heure dans le bâtiment IC2 (avenue Laënnec au Mans / $salle).<br/>
 		<br/>
@@ -49,9 +54,8 @@ function envoyerConvocation($oEtudiant, $oContact, $cadre, $date, $heure, $salle
 		ou m'informer de cette erreur.<br/>
 		<br/>
 		Cordialement<br/>
-		<br/>
-		Thierry Lemeunier<br/>
-		Responsable des stages<br/>
+
+		Le Mans Université
 		Département Informatique<br/>
 		http://www-info.univ-lemans.fr/";
 
@@ -75,9 +79,9 @@ if (isset($_POST['convocation']) && isset($_POST['date']) && isset($_POST['convo
 
 	    $statut = $oEtudiant->getCodeEtudiant();
 	    if ($statut == 5 || $statut == 51 || $statut == 52)
-		$cadre = "de l'alternance";
+		$cadre = "alternant";
 	    else
-		$cadre = "du stage";
+		$cadre = "stagiaire";
 
 	    $date = $oDS->getJour()." ".Utils::numToMois($oDS->getMois())." ".$oDS->getAnnee();
 

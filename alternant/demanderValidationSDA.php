@@ -22,17 +22,17 @@ IHM_Generale::header("Demander la validation", "d'un sujet d'alternance'", "../"
 
 //Envoie d'un mail de notification au responsable des alternances
 function envoyerNotification() {
-  global $emailResponsable;
+  global $emailResponsableAlter;
   global $baseSite;
 
   $headers = 'Content-Type: text/html; charset=utf-8' . "\n";
   $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-  $headers .= 'From: ' . $emailResponsable . "\n";
-  $headers .= 'Reply-To: ' . $emailResponsable . "\n";
+  $headers .= 'From: ' . $emailResponsableAlter . "\n";
+  $headers .= 'Reply-To: ' . $emailResponsableAlter . "\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
 
-  $msg = "Un nouveau sujet d'alternance' a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/gestionSujetDAlternance.php'>ici</a>";
-  mail($emailResponsable, 'Site des stages : Demande de validation !', $msg, $headers);
+  $msg = "Un nouveau sujet d'alternance' a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/gestionSujetDeStage.php'>ici</a>";
+  mail($emailResponsableAlter, 'Site des stages : Demande de validation !', $msg, $headers);
 }
 
 //Fonction pour copier le fichier sur le serveur

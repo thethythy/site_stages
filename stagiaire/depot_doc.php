@@ -24,7 +24,7 @@ Promotion_IHM::afficherFormulaireRecherche("depot_docData.php", false);
 
 //Envoie d'un mail de notification au parrain et au responsable
 function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idParrain, $nomFichier, $typedocument) {
-    global $emailResponsable;
+    global $emailResponsableStage;
     global $baseSite;
 
     $oParrain = Parrain::getParrain($idParrain);
@@ -34,8 +34,8 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
 
     $headers = 'Content-Type: text/html; charset=utf-8'. "\n";
     $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-    $headers .= 'From: ' . $emailResponsable . "\n";
-    $headers .= 'Reply-To: ' . $emailResponsable . "\n";
+    $headers .= 'From: ' . $emailResponsableStage . "\n";
+    $headers .= 'Reply-To: ' . $emailResponsableStage . "\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
     $msg = "Ceci est un message automatique concernant le suivi de stage.<br/>
@@ -49,7 +49,7 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
 		Bonne lecture<br/>
 		Le responsable des stages";
 
-    mail($oParrain->getEmail() . "," . $emailResponsable . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
+    mail($oParrain->getEmail() . "," . $emailResponsableStage . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
 }
 
 //Fonction pour copier un document sur le serveur

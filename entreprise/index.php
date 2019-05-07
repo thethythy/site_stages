@@ -2,7 +2,7 @@
 
 /**
 * Page index.php
-* Utilisation : page pour déposer une offre de stage
+* Utilisation : page pour déposer une offre de stage ou d'alternance
 * Accès : public
 */
 
@@ -14,7 +14,8 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 /**
 * Vérification de la présence de toutes les informations nécessaire
 * pour enregistrer une nouvelle offre de stage dans la base
-* @global string $emailResponsable
+* @global string $emailResponsableStage
+* @global string $emailResponsableAlter
 * @global string $baseSite
 */
 function verifier(){
@@ -141,10 +142,12 @@ function verifier(){
         $idOffreDeStage = OffreDeStage::saisirDonnees($tabDonnees);
       }
 
-
-      //Envoie d'un mail de notification au responsable des stages
-      global $emailResponsable;
+      //Envoie d'un mail de notification au responsable concerné
+      global $emailResponsableStage;
+      global $emailResponsableAlter;
       global $baseSite;
+
+      $emailResponsable = $_POST['type'] === "alternant" ? $emailResponsableAlter : $emailResponsableStage;
 
       $headers ='Content-Type:  text/html; charset=utf-8'."\n";
       $headers .='Content-Transfer-Encoding: 8bit'."\n";
@@ -159,7 +162,7 @@ function verifier(){
         $msg = "Une nouvelle offre de stage a été ajoutée.<br/>Vous pouvez la visualiser <a href=".$baseSite."gestion/entreprises/editionOffreDeStage.php?id=".$idOffreDeStage.">ici</a>";
         mail($emailResponsable, 'Site de l\'alternance et des stages : nouvelle offre d\'alternance !', $msg, $headers);
       }
-      echo "<p>Votre annonce a bien été enregistrée !</p><p>Après validation par le responsable des stages, un mail de confirmation de diffusion vous sera envoyé.</p><p><a href='../index.php'>Retour</a></p>";
+      echo "<p>Votre annonce a bien été enregistrée !</p><p>Après validation du sujet, un mail de confirmation de diffusion vous sera envoyé.</p><p><a href='../index.php'>Retour</a></p>";
     } else {
       IHM_Generale::erreur("Vous devez saisir tous les champs marqués d'une * !");
       OffreDeStage_IHM::afficherFormulaireSaisie();

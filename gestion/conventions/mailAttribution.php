@@ -24,12 +24,12 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
  * @param type $oReferent
  */
 function envoyerNotification($oEtudiant, $oContact, $oReferent) {
-    global $emailResponsable;
+    global $emailResponsableStage;
 
     $headers = "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit\n";
-    $headers .= "From: $emailResponsable\n";
-    $headers .= "Reply-To: $emailResponsable\n";
+    $headers .= "From: $emailResponsableStage\n";
+    $headers .= "Reply-To: $emailResponsableStage\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
 
     $nomE = $oEtudiant->getNom();
@@ -63,7 +63,7 @@ Responsable des stages<br/>
 Département Informatique<br/>
 http://www-info.univ-lemans.fr/";
 
-    mail($emailResponsable . "," . $emailE . "," . $oContact->getEmail() . "," . $emailR, "Suivi de stage", $msg, $headers);
+    mail($emailResponsableStage . "," . $emailE . "," . $oContact->getEmail() . "," . $emailR, "Suivi de stage", $msg, $headers);
 }
 
 // Envoyer les notifications sélectionnées

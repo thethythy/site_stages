@@ -13,7 +13,7 @@ include_once('../../classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level2');
 
 function envoyerNotifications($contact, $idOffreDAlternance) {
-  global $emailResponsable;
+  global $emailResponsableAlter;
   global $baseSite;
 
   if (!isset($_POST['annee']))
@@ -23,8 +23,8 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
 
   // ------------------------------------------------
   // Envoie d'un mail de notification à l'entreprise
-  $expediteur = $emailResponsable;
-  $reponse = $emailResponsable;
+  $expediteur = $emailResponsableAlter;
+  $reponse = $emailResponsableAlter;
   $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
   $headers .= "Content-Type: text/html; charset=utf-8\n";
   $headers .= "Content-Transfer-Encoding: 8bit";
@@ -33,7 +33,7 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     Ceci est un message automatique.<br/>
     Votre offre d'alternance a été diffusée à nos étudiants.<br/>
     Vous pouvez la consulter à l'adresse suivante :<br/>
-    <a href=" . $baseSite . "/entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt>" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt</a><br/><br/>
+    <a href=" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt>" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt</a><br/><br/>
     Cordialement,<br/><br/>
     Le responsable de l'alternance<br/>
     Département Informatique<br/>
@@ -63,23 +63,22 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
   Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
   Vous pouvez directement la consulter à l'adresse suivante :<br/>
   <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
-  Thierry Lemeunier<br>
-  Responsable des stages<br>";
-  mail($destinataire, 'Site des stages et de l\'alternance: nouvelle offre sur le site', $msg, $headers);
+  Responsable de l'alternance<br>";
+  mail($destinataire, 'Site des stages et de l\'alternance : nouvelle offre sur le site', $msg, $headers);
   echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
 
   // ------------------------------------------------
   // Mise à jour du flux RSS
   // Création initiale du flux si nécessaire
   if (!FluxRSS::existe())
-  FluxRSS::initialise();
+    FluxRSS::initialise();
 
   // Création d'une nouvelle news
   $title = "Nouvelle offre d'alternance";
   $link = $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance;
   $timestamp = time();
   $contents = htmlspecialchars($offreDAlternance->getTitre(), ENT_QUOTES, 'UTF-8');
-  $author = $emailResponsable . " (Thierry Lemeunier)";
+  $author = $emailResponsableAlter;
   FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
   echo "<p>Le flux RSS a été mis à jour.</p>";
 }
