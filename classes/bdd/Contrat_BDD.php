@@ -44,7 +44,6 @@ class Contrat_BDD {
       $res->free();
       return $result['ID'];
     } else {
-      Utils::printLog("Ici ".$contrat->getIndemnites());
       $idsoutenance = $contrat->getIdSoutenance() ? $contrat->getIdSoutenance() : "NULL";
 
       // Mise à jour du Contrat

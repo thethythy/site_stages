@@ -240,7 +240,6 @@ class OffreDAlternance {
   * @return array
   */
   public static function getListeOffreDAlternance($filtre) {
-    Utils::printLog("AA");
     $tabODSString = OffreDAlternance_BDD::getListeOffreDAlternance($filtre);
 
     $tabODS = array();

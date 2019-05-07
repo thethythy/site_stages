@@ -270,17 +270,16 @@ if ($nbSerie > 0) {
 	$oParcours = $oPromotion->getParcours();
 	$pAnnee = $oPromotion->getAnneeUniversitaire();
 	$filtre = donneFiltre($pAnnee, $oFiliere, $oParcours);
-  $tabOConventions = array();
-  $tabOContrats = array();
-  Utils::printLog("dataFLAG : ".$dataFlag);
-  if($dataFlag == 0 || $dataFlag == 2){
-    $tabOConventions = Convention::getListeConvention($filtre);
-  }
-  if($dataFlag == 1 || $dataFlag == 2){
-    $tabOContrats = Contrat::getListeContrat($filtre);
-  }
+	$tabOConventions = array();
+	$tabOContrats = array();
+	if($dataFlag == 0 || $dataFlag == 2){
+	    $tabOConventions = Convention::getListeConvention($filtre);
+	}
+	if($dataFlag == 1 || $dataFlag == 2){
+	    $tabOContrats = Contrat::getListeContrat($filtre);
+	}
 
-  $tabOC = array_merge($tabOConventions, $tabOContrats);
+	$tabOC = array_merge($tabOConventions, $tabOContrats);
 	// Accumulation des conventions au cas ou il y aura une série 'Total'
 	if ($nbSerie > 1) {
 	    $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOC);

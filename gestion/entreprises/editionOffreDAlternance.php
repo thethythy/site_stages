@@ -202,9 +202,9 @@ function verifier() {
         $idOffreDAlternance = OffreDAlternance::modifierDonnees($tabDonnees);
         $contact = Contact::getContact($idContact);
         if (!$_POST['estVisible'])
-        envoyerNotifications($contact, $idOffreDAlternance);
+	    envoyerNotifications($contact, $idOffreDAlternance);
         echo "<p>L'offre d'alternance a été enregistrée !</p><p><a href='./listeDesOffreDAlternance.php'>Retour</a></p>";
-      }else if (isset($_POST['cancel'])) {
+      } else if (isset($_POST['cancel'])) {
         OffreDAlternance::supprimerDonnees($tabDonnees[0]);
         OffreDalternance::supprimerSuivi($tabDonnees[0]);
         echo "<p>L'offre d'alternance a été supprimée de la base de données !</p><p><a href='./listeDesOffreDAlternance.php'>Retour</a></p>";

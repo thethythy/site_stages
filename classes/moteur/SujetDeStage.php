@@ -71,13 +71,10 @@ class SujetDeStage {
   }
 
   public function setValide($valide) {
-    Utils::printLog("setting validation from ".$this->valide);
     $this->valide = $valide;
-    Utils::printLog(" TO ".$this->valide);
   }
 
   public function setEnAttenteDeValidation($enAttenteDeValidation) {
-      Utils::printLog("setting attente validation from ".$this->enAttenteDeValidation." TO ".$enAttenteDeValidation);
     $this->enAttenteDeValidation = $enAttenteDeValidation;
   }
 

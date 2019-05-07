@@ -91,7 +91,6 @@ function accepter() {
       $sda = SujetDAlternance::getSujetDAlternance($_POST['id']);
       $sda->setEnAttenteDeValidation(0);
       $sda->setValide(1);
-      Utils::printLog("A");
       SujetDAlternance_BDD::sauvegarder($sda);
 
       // global $baseSite;
@@ -117,7 +116,6 @@ function refuser() {
       $sds = SujetDeStage::getSujetDeStage($_POST['id']);
       $sds->setEnAttenteDeValidation(0);
       $sds->setValide(0);
-      Utils::printLog("A");
       SujetDeStage_BDD::sauvegarder($sds);
 
       // $message = "Bonjour,<br><br>
@@ -141,7 +139,6 @@ function refuser() {
       $sda = SujetDeStage::getSujetDeStage($_POST['id']);
       $sda->setEnAttenteDeValidation(0);
       $sda->setValide(0);
-      Utils::printLog("A");
       SujetDAlternance_BDD::sauvegarder($sda);
 
       // $message = "Bonjour,<br><br>
