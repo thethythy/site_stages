@@ -151,10 +151,10 @@ class Contrat_IHM {
 		$promo_filiere = $promotion->getFiliere();
 		$contrat = $tabEtuWithContrat[$i]->getContrat($annee);
 		$contact = $contrat->getContact();
-    $typeDeContrat = $contrat->getTypeDeContrat();
+		$typeDeContrat = $contrat->getTypeDeContrat();
 		$entreprise = $contact->getEntreprise();
 		?>
-	        <tr id="ligne<?php echo $i % 2; ?>">
+	        <tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<br/>
 			    <?php echo $entreprise->getNom(); ?> <br/>
@@ -224,14 +224,12 @@ class Contrat_IHM {
 		$idContrats = "";
 		for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
 		    $contrat = $tabEtuWithContrat[$i]->getContrat($annee);
-
 		    if ($idContrats == "")
 			$idContrats = $contrat->getIdentifiantBDD();
 		    else
 			$idContrats .= ";" . $contrat->getIdentifiantBDD();
-
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
 		    </td>
@@ -304,7 +302,7 @@ class Contrat_IHM {
 
 		    $somme = $somme + $contrat->getNote();
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 		    <?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
 		    </td>
@@ -406,10 +404,9 @@ class Contrat_IHM {
 			if ($contrat->aSonResume == "1"){
 			    echo "<a href='".$chemin.$contrat->getSujetDeContrat()."'>Résumé du contrat</a>";
 			} else {
-
-			   echo "Sujet de l'aternance : ".$contrat->getSujetDeContrat()."<br/>";
-         echo "Durée du contrat : ".$contrat->getDuree()." an(s)<br/>";
-         echo "Indemnités mensuelles : ".$contrat->getIndemnites()." €<br/>";
+			    echo "Sujet de l'aternance : ".$contrat->getSujetDeContrat()."<br/>";
+			    echo "Durée du contrat : ".$contrat->getDuree()." an(s)<br/>";
+			    echo "Indemnités mensuelles : ".$contrat->getIndemnites()." €<br/>";
 			}
 		    ?>
 		</td>

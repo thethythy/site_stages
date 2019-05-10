@@ -183,7 +183,7 @@ class Convention_IHM {
 
 	    for ($i = 0; $i < $nbEtudiants; $i++) {
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	    	<td>
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 	    	</td>
@@ -235,7 +235,7 @@ class Convention_IHM {
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
 	        </td>

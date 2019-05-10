@@ -155,7 +155,7 @@ class Parrain_IHM {
         $nom = $tabParrains[$i]->getNom();
         $prenom = $tabParrains[$i]->getPrenom();
         ?>
-        <tr id="ligne<?php echo $i % 2; ?>">
+        <tr class="ligne<?php echo $i % 2; ?>">
           <td>
             <table >
               <tr>

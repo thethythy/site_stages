@@ -77,7 +77,7 @@ if (sizeof($tabPromos) > 0) {
 
 		    // Affichage de l'étiquette
 		    ?>
-		    <tr id="ligne<?php echo $j % 2; ?>">
+		    <tr class="ligne<?php echo $j % 2; ?>">
 		        <td>
 		    	<br/>
 			    <?php echo $contact->getPrenom() . " " . $contact->getNom(); ?><br/>
