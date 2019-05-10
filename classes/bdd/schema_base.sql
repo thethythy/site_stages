@@ -18,6 +18,21 @@ CREATE SCHEMA IF NOT EXISTS `stages` DEFAULT CHARACTER SET utf8 ;
 USE `stages` ;
 
 -- -----------------------------------------------------
+-- Table `stages`.`responsable`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stages`.`responsable` (
+  `idresponsable` INT(10) NOT NULL AUTO_INCREMENT,
+  `responsabilite` VARCHAR(100) NOT NULL,
+  `nomresponsable` VARCHAR(100) NOT NULL,
+  `prenomresponsable` VARCHAR(100) NOT NULL,
+  `emailresponsable` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idresponsable`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `stages`.`competence`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stages`.`competence` (
