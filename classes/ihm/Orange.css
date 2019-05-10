@@ -450,7 +450,7 @@ textarea {
 
 #dhtmlxscheduler {
     margin: auto;
-    width: 700px;
+    width: 750px;
     height: 645px;
     float: right;
     border: 1px solid;
@@ -647,7 +647,7 @@ de la table au form et le style du form à la table
 
 .formToTableCheatStyle {
       text-align: center;
-      background-color= white;
+      background-color: white;
       border: medium none white;
 }
 
