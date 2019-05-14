@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Page saisirNotesStages.php
- * Utilisation : page pour éditer les notes de stages
+ * Page saisirNotes.php
+ * Utilisation : page pour éditer les notes de soutenances
  * Dépendance(s) : saisirNotesStagesData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
@@ -17,26 +17,35 @@ $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 IHM_Generale::header("Saisir des", "notes de stages", "../../", $tabLiens);
 
-Promotion_IHM::afficherFormulaireRecherche("saisirNotesStagesData.php", false);
+Promotion_IHM::afficherFormulaireRecherche("saisirNotesData.php", false);
 
 // Si un enregistrement des notes a été effectuée
 if (isset($_POST['save'])) {
-    $tabIdConventions = $_POST['idConventions'];
 
-    // Y-a-t-il au moins une note à changer ?
-    if ($tabIdConventions != "") {
-	$tabIdConv = explode(";", $tabIdConventions);
+    // Y-a-t-il au moins une note à changer pour un stagiaire ?
+    if ($_POST['idConventions'] != "") {
+	$tabIdConv = explode(";", $_POST['idConventions']);
 	for ($i = 0; $i < sizeof($tabIdConv); $i++) {
 	    $conv = Convention::getConvention($tabIdConv[$i]);
 	    $conv->setNote($_POST['conv' . $tabIdConv[$i]]);
 	    Convention_BDD::sauvegarder($conv);
 	}
     }
+
+    // Y-a-t-il au moins une note à changer pour un alternant ?
+    if ($_POST['idContrats'] != "") {
+	$tabIdCont = explode(";", $_POST['idContrats']);
+	for ($i = 0; $i < sizeof($tabIdCont); $i++) {
+	    $cont = Contrat::getContrat($tabIdCont[$i]);
+	    $cont->setNote($_POST['cont' . $tabIdCont[$i]]);
+	    Contrat_BDD::sauvegarder($cont);
+	}
+    }
 }
 
 // Affichage des données
 echo "<div id='data'>\n";
-include_once("saisirNotesStagesData.php");
+include_once("saisirNotesData.php");
 echo "\n</div>";
 ?>
 <table align="center">

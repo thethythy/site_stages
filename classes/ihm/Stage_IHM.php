@@ -279,51 +279,71 @@ class Stage_IHM {
     * @param integer $filiere L'identifiant de la filière concernée
     * @param tableau d'objets $tabEtuWithConv Liste des objets Etudiants
     */
-    public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtuWithConv) {
+    public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtu, $url) {
       ?>
-      <form method="post" action="saisirNotesStages.php">
+      <form method="post" action=<?php echo $url;?>>
         <table>
           <tr id='entete'>
-            <td width='60%'>Etudiant</td>
-            <td width='20%'>Note actuelle</td>
-            <td width='20%'>Nouvelle note</td>
+            <td width='50%'>Etudiant</td>
+	    <td width="20%">Statut</td>
+            <td width='15%'>Note actuelle</td>
+            <td width='15%'>Nouvelle note</td>
           </tr>
           <?php
           $idConventions = "";
+	  $idContrats = "";
           $somme = 0;
 
-          for ($i = 0; $i < sizeof($tabEtuWithConv); $i++) {
-            $conv = $tabEtuWithConv[$i]->getConvention($annee);
+          for ($i = 0; $i < sizeof($tabEtu); $i++) {
+            $conv = $tabEtu[$i]->getConvention($annee);
+	    $cont = $tabEtu[$i]->getContrat($annee);
 
-            if ($idConventions == "")
-            $idConventions = $conv->getIdentifiantBDD();
-            else
-            $idConventions .= ";" . $conv->getIdentifiantBDD();
+	    if ($conv) {
+		if ($idConventions == "")
+		    $idConventions = $conv->getIdentifiantBDD();
+		else
+		    $idConventions .= ";" . $conv->getIdentifiantBDD();
+		$somme += $conv->getNote();
+	    }
 
-            $somme = $somme + $conv->getNote();
-            ?>
+	    if ($cont) {
+		if ($idContrats == "")
+		    $idContrats = $cont->getIdentifiantBDD();
+		else
+		    $idContrats .= ";" . $cont->getIdentifiantBDD();
+		$somme += $cont->getNote();
+	    }
+
+	?>
             <tr id="ligne<?php echo $i % 2; ?>">
-              <td>
-                <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
+              <td align="center">
+                <?php echo $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom(); ?>
+              </td>
+	      <td align="center">
+		  <?php echo $conv ? "Stagiaire" : "Alternant"; ?>
+	      </td>
+              <td align="center">
+                <?php echo $conv ? $conv->getNote() : $cont->getNote(); ?>
               </td>
               <td align="center">
-                <?php echo $conv->getNote(); ?>
-              </td>
-              <td align="center">
-                <input style="width: 50px;" name="conv<?php echo $conv->getIdentifiantBDD(); ?>" type="text" value="<?php echo $conv->getNote(); ?>" />
+                <input style="width: 50px;"
+		       name="<?php echo $conv ? "conv".$conv->getIdentifiantBDD() : "cont".$cont->getIdentifiantBDD(); ?>"
+		       type="text"
+		       value="<?php echo $conv ? $conv->getNote() : $cont->getNote(); ?>" />
               </td>
             </tr>
             <?php
           }
           ?>
           <tr>
-            <td align="center">
+	    <td></td><td></td><td></td>
+            <td align="center" >
               <br/>
               Moyenne = <?php echo number_format($somme / $i, 2, ",", "."); ?>
             </td>
           </tr>
           <tr>
-            <td colspan="3" width="100%" align="center">
+            <td colspan="4" width="100%" align="center">
               <br/>
               <input type="hidden" value="1" name="save" />
               <input type="hidden" value="<?php echo $annee; ?>" name="annee" />
@@ -334,7 +354,8 @@ class Stage_IHM {
                 <input type="hidden" value="<?php echo $filiere; ?>" name="filiere" />
               <?php } ?>
               <input type="hidden" name="idConventions" value="<?php echo $idConventions; ?>" />
-              <input type="submit" value="Enregistrer" />
+              <input type="hidden" name="idContrats" value="<?php echo $idContrats; ?>" />
+              <input type="submit" value="Valider modification" />
             </td>
           </tr>
         </table>

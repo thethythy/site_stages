@@ -249,7 +249,7 @@ class Gestion_IHM {
 					<li><a href="./contrats/saisirContrat.php">Saisir un contrat</a></li>
 					<li><a href="./contrats/modifierListeContrat.php">Modifier/Supprimer un contrat</a></li><br/>
 					<li><a href="./conventions/mailAttribution.php">Notifier les attributions</a></li><br/>
-					<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li>
+					<li><a href="./conventions/saisirNotes.php">Saisir des notes de soutenance</a></li>
 					<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
 					<li><a href="./conventions/bilanConventions.php">Bilan des conventions/contrats</a></li>
 				    </ul>
