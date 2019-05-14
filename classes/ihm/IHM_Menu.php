@@ -86,7 +86,7 @@ class IHM_Menu {
         }
 
         /*
-        * Afficher le menu de la page dédiée aux étudiants
+        * Afficher le menu de la page dédiée aux stagiaires
         */
         public static function menuStagiaire() {
           ?>
@@ -123,7 +123,9 @@ class IHM_Menu {
           }
 
 
-
+	  /**
+	   * Afficher le menu de la page dédiée aux alternants
+	   */
           public static function menuAlternant() {
             ?>
             <div id="sidebar">
@@ -134,9 +136,11 @@ class IHM_Menu {
                   <li><a href="./listerAnciensContrats.php">Les anciennes alternances</a></li>
                 </ul>
                 <li><a href="./demanderValidationSDA.php">2- Valider le sujet d'alternance</a></li>
-                <li><a href="./depot_doc.php">3- Déposer des documents</a></li>
-                <li><a href="./suiviCandidatures.php">4- Suivi des candidatures</a></li>
-                <br></br>
+		<br/>
+                <li><a href="./suiviCandidatures.php">3- Suivi des candidatures</a></li>
+		<br/>
+		<li><a href="./depot_doc.php">4- Déposer des documents</a></li>
+                 <br></br>
                 <li>Site externes d'offres:</li>
                 <ul class="sidemenu2">
                   <li><a href="http://univ-lemans.jobteaser.com/" title="Career Center">Career Center</a></li>

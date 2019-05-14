@@ -3,7 +3,7 @@
 /**
 * Page editionOffreDAlternance.php
 * Utilisation : page pour éditer, valider ou supprimer une offre d'alternance
-*		 page accessible depuis listeDesOffreDAlternance.php
+*		page accessible depuis listeDesOffreDAlternance.php
 * Accès : restreint par authentification HTTP
 */
 
@@ -38,8 +38,8 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     Le responsable de l'alternance<br/>
     Département Informatique<br/>
     Université du Maine";
-  mail($contact->getEmail(), 'Votre offre d\'alternance', $msg, $headers);
-  echo "<p>Un email de notification a été envoyé à l\'entreprise.</p>";
+  mail($contact->getEmail(), "Votre offre d'alternance", $msg, $headers);
+  echo "<p>Un email de notification a été envoyé à l'entreprise.</p>";
 
   // ----------------------------------------------------------
   // Envoie d'un mail de notification aux promotions concernées
@@ -64,7 +64,7 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
   Vous pouvez directement la consulter à l'adresse suivante :<br/>
   <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
   Responsable de l'alternance<br>";
-  mail($destinataire, 'Site des stages et de l\'alternance : nouvelle offre sur le site', $msg, $headers);
+  mail($destinataire, "Site des stages et de l'alternance : nouvelle offre sur le site", $msg, $headers);
   echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
 
   // ------------------------------------------------

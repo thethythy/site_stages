@@ -45,7 +45,7 @@ $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
     if (sizeof($tabEtudiants) > 0) {
-	Convention_IHM::afficherListeConventions($annee, $tabEtudiants);
+	Promotion_IHM::afficherListeConventionsContrats($annee, $tabEtudiants);
     } else {
 	echo "<br/><center>Aucun étudiant n'est dans cette promotion.<center/><br/>";
     }

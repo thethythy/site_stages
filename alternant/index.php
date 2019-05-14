@@ -25,7 +25,7 @@ IHM_Menu::menuAlternant();
 <p>Elle leur permet d'une part d'accéder à une liste des entreprises ayant déjà accueillies des alternants les années précédentes et la liste des contacts dans ces entreprises.</p>
 <p>D'autre part, elle donne accès à plusieurs sites d'offres d'alternance.</p>
 <p>Les étudiants peuvent y trouver un formulaire de demande de validation de sujet d'alternance, demande qui sera transmise au responsable.</p>
-<p>Enfin, ils peuvent déposer les rapports d'alternance et les résumés d'alternance. Ces documents seront ensuite accessibles aux enseignants.</p>
+<p>Enfin, ils peuvent déposer les rapports d'alternance et les résumés d'alternance. Ces documents seront ensuite accessibles aux enseignants. Les résumées seront aussi accessibles aux étudiants.</p>
 <?php
 
 IHM_Generale::endHeader(true);

@@ -185,7 +185,6 @@ class Etudiant_BDD {
   public static function ajouterPromotion($etu, $promo) {
     global $db;
     global $tab19;
-    global $tab32;
 
     $sql = "SELECT COUNT(idetudiant) AS NB_ETU FROM $tab19 WHERE idetudiant='$etu' AND idpromotion='$promo';";
     $res = $db->query($sql);
@@ -220,11 +219,11 @@ class Etudiant_BDD {
 
 
   /**
-  * Associer une convention à un étudiant et une promotion existants
+  * Associer un contrat à un étudiant et une promotion existants
   * @global resource $db Référence sur la base ouverte
   * @global string $tab32 Nom de la table 'relation_promotion_etudiant_contrat'
   * @param integer $idetu Identifiant de l'étudiant
-  * @param integer $idconv Identifiant de la convention
+  * @param integer $idcontrat Identifiant du contrat
   * @param integer $idpromo Identifiant de la promotion
   */
   public static function ajouterContrat($idetu, $idcontrat, $idpromo) {
