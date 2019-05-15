@@ -45,18 +45,18 @@ $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
 
-    // Récupération des étudiants ayant une convention
-    $tabEtuWithConv = array();
-
+    // Récupération des étudiants ayant une convention ou un contrat
+    $tabEtu = array();
     for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
-	if ($tabEtudiants[$i]->getConvention($annee) != null)
-	    array_push($tabEtuWithConv, $tabEtudiants[$i]);
+	if ($tabEtudiants[$i]->getConvention($annee) != null ||
+	    $tabEtudiants[$i]->getContrat($annee) != null)
+	    array_push($tabEtu, $tabEtudiants[$i]);
     }
 
-    // Si il y a au moins un étudiant avec une convention
-    if (sizeof($tabEtuWithConv) > 0) {
-	// Affichage des conventions des étudiants
-	Stage_IHM::afficherListeResumes($annee, $parcours, $filiere, $tabEtuWithConv);
+    // Si il y a au moins un étudiant
+    if (sizeof($tabEtu) > 0) {
+	// Affichage des résumés des étudiants
+	Stage_IHM::afficherListeResumes($annee, $parcours, $filiere, $tabEtu);
     } else {
 	echo "<br/><center>Aucune convention n'a été trouvée.</center><br/>";
     }
