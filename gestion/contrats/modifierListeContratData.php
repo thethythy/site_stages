@@ -56,7 +56,7 @@ if (sizeof($tabPromos) > 0) {
     // Si il y a au moins un étudiant avec une convention
     if (sizeof($tabEtuWithConv) > 0) {
 	// Affichage des conventions des étudiants
-	Contrats_IHM::afficherListeContratsAModifier($annee, $idPromo, $tabEtuWithConv);
+	Contrat_IHM::afficherListeContratsAModifier($annee, $idPromo, $tabEtuWithConv);
     } else {
 	echo "<br/><center>Aucun contrat n'a été trouvée.</center><br/>";
     }

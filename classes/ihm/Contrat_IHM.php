@@ -3,6 +3,190 @@
 class Contrat_IHM {
 
     /**
+     * Afficher un formulaire de création ou de modification d'un contrat de stage
+     * Si $contrat = "" alors il s'agit d'un formulaire de création (champs vide)
+     * @param Contrat $contrat Objet qui est modifié et dont les informations son affichées.
+     * @param tableau d'objets $tabEtu Tableau contenant les étudiants à afficher
+     * @param integer $annee Année de la promotion
+     * @param integer $parcours Identifiant du parcours de la promotion
+     * @param integer $filiere Identifiant de la filière de la promotion
+     */
+    public static function afficherFormulaireSaisie($contrat, $tabEtu, $annee, $parcours, $filiere) {
+
+	if ($contrat != "") {
+	    $parrain = $contrat->getParrain();
+	    $etudiant = $contrat->getEtudiant();
+	    $contact = $contrat->getContact();
+	}
+	?>
+	<form method=post action="">
+	    <table width="100%">
+		<tr>
+		    <td width="100%" align="center">
+			<table>
+			    <tr>
+				<td>Etudiant</td>
+				<td>
+				    <?php
+				    if ($contrat != "") {
+					echo $etudiant->getNom() . " " . $etudiant->getPrenom();
+				    } else {
+				    ?>
+				    <select name="idEtu" style="width: 300px;">
+					<?php
+					for ($i = 0; $i < sizeof($tabEtu); $i++) {
+					    if ((isset($_POST['idEtu'])) && ($_POST['idEtu'] == $tabEtu[$i]->getIdentifiantBDD()))
+						echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+					    else
+						echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+					}
+					?>
+				    </select>
+				    <?php
+				    }
+				    ?>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Référent</td>
+				<td>
+				    <select name="idPar" style="width: 300px;">
+				    <?php
+				    $tabPar = Parrain::listerParrain();
+				    for ($i = 0; $i < sizeof($tabPar); $i++) {
+					if ((($contrat != "") && ($parrain->getIdentifiantBDD() == $tabPar[$i]->getIdentifiantBDD())) ||
+					    ((isset($_POST['idPar'])) && ($_POST['idPar'] == $tabPar[$i]->getIdentifiantBDD())))
+					    echo "<option selected value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+					else
+					    echo "<option value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+				    }
+				    ?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+			    </tr>
+			    <tr>
+				<td>Référent entreprise</td>
+				<td>
+				    <select name="idCont" style="width: 300px;">
+				    <?php
+				    $tabCont = Contact::getListeContacts("");
+				    for ($i = 0; $i < sizeof($tabCont); $i++) {
+					$entreprise = $tabCont[$i]->getEntreprise();
+					$nomEntreprise = " - " . $entreprise->getNom() . " (" . $entreprise->getVille() . ")";
+					if ((($contrat != "") && ($contact->getIdentifiantBDD() == $tabCont[$i]->getIdentifiantBDD())) ||
+					    ((isset($_POST['idCont'])) && ($_POST['idCont'] == $tabCont[$i]->getIdentifiantBDD())))
+					    echo "<option selected value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
+					else
+					    echo "<option value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
+				    }
+				    ?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Thème de stage</td>
+				<td>
+				    <select name="idTheme" style="width: 300px;">
+				    <?php
+				    $tabTheme = ThemeDeStage::getListeTheme();
+				    for ($i = 0; $i < sizeof($tabTheme); $i++) {
+					$couleur = $tabTheme[$i]->getCouleur();
+					if (($contrat != "") && $tabTheme[$i]->getIdentifiantBDD() == $contrat->getIdTheme())
+					    echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+					else
+					    echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+				    }
+				    ?>
+				    </select>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Type Offre</td>
+				<td>
+				<?php
+				if (($contrat != "") && ($contrat->getTypeDeContrat() == 0)) {
+				    echo "<input type='radio' id='' name ='typeContrat'  value='1' onclick=''> Apprentissage
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type='radio'  id='' name ='typeContrat' checked='checked' value='0' onclick=''> Professionnalisation";
+				} else {
+				    echo "<input type='radio' id='' name ='typeContrat' checked='checked' value='1' onclick=''> Apprentissage
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type='radio'  id='' name ='typeContrat'  value='0' onclick=''> Professionnalisation";
+				}
+				?>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Durée du contrat</td>
+				<td>
+				<?php
+				if (($contrat != "") && ($contrat->getDuree() == 2)) {
+				    echo "<input type='radio' id='' name ='dureeContrat'  value='1' onclick=''> 1 an
+						    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						    <input type='radio'  id='' name ='dureeContrat' checked='checked' value='2' onclick=''> 2 ans";
+				} else {
+				    echo "<input type='radio' id='' name ='dureeContrat' checked='checked' value='1' onclick=''> 1 an
+					       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					       <input type='radio'  id='' name ='dureeContrat'  value='2' onclick=''> 2 ans";
+				}
+				?>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Indemnités mensuelles</td>
+				<td>
+				<?php
+				if ($contrat != "") {
+				    echo "<input type='text' name='indemnite' size='100' value =" . $contrat->getIndemnites() . " >";
+				} else {
+				    echo "<input type='text' name='indemnite' size='100' >";
+				}
+				?>
+				</td>
+			    </tr>
+			    <tr>
+				<td>
+				    <?php
+				    if (($contrat != "") && ($contrat->getASonResume() == 1)) {
+					echo "Résumé du contrat";
+				    } else {
+					echo "Sujet du contrat";
+				    }
+				    ?>
+				</td>
+				<td>
+				    <?php
+				    if (($contrat != "") && ($contrat->getASonResume() == 1)) {
+					echo "<a href='../../documents/resumes/" . $contrat->getSujetDeContrat() . "'>" . $contrat->getSujetDeContrat() . "</a>";
+				    } else if ($contrat != "") {
+					echo "<textarea name='sujet' style='width: 85%;'>" . $contrat->getSujetDeContrat() . "</textarea>";
+				    } else {
+					echo "<textarea name='sujet' style='width: 85%;'></textarea>";
+				    }
+				    ?>
+				</td>
+			    </tr>
+			</table>
+		    </td>
+		</tr>
+		<tr>
+		    <td id="submit">
+			<br/>
+			<input type="hidden" name="annee" value="<?php echo $annee; ?>"/>
+			<input type="hidden" name="parcours" value="<?php echo $parcours; ?>"/>
+			<input type="hidden" name="filiere" value="<?php echo $filiere; ?>"/>
+			<input type="hidden" value="1" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
+			<input type="submit" value="Enregistrer" name="<?php if ($contrat != "") echo "edit"; else echo "add"; ?>" />
+		    </td>
+		</tr>
+	    </table>
+	</form>
+	<?php
+    }
+
+    /**
      * Affiche un formulaire de filtrage sur l'année, le parcours, la filière
      * le thème de contrat, le type d'entreprise et le lieu du contrat
      * @param string $page Indique la page du traitement des requêtes Ajax
@@ -151,10 +335,9 @@ class Contrat_IHM {
 		$promo_filiere = $promotion->getFiliere();
 		$contrat = $tabEtuWithContrat[$i]->getContrat($annee);
 		$contact = $contrat->getContact();
-		$typeDeContrat = $contrat->getTypeDeContrat();
 		$entreprise = $contact->getEntreprise();
 		?>
-	        <tr class="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<br/>
 			    <?php echo $entreprise->getNom(); ?> <br/>
@@ -167,11 +350,8 @@ class Contrat_IHM {
 		    <td>
 			    <?php
 			    echo $contact->getNom() . " " . $contact->getPrenom() . "<br/>";
-
 			    if ($contact->getTelephone() != "")
 				echo "Tel : " . $contact->getTelephone() . "<br/>";
-
-
 			    if ($contact->getEmail() != "")
 				echo "Email : " . $contact->getEmail();
 			    ?>
@@ -180,12 +360,11 @@ class Contrat_IHM {
 			<table>
 			    <tr>
 				<td colspan="2">
-					<?php
-					echo "Etudiant en " . $promo_filiere->getNom() . " " . $promo_parcours->getNom() . "<br/>";
-					?>
+				    <?php
+				    echo "Etudiant en " . $promo_filiere->getNom() . " " . $promo_parcours->getNom() . "<br/>";
+				    ?>
 				</td>
 			    </tr>
-
 			    <tr>
 				<td width="50%">
 				    Résumé :
@@ -198,148 +377,124 @@ class Contrat_IHM {
 			    </tr>
 			</table>
 		    </td>
-	        </tr>
+		</tr>
 		<?php
 	    }
 	echo "</table>";
     }
 
     /**
-     * Afficher un tableau interactif d'attribution des fichiers de résumés
-     * @param integer $annee L'année concernée
-     * @param integer $parcours L'identifiant du parcours concerné
-     * @param integer $filiere L'identifiant de la filière concernée
-     * @param tableau d'objets $tabEtuWithContrat Liste des objets Etudiants
+     * Afficher une liste des contrats à éditer ou à supprimer (tableau interactif)
+     * @param integer $annee Année de la promotion concernée
+     * @param integer $idPromo Identifiant de la promotion
+     * @param tableau d'objets $tabEtu Tableaux d'objets Etudiant
      */
-    public static function afficherListeResumes($annee, $parcours, $filiere, $tabEtuWithContrat) {
-	?>
-	<form method=post action="">
-	    <table>
+    public static function afficherListeContratsAModifier($annee, $idPromo, $tabEtu) {
+	echo "<table>
 		<tr id='entete'>
-		    <td>Etudiant</td>
-		    <td>Résumé actuelle</td>
-		    <td width='25%'>Nouveau résumé</td>
-		</tr>
-		<?php
-		$idContrats = "";
-		for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
-		    $contrat = $tabEtuWithContrat[$i]->getContrat($annee);
-		    if ($idContrats == "")
-			$idContrats = $contrat->getIdentifiantBDD();
-		    else
-			$idContrats .= ";" . $contrat->getIdentifiantBDD();
-		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
-		    <td>
-			<?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
-		    </td>
-		    <td><?php echo $contrat->getSujetDeContrat(); ?></td>
-		    <td align="center">
-			<?php
-			$tabRes = Contrat::getResumesPossible($tabEtuWithContrat[$i]->getIdentifiantBDD(), "../../documents/resumes/");
-			if (sizeof($tabRes) == 0) {
-			    echo "<input style='width: 250px;' name='conv" . $contrat->getIdentifiantBDD() . "' type='text' value='" . htmlentities($contrat->getSujetDeContrat(), ENT_QUOTES, 'utf-8') . "'/>";
-			} else {
-			    echo "<select name='conv" . $contrat->getIdentifiantBDD() . "' style='width: 250px;'>";
-			    echo "<option value=''></option>";
-			    for ($j = 0; $j < sizeof($tabRes); $j++) {
-				if (($contrat->getASonResume() == "1") && ($contrat->getSujetDeContrat() == $tabRes[$j]))
-				    echo "<option selected value='$tabRes[$j]'>" . $tabRes[$j] . "</option>";
-				else
-				    echo "<option value='$tabRes[$j]'>" . $tabRes[$j] . "</option>";
-			    }
-			    echo "</select>";
-			}
-			?>
-		    </td>
-		</tr>
-		<?php
-		}
-		?>
-		<tr>
-		    <td colspan="3" width="100%" align="center">
-			<br/>
-			<input type="hidden" value="1" name="save" />
-			<input type="hidden" value="<?php echo $annee; ?>" name="annee" />
-			<input type="hidden" value="<?php echo $parcours; ?>" name="parcours" />
-			<input type="hidden" value="<?php echo $filiere; ?>" name="filiere" />
-			<input type="hidden" name="idContrats" value="<?php echo $idContrats; ?>" />
-			<input type="submit" value="Enregistrer" />
-		    </td>
-		</tr>
-	    </table>
-	</form>
-	<?php
+			<td width='20%'>Etudiant</td>
+			<td width='15%'>Référent</td>
+			<td width='15%'>Contact</td>
+			<td width='15%'>Entreprise</td>
+			<td width='15%'>Thème</td>
+			<td width='10%' align='center'>Modifier</td>
+			<td width='10%' align='center'>Supprimer</td>
+		</tr>";
+	for ($i = 0; $i < sizeof($tabEtu); $i++) {
+	    $contrat = $tabEtu[$i]->getContrat($annee);
+	    $parrain = $contrat->getParrain();
+
+	    $contact = $contrat->getContact();
+	    $entreprise = $contact->getEntreprise();
+	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
+	    ?>
+	    <tr class="ligne<?php echo $i % 2; ?>">
+	        <td>
+		    <?php echo $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $parrain->getNom() . " " . $parrain->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $contact->getNom() . " " . $contact->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $entreprise->getNom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $theme->getTheme(); ?>
+	        </td>
+	        <td align="center">
+		    <a href="modifierContrat.php?promo=<?php echo $idPromo; ?>&id=<?php echo $contrat->getIdentifiantBDD(); ?>">
+		        <img src="../../images/reply.png"/>
+		    </a>
+	        </td>
+	        <td align="center">
+		    <?php
+		    if (!$contrat->getSoutenance()->getIdentifiantBDD()) {
+			echo '<a href="modifierListeContrat.php?promo='.$idPromo.'&id='.$contrat->getIdentifiantBDD().'">
+				<img src="../../images/action_delete.png"/>
+			      </a>';
+		    } else {
+			echo '<img src="../../images/action_remove.png"/>';
+		    }
+		    ?>
+	        </td>
+	    </tr>
+	    <?php
+	}
+	echo "</table>";
     }
 
     /**
-     * Afficher un tableau interactif d'attribution des notes
-     * @param integer $annee L'année concernée
-     * @param integer $parcours L'identifiant du parcours concerné
-     * @param integer $filiere L'identifiant de la filière concernée
-     * @param tableau d'objets $tabEtuWithContrat Liste des objets Etudiants
+     * Afficher une liste des contrats à exporter
+     * @param integer $annee Année de la promotion concernée
+     * @param integer $idPromo Identifiant de la promotion
+     * @param tableau d'objets $tabEtuWithContrats Tableaux d'objets Etudiant
      */
-    public static function afficherListeNotes($annee, $parcours, $filiere, $tabEtuWithContrat) {
-	?>
-	<form method="post" action="saisirNotesContrats.php">
-	    <table>
+    public static function afficherListeContratsAExporter($annee, $idPromo, $tabEtuWithContrats) {
+	echo "<table>
 		<tr id='entete'>
-		    <td width='60%'>Etudiant</td>
-		    <td width='20%'>Note actuelle</td>
-		    <td width='20%'>Nouvelle note</td>
-		</tr>
-		<?php
-		$idContrats = "";
-		$somme = 0;
+			<td width='20%'>Etudiant</td>
+			<td width='15%'>Référent</td>
+			<td width='15%'>Contact</td>
+			<td width='15%'>Entreprise</td>
+			<td width='15%'>Thème</td>
+			<td width='10%' align='center'>Exporter</td>
+		</tr>";
+	for ($i = 0; $i < sizeof($tabEtuWithContrats); $i++) {
+	    $contrat = $tabEtuWithContrats[$i]->getContrat($annee);
+	    $parrain = $contrat->getParrain();
 
-		for ($i = 0; $i < sizeof($tabEtuWithContrat); $i++) {
-		    $contrat = $tabEtuWithContrat[$i]->getContrat($annee);
-
-		    if ($idContrats == "")
-			$idContrats = $contrat->getIdentifiantBDD();
-		    else
-			$idContrats .= ";" . $contrat->getIdentifiantBDD();
-
-		    $somme = $somme + $contrat->getNote();
-		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
-		    <td>
-		    <?php echo $tabEtuWithContrat[$i]->getNom() . " " . $tabEtuWithContrat[$i]->getPrenom(); ?>
-		    </td>
-		    <td align="center">
-			    <?php echo $contrat->getNote(); ?>
-		    </td>
-		    <td align="center">
-			<input style="width: 50px;" name="conv<?php echo $contrat->getIdentifiantBDD(); ?>" type="text" value="<?php echo $contrat->getNote(); ?>" />
-		    </td>
-		</tr>
-		<?php
-		}
-		?>
-		<tr>
-		    <td align="center">
-			<br/>
-			Moyenne = <?php echo number_format($somme / $i, 2, ",", "."); ?>
-		    </td>
-		</tr>
-		<tr>
-		    <td colspan="3" width="100%" align="center">
-			<br/>
-			<input type="hidden" value="1" name="save" />
-			<input type="hidden" value="<?php echo $annee; ?>" name="annee" />
-			<?php if (isset($parcours)) { ?>
-			    <input type="hidden" value="<?php echo $parcours; ?>" name="parcours" />
-			<?php } ?>
-			<?php if (isset($filiere)) { ?>
-			    <input type="hidden" value="<?php echo $filiere; ?>" name="filiere" />
-			<?php } ?>
-			<input type="hidden" name="idContrats" value="<?php echo $idContrats; ?>" />
-			<input type="submit" value="Enregistrer" />
-		    </td>
-		</tr>
-	    </table>
-	</form>
-	<?php
+	    $contact = $contrat->getContact();
+	    $entreprise = $contact->getEntreprise();
+	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
+	    ?>
+	    <tr id="ligne<?php echo $i % 2; ?>">
+	        <td>
+		    <?php echo $tabEtuWithContrats[$i]->getNom() . " " . $tabEtuWithContrats[$i]->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $parrain->getNom() . " " . $parrain->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $contact->getNom() . " " . $contact->getPrenom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $entreprise->getNom(); ?>
+	        </td>
+	        <td>
+		    <?php echo $theme->getTheme(); ?>
+	        </td>
+	        <td align="center">
+		    <a href="exporterContrat.php?promo=<?php echo $idPromo; ?>&id=<?php echo $contrat->getIdentifiantBDD(); ?>">
+		        <img src="../../images/download.png"/>
+		    </a>
+	        </td>
+	    </tr>
+	    <?php
+	}
+	echo "</table>";
     }
 
     /**

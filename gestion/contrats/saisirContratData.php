@@ -85,12 +85,12 @@ if (isset($_POST['add']) && isset($_POST['idEtu'])) {
 	<?php
 
     } else {
-	Contrats_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
+	Contrat_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
 	IHM_Generale::erreur("Cet étudiant à déjà un contrat pour l'année sélectionnée !");
     }
 } else {
     if (! isset($parcours)) $parcours = "";
     if (! isset($filiere)) $filiere = "";
-    Contrats_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
+    Contrat_IHM::afficherFormulaireSaisie("", $tabEtudiants, $annee, $parcours, $filiere);
 }
 ?>

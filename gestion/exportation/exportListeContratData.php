@@ -56,7 +56,7 @@ if (sizeof($tabPromos) > 0) {
     // Si il y a au moins un étudiant avec un contrat
     if (sizeof($tabEtuWithConv) > 0) {
 	// Affichage des contrats des étudiants
-	Contrats_IHM::afficherListeContratsAExporter($annee, $idPromo, $tabEtuWithConv);
+	Contrat_IHM::afficherListeContratsAExporter($annee, $idPromo, $tabEtuWithConv);
     } else {
 	echo "<br/><center>Aucun contrat n'a été trouvée.</center><br/>";
     }
