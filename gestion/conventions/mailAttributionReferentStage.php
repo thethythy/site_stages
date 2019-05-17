@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Page mailAttribution.php
+ * Page mailAttributionReferentStage.php
  * Utilisation : page pour notifier l'enseignant-référent d'un étudiant auprès de l'entreprise
- * Dépendance(s) : mailAttributionData.php --> traitement des requêtes Ajax
+ * Dépendance(s) : mailAttributionReferentStageData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
 
@@ -17,7 +17,7 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 
 /**
  * Envoyer la notification au contact dans l'entreprise aini qu'à l'étudiant
- * et au référent (copie au responsable des stages)
+ * et au référent (copie au responsable)
  * @global type $emailResponsable
  * @param type $oEtudiant
  * @param type $oContact
@@ -97,13 +97,13 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion des stages');
 
-IHM_Generale::header("Notification des", "attributions", "../../", $tabLiens);
+IHM_Generale::header("Notification des attributions de", "stage", "../../", $tabLiens);
 
-Promotion_IHM::afficherFormulaireRecherche("mailAttributionData.php", false, true);
+Promotion_IHM::afficherFormulaireRecherche("mailAttributionReferentStageData.php", false, true);
 
 // Affichage des données
 echo "<div id='data'>";
-include_once("mailAttributionData.php");
+include_once("mailAttributionReferentStageData.php");
 echo "</div>";
 
 IHM_Generale::endHeader(false);

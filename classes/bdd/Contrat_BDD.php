@@ -305,14 +305,13 @@ class Contrat_BDD {
      * Suppression d'une contrat en base.
      * La suppression est possible s'il n'y a pas de soutenane associée.
      *
-     * Du fait des contraintes d'intégrité référentielle, la table n°19
+     * Du fait des contraintes d'intégrité référentielle, la table n°32
      * 'relation_promotion_etudiant_contrat' est mise à jour automatiquement
      *
-     * Du fait des contraintes d'intégrité référentielle, la table n°25
-     * 'attribution' est mise à jour automatiquement
+     * Du fait des contraintes d'intégrité référentielle, la table n°35
+     * 'affectation' est mise à jour automatiquement
      *
      * @global resource $db Référence à la base ouverte
-     * @global string $tab32 Nom de la table 'relation_promotion_etudiant_contrat'
      * @global string $tab31 Nom de la table 'contrat'
      * @param integer $identifiantBDD Identifiant de la contrat à supprimer
      * @param integer $idEtu Identifiant de l'étudiant concerné

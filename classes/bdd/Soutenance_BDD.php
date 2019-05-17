@@ -52,6 +52,9 @@ class Soutenance_BDD {
      * Du fait de la contrainte d'intégrité référentielle, la table 'convention'
      * est mise à jour automatiquement
      *
+     * Du fait de la contrainte d'intégrité référentielle, la table 'contrat"
+     * est mise à jour automatiquement
+     *
      * Du fait de la contrainte d'intégrité référentielle, la table 'convocation'
      * est mise à jour automatiquement
      *

@@ -55,14 +55,14 @@ if (isset($_POST['add']) && isset($_POST['idEtu'])) {
     // Si la convention que l'on veut créer n'existe pas déjà
     if (Contrat_BDD::existe($newContrat, $annee) == false) {
 
-	// Sauvegarde de la convention
+	// Sauvegarde du contrat
 	$idContrat = Contrat_BDD::sauvegarder($newContrat);
 
-	// Création et sauvegarde de l'attribution liée à la convention
-	$attribution = new Attribution('', 0, $idContrat);
-	Attribution_BDD::sauvegarder($attribution);
+	// Création et sauvegarde de l'affectation liée au contrat
+	$affectation = new Affectation('', 0, $idContrat);
+	Affectation_BDD::sauvegarder($affectation);
 
-	// Mise à jour du lien promotion / étudiant / convention
+	// Mise à jour du lien promotion / étudiant / contrat
 	if (isset($filiere) && isset($parcours)) {
 	    $promotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $filiere, $parcours);
 	    Etudiant_BDD::ajouterContrat($idEtu, $idContrat, $promotion->getIdentifiantBDD());

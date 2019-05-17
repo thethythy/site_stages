@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost:8889
--- Généré le :  ven. 30 nov. 2018 à 13:48
--- Version du serveur :  5.6.38
--- Version de PHP :  7.1.12
 --
 -- ATTENTION : Importer en désactivant la vérification des clés étrangères
 --
@@ -36,6 +28,19 @@ INSERT INTO `responsable` (`idresponsable`, `responsabilite`, `nomresponsable`, 
 (1, 'stage', 'nom1', 'prenom1', 'email1@bidon.fr'),
 (2, 'alternance', 'nom2', 'prenom2', 'email2@bidon.fr'),
 (3, 'site', 'nom3', 'prenom3', 'email3@bidon.fr');
+
+--
+-- Tronquer la table avant d'insérer `affectation`
+--
+
+TRUNCATE TABLE `affectation`;
+--
+-- Déchargement des données de la table `attribution`
+--
+
+INSERT INTO `affectation` (`idaffectation`, `envoi`, `idcontrat`) VALUES
+(1, 0, 387),
+(2, 0, 388);
 
 --
 -- Tronquer la table avant d'insérer `attribution`

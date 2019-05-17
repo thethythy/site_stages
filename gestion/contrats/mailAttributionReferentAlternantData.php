@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page mailAttributionData.php
+ * Page mailAttributionReferentReferentData.php
  * Utilisation : page retournant une liste de sélection des notifications
  * Accès : restreint par authentification HTTP
  */
@@ -17,9 +17,15 @@ if (!headers_sent())
 
 // Si une année a été sélectionnée
 if (isset($_POST['annee']) && $_POST['annee'] > 0) {
+
     // Afficher la liste des notifications à envoyer ou déjà envoyées
-    $tabOA = Attribution::getListeAttributionFromPromotion($_POST['annee'], $_POST['parcours'], $_POST['filiere']);
-    Attribution_IHM::afficherSelectionDestinairesNotification($tabOA, $_POST['annee'], $_POST['parcours'], $_POST['filiere']);
+    $tabOA = Affectation::getListeAffectationFromPromotion(
+	    $_POST['annee'], $_POST['parcours'], $_POST['filiere']);
+
+    Affectation_IHM::afficherSelectionDestinairesNotification(
+	    $tabOA, $_POST['annee'], $_POST['parcours'], $_POST['filiere'],
+	    "mailAttributionReferentAlternant.php");
+
 } else {
     echo "<center>Veuillez sélectioner une année</center>";
 }

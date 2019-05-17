@@ -181,6 +181,10 @@ class Contrat {
 	return Parrain::getParrain($this->idExaminateur);
     }
 
+    public function getTuteur() {
+	return Contact::getContact($this->idreferent);
+    }
+
     public function getSoutenance() {
 	if ($this->idSoutenance == 0)
 	    return new Soutenance(0, 0, 0, 0, 0, 0);

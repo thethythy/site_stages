@@ -94,6 +94,7 @@ $tab31 = 'contrat';
 $tab32 = 'relation_promotion_etudiant_contrat';
 $tab33 = 'sujetdalternance';
 $tab34 = 'responsable';
+$tab35 = 'affectation';
 
 function deconnexion() {
     global $db;

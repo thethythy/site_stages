@@ -248,7 +248,8 @@ class Gestion_IHM {
 					<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li><br/>
 					<li><a href="./contrats/saisirContrat.php">Saisir un contrat</a></li>
 					<li><a href="./contrats/modifierListeContrat.php">Modifier/Supprimer un contrat</a></li><br/>
-					<li><a href="./conventions/mailAttribution.php">Notifier les attributions</a></li><br/>
+					<li><a href="./conventions/mailAttributionReferentStage.php">Notifier les référents stagiaire</a></li>
+					<li><a href="./contrats/mailAttributionReferentAlternant.php">Notifier les référents alternant</a></li><br/>
 					<li><a href="./conventions/saisirNotes.php">Saisir des notes de soutenance</a></li>
 					<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
 					<li><a href="./conventions/bilanConventions.php">Bilan des conventions/contrats</a></li>

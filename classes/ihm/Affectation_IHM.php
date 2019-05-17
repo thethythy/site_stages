@@ -1,36 +1,36 @@
 <?php
 
-class Attribution_IHM {
+class Affectation_IHM {
 
     /**
-     * Afficher une liste des notifications d'attribution à sélectionner
-     * @param tableau $tabOAttribution Un tableau d'objets Attribution
+     * Afficher une liste des notifications d'affectation à sélectionner
+     * @param tableau $tabOAffectation Un tableau d'objets Affectation
      * @param integer $annee L'année de la promotion
      * @param integer $parcours Le parcours de la promotion
      * @param integer $filiere La filière de la promotion
      */
-    public static function afficherSelectionDestinairesNotification($tabOAttribution, $annee, $parcours, $filiere, $url) {
-	if (sizeof($tabOAttribution) > 0) {
+    public static function afficherSelectionDestinairesNotification($tabOAffectation, $annee, $parcours, $filiere, $url) {
+	if (sizeof($tabOAffectation) > 0) {
 	    ?>
 	    <form method="post" action="<?php echo $url; ?>">
 		<table>
 		    <tr id='entete'>
 			<td width='30%'>Etudiant</td>
 			<td width='30%'>Référent</td>
-			<td width='30%'>Encadrant entreprise</td>
+			<td width='30%'>Tuteur entreprise</td>
 			<td width='10%'>Notification</td>
 		    </tr>
 
 		    <?php
-		    for ($i = 0; $i < sizeof($tabOAttribution); $i++) {
-			$oConvention = Convention::getConvention($tabOAttribution[$i]->getIdconvention());
+		    for ($i = 0; $i < sizeof($tabOAffectation); $i++) {
+			$oContrat = Contrat::getContrat($tabOAffectation[$i]->getIdContrat());
 
-			$etudiant = $oConvention->getEtudiant();
-			$referent = $oConvention->getParrain();
-			$contact = $oConvention->getContact();
-			$entreprise = $oConvention->getEntreprise();
+			$etudiant = $oContrat->getEtudiant();
+			$referent = $oContrat->getParrain();
+			$contact = $oContrat->getTuteur();
+			$entreprise = $oContrat->getEntreprise();
 
-			$idNotification = $tabOAttribution[$i]->getIdentifiantBDD();
+			$idNotification = $tabOAffectation[$i]->getIdentifiantBDD();
 			?>
 
 			<tr id="ligne<?php echo $i % 2; ?>">
@@ -45,7 +45,7 @@ class Attribution_IHM {
 			    </td>
 			    <td align="center">
 				<?php
-				if ($tabOAttribution[$i]->getEnvoi() == 1)
+				if ($tabOAffectation[$i]->getEnvoi() == 1)
 				    echo "<input type='checkbox' checked disabled name='notifications[]' value='$idNotification'/>";
 				else
 				    echo "<input type='checkbox' name='notifications[]' value='$idNotification'/>";
