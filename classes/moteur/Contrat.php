@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Les contrats de stage : accord entre l'université, l'étudiant et l'entreprise
+ * Les contrats d'alternance : accord entre l'université, l'étudiant et l'entreprise
  */
-
 class Contrat {
 
     var $identifiant_BDD; // Identifiant unique en base
     var $sujetDAlt; // Texte descriptif du contenu du stage
-    var $typeDeContrat;//apprentissage ou professionnalisation
-    var $duree;//duree du contrat d'alternance (mois)
-    var $indemnite;//indemnite de l'alternance (mensuel)
+    var $typeDeContrat; //apprentissage ou professionnalisation
+    var $duree; //duree du contrat d'alternance (mois)
+    var $indemnite; //indemnite de l'alternance (mensuel)
     var $aSonResume; // Indicateur de la présence d'un résumé ou pas
     var $note; // La note d'évaluation attribuée à l'étudiant
     var $idParrain; // Identifiant du parrain
+    var $idExaminateur; // Identifiant de l'examinateur
     var $idEtudiant; // Identifiant de l'étudiant
     var $idSoutenance; // Identifiant de la soutenance
     var $idreferent; // Identifiant du contact
@@ -21,39 +21,34 @@ class Contrat {
 
     /**
      * Constructeur d'un objet Contrat
+     *
      * @param integer $identifiant_BDD
      * @param string $sujetDAlt
      * @param integer $typeDeContrat
      * @param integer $duree
-    * @param integer $indemnite
+     * @param integer $indemnite
      * @param boolean $aSonResume
      * @param decimal $note
      * @param integer $idParrain
+     * @param integer $idExaminateur
      * @param integer $idEtudiant
      * @param integer $idSoutenance
      * @param integer $idreferent
      * @param integer $idTheme
      */
-    public function __construct($identifiant_BDD,
-    $sujetDAlt,
-    $typeDeContrat,
-    $duree,
-    $indemnite,
-    $aSonResume,
-    $note,
-    $idParrain,
-    $idEtudiant,
-    $idSoutenance,
-	  $idreferent,
-    $idTheme) {
+    public function __construct($identifiant_BDD, $sujetDAlt, $typeDeContrat,
+				$duree, $indemnite, $aSonResume, $note,
+				$idParrain, $idExaminateur, $idEtudiant,
+				$idSoutenance, $idreferent, $idTheme) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->sujetDeContrat = $sujetDAlt;
-  $this->typeDeContrat = $typeDeContrat;
-  $this->duree = $duree;
-  $this->indemnite = $indemnite;
+	$this->typeDeContrat = $typeDeContrat;
+	$this->duree = $duree;
+	$this->indemnite = $indemnite;
 	$this->aSonResume = $aSonResume;
 	$this->note = $note;
 	$this->idParrain = $idParrain;
+	$this->idExaminateur = $idExaminateur;
 	$this->idEtudiant = $idEtudiant;
 	$this->idSoutenance = $idSoutenance;
 	$this->idreferent = $idreferent;
@@ -80,7 +75,7 @@ class Contrat {
     }
 
     public function getIndemnites() {
-  return $this->indemnite;
+	return $this->indemnite;
     }
 
     public function getASonResume() {
@@ -93,6 +88,10 @@ class Contrat {
 
     public function getIdParrain() {
 	return $this->idParrain;
+    }
+
+    public function getIdExaminateur() {
+	return $this->idExaminateur;
     }
 
     public function getIdEtudiant() {
@@ -119,16 +118,15 @@ class Contrat {
     }
 
     public function setTypeDeContrat($sds) {
-  $this->typeDeContrat = $sds;
+	$this->typeDeContrat = $sds;
     }
 
-
     public function setDuree($d) {
-      $this->duree = $d;
+	$this->duree = $d;
     }
 
     public function setIndemnites($i) {
-      $this->indemnite = $i;
+	$this->indemnite = $i;
     }
 
     public function setASonResume($asr) {
@@ -141,6 +139,10 @@ class Contrat {
 
     public function setIdParrain($idParrain) {
 	$this->idParrain = $idParrain;
+    }
+
+    public function setIdExaminateur($idExaminateur) {
+	$this->idExaminateur = $idExaminateur;
     }
 
     public function setIdEtudiant($idEtudiant) {
@@ -173,6 +175,10 @@ class Contrat {
 
     public function getParrain() {
 	return Parrain::getParrain($this->idParrain);
+    }
+
+    public function getExaminateur() {
+	return Parrain::getParrain($this->idExaminateur);
     }
 
     public function getSoutenance() {
@@ -210,18 +216,13 @@ class Contrat {
      */
     public static function getContrat($idContrat) {
 	$contratBDD = Contrat_BDD::getContrat($idContrat);
-	return new Contrat($contratBDD["idcontrat"],
-                    $contratBDD["sujetcontrat"],
-                    $contratBDD["typedecontrat"],
-                    $contratBDD["duree"],
-                    $contratBDD["indemnite"],
-                    $contratBDD["asonresume"],
-                    $contratBDD["note"],
-                    $contratBDD["idparrain"],
-                    $contratBDD["idetudiant"],
-                    $contratBDD["idsoutenance"],
-                    $contratBDD["idreferent"],
-                    $contratBDD["idtheme"]);
+	return new Contrat($contratBDD["idcontrat"], $contratBDD["sujetcontrat"],
+			   $contratBDD["typedecontrat"], $contratBDD["duree"],
+			   $contratBDD["indemnite"], $contratBDD["asonresume"],
+			   $contratBDD["note"], $contratBDD["idparrain"],
+			   $contratBDD["idexaminateur"], $contratBDD["idetudiant"],
+			   $contratBDD["idsoutenance"], $contratBDD["idreferent"],
+			   $contratBDD["idtheme"]);
     }
 
     /**
@@ -232,11 +233,13 @@ class Contrat {
      */
     public static function getContratFromEtudiantAndPromotion($idetudiant, $idpromotion) {
 	$contratBDD = Contrat_BDD::getContrat2($idetudiant, $idpromotion);
-	return new Contrat($contratBDD["idcontrat"], $contratBDD["sujetcontrat"],$contratBDD["typedecontrat"],$contratBDD["duree"],$contratBDD["indemnite"],
-			      $contratBDD["asonresume"], $contratBDD["note"],
-			      $contratBDD["idparrain"],
-			      $contratBDD["idetudiant"], $contratBDD["idsoutenance"],
-			      $contratBDD["idreferent"], $contratBDD["idtheme"]);
+	return new Contrat($contratBDD["idcontrat"], $contratBDD["sujetcontrat"],
+			   $contratBDD["typedecontrat"], $contratBDD["duree"],
+			   $contratBDD["indemnite"], $contratBDD["asonresume"],
+			   $contratBDD["note"], $contratBDD["idparrain"],
+			   $contratBDD["idexaminateur"], $contratBDD["idetudiant"],
+			   $contratBDD["idsoutenance"], $contratBDD["idreferent"],
+			   $contratBDD["idtheme"]);
     }
 
     /**
@@ -252,13 +255,13 @@ class Contrat {
 
 	$tabLC = array();
 	for ($i = 0; $i < sizeof($tabLCString); $i++)
-	    array_push($tabLC,
-		    new Contrat($tabLCString[$i][0], $tabLCString[$i][1],
-				   $tabLCString[$i][2], $tabLCString[$i][3],
-				   $tabLCString[$i][4], $tabLCString[$i][5],
-				   $tabLCString[$i][6], $tabLCString[$i][7],
-				   $tabLCString[$i][8], $tabLCString[$i][9],
-           $tabLCString[$i][10], $tabLCString[$i][11]));
+	    array_push($tabLC, new Contrat($tabLCString[$i][0], $tabLCString[$i][1],
+					   $tabLCString[$i][2], $tabLCString[$i][3],
+					   $tabLCString[$i][4], $tabLCString[$i][5],
+					   $tabLCString[$i][6], $tabLCString[$i][7],
+					   $tabLCString[$i][8], $tabLCString[$i][9],
+					   $tabLCString[$i][10], $tabLCString[$i][11],
+					   $tabLCString[$i][12]));
 
 	return $tabLC;
     }
@@ -273,13 +276,13 @@ class Contrat {
 
 	$tabLC = array();
 	for ($i = 0; $i < sizeof($tabLCString); $i++)
-	    array_push($tabLC,
-		    new Contrat($tabLCString[$i][0], $tabLCString[$i][1],
-				   $tabLCString[$i][2], $tabLCString[$i][3],
-				   $tabLCString[$i][4], $tabLCString[$i][5],
-				   $tabLCString[$i][6], $tabLCString[$i][7],
-				   $tabLCString[$i][8], $tabLCString[$i][9],
-           $tabLCString[$i][10], $tabLCString[$i][11]));
+	    array_push($tabLC, new Contrat($tabLCString[$i][0], $tabLCString[$i][1],
+					   $tabLCString[$i][2], $tabLCString[$i][3],
+					   $tabLCString[$i][4], $tabLCString[$i][5],
+					   $tabLCString[$i][6], $tabLCString[$i][7],
+					   $tabLCString[$i][8], $tabLCString[$i][9],
+					   $tabLCString[$i][10], $tabLCString[$i][11],
+					   $tabLCString[$i][12]));
 
 	return $tabLC;
     }

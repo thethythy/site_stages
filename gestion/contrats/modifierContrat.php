@@ -27,22 +27,18 @@ $oParcours = $oPromo->getParcours();
 if (isset($_POST['edit'])) {
     extract($_POST);
 
-    if (isset($sujet)){
-      $oContrat->setSujetDeContrat($sujet);
-    }
-
-
-    if (isset($idTheme))
-	   $oContrat->setIdTheme($idTheme);
-     $oContrat->setIndemnites($indemnite);
+    // Modification du contrat
+    if (isset($sujet)) $oContrat->setSujetDeContrat($sujet);
+    if (isset($idTheme)) $oContrat->setIdTheme($idTheme);
+    $oContrat->setIndemnites($indemnite);
     $oContrat->setTypeDeContrat($typeContrat);
     $oContrat->setIdParrain($idPar);
+    $oContrat->setIdExaminateur($idExa);
     $oContrat->setIdReferent($idCont);
-
     $idContrat = Contrat_BDD::sauvegarder($oContrat);
 
+    // Affichage
     $oEtu = $oContrat->getEtudiant();
-
     echo "Les informations sur le contrat de " . $oEtu->getNom() . " " . $oEtu->getPrenom() . " ont été mises à jour.";
     ?>
     <table>

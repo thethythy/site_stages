@@ -612,9 +612,9 @@ TRUNCATE TABLE `contrat`;
 -- Déchargement des données de la table `contrat`
 --
 
-INSERT INTO `contrat` (`idcontrat`, `sujetcontrat`, `typedecontrat`, `duree`, `indemnite`, `asonresume`, `note`, `idparrain`, `idreferent`, `idetudiant`, `idsoutenance`, `idtheme`) VALUES
-(387, 'huyguyg', 0, 1, 800, 0, '0.00', 12, 892, 430, NULL, 1),
-(388, 'Truc', 0, 1, 1200, 0, '0.00', 1, 898, 431, NULL, 1);
+INSERT INTO `contrat` (`idcontrat`, `sujetcontrat`, `typedecontrat`, `duree`, `indemnite`, `asonresume`, `note`, `idparrain`, `idexaminateur`,`idreferent`, `idetudiant`, `idsoutenance`, `idtheme`) VALUES
+(387, 'huyguyg', 0, 1, 800, 0, '0.00', 12, 3 , 892, 430, NULL, 1),
+(388, 'Truc', 0, 1, 1200, 0, '0.00', 1, 3, 898, 431, NULL, 1);
 
 --
 -- Tronquer la table avant d'insérer `convention`

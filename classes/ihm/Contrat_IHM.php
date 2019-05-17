@@ -3,7 +3,7 @@
 class Contrat_IHM {
 
     /**
-     * Afficher un formulaire de création ou de modification d'un contrat de stage
+     * Afficher un formulaire de création ou de modification d'un contrat d'alternance
      * Si $contrat = "" alors il s'agit d'un formulaire de création (champs vide)
      * @param Contrat $contrat Objet qui est modifié et dont les informations son affichées.
      * @param tableau d'objets $tabEtu Tableau contenant les étudiants à afficher
@@ -15,9 +15,13 @@ class Contrat_IHM {
 
 	if ($contrat != "") {
 	    $parrain = $contrat->getParrain();
+	    $examinateur = $contrat->getExaminateur();
 	    $etudiant = $contrat->getEtudiant();
 	    $contact = $contrat->getContact();
 	}
+
+	$tabPar = Parrain::listerParrain();
+
 	?>
 	<form method=post action="">
 	    <table width="100%">
@@ -31,18 +35,18 @@ class Contrat_IHM {
 				    if ($contrat != "") {
 					echo $etudiant->getNom() . " " . $etudiant->getPrenom();
 				    } else {
-				    ?>
-				    <select name="idEtu" style="width: 300px;">
-					<?php
-					for ($i = 0; $i < sizeof($tabEtu); $i++) {
-					    if ((isset($_POST['idEtu'])) && ($_POST['idEtu'] == $tabEtu[$i]->getIdentifiantBDD()))
-						echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-					    else
-						echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
-					}
 					?>
-				    </select>
-				    <?php
+					<select name="idEtu" style="width: 300px;">
+					    <?php
+					    for ($i = 0; $i < sizeof($tabEtu); $i++) {
+						if ((isset($_POST['idEtu'])) && ($_POST['idEtu'] == $tabEtu[$i]->getIdentifiantBDD()))
+						    echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+						else
+						    echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+					    }
+					    ?>
+					</select>
+					<?php
 				    }
 				    ?>
 				</td>
@@ -51,37 +55,50 @@ class Contrat_IHM {
 				<td>Référent</td>
 				<td>
 				    <select name="idPar" style="width: 300px;">
-				    <?php
-				    $tabPar = Parrain::listerParrain();
-				    for ($i = 0; $i < sizeof($tabPar); $i++) {
-					if ((($contrat != "") && ($parrain->getIdentifiantBDD() == $tabPar[$i]->getIdentifiantBDD())) ||
-					    ((isset($_POST['idPar'])) && ($_POST['idPar'] == $tabPar[$i]->getIdentifiantBDD())))
-					    echo "<option selected value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
-					else
-					    echo "<option value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
-				    }
-				    ?>
+					<?php
+					for ($i = 0; $i < sizeof($tabPar); $i++) {
+					    if ((($contrat != "") && ($parrain->getIdentifiantBDD() == $tabPar[$i]->getIdentifiantBDD())) ||
+						((isset($_POST['idPar'])) && ($_POST['idPar'] == $tabPar[$i]->getIdentifiantBDD())))
+						echo "<option selected value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+					    else
+						echo "<option value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+					}
+					?>
 				    </select>
 				</td>
 			    </tr>
 			    <tr>
+				<td>Examinateur</td>
+				<td>
+				    <select name="idExa" style="width: 300px;">
+					<?php
+					for ($i = 0; $i < sizeof($tabPar); $i++) {
+					    if ((($contrat != "") && ($examinateur->getIdentifiantBDD() == $tabPar[$i]->getIdentifiantBDD())) ||
+						((isset($_POST['idExa'])) && ($_POST['idExa'] == $tabPar[$i]->getIdentifiantBDD())))
+						echo "<option selected value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+					    else
+						echo "<option value='" . $tabPar[$i]->getIdentifiantBDD() . "'>" . $tabPar[$i]->getNom() . " " . $tabPar[$i]->getPrenom() . "</option>";
+					}
+					?>
+				    </select>
+				</td>
 			    </tr>
 			    <tr>
 				<td>Référent entreprise</td>
 				<td>
 				    <select name="idCont" style="width: 300px;">
-				    <?php
-				    $tabCont = Contact::getListeContacts("");
-				    for ($i = 0; $i < sizeof($tabCont); $i++) {
-					$entreprise = $tabCont[$i]->getEntreprise();
-					$nomEntreprise = " - " . $entreprise->getNom() . " (" . $entreprise->getVille() . ")";
-					if ((($contrat != "") && ($contact->getIdentifiantBDD() == $tabCont[$i]->getIdentifiantBDD())) ||
-					    ((isset($_POST['idCont'])) && ($_POST['idCont'] == $tabCont[$i]->getIdentifiantBDD())))
-					    echo "<option selected value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
-					else
-					    echo "<option value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
-				    }
-				    ?>
+					<?php
+					$tabCont = Contact::getListeContacts("");
+					for ($i = 0; $i < sizeof($tabCont); $i++) {
+					    $entreprise = $tabCont[$i]->getEntreprise();
+					    $nomEntreprise = " - " . $entreprise->getNom() . " (" . $entreprise->getVille() . ")";
+					    if ((($contrat != "") && ($contact->getIdentifiantBDD() == $tabCont[$i]->getIdentifiantBDD())) ||
+						((isset($_POST['idCont'])) && ($_POST['idCont'] == $tabCont[$i]->getIdentifiantBDD())))
+						echo "<option selected value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
+					    else
+						echo "<option value='" . $tabCont[$i]->getIdentifiantBDD() . "'>" . $tabCont[$i]->getNom() . " " . $tabCont[$i]->getPrenom() . $nomEntreprise . "</option>";
+					}
+					?>
 				    </select>
 				</td>
 			    </tr>
@@ -89,61 +106,61 @@ class Contrat_IHM {
 				<td>Thème de stage</td>
 				<td>
 				    <select name="idTheme" style="width: 300px;">
-				    <?php
-				    $tabTheme = ThemeDeStage::getListeTheme();
-				    for ($i = 0; $i < sizeof($tabTheme); $i++) {
-					$couleur = $tabTheme[$i]->getCouleur();
-					if (($contrat != "") && $tabTheme[$i]->getIdentifiantBDD() == $contrat->getIdTheme())
-					    echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-					else
-					    echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
-				    }
-				    ?>
+					<?php
+					$tabTheme = ThemeDeStage::getListeTheme();
+					for ($i = 0; $i < sizeof($tabTheme); $i++) {
+					    $couleur = $tabTheme[$i]->getCouleur();
+					    if (($contrat != "") && $tabTheme[$i]->getIdentifiantBDD() == $contrat->getIdTheme())
+						echo "<option selected value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+					    else
+						echo "<option value='" . $tabTheme[$i]->getIdentifiantBDD() . "'style='color: #" . $couleur->getCode() . ";'>" . $tabTheme[$i]->getTheme() . "</option>";
+					}
+					?>
 				    </select>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Type Offre</td>
 				<td>
-				<?php
-				if (($contrat != "") && ($contrat->getTypeDeContrat() == 0)) {
-				    echo "<input type='radio' id='' name ='typeContrat'  value='1' onclick=''> Apprentissage
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type='radio'  id='' name ='typeContrat' checked='checked' value='0' onclick=''> Professionnalisation";
-				} else {
-				    echo "<input type='radio' id='' name ='typeContrat' checked='checked' value='1' onclick=''> Apprentissage
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type='radio'  id='' name ='typeContrat'  value='0' onclick=''> Professionnalisation";
-				}
-				?>
+				    <?php
+				    if (($contrat != "") && ($contrat->getTypeDeContrat() == 0)) {
+					echo "<input type='radio' id='' name ='typeContrat'  value='1' onclick=''> Apprentissage
+					    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <input type='radio'  id='' name ='typeContrat' checked='checked' value='0' onclick=''> Professionnalisation";
+				    } else {
+					echo "<input type='radio' id='' name ='typeContrat' checked='checked' value='1' onclick=''> Apprentissage
+					    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <input type='radio'  id='' name ='typeContrat'  value='0' onclick=''> Professionnalisation";
+				    }
+				    ?>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Durée du contrat</td>
 				<td>
-				<?php
-				if (($contrat != "") && ($contrat->getDuree() == 2)) {
-				    echo "<input type='radio' id='' name ='dureeContrat'  value='1' onclick=''> 1 an
-						    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						    <input type='radio'  id='' name ='dureeContrat' checked='checked' value='2' onclick=''> 2 ans";
-				} else {
-				    echo "<input type='radio' id='' name ='dureeContrat' checked='checked' value='1' onclick=''> 1 an
-					       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					       <input type='radio'  id='' name ='dureeContrat'  value='2' onclick=''> 2 ans";
-				}
-				?>
+				    <?php
+				    if (($contrat != "") && ($contrat->getDuree() == 2)) {
+					echo "<input type='radio' id='' name ='dureeContrat'  value='1' onclick=''> 1 an
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type='radio'  id='' name ='dureeContrat' checked='checked' value='2' onclick=''> 2 ans";
+				    } else {
+					echo "<input type='radio' id='' name ='dureeContrat' checked='checked' value='1' onclick=''> 1 an
+						   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						   <input type='radio'  id='' name ='dureeContrat'  value='2' onclick=''> 2 ans";
+				    }
+				    ?>
 				</td>
 			    </tr>
 			    <tr>
 				<td>Indemnités mensuelles</td>
 				<td>
-				<?php
-				if ($contrat != "") {
-				    echo "<input type='text' name='indemnite' size='100' value =" . $contrat->getIndemnites() . " >";
-				} else {
-				    echo "<input type='text' name='indemnite' size='100' >";
-				}
-				?>
+				    <?php
+				    if ($contrat != "") {
+					echo "<input type='text' name='indemnite' size='100' value =" . $contrat->getIndemnites() . " >";
+				    } else {
+					echo "<input type='text' name='indemnite' size='100' >";
+				    }
+				    ?>
 				</td>
 			    </tr>
 			    <tr>
