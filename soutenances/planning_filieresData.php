@@ -19,7 +19,6 @@ if (!headers_sent())
 if (!isset($_POST['promotion'])) {
 	if (date('n')>=10) $annee = date('Y');
 	else $annee = date('Y')-1;
-	//$annee = 2010; // Pour tester
 
 	// Liste promotion de l'année
 	$filtrePromotion = new FiltreNumeric('anneeuniversitaire', $annee);
@@ -33,20 +32,25 @@ if (!isset($_POST['promotion'])) {
 if (isset($promotion)) {
 	$annee = $promotion->getAnneeUniversitaire();
 
-	// Listes conventions
+	// Liste conventions ou contrats
 	$filtreConvention = new FiltreNumeric($tab19.'.idpromotion', $promotion->getIdentifiantBDD());
-	// Listes conventions
 	$listeConvention = Convention::getListeConvention($filtreConvention);
 
-	// Tri des conventions selon l'heure de passage
-	usort($listeConvention, array("Convention", "compareHeureSoutenance"));
+	$filtreContrat = new FiltreNumeric($tab32.'.idpromotion', $promotion->getIdentifiantBDD());
+	$listeContrat = Contrat::getListeContrat($filtreContrat);
+
+	// Fusion des deux listes
+	$listeContConv = array_merge($listeConvention, $listeContrat);
+
+	// Tri selon l'heure de passage
+	usort($listeContConv, array("Convention", "compareHeureSoutenance"));
 
 	// Pour chaque date soutenance
 	$filtreDateSoutenance = new FiltreNumeric('annee', $annee+1);
 	$listeDateSoutenance = DateSoutenance::listerDateSoutenance($filtreDateSoutenance);
 
 	// Affichage du planning
-	Promotion_IHM::afficherPlanningPromotions($promotion, $listeDateSoutenance, $listeConvention);
+	Promotion_IHM::afficherPlanningPromotions($promotion, $listeDateSoutenance, $listeContConv);
 } else
 	echo "<br/><center>Veuillez sélectionner une promotion.</center>";
 

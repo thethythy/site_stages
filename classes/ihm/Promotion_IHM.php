@@ -811,7 +811,7 @@ class Promotion_IHM {
 
 			// Affichage
 			echo
-			"<tr id='ligne" . $i . "'>
+			"<tr class='ligne" . $i . "'>
 			    <td>" . $heureDebut . "h" . $minuteDebut . " / " . $heureFin . "h" . $minuteFin . "</td>
 			    <td>" . strtoupper($etudiant->getNom()) . " " . $etudiant->getPrenom() . "</td>
 			    <td><a href='fichedestage.php?idEtu=" . $etudiant->getIdentifiantBDD() . "&idPromo=" . $promotion->getIdentifiantBDD() . "' target='_blank'><img src='../images/resume.png' alt='Résumé'/></a></td>
