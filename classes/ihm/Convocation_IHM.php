@@ -55,25 +55,31 @@ class Convocation_IHM {
 		    <tr id='entete'>
 			<td width="20%">Promotion</td>
 			<td width='20%'>Etudiant</td>
-			<td width='50%'>Encadrant</td>
+			<td width='15%'>Statut</td>
+			<td width='35%'>Encadrant</td>
 			<td width='10%'>Convocation</td>
 		    </tr>
 
 		    <?php
 		    for ($i = 0; $i < sizeof($tabOConvocation); $i++) {
 			$oSoutenance = Soutenance::getSoutenance($tabOConvocation[$i]->getIdsoutenance());
+
 			$oConvention = Soutenance::getConvention($oSoutenance);
+			$oContrat = Soutenance::getContrat($oSoutenance);
 
-			$etudiant = $oConvention->getEtudiant();
-
-			$promotion = $etudiant->getPromotion($annee);
-			if ($promotion) {
-			    $nomParcours = $promotion->getParcours()->getNom();
-			    $nomFiliere = $promotion->GetFiliere()->getNom();
+			if ($oConvention) {
+			    $etudiant = $oConvention->getEtudiant();
+			    $contact = $oConvention->getContact();
+			    $entreprise = $oConvention->getEntreprise();
+			} else {
+			    $etudiant = $oContrat->getEtudiant();
+			    $contact = $oContrat->getContact();
+			    $entreprise = $oContrat->getEntreprise();
 			}
 
-			$contact = $oConvention->getContact();
-			$entreprise = $oConvention->getEntreprise();
+			$promotion = $etudiant->getPromotion($annee);
+			$nomParcours = $promotion->getParcours()->getNom();
+			$nomFiliere = $promotion->GetFiliere()->getNom();
 
 			$idConvocation = $tabOConvocation[$i]->getIdentifiantBDD();
 			?>
@@ -84,6 +90,9 @@ class Convocation_IHM {
 			    </td>
 			    <td align="center">
 				<?php echo $etudiant->getPrenom() . " " . $etudiant->getNom(); ?>
+			    </td>
+			    <td align='centre'>
+				<?php echo $oConvention ? "Stagiaire" : "Alternant"; ?>
 			    </td>
 			    <td align="center">
 				<?php echo $contact->getPrenom() ." " . $contact->getNom() . " (". $entreprise->getNom() . ")" ?>

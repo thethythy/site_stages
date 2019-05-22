@@ -73,12 +73,19 @@ if (isset($_POST['convocation']) && isset($_POST['date']) && isset($_POST['convo
 	// Envoie si pas déjà envoyé
 	if ($oConvocation->getEnvoi() == 0) {
 	    $oSoutenance = Soutenance::getSoutenance($oConvocation->getIDsoutenance());
-	    $oConvention = Soutenance::getConvention($oSoutenance);
-	    $oEtudiant = $oConvention->getEtudiant();
-	    $oContact = $oConvention->getContact();
 
-	    $statut = $oEtudiant->getCodeEtudiant();
-	    if ($statut == 5 || $statut == 51 || $statut == 52)
+	    $oConvention = Soutenance::getConvention($oSoutenance);
+	    $oContrat = Soutenance::getContrat($oSoutenance);
+
+	    if ($oConvention) {
+		$oEtudiant = $oConvention->getEtudiant();
+		$oContact = $oConvention->getContact();
+	    } else {
+		$oEtudiant = $oContrat->getEtudiant();
+		$oContact = $oContrat->getContact();
+	    }
+
+	    if ($oContrat)
 		$cadre = "alternant";
 	    else
 		$cadre = "stagiaire";
