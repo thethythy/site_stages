@@ -50,7 +50,7 @@ if (isset($annee)) {
 if (isset($_POST['add']) && isset($_POST['idEtu'])) {
     extract($_POST);
 
-    $newContrat = new Contrat("", $sujet,$typeContrat,$dureeContrat,$indemnite, 0, 0, $idPar, $idExa, $idEtu, NULL, $idCont, $idTheme);
+    $newContrat = new Contrat("", $sujet,$typeContrat,$dureeContrat,$indemnite, 0, 0, $idPar, $idExa, $idCont, $idEtu, NULL, $idTheme);
 
     // Si la convention que l'on veut créer n'existe pas déjà
     if (Contrat_BDD::existe($newContrat, $annee) == false) {

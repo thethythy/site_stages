@@ -27,7 +27,7 @@ class Affectation_IHM {
 
 			$etudiant = $oContrat->getEtudiant();
 			$referent = $oContrat->getParrain();
-			$contact = $oContrat->getTuteur();
+			$contact = $oContrat->getContact();
 			$entreprise = $oContrat->getEntreprise();
 
 			$idNotification = $tabOAffectation[$i]->getIdentifiantBDD();

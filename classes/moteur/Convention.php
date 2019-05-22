@@ -182,11 +182,15 @@ class Convention {
   */
   public static function getConvention($idConvention) {
     $convBDD = Convention_BDD::getConvention($idConvention);
-    return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"],
-    $convBDD["asonresume"], $convBDD["note"],
-    $convBDD["idparrain"], $convBDD["idexaminateur"],
-    $convBDD["idetudiant"], $convBDD["idsoutenance"],
-    $convBDD["idcontact"], $convBDD["idtheme"]);
+    if ($convBDD) {
+	return new Convention($convBDD["idconvention"], $convBDD["sujetdestage"],
+			      $convBDD["asonresume"], $convBDD["note"],
+			      $convBDD["idparrain"], $convBDD["idexaminateur"],
+			      $convBDD["idetudiant"], $convBDD["idsoutenance"],
+			      $convBDD["idcontact"], $convBDD["idtheme"]);
+    } else {
+	return NULL;
+    }
   }
 
   /**

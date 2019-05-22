@@ -31,15 +31,15 @@ class Contrat {
      * @param decimal $note
      * @param integer $idParrain
      * @param integer $idExaminateur
+     * @param integer $idreferent
      * @param integer $idEtudiant
      * @param integer $idSoutenance
-     * @param integer $idreferent
      * @param integer $idTheme
      */
     public function __construct($identifiant_BDD, $sujetDAlt, $typeDeContrat,
 				$duree, $indemnite, $aSonResume, $note,
-				$idParrain, $idExaminateur, $idEtudiant,
-				$idSoutenance, $idreferent, $idTheme) {
+				$idParrain, $idExaminateur, $idreferent,
+				$idEtudiant, $idSoutenance, $idTheme) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->sujetDeContrat = $sujetDAlt;
 	$this->typeDeContrat = $typeDeContrat;
@@ -181,10 +181,6 @@ class Contrat {
 	return Parrain::getParrain($this->idExaminateur);
     }
 
-    public function getTuteur() {
-	return Contact::getContact($this->idreferent);
-    }
-
     public function getSoutenance() {
 	if ($this->idSoutenance == 0)
 	    return new Soutenance(0, 0, 0, 0, 0, 0);
@@ -224,8 +220,8 @@ class Contrat {
 			   $contratBDD["typedecontrat"], $contratBDD["duree"],
 			   $contratBDD["indemnite"], $contratBDD["asonresume"],
 			   $contratBDD["note"], $contratBDD["idparrain"],
-			   $contratBDD["idexaminateur"], $contratBDD["idetudiant"],
-			   $contratBDD["idsoutenance"], $contratBDD["idreferent"],
+			   $contratBDD["idexaminateur"], $contratBDD["idreferent"],
+			   $contratBDD["idetudiant"], $contratBDD["idsoutenance"],
 			   $contratBDD["idtheme"]);
     }
 
@@ -241,8 +237,8 @@ class Contrat {
 			   $contratBDD["typedecontrat"], $contratBDD["duree"],
 			   $contratBDD["indemnite"], $contratBDD["asonresume"],
 			   $contratBDD["note"], $contratBDD["idparrain"],
-			   $contratBDD["idexaminateur"], $contratBDD["idetudiant"],
-			   $contratBDD["idsoutenance"], $contratBDD["idreferent"],
+			   $contratBDD["idexaminateur"], $contratBDD["idreferent"],
+			   $contratBDD["idetudiant"], $contratBDD["idsoutenance"],
 			   $contratBDD["idtheme"]);
     }
 

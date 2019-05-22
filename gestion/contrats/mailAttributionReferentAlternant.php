@@ -77,7 +77,7 @@ if (isset($_POST['notification']) && isset($_POST['notifications'])) {
 	if ($oAffectation->getEnvoi() == 0) {
 	    $oContrat = Contrat::getContrat($oAffectation->getIdContrat());
 	    $oEtudiant = $oContrat->getEtudiant();
-	    $oContact = $oContrat->getTuteur();
+	    $oContact = $oContrat->getContact();
 	    $oReferent = $oContrat->getParrain();
 
 	    // Envoyer la notification

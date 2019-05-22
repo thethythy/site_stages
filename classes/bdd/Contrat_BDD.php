@@ -168,9 +168,9 @@ class Contrat_BDD {
 		array_push($tab, $ods['note']);
 		array_push($tab, $ods['idparrain']);
 		array_push($tab, $ods['idexaminateur']);
+		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idetudiant']);
 		array_push($tab, $ods['idsoutenance']);
-		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idtheme']);
 
 		array_push($tabC, $tab);
@@ -224,9 +224,9 @@ class Contrat_BDD {
 		array_push($tab, $ods['note']);
 		array_push($tab, $ods['idparrain']);
 		array_push($tab, $ods['idexaminateur']);
+		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idetudiant']);
 		array_push($tab, $ods['idsoutenance']);
-		array_push($tab, $ods['idreferent']);
 		array_push($tab, $ods['idtheme']);
 
 		array_push($tabC, $tab);

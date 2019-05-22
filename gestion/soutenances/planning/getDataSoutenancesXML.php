@@ -41,7 +41,21 @@ if (sizeof($tabSoutenances) > 0) {
 
 		// Fin de l'événement
 		$convention = Soutenance::getConvention($tabSoutenances[$i]);
-		$etudiant = $convention->getEtudiant();
+		$idconvention = "";
+		$contrat = Soutenance::getContrat($tabSoutenances[$i]);
+		$idcontrat = "";
+
+		if ($convention) {
+		    $convOUcont = $convention;
+		    $statut = " &#91;STA&#93;";
+		    $idconvention = $convention->getIdentifiantBDD();
+		} else {
+		    $convOUcont = $contrat;
+		    $statut = " &#91;ALT&#93;";
+		    $idcontrat = $contrat->getIdentifiantBDD();
+		}
+
+		$etudiant = $convOUcont->getEtudiant();
 		$promotion = $etudiant->getPromotion($annee - 1);
 		$filiere = $promotion->getFiliere();
 		$temps_soutenance = $filiere->getTempsSoutenance();
@@ -56,33 +70,34 @@ if (sizeof($tabSoutenances) > 0) {
 		print("\t\t<text></text>\n");
 
 		// Détails
-		$prenom_nom_etudiant = $etudiant->getPrenom()." ".$etudiant->getNom();
+		$prenom_nom_etudiant = $etudiant->getPrenom()." ".$etudiant->getNom().$statut;
 		print("\t\t<details><![CDATA[".$prenom_nom_etudiant."]]></details>\n");
 
 		// Couleur du texte = noir
 		print("\t\t<textColor>#000000</textColor>\n");
 
 		// Identifiant dans l'arbre
-		$iditemtree = $promotion->getIdentifiantBDD()."_". $filiere->getIdentifiantBDD()."_".$convention->getIdentifiantBDD();
+		$iditemtree = $promotion->getIdentifiantBDD()."_". $filiere->getIdentifiantBDD()."_".$convOUcont->getIdentifiantBDD();
 		print("\t\t<iditemtree>".$iditemtree."</iditemtree>\n");
-		print("\t\t<idconvention>".$convention->getIdentifiantBDD()."</idconvention>\n");
+		print("\t\t<idconvention>".$idconvention."</idconvention>\n");
+		print("\t\t<idcontrat>".$idcontrat."</idcontrat>\n");
 
 		// Parrain
-		$nom_prenom_parrain = $convention->getParrain()->getNom()." ".$convention->getParrain()->getPrenom();
+		$nom_prenom_parrain = $convOUcont->getParrain()->getNom()." ".$convOUcont->getParrain()->getPrenom();
 		print("\t\t<parrain><![CDATA[".$nom_prenom_parrain."]]></parrain>\n");
-		print("\t\t<idparrain>".$convention->getParrain()->getIdentifiantBDD()."</idparrain>\n");
+		print("\t\t<idparrain>".$convOUcont->getParrain()->getIdentifiantBDD()."</idparrain>\n");
 
 		// Couleur de l'événement = celle du parrain
-		print("\t\t<color>#".$convention->getParrain()->getCouleur()->getCode()."</color>\n");
+		print("\t\t<color>#".$convOUcont->getParrain()->getCouleur()->getCode()."</color>\n");
 
 		// Examinateur
-		$examinateur = $convention->getExaminateur();
+		$examinateur = $convOUcont->getExaminateur();
 		$nom_prenom_examinateur = $examinateur->getNom()." ".$examinateur->getPrenom();
 		print("\t\t<examinateur><![CDATA[".$nom_prenom_examinateur."]]></examinateur>\n");
 		print("\t\t<idexaminateur>".$examinateur->getIdentifiantBDD()."</idexaminateur>\n");
 
 		// Entreprise
-		$contact = $convention->getContact();
+		$contact = $convOUcont->getContact();
 		$nom_lieu_entreprise = $contact->getEntreprise()->getNom()." (".$contact->getEntreprise()->getVille().")";
 		print("\t\t<entreprise><![CDATA[".$nom_lieu_entreprise."]]></entreprise>\n");
 		print("\t\t<idcontact>".$contact->getIdentifiantBDD()."</idcontact>\n");

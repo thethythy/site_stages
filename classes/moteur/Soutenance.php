@@ -106,16 +106,36 @@ class Soutenance {
     }
 
     /**
-     * Obtenir un objet Convention associée à la soutenance
-     * @param integer $soutenance
-     * @return Convention
+     * Obtenir un objet Convention associé à la soutenance
+     * @param Soutenance $soutenance
+     * @return Convention ou null
      */
     public static function getConvention($soutenance) {
 	$tab_donnees = Soutenance_BDD::getConvention($soutenance->getIdentifiantBDD());
-	return new Convention($tab_donnees[0], $tab_donnees[1], $tab_donnees[2],
-			      $tab_donnees[3], $tab_donnees[4], $tab_donnees[5],
-			      $tab_donnees[6], $tab_donnees[7], $tab_donnees[8],
-			      $tab_donnees[9]);
+	if ($tab_donnees)
+	    return new Convention($tab_donnees[0], $tab_donnees[1], $tab_donnees[2],
+			          $tab_donnees[3], $tab_donnees[4], $tab_donnees[5],
+			          $tab_donnees[6], $tab_donnees[7], $tab_donnees[8],
+			          $tab_donnees[9]);
+	else
+	    return NULL;
+    }
+
+    /**
+     * Obtenir un objet Contrat associé à la soutenance
+     * @param Soutenance $soutenance
+     * @return Contrat ou null
+     */
+    public static function getContrat($soutenance) {
+	$tab_donnees = Soutenance_BDD::getContrat($soutenance->getIdentifiantBDD());
+	if ($tab_donnees)
+	    return new Contrat($tab_donnees[0], $tab_donnees[1], $tab_donnees[2],
+			       $tab_donnees[3], $tab_donnees[4], $tab_donnees[5],
+			       $tab_donnees[6], $tab_donnees[7], $tab_donnees[8],
+			       $tab_donnees[9], $tab_donnees[10], $tab_donnees[11],
+			       $tab_donnees[12]);
+	else
+	    return NULL;
     }
 
     /**

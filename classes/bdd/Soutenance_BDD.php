@@ -116,6 +116,28 @@ class Soutenance_BDD {
     }
 
     /**
+     * Obtenir le contrat associé à une soutenance
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab31 Nom de la table 'contrat'
+     * @param integer $idsoutenance Identifiant de la soutenance concernée
+     * @return enregistrement ou FALSE
+     */
+    public static function getContrat($idsoutenance) {
+	global $db;
+	global $tab31;
+
+	$requete = "SELECT * FROM $tab31 WHERE idsoutenance='$idsoutenance'";
+	$res = $db->query($requete);
+
+	if ($res) {
+	    $enreg = $res->fetch_array();
+	    $res->free();
+	    return $enreg;
+	} else
+	    return FALSE;
+    }
+
+    /**
      * Obtenir les enregistrements Soutenance à partir de la salle et de la date
      * @global resource $db Référence sur la base ouverte
      * @global string $tab17 Nom de la table 'soutenances'
