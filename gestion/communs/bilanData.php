@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page bilanConventionsData.php
+ * Page bilanData.php
  * Utilisation : page retournant une synthèse des étudiants ayant une convention
  * Accès : restreint par authentification HTTP
  */

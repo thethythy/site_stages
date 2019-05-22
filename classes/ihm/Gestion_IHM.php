@@ -237,22 +237,20 @@ class Gestion_IHM {
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
-				    Conventions/Contrats
+				    Conventions / Contrats
 				</td>
 			    </tr>
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./conventions/gestionThemeDeStage.php">Gérer les thèmes de stage</a></li><br/>
+					<li><a href="./communs/gestionThemeDeStage.php">Gérer les thèmes de stage/alternance</a></li><br/>
 					<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
 					<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li><br/>
 					<li><a href="./contrats/saisirContrat.php">Saisir un contrat</a></li>
 					<li><a href="./contrats/modifierListeContrat.php">Modifier/Supprimer un contrat</a></li><br/>
 					<li><a href="./conventions/mailAttributionReferentStage.php">Notifier les référents stagiaire</a></li>
 					<li><a href="./contrats/mailAttributionReferentAlternant.php">Notifier les référents alternant</a></li><br/>
-					<li><a href="./conventions/saisirNotes.php">Saisir des notes de soutenance</a></li>
-					<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
-					<li><a href="./conventions/bilanConventions.php">Bilan des conventions/contrats</a></li>
+					<li><a href="./communs/bilan.php">Bilan des conventions/contrats</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -267,10 +265,12 @@ class Gestion_IHM {
 				<td>
 				    <ul>
 					<li><a href="./soutenances/gestionSalle.php">Gérer les salles</a></li>
-					<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li><br/>
-					<li><a href="./soutenances/gestionTempsSoutenance.php">Gérer les durées de soutenance</a></li>
-					<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li><br/>
-					<li><a href="./soutenances/convocation.php">Convocation aux soutenances</a></li>
+					<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li>
+					<li><a href="./soutenances/gestionTempsSoutenance.php">Gérer les durées de soutenance</a></li><br/>
+					<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li>
+					<li><a href="./soutenances/convocation.php">Convocation aux soutenances</a></li><br/>
+					<li><a href="./communs/saisirNotes.php">Saisir des notes de soutenance</a></li>
+					<li><a href="./communs/rattacherResumes.php">Rattacher des résumés</a></li>
 				    </ul>
 				</td>
 			    </tr>
