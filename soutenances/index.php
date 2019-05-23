@@ -33,7 +33,7 @@ IHM_Menu::menuSoutenance();
 		<td>Soutenance</td>
 	</tr>
 
-	<tr id="ligne0">
+	<tr class="ligne0">
 		<td>Master 1</td>
 		<td>avril à juin</td>
 		<td>9 avril 2018</td>
@@ -43,7 +43,7 @@ IHM_Menu::menuSoutenance();
 		<td>2 juillet 2018</td>
 	</tr>
 
-	<tr id="ligne1">
+	<tr class="ligne1">
 		<td>Master 2 AFD</td>
 		<td>mars à août</td>
 		<td>5 mars 2018</td>
@@ -53,7 +53,7 @@ IHM_Menu::menuSoutenance();
 		<td>30 août 2018</td>
 	</tr>
 
-	<tr id="ligne1">
+	<tr class="ligne0">
 		<td>Master 2 ATAL</td>
 		<td>janvier à juin</td>
 		<td>22 janvier 2018</td>

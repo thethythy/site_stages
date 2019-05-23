@@ -747,14 +747,14 @@ class Promotion_IHM {
      * d'une promotion
      * @param Promotion $promotion La promotion concernée
      * @param tableau d'objets $listeDateSoutenance La liste des dates de soutenances
-     * @param tableau d'objets $listeConvention La liste des conventions concernés
+     * @param tableau d'objets $listeConvOUCont La liste des conventions/contrats concernés
      */
-    public static function afficherPlanningPromotions($promotion, $listeDateSoutenance, $listeConvention) {
+    public static function afficherPlanningPromotions($promotion, $listeDateSoutenance, $listeConvOUCont) {
 	$enteteTableau = "<table>
 			    <tr id='entete'>
 				<td rowspan='2' style='width: 85px;'>Horaires</td>
 				<td rowspan='2' style='width: 160px;'>Nom prénom</td>
-				<td rowspan='2' style='width: 50px;'>Fiche de stage</td>
+				<td rowspan='2' style='width: 50px;'>Fiche résumé</td>
 				<td colspan='2'>Jury</td>
 				<td rowspan='2' style='width: 75px;'>Salle</td>
 			    </tr>
@@ -771,9 +771,13 @@ class Promotion_IHM {
 	    $i = 0;
 	    $j = 0;
 
-	    // Pour chaque convention
-	    foreach ($listeConvention as $convention) {
-		$soutenance = $convention->getSoutenance();
+	    // Pour chaque convention / contrat
+	    foreach ($listeConvOUCont as $convOUcont) {
+		$soutenance = $convOUcont->getSoutenance();
+
+		// Est-ce un stagiaire ou un alternant ?
+		$convention = Soutenance::getConvention($soutenance);
+		$fiche = $convention ? "fichedestage.php" : "fichedecontrat.php";
 
 		// On test s'il y a une soutenance associee a la date
 		if ($soutenance->getIdentifiantBDD() != 0 && $soutenance->getSalle()->getIdentifiantBDD() != 0) {
@@ -787,11 +791,10 @@ class Promotion_IHM {
 			$j++;
 			$k++;
 			$nomSalle = ($soutenance->getSalle()->getIdentifiantBDD() != 0) ? $soutenance->getSalle()->getNom() : "Non attribuée";
-			$etudiant = $convention->getEtudiant();
-			$parcours = $promotion->getParcours();
+			$etudiant = $convOUcont->getEtudiant();
 			$filiere = $promotion->getFiliere();
-			$parrain = $convention->getParrain();
-			$examinateur = $convention->getExaminateur();
+			$parrain = $convOUcont->getParrain();
+			$examinateur = $convOUcont->getExaminateur();
 
 			// Gestion horaires
 			$tempsSoutenance = $filiere->getTempsSoutenance();
@@ -814,7 +817,7 @@ class Promotion_IHM {
 			"<tr class='ligne" . $i . "'>
 			    <td>" . $heureDebut . "h" . $minuteDebut . " / " . $heureFin . "h" . $minuteFin . "</td>
 			    <td>" . strtoupper($etudiant->getNom()) . " " . $etudiant->getPrenom() . "</td>
-			    <td><a href='fichedestage.php?idEtu=" . $etudiant->getIdentifiantBDD() . "&idPromo=" . $promotion->getIdentifiantBDD() . "' target='_blank'><img src='../images/resume.png' alt='Résumé'/></a></td>
+			    <td><a href='".$fiche."?idEtu=" . $etudiant->getIdentifiantBDD() . "&idPromo=" . $promotion->getIdentifiantBDD() . "' target='_blank'><img src='../images/resume.png' alt='Résumé'/></a></td>
 			    <td>" . strtoupper($parrain->getNom()) . " " . $parrain->getPrenom() . "
 			    <td>" . strtoupper($examinateur->getNom()) . " " . $examinateur->getPrenom() . "
 			    <td>" . $nomSalle . "</td>

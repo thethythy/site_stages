@@ -55,7 +55,7 @@ if (isset($date) && isset($salle)) {
 			array_push($listeConvOUCont, $oContrat);
 	}
 
-	// Tri des conventions selon l'heure de passage
+	// Tri selon l'heure de passage
 	usort($listeConvOUCont, array("Convention", "compareHeureSoutenance"));
 
 	// Affichage du planning

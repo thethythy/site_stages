@@ -316,7 +316,7 @@ class Parrain_IHM {
           $filiere = $promotion->getFiliere();
           $parcours = $promotion->getParcours();
           ?>
-          <tr id="ligne<?php echo $cpt%2; $cpt++; ?>">
+          <tr class="ligne<?php echo $cpt%2; $cpt++; ?>">
             <td>Stage</td>
             <td>
               <?php
@@ -341,6 +341,7 @@ class Parrain_IHM {
           </tr>
           <?php
         }
+	// Affichage des contrats correspondants aux critères de recherches
         for ($i = 0; $i < sizeof($tabContrats); $i++) {
           if (isset($_POST['annee']) && $_POST['annee'] != "")
           $annee = $_POST['annee'];
@@ -351,7 +352,7 @@ class Parrain_IHM {
           $filiere = $promotion->getFiliere();
           $parcours = $promotion->getParcours();
           ?>
-          <tr id="ligne<?php echo $cpt%2; $cpt++; ?>">
+          <tr class="ligne<?php echo $cpt%2; $cpt++; ?>">
             <td>Alternance</td>
             <td>
               <?php
@@ -383,7 +384,7 @@ class Parrain_IHM {
     } else {
       ?>
       <br/>
-      <p>Aucun référent ne correspond aux critères de recherche.</p>
+      <p>Aucun suivi de stage ou d'alternance pour ces critères de recherche.</p>
       <br/>
       <?php
     }
@@ -524,15 +525,15 @@ class Parrain_IHM {
     * Chaque soutenance affichée permet d'accéder à la convention associée.
     * @param integer $annee L'année concernée
     * @param tableau d'objets $listeDateSoutenance Les objets DateSoutenance concernés
-    * @param tableau d'objets $listeConvention Les objets Convention concernés
+    * @param tableau d'objets $listeConvOUCont Les objets Convention/Contrat concernés
     */
-    public static function afficherPlanningParrains($annee, $listeDateSoutenance, $listeConvention) {
+    public static function afficherPlanningParrains($annee, $listeDateSoutenance, $listeConvOUCont) {
       $enteteTableau =
       "<table>
       <tr id='entete'>
       <td rowspan='2' style='width: 85px;'>Horaires</td>
       <td colspan='2'>Étudiant</td>
-      <td rowspan='2' style='width: 50px;'>Fiche de stage</td>
+      <td rowspan='2' style='width: 50px;'>Fiche résumé</td>
       <td colspan='2'>Jury</td>
       <td rowspan='2' style='width: 75px;'>Salle</td>
       </tr>
@@ -551,8 +552,12 @@ class Parrain_IHM {
         $i = 0; $j = 0;
 
         // Pour chaque convention
-        foreach ($listeConvention as $convention) {
-          $soutenance = $convention->getSoutenance();
+        foreach ($listeConvOUCont as $convOUcont) {
+          $soutenance = $convOUcont->getSoutenance();
+
+	  // Est-ce un stagiaire ou un alternant ?
+	  $convention = Soutenance::getConvention($soutenance);
+	  $fiche = $convention ? "fichedestage.php" : "fichedecontrat.php";
 
           // On test s'il y a une soutenance associee a la date
           if ($soutenance->getIdentifiantBDD()!=0 && $soutenance->getSalle()->getIdentifiantBDD()!=0) {
@@ -564,12 +569,12 @@ class Parrain_IHM {
               }
               $j++; $k++;
               $nomSalle = ($soutenance->getSalle()->getIdentifiantBDD()!=0) ? $soutenance->getSalle()->getNom() : "Non attribuée";
-              $etudiant = $convention->getEtudiant();
+              $etudiant = $convOUcont->getEtudiant();
               $promotion = $etudiant->getPromotion($annee);
               $parcours = $promotion->getParcours();
               $filiere = $promotion->getFiliere();
-              $parrain = $convention->getParrain();
-              $examinateur = $convention->getExaminateur();
+              $parrain = $convOUcont->getParrain();
+              $examinateur = $convOUcont->getExaminateur();
 
               // Gestion horaires
               $tempsSoutenance = $filiere->getTempsSoutenance();
@@ -594,7 +599,7 @@ class Parrain_IHM {
               <td>".strtoupper($etudiant->getNom())." ".$etudiant->getPrenom()."</td>
               <td>".$filiere->getNom()." ".$parcours->getNom()."</td>
               <td>
-              <a href='fichedestage.php?idEtu=".$etudiant->getIdentifiantBDD()."&idPromo=".$promotion->getIdentifiantBDD()."' target='_blank'>
+              <a href='".$fiche."?idEtu=".$etudiant->getIdentifiantBDD()."&idPromo=".$promotion->getIdentifiantBDD()."' target='_blank'>
               <img src=\"../images/resume.png\" />
               </a>
               </td>

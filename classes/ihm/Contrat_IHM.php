@@ -573,12 +573,12 @@ class Contrat_IHM {
 		<td colspan="2" style="column-span: all; border: 1px solid; padding: 15px;">
 		    <h3>Le contrat</h3>
 		    <?php
+			echo "Durée du contrat : ".$contrat->getDuree()." an(s)<br/>";
+			echo "Indemnités mensuelles : ".$contrat->getIndemnites()." €<br/>";
 			if ($contrat->aSonResume == "1"){
 			    echo "<a href='".$chemin.$contrat->getSujetDeContrat()."'>Résumé du contrat</a>";
 			} else {
 			    echo "Sujet de l'aternance : ".$contrat->getSujetDeContrat()."<br/>";
-			    echo "Durée du contrat : ".$contrat->getDuree()." an(s)<br/>";
-			    echo "Indemnités mensuelles : ".$contrat->getIndemnites()." €<br/>";
 			}
 		    ?>
 		</td>

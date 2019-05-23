@@ -42,7 +42,7 @@ if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['ensei
 	// Fusion des deux listes
 	$listeConvCont = array_merge($listeConvention, $listeContrat);
 
-	// Tri des conventions selon l'heure de passage
+	// Tri selon l'heure de passage
 	usort($listeConvCont, array("Convention", "compareHeureSoutenance"));
 
 	// Pour chaque date soutenance
