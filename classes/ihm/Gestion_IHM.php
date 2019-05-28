@@ -166,7 +166,7 @@ class Gestion_IHM {
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
-				    Alternance
+				    Alternances
 				</td>
 			    </tr>
 			    <tr>

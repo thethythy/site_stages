@@ -40,6 +40,12 @@ class Responsable_IHM {
 				</td>
 			    </tr>
 			    <tr>
+				<th width="100">Titre :</th>
+				<td>
+				    <input type="text" id="titre" name="titreresponsable" placeholder="Le titre du responsable"
+				</td>
+			    </tr>
+			    <tr>
 				<td colspan=2>
 				    <input type=submit value="Enregistrer les données"/>
 				    <input type=reset value="Effacer" onclick="effacer()"/>
@@ -56,6 +62,7 @@ class Responsable_IHM {
 		document.getElementById("nom").value = '';
 		document.getElementById("prenom").value = '';
 		document.getElementById("email").value = '';
+		document.getElementById("titre").value = '';
 	    }
 	</script>
 	<?php
@@ -80,7 +87,8 @@ class Responsable_IHM {
 			    <tr>
 				<th width="100">Responsabilité :</th>
 				<td>
-				    <input type="text" id='responsabilite' name="responsabilite" value="<?php echo $responsable->getResponsabilite(); ?>" placeholder="La_responsabilite (sans accent ; sans espace)"/>
+				    <input type="text" readonly id='responsabilite' name="responsabilite" value="<?php echo $responsable->getResponsabilite(); ?>" placeholder="La_responsabilite (sans accent ; sans espace)"/>
+				    <label>(Modification interdite)</label>
 				</td>
 			    </tr>
 			    <tr>
@@ -102,6 +110,12 @@ class Responsable_IHM {
 				</td>
 			    </tr>
 			    <tr>
+				<th width="100">Titre :</th>
+				<td>
+				    <input type="text" id="titre" name="titreresponsable" value="<?php echo $responsable->getTitreresponsable(); ?>" placeholder="Le titre du responsable"
+				</td>
+			    </tr>
+			    <tr>
 				<td colspan=2>
 				    <input type=submit value="Enregistrer les données"/>
 				    <input type=reset value="Effacer" onclick="effacer()"/>
@@ -118,6 +132,7 @@ class Responsable_IHM {
 		document.getElementById("nom").value = '';
 		document.getElementById("prenom").value = '';
 		document.getElementById("email").value = '';
+		document.getElementById("titre").value = '';
 	    }
 	</script>
 	<?php
@@ -133,10 +148,11 @@ class Responsable_IHM {
 	    echo
 	    "<table>
 		<tr id='entete'>
-		    <td width='42%'>Responsabilité</td>
-		    <td width='42%'>Responsable</td>
-		    <td width='8%' align='center'>Modifier</td>
-		    <td width='8%' align='center'>Supprimer</td>
+		    <td width='20%'>Responsabilité</td>
+		    <td width='30%'>Titre</td>
+		    <td width='30%'>Responsable</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
 		</tr>";
 	    for ($i = 0; $i < sizeof($tabResponsables); $i++) {
 		$resp = $tabResponsables[$i];
@@ -144,6 +160,9 @@ class Responsable_IHM {
 		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td align="center">
 			<?php echo $resp->getResponsabilite(); ?>
+		    </td>
+		    <td align="center">
+			<?php echo $resp->getTitreresponsable(); ?>
 		    </td>
 		    <td align="center">
 			<?php echo $resp->getPrenomresponsable() . " ". $resp->getNomresponsable() . " (" . $resp->getEmailresponsable() . ")"; ?>

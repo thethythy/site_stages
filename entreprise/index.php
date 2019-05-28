@@ -14,8 +14,6 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 /**
 * Vérification de la présence de toutes les informations nécessaire
 * pour enregistrer une nouvelle offre de stage dans la base
-* @global string $emailResponsableStage
-* @global string $emailResponsableAlter
 * @global string $baseSite
 */
 function verifier(){
@@ -143,11 +141,13 @@ function verifier(){
       }
 
       //Envoie d'un mail de notification au responsable concerné
-      global $emailResponsableStage;
-      global $emailResponsableAlter;
       global $baseSite;
 
-      $emailResponsable = $_POST['type'] === "alternant" ? $emailResponsableAlter : $emailResponsableStage;
+      if ($_POST['type'] === "alternant") {
+	  $emailResponsable = Responsable::getResponsableFromResponsabilite("alternance")->getEmailresponsable();
+      } else {
+	  $emailResponsable = Responsable::getResponsableFromResponsabilite("stage")->getEmailresponsable();
+      }
 
       $headers ='Content-Type:  text/html; charset=utf-8'."\n";
       $headers .='Content-Transfer-Encoding: 8bit'."\n";

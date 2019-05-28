@@ -20,15 +20,19 @@ IHM_Generale::header("Gérer", "les demandes de validation", "../../", $tabLiens
 // ----------------------------------------------
 // Contrôleur
 
-function envoyerNotification($message, $sds, $type) {
   //Envoie d'un mail de validation ou invalidation à l'étudiant
-  global $emailResponsableStage;
-  global $emailResponsableAlter;
-
+function envoyerNotification($message, $sds, $type) {
   $destinataire = $sds->getEtudiant()->getEmailInstitutionel();
   if ($sds->getEtudiant()->getEmailPersonnel() != "")
      $destinataire = $destinataire . ", " . $sds->getEtudiant()->getEmailPersonnel();
-  $expediteur = $type == "sta" ? $emailResponsableStage : $emailResponsableAlter;
+
+  if ($type == "sta") {
+      $responsable = Responsable::getResponsableFromResponsabilite("stage");
+  } else {
+      $responsable = Responsable::getResponsableFromResponsabilite("alternance");
+  }
+
+  $expediteur = $responsable->getEmailresponsable();
   $reponse = $expediteur;
 
   $headers = "From: $expediteur\nReply-To: $reponse\nCc: $expediteur\n";
@@ -76,11 +80,12 @@ function accepter() {
       SujetDeStage_BDD::sauvegarder($sds);
 
       global $baseSite;
+      $titreResp = Responsable::getResponsableFromResponsabilite("stage")->getTitreresponsable();
       $message = "Bonjour,<br><br>
       Votre demande de validation d'un sujet de stage a été traitée et le sujet accepté.<br>
       Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
       Bon courage<br><br>
-      Responsable des stages";
+      $titreResp";
       envoyerNotification($message, $sds, $_POST["type"]);
 
     } else {
@@ -90,11 +95,12 @@ function accepter() {
       SujetDAlternance_BDD::sauvegarder($sda);
 
       global $baseSite;
+      $titreResp = Responsable::getResponsableFromResponsabilite("alternance")->getTitreresponsable();
       $message = "Bonjour,<br><br>
       Votre demande de validation d'un sujet d'alternance a été traitée et le sujet accepté.<br>
       Veuillez poursuivre la procédure spécifique comme elle est indiquée <a href='" . $baseSite . "presentation/index.php'>ici</a>.<br>
       Bon courage<br><br>
-      Responsable de l'alternance";
+      $titreResp";
       envoyerNotification($message, $sda, $_POST["type"]);
     }
   }
@@ -110,6 +116,7 @@ function refuser() {
       $sds->setValide(0);
       SujetDeStage_BDD::sauvegarder($sds);
 
+      $titreResp = Responsable::getResponsableFromResponsabilite("stage")->getTitreresponsable();
       $message = "Bonjour,<br><br>
       Votre demande de validation d'un sujet de stage a été traitée mais le sujet proposé<br>
       ne peut être accepté tel que vous le présentez actuellement car il ne correspond<br>
@@ -118,7 +125,7 @@ function refuser() {
       - refaire une demande de validation avec un sujet modifié ;<br>
       - trouver un autre sujet et faire une demande de validation de ce sujet ;<br>
       - demander plus d'explications en venant voir le responsable pédagogique.<br><br>
-      Responsable des stages";
+      $titreResp";
       envoyerNotification($message, $sds, $_POST["type"]);
 
     } else {
@@ -127,6 +134,7 @@ function refuser() {
       $sda->setValide(0);
       SujetDAlternance_BDD::sauvegarder($sda);
 
+      $titreResp = Responsable::getResponsableFromResponsabilite("alternance");
       $message = "Bonjour,<br><br>
       Votre demande de validation d'un sujet d'alternance a été traitée mais le sujet proposé<br>
       ne peut être accepté tel que vous le présentez actuellement car il ne correspond<br>
@@ -135,7 +143,7 @@ function refuser() {
       - refaire une demande de validation avec un sujet modifié ;<br>
       - trouver un autre sujet et faire une demande de validation de ce sujet ;<br>
       - demander plus d'explications en venant voir le responsable pédagogique.<br><br>
-      Responsable de l'alternance";
+      $titreResp";
       envoyerNotification($message, $sda, $_POST["type"]);
     }
   }

@@ -18,18 +18,20 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 /**
  * Envoyer la notification au contact dans l'entreprise aini qu'à l'étudiant
  * et au référent (copie au responsable)
- * @global type $emailResponsable
  * @param type $oEtudiant
  * @param type $oContact
  * @param type $oReferent
  */
 function envoyerNotification($oEtudiant, $oContact, $oReferent) {
-    global $emailResponsableStage;
+    $responsable = Responsable::getResponsableFromResponsabilite("stage");
+    $emailResp = $responsable->getEmailresponsable();
+    $nomResp = $responsable->getPrenomresponsable(). ' ' . $responsable->getNomresponsable();
+    $titreResp = $responsable->getTitreresponsable();
 
     $headers = "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit\n";
-    $headers .= "From: $emailResponsableStage\n";
-    $headers .= "Reply-To: $emailResponsableStage\n";
+    $headers .= "From: $emailResp\n";
+    $headers .= "Reply-To: $emailResp\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
 
     $nomE = $oEtudiant->getNom();
@@ -58,12 +60,12 @@ de cet(te) étudiant(e) ou m'informer de cette erreur.<br/>
 <br/>
 Cordialement<br/>
 <br/>
-Thierry Lemeunier<br/>
-Responsable des stages<br/>
+$nomResp<br/>
+$titreResp<br/>
 Département Informatique<br/>
 http://www-info.univ-lemans.fr/";
 
-    mail($emailResponsableStage . "," . $emailE . "," . $oContact->getEmail() . "," . $emailR, "Suivi de stage", $msg, $headers);
+    mail($emailResp . "," . $emailE . "," . $oContact->getEmail() . "," . $emailR, "Suivi de stage", $msg, $headers);
 }
 
 // Envoyer les notifications sélectionnées

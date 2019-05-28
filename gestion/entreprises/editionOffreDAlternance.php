@@ -13,7 +13,6 @@ include_once('../../classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level2');
 
 function envoyerNotifications($contact, $idOffreDAlternance) {
-  global $emailResponsableAlter;
   global $baseSite;
 
   if (!isset($_POST['annee']))
@@ -23,8 +22,13 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
 
   // ------------------------------------------------
   // Envoie d'un mail de notification à l'entreprise
-  $expediteur = $emailResponsableAlter;
-  $reponse = $emailResponsableAlter;
+
+  $responsable = Responsable::getResponsableFromResponsabilite("alternance");
+  $emailResp = $responsable->getEmailresponsable();
+  $nomResp = $responsable->getPrenomresponsable() . " " . $responsable->getNomresponsable();
+  $titreResp = $responsable->getTitreresponsable();
+  $expediteur = $emailResp;
+  $reponse = $emailResp;
   $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
   $headers .= "Content-Type: text/html; charset=utf-8\n";
   $headers .= "Content-Transfer-Encoding: 8bit";
@@ -35,7 +39,8 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     Vous pouvez la consulter à l'adresse suivante :<br/>
     <a href=" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt>" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDAlternance . "&type=alt</a><br/><br/>
     Cordialement,<br/><br/>
-    Le responsable de l'alternance<br/>
+    $nomResp<br/>
+    $titreResp<br/>
     Département Informatique<br/>
     Université du Maine";
   mail($contact->getEmail(), "Votre offre d'alternance", $msg, $headers);
@@ -43,6 +48,7 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
 
   // ----------------------------------------------------------
   // Envoie d'un mail de notification aux promotions concernées
+
   $offreDAlternance = OffreDAlternance::getOffreDAlternance($idOffreDAlternance);
   $destinataire = "";
 
@@ -62,8 +68,9 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
   Ceci est un message automatique.<br/>
   Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
   Vous pouvez directement la consulter à l'adresse suivante :<br/>
-  <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
-  Responsable de l'alternance<br>";
+  <a href='" . $baseSite . "/alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
+  $nomResp<br>
+  $titreResp<br>";
   mail($destinataire, "Site des stages et de l'alternance : nouvelle offre sur le site", $msg, $headers);
   echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
 
@@ -74,11 +81,11 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     FluxRSS::initialise();
 
   // Création d'une nouvelle news
-  $title = "Nouvelle offre d'alternance";
-  $link = $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDAlternance;
+  $title = htmlspecialchars("Nouvelle offre d'alternance", ENT_QUOTES, 'UTF-8');
+  $link = $baseSite . "/alternant/visualiserOffre.php?id=" . $idOffreDAlternance;
   $timestamp = time();
   $contents = htmlspecialchars($offreDAlternance->getTitre(), ENT_QUOTES, 'UTF-8');
-  $author = $emailResponsableAlter;
+  $author = $emailResp;
   FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
   echo "<p>Le flux RSS a été mis à jour.</p>";
 }

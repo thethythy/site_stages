@@ -17,9 +17,7 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
 
 /**
  * Envoyer l'invitation au contact dans l'entreprise aini qu'à l'étudiant.
- * (copie au responsable des stages)
- * @global string $emailResponsableStage
- * @global string $emailResponsableAlter
+ * (copie au responsable des relations entreprise)
  * @param objet Etudiant $oEtudiant
  * @param objet Contact $oContact
  * @param string $cadre
@@ -28,10 +26,7 @@ spl_autoload_register('Utils::my_autoloader_from_level2');
  * @param string $salle
  */
 function envoyerConvocation($oEtudiant, $oContact, $cadre, $date, $heure, $salle) {
-    global $emailResponsableStage;
-    global $emailResponsableAlter;
-
-    $emailResponsable = $cadre === "alternant" ? $emailResponsableAlter : $emailResponsableStage;
+    $emailResponsable = Responsable::getResponsableFromResponsabilite("site")->getEmailresponsable();
     $contexte = $cadre === "alternant" ? "de l'alternance" : " du stage";
 
     $headers = "Content-Type: text/html; charset=utf-8\n";

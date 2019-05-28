@@ -14,7 +14,7 @@ spl_autoload_register('Utils::my_autoloader_from_level1');
 $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 
-IHM_Generale::header("Gestion des ", "stages", "../", $tabLiens);
+IHM_Generale::header("Gestion des ", "stages et alternances", "../", $tabLiens);
 
 Gestion_IHM::afficherMenuGestion();
 

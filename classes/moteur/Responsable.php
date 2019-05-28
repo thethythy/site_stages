@@ -11,6 +11,7 @@ class Responsable {
     var $nomresponsable; // Nom du responsable
     var $prenomresponsable; // Prénom du responsable
     var $emailresponsable; // Adresse de courriel
+    var $titreresponsable; // Titre du responsable
 
     /**
      * Constructeur d'un objet Responsable
@@ -19,13 +20,15 @@ class Responsable {
      * @param string $nom
      * @param string $prenom
      * @param string $email
+     * @param string $titre
     */
-    public function __construct($identifiantBDD, $responsabilite, $nom, $prenom, $email) {
+    public function __construct($identifiantBDD, $responsabilite, $nom, $prenom, $email, $titre) {
 	$this->identifiantBDD = $identifiantBDD;
 	$this->responsabilite = $responsabilite;
 	$this->nomresponsable = $nom;
 	$this->prenomresponsable = $prenom;
 	$this->emailresponsable = $email;
+	$this->titreresponsable = $titre;
     }
 
     // ------------------------------------------------------------------------
@@ -51,6 +54,10 @@ class Responsable {
 	return $this->emailresponsable;
     }
 
+    public function getTitreresponsable() {
+	return $this->titreresponsable;
+    }
+
     // ------------------------------------------------------------------------
     // Accesseurs en écriture
 
@@ -70,6 +77,10 @@ class Responsable {
 	$this->emailresponsable = $emailresponsable;
     }
 
+    public function setTitreresponsable($titreresponsable) {
+	$this->titreresponsable = $titreresponsable;
+    }
+
     // ------------------------------------------------------------------------
     // Méthodes statiques
 
@@ -84,7 +95,8 @@ class Responsable {
 			       $responsableBDD["responsabilite"],
 			       $responsableBDD["nomresponsable"],
 			       $responsableBDD["prenomresponsable"],
-			       $responsableBDD["emailresponsable"]);
+			       $responsableBDD["emailresponsable"],
+			       $responsableBDD["titreresponsable"]);
     }
 
     /**
@@ -99,7 +111,8 @@ class Responsable {
 				   $responsableBDD["responsabilite"],
 				   $responsableBDD["nomresponsable"],
 				   $responsableBDD["prenomresponsable"],
-				   $responsableBDD["emailresponsable"]);
+				   $responsableBDD["emailresponsable"],
+				   $responsableBDD["titreresponsable"]);
 	} else {
 	    return FALSE;
 	}
@@ -111,7 +124,8 @@ class Responsable {
      */
     public static function saisirDonneesResponsable($tab_donnees) {
 	$resp = new Responsable('', $tab_donnees[0], $tab_donnees[1],
-		                $tab_donnees[2], $tab_donnees[3]);
+		                $tab_donnees[2], $tab_donnees[3],
+				$tab_donnees[4]);
 	Responsable_BDD::sauvegarder($resp);
     }
 
@@ -129,7 +143,8 @@ class Responsable {
 				    $tabResponsableString[$i][1],
 				    $tabResponsableString[$i][2],
 				    $tabResponsableString[$i][3],
-				    $tabResponsableString[$i][4]));
+				    $tabResponsableString[$i][4],
+				    $tabResponsableString[$i][5]));
 
 	return $tabResponsable;
     }

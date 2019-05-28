@@ -24,10 +24,10 @@ TRUNCATE TABLE `responsable`;
 -- Déchargement des données de la table `responsable`
 --
 
-INSERT INTO `responsable` (`idresponsable`, `responsabilite`, `nomresponsable`, `prenomresponsable`, `emailresponsable`) VALUES
-(1, 'stage', 'nom1', 'prenom1', 'email1@bidon.fr'),
-(2, 'alternance', 'nom2', 'prenom2', 'email2@bidon.fr'),
-(3, 'site', 'nom3', 'prenom3', 'email3@bidon.fr');
+INSERT INTO `responsable` (`idresponsable`, `responsabilite`, `nomresponsable`, `prenomresponsable`, `emailresponsable`, `titreresponsable`) VALUES
+(1, 'stage', 'nom1', 'prenom1', 'email1@bidon.fr', 'Responsable des stages'),
+(2, 'alternance', 'nom2', 'prenom2', 'email2@bidon.fr', 'Responsable de l\'alternance'),
+(3, 'site', 'nom3', 'prenom3', 'email3@bidon.fr', 'Responsable relations entreprise');
 
 --
 -- Tronquer la table avant d'insérer `affectation`

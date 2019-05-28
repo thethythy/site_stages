@@ -22,13 +22,15 @@ class Responsable_BDD {
 		'" . $responsable->getResponsabilite() . "',
 		'" . $responsable->getNomresponsable() . "',
 		'" . $responsable->getPrenomresponsable() . "',
-		'" . $responsable->getEmailresponsable() . "');";
+		'" . $responsable->getEmailresponsable() . "',
+		'" . $responsable->getTitreresponsable() . "');";
 	} else {
 	    $sql = "UPDATE $tab34 SET
 		responsabilite='" . $responsable->getResponsabilite() . "',
 		nomresponsable='" . $responsable->getNomresponsable() . "',
 		prenomresponsable='" . $responsable->getPrenomresponsable() . "',
-		emailresponsable='" . $responsable->getEmailresponsable() . "'
+		emailresponsable='" . $responsable->getEmailresponsable() . "',
+		titreresponsable='" . $responsable->getTitreresponsable() ."'
 		WHERE idresponsable='" . $responsable->getIdentifiantBDD() . "';";
 	}
 	$db->query($sql);
@@ -100,6 +102,7 @@ class Responsable_BDD {
 		array_push($tab, $responsable["nomresponsable"]);
 		array_push($tab, $responsable["prenomresponsable"]);
 		array_push($tab, $responsable["emailresponsable"]);
+		array_push($tab, $responsable["titreresponsable"]);
 		array_push($tabResponsable, $tab);
 	    }
 	    $result->free();

@@ -159,21 +159,4 @@ foreach ($_FILES as $key => $value) {
     $_FILES[$key] = filterParameters($value);
 }
 
-// ----------------------------------------------------------------------------
-// Définition globale des emails des responsables
-
-function definitionEmailResponsables() {
-    include_once('Responsable_BDD.php');
-
-    $responsableStageBDD = Responsable_BDD::getResponsableFromResponsabilite("stage");
-    $GLOBALS['emailResponsableStage'] = $responsableStageBDD ? $responsableStageBDD[4] : "";
-
-    $responsableAlterBDD = Responsable_BDD::getResponsableFromResponsabilite("alternance");
-    $GLOBALS['emailResponsableAlter'] = $responsableAlterBDD ? $responsableAlterBDD[4] : "";
-
-    // Ajouter ICI les autres responsables éventuels
-}
-
-definitionEmailResponsables();
-
 ?>

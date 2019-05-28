@@ -922,6 +922,10 @@ $duree_init, $competence_init) {
             <th>Pays :</th>
             <td><?php echo $entreprise->getPays(); ?></td>
           </tr>
+	  <tr>
+	      <th>Siret :</th>
+	      <td><?php echo $entreprise->getSiret(); ?></td>
+	  </tr>
         </table>
       </td>
     </tr>

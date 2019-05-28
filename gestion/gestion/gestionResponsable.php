@@ -27,12 +27,14 @@ function save() {
 	isset($_POST['responsabilite']) && $_POST['responsabilite'] != "" &&
 	isset($_POST['nomresponsable']) && $_POST['nomresponsable'] != "" &&
 	isset($_POST['prenomresponsable']) && $_POST['prenomresponsable'] != "" &&
-	isset($_POST['emailresponsable']) && $_POST['emailresponsable'] != "" ) {
+	isset($_POST['emailresponsable']) && $_POST['emailresponsable'] != "" &&
+	isset($_POST['titreresponsable'])) {
 	$tabDonnees = array();
 	array_push($tabDonnees, $_POST['responsabilite']);
 	array_push($tabDonnees, $_POST['nomresponsable']);
 	array_push($tabDonnees, $_POST['prenomresponsable']);
 	array_push($tabDonnees, $_POST['emailresponsable']);
+	array_push($tabDonnees, $_POST['titreresponsable']);
 	Responsable::saisirDonneesResponsable($tabDonnees);
 	$_GET['action'] = $_GET['id'] = '';
     }
@@ -45,12 +47,14 @@ function modifier() {
 	isset($_POST['responsabilite']) && $_POST['responsabilite'] != "" &&
 	isset($_POST['nomresponsable']) && $_POST['nomresponsable'] != "" &&
 	isset($_POST['prenomresponsable']) && $_POST['prenomresponsable'] != "" &&
-	isset($_POST['emailresponsable']) && $_POST['emailresponsable'] != "" ) {
+	isset($_POST['emailresponsable']) && $_POST['emailresponsable'] != "" &&
+	isset($_POST['titreresponsable'])) {
 	$responsable = Responsable::getResponsable($_POST['id']);
 	$responsable->setResponsabilite($_POST['responsabilite']);
 	$responsable->setNomresponsable($_POST['nomresponsable']);
 	$responsable->setPrenomresponsable($_POST['prenomresponsable']);
 	$responsable->setEmailresponsable($_POST['emailresponsable']);
+	$responsable->setTitreresponsable($_POST['titreresponsable']);
 	Responsable_BDD::sauvegarder($responsable);
 	$_GET['action'] = $_GET['id'] = '';
     }

@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `stages`.`responsable` (
   `nomresponsable` VARCHAR(100) NOT NULL,
   `prenomresponsable` VARCHAR(100) NOT NULL,
   `emailresponsable` VARCHAR(100) NOT NULL,
+  `titreresponsable` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idresponsable`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1

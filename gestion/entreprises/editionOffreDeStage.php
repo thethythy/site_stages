@@ -3,7 +3,7 @@
 /**
 * Page editionOffreDeStage.php
 * Utilisation : page pour éditer, valider ou supprimer une offre de stage
-*		 page accessible depuis listeDesOffreDeStage.php
+*		page accessible depuis listeDesOffreDeStage.php
 * Accès : restreint par authentification HTTP
 */
 
@@ -13,7 +13,6 @@ include_once('../../classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level2');
 
 function envoyerNotifications($contact, $idOffreDeStage) {
-  global $emailResponsableStage;
   global $baseSite;
 
   if (!isset($_POST['annee']))
@@ -23,8 +22,13 @@ function envoyerNotifications($contact, $idOffreDeStage) {
 
   // ------------------------------------------------
   // Envoie d'un mail de notification à l'entreprise
-  $expediteur = $emailResponsableStage;
-  $reponse = $emailResponsableStage;
+
+  $responsable = Responsable::getResponsableFromResponsabilite("stage");
+  $emailResp = $responsable->getEmailresponsable();
+  $nomResp = $responsable->getPrenomresponsable() . " " . $responsable->getNomresponsable();
+  $titreResp = $responsable->getTitreresponsable();
+  $expediteur = $emailResp;
+  $reponse = $emailResp;
   $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
   $headers .= "Content-Type: text/html; charset=utf-8\n";
   $headers .= "Content-Transfer-Encoding: 8bit";
@@ -33,9 +37,10 @@ function envoyerNotifications($contact, $idOffreDeStage) {
   Ceci est un message automatique.<br/>
   Votre offre de stage a été diffusée à nos étudiants.<br/>
   Vous pouvez la consulter à l'adresse suivante :<br/>
-  <a href=" . $baseSite . "/entreprise/visualiserOffre.php?id=" . $idOffreDeStage . ">" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDeStage . "</a><br/><br/>
+  <a href=" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDeStage . "&type=sta>" . $baseSite . "entreprise/visualiserOffre.php?id=" . $idOffreDeStage . "</a><br/><br/>
   Cordialement,<br/><br/>
-  Le responsable des stages<br/>
+  $nomResp<br/>
+  $titreResp<br/>
   Département Informatique<br/>
   Université du Maine";
   mail($contact->getEmail(), 'Votre offre de stage', $msg, $headers);
@@ -43,6 +48,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
 
   // ----------------------------------------------------------
   // Envoie d'un mail de notification aux promotions concernées
+
   $offreDeStage = OffreDeStage::getOffreDeStage($idOffreDeStage);
   $destinataire = "";
 
@@ -63,8 +69,8 @@ function envoyerNotifications($contact, $idOffreDeStage) {
   Une nouvelle offre de stage est disponible sur le site Web des stages.<br/>
   Vous pouvez directement la consulter à l'adresse suivante :<br/>
   <a href='" . $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDeStage . "'>'" . $baseSite . "stagiaire/visualiserOffre.php?id=" . $idOffreDeStage . "</a><br/><br/>
-  Thierry Lemeunier<br>
-  Responsable des stages<br>";
+  $nomResp<br>
+  $titreResp<br>";
   mail($destinataire, 'Site des stages : nouvelle offre sur le site', $msg, $headers);
   echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
 
@@ -79,7 +85,7 @@ function envoyerNotifications($contact, $idOffreDeStage) {
   $link = $baseSite . "/stagiaire/visualiserOffre.php?id=" . $idOffreDeStage;
   $timestamp = time();
   $contents = htmlspecialchars($offreDeStage->getTitre(), ENT_QUOTES, 'UTF-8');
-  $author = $emailResponsableStage;
+  $author = $emailResp;
   FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
   echo "<p>Le flux RSS a été mis à jour.</p>";
 }

@@ -18,21 +18,21 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Alternant');
 
-IHM_Generale::header("Demander la validation", "d'un sujet d'alternance'", "../", $tabLiens);
+IHM_Generale::header("Demander la validation", "d'un sujet d'alternance", "../", $tabLiens);
 
 //Envoie d'un mail de notification au responsable des alternances
 function envoyerNotification() {
-  global $emailResponsableAlter;
   global $baseSite;
 
+  $emailResp = Responsable::getResponsableFromResponsabilite("alternance")->getEmailresponsable();
   $headers = 'Content-Type: text/html; charset=utf-8' . "\n";
   $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-  $headers .= 'From: ' . $emailResponsableAlter . "\n";
-  $headers .= 'Reply-To: ' . $emailResponsableAlter . "\n";
+  $headers .= 'From: ' . $emailResp . "\n";
+  $headers .= 'Reply-To: ' . $emailResp . "\n";
   $headers .= 'X-Mailer: PHP/' . phpversion();
 
   $msg = "Un nouveau sujet d'alternance' a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/gestionSujetDeStage.php'>ici</a>";
-  mail($emailResponsableAlter, 'Site des stages : Demande de validation !', $msg, $headers);
+  mail($emailResp, 'Site des stages : Demande de validation !', $msg, $headers);
 }
 
 //Fonction pour copier le fichier sur le serveur
