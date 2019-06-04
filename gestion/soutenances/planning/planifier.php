@@ -58,6 +58,6 @@ echo "<script type='text/javascript' src='planifier_compresse.js'></script>\n";
 
 deconnexion();
 IHM_Generale::endHeader(false);
-IHM_Generale::footer("../../");
+IHM_Generale::footer("../../../");
 
 ?>
