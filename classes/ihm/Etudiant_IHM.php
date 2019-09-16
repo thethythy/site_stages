@@ -194,7 +194,7 @@ class Etudiant_IHM {
 		$conv = $tabEtudiants[$i]->getLastConvention($anneePromo);
 	    }
 	?>
-	    <tr class="ligne<?php echo $i % 2; ?>">
+	    <tr id="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 		    <br/>

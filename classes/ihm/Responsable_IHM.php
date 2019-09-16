@@ -157,7 +157,7 @@ class Responsable_IHM {
 	    for ($i = 0; $i < sizeof($tabResponsables); $i++) {
 		$resp = $tabResponsables[$i];
 		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
+		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td align="center">
 			<?php echo $resp->getResponsabilite(); ?>
 		    </td>

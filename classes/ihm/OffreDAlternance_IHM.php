@@ -146,7 +146,7 @@ class OffreDAlternance_IHM {
       for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
         if ($tabOffreDAlt[$i]->estVisible()) {//A changer ...
           ?>
-          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
             <td>
               <?php
@@ -232,7 +232,7 @@ class OffreDAlternance_IHM {
             <?php
           }
           ?>
-          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
             <td><?php
             $entreprise = $tabOffreDAlt[$i]->getEntreprise();
@@ -291,7 +291,7 @@ if ($cpt == 0) {
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
-      <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+      <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
         <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
         <td><?php
         $entreprise = $tabOffreDAlt[$i]->getEntreprise();
@@ -1013,7 +1013,7 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
       $cpt = 0;
       for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
         ?>
-        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+        <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
           <td class='cellBordersCheatStyle' id="idOffre-<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>"><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
           <td class='cellBordersCheatStyle' id="idEntreprise-<?php echo $tabOffreDAlt[$i]->getEntreprise()->getIdentifiantBDD(); ?>">
             <?php
@@ -1082,7 +1082,7 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
       $cpt = 0;
       for ($i = 0; $i < sizeof($tabC); $i++) {
         ?>
-        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>" id="ligneCandidature-<?php echo $cpt;?>">
+        <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>" id="ligneCandidature-<?php echo $cpt;?>">
           <?php echo '<td id="idEtu-'.$tabC[$i]->getEtudiant().'"  name="nomEtu-'.$cpt.'">'. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getNom().' '. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getPrenom().'</td>';?>
           <?php echo '<td>'. OffreDAlternance::getOffreDAlternance($tabC[$i]->getOffre())->getTitre().'</td>'; ?>
           <?php echo '<td>'.Entreprise::getEntreprise($tabC[$i]->getEntreprise())->getNom().'</td>'; ?>

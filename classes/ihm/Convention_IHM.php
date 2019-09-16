@@ -191,7 +191,7 @@ class Convention_IHM {
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
 	    ?>
-	    <tr class="ligne<?php echo $i % 2; ?>">
+	    <tr id="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
 	        </td>

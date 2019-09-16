@@ -86,7 +86,7 @@ class Salle_IHM {
 	    for ($i = 0; $i < sizeof($tabSalles); $i++) {
 		$salle = $tabSalles[$i];
 		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
+		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td width='50%'><?php echo $salle->getNom(); ?></td>
 		    <td align="center">
 			<a href="gestionSalle.php?action=mod&id=<?php echo $salle->getIdentifiantBDD(); ?>">

@@ -142,7 +142,7 @@ class DateSoutenance_IHM {
 		$tabPromoDate = DateSoutenance::listerRelationPromoDate($tabDates[$i]->getIdentifiantBDD());
 		$tabPromo = Promotion::listerPromotions(new FiltreString('anneeuniversitaire', $oDate->getAnnee() - 1));
 		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
+		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<table >
 			    <tr>

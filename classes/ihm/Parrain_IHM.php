@@ -155,7 +155,7 @@ class Parrain_IHM {
         $nom = $tabParrains[$i]->getNom();
         $prenom = $tabParrains[$i]->getPrenom();
         ?>
-        <tr class="ligne<?php echo $i % 2; ?>">
+        <tr id="ligne<?php echo $i % 2; ?>">
           <td>
             <table >
               <tr>
@@ -316,7 +316,7 @@ class Parrain_IHM {
           $filiere = $promotion->getFiliere();
           $parcours = $promotion->getParcours();
           ?>
-          <tr class="ligne<?php echo $cpt%2; $cpt++; ?>">
+          <tr id="ligne<?php echo $cpt%2; $cpt++; ?>">
             <td>Stage</td>
             <td>
               <?php
@@ -352,7 +352,7 @@ class Parrain_IHM {
           $filiere = $promotion->getFiliere();
           $parcours = $promotion->getParcours();
           ?>
-          <tr class="ligne<?php echo $cpt%2; $cpt++; ?>">
+          <tr id="ligne<?php echo $cpt%2; $cpt++; ?>">
             <td>Alternance</td>
             <td>
               <?php
@@ -424,7 +424,7 @@ class Parrain_IHM {
 
               if ($parrain->getIdentifiantBDD() != $oldparrain) {
                 ?>
-                <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+                <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
                   <td>
                     <?php
                     echo $parrain->getNom() . " " . $parrain->getPrenom();
@@ -594,7 +594,7 @@ class Parrain_IHM {
 
               // Affichage
               echo
-              "<tr class='ligne".$i."'>
+              "<tr id='ligne".$i."'>
               <td>".$heureDebut."h".$minuteDebut." / ".$heureFin."h".$minuteFin."</td>
               <td>".strtoupper($etudiant->getNom())." ".$etudiant->getPrenom()."</td>
               <td>".$filiere->getNom()." ".$parcours->getNom()."</td>

@@ -86,7 +86,7 @@ class Competence_IHM {
 	    for ($i = 0; $i < sizeof($tabCompetences); $i++) {
 		$comp = $tabCompetences[$i];
 		?>
-		<tr class="ligne<?php echo $i % 2; ?>">
+		<tr id="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<?php echo $comp->getNom(); ?>
 		    </td>

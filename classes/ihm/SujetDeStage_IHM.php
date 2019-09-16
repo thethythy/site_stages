@@ -87,7 +87,7 @@ class SujetDeStage_IHM {
 
           }
           ?>
-          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+          <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
             <td><?php echo $etudiant->getNom(); ?></td>
             <td><?php echo $etudiant->getPrenom(); ?></td>
             <td><?php echo $filiere->getNom(); ?></td>
@@ -257,7 +257,7 @@ class SujetDeStage_IHM {
             $parcours = $promotion->getParcours();
 
             ?>
-            <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+            <tr id="ligne<?php echo $cpt % 2; $cpt++; ?>">
               <td><?php echo $etudiant->getNom(); ?></td>
               <td><?php echo $etudiant->getPrenom(); ?></td>
               <td><?php echo $filiere->getNom(); ?></td>
