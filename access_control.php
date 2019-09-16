@@ -19,7 +19,7 @@ session_write_close();
 include_once('classes/moteur/Utils.php');
 spl_autoload_register('Utils::my_autoloader_from_level1'); // Accès par redirection
 
-IHM_Generale::header("Les stages", "étudiants", "/", array(), "auchargement");
+IHM_Generale::header("alternance et stages", "étudiants", "/", array(), "auchargement");
 IHM_Menu::menuAccueilAccessControl();
 ?>
 
