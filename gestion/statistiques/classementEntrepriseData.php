@@ -191,7 +191,7 @@ switch($displayFlag){
 $i = 0; // Pour l'affichage de couleur alterné
 foreach ($tabData as $key => $value) {
   if( ($displayFlag == 0 && $tabData[$key]['nbConventions'] != 0) || ($displayFlag == 1 && $tabData[$key]['nbContrats'] != 0) || ($displayFlag == 2)){
-    echo '<tr class="ligne' . $i%2 . '">';
+    echo '<tr id="ligne' . $i%2 . '">';
 
     // L'entreprise
     $oEntreprise = Entreprise::getEntreprise($key);

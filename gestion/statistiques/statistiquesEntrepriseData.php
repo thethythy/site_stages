@@ -122,7 +122,7 @@ if (sizeof($tabOEntreprise) > 0) {
 
       foreach ($tabData as $key => $value) {
 
-        echo '<tr class="ligne' . $j%2 . '">';
+        echo '<tr id="ligne' . $j%2 . '">';
 
         // L'entreprise
         $oEntreprise = Entreprise::getEntreprise($key);
