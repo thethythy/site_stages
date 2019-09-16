@@ -166,50 +166,6 @@ class Convention_IHM {
     }
 
     /**
-     * Afficher une liste des étudiants avec ou sans convention (tableau statique)
-     * @param integer $annee L'année concernée
-     * @param tableau d'objets $tabEtudiants Les étudiants concernés
-     */
-    public static function afficherListeConventions($annee, $tabEtudiants) {
-	?>
-	<table>
-	    <tr id="entete">
-		<td width="80%">Etudiant</td>
-		<td width="20%" align="center">Convention</td>
-	    </tr>
-	    <?php
-	    $nbConventions = 0;
-	    $nbEtudiants = sizeof($tabEtudiants);
-
-	    for ($i = 0; $i < $nbEtudiants; $i++) {
-	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
-	    	<td>
-		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
-	    	</td>
-	    	<td align="center">
-		    <?php
-		    if ($tabEtudiants[$i]->getConvention($annee) != null) {
-			$nbConventions++;
-			echo "<img src='../../images/action_check.png' />";
-		    } else
-			echo "<img src='../../images/action_remove.png' />";
-		    ?>
-	    	</td>
-	    </tr>
-	    <?php
-	    }
-	    ?>
-	    <tr id='entete'>
-		<td colspan="2" align="center">
-		    Total : <?php echo $nbConventions . " / " . $nbEtudiants; ?>
-		</td>
-	    </tr>
-	</table>
-	<?php
-    }
-
-    /**
      * Afficher une liste de conventions à éditer ou à supprimer (tableau interactif)
      * @param integer $annee Année de la promotion concernée
      * @param integer $idPromo Identifiant de la promotion
@@ -235,7 +191,7 @@ class Convention_IHM {
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($conv->getIdTheme());
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtuWithConv[$i]->getNom() . " " . $tabEtuWithConv[$i]->getPrenom(); ?>
 	        </td>

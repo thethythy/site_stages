@@ -86,7 +86,7 @@ class Salle_IHM {
 	    for ($i = 0; $i < sizeof($tabSalles); $i++) {
 		$salle = $tabSalles[$i];
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td width='50%'><?php echo $salle->getNom(); ?></td>
 		    <td align="center">
 			<a href="gestionSalle.php?action=mod&id=<?php echo $salle->getIdentifiantBDD(); ?>">
@@ -111,15 +111,15 @@ class Salle_IHM {
     /**
      * Afficher par ordre chronologique les soutenances d'une salle.
      * @param integer $annee L'année concernée
-     * @param tableau d'objets $listeConvention Liste de Convention triés chronologiquement pour la salle
+     * @param tableau d'objets $listeConvCont Liste de Convention / Contrat triés chronologiquement pour la salle
      */
-    public static function afficherPlanningSalles($annee, $listeConvention) {
+    public static function afficherPlanningSalles($annee, $listeConvCont) {
 	$enteteTableau =
 	"<table>
 	    <tr id='entete'>
 		<td rowspan='2' style='width: 85px;'>Horaires</td>
 		<td colspan='2'>Étudiant</td>
-		<td rowspan='2' style='width: 50px;'>Fiche de stage</td>
+		<td rowspan='2' style='width: 50px;'>Fiche résumé</td>
 		<td colspan='2'>Jury</td>
 		<td rowspan='2' style='width: 75px;'>Salle</td>
 	    </tr>
@@ -133,10 +133,14 @@ class Salle_IHM {
 	$finTableau = "</table>";
 	echo '<table>';
 
-	// Pour chaque convention
+	// Pour chaque convention / contrat
 	$k = 0; $i = 0; $j = 0;
-	foreach ($listeConvention as $convention) {
-	    $soutenance = $convention->getSoutenance();
+	foreach ($listeConvCont as $convOUcont) {
+	    $soutenance = $convOUcont->getSoutenance();
+
+	    // Est-ce un stagiaire ou un alternant ?
+	    $convention = Soutenance::getConvention($soutenance);
+	    $fiche = $convention ? "fichedestage.php" : "fichedecontrat.php";
 
 	    if ($j == 0) {
 		echo $finTableau;
@@ -145,12 +149,12 @@ class Salle_IHM {
 
 	    $j++; $k++;
 	    $nomSalle = ($soutenance->getSalle()->getIdentifiantBDD() != 0) ? $soutenance->getSalle()->getNom() : "Non attribuée";
-	    $etudiant = $convention->getEtudiant();
+	    $etudiant = $convOUcont->getEtudiant();
 	    $promotion = $etudiant->getPromotion($annee);
 	    $parcours = $promotion->getParcours();
 	    $filiere = $promotion->getFiliere();
-	    $parrain = $convention->getParrain();
-	    $examinateur = $convention->getExaminateur();
+	    $parrain = $convOUcont->getParrain();
+	    $examinateur = $convOUcont->getExaminateur();
 
 	    // Gestion horaires
 	    $tempsSoutenance = $filiere->getTempsSoutenance();
@@ -170,11 +174,11 @@ class Salle_IHM {
 
 	    // Affichage
 	    echo
-	    "<tr id='ligne".$i."'>
+	    "<tr class='ligne".$i."'>
 		<td>".$heureDebut."h".$minuteDebut." / ".$heureFin."h".$minuteFin."</td>
 		<td>".strtoupper($etudiant->getNom())." ".$etudiant->getPrenom()."</td>
 		<td>".$filiere->getNom()." ".$parcours->getNom()."</td>
-		<td><a href='fichedestage.php?idEtu=".$etudiant->getIdentifiantBDD()."&idPromo=".$promotion->getIdentifiantBDD()."' target='_blank'><img src=\"../images/resume.png\" /></a></td>
+		<td><a href='".$fiche."?idEtu=".$etudiant->getIdentifiantBDD()."&idPromo=".$promotion->getIdentifiantBDD()."' target='_blank'><img src=\"../images/resume.png\" /></a></td>
 		<td>".strtoupper($parrain->getNom())." ".$parrain->getPrenom()."
 		<td>".strtoupper($examinateur->getNom())." ".$examinateur->getPrenom()."
 		<td>".$nomSalle."</td>

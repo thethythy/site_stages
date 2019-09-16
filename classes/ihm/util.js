@@ -1,5 +1,5 @@
 // Extension des objets DOM Element
-// On stocke toutes les methodes dans
+
 if (!window.Element) {
 	Element = new Object();
 }
@@ -135,6 +135,7 @@ LoadData.prototype = {
 			switch(this.action) {
 				case "onchange" :
 					var composantJS = this;
+					console.log("Updating : "+this.idSources[i]);
 					document.getElementById(this.idSources[i]).onchange = function() {
 						composantJS.load();
 					}
@@ -145,6 +146,12 @@ LoadData.prototype = {
 						composantJS.onkeyup(aEvent);
 					}
 					break;
+				case "onclick" :
+					var composantJS = this;
+					document.getElementById(this.idSources[i]).onclick = function(aEvent) {
+						composantJS.onclick(aEvent);
+					}
+				break;
 				default:
 					break;
 			}

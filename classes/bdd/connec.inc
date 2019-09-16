@@ -1,24 +1,54 @@
 <?php
 
 // ----------------------------------------------------------------------------
+// Variable globale : adresse du site web
+
+$GLOBALS['baseSite'] = "http://localhost:8888/";
+
+// ----------------------------------------------------------------------------
 // Vérification de l'autorisation
 
-global $access_control_target;
+global $access_control_target; // Page désirée
 
 if (isset($access_control_target)) {
-    if (!isset($_COOKIE['site_stages_depinfo'])) {
-	include_once('../access_control.php');
-	die();
-    } else {
-	// Récupérer le digest de la clef du cookie
-	$HClef1 = $_COOKIE['site_stages_depinfo'];
 
-	// Récupérer le digest du fichier
-	$f = fopen('../documents/demon/clef', 'r');
-	$HClef2 = fread($f, 500);
-	fclose($f);
+    // Si pas de cookie alors --> page connexion
+    if(!isset($_COOKIE['site_stages_depinfo_alternant']) && !isset($_COOKIE['site_stages_depinfo_stagiaire'])){
+        include_once('../access_control.php');
+        die();
+    }
 
-	if (!hash_equals($HClef1, $HClef2)) {
+    // Il existe un cokkie, il faut le contrôler selon la destination désirée
+    else {
+
+	// Récupérer les condensats depuis les cookies
+	$HClef1_alter = isset($_COOKIE['site_stages_depinfo_alternant']) ? $_COOKIE['site_stages_depinfo_alternant'] : "";
+	$HClef1_stagi = isset($_COOKIE['site_stages_depinfo_stagiaire']) ? $_COOKIE['site_stages_depinfo_stagiaire'] : "";
+
+	// Récupérer les condensats dans le fichier
+	$condensats = json_decode(file_get_contents('../documents/demon/clef.json'));
+
+	// Récupérer la destination voulue
+	$destination = explode("/", str_replace($baseSite, "", $access_control_target))[0];
+
+	// Sélection et comparaison du condensat selon la destination
+	$res_comparaison = FALSE;
+
+	if (strcmp($destination, "alternant") == 0) {
+	    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant);
+	} else {
+	    if (strcmp($destination, "stagiaire") == 0 || strcmp($destination, "parrainage") == 0) {
+		$res_comparaison = $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);
+	    } else {
+		if (strcmp($destination, "soutenances") == 0 || strcmp($destination, "telechargements") == 0) {
+		    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant) ||
+				       $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);
+		}
+	    }
+	}
+
+	//Si la clef n'est pas bonne -> Renvoyer la demande de clef
+	if (!$res_comparaison) {
 	    include_once('../access_control.php');
 	    die();
 	}
@@ -55,6 +85,16 @@ $tab22 = 'type_entreprise';
 $tab23 = 'theme_destage';
 $tab24 = 'convocation';
 $tab25 = 'attribution';
+$tab26 = 'profilsouhaite_offredalternance';
+$tab27 = 'theme_offredalternance';
+$tab28 = 'relation_competence_offredalternance';
+$tab29 = 'offredalternance';
+$tab30 = 'candidature_alternance';
+$tab31 = 'contrat';
+$tab32 = 'relation_promotion_etudiant_contrat';
+$tab33 = 'sujetdalternance';
+$tab34 = 'responsable';
+$tab35 = 'affectation';
 
 function deconnexion() {
     global $db;
@@ -73,12 +113,12 @@ function filterParameters($param) {
 	foreach ($param as $key => $value) {
 	    // Es-ce que la valeur est elle-même un tableau
 	    if (is_array($param[$key]))
-		// Alors appel récursif
+	    // Alors appel récursif
 		$param[$key] = filterParameters($param[$key]);
 
 	    // Est-ce que le paramètre est une chaîne ?
 	    if (is_string($param[$key]))
-		// Alors échaper le paramètre
+	    // Alors échaper le paramètre
 		$param[$key] = $db->real_escape_string($param[$key]);
 	}
     }
@@ -108,7 +148,7 @@ foreach ($_COOKIE as $key => $value) {
 }
 
 // Prévention contre les injection SQL dans les variables SESSION
-if(isset($_SESSION)) {
+if (isset($_SESSION)) {
     foreach ($_SESSION as $key => $value) {
 	$_SESSION[$key] = filterParameters($value);
     }
@@ -118,11 +158,5 @@ if(isset($_SESSION)) {
 foreach ($_FILES as $key => $value) {
     $_FILES[$key] = filterParameters($value);
 }
-
-// ----------------------------------------------------------------------------
-// Variables globales
-
-$emailResponsable = "thierry.lemeunier@univ-lemans.fr";
-$baseSite = "http://localhost:8888/";
 
 ?>

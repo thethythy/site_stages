@@ -38,6 +38,22 @@ if (isset($_GET['parcours']) && $_GET['parcours'] != '*')
 if (isset($_GET['filiere']) && $_GET['filiere'] != '*')
     array_push($filtres, new FiltreNumeric('idfiliere', $_GET['filiere']));
 
+// Si le $_GET n'est pas défini (normalement n'arrive jamais)
+// on affiche tout par défuat
+$dataFlag = 2;
+if(isset($_GET['offre'])){
+  switch($_GET['offre']){
+    case 'Stage' :
+      $dataFlag = 0;
+      break;
+    case 'Alternance' :
+      $dataFlag = 1;
+      break;
+    default :
+      $dataFlag = 2;
+  }
+}
+
 if (sizeof($filtres) > 0) {
     $filtre = $filtres[0];
     for ($i = 1; $i < sizeof($filtres); $i++)
@@ -254,15 +270,23 @@ if ($nbSerie > 0) {
 	$oParcours = $oPromotion->getParcours();
 	$pAnnee = $oPromotion->getAnneeUniversitaire();
 	$filtre = donneFiltre($pAnnee, $oFiliere, $oParcours);
-	$tabOConventions = Convention::getListeConvention($filtre);
+	$tabOConventions = array();
+	$tabOContrats = array();
+	if($dataFlag == 0 || $dataFlag == 2){
+	    $tabOConventions = Convention::getListeConvention($filtre);
+	}
+	if($dataFlag == 1 || $dataFlag == 2){
+	    $tabOContrats = Contrat::getListeContrat($filtre);
+	}
 
+	$tabOC = array_merge($tabOConventions, $tabOContrats);
 	// Accumulation des conventions au cas ou il y aura une série 'Total'
 	if ($nbSerie > 1) {
-	    $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOConventions);
+	    $tabTotalOConventions = array_merge($tabTotalOConventions, $tabOC);
 	}
 
 	// Nouvelle série de données (une promotion)
-	$data[$nom_serie] = donneUneSerie($tabOConventions, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
+	$data[$nom_serie] = donneUneSerie($tabOC, intval($pAnnee), $oFiliere->getNom(), $oParcours->getNom());
 
 	// Préparation pour la série suivante
 	$num_serie += 1;
@@ -279,7 +303,7 @@ if ($nbSerie > 0) {
     $generator->genereFichierExcel($data);
 
     // Encodage en JSON puis envoie du flux
-    print(json_encode($data));
+    echo json_encode($data);
 }
 
 ?>

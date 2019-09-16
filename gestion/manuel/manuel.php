@@ -275,7 +275,6 @@ IHM_Generale::header("Aide", "en ligne", "../../", $tabLiens);
 		    <li>le nom du contact ;</li>
 		    <li>le prénom du contact ;</li>
 		    <li>le numéro de téléphone ;</li>
-		    <li>le numéro de fax ;</li>
 		    <li>l'email du contact.</li>
 		</ul>
 	    </li>
@@ -404,7 +403,6 @@ IHM_Generale::header("Aide", "en ligne", "../../", $tabLiens);
 	    <li>du nom du contact ;</li>
 	    <li>du prénom du contact ;</li>
 	    <li>du numéro de téléphone ;</li>
-	    <li>du numéro de fax.</li>
 	</ul>
 	<figure>
 	    <a href="#image_liste_contact" onclick="cacheOuMontre('image_liste_contact', false);"><img src="liste_contact.png" alt="Obtenir la liste des contacts" width="50%"/></a>

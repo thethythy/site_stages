@@ -22,9 +22,10 @@ Promotion_IHM::afficherFormulaireRecherche("rattacherResumesData.php", false);
 
 // Si un enregistrement des résumés a été effectuée
 if (isset($_POST['save'])) {
-    $tabIdConventions = $_POST['idConventions'];
-    if ($tabIdConventions != "") {
-	$tabIdConv = explode(";", $tabIdConventions);
+
+    // Mise à jour éventuelle des résumés des stagiaires
+    if ($_POST['idConventions'] != "") {
+	$tabIdConv = explode(";", $_POST['idConventions']);
 	for ($i = 0; $i < sizeof($tabIdConv); $i++) {
 	    $conv = Convention::getConvention($tabIdConv[$i]);
 	    if ($_POST['conv' . $tabIdConv[$i]] != "") {
@@ -36,6 +37,23 @@ if (isset($_POST['save'])) {
 		$conv->setSujetDeStage("Pas de résumé");
 	    }
 	    Convention_BDD::sauvegarder($conv);
+	}
+    }
+
+    // Mise à jour éventuelle des résumés des alternants
+    if ($_POST['idContrats'] != "") {
+	$tabIdCont = explode(";", $_POST['idContrats']);
+	for ($i = 0; $i < sizeof($tabIdCont); $i++) {
+	    $cont = Contrat::getContrat($tabIdCont[$i]);
+	    if ($_POST['cont' . $tabIdCont[$i]] != "") {
+		if (file_exists("../../documents/resumes/" . $_POST['cont' . $tabIdCont[$i]]))
+		    $cont->setASonResume (1);
+		$cont->setSujetDeContrat($_POST['cont' . $tabIdCont[$i]]);
+	    } else {
+		$cont->setASonResume(0);
+		$cont->setSujetDeContrat("Pas de résumé");
+	    }
+	    Contrat_BDD::sauvegarder($cont);
 	}
     }
 }

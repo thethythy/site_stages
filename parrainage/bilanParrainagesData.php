@@ -63,8 +63,8 @@ if ($nbFiltres >= 2) {
 }
 
 $tabConventions = Convention::getListeConvention($filtre);
-
+$tabContrats = Contrat::getListeContrat($filtre);
 // Afficher le résultat de la recherche
-Parrain_IHM::afficherListeBilanParrains($tabPromotions, $tabConventions);
+Parrain_IHM::afficherListeBilanParrains($tabPromotions, $tabConventions, $tabContrats);
 
 ?>

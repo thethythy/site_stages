@@ -1,7 +1,0 @@
-ErrorDocument 404 http://info-stages.univ-lemans.fr
-php_value post_max_size 20M
-php_value upload_max_filesize 20M
-php_value default_charset UTF-8
-php_value always_populate_raw_post_data -1
-AddDefaultCharset UTF-8
-

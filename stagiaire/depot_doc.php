@@ -24,7 +24,6 @@ Promotion_IHM::afficherFormulaireRecherche("depot_docData.php", false);
 
 //Envoie d'un mail de notification au parrain et au responsable
 function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idParrain, $nomFichier, $typedocument) {
-    global $emailResponsable;
     global $baseSite;
 
     $oParrain = Parrain::getParrain($idParrain);
@@ -32,10 +31,14 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
     $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $idFiliere, $idParcours);
     $oConvention = Convention::getConventionFromEtudiantAndPromotion($oEtudiant->getIdentifiantBDD(), $oPromotion->getIdentifiantBDD());
 
+    $oResponsable = Responsable::getResponsableFromResponsabilite("stage");
+    $emailResp = $oResponsable->getEmailresponsable();
+    $titreResp = $oResponsable->getTitreresponsable();
+
     $headers = 'Content-Type: text/html; charset=utf-8'. "\n";
     $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-    $headers .= 'From: ' . $emailResponsable . "\n";
-    $headers .= 'Reply-To: ' . $emailResponsable . "\n";
+    $headers .= 'From: ' . $emailResp . "\n";
+    $headers .= 'Reply-To: ' . $emailResp . "\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
     $msg = "Ceci est un message automatique concernant le suivi de stage.<br/>
@@ -47,9 +50,9 @@ function envoyerNotification($oEtudiant, $annee, $idFiliere, $idParcours, $idPar
 		Document : $typedocument <a href='" . $baseSite . "documents/" . $nomFichier . "'>accessible ici</a><br/>
 		<br/>
 		Bonne lecture<br/>
-		Le responsable des stages";
+		$titreResp";
 
-    mail($oParrain->getEmail() . "," . $emailResponsable . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
+    mail($oParrain->getEmail() . "," . $emailResp . "," . $oEtudiant->getEmailInstitutionel(), "Site des stages : $typedocument déposé", $msg, $headers);
 }
 
 //Fonction pour copier un document sur le serveur

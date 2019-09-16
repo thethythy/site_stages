@@ -409,7 +409,7 @@ textarea {
     padding: 4px;
 }
 
-#entete td, #ligne0 td, #ligne1 td {
+#entete td, .ligne0 td, .ligne1 td {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
@@ -426,16 +426,16 @@ textarea {
     padding: 4px;
 }
 
-#entete2 td, #ligne0 td, #ligne1 td {
+#entete2 td, .ligne0 td, .ligne1 td {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-#ligne0 {
+.ligne0 {
     background: #DDDDDD;
 }
 
-#ligne1 {
+.ligne1 {
     background: #ededec;
 }
 
@@ -450,7 +450,7 @@ textarea {
 
 #dhtmlxscheduler {
     margin: auto;
-    width: 700px;
+    width: 750px;
     height: 645px;
     float: right;
     border: 1px solid;
@@ -628,4 +628,29 @@ section table td {
 .formulaire_saisie_clef table {
   margin: 5px ;
   padding: 5px ;
+}
+
+/* Utilisé sur la page de Suivi des Alternances pour garder
+la logique de l'IHM
+Un form ne peut pas être mis dans une table alors on passe le style
+de la table au form et le style du form à la table
+*/
+
+.tableToFormCheatStyle {
+    padding: 0;
+    border: 1px solid #dcdbda;
+    border-collapse: collapse;
+    background-color: #ededec;
+    text-align: center;
+    width:100%;
+}
+
+.formToTableCheatStyle {
+      text-align: center;
+      background-color: white;
+      border: medium none white;
+}
+
+.cellBordersCheatStyle {
+  border:2px solid white;
 }

@@ -44,46 +44,63 @@ if (sizeof($tabPromos) > 0) {
 
 		$tabEtudiants = Promotion::listerEtudiants($filtre);
 
-		// Récupération des étudiants ayant une convention
-		$tabEtuWithConv = array();
-
+		// Récupération des étudiants ayant une convention ou un contrat
+		$tabEtu = array();
 		for ($k = 0; $k < sizeof($tabEtudiants); $k++) {
-			if ($tabEtudiants[$k]->getConvention($annee) != null)
-				array_push($tabEtuWithConv, $tabEtudiants[$k]);
+			if ($tabEtudiants[$k]->getConvention($annee) ||
+			    $tabEtudiants[$k]->getContrat($annee))
+				array_push($tabEtu, $tabEtudiants[$k]);
 		}
 
-		// S'il y a des conventions alors les ajouter au flux
-		if (sizeof($tabEtuWithConv) > 0) {
+		// S'il y a des conventions ou des contrats alors les ajouter au flux
+		if (sizeof($tabEtu) > 0) {
 			$idpromotion = $tabPromos[$i]->getIdentifiantBDD();
 			$nom_parcours_filiere = $filiere->getNom()." ".$parcours->getNom();
 			print("\t<item id='".$idpromotion."' text='".$nom_parcours_filiere."' child='1'>\n\t\t<userdata name='idpromotion'>".$idpromotion."</userdata>\n");
 
-			for ($l = 0; $l < sizeof($tabEtuWithConv) ; $l++) {
-				$nom_prenom = $tabEtuWithConv[$l]->getNom()." ".$tabEtuWithConv[$l]->getPrenom();
-				$nom_prenom_style = $nom_prenom;
-				$convention = $tabEtuWithConv[$l]->getConvention($annee);
-				$couleur = $convention->getParrain()->getCouleur();
+			for ($l = 0; $l < sizeof($tabEtu) ; $l++) {
+				$nom_prenom = $tabEtu[$l]->getNom()." ".$tabEtu[$l]->getPrenom();
 
-				$parrain = $convention->getParrain();
+				$convention = $tabEtu[$l]->getConvention($annee);
+				$idconvention= "";
+				$contrat = $tabEtu[$l]->getContrat($annee);
+				$idcontrat = "";
+
+				if ($convention) {
+				    $convOUcont = $convention;
+				    $nom_prenom .= " &#91;STA&#93;";
+				    $idconvention = $convention->getIdentifiantBDD();
+				}
+				else {
+				    $convOUcont = $contrat;
+				    $nom_prenom .= " &#91;ALT&#93;";
+				    $idcontrat = $contrat->getIdentifiantBDD();
+				}
+
+				$nom_prenom_style = $nom_prenom;
+				$couleur = $convOUcont->getParrain()->getCouleur();
+
+				$parrain = $convOUcont->getParrain();
 				$nom_prenom_parrain = $parrain->getNom()." ".$parrain->getPrenom();
 
-				$examinateur = $convention->getExaminateur();
+				$examinateur = $convOUcont->getExaminateur();
 				$nom_prenom_examinateur = $examinateur->getNom()." ".$examinateur->getPrenom();
 
 				$style = "aCol='#".$couleur->getCode()."' sCol='#".$couleur->getCode()."'";
 
-				if ($convention->getIdSoutenance())
+				if ($convOUcont->getIdSoutenance())
 					$nom_prenom_style = "&lt;i&gt;".$nom_prenom."&lt;/i&gt;";
 
 				$tooltip = "tooltip='Etudiant : ".$nom_prenom." R&#233;f&#233;rent : ".$nom_prenom_parrain."'";
 
-				$contact = $convention->getContact();
+				$contact = $convOUcont->getContact();
 				$nom_lieu_entreprise = htmlspecialchars($contact->getEntreprise()->getNom()." (".$contact->getEntreprise()->getVille().")");
 
-				$iditemtree = $idpromotion."_".$filiere->getIdentifiantBDD()."_".$convention->getIdentifiantBDD();
+				$iditemtree = $idpromotion."_".$filiere->getIdentifiantBDD()."_".$convOUcont->getIdentifiantBDD();
 
 				print("\t\t<item id='".$iditemtree."' text='".$nom_prenom_style."' ".$style." ".$tooltip.">\n
-							\t\t\t<userdata name='idconvention'>".$convention->getIdentifiantBDD()."</userdata>\n
+							\t\t\t<userdata name='idconvention'>".$idconvention."</userdata>\n
+							\t\t\t<userdata name='idcontrat'>".$idcontrat."</userdata>\n
 							\t\t\t<userdata name='nom_prenom_etudiant'>".$nom_prenom."</userdata>\n
 
 							\t\t\t<userdata name='idparrain'>".$parrain->getIdentifiantBDD()."</userdata>\n
@@ -96,7 +113,7 @@ if (sizeof($tabPromos) > 0) {
 							\t\t\t<userdata name='idcontact'>".$contact->getIdentifiantBDD()."</userdata>\n
 							\t\t\t<userdata name='nom_entreprise'>".$nom_lieu_entreprise."</userdata>\n
 
-							\t\t\t<userdata name='idsoutenance'>".$convention->getIdSoutenance()."</userdata>\n
+							\t\t\t<userdata name='idsoutenance'>".$convOUcont->getIdSoutenance()."</userdata>\n
 						\t\t</item>\n");
 			}
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Page bilanConventions.php
+ * Page bilan.php
  * Utilisation : page visualisant par promotion les étudiants ayant une convention
- * Dépendance(s) : bilanConventionsData.php --> traitement des requêtes Ajax
+ * Dépendance(s) : bilanData.php --> traitement des requêtes Ajax
  * Accès : restreint par authentification HTTP
  */
 
@@ -16,13 +16,13 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Bilan des", "conventions", "../../", $tabLiens);
+IHM_Generale::header("Bilan des", "conventions / contrats", "../../", $tabLiens);
 
-Promotion_IHM::afficherFormulaireRecherche("bilanConventionsData.php", false);
+Promotion_IHM::afficherFormulaireRecherche("bilanData.php", false);
 
 // Affichage des données
 echo "<div id='data'>\n";
-include_once("bilanConventionsData.php");
+include_once("bilanData.php");
 echo "\n</div>";
 
 ?>

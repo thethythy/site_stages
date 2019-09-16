@@ -43,12 +43,19 @@ if (sizeof($datesSoutenances) == 1) {
 	// Sauvegarder l'objet soutenance en base
 	$id = Soutenance_BDD::sauvegarder($soutenance);
 
-	// Modification de la convention associée si nécessaire
+	// Modification de la convention ou du contrat associé si nécessaire
 	$result = TRUE;
 	if ($data['id'] != $id) {
-		$convention = Convention::getConvention($data['idconvention']);
-		$convention->setIdSoutenance($id);
-		$result = Convention_BDD::sauvegarder($convention);
+		if ($data['idconvention']) {
+		    $convention = Convention::getConvention($data['idconvention']);
+		    $convention->setIdSoutenance($id);
+		    $result = Convention_BDD::sauvegarder($convention);
+		}
+		else if ($data['idcontrat']) {
+		    $contrat = Contrat::getContrat($data['idcontrat']);
+		    $contrat->setIdSoutenance($id);
+		    $result = Contrat_BDD::sauvegarder($contrat);
+		}
 	}
 
 	// Création de la convocation liée à la soutenance
@@ -64,6 +71,8 @@ if (sizeof($datesSoutenances) == 1) {
 	    // Renvoie 0 = probleme
 	    print(0);
 	    Soutenance_BDD::supprimer($id);
+	    // La convention ou le contrat est mis-à-jour automatiquement
+	    // du fait des contraintes d'intégrité
 	    Convocation_BDD::supprimer($idconvocation);
 	} else {
 	    // Renvoie l'id de la soutenance

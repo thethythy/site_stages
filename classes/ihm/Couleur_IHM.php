@@ -127,7 +127,7 @@ class Couleur_IHM {
 	    for ($i = 0; $i < sizeof($tabCouleurs); $i++) {
 		$coul = $tabCouleurs[$i];
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<table >
 			    <tr>

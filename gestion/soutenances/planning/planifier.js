@@ -5,7 +5,7 @@
  *		 création puis envoi des requêtes Ajax traitées par
  *		    setSoutenanceJSON.php
  *		    delSoutenanceJSON.php
- *		    getDataConventionsXML.php
+ *		    getDataConvContXML.php
  *		    getDataSoutenancesXML.php
  *		    getDatesJSON.php
  *		 mise en forme et affichage des réponses
@@ -24,8 +24,8 @@ function Logger(idlogline) {
 Logger.prototype = {
 	/** Création de la structure */
 	setStructure : function() {
-		// Le nombre de conventions
-		this.nbconv = 0;
+		// Le nombre d'étudiants
+		this.nbetu = 0;
 		// Le nombre de soutenances
 		this.nbsout = 0;
 		// Le message
@@ -34,15 +34,15 @@ Logger.prototype = {
 		this.loglinehtml.innerHTML = "";
 	},
 
-	/** Modification du nombre de conventions */
-	setNbConv : function(nbconv) {
-		this.nbconv = nbconv;
+	/** Modification du nombre d'étudiants */
+	setNbConv : function(nbetu) {
+		this.nbetu = nbetu;
 		this.maj();
 	},
 
-	/** Retourne le nombre de conventions */
+	/** Retourne le nombre d'étudiants */
 	getNbConv : function() {
-		return this.nbconv;
+		return this.nbetu;
 	},
 
 	/** Modification du nombre de soutenances */
@@ -64,7 +64,7 @@ Logger.prototype = {
 
 	/** Mise à jour du logger puis effacement automatique du message après 5 secondes */
 	maj : function() {
-		this.loglinehtml.innerHTML = "Conventions : " + this.nbconv + "   Soutenances : " + this.nbsout;
+		this.loglinehtml.innerHTML = "Etudiants : " + this.nbetu + "   Soutenances : " + this.nbsout;
 		if (this.message != "") {
 			this.loglinehtml.innerHTML += "<br/>" + this.message;
 			window.setTimeout("logger.clear()", 5000);
@@ -93,7 +93,7 @@ tree.enableDragAndDrop(true);
 tree.attachEvent("onDrag", function() {return false;});
 tree.setImagePath('../../../classes/ihm/dhtmlxtree/imgs/csh_yellowbooks/');
 
-// Pour compter et mettre à jour le nombre de conventions
+// Pour compter et mettre à jour le nombre d'étudiants
 tree.attachEvent("onXLE", function(tree,id) {
 	logger.setNbConv(tree.getAllChildless().split(',').length);
 });
@@ -106,7 +106,7 @@ var getDureeSoutenanceFiliere = function(id) {
 	return 30;
 };
 
-// Pour faire ressortir la soutenance correspond à une convention sélectionnée
+// Pour faire ressortir la soutenance correspond à un étudiant sélectionné
 tree.setOnClickHandler(function(id) {
 	// Sélection de la soutenance et désélection de l'ancienne
 	var idsoutenance = tree.getUserData(id,"idsoutenance");
@@ -392,13 +392,13 @@ scheduler.attachEvent("onBeforeEventChanged",function(ev, e, is_new){
 	return this.isConstraintsOK(ev);
 });
 
-// Fonction pour créer une soutenance par drag & drop d'une convention
+// Fonction pour créer une soutenance par drag & drop d'un étudiant
 scheduler.attachEvent("onExternalDragIn", function(id, source, e){
 	var event = this.getEvent(id);
 
-	// Interdire si la convention a déjà une soutenance
+	// Interdire si l'étudiant a déjà une soutenance
 	if (tree.getUserData(tree._dragged[0].id, "idsoutenance") != 0) {
-		logger.setMessage("Une soutenance existe déjà pour cette convention");
+		logger.setMessage("Une soutenance existe déjà pour l'étudiant(e)");
 		return false;
 	}
 
@@ -406,9 +406,10 @@ scheduler.attachEvent("onExternalDragIn", function(id, source, e){
 	event.text = "";
 	event.details = tree.getItemText(tree._dragged[0].id);
 
-	// Le lien avec l'arbre et la convention
+	// Le lien avec l'arbre et l'étudiant
 	event.iditemtree = tree._dragged[0].id;
-	event.idconvention = tree._dragged[0].id.split('_')[2];
+	event.idconvention = tree.getUserData(tree._dragged[0].id, "idconvention");
+	event.idcontrat = tree.getUserData(tree._dragged[0].id, "idcontrat");
 
 	// Le référent
 	event.parrain = tree.getUserData(tree._dragged[0].id, "nom_prenom_parrain");
@@ -428,7 +429,7 @@ scheduler.attachEvent("onExternalDragIn", function(id, source, e){
 
 	// La salle : ne garder que les salles disponibles (voir l'éditeur spécifique)
 
-	// L'heure de fin selon la filiere (voir la sélection d'une convention dans l'arborescence)
+	// L'heure de fin selon la filiere (voir la sélection d'un étudiant dans l'arborescence)
 
 	// Incrémentation du nombre de soutenance
 	logger.setNbSout(logger.getNbSout() + 1);
@@ -646,7 +647,7 @@ LoadData.prototype.load = function() {
 	tree.deleteChildItems(0);
 	logger.reset();
 	if (annee != '') {
-		tree.loadXML('getDataConventionsXML.php?annee=' + annee);
+		tree.loadXML('getDataConvContXML.php?annee=' + annee);
 		scheduler.loadPlanning(annee);
 	} else {
 		scheduler.do_default_dhx_cal_navline(document.getElementById('identpourajax'));

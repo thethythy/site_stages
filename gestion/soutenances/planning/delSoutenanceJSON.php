@@ -30,10 +30,8 @@ if ($identifiantBDD != "") {
 	$idConvocation = Convocation::getConvocationFromSoutenance($identifiantBDD);
 	Convocation_BDD::supprimer($idConvocation);
 
-	// Modifier la convention
-	$convention = Convention::getConvention($data['idconvention']);
-	$convention->setIdSoutenance(NULL);
-	Convention_BDD::sauvegarder($convention);
+	// La convention ou le contrat est mis-jour automatiquement
+	// du fait des contraintes d'intégrité
 
 	// La suppression s'est bien passée
 	print("OK");

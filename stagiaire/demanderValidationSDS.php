@@ -22,17 +22,18 @@ IHM_Generale::header("Demander la validation", "d'un sujet de stage", "../", $ta
 
 //Envoie d'un mail de notification au responsable des stages
 function envoyerNotification() {
-    global $emailResponsable;
     global $baseSite;
+
+    $emailResp = Responsable::getResponsableFromResponsabilite("stage")->getEmailresponsable();
 
     $headers = 'Content-Type: text/html; charset=utf-8' . "\n";
     $headers .= 'Content-Transfer-Encoding: 8bit' . "\n";
-    $headers .= 'From: ' . $emailResponsable . "\n";
-    $headers .= 'Reply-To: ' . $emailResponsable . "\n";
+    $headers .= 'From: ' . $emailResp . "\n";
+    $headers .= 'Reply-To: ' . $emailResp . "\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
     $msg = "Un nouveau sujet de stage a été soumis.<br/>Vous pouvez le visualisez <a href='" . $baseSite . "gestion/etudiants/gestionSujetDeStage.php'>ici</a>";
-    mail($emailResponsable, 'Site des stages : Demande de validation !', $msg, $headers);
+    mail($emailResp, 'Site des stages : Demande de validation !', $msg, $headers);
 }
 
 //Fonction pour copier le fichier sur le serveur

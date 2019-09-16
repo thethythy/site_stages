@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Page bilanConventionsData.php
- * Utilisation : page retournant une synthèse des étudiants ayant une convention
+ * Page saisirNotesData.php
+ * Utilisation : page retournant un tableau d'édition des notes de soutenances
  * Accès : restreint par authentification HTTP
  */
 
@@ -44,13 +44,25 @@ $tabEtudiants = Promotion::listerEtudiants($filtre);
 $tabPromos = Promotion_BDD::getListePromotions($filtre);
 
 if (sizeof($tabPromos) > 0) {
-    if (sizeof($tabEtudiants) > 0) {
-	Convention_IHM::afficherListeConventions($annee, $tabEtudiants);
+
+    // Récupération des étudiants ayant une convention
+    $tabEtu = array();
+    for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
+	if ($tabEtudiants[$i]->getConvention($annee) != null)
+	    array_push($tabEtu, $tabEtudiants[$i]);
+	if ($tabEtudiants[$i]->getContrat($annee) != null)
+	    array_push($tabEtu, $tabEtudiants[$i]);
+    }
+
+    // Si il y a au moins un étudiant avec une convention
+    if (sizeof($tabEtu) > 0) {
+	// Affichage des notes des étudiants
+	Stage_IHM::afficherListeNotes($annee, $parcours, $filiere, $tabEtu, "saisirNotes.php");
     } else {
-	echo "<br/><center>Aucun étudiant n'est dans cette promotion.<center/><br/>";
+	echo "<br/><center>Aucune convention ou contrat  n'a été trouvée.</center><br/>";
     }
 } else {
-    echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.<center/><br/>";
+    echo "<br/><center>Aucune promotion ne correspond à ces critères de recherche.</center><br/>";
 }
 
 ?>

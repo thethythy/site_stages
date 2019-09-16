@@ -33,18 +33,24 @@ if (isset($_POST['enseignant']) && !empty($_POST['enseignant']) && $_POST['ensei
 	for($i=1; $i<sizeof($filtres); $i++)
 	    $filtre = new Filtre($filtre, $filtres[$i], "OR");
 
-	// Listes conventions
+	// Liste conventions
 	$listeConvention = Convention::getListeConvention($filtre);
 
-	// Tri des conventions selon l'heure de passage
-	usort($listeConvention, array("Convention", "compareHeureSoutenance"));
+	// Liste contrats
+	$listeContrat = Contrat::getListeContrat($filtre);
+
+	// Fusion des deux listes
+	$listeConvCont = array_merge($listeConvention, $listeContrat);
+
+	// Tri selon l'heure de passage
+	usort($listeConvCont, array("Convention", "compareHeureSoutenance"));
 
 	// Pour chaque date soutenance
 	$filtreDateSoutenance = new FiltreNumeric('annee', $annee+1);
 	$listeDateSoutenance = DateSoutenance::listerDateSoutenance($filtreDateSoutenance);
 
 	// Affichage du planning
-	Parrain_IHM::afficherPlanningParrains($annee, $listeDateSoutenance, $listeConvention);
+	Parrain_IHM::afficherPlanningParrains($annee, $listeDateSoutenance, $listeConvCont);
 
 } else
 	echo "<br/><center>Veuillez sélectionner un enseignant</center>";

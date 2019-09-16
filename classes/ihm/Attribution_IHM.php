@@ -3,22 +3,21 @@
 class Attribution_IHM {
 
     /**
-     * Afficher une liste des notifications d'attribution à sélectionnner
+     * Afficher une liste des notifications d'attribution à sélectionner
      * @param tableau $tabOAttribution Un tableau d'objets Attribution
      * @param integer $annee L'année de la promotion
      * @param integer $parcours Le parcours de la promotion
      * @param integer $filiere La filière de la promotion
      */
-    public static function afficherSelectionDestinairesNotification($tabOAttribution, $annee, $parcours, $filiere) {
+    public static function afficherSelectionDestinairesNotification($tabOAttribution, $annee, $parcours, $filiere, $url) {
 	if (sizeof($tabOAttribution) > 0) {
 	    ?>
-	    <form method="post" action="mailAttribution.php">
+	    <form method="post" action="<?php echo $url; ?>">
 		<table>
 		    <tr id='entete'>
-			<td width='29%'>Etudiant</td>
-			<td width='3%'>Alt.</td>
-			<td width='28%'>Référent</td>
-			<td width='30%'>Encadrant</td>
+			<td width='30%'>Etudiant</td>
+			<td width='30%'>Référent</td>
+			<td width='30%'>Encadrant entreprise</td>
 			<td width='10%'>Notification</td>
 		    </tr>
 
@@ -27,13 +26,7 @@ class Attribution_IHM {
 			$oConvention = Convention::getConvention($tabOAttribution[$i]->getIdconvention());
 
 			$etudiant = $oConvention->getEtudiant();
-			$alternant = FALSE;
-			$statut = $etudiant->getCodeEtudiant();
-			if ($statut == 5 || $statut == 51 || $statut == 52)
-			    $alternant = TRUE;
-
 			$referent = $oConvention->getParrain();
-
 			$contact = $oConvention->getContact();
 			$entreprise = $oConvention->getEntreprise();
 
@@ -44,14 +37,6 @@ class Attribution_IHM {
 			    <td align="center">
 				<?php echo $etudiant->getPrenom() . " " . $etudiant->getNom(); ?>
 			    </td>
-			    <td>
-				<?php
-				    if ($alternant)
-					echo "<input type='checkbox' checked disabled/>";
-				    else
-					echo "<input type='checkbox' disabled/>";
-				?>
-			    </td>
 			    <td align="center">
 				<?php echo $referent->getPrenom() ." " . $referent->getNom(); ?>
 			    </td>
@@ -60,14 +45,10 @@ class Attribution_IHM {
 			    </td>
 			    <td align="center">
 				<?php
-				    if ($alternant) {
-					echo "ns";
-				    } else {
-					if ($tabOAttribution[$i]->getEnvoi() == 1)
-					    echo "<input type='checkbox' checked disabled name='notifications[]' value='$idNotification'/>";
-					else
-					    echo "<input type='checkbox' name='notifications[]' value='$idNotification'/>";
-				    }
+				if ($tabOAttribution[$i]->getEnvoi() == 1)
+				    echo "<input type='checkbox' checked disabled name='notifications[]' value='$idNotification'/>";
+				else
+				    echo "<input type='checkbox' name='notifications[]' value='$idNotification'/>";
 				?>
 			    </td>
 			<?php

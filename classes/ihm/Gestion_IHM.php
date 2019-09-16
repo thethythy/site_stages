@@ -76,9 +76,11 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
+					<li><a href='./gestion/gestionResponsable.php'>Gérer les responsables</a></li>
 					<li><a href="./gestion/gestionClef.php">Gérer la clef d'accès</a></li>
 					<li><a href="./gestion/exporterBDD.php">Exporter la base</a></li>
 					<li><a href='./gestion/phpInfo.php' target="_blank">Informations PHP</a></li>
+					<li><a href="./couleurs/gestionCouleur.php">Gérer les couleurs</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -92,28 +94,9 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./gestion/videroffrestage.php">Supprimer les offres</a></li>
-					<li><a href="./gestion/vidersujetstage.php">Supprimer les validations</a></li>
-					<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li><br/>
+					<li><a href="./gestion/viderfluxrss.php">Vider le flux RSS</a></li>
 					<li><a href="./gestion/editiontache.php">Gestion des tâches</a></li>
 					<li><a href="./gestion/browser/index.php">Gestion des documents</a></li>
-				    </ul>
-				</td>
-			    </tr>
-			</table>
-		    </td>
-
-		    <td>
-			<table id="menuBdd">
-			    <tr>
-				<td id="titreMenuBdd">
-				    Couleurs
-				</td>
-			    </tr>
-			    <tr>
-				<td>
-				    <ul>
-					<li><a href="./couleurs/gestionCouleur.php">Gérer les couleurs</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -134,6 +117,8 @@ class Gestion_IHM {
 				</td>
 			    </tr>
 			</table>
+		    </td>
+		    <td>
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
@@ -145,6 +130,7 @@ class Gestion_IHM {
 				    <ul>
 					<li><a href="./etudiants/gestionEtudiants.php">Gérer les étudiants</a></li>
 					<li><a href="./etudiants/gestionSujetDeStage.php">Gérer les demandes de validation</a></li>
+					<li><a href="./gestion/vidersujetstage.php">Supprimer les validations</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -163,8 +149,37 @@ class Gestion_IHM {
 				</td>
 			    </tr>
 			</table>
+			<table id="menuBdd">
+			    <tr>
+				<td id="titreMenuBdd">
+				    Stages
+				</td>
+			    </tr>
+			    <tr>
+				<td>
+				    <ul>
+					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider/Editer des offres de stage</a></li>
+				    </ul>
+				</td>
+			    </tr>
+			</table>
+			<table id="menuBdd">
+			    <tr>
+				<td id="titreMenuBdd">
+				    Alternances
+				</td>
+			    </tr>
+			    <tr>
+				<td>
+				    <ul>
+					<li><a href="./entreprises/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
+					<li><a href="./SuiviCandidatures/SuiviCandidatures.php">Suivi des démarches alternants</a></li>
+					<li><a href="./exportation/exportListeContrat.php">Exporter étudiant/contrat</a></li>
+				    </ul>
+				</td>
+			    </tr>
+			</table>
 		    </td>
-
 		    <td>
 			<table id="menuBdd">
 			    <tr>
@@ -182,8 +197,7 @@ class Gestion_IHM {
 					<li><a href="./entreprises/modifierListeEntreprises.php">Modifier/Supprimer une entreprise</a></li><br/>
 					<li><a href="./entreprises/listeDesContacts.php">Lister les contacts</a></li>
 					<li><a href="./entreprises/saisirContact.php">Saisir un contact</a></li>
-					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li><br/>
-					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider des offres de stage</a></li>
+					<li><a href="./entreprises/modifierListeContacts.php">Modifier/Supprimer un contact</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -219,24 +233,24 @@ class Gestion_IHM {
 			    </tr>
 			</table>
 		    </td>
-
 		    <td>
 			<table id="menuBdd">
 			    <tr>
 				<td id="titreMenuBdd">
-				    Conventions
+				    Conventions / Contrats
 				</td>
 			    </tr>
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./conventions/gestionThemeDeStage.php">Gérer les thèmes de stage</a></li><br/>
+					<li><a href="./communs/gestionThemeDeStage.php">Gérer les thèmes de stage/alternance</a></li><br/>
 					<li><a href="./conventions/saisirConvention.php">Saisir une convention</a></li>
 					<li><a href="./conventions/modifierListeConventions.php">Modifier/Supprimer une convention</a></li><br/>
-					<li><a href="./conventions/mailAttribution.php">Notifier les attributions</a></li><br/>
-					<li><a href="./conventions/saisirNotesStages.php">Saisir des notes de stages</a></li>
-					<li><a href="./conventions/rattacherResumes.php">Rattacher des résumés</a></li><br/>
-					<li><a href="./conventions/bilanConventions.php">Bilan des conventions</a></li>
+					<li><a href="./contrats/saisirContrat.php">Saisir un contrat</a></li>
+					<li><a href="./contrats/modifierListeContrat.php">Modifier/Supprimer un contrat</a></li><br/>
+					<li><a href="./conventions/mailAttributionReferentStage.php">Notifier les référents stagiaire</a></li>
+					<li><a href="./contrats/mailAttributionReferentAlternant.php">Notifier les référents alternant</a></li><br/>
+					<li><a href="./communs/bilan.php">Bilan des conventions/contrats</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -251,10 +265,12 @@ class Gestion_IHM {
 				<td>
 				    <ul>
 					<li><a href="./soutenances/gestionSalle.php">Gérer les salles</a></li>
-					<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li><br/>
-					<li><a href="./soutenances/gestionTempsSoutenance.php">Gérer les durées de soutenance</a></li>
-					<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li><br/>
-					<li><a href="./soutenances/convocation.php">Convocation aux soutenances</a></li>
+					<li><a href="./soutenances/gestionDate.php">Gérer les dates</a></li>
+					<li><a href="./soutenances/gestionTempsSoutenance.php">Gérer les durées de soutenance</a></li><br/>
+					<li><a href="./soutenances/planning/planifier.php">Planifier les soutenances</a></li>
+					<li><a href="./soutenances/convocation.php">Convocation aux soutenances</a></li><br/>
+					<li><a href="./communs/saisirNotes.php">Saisir des notes de soutenance</a></li>
+					<li><a href="./communs/rattacherResumes.php">Rattacher des résumés</a></li>
 				    </ul>
 				</td>
 			    </tr>

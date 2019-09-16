@@ -26,7 +26,7 @@ if (isset($_POST['add'])) {
 	Contact_IHM::afficherFormulaireSaisie("");
 	IHM_Generale::erreur("Le nom, le prénom et le numéro de téléphone sont obligatoires !");
     } else {
-	$newContact = new Contact("", $nom, $prenom, $tel, $fax, $email, $idEntreprise);
+	$newContact = new Contact("", $nom, $prenom, $tel, $email, $idEntreprise);
 
 	$idCont = Contact_BDD::sauvegarder($newContact);
 	$contact = Contact::getContact($idCont);

@@ -44,16 +44,22 @@ if (isset($date) && isset($salle)) {
 	// Tri des soutenances selon l'heure de passage
 	usort($listeSoutenance, array("Soutenance", "compareHeureSoutenance"));
 
-	// Liste conventions
-	$listeConvention = array();
-	foreach ($listeSoutenance as $sout)
-		array_push($listeConvention, Soutenance::getConvention($sout));
+	// Liste conventions ou contrats
+	$listeConvOUCont = array();
+	foreach ($listeSoutenance as $sout) {
+		$oConvention = Soutenance::getConvention($sout);
+		$oContrat = Soutenance::getContrat($sout);
+		if ($oConvention)
+			array_push($listeConvOUCont, $oConvention);
+		else
+			array_push($listeConvOUCont, $oContrat);
+	}
 
-	// Tri des conventions selon l'heure de passage
-	usort($listeConvention, array("Convention", "compareHeureSoutenance"));
+	// Tri selon l'heure de passage
+	usort($listeConvOUCont, array("Convention", "compareHeureSoutenance"));
 
 	// Affichage du planning
-	Salle_IHM::afficherPlanningSalles($annee, $listeConvention);
+	Salle_IHM::afficherPlanningSalles($annee, $listeConvOUCont);
 } else
 	echo "<br/><center>Veuillez sélectionner une salle et une date.</center>";
 
