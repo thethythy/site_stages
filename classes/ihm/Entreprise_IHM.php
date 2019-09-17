@@ -120,24 +120,6 @@ class Entreprise_IHM {
 				    />
 				</td>
 			    </tr>
-			    <tr>
-				<td>Type de l'entreprise</td>
-				<td>
-				    <?php
-				    echo "<select name='idtype'>";
-				    for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++) {
-					$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
-					$type = $tabTypeEntreprise[$i]->getType();
-
-					if ($ent != "" && $ent->getType()->getIdentifiantBDD() == $id)
-					    echo "<option value='$id' selected>$type</option>";
-					else
-					    echo "<option value='$id'>$type</option>";
-				    }
-				    echo "</select>";
-				    ?>
-				</td>
-			    </tr>
 			</table>
 		    </td>
 		    <td width="50%" align="center">
@@ -177,8 +159,42 @@ class Entreprise_IHM {
 						echo $ent->getPays(); ?>"/>
 				</td>
 			    </tr>
+			</table>
+		    </td>
+		</tr>
+		<tr>
+		    <td width="50%" align="center">
+			<table>
 			    <tr>
-				<td>&nbsp;</td>
+				<td>Type de l'entreprise</td>
+				<td>
+				    <?php
+				    echo "<select name='idtype'>";
+				    for ($i = 0; $i < sizeof($tabTypeEntreprise); $i++) {
+					$id = $tabTypeEntreprise[$i]->getIdentifiantBDD();
+					$type = $tabTypeEntreprise[$i]->getType();
+
+					if ($ent != "" && $ent->getType()->getIdentifiantBDD() == $id)
+					    echo "<option value='$id' selected>$type</option>";
+					else
+					    echo "<option value='$id'>$type</option>";
+				    }
+				    echo "</select>";
+				    ?>
+				</td>
+			    </tr>
+			    <tr>
+				<td>Numéro de SIRET</td>
+				<td>
+				    <input type="text" name="siret"
+				    <?php
+				    if (isset($_POST['siret']))
+					echo "value='" . $_POST['siret'] . "'";
+				    else
+					if ($ent != "")
+					    echo "value='" . $ent->getSiret() . "'";
+				    ?>
+				</td>
 			    </tr>
 			</table>
 		    </td>

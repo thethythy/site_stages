@@ -198,7 +198,7 @@ function verifier() {
           $idContact = Contact_BDD::sauvegarder($nouveauContact);
         }
       } else {//On enregistre l'entreprise dans la base de données
-        $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL);
+        $nouvelleEntreprise = new Entreprise("", $nom_entreprise, $adresse, $codePostal, $ville, $pays, $email_entreprise, NULL, NULL);
         $idEntreprise = Entreprise_BDD::sauvegarder($nouvelleEntreprise);
         $nouveauContact = new Contact("", $nom_contact, $prenom_contact, $tel_contact, $email_contact, $idEntreprise);
         $idContact = Contact_BDD::sauvegarder($nouveauContact);

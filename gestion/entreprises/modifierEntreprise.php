@@ -37,6 +37,7 @@ if (isset($_POST['edit'])) {
 	$oEnt->setVille($ville);
 	$oEnt->setPays($pays);
 	$oEnt->setEmail($email);
+	$oEnt->setSiret($siret);
 	$oEnt->setTypeEntreprise($idtype);
 
 	Entreprise_BDD::sauvegarder($oEnt);

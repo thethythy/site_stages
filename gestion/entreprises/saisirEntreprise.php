@@ -25,7 +25,7 @@ if (isset($_POST['add'])) {
 	Entreprise_IHM::afficherFormulaireSaisie("");
 	IHM_Generale::erreur("Tous les champs sont obligatoires !");
     } else {
-	$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype);
+	$newEntreprise = new Entreprise("", $nom, $adresse, $cp, $ville, $pays, $email, $idtype, $siret);
 
 	// Si l'entreprise que l'on veut créer n'existe pas déjà
 	if (Entreprise_BDD::existe($newEntreprise) == false) {
