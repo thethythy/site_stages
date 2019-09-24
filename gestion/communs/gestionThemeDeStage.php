@@ -57,7 +57,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../../', 'Accueil');
 $tabLiens[1] = array('../', 'Gestion de la base');
 
-IHM_Generale::header("Gestion des", "types d'entreprises", "../../", $tabLiens);
+IHM_Generale::header("Gestion des", "thèmes de stage", "../../", $tabLiens);
 
 if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == 'mod') {
     ThemeDeStage_IHM::afficherFormulaireModification($_GET['id']);
