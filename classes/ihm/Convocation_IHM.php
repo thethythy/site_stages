@@ -84,7 +84,7 @@ class Convocation_IHM {
 			$idConvocation = $tabOConvocation[$i]->getIdentifiantBDD();
 			?>
 
-			<tr id="ligne<?php echo $i % 2; ?>">
+			<tr class="ligne<?php echo $i % 2; ?>">
 			    <td align="center">
 				<?php echo $nomFiliere . " " . $nomParcours; ?>
 			    </td>

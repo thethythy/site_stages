@@ -446,7 +446,7 @@ class Promotion_IHM {
 			<?php
 			for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 			    ?>
-	    	<tr id="ligne<?php echo $i % 2; ?>">
+	    	<tr class="ligne<?php echo $i % 2; ?>">
 	                <td width="80%" align="left">
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 	                </td>
@@ -490,7 +490,7 @@ class Promotion_IHM {
 	for ($i = 0; $i < sizeof($tabEtudiants); $i++) {
 	    if (isset($_POST['etu' . $tabEtudiants[$i]->getIdentifiantBDD()])) {
 		?>
-		    <tr id="ligne<?php echo $i % 2; ?>">
+		    <tr class="ligne<?php echo $i % 2; ?>">
 			<td width="100%" align="left">
 		<?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom() . " " . $tabEtudiants[$i]->getEmailInstitutionel(); ?>
 			</td>
@@ -595,7 +595,7 @@ class Promotion_IHM {
 				    break;
 			    }
 			    ?>
-		    	<tr id="ligne<?php echo $i % 2; ?>">
+		    	<tr class="ligne<?php echo $i % 2; ?>">
 		    	    <td>
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 		    	    </td>
@@ -713,7 +713,7 @@ class Promotion_IHM {
     </tr>";
 		for ($i = 0; $i < $nbEtudiants; $i++) {
 		    ?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 	    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 		    </td>
@@ -854,7 +854,7 @@ class Promotion_IHM {
 
 	    for ($i = 0; $i < $nbEtudiants; $i++) {
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	    	<td>
 		    <?php echo $tabEtudiants[$i]->getNom() . " " . $tabEtudiants[$i]->getPrenom(); ?>
 	    	</td>

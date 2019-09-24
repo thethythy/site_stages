@@ -33,7 +33,7 @@ class Affectation_IHM {
 			$idNotification = $tabOAffectation[$i]->getIdentifiantBDD();
 			?>
 
-			<tr id="ligne<?php echo $i % 2; ?>">
+			<tr class="ligne<?php echo $i % 2; ?>">
 			    <td align="center">
 				<?php echo $etudiant->getPrenom() . " " . $etudiant->getNom(); ?>
 			    </td>

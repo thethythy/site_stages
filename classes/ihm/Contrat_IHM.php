@@ -354,7 +354,7 @@ class Contrat_IHM {
 		$contact = $contrat->getContact();
 		$entreprise = $contact->getEntreprise();
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<br/>
 			    <?php echo $entreprise->getNom(); ?> <br/>
@@ -425,7 +425,7 @@ class Contrat_IHM {
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom(); ?>
 	        </td>
@@ -487,7 +487,7 @@ class Contrat_IHM {
 	    $entreprise = $contact->getEntreprise();
 	    $theme = ThemeDeStage::getThemeDeStage($contrat->getIdTheme());
 	    ?>
-	    <tr id="ligne<?php echo $i % 2; ?>">
+	    <tr class="ligne<?php echo $i % 2; ?>">
 	        <td>
 		    <?php echo $tabEtuWithContrats[$i]->getNom() . " " . $tabEtuWithContrats[$i]->getPrenom(); ?>
 	        </td>

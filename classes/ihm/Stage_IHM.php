@@ -158,7 +158,7 @@ class Stage_IHM {
 		$contact = $conv->getContact();
 		$entreprise = $contact->getEntreprise();
 		?>
-	        <tr id="ligne<?php echo $i % 2; ?>">
+	        <tr class="ligne<?php echo $i % 2; ?>">
 	    	<td>
 	                <br/>
 	    <?php echo $entreprise->getNom(); ?> <br/>
@@ -246,7 +246,7 @@ class Stage_IHM {
 			    $idContrats .= ";" . $cont->getIdentifiantBDD();
 		    }
 		    ?>
-		    <tr id="ligne<?php echo $i % 2; ?>">
+		    <tr class="ligne<?php echo $i % 2; ?>">
 			<td width="20%">
 				<?php echo $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom(); ?>
 			</td>
@@ -336,7 +336,7 @@ class Stage_IHM {
 			$somme += $cont->getNote();
 		    }
 		    ?>
-		    <tr id="ligne<?php echo $i % 2; ?>">
+		    <tr class="ligne<?php echo $i % 2; ?>">
 		    <td align="center">
 			    <?php echo $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom(); ?>
 		    </td>

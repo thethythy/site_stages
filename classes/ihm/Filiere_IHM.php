@@ -53,7 +53,7 @@ class Filiere_IHM {
 		$nom = $tabFiliere[$i]->getNom();
 		$tps_soutenance = $tabFiliere[$i]->getTempsSoutenance();
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<table >
 			    <tr>

@@ -122,7 +122,7 @@ class TypeEntreprise_IHM {
 	    for ($i = 0; $i < sizeof($tabTypes); $i++) {
 		$couleur = $tabTypes[$i]->getCouleur();
 		?>
-		<tr id="ligne<?php echo $i % 2; ?>">
+		<tr class="ligne<?php echo $i % 2; ?>">
 		    <td>
 			<table >
 			    <tr>
