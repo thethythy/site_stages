@@ -54,13 +54,23 @@ IHM_Menu::menuSoutenance();
 	</tr>
 
 	<tr class="ligne0">
-		<td>Master 2 ATAL</td>
+		<td>Master 2 ATAL initiaux</td>
 		<td>janvier à juin</td>
 		<td>27 janvier 2020</td>
-		<td>10 juillet 2020</td>
+		<td>26 juin 2020</td>
 		<td>6 mois<br>
 		(24 sem.)</td>
-		<td>10 juillet 2020</td>
+		<td>3 juillet 2020</td>
+	</tr>
+
+	<tr class="ligne0">
+		<td>Master 2 ATAL alternants</td>
+		<td>janvier à juin</td>
+		<td>27 janvier 2020</td>
+		<td>26 juin 2020</td>
+		<td>6 mois<br>
+		(24 sem.)</td>
+		<td>27 août 2020</td>
 	</tr>
 
 </table>

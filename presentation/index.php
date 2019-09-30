@@ -21,8 +21,8 @@ IHM_Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../documents/telechargements/presentation-1718.pdf">Téléchargement</a>
-    <A href="../documents/telechargements/presentation-1718.pdf">
+    <A href="../documents/telechargements/presentation-1920.pdf">Téléchargement</a>
+    <A href="../documents/telechargements/presentation-1920.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
@@ -40,11 +40,13 @@ IHM_Menu::menuPresentation();
 
 <p>L'enseignement de l'informatique nécessite une grande part de travaux pratiques et appliqués afin d'assimiler les nombreuses notions abordées en cours et en travaux dirigés. Les travaux pratiques sont assurés par l'enseignement universitaire, mais l'apprentissage du développement d'un projet informatique ne peut se faire qu'en situation réelle au cours de stages de formation en entreprise ou en laboratoire de recherche.</p>
 
-<p>Ce document s'adresse en premier lieu aux étudiants des filières informatiques de l'Université du Maine (Licence L3, Master Professionnel), mais il s'adresse également aux différentes personnes concernées par les stages&nbsp;: l'équipe enseignante et les entreprises d'accueils.
+<p>Ce document s'adresse en premier lieu aux étudiants des filières informatiques de l'Université du Maine (Licence et Master Informatique), mais il s'adresse également aux différentes personnes concernées par les stages&nbsp;: l'équipe enseignante et les entreprises d'accueils.
 
 <p>Il présente toutes les informations concernant les stages étudiants qu'ils soient normalement prévus dans le cursus (stage obligatoire de durée minimale) ou qu'ils soient fait en dehors du cursus (stage de durée variable à l'initiative de l'étudiant). Dans les deux cas une convention de stage doit être établie entre les trois parties prenantes (l'étudiant, l'Université et l'entreprise). La suite du document parle essentiellement des stages obligatoires mais les aspects administratifs sont les mêmes quel que soit le type de stage (obligatoire ou hors formation).</p>
 
 <p>Enfin, d'un point de vue organisationnel, tous les aspects pédagogiques (validation d'un sujet, suivi, organisation des soutenances) sont gérés par le responsable des stages et les enseignant-référents du Département Informatique. En ce qui concerne les aspects administratifs (retrait de la fiche d'établissement d'une convention, signature des conventions, avenant), ils sont gérés par la scolarité de la Faculté des Sciences.</p>
+
+<p><b>Dans le cas d'une alternance, les informations données ci-après ne s'appliquent pas sauf ce qui concerne les soutenances (dates, planning, conditions de la soutenance) et le rapport de stage.</b></p>
 
 <div class="titre2"><a name="11">1.1. Contenu du stage</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
@@ -52,7 +54,7 @@ IHM_Menu::menuPresentation();
 
 <div class="titre3">Principe&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le contenu du stage ainsi que la durée et son évaluation diffèrent selon le diplôme et selon l'année dans le diplôme (cf. tableau ci-après). L'évaluation se fait d'après le rapport écrit, la soutenance orale et l'avis de l'entreprise. Dans des conditions très particulières ou dans le cas des stages à l'étranger, la durée du stage peut être « négociée » avec le responsable pédagogique. Pour les filières professionnelles, le stage s'effectue généralement en entreprise mais, dans certains cas particuliers, il peut s'effectuer dans un laboratoire de recherche ou un service de recherche & développement. Pour les filières recherche, le stage doit obligatoirement s'effectuer dans un laboratoire de recherche (privé ou public).</p>
+<p>Le contenu du stage ainsi que la durée et son évaluation diffèrent selon le diplôme et selon l'année dans le diplôme (cf. tableau ci-après). L'évaluation se fait d'après le rapport écrit, la soutenance orale et l'avis de l'entreprise. Dans des conditions très particulières ou dans le cas des stages à l'étranger, la durée du stage peut être « négociée » avec le responsable pédagogique. Le stage s'effectue généralement en entreprise mais, dans certains cas, il peut s'effectuer dans un laboratoire de recherche public.</p>
 
 <p>Il s'agit d'un stage de formation. L'étudiant est considéré comme étant en travaux pratiques mais hors de l'Université. Par conséquent, il ne peut pas être contraint à une obligation de résultat de son activité au sein de l'organisme d'accueil. Un stage ne peut pas être assimilé à un contrat de travail à durée déterminée. Cependant, il reste souhaitable que l'obtention d'un résultat tangible, mesurable, valide et réutilisable soit recherchée.</p>
 
@@ -64,7 +66,7 @@ IHM_Menu::menuPresentation();
 
 <p>Le logiciel objet du stage doit être écrit dans un langage structuré (C, langage orienté objet, langage de programmation logique par exemple), ou en assembleur. L'utilisation d'une méthode ou d'une démarche de développement issue du génie logiciel ou de l'intelligence artificielle est fortement recommandée. Un planning du stage est d'ailleurs demandé dans le rapport et à la soutenance.</p>
 
-<div class="titre2"><a name="12">1.2. Planification et durée en 2017-2018</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="12">1.2. Planification et durée en 2019-2020</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>
     <table border=1 align=center cellpadding=5 cellspacing=1>
@@ -72,33 +74,33 @@ IHM_Menu::menuPresentation();
 	<tr>
 	    <td align=center valign=center>Master 1</td>
 	    <td align=center valign=center>avril à juin</td>
-	    <td align=center valign=center>9 Avril 2018</td>
-	    <td align=center valign=center>29 Juin 2018</td>
+	    <td align=center valign=center>6 Avril 2020</td>
+	    <td align=center valign=center>26 Juin 2020</td>
 	    <td align=center valign=center>3 mois<br/>(12 semaines)</td>
-	    <td align=center valign=center>2 juillet 2018<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>29 Juin 2020<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 AFD</td>
 	    <td align=center valign=center>mars à août</td>
-	    <td align=center valign=center>5 Mars 2018</td>
-	    <td align=center valign=center>17 Août 2018</td>
+	    <td align=center valign=center>2 Mars 2020</td>
+	    <td align=center valign=center>14 Août 2020</td>
 	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
-	    <td align=center valign=center>30 Août 2018<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>27 Août 2020<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 ATAL</td>
 	    <td align=center valign=center>janvier à juin</td>
-	    <td align=center valign=center>22 Janvier 2018</td>
-	    <td align=center valign=center>6 Juillet 2018</td>
+	    <td align=center valign=center>27 Janvier 2020</td>
+	    <td align=center valign=center>26 Juin 2020</td>
 	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
-	    <td align=center valign=center>9 Juillet 2018<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>Initiaux : 3 Juillet 2020<br/>(susceptible de modification)<br/>Alternants : 27 Août 2020<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
 
 <p>Il est possible de faire des avenants aux conventions pour prolonger la durée d'un stage au-delà de la durée minimale indiquée dans ce tableau. Il faut cependant noter, d'une part, que les dates de soutenances ne peuvent pas être reportées en dehors des périodes prévues même en cas de prolongation, et, d'autre part, que les étudiants de Master 2 ne peuvent prolonger leur stage au-delà de la limite d'inscription administrative officielle du 30 septembre (sauf s'ils se ré-inscrivent pour une seconde année de M2).</p>
 
-<p>Si au cours du stage vous décidez d'en prolonger sa durée contactez le plus rapidement possible la scolarité de la Faculté des Sciences pour établir l'avenant nécessaire à la convention pour fixer la nouvelle date de fin du stage.</p>
+<p>Si au cours du stage vous décidez d'en prolonger sa durée contactez le plus rapidement possible la scolarité de la Faculté des Sciences pour établir l'avenant nécessaire à la convention pour fixer la nouvelle date de fin du stage. Prévenez également le responsable des stages.</p>
 
 <div class="titre2"><a name="13">1.3. Remarques et conseils</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 <ul>
@@ -122,8 +124,6 @@ IHM_Menu::menuPresentation();
 <ul>
     <li>Chaque étudiant recherche un sujet de stage (des offres sont accessibles via le site Web des stages).</li>
     <li>Il n'est pas souhaitable de faire deux stages consécutifs dans la même entreprise (le but est aussi d'avoir un aperçu de différentes cultures d'entreprise).</li>
-    <li>Pour les filières professionnelles, les stages doivent se dérouler en entreprise. Dans des cas exceptionnels, laissés à l'appréciation du responsable pédagogique, il peut se dérouler dans un laboratoire d'université, cette dérogation ne pouvant être accordée qu'une seule fois à un étudiant donné.</li>
-    <li>Pour les filières recherches, les stages doivent se dérouler dans un laboratoire de recherche (public ou privé, français ou étranger) ou dans un service de recherche & développement.</li>
     <li><strong>Le responsable pédagogique doit valider le sujet de stage avant l'établissement de la convention.</strong></li>
     <li>Agissez de façon responsable car l'image de la formation est fortement en jeu dans vos démarches et interactions avec les entreprises : tenez votre parole et si vous changez d'avis, avertissez les personnes concernées.</li>
     <li>La recherche ne se termine que lorsque la convention est signée. Il ne peut et ne doit pas y avoir de départ en stage si la convention n'est pas signée avant la date de début de stage.</li>
@@ -131,7 +131,7 @@ IHM_Menu::menuPresentation();
 
 <div class="titre3">Validation du sujet de stage&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le responsable pédagogique doit valider le sujet de stage de chaque étudiant stagiaire. Afin de faciliter ce travail, les étudiants saisissent sur le site des stages un résumé (30 lignes maximum) présentant le sujet de stage envisagé. Une demande de validation et envoyée automatiquement au responsable pédagogique à l'issue de cette saisie. En retour, le responsable pédagogique prévient l'étudiant par email de la validation ou de la non-validation du sujet proposé. L'étudiant doit donc consulter régulièrement son email institutionnel après la saisie d'une demande de validation.</p>
+<p>Le responsable pédagogique doit valider le sujet de stage de chaque étudiant stagiaire. Afin de faciliter ce travail, les étudiants saisissent ou téléchargent sur le site des stages un résumé présentant le sujet de stage envisagé. Une demande de validation et envoyée automatiquement au responsable pédagogique à l'issue de cette saisie. En retour, le responsable pédagogique prévient l'étudiant par email de la validation ou de la non-validation du sujet proposé. L'étudiant doit donc consulter régulièrement son email institutionnel après la saisie d'une demande de validation.</p>
 
 <p>Dès que le sujet proposé par l'étudiant est validé par le responsable pédagogique, l'étudiant peut poursuivre la procédure prévue pour le déroulement du stage (cf. ci-après).</p>
 
@@ -165,7 +165,7 @@ IHM_Menu::menuPresentation();
 
 <p>La convention de stage est un document officiel définissant un accord passé entre l'université, l'entreprise et le stagiaire. A l'issue de la procédure, chacune des parties est en possession d'un exemplaire de cette convention. Chacun de ces trois exemplaires doit être signé par les trois parties : une convention qui n'a pas ces trois signatures avant le départ en stage n'a aucune valeur juridique. Enfin, tout stage qui n'entrerait pas dans le cadre de la formation obligatoire devra faire l'objet d'une convention distincte, précisant qu'il s'agit d'un stage facultatif hors cursus universitaire.</p>
 
-<p>Les conventions sont gérées par la scolarité de la Faculté des Sciences. Une fois le sujet validé par le responsable des stages, l'étudiant fait une demande à la scolarité d'une convention en suivant la procédure <a href="http://sciences.univ-lemans.fr/Stages-en-entreprise-ou-a-l">indiquée ici</a>. Une convention-type, rédigée par l'université, est établie par la scolarité de la Faculté des Sciences avec les éléments propres à chaque stage, et en particulier&nbsp;:
+<p>Les conventions sont gérées par la scolarité de la Faculté des Sciences. Une fois le sujet validé par le responsable des stages, l'étudiant fait une demande à la scolarité d'une convention en suivant la procédure <a href="http://sciences.univ-lemans.fr/fr/ma-scolarite.html">indiquée ici</a>. Une convention-type, rédigée par l'université, est établie par la scolarité de la Faculté des Sciences avec les éléments propres à chaque stage, et en particulier&nbsp;:
 <ul>
     <li>Les coordonnées de l'entreprise.</li>
     <li>Les dates officielles de début et de fin de stage (en cas de prolongation du stage la convention devra être complétée d'un avenant dont la demande se fera également à la scolarité).</li>
@@ -177,7 +177,7 @@ IHM_Menu::menuPresentation();
 <ul>
     <li style="list-style-type: decimal;">l'étudiant <a href="../stagiaire/demanderValidationSDS.php">fait une demande de validation</a> au responsable des stages&nbsp;;</li>
     <li style="list-style-type: decimal;">le responsable des stages valide ou pas le sujet&nbsp;;</li>
-    <li style="list-style-type: decimal;">l'étudiant <a href="http://sciences.univ-lemans.fr/Stages-en-entreprise-ou-a-l">fait une demande d'établissement d'une convention</a> à la scolarité des Sciences&nbsp;;</li>
+    <li style="list-style-type: decimal;">l'étudiant <a href="http://sciences.univ-lemans.fr/fr/ma-scolarite.html">fait une demande d'établissement d'une convention</a> à la scolarité des Sciences&nbsp;;</li>
     <li style="list-style-type: decimal;">la scolarité établit la convention (édition, impression, signatures).</li>
 </ul>
 
@@ -185,7 +185,7 @@ IHM_Menu::menuPresentation();
 
 <p>Pendant le stage, l'étudiant est soumis aux horaires et aux conditions de travail de l'organisme d'accueil. En particulier, il est soumis aux contraintes de sécurité en vigueur au sein de l'organisme d'accueil. En cas de problème, dont les causes peuvent être de divers origines (relation avec l'entreprise, conflit sur le sujet de stage, accident, etc.), il faut prévenir au plus tôt au moins une des personnes suivantes&nbsp;:</p>
 <ul>
-    <li>l'enseignant-référent du stage (coordonnées accessibles dans <a href="http://www.univ-lemans.fr/fr/annuaire.html">l'annuaire Web</a> de l'Université) ;</li>
+    <li>l'enseignant-référent du stage (coordonnées accessibles dans <a href="http://www.univ-lemans.fr/fr/acces-directs-annuaire/annuaire.html">l'annuaire Web</a> de l'Université) ;</li>
     <li>le secrétariat du Département Informatique : Mme Nathalie Rodier au 02 43 83 38 38 ou par email à l'adresse <a href="mailto:secretariat @ univ-lemans.fr">secretariat @ univ-lemans.fr</a> ;</li>
     <li>le responsable pédagogique : M. Thierry Lemeunier au 02 43 83 38 65 ou par email à l'adresse <a href="mailto:Thierry.Lemeunier @ univ-lemans.fr">Thierry.Lemeunier @ univ-lemans.fr.</a></li>
 </ul>
@@ -212,10 +212,10 @@ IHM_Menu::menuPresentation();
     <li>Le stagiaire doit impérativement suivre la norme de présentation (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
     <li>L'utilisation d'un traitement de texte est obligatoire (les documents manuscrits ne sont pas acceptés).</li>
     <li>Le format du document numérique doit être le format PDF.</li>
-    <li>Le nombre de page (hors annexes) est limité selon l'année du diplôme de l'étudiant :</li>
+    <li>Le nombre de page (annexes comprises) est limité selon l'année du diplôme de l'étudiant :</li>
     <ul>
-	<li>en Master 1 : 40 pages au maximum ;</li>
-	<li>en Master 2 : 60 pages au maximum.</li>
+	<li>en Master 1 : entre 25 à 30 pages au maximum ;</li>
+	<li>en Master 2 : entre 30 et 40 pages au maximum.</li>
     </ul>
 </ul>
 
@@ -232,18 +232,18 @@ IHM_Menu::menuPresentation();
     <li>Un court résumé inclus dans la page de garde (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
     <li>Un sommaire.</li>
     <li>Le texte (structuré) lui-même décrivant le travail effectué durant le stage.</li>
-    <li>Des annexes techniques (non comptées dans le nombre maximum de page).</li>
+    <li>Des annexes techniques (comptées dans le nombre maximum de page).</li>
 </ul>
 
 <p>Le texte décrivant le travail réalisé doit inclure au minimum&nbsp;:</p>
 <ul>
     <li>la spécification initiale du problème (cadre du travail réalisé, cahier des charges, intégration dans un projet existant de l'entreprise, etc.)&nbsp;;</li>
-    <li>l'analyse du problème (organigrammes, structures de données, description de toutes les fonctionnalités, diagrammes UML de niveau analyse...)&nbsp;;</li>
+    <li>l'analyse du problème (organigrammes, structures de données, description des fonctionnalités principales, diagrammes UML...)&nbsp;;</li>
     <li>la conception : choix effectués et leurs justifications, description et choix de l'architecture logicielle, difficultés rencontrées...</li>
     <li>les apports aussi bien pour l'entreprise que pour l'étudiant.</li>
 </ul>
 
-<p>Tout détail pertinent aidant à la compréhension doit être inclus, ainsi que les difficultés rencontrées et les solutions retenues. Les moyens matériels mis en oeuvre et les conditions effectives de la réalisation doivent être également donnés. Des plannings (initial et final) doivent apparaître et être justifié. Enfin les annexes peuvent contenir une description sommaire de l'entreprise et certaines parties de listings de code limitées aux parties significatives et intéressantes.</p>
+<p>Tout détail pertinent aidant à la compréhension doit être inclus, <b>ainsi que les difficultés rencontrées et les solutions retenues</b>. Les moyens matériels mis en oeuvre et les conditions effectives de la réalisation doivent être également donnés. Des plannings (initial et final) doivent apparaître et être justifié. Enfin les annexes peuvent contenir une description sommaire de l'entreprise et certaines parties de listings de code limitées aux parties significatives et intéressantes.</p>
 
 <div class="titre2"><a name="26">2.6. Résumé de la procédure</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
@@ -278,16 +278,17 @@ IHM_Menu::menuPresentation();
     <li>en Master 2, la durée est de 50 min par étudiant (30 min d'exposé + 20 min de questions) ;</li>
 </ul>
 
-<p>Le respect de ces durées est essentiel, les débordements pourront être sanctionnés lors de la notation de la soutenance. Les moyens matériels de soutenance sont ceux disponibles pour les exposés en cours d'année (rétroprojecteur, vidéo projecteur, magnétoscope...). En cas de démonstration nécessitant l'installation de matériels spécifiques, l'étudiant est responsable de sa préparation (il peut demander de l'aide aux techniciens).</p>
+<p>Le respect de ces durées est essentiel, les débordements seront sanctionnés lors de la notation de la soutenance. Les moyens matériels de soutenance sont ceux disponibles pour les exposés en cours d'année (rétroprojecteur, vidéo projecteur, magnétoscope...). En cas de démonstration nécessitant l'installation de matériels spécifiques, l'étudiant est responsable de sa préparation (il peut demander de l'aide aux techniciens).</p>
 
 <div class="titre3">Période de soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>Les soutenances ne font pas l'objet d'une convocation : il est de la responsabilité des étudiants de <strong>consulter régulièrement le site des stages pour se tenir informés de la date et de l'heure de leur soutenance</strong>. Des périodes spécifiques sont réservées dans le planning de chaque diplôme.</p>
-<p>Pour l'année 2017/2018&nbsp;:</p>
+<p>Pour l'année 2019/2020&nbsp;:</p>
 <ul>
-    <li>en Master 1 la date prévue est le 2 juillet 2018 (susceptible de modification)&nbsp;;</li>
-    <li>en Master 2 AFD la date prévue est le 30 août 2018 (susceptible de modification)&nbsp;;</li>
-    <li>en Master 2 ATAL la date prévue est le 9 juillet 2018 (susceptible de modification).</li>
+    <li>en Master 1 la date est le 29 juin 2020 (susceptible de modification)&nbsp;;</li>
+    <li>en Master 2 AFD la date est le 27 août 2020 (susceptible de modification)&nbsp;;</li>
+    <li>en Master 2 ATAL initiaux la date est le 3 juillet 2020 (susceptible de modification).</li>
+    <li>en Master 2 ATAL alternants la date est le 27 août 2020 (susceptible de modification).</li>
 </ul>
 
 <p>Si, pour une raison quelconque mais impérieuse (par exemple accident), la soutenance ne peut se faire à la date prévue, une date ultérieure pourra être fixée. Cependant, le diplôme ne peut être décerné qu'après la soutenance orale. Cette solution peut donc être handicapante pour les étudiants désirant poursuivre leurs études. En particulier, même en cas de prolongation du stage au-delà de la durée officielle, les étudiants doivent soutenir à la date prévue.</p>

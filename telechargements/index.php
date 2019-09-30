@@ -25,9 +25,9 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 <h4>Présentations orales</h4>
 
 <ul>
-    <li>Présentation détaillée 2017-2018 (format PDF) <A href="/documents/telechargements/presentation-1718.pdf"><IMG border=0 title="Présentation détaillée" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M2 2017-2018 (format PDF) <A href="/documents/telechargements/presentation-M2-1718.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M1 2017-2018 (format PDF) <A href="/documents/telechargements/presentation-M1-1718.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation détaillée 2019-2020 (format PDF) <A href="/documents/telechargements/presentation-1920.pdf"><IMG border=0 title="Présentation détaillée" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M2 2019-2020 (format PDF) <A href="/documents/telechargements/presentation-M2-1920.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M1 2019-2020 (format PDF) <A href="/documents/telechargements/presentation-M1-1920.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
 </ul>
 
 <h4>Documents annexes</h4>
@@ -35,15 +35,15 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 <ul>
 <li>Annexe 1 - Exemple d'extrait de rapport de stage (format PDF) <a href="/documents/telechargements/Annexe1.pdf"><IMG border=0 title="Fiche extrait" align=middle src="../images/download.png"/></a></li>
 <li>Annexe 2 - Norme de présentation du rapport de stage (format PDF) <a href="/documents/telechargements/Annexe2.pdf"><IMG border=0 title="Fiche rapport" align=middle src="../images/download.png"/></a></li>
-<li>Annexe 3 - Fiche d'évaluation 2017-2018 pour l'entreprise
-    (format DOC) <A href="/documents/telechargements/Fiche_Entreprise_1718.doc"><IMG border=0 title="Fiche entreprise format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Fiche_Entreprise_1718.pdf"><IMG border=0 title="Fiche entreprise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 3bis - Fiche d'évaluation 2017-2018 pour l'entreprise version anglaise
-    (format DOC) <A href="/documents/telechargements/Entreprise_Form_1718.doc"><IMG border=0 title="Fiche entreprise version anglaise format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Entreprise_Form_1718.pdf"><IMG border=0 title="Fiche entreprise version anglaise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 4 - Fiche de soutenance 2017-2018 pour le jury
-    (format DOC) <A href="/documents/telechargements/Fiche_Soutenance_1718.doc"><IMG border=0 title="Fiche soutenance format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Fiche_Soutenance_1718.pdf"><IMG border=0 title="Fiche soutenance format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 3 - Fiche d'évaluation 2019-2020 pour l'entreprise
+    (format DOC) <A href="/documents/telechargements/Fiche_Entreprise_1920.doc"><IMG border=0 title="Fiche entreprise format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Fiche_Entreprise_1920.pdf"><IMG border=0 title="Fiche entreprise format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 3bis - Fiche d'évaluation 2019-2020 pour l'entreprise version anglaise
+    (format DOC) <A href="/documents/telechargements/Entreprise_Form_1920.doc"><IMG border=0 title="Fiche entreprise version anglaise format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Entreprise_Form_1920.pdf"><IMG border=0 title="Fiche entreprise version anglaise format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 4 - Fiche de soutenance 2019-2020 pour le jury
+    (format DOC) <A href="/documents/telechargements/Fiche_Soutenance_1920.doc"><IMG border=0 title="Fiche soutenance format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Fiche_Soutenance_1920.pdf"><IMG border=0 title="Fiche soutenance format PDF" align=middle src="../images/download.png"/></A></li>
 </ul>
 
 <h4>Documents officiels</h4>
