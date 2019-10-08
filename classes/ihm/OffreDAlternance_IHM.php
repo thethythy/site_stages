@@ -815,7 +815,7 @@ $duree_init, $competence_init) {
             <td colspan="2">Alternance</td>
           </tr>
           <tr>
-            <th>Titre de l'aternance :</th>
+            <th width="160">Titre de l'aternance :</th>
             <td><?php echo $offreDAlt->getTitre(); ?></td>
           </tr>
           <tr>

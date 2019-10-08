@@ -847,7 +847,7 @@ $duree_init, $competence_init) {
             <td colspan="2">Stage</td>
           </tr>
           <tr>
-            <th>Titre du stage :</th>
+            <th width="160">Titre du stage :</th>
             <td><?php echo $offreDeStage->getTitre(); ?></td>
           </tr>
           <tr>
