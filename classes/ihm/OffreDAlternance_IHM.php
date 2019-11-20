@@ -496,6 +496,12 @@ public static function afficherFormulaireModification() {
 				echo 'checked="checked"';
 			    }
 			    ?> value="0"> Professionnalisation
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <input type="radio" name ="typeContrat" <?php if ((isset($modificationOffreDAlternance) && $modificationOffreDAlternance->getTypeContrat() == 2) ||
+				    (isset($_POST['typeContrat']) && $_POST['typeContrat'] == 2)) {
+				echo 'checked="checked"';
+			    }
+			    ?> value="2"> Indéfini
 			</td>
 		    </tr>
 		    <tr>
@@ -785,7 +791,7 @@ public static function afficherFormulaireModification() {
 
 /**
 * Afficher le contenu d'une offre d'alternance (sans modification possible)
-* @param OffreDAlternance $offreDAlternance L'objet à visualiser
+* @param OffreDAlternance $offreDAlt L'objet à visualiser
 * @param string $page La page de retour
 * @param string $nom_init Nom de l'entreprise
 * @param string $ville_init Nom de la ville de l'entreprise
@@ -890,7 +896,7 @@ $duree_init, $competence_init) {
           </tr>
 
           <tr>
-            <th>type de contrat :</th>
+            <th>Type de contrat :</th>
             <td><?php echo $offreDAlt->getTypeContratStr(); ?></td>
           </tr>
         </table>

@@ -290,6 +290,8 @@ class OffreDeStage_IHM {
             <input type="radio" id="" name ="typeContrat" checked="checked" value="1" onclick=""> Apprentissage
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio"  id="" name ="typeContrat" value="0" onclick=""> Professionnalisation
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio"  id="" name ="typeContrat" value="2" onclick=""> Indéfini
           </td>
         </tr>
 
