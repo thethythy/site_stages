@@ -802,8 +802,6 @@ public static function afficherFormulaireModification() {
 * @param string $duree_init La durée de l'alternance
 * @param string $competence_init Les compétences demandées
 */
-
-
 public static function visualiserOffre($offreDAlt, $page, $nom_init,
 $ville_init, $cp_init, $pays_init, $filiere_init, $parcours_init,
 $duree_init, $competence_init) {
@@ -818,14 +816,14 @@ $duree_init, $competence_init) {
       <td colspan=2>
         <table id="presentation_saisieOffreDAlternance">
           <tr id="entete2">
-            <td colspan="2">Alternance</td>
+            <td colspan="2">Offre d'alternance</td>
           </tr>
           <tr>
-            <th width="160">Titre de l'aternance :</th>
+            <th width="160">Titre :</th>
             <td><?php echo $offreDAlt->getTitre(); ?></td>
           </tr>
           <tr>
-            <th>Sujet de l'alternance :</th>
+            <th>Sujet :</th>
             <td><?php echo $offreDAlt->getSujet(); ?></td>
           </tr>
           <tr>
@@ -848,22 +846,6 @@ $duree_init, $competence_init) {
             </td>
           </tr>
           <tr>
-            <th>Thème de l'aternance :</th>
-            <td>
-              <!-- Récupération des parcours -->
-              <?php
-              for ($i = 0; $i < sizeof($themes); $i++) {
-                $parcours = Parcours::getParcours($themes[$i]->getIdentifiantBDD());
-                if ($i == (sizeof($themes) - 1)) {
-                  echo $parcours->getNom();
-                } else {
-                  echo $parcours->getNom() . ", ";
-                }
-              }
-              ?>
-            </td>
-          </tr>
-          <tr>
             <th>Profil souhaité :</th>
             <td>
               <!-- Récupération des filières -->
@@ -874,6 +856,22 @@ $duree_init, $competence_init) {
                   echo $filiere->getNom();
                 } else {
                   echo $filiere->getNom() . ", ";
+                }
+              }
+              ?>
+            </td>
+          </tr>
+          <tr>
+            <th>Filière souhaité :</th>
+            <td>
+              <!-- Récupération des parcours -->
+              <?php
+              for ($i = 0; $i < sizeof($themes); $i++) {
+                $parcours = Parcours::getParcours($themes[$i]->getIdentifiantBDD());
+                if ($i == (sizeof($themes) - 1)) {
+                  echo $parcours->getNom();
+                } else {
+                  echo $parcours->getNom() . ", ";
                 }
               }
               ?>
@@ -991,7 +989,6 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
     <table width="100%">
       <tr>
         <td width='50%' align='center'>Nom de l'etudiant :
-          <!-- <select name="idEtudiant" id="idEtudiant"> -->
           <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant()'>
             <option value="-1">-------------------------</option>
             <?php
@@ -1044,7 +1041,7 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
       ?>
     </table>
   </form>
-  <div class="align-center"><button type="button" onclick="postForm()">Enregistrer</button></div>
+  <div class="align-center"><button id="idSaveButton" type="button" onclick="postForm()">Enregistrer</button></div>
 
   <?php
 }

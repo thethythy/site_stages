@@ -46,6 +46,7 @@ if (sizeof($tabEtudiants) > 0) {
 } else {
     ?>
     <br/>
+    <p>Sélectionnez votre diplôme et votre filière actuels.</p>
     <p>Aucun étudiant ne correspond aux critères de recherche.</p>
     <br/>
     <?php
