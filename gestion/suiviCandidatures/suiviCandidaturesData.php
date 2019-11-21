@@ -6,7 +6,6 @@
 * Accès : restreint par cookie
 */
 
-
 include_once("../../classes/bdd/connec.inc");
 
 include_once('../../classes/moteur/Utils.php');
@@ -17,7 +16,7 @@ if (!headers_sent())
 
 $filtresEtu = array();
 
-// Si pas d'ann�e s�lectionn�e
+// Si pas d'année�sélectionnée
 if (!isset($_POST['annee'])) {
   $annee = Promotion_BDD::getLastAnnee();
 } else {
@@ -25,7 +24,7 @@ if (!isset($_POST['annee'])) {
 }
 array_push($filtresEtu, new FiltreNumeric("anneeuniversitaire", $annee));
 
-// Si une recherche sur le parcours est demand�
+// Si une recherche sur le parcours est demandé
 if (!isset($_POST['parcours'])) {
   $tabParcours = Parcours::listerParcours();
   $parcours = $tabParcours[0]->getIdentifiantBDD();
@@ -34,7 +33,7 @@ if (!isset($_POST['parcours'])) {
 }
 array_push($filtresEtu, new FiltreNumeric("idparcours", $parcours));
 
-// Si une recherche sur la filiere est demand�e
+// Si une recherche sur la filiere est demandée
 if (!isset($_POST['filiere'])) {
   $tabFilieres = Filiere::listerFilieres();
   $filiere = $tabFilieres[0]->getIdentifiantBDD();
@@ -46,30 +45,19 @@ array_push($filtresEtu, new FiltreNumeric("idfiliere", $filiere));
 $filtreEtu = $filtresEtu[0];
 
 for ($i = 1; $i < sizeof($filtresEtu); $i++)
-$filtreEtu = new Filtre($filtreEtu, $filtresEtu[$i], "AND");
+  $filtreEtu = new Filtre($filtreEtu, $filtresEtu[$i], "AND");
 
 $tabEtu = Promotion::listerEtudiants($filtreEtu);
 
-
-if (sizeof($tabEtu) == 0){
-
-  echo 'Aucun étudiant ne correspond à cette recherche.';
-
-
+if (sizeof($tabEtu) == 0) {
+  echo '<p>Sélectionnez le diplôme et la spécialité actuels des étudiants.</p>';
+  echo '<p>Aucun étudiant ne correspond aux critères.</p>';
 } else {
-  echo "<div id='data1'>\n";
-  if(isset($_POST['idEtudiant']) && $_POST['idEtudiant'] != '*'){
+  if (isset($_POST['idEtudiant']) && $_POST['idEtudiant'] != '*') {
     $tabC = Candidature::getListeCandidatures($_POST['idEtudiant']);
   } else {
     $tabC = Candidature::getCandidaturesEtudiant($tabEtu);
   }
-  if(!is_array($tabC)){
-    echo "Il ny'a pas de candidature qui réponde aux critères.";
-  } else {
   OffreDAlternance_IHM::afficherFormulaireSuiviGestion($tabC, $tabEtu);
-}
-
-  echo "\n</div>";
-
 }
 ?>

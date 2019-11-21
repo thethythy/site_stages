@@ -4,6 +4,7 @@
 * Page SuiviCandidatures.php
 * Utilisation : page d'accès aux offres de stages de l'année en cours
 * Dépendance(s) : SuiviCandidaturesData.php --> traitement des requêtes Ajax
+ *                suiviCandidatures.js --> ajout dynamique des gestionnaires
 * Accès : restreint par cookie
 */
 
@@ -18,22 +19,15 @@ $tabLiens[1] = array('../', 'Gestion');
 
 IHM_Generale::header("Suivi des", "candidatures", "../../", $tabLiens);
 
-echo "<script type='text/javascript' src='suiviCandidatures.js'></script>\n";
+Promotion_IHM::afficherFormulaireRecherche("suiviCandidaturesData.php", false, true);
 
-echo "<div id='erreurAjax'></div>";
-Promotion_IHM::afficherFormulaireRecherche("suiviCandidaturesData.php", false, false);
+echo "<script type='text/javascript' src='suiviCandidatures.js'></script>\n";
 
 echo "<div id='data'>";
 include_once("suiviCandidaturesData.php");
 echo "</div>";
 
-
-
-
-
 deconnexion();
 IHM_Generale::endHeader(false);
 IHM_Generale::footer("../");
 ?>
-
-

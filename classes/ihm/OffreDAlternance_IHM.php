@@ -115,10 +115,10 @@ class OffreDAlternance_IHM {
       </table>
     </form>
     <script type="text/javascript">
-    var table_onchange = new Array("filiere", "parcours", "duree", "competence");
-    new LoadData(table_onchange, "<?php echo $fichier; ?>", "onchange");
-    var table_onkeyup = new Array("nom", "ville", "cp", "pays");
-    new LoadData(table_onkeyup, "<?php echo $fichier; ?>", "onkeyup");
+	var table_onchange = new Array("filiere", "parcours", "duree", "competence");
+	new LoadData(table_onchange, "<?php echo $fichier; ?>", "onchange");
+	var table_onkeyup = new Array("nom", "ville", "cp", "pays");
+	new LoadData(table_onkeyup, "<?php echo $fichier; ?>", "onkeyup");
     </script>
     <?php
   }
@@ -1051,20 +1051,50 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
 * @param string $fichier La page de traitement du formulaire
 */
 public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
+
+  /**
+   * Retourne le style CSS pour afficher une case du tableau des candidatures
+   * @return Une chaîne éventuellement vide
+   */
+  function getStyle($statut) {
+      $style = "";
+      switch("$statut"){
+	case "Pas intéressé":
+		$style = "font-weight: bold; color: #000";
+		break;
+	case "Postulé":
+		$style = "background-color:#FFFF00; font-weight: bold; color: #000;";
+		break;
+	case "Entretien en attente":
+		$style = "background-color: #FF7F50; font-weight: bold; color: #000;";
+		break;
+	case "Entretien passé":
+		$style = "background-color: #FFA500; font-weight: bold; color: #000;";
+		break;
+	case "Accepté":
+		$style = "background-color: #008000; font-weight: bold; color: #FFF;";
+		break;
+	case "Refusé":
+		$style = "background-color: #FF0000; font-weight: bold; color: #FFF;";
+		break;
+	}
+      return $style;
+  }
+
   ?>
-  <form action="javascript:">
+  <form method=POST action="javascript:">
+
     <table width="100%">
       <tr>
         <td width='50%' align='center'>Nom de l'etudiant :
-          <!-- <select name="idEtudiant" id="idEtudiant"> -->
-          <select name="idEtudiant" id="idEtudiant" onchange='populateEtudiant();'>
-            <option value="0">Tous</option>
+	    <select name="idEtudiant" id="idEtudiant" onchange="loadEtudiant();">
+            <option value="*">Tous</option>
             <?php
             for ($i = 0; $i < sizeof($tabEtu); $i++) {
               if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
-              echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+		echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
               else
-              echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+		echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
             }
             ?>
           </select>
@@ -1073,7 +1103,9 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
       </tr>
     </table>
   </form>
-  <?php if(sizeof($tabC) != 0){ ?>
+
+  <?php
+  if(is_array($tabC) && sizeof($tabC) != 0) { ?>
     <table>
       <tr id="entete">
         <td id="idEtu-0" name='nomEtu-0'>Nom Étudiant</td>
@@ -1089,15 +1121,16 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
           <?php echo '<td id="idEtu-'.$tabC[$i]->getEtudiant().'"  name="nomEtu-'.$cpt.'">'. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getNom().' '. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getPrenom().'</td>';?>
           <?php echo '<td>'. OffreDAlternance::getOffreDAlternance($tabC[$i]->getOffre())->getTitre().'</td>'; ?>
           <?php echo '<td>'.Entreprise::getEntreprise($tabC[$i]->getEntreprise())->getNom().'</td>'; ?>
-          <?php echo '<td id="statut-<?php echo $cpt;?>">'.$tabC[$i]->getStatut().'</td>' ?>
+          <?php echo '<td id="statut-'.$cpt.'" style="'.getStyle($tabC[$i]->getStatut()).'">'.$tabC[$i]->getStatut().'</td>' ?>
         </tr>
         <?php
       }
       ?>
-    </table >
-
+    </table>
   <?php
-}
+  } else {
+      echo "<p>Aucune candidature effectuée !</p>";
+  }
 }
 
 }
