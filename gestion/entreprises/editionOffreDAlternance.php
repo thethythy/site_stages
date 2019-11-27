@@ -3,9 +3,10 @@
 /**
  * Page editionOffreDAlternance.php
  * Utilisation : page pour éditer, valider ou supprimer une offre d'alternance
- * 		page accessible depuis listeDesOffreDAlternance.php
+ * 		 page accessible depuis listeDesOffreDAlternance.php
  * Accès : restreint par authentification HTTP
  */
+
 include_once("../../classes/bdd/connec.inc");
 
 include_once('../../classes/moteur/Utils.php');
@@ -101,18 +102,20 @@ function verifier() {
 
 	    $tabDonnees = array();
 
+	    // ----------------------------------------------------------------
 	    // Identifiant
 	    array_push($tabDonnees, $idOffreDAlternance);
 
+	    // ----------------------------------------------------------------
 	    // Sujet
 	    array_push($tabDonnees, $sujet);
 
+	    // ----------------------------------------------------------------
 	    // Titre
 	    array_push($tabDonnees, $titre);
 
-
 	    // ----------------------------------------------------------------
-	    // Theme
+	    // Theme = parcours
 	    $tabParcours = Parcours::listerParcours();
 	    $tabThemes = array();
 	    for ($i = 0; $i < sizeof($tabParcours); $i++) {
@@ -135,15 +138,19 @@ function verifier() {
 	    }
 	    array_push($tabDonnees, $tabProfils);
 
+	    // ----------------------------------------------------------------
 	    // DureeMin
 	    array_push($tabDonnees, $duree);
 
+	    // ----------------------------------------------------------------
 	    // Indemnites
 	    array_push($tabDonnees, $indemnites);
 
+	    // ----------------------------------------------------------------
 	    // Remarques
 	    array_push($tabDonnees, $rmq);
 
+	    // ----------------------------------------------------------------
 	    // estVisible
 	    if (isset($_POST['valider']))
 		array_push($tabDonnees, true);
@@ -176,6 +183,7 @@ function verifier() {
 
 	    // ----------------------------------------------------------------
 	    // Entreprise et contact
+
 	    $filtreNom = new FiltreString("nom", $nom_entreprise);
 	    $filtreVille = new FiltreString("ville", $ville);
 	    $filtre = new Filtre($filtreNom, $filtreVille, "AND");
@@ -203,7 +211,31 @@ function verifier() {
 	    }
 	    array_push($tabDonnees, $idContact);
 
+	    // ----------------------------------------------------------------
+	    // Type de contrat
 	    array_push($tabDonnees, $typeContrat);
+
+	    // ----------------------------------------------------------------
+	    // Promotion(s) associée(s) à l'offre
+
+	    $tabPromotions = array();
+	    $anneeCourante = Promotion_BDD::getLastAnnee();
+	    foreach ($tabThemes as $idParcours ) {
+		    foreach ($tabProfils as $idFiliere)	{
+			    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($anneeCourante, $idFiliere, $idParcours);
+			    if ($oPromotion != FALSE)
+				    array_push($tabPromotions, $oPromotion->getIdentifiantBDD());
+		    }
+	    }
+	    array_push($tabDonnees, $tabPromotions);
+	    if (sizeof($tabPromotions) == 0 && isset($_POST['valider'])) {
+		    IHM_Generale::erreur("Vous devez choisir au moins un couple profil / spécialité existants !");
+		    OffreDAlternance_IHM::afficherFormulaireModification();
+		    unset($_POST['valider'], $_POST['supprimer']);
+	    }
+
+	    // ----------------------------------------------------------------
+	    // Demande de sauvegarde en base de données et envoi des mails
 
 	    if (isset($_POST['valider'])) {
 		$idOffreDAlternance = OffreDAlternance::modifierDonnees($tabDonnees);
@@ -211,11 +243,24 @@ function verifier() {
 		if (!$_POST['estVisible'])
 		    envoyerNotifications($contact, $idOffreDAlternance);
 		echo "<p>L'offre d'alternance a été enregistrée !</p><p><a href='./listeDesOffreDAlternance.php'>Retour</a></p>";
-	    } else if (isset($_POST['cancel'])) {
+	    }
+
+	    // ----------------------------------------------------------------
+	    // Demande de suppression en base de données
+
+	    if (isset($_POST['supprimer'])) {
 		OffreDAlternance::supprimerDonnees($tabDonnees[0]);
 		OffreDalternance::supprimerSuivi($tabDonnees[0]);
 		echo "<p>L'offre d'alternance a été supprimée de la base de données !</p><p><a href='./listeDesOffreDAlternance.php'>Retour</a></p>";
 	    }
+
+	    // ----------------------------------------------------------------
+	    // Annulation
+
+	    if (isset($_POST['cancel'])) {
+		    echo "<p>Ancienne offre non éditable !</p><p><a href='./listeDesOffreDAlternance.php'>Retour</a></p>";
+	    }
+
 	} else {
 	    IHM_Generale::erreur("Vous devez saisir tous les champs marqués d'une * !");
 	    OffreDAlternance_IHM::afficherFormulaireModification();

@@ -439,6 +439,7 @@ public static function afficherFormulaireModification() {
       $modificationProfils = $modificationOffreDeStage->getListeProfilSouhaite();
       $modificationContact = $modificationOffreDeStage->getContact();
       $modificationEntreprise = $modificationContact->getEntreprise();
+      $modificationPromotions = $modificationOffreDeStage->getPromotions();
     }
     ?>
 
@@ -606,7 +607,7 @@ public static function afficherFormulaireModification() {
               </td>
             </tr>
             <tr>
-              <th colspan="2">Thème du stage :</th>
+              <th colspan="2">Spécialité du stage :</th>
             </tr>
             <tr>
               <td colspan="2">
@@ -809,8 +810,15 @@ public static function afficherFormulaireModification() {
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" name="valider" value="Valider l'offre de stage">
-        <input type="submit" name="cancel" value="Effacer l'offre de stage">
+        <?php
+          if (sizeof($modificationPromotions) == 0)
+            echo '<input type="submit" name="valider" value="Valider l\'offre de stage">';
+          else if (Promotion_BDD::getLastAnnee() == $modificationPromotions[0]->getAnneeUniversitaire())
+            echo '<input type="submit" name="valider" value="Valider l\'offre de stage">';
+          else
+            echo '<input type="submit" name="cancel" value="Ancienne offre non-éditable !">';
+        ?>
+        <input type="submit" name="supprimer" value="Effacer l'offre de stage">
       </td>
     </tr>
   </table>
@@ -1082,7 +1090,7 @@ public static function afficherListeOffres($tabOffreDeStages) {
 * Afficher deux listes :
 * - une liste des offres de stage pas encore validées
 * - une liste des offres de stage déjà validées
-* Dans les cas, la sélection permet d'éditer l'offre
+* Dans les 2 cas, la sélection permet de visualiser ou d'éditer l'offre
 * @param tableau d'objets $tabOffreDeStages Les objets OffreDeStage concernés
 */
 public static function afficherListeOffresAEditer($tabOffreDeStages) {
@@ -1152,57 +1160,68 @@ if ($cpt == 0) {
 ?>
 <table width="100%">
   <tr id="entete">
-    <td width="30%">Titre</td>
-    <td width="35%">Entreprise</td>
-    <td width="13%">Diplôme</td>
-    <td width="13%">Spécialité</td>
-    <td align="center" width="9%">Visualiser</td>
+    <td width="10%">Année</td>
+    <td width="40%">Titre</td>
+    <td width="20%">Entreprise</td>
+    <td width="10%">Diplôme</td>
+    <td width="10%">Spécialité</td>
+    <td align="center" width="10%">Visualiser</td>
   </tr>
 
   <?php
   $cpt = 0;
-  echo "<p>Voici la liste des offres de stage disponibles sur le site des stages : </p>";
+  echo "<p>Voici la liste des offres de stage validées : </p>";
   for ($i = 0; $i < sizeof($tabOffreDeStages); $i++) {
     if ($tabOffreDeStages[$i]->estVisible()) {
       ?>
       <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+        <td><?php
+        $tabPromotions = $tabOffreDeStages[$i]->getPromotions();
+        if (sizeof($tabPromotions) > 0) {
+          $annee = $tabPromotions[0]->getAnneeUniversitaire();
+          echo $annee . " / " . ($annee + 1);
+        } else {
+          echo "----";
+        }
+        ?>
+        </td>
         <td><?php echo $tabOffreDeStages[$i]->getTitre(); ?></td>
         <td><?php
         $entreprise = $tabOffreDeStages[$i]->getEntreprise();
         echo $entreprise->getNom();
         ?>
+        </td>
+        <td><?php
+        $profil = $tabOffreDeStages[$i]->getListeProfilSouhaite();
+        for ($j = 0; $j < sizeof($profil); $j++) {
+          if ($j == (sizeof($profil) - 1)) {
+            echo $profil[$j]->getNom();
+          } else {
+            echo $profil[$j]->getNom() . " / ";
+          }
+        }
+        ?>
       </td>
       <td><?php
-      $profil = $tabOffreDeStages[$i]->getListeProfilSouhaite();
-      for ($j = 0; $j < sizeof($profil); $j++) {
-        if ($j == (sizeof($profil) - 1)) {
-          echo $profil[$j]->getNom();
+      $themes = $tabOffreDeStages[$i]->getThemes();
+      for ($j = 0; $j < sizeof($themes); $j++) {
+        if ($j == (sizeof($themes) - 1)) {
+          echo $themes[$j]->getNom();
         } else {
-          echo $profil[$j]->getNom() . " / ";
+          echo $themes[$j]->getNom() . " / ";
         }
       }
       ?>
-    </td>
-    <td><?php
-    $themes = $tabOffreDeStages[$i]->getThemes();
-    for ($j = 0; $j < sizeof($themes); $j++) {
-      if ($j == (sizeof($themes) - 1)) {
-        echo $themes[$j]->getNom();
-      } else {
-        echo $themes[$j]->getNom() . " / ";
-      }
+      </td>
+      <td align="center">
+        <a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDeStages[$i]->getIdentifiantBDD(); ?>">
+          <img src="../../images/search.png">
+        </a>
+      </td>
+    </tr>
+    <?php
     }
-    ?>
-  </td>
-  <td align="center">
-    <a href="./editionOffreDeStage.php?id=<?php echo $tabOffreDeStages[$i]->getIdentifiantBDD(); ?>">
-      <img src="../../images/search.png">
-    </a>
-  </td>
-</tr>
-<?php
-}
-}
+  }
 ?>
 </table>
 <br/><br/>

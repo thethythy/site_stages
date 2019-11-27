@@ -18,6 +18,7 @@ class OffreDAlternance {
   var $competences;  // Tableau des identifiants des compétences
   var $maitreDAlternance;  // Identifiant du contact
   var $typeContrat;
+  var $promotions;  // Tableau des identifiants des promotions
 
   /**
   * Constructeur
@@ -33,10 +34,11 @@ class OffreDAlternance {
   * @param array $listeCompetences
   * @param integer $maitreDAlternance
   * @param integer $typeContrat
+  * @param array $promotions  
   */
-  public function __construct($identifiantBDD, $sujet, $titre,
-  $theme, $listeProfilSouhaite, $duree, $indemnite, $remarques,
-  $estVisible, $listeCompetences, $maitreDAlternance, $typeContrat) {
+  public function __construct($identifiantBDD, $sujet, $titre, $theme, $listeProfilSouhaite,
+                              $duree, $indemnite, $remarques, $estVisible, $listeCompetences,
+                              $maitreDAlternance, $typeContrat, $promotions=array()) {
     $this->identifiantBDD = $identifiantBDD;
     $this->sujet = $sujet;
     $this->titre = $titre;
@@ -49,6 +51,7 @@ class OffreDAlternance {
     $this->competences = $listeCompetences;
     $this->maitreDAlternance = $maitreDAlternance;
     $this->typeContrat = $typeContrat;
+    $this->promotions = $promotions;
   }
 
   // ------------------------------------------------------------------------
@@ -132,9 +135,6 @@ class OffreDAlternance {
     $this->typeContrat = $typeContrat;
   }
 
-
-
-
   // ------------------------------------------------------------------------
   // Méthodes dérivées
 
@@ -176,6 +176,15 @@ class OffreDAlternance {
     return $tabProfil;
   }
 
+  public function getPromotions() {
+    $tabPromotions = array();
+
+    for ($i = 0; $i < sizeof($this->promotions); $i++) {
+        array_push($tabPromotions, Promotion::getPromotion($this->promotions[$i]));
+    }
+
+    return $tabPromotions;
+}  
 
   // ------------------------------------------------------------------------
   // Méthodes statiques
@@ -186,12 +195,10 @@ class OffreDAlternance {
   * @return integer Identifiant en base
   */
   public static function saisirDonnees($tab_donnees) {
-    $ods = new OffreDAlternance("", $tab_donnees[0], $tab_donnees[1],
-    $tab_donnees[2],
-    $tab_donnees[3], $tab_donnees[4],
-    $tab_donnees[5], $tab_donnees[6],
-    '0', $tab_donnees[7],
-    $tab_donnees[8], $tab_donnees[9]);
+    $ods = new OffreDAlternance("", $tab_donnees[0], $tab_donnees[1], $tab_donnees[2],
+                                $tab_donnees[3], $tab_donnees[4], $tab_donnees[5],
+                                $tab_donnees[6], '0', $tab_donnees[7], $tab_donnees[8],
+                                $tab_donnees[9]);
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 
@@ -201,12 +208,11 @@ class OffreDAlternance {
   * @return integer Identifiant en base
   */
   public static function modifierDonnees($tab_donnees) {
-    $ods = new OffreDAlternance($tab_donnees[0], $tab_donnees[1],
-    $tab_donnees[2], $tab_donnees[3],
-    $tab_donnees[4], $tab_donnees[5],
-    $tab_donnees[6], $tab_donnees[7],
-    $tab_donnees[8], $tab_donnees[9],
-    $tab_donnees[10], $tab_donnees[11]);
+    $ods = new OffreDAlternance($tab_donnees[0], $tab_donnees[1], $tab_donnees[2],
+                                $tab_donnees[3], $tab_donnees[4], $tab_donnees[5],
+                                $tab_donnees[6], $tab_donnees[7], $tab_donnees[8],
+                                $tab_donnees[9], $tab_donnees[10], $tab_donnees[11],
+                                $tab_donnees[12]);
     return OffreDAlternance_BDD::sauvegarder($ods);
   }
 
@@ -227,11 +233,12 @@ class OffreDAlternance {
     $offreDAlternance = OffreDAlternance_BDD::getOffreDAlternance($identifiantBDD);
 
     return new OffreDAlternance($offreDAlternance[0], $offreDAlternance[1],
-    $offreDAlternance[2], $offreDAlternance[3],
-    $offreDAlternance[4], $offreDAlternance[5],
-    $offreDAlternance[6], $offreDAlternance[7],
-    $offreDAlternance[8], $offreDAlternance[9],
-    $offreDAlternance[10], $offreDAlternance[11]);
+                                $offreDAlternance[2], $offreDAlternance[3],
+                                $offreDAlternance[4], $offreDAlternance[5],
+                                $offreDAlternance[6], $offreDAlternance[7],
+                                $offreDAlternance[8], $offreDAlternance[9],
+                                $offreDAlternance[10], $offreDAlternance[11],
+                                $offreDAlternance[12]);
   }
 
   /**
@@ -244,22 +251,21 @@ class OffreDAlternance {
 
     $tabODS = array();
     for ($i = 0; $i < sizeof($tabODSString); $i++) {
-      array_push($tabODS,
-      new OffreDAlternance($tabODSString[$i][0], $tabODSString[$i][1],
-      $tabODSString[$i][2], $tabODSString[$i][3],
-      $tabODSString[$i][4], $tabODSString[$i][5],
-      $tabODSString[$i][6], $tabODSString[$i][7],
-      $tabODSString[$i][8], $tabODSString[$i][9],
-      $tabODSString[$i][10], NULL));
+      array_push($tabODS, new OffreDAlternance($tabODSString[$i][0], $tabODSString[$i][1],
+                                                $tabODSString[$i][2], $tabODSString[$i][3],
+                                                $tabODSString[$i][4], $tabODSString[$i][5],
+                                                $tabODSString[$i][6], $tabODSString[$i][7],
+                                                $tabODSString[$i][8], $tabODSString[$i][9],
+                                                $tabODSString[$i][10], $tabODSString[$i][11],
+                                                $tabODSString[$i][12]));
     }
 
     return $tabODS;
   }
 
-
-    public static function supprimerSuivi($idOffre) {
-      OffreDAlternance_BDD::supprimerSuivi($idOffre);
-    }
+  public static function supprimerSuivi($idOffre) {
+    OffreDAlternance_BDD::supprimerSuivi($idOffre);
+  }
 
 }
 

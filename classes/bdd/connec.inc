@@ -95,6 +95,8 @@ $tab32 = 'relation_promotion_etudiant_contrat';
 $tab33 = 'sujetdalternance';
 $tab34 = 'responsable';
 $tab35 = 'affectation';
+$tab36 = 'relation_promotion_offredalternance';
+$tab37 = 'relation_promotion_offredestage';
 
 function deconnexion() {
     global $db;

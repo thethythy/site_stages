@@ -208,7 +208,7 @@ class OffreDAlternance_IHM {
   * Afficher deux listes :
   * - une liste des offres d'alternance pas encore validées
   * - une liste des offres d'alternance déjà validées
-  * Dans les cas, la sélection permet d'éditer l'offre
+  * Dans les 2 cas, la sélection permet d'éditer l'offre
   * @param tableau d'objets $tabOffreDAlt Les objets OffreDAlternance concernés
   */
   public static function afficherListeOffresAEditer($tabOffreDAlt) {
@@ -278,20 +278,31 @@ if ($cpt == 0) {
 ?>
 <table width="100%">
   <tr id="entete">
-    <td width="30%">Titre</td>
-    <td width="35%">Entreprise</td>
-    <td width="13%">Diplôme</td>
-    <td width="13%">Spécialité</td>
-    <td align="center" width="9%">Visualiser</td>
+    <td width="10%">Année</td>
+    <td width="40%">Titre</td>
+    <td width="20%">Entreprise</td>
+    <td width="10%">Diplôme</td>
+    <td width="10%">Spécialité</td>
+    <td align="center" width="10%">Visualiser</td>
   </tr>
 
   <?php
   $cpt = 0;
-  echo "<p>Voici la liste des offres d'alternance disponibles sur le site des alternances : </p>";
+  echo "<p>Voici la liste des offres d'alternance validées : </p>";
   for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
     if ($tabOffreDAlt[$i]->estVisible()) {
       ?>
       <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
+        <td><?php
+        $tabPromotions = $tabOffreDAlt[$i]->getPromotions();
+        if (sizeof($tabPromotions) > 0) {
+          $annee = $tabPromotions[0]->getAnneeUniversitaire();
+          echo $annee . " / " . ($annee + 1);
+        } else {
+          echo "----";
+        }
+        ?>
+        </td>
         <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
         <td><?php
         $entreprise = $tabOffreDAlt[$i]->getEntreprise();
@@ -370,6 +381,7 @@ public static function afficherFormulaireModification() {
       $modificationProfils = $modificationOffreDAlternance->getListeProfilSouhaite();
       $modificationContact = $modificationOffreDAlternance->getContact();
       $modificationEntreprise = $modificationContact->getEntreprise();
+      $modificationPromotions = $modificationOffreDAlternance->getPromotions();
     }
     ?>
 
@@ -555,7 +567,7 @@ public static function afficherFormulaireModification() {
 			</td>
 		    </tr>
 		    <tr>
-			<th colspan="2">Thème de l'alternance :</th>
+			<th colspan="2">Spécialité de l'alternance :</th>
 		    </tr>
 		    <tr>
 			<td colspan="2">
@@ -778,8 +790,15 @@ public static function afficherFormulaireModification() {
 	</tr>
 	<tr>
 	    <td colspan="2">
-		<input type="submit" name="valider" value="Valider l'offre d'alternance">
-		<input type="submit" name="cancel" value="Effacer l'offre d'alternance">
+		<?php
+		if (sizeof($modificationPromotions) == 0)
+		    echo '<input type="submit" name="valider" value="Valider l\'offre d\'alternance">';
+		else if (Promotion_BDD::getLastAnnee() == $modificationPromotions[0]->getAnneeUniversitaire())
+		    echo '<input type="submit" name="valider" value="Valider l\'offre d\'alternance">';
+		else
+		    echo '<input type="submit" name="cancel" value="Ancienne offre non-éditable !">';
+		?>
+		<input type="submit" name="supprimer" value="Effacer l'offre d'alternance">
 	    </td>
 	</tr>
     </table>
@@ -1005,6 +1024,9 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
       </tr>
     </table>
   </form>
+
+  <?php
+  if (sizeof($tabOffreDAlt) > 0) {?>
   <form action='' method='POST' class='formToTableCheatStyle'>
     <table class='tableToFormCheatStyle'>
       <tr id="entete">
@@ -1044,6 +1066,9 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
   <div class="align-center"><button id="idSaveButton" type="button" onclick="postForm()">Enregistrer</button></div>
 
   <?php
+  } else {
+      echo "<p>Aucune offre disponible selon ces critères.</p>";
+  }
 }
 
 /**

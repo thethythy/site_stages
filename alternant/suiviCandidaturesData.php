@@ -18,6 +18,7 @@ if (!headers_sent())
 
 $filtresEtu = array();
 $filtresOffres = array();
+$filtrePromo = array();
 
 // Si pas d'année�sélectionnée
 if (!isset($_POST['annee'])) {
@@ -26,8 +27,9 @@ if (!isset($_POST['annee'])) {
     $annee = $_POST['annee'];
 }
 array_push($filtresEtu, new FiltreNumeric("anneeuniversitaire", $annee));
+array_push ($filtrePromo, new FiltreNumeric("anneeuniversitaire", $annee));
 
-// Si une recherche sur le parcours est demandé
+// Si une recherche sur le parcours est demandée
 if (!isset($_POST['parcours'])) {
     $tabParcours = Parcours::listerParcours();
     $parcours = $tabParcours[0]->getIdentifiantBDD();
@@ -36,6 +38,7 @@ if (!isset($_POST['parcours'])) {
 }
 array_push($filtresEtu, new FiltreNumeric("idparcours", $parcours));
 array_push($filtresOffres, new FiltreNumeric("idparcours", $parcours));
+array_push($filtrePromo, new FiltreNumeric("idparcours", $parcours));
 
 // Si une recherche sur la filiere est demandée
 if (!isset($_POST['filiere'])) {
@@ -46,6 +49,22 @@ if (!isset($_POST['filiere'])) {
 }
 array_push($filtresEtu, new FiltreNumeric("idfiliere", $filiere));
 array_push($filtresOffres, new FiltreNumeric("idfiliere", $filiere));
+array_push($filtrePromo, new FiltreNumeric("idfiliere", $filiere));
+
+// Ajout d'un filtre pour limiter les offres à l'année en cours
+$filtre = $filtrePromo[0];
+for ($i = 1; $i < sizeof($filtrePromo); $i++)
+    $filtre = new Filtre($filtre, $filtrePromo[$i], "AND");
+
+$oPromotions = Promotion::listerPromotions($filtre);
+if (sizeof($oPromotions) > 0) {
+    $filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
+    for ($i = 1; $i < sizeof($oPromotions); $i++)
+        $filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
+    array_push($filtresOffres, $filtre);
+}
+
+// La liste des étudiants sélectionnés
 
 $filtreEtu = $filtresEtu[0];
 
@@ -53,6 +72,8 @@ for ($i = 1; $i < sizeof($filtresEtu); $i++)
     $filtreEtu = new Filtre($filtreEtu, $filtresEtu[$i], "AND");
 
 $tabEtu = Promotion::listerEtudiants($filtreEtu);
+
+// La liste des offres sélectionnées
 
 $filtreOffres = $filtresOffres[0];
 for ($i = 1; $i < sizeof($filtresOffres); $i++)

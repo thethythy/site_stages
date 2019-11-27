@@ -7,65 +7,70 @@
 
 class offreDeStage_BDD {
 
-  /**
-  * Enregistrer ou mettre à jour un objet OffreDeStage ansi que les associations
-  * avec les compétences, les filières et les parcours
-  *
-  * @global resource $db Référence sur la base ouverte
-  * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
-  * @global string $tab8 Nom de la table 'theme_offredestage'
-  * @global string $tab11 Nom de la table 'relation_competence_offredestage'
-  * @global string $tab12 Nom de la table 'offredestage'
-  * @param OffreDeStage $offreDeStage L'objet à enregistrer
-  * @return integer L'identifiant de l'enregistrement
-  */
-  public static function sauvegarder($offreDeStage) {
-    global $db;
-    global $tab7;
-    global $tab8;
-    global $tab11;
-    global $tab12;
+    /**
+    * Enregistrer ou mettre à jour un objet OffreDeStage ansi que les associations
+    * avec les compétences, les filières, les parcours et les promotions
+    *
+    * @global resource $db Référence sur la base ouverte
+    * @global string $tab7 Nom de la table 'profilsouhaite_offredestage'
+    * @global string $tab8 Nom de la table 'theme_offredestage'
+    * @global string $tab11 Nom de la table 'relation_competence_offredestage'
+    * @global string $tab12 Nom de la table 'offredestage'
+    * @global string $tab37 Nom de la table 'relation_promotion_offredestage'
+    * @param OffreDeStage $offreDeStage L'objet à enregistrer
+    * @return integer L'identifiant de l'enregistrement
+    */
+    public static function sauvegarder($offreDeStage) {
+      global $db;
+      global $tab7;
+      global $tab8;
+      global $tab11;
+      global $tab12;
+      global $tab37;
 
-    $estVisible = $offreDeStage->estVisible() ? 1 : 0;
+      $estVisible = $offreDeStage->estVisible() ? 1 : 0;
 
-    if ($offreDeStage->getIdentifiantBDD() == "") {
+      if ($offreDeStage->getIdentifiantBDD() == "") {
+        $sql = "INSERT INTO $tab12
+                VALUES ('0',
+                        '" . $offreDeStage->getSujet() . "',
+                        '" . $offreDeStage->getTitre() . "',
+                        '" . $offreDeStage->getDureeMinimale() . "',
+                        '" . $offreDeStage->getDureeMaximale() . "',
+                        '" . $offreDeStage->getIndemnite() . "',
+                        '" . $offreDeStage->getRemarques() . "',
+                        '$estVisible',
+                        '" . $offreDeStage->getIdContact() . "');";
 
-      $sql = "INSERT INTO $tab12
-      VALUES ('0',
-        '" . $offreDeStage->getSujet() . "',
-        '" . $offreDeStage->getTitre() . "',
-        '" . $offreDeStage->getDureeMinimale() . "',
-        '" . $offreDeStage->getDureeMaximale() . "',
-        '" . $offreDeStage->getIndemnite() . "',
-        '" . $offreDeStage->getRemarques() . "',
-        '$estVisible',
-        '" . $offreDeStage->getIdContact() . "');";
-
-        $db->query($sql);
-        $lastId = $db->insert_id;
+          $db->query($sql);
+          $lastId = $db->insert_id;
       } else {
         $sql = "UPDATE $tab12
-        SET sujet='" . $offreDeStage->getSujet() . "',
-        titre='" . $offreDeStage->getTitre() . "',
-        dureemin='" . $offreDeStage->getDureeMinimale() . "',
-        dureemax='" . $offreDeStage->getDureeMaximale() . "',
-        indemnite='" . $offreDeStage->getIndemnite() . "',
-        remarques='" . $offreDeStage->getRemarques() . "',
-        estVisible='$estVisible',
-        idcontact='" . $offreDeStage->getIdContact() . "'
-        WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
+                SET sujet='" . $offreDeStage->getSujet() . "',
+                    titre='" . $offreDeStage->getTitre() . "',
+                    dureemin='" . $offreDeStage->getDureeMinimale() . "',
+                    dureemax='" . $offreDeStage->getDureeMaximale() . "',
+                    indemnite='" . $offreDeStage->getIndemnite() . "',
+                    remarques='" . $offreDeStage->getRemarques() . "',
+                    estVisible='$estVisible',
+                    idcontact='" . $offreDeStage->getIdContact() . "'
+                WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
         $db->query($sql);
 
-        //Themes
+        // Themes
         $sql = "DELETE FROM $tab8 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
         $db->query($sql);
 
-        //Profils
+        // Profils
         $sql = "DELETE FROM $tab7 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
         $db->query($sql);
 
-        //Competences
+        // Competences
         $sql = "DELETE FROM $tab11 WHERE idoffre='" . $offreDeStage->getIdentifiantBDD() . "';";
+        $db->query($sql);
+
+        // Promotions
+        $sql = "DELETE FROM $tab37 WHERE idoffre='". $offreDeStage->getIdentifiantBDD() . "';";
         $db->query($sql);
 
         $lastId = $offreDeStage->getIdentifiantBDD();
@@ -90,6 +95,13 @@ class offreDeStage_BDD {
       for ($i = 0; $i < sizeof($tabCompetences); $i++) {
         $sql = "INSERT INTO $tab11 VALUES('" . $tabCompetences[$i]->getIdentifiantBDD() . "', '" . $lastId . "')";
         $db->query($sql);
+      }
+
+      // Promotions
+      $tabPromotions = $offreDeStage->getPromotions();
+      for ($i =0; $i < sizeof($tabPromotions); $i++) {
+          $sql = "INSERT INTO $tab37 VALUES('" . $tabPromotions[$i]->getIdentifiantBDD() . "', '" . $lastId . "')";
+          $db->query($sql);
       }
 
       return $lastId;
@@ -126,6 +138,7 @@ class offreDeStage_BDD {
     * @global string $tab8 Nom de la table 'theme_offredestage'
     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
     * @global string $tab12 Nom de la table 'offredestage'
+    * @global string $tab37 Nom de la table 'relation_promotion_offredestage'
     * @param integer $identifiantBDD Identifiant de l'enregistrement cherché
     * @return enregistrement
     */
@@ -135,6 +148,7 @@ class offreDeStage_BDD {
       global $tab8;
       global $tab11;
       global $tab12;
+      global $tab37;
 
       $sql = "SELECT * FROM $tab12 WHERE idoffre='$identifiantBDD'";
       $res = $db->query($sql);
@@ -146,6 +160,7 @@ class offreDeStage_BDD {
       array_push($tabOffreDeStage, $data['sujet']);
       array_push($tabOffreDeStage, $data['titre']);
 
+      // Parcours
       $sql2 = "SELECT * FROM $tab8 WHERE idoffre='$identifiantBDD'";
       $res2 = $db->query($sql2);
       $tabThemes = array();
@@ -155,6 +170,7 @@ class offreDeStage_BDD {
       $res2->free();
       array_push($tabOffreDeStage, $tabThemes);
 
+      // Filiere
       $sql3 = "SELECT * FROM $tab7 WHERE idoffre='$identifiantBDD'";
       $res3 = $db->query($sql3);
       $tabProfils = array();
@@ -170,6 +186,7 @@ class offreDeStage_BDD {
       array_push($tabOffreDeStage, $data['remarques']);
       array_push($tabOffreDeStage, $data['estVisible']);
 
+      // Compétences
       $sql4 = "SELECT * FROM $tab11 WHERE idoffre='$identifiantBDD'";
       $res4 = $db->query($sql4);
       $tabCompetences = array();
@@ -180,6 +197,16 @@ class offreDeStage_BDD {
       array_push($tabOffreDeStage, $tabCompetences);
 
       array_push($tabOffreDeStage, $data['idcontact']);
+
+      // Promotions
+      $sql5 = "SELECT * FROM $tab37 WHERE idoffre='$identifiantBDD'";
+      $res5 = $db->query($sql5);
+      $tabPromotions = array();
+      while ($promotion = $res5->fetch_array()) {
+          array_push($tabPromotions, $promotion['idpromotion']);
+      }
+      $res5->free();
+      array_push($tabOffreDeStage, $tabPromotions);
 
       return $tabOffreDeStage;
     }
@@ -193,6 +220,7 @@ class offreDeStage_BDD {
     * @global string $tab8 Nom de la table 'theme_offredestage'
     * @global string $tab11 Nom de la table 'relation_competence_offredestage'
     * @global string $tab12 Nom de la table 'offredestage'
+    * @global string $tab37 Nom de la table 'relation_promotion_offredestage'
     * @param Filtre $filtre Le filtre de la recherche
     * @return tableau d'enregistrements
     */
@@ -204,6 +232,7 @@ class offreDeStage_BDD {
       global $tab8;
       global $tab11;
       global $tab12;
+      global $tab37;
 
       // --------------------------------------------------------------------
       // Recherche des identifiants des offres de stage selon le filtre
@@ -219,6 +248,7 @@ class offreDeStage_BDD {
         $pos1 = strripos($filtre->getStrFiltres(), "idfiliere");
         $pos2 = strripos($filtre->getStrFiltres(), "idparcours");
         $pos3 = strripos($filtre->getStrFiltres(), "idcompetence");
+        $pos4 = strripos($filtre->getStrFiltres(), "idpromotion");
 
         if ($pos1 !== false) {
           $requete = $requete . " AND $tab7.idoffre=$tab12.idoffre";
@@ -235,7 +265,12 @@ class offreDeStage_BDD {
           $table = $table . "," . $tab11;
         }
 
-        $requete = "SELECT $tab12.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab12.idoffre";
+        if ($pos4 !== false) {
+          $requete = $requete . " AND $tab37.idoffre=$tab12.idoffre";
+          $table = $table . "," . $tab37;
+        }
+
+        $requete = "SELECT DISTINCT $tab12.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab12.idoffre";
       }
 
       $result = $db->query($requete);
@@ -247,7 +282,7 @@ class offreDeStage_BDD {
 
       if ($result != FALSE) {
         while ($idods = $result->fetch_array()) {
-          $ods = offreDeStage_BDD::getOffreDeStage($idods['idoffre']);
+          $ods = OffreDeStage_BDD::getOffreDeStage($idods['idoffre']);
           array_push($tabODS, $ods);
         }
         $result->free();

@@ -1,6 +1,11 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
 --
--- ATTENTION : Importer en désactivant la vérification des clés étrangères
---
+-- Hôte : localhost:8889
+-- Généré le :  mar. 26 nov. 2019 à 17:09
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -16,37 +21,15 @@ SET time_zone = "+00:00";
 --
 
 --
--- Tronquer la table avant d'insérer `responsable`
---
-
-TRUNCATE TABLE `responsable`;
---
--- Déchargement des données de la table `responsable`
---
-
-INSERT INTO `responsable` (`idresponsable`, `responsabilite`, `nomresponsable`, `prenomresponsable`, `emailresponsable`, `titreresponsable`) VALUES
-(1, 'stage', 'nom1', 'prenom1', 'email1@bidon.fr', 'Responsable des stages'),
-(2, 'alternance', 'nom2', 'prenom2', 'email2@bidon.fr', 'Responsable de l\'alternance'),
-(3, 'site', 'nom3', 'prenom3', 'email3@bidon.fr', 'Responsable relations entreprise');
-
---
--- Tronquer la table avant d'insérer `affectation`
---
-
-TRUNCATE TABLE `affectation`;
---
--- Déchargement des données de la table `attribution`
+-- Déchargement des données de la table `affectation`
 --
 
 INSERT INTO `affectation` (`idaffectation`, `envoi`, `idcontrat`) VALUES
-(1, 0, 387),
-(2, 0, 388);
+(1, 1, 388),
+(2, 0, 389),
+(3, 0, 394),
+(5, 0, 396);
 
---
--- Tronquer la table avant d'insérer `attribution`
---
-
-TRUNCATE TABLE `attribution`;
 --
 -- Déchargement des données de la table `attribution`
 --
@@ -96,13 +79,17 @@ INSERT INTO `attribution` (`idattribution`, `envoi`, `idconvention`) VALUES
 (43, 1, 580),
 (45, 0, 582),
 (46, 0, 583),
-(47, 0, 584);
+(47, 1, 584);
 
 --
--- Tronquer la table avant d'insérer `competence`
+-- Déchargement des données de la table `candidature_alternance`
 --
 
-TRUNCATE TABLE `competence`;
+INSERT INTO `candidature_alternance` (`idcandidature`, `idetudiant`, `idoffre`, `identreprise`, `statut`) VALUES
+(6, 430, 323, 545, 'Pas intéressé'),
+(7, 430, 332, 556, 'Postulé'),
+(8, 430, 333, 557, 'Postulé');
+
 --
 -- Déchargement des données de la table `competence`
 --
@@ -169,11 +156,6 @@ INSERT INTO `competence` (`idcompetence`, `nomcompetence`) VALUES
 (80, 'Traitement de la parole'),
 (81, 'BPM');
 
---
--- Tronquer la table avant d'insérer `contact`
---
-
-TRUNCATE TABLE `contact`;
 --
 -- Déchargement des données de la table `contact`
 --
@@ -606,26 +588,27 @@ INSERT INTO `contact` (`idcontact`, `nomcontact`, `prenomcontact`, `telephone`, 
 (899, 'Nom 656', 'Prenom 656', 'xx', 'xx', 549),
 (900, 'Nom 1', 'Prénom 1', 'xx', 'sdf', 539),
 (901, 'Monsieur', 'Prénom 1', 'xx', 'xx', 550),
-(902, 'Contact déjà pris', 'Contact déjà pris', 'xx', 'xx', 551);
+(902, 'Contact déjà pris', 'Contact déjà pris', 'xx', 'xx', 551),
+(903, 'Nom contact test10', 'Prénom contact test10', '02 xx', 'test10@bidon.fr', 552),
+(904, 'Nom 1', 'Prénom 1', 'xx', 'sdf', 540),
+(905, 'CS1', 'CS2', '06', 'email@bidon.fr', 553),
+(906, 'NC45', 'PC45', '06', 'email@bidon.fr', 554),
+(907, 'NC89', 'PC89', '06', 'email@bidon.fr', 555),
+(908, 'contact', 'prenom', '02', 'bidon@bidon.fr', 556),
+(909, 'toto', 'titi', '06', 'toto@tata.fr', 557),
+(910, 'c12', 'p12', '06', 'adr@bidon.fr', 558),
+(911, 'nomc', 'prenomc', '06', 'bidon@bidon.fr', 559);
 
---
--- Tronquer la table avant d'insérer `contrat`
---
-
-TRUNCATE TABLE `contrat`;
 --
 -- Déchargement des données de la table `contrat`
 --
 
-INSERT INTO `contrat` (`idcontrat`, `sujetcontrat`, `typedecontrat`, `duree`, `indemnite`, `asonresume`, `note`, `idparrain`, `idexaminateur`,`idreferent`, `idetudiant`, `idsoutenance`, `idtheme`) VALUES
-(387, 'huyguyg', 0, 1, 800, 0, '0.00', 12, 3 , 892, 430, NULL, 1),
-(388, 'Truc', 0, 1, 1200, 0, '0.00', 1, 3, 898, 431, NULL, 1);
+INSERT INTO `contrat` (`idcontrat`, `sujetcontrat`, `typedecontrat`, `duree`, `indemnite`, `asonresume`, `note`, `idparrain`, `idexaminateur`, `idreferent`, `idetudiant`, `idsoutenance`, `idtheme`) VALUES
+(388, 'Truc', 0, 1, 1200, 0, '15.00', 1, 29, 898, 431, 666, 1),
+(389, '425_Master1_nom425_Maymouna_1819_Resume.pdf', 0, 1, 800, 1, '8.00', 1, 3, 884, 425, 664, 12),
+(394, 'test2', 1, 1, 800, 0, '19.00', 1, 3, 120, 422, 663, 10),
+(396, 'test5', 1, 1, 800, 0, '8.00', 11, 3, 134, 409, 665, 1);
 
---
--- Tronquer la table avant d'insérer `convention`
---
-
-TRUNCATE TABLE `convention`;
 --
 -- Déchargement des données de la table `convention`
 --
@@ -1002,10 +985,9 @@ INSERT INTO `convention` (`idconvention`, `sujetdestage`, `asonresume`, `note`, 
 (385, '2587c0444e.pdf', 1, '13.00', 29, 4, 300, 399, 414, 4),
 (386, 'a2b7c3f7e5.pdf', 1, '14.00', 2, 1, 306, 407, 612, 4),
 (387, 'ecf599db34.pdf', 1, '0.00', 1, 14, 201, 437, 615, 1),
-(388, '9f16d6dd76.pdf', 1, '17.00', 31, 14, 299, 460, 584, 1),
 (391, '8202896c9f.pdf', 1, '14.00', 30, 11, 292, 468, 637, 1),
 (392, 'c885429031.pdf', 1, '11.00', 12, 22, 309, 476, 638, 4),
-(394, 'Pas de résumé', 0, '14.00', 2, 1, 312, 478, 639, 5),
+(394, 'Pas de résumé', 0, '14.00', 2, 1, 312, NULL, 639, 5),
 (395, 'Pas de résumé', 0, '0.00', 9, 10, 313, 474, 641, 1),
 (396, '55b8d757d0.pdf', 1, '12.50', 8, 11, 320, 440, 618, 1),
 (397, '619bac75d1.pdf', 1, '14.00', 14, 31, 291, 458, 643, 1),
@@ -1187,13 +1169,8 @@ INSERT INTO `convention` (`idconvention`, `sujetdestage`, `asonresume`, `note`, 
 (580, 'a5a6dbd620.pdf', 1, '13.50', 26, 30, 408, 614, 860, 8),
 (582, '6b7601bfbf.pdf', 1, '11.50', 1, 34, 409, 625, 867, 5),
 (583, '4110d5386d.pdf', 1, '9.00', 1, 34, 413, 626, 867, 5),
-(584, 'Sanofi a débuté quelques projets d\'assistants virtuels (Chatbot) pour améliorer les services rendus aux utilisateurs soit internes (Ressources Humaines, Voyages et notes de frais etc.) soit externes. Le sujet de stage consistera à intégrer toutes les briques logicielles pour fournir un environnement de développement efficace et avec cet environnement, développer un Chatbot répondant à des questions liées aux technologies de Machine Learning.', 0, '0.00', 12, 3, 361, NULL, 879, 12);
+(584, '361_Master2_nom361_Etienne_1819_Rapport.pdf', 1, '12.00', 12, 1, 361, 662, 879, 12);
 
---
--- Tronquer la table avant d'insérer `convocation`
---
-
-TRUNCATE TABLE `convocation`;
 --
 -- Déchargement des données de la table `convocation`
 --
@@ -1288,13 +1265,13 @@ INSERT INTO `convocation` (`idconvocation`, `envoi`, `idsoutenance`) VALUES
 (89, 1, 645),
 (90, 1, 646),
 (91, 1, 647),
-(92, 0, 648);
+(92, 0, 648),
+(106, 1, 662),
+(107, 0, 663),
+(108, 1, 664),
+(109, 0, 665),
+(110, 0, 666);
 
---
--- Tronquer la table avant d'insérer `couleur`
---
-
-TRUNCATE TABLE `couleur`;
 --
 -- Déchargement des données de la table `couleur`
 --
@@ -1342,11 +1319,6 @@ INSERT INTO `couleur` (`idcouleur`, `nomcouleur`, `codehexa`) VALUES
 (40, 'Marron4', 'ff6700');
 
 --
--- Tronquer la table avant d'insérer `datesoutenance`
---
-
-TRUNCATE TABLE `datesoutenance`;
---
 -- Déchargement des données de la table `datesoutenance`
 --
 
@@ -1392,13 +1364,10 @@ INSERT INTO `datesoutenance` (`iddatesoutenance`, `jour`, `mois`, `annee`, `conv
 (40, 2, 7, 2018, 1),
 (41, 30, 8, 2018, 1),
 (44, 9, 7, 2018, 1),
-(45, 29, 6, 2018, 1);
+(45, 29, 6, 2018, 1),
+(46, 4, 7, 2019, 1),
+(47, 8, 7, 2019, 1);
 
---
--- Tronquer la table avant d'insérer `entreprise`
---
-
-TRUNCATE TABLE `entreprise`;
 --
 -- Déchargement des données de la table `entreprise`
 --
@@ -1679,13 +1648,16 @@ INSERT INTO `entreprise` (`identreprise`, `nom`, `adresse`, `codepostal`, `ville
 (548, 'Entreprise secrete', 'quelque part', '72000', 'une certaine ville', 'FRANCE', 'mail@domain.com', NULL, 1230123012301),
 (549, 'Nom 656', 'Adresse 656', '72000', 'Ville 656', 'FRANCE', 'xx', NULL, 1234567890123),
 (550, 'Entreprise 122', 'Adresse', '72000', 'Ville', 'FRANCE', 'xx', NULL, 12345678901258),
-(551, 'Entreprise honnete', 'Bonne petite ville', '72000', 'Quelquepart', 'FRANCE', 'xx', NULL, 1234567890123);
+(551, 'Entreprise honnete', 'Bonne petite ville', '72000', 'Quelquepart', 'FRANCE', 'xx', NULL, 1234567890123),
+(552, 'Entreprise test10', 'adrese', '7200', 'ville', 'FRANCE', 'test10@bidon.fr', NULL, 123456789),
+(553, 'test3', 'test3', '78000', 'ville', 'FRANCE', 'email@bidon.fr', NULL, 14587551),
+(554, 'Entre45', 'Adresse45', '45000', 'Ville45', 'FRANCE', 'email@bidon.fr', NULL, 45878),
+(555, 'Entreprise Bidon89', 'Adresse 89', '89000', 'Ville89', 'FRANCE', 'email@bidon.fr', NULL, NULL),
+(556, 'Entreprise', 'Adresse', '78000', 'ville', 'FRANCE', 'bidon@bidon.fr', NULL, 78999),
+(557, 'entre', 'adresses', '75000', 'le mans', 'FRANCE', 'toto@tata.fr', NULL, 12333),
+(558, 'nom', 'adr', '72000', 'le mans', 'FRANCE', 'adr@bidon.fr', NULL, NULL),
+(559, 'entr', 'adr', '72000', 'le mans', 'FRANCE', 'bidon@bidon.fr', NULL, 456);
 
---
--- Tronquer la table avant d'insérer `etudiant`
---
-
-TRUNCATE TABLE `etudiant`;
 --
 -- Déchargement des données de la table `etudiant`
 --
@@ -2113,11 +2085,6 @@ INSERT INTO `etudiant` (`idetudiant`, `nometudiant`, `prenometudiant`, `email_in
 (455, 'nom455', 'Anatolii', 'prenom.nom.etu@bidon.fr', '', '');
 
 --
--- Tronquer la table avant d'insérer `filiere`
---
-
-TRUNCATE TABLE `filiere`;
---
 -- Déchargement des données de la table `filiere`
 --
 
@@ -2129,15 +2096,35 @@ INSERT INTO `filiere` (`idfiliere`, `nomfiliere`, `temps_soutenance`, `affDepot`
 (5, 'Deust2', 20, 0);
 
 --
--- Tronquer la table avant d'insérer `fluxrss`
+-- Déchargement des données de la table `fluxrss`
 --
 
-TRUNCATE TABLE `fluxrss`;
+INSERT INTO `fluxrss` (`ID`, `title`, `link`, `timestamp`, `contents`, `author`) VALUES
+(1, 'Nouvelle offre de stage', 'http://localhost:8888//stagiaire/visualiserOffre.php?id=31', 1559045078, 'Test ', 'thierry.lemeunier@univ-lemans.fr'),
+(2, 'Nouvelle offre d\'alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=331', 1559047780, 'Offre secrète', 'thierry.lemeunier@univ-lemans.fr'),
+(3, 'Nouvelle offre d&#145;alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=331', 1559048071, 'Offre secrète', 'thierry.lemeunier@univ-lemans.fr'),
+(4, 'Nouvelle offre d&#039;alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=331', 1559048622, 'Offre secrète', 'thierry.lemeunier@univ-lemans.fr'),
+(5, 'Nouvelle offre d&#039;alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=332', 1559568543, 'titre bidon', 'thierry.lemeunier@univ-lemans.fr'),
+(6, 'Nouvelle offre d&#039;alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=333', 1574242261, 'Test contrat indéfini', 'thierry.lemeunier@univ-lemans.fr'),
+(7, 'Nouvelle offre de stage', 'http://localhost:8888//stagiaire/visualiserOffre.php?id=1', 1574688001, 'titre sujet de stage 1', 'thierry.lemeunier@univ-lemans.fr'),
+(8, 'Nouvelle offre de stage', 'http://localhost:8888//stagiaire/visualiserOffre.php?id=2', 1574688696, 'titre sujet de stage 2', 'thierry.lemeunier@univ-lemans.fr'),
+(9, 'Nouvelle offre d&#039;alternance', 'http://localhost:8888//alternant/visualiserOffre.php?id=334', 1574783770, 'Test 2019-11-26', 'thierry.lemeunier@univ-lemans.fr');
+
 --
--- Tronquer la table avant d'insérer `offredestage`
+-- Déchargement des données de la table `offredalternance`
 --
 
-TRUNCATE TABLE `offredestage`;
+INSERT INTO `offredalternance` (`idoffre`, `sujet`, `titre`, `duree`, `indemnite`, `remarques`, `estVisible`, `idcontact`, `typedecontrat`) VALUES
+(321, 'lkjj', 'Offre 4', '1', 1500, '', 1, 888, 1),
+(323, 'eazea', 'Offre 5', '2', 21, 'zea', 1, 890, 1),
+(324, 'jp', 'Offre 7', '1', 2525, '', 1, 891, 1),
+(325, 'Plein de truc', 'Alternance qu\'elle est bien', '2', 9999999999, 'Nope', 0, 898, 1),
+(329, 'gfhfghf', 'hfggf', '1', 5859, 'gfhfg', 0, 901, 1),
+(331, 'Mission secrète', 'Offre secrète', '2', 89000, '', 0, 906, 1),
+(332, 'mission bidon', 'titre bidon', '2', 0, '', 1, 908, 1),
+(333, 'dezdez', 'Test contrat indéfini', '1', 0, '', 1, 909, 2),
+(334, 'rien', 'Test 2019-11-26', '1', 0, '', 1, 911, 2);
+
 --
 -- Déchargement des données de la table `offredestage`
 --
@@ -2145,9 +2132,8 @@ TRUNCATE TABLE `offredestage`;
 INSERT INTO `offredestage` (`idoffre`, `sujet`, `titre`, `dureemin`, `dureemax`, `indemnite`, `remarques`, `estVisible`, `idcontact`) VALUES
 (1, 'sujet de stage 1', 'titre sujet de stage 1', '3', '3', 0, '', 1, 869),
 (2, 'sujet de stage 2', 'titre sujet de stage 2', '6', '6', 0, '', 1, 870),
-(3, 'sujet de stage 3', 'titre sujet de stage 3', '6', '6', 0, 'Lieu du stage : Le Mans', 1, 871),
-(4, 'sujet de stage 4', 'titre sujet de stage 4', '6', '6', 0, '', 1, 668),
-(5, 'sujet de stage 5', 'titre sujet de stage 5', '6', '6', 0, '', 1, 873),
+(4, 'sujet de stage 4', 'titre sujet de stage 4', '6', '6', 0, '', 0, 668),
+(5, 'sujet de stage 5', 'titre sujet de stage 5', '6', '6', 0, '', 0, 873),
 (8, 'sujet de stage 8', 'titre sujet de stage 8', '6', '6', 0, '', 1, 875),
 (9, 'sujet de stage 9', 'titre sujet de stage 9', '6', '6', 0, '', 1, 876),
 (10, 'sujet de stage 10', 'titre sujet de stage 10', '6', '6', 0, '', 1, 877),
@@ -2157,37 +2143,11 @@ INSERT INTO `offredestage` (`idoffre`, `sujet`, `titre`, `dureemin`, `dureemax`,
 (14, 'sujet de stage 14', 'titre sujet de stage 14', '4', '6', 0, '', 1, 881),
 (15, 'sujet de stage 15', 'titre sujet de stage 15', '6', '6', 0, '', 1, 882),
 (16, 'sujet de stage 16', 'titre sujet de stage 16', '3', '3', 0, 'L\'offre s\'adresse en priorité aux étudiants autonomes et motivés par le développement web.', 1, 883),
-(19, 'ghf', 'Offre 1', '1', '5', 24, '', 1, 886),
 (28, 'dsfsdf', 'Test stage', '1', '4', 250, 'Tortue', 1, 892),
 (29, 'dsfsdf', 'Test stage', '1', '4', 250, 'Tortue', 1, 892),
-(30, 'dsfsdf', 'Test stage2', '1', '4', 250, 'Tortue', 1, 892);
+(30, 'dsfsdf', 'Test stage2', '1', '4', 250, 'Tortue', 1, 892),
+(31, 'Une sujet de stage', 'Test ', '6', '6', 0, '', 1, 907);
 
-
---
--- Tronquer la table avant d'insérer `offredalternance`
---
-
-TRUNCATE TABLE `offredalternance`;
---
--- Déchargement des données de la table `offredalternance`
---
-
-INSERT INTO `offredalternance` (`idoffre`, `sujet`, `titre`, `duree`, `indemnite`, `remarques`, `estVisible`, `idcontact`, `typedecontrat`) VALUES
-(318, 'fzdfz', 'Offre 2', '2', 13, 'dqs', 1, 897, 1),
-(320, 'ezrezrz', 'Offre 3', '1', 1200, '', 1, 887, 1),
-(321, 'lkjj', 'Offre 4', '1', 1500, '', 1, 888, 1),
-(323, 'eazea', 'Offre 5', '2', 21, 'zea', 1, 890, 1),
-(324, 'jp', 'Offre 7', '1', 2525, '', 1, 891, 1),
-(325, 'Plein de truc', 'Alternance qu\'elle est bien', '2', 9999999999, 'Nope', 1, 898, 1),
-(329, 'gfhfghf', 'hfggf', '1', 5859, 'gfhfg', 1, 901, 1),
-(330, 'Mission qui donne envie', 'Titre bien choisi', '2', 99999, 'Remarquable !', 1, 902, 0),
-(331, 'C\'est vraiment interessant', 'Ca a l\'air bien', '2', 9999, 'Incroyable !', 1, 902, 0);
-
---
--- Tronquer la table avant d'insérer `parcours`
---
-
-TRUNCATE TABLE `parcours`;
 --
 -- Déchargement des données de la table `parcours`
 --
@@ -2202,11 +2162,6 @@ INSERT INTO `parcours` (`idparcours`, `nomparcours`) VALUES
 (9, 'ISI'),
 (11, 'INFO');
 
---
--- Tronquer la table avant d'insérer `parrain`
---
-
-TRUNCATE TABLE `parrain`;
 --
 -- Déchargement des données de la table `parrain`
 --
@@ -2252,29 +2207,22 @@ INSERT INTO `parrain` (`idparrain`, `nomparrain`, `prenomparrain`, `emailparrain
 (38, 'nom parrain 38', 'Marie', 'adresse@bidon38.fr', 21),
 (39, 'nom parrain 39', 'Nicolas', 'adresse@bidon39.fr', 14);
 
-
---
--- Tronquer la table avant d'insérer `profilsouhaite_offredalternance`
---
-
-TRUNCATE TABLE `profilsouhaite_offredalternance`;
 --
 -- Déchargement des données de la table `profilsouhaite_offredalternance`
 --
 
 INSERT INTO `profilsouhaite_offredalternance` (`idoffre`, `idfiliere`) VALUES
-(318, 2),
+(325, 4),
+(329, 4),
+(331, 4),
 (321, 1),
 (323, 4),
 (324, 1),
-(320, 2),
-(325, 4);
+(334, 4),
+(332, 4),
+(332, 1),
+(333, 4);
 
---
--- Tronquer la table avant d'insérer `profilsouhaite_offredestage`
---
-
-TRUNCATE TABLE `profilsouhaite_offredestage`;
 --
 -- Déchargement des données de la table `profilsouhaite_offredestage`
 --
@@ -2283,14 +2231,12 @@ INSERT INTO `profilsouhaite_offredestage` (`idoffre`, `idfiliere`) VALUES
 (28, 4),
 (29, 4),
 (30, 4),
-(19, 4);
+(31, 1),
+(1, 4),
+(2, 1),
+(8, 4),
+(11, 1);
 
---
--- Tronquer la table avant d'insérer `promotion`
---
-
-
-TRUNCATE TABLE `promotion`;
 --
 -- Déchargement des données de la table `promotion`
 --
@@ -2326,51 +2272,30 @@ INSERT INTO `promotion` (`idpromotion`, `anneeuniversitaire`, `idparcours`, `idf
 (33, 2018, 11, 1, 'bidon@bidon.fr');
 
 --
--- Tronquer la table avant d'insérer `relation_competence_offredalternance`
---
-
-TRUNCATE TABLE `relation_competence_offredalternance`;
---
 -- Déchargement des données de la table `relation_competence_offredalternance`
 --
 
 INSERT INTO `relation_competence_offredalternance` (`idcompetence`, `idoffre`) VALUES
-(10, 318),
+(10, 329),
+(17, 331),
 (13, 321),
 (78, 321),
 (4, 323),
 (67, 324),
-(4, 320),
-(40, 331),
-(41, 330),
-(10, 329);
+(46, 334),
+(31, 332),
+(17, 333);
 
---
--- Tronquer la table avant d'insérer `relation_competence_offredestage`
---
-
-TRUNCATE TABLE `relation_competence_offredestage`;
 --
 -- Déchargement des données de la table `relation_competence_offredestage`
 --
 
 INSERT INTO `relation_competence_offredestage` (`idcompetence`, `idoffre`) VALUES
-(10, 1),
-(27, 2),
-(34, 2),
 (3, 4),
 (2, 5),
-(2, 8),
-(10, 8),
 (2, 9),
 (10, 9),
 (18, 10),
-(1, 11),
-(13, 11),
-(18, 11),
-(28, 11),
-(52, 11),
-(67, 11),
 (2, 12),
 (10, 12),
 (3, 13),
@@ -2379,22 +2304,11 @@ INSERT INTO `relation_competence_offredestage` (`idcompetence`, `idoffre`) VALUE
 (78, 14),
 (78, 15),
 (3, 16),
-(10, 1),
-(27, 2),
-(34, 2),
 (3, 4),
 (2, 5),
-(2, 8),
-(10, 8),
 (2, 9),
 (10, 9),
 (18, 10),
-(1, 11),
-(13, 11),
-(18, 11),
-(28, 11),
-(52, 11),
-(67, 11),
 (2, 12),
 (10, 12),
 (3, 13),
@@ -2412,16 +2326,19 @@ INSERT INTO `relation_competence_offredestage` (`idcompetence`, `idoffre`) VALUE
 (41, 30),
 (66, 30),
 (73, 30),
-(3, 3),
-(6, 3),
-(6, 19),
-(10, 19);
+(4, 31),
+(10, 1),
+(27, 2),
+(34, 2),
+(2, 8),
+(10, 8),
+(1, 11),
+(13, 11),
+(18, 11),
+(28, 11),
+(52, 11),
+(67, 11);
 
---
--- Tronquer la table avant d'insérer `relation_promotion_datesoutenance`
---
-
-TRUNCATE TABLE `relation_promotion_datesoutenance`;
 --
 -- Déchargement des données de la table `relation_promotion_datesoutenance`
 --
@@ -2574,29 +2491,25 @@ INSERT INTO `relation_promotion_datesoutenance` (`iddatesoutenance`, `idpromotio
 (40, 30),
 (41, 31),
 (44, 31),
-(45, 30);
+(45, 30),
+(46, 32),
+(47, 33);
 
---
--- Tronquer la table avant d'insérer `relation_promotion_etudiant_contrat`
---
-
-TRUNCATE TABLE `relation_promotion_etudiant_contrat`;
 --
 -- Déchargement des données de la table `relation_promotion_etudiant_contrat`
 --
 
 INSERT INTO `relation_promotion_etudiant_contrat` (`idcontrat`, `idpromotion`, `idetudiant`) VALUES
-(387, 32, 430),
-(388, 32, 431);
+(388, 32, 431),
+(389, 32, 425),
+(394, 33, 422),
+(NULL, 33, 409),
+(396, 33, 409);
 
---
--- Tronquer la table avant d'insérer `relation_promotion_etudiant_convention`
---
-
-TRUNCATE TABLE `relation_promotion_etudiant_convention`;
 --
 -- Déchargement des données de la table `relation_promotion_etudiant_convention`
 --
+
 INSERT INTO `relation_promotion_etudiant_convention` (`idetudiant`, `idconvention`, `idpromotion`) VALUES
 (1, 15, 1),
 (2, 7, 1),
@@ -3012,7 +2925,7 @@ INSERT INTO `relation_promotion_etudiant_convention` (`idetudiant`, `idconventio
 (294, 398, 25),
 (295, 403, 25),
 (296, 399, 25),
-(299, 388, 25),
+(299, NULL, 25),
 (301, 406, 25),
 (320, 440, 26),
 (341, 436, 25),
@@ -3211,10 +3124,39 @@ INSERT INTO `relation_promotion_etudiant_convention` (`idetudiant`, `idconventio
 (361, 584, 33);
 
 --
--- Tronquer la table avant d'insérer `salle_soutenance`
+-- Déchargement des données de la table `relation_promotion_offredalternance`
 --
 
-TRUNCATE TABLE `salle_soutenance`;
+INSERT INTO `relation_promotion_offredalternance` (`idpromotion`, `idoffre`) VALUES
+(31, 321),
+(32, 323),
+(33, 324),
+(32, 334),
+(32, 332),
+(33, 332),
+(32, 333);
+
+--
+-- Déchargement des données de la table `relation_promotion_offredestage`
+--
+
+INSERT INTO `relation_promotion_offredestage` (`idpromotion`, `idoffre`) VALUES
+(32, 1),
+(33, 2),
+(31, 16),
+(19, 15),
+(32, 8),
+(33, 11);
+
+--
+-- Déchargement des données de la table `responsable`
+--
+
+INSERT INTO `responsable` (`idresponsable`, `responsabilite`, `nomresponsable`, `prenomresponsable`, `emailresponsable`, `titreresponsable`) VALUES
+(1, 'stage', 'nom1', 'prenom1', 'thierry.lemeunier@univ-lemans.fr', 'Responsable des stages'),
+(2, 'alternance', 'Lemeunier', 'Thierry', 'thierry.lemeunier@univ-lemans.fr', 'Responsable de l\'alternance'),
+(4, 'site', 'test', 'test', 'email', 'Responsable relations entreprise');
+
 --
 -- Déchargement des données de la table `salle_soutenance`
 --
@@ -3230,11 +3172,6 @@ INSERT INTO `salle_soutenance` (`idsalle`, `nomsalle`) VALUES
 (8, 'salle8'),
 (9, 'salle9');
 
---
--- Tronquer la table avant d'insérer `soutenances`
---
-
-TRUNCATE TABLE `soutenances`;
 --
 -- Déchargement des données de la table `soutenances`
 --
@@ -3789,26 +3726,25 @@ INSERT INTO `soutenances` (`idsoutenance`, `heuredebut`, `mindebut`, `ahuitclos`
 (645, 11, 0, 0, 41, 1),
 (646, 10, 0, 0, 44, 9),
 (647, 10, 50, 0, 44, 9),
-(648, 11, 40, 0, 44, 9);
+(648, 11, 40, 0, 44, 9),
+(662, 9, 0, 0, 46, 1),
+(663, 11, 0, 0, 46, 1),
+(664, 10, 0, 0, 47, 1),
+(665, 12, 15, 0, 47, 2),
+(666, 10, 0, 0, 46, 2);
 
---
--- Tronquer la table avant d'insérer `sujetdestage`
---
-
-TRUNCATE TABLE `sujetdestage`;
 --
 -- Déchargement des données de la table `sujetdestage`
 --
 
 INSERT INTO `sujetdestage` (`idsujetdestage`, `description`, `valide`, `enattente`, `idetudiant`, `idpromotion`) VALUES
-(1, 'Sujet de stage à valider 1', 1, 0, 431, 32),
-(2, 'Sujet de stage à valider 2', 0, 1, 411, 33);
+(1, 'Sujet de stage à valider 1', 1, 1, 431, 32),
+(2, 'Sujet de stage à valider 2', 0, 0, 411, 33),
+(3, 'test', 1, 0, 413, 32),
+(4, 'test', 0, 1, 430, 32),
+(5, 'test', 0, 0, 448, 32),
+(6, 'test', 0, 1, 451, 32);
 
---
--- Tronquer la table avant d'insérer `taches`
---
-
-TRUNCATE TABLE `taches`;
 --
 -- Déchargement des données de la table `taches`
 --
@@ -3837,11 +3773,6 @@ INSERT INTO `taches` (`idtache`, `intitule`, `statut`, `priorite`, `datelimite`)
 (24, 'Mail final étudiants M2', 'Pas fait', 0, '2019-09-05');
 
 --
--- Tronquer la table avant d'insérer `theme_destage`
---
-
-TRUNCATE TABLE `theme_destage`;
---
 -- Déchargement des données de la table `theme_destage`
 --
 
@@ -3860,52 +3791,40 @@ INSERT INTO `theme_destage` (`idtheme`, `theme`, `idcouleur`) VALUES
 (12, 'Indéfini', 16);
 
 --
--- Tronquer la table avant d'insérer `theme_offredalternance`
---
-
-TRUNCATE TABLE `theme_offredalternance`;
---
 -- Déchargement des données de la table `theme_offredalternance`
 --
 
 INSERT INTO `theme_offredalternance` (`idparcours`, `idoffre`) VALUES
-(11, 318),
+(11, 325),
+(11, 329),
+(11, 331),
 (11, 321),
 (11, 323),
 (11, 324),
-(11, 320),
-(11, 325);
+(11, 334),
+(11, 332),
+(11, 333);
 
---
--- Tronquer la table avant d'insérer `theme_offredestage`
---
-
-TRUNCATE TABLE `theme_offredestage`;
 --
 -- Déchargement des données de la table `theme_offredestage`
 --
 
 INSERT INTO `theme_offredestage` (`idparcours`, `idoffre`) VALUES
-(11, 1),
-(11, 2),
-(11, 3),
 (11, 4),
 (11, 5),
-(11, 8),
 (11, 9),
 (11, 10),
-(11, 11),
 (11, 12),
 (11, 13),
 (11, 14),
 (11, 15),
-(11, 16);
+(11, 16),
+(11, 31),
+(11, 1),
+(11, 2),
+(11, 8),
+(11, 11);
 
---
--- Tronquer la table avant d'insérer `type_entreprise`
---
-
-TRUNCATE TABLE `type_entreprise`;
 --
 -- Déchargement des données de la table `type_entreprise`
 --

@@ -52,6 +52,32 @@ if (isset($_POST['duree']) && $_POST['duree'] != '*') {
     array_push($filtres, new FiltreNumeric("duree", $_POST['duree']));
 }
 
+// Ajout d'un filtre pour limiter aux promotions de l'année en cours
+$filtrePromo = array();
+
+$annee = Promotion_BDD::getLastAnnee();
+array_push ($filtrePromo, new FiltreNumeric("anneeuniversitaire", $annee));
+
+if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
+    array_push($filtrePromo, new FiltreNumeric("idfiliere", $_POST['filiere']));
+
+if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
+    array_push($filtrePromo, new FiltreNumeric("idparcours", $_POST['parcours']));
+
+$filtre = $filtrePromo[0];
+for ($i = 1; $i < sizeof($filtrePromo); $i++)
+    $filtre = new Filtre($filtre, $filtrePromo[$i], "AND");
+
+$oPromotions = Promotion::listerPromotions($filtre);
+if (sizeof($oPromotions) > 0) {
+    $filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
+    for ($i = 1; $i < sizeof($oPromotions); $i++)
+        $filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
+    array_push($filtres, $filtre);
+}
+
+// Construction du filtre final
+
 $nbFiltres = sizeof($filtres);
 
 if ($nbFiltres >= 2) {

@@ -16,6 +16,7 @@ class offreDAlternance_BDD {
      * @global string $tab27 Nom de la table 'theme_offredalternance'
      * @global string $tab28 Nom de la table 'relation_competence_offredalternance'
      * @global string $tab29 Nom de la table 'offredalternance'
+     * @global string $tab36 Nom de la table "relation_promotion_offredalternance"
      * @param OffreDAlternance $offreDAlternance L'objet à enregistrer
      * @return integer L'identifiant de l'enregistrement
      */
@@ -25,6 +26,7 @@ class offreDAlternance_BDD {
 	global $tab27;
 	global $tab28;
 	global $tab29;
+	global $tab36;
 
 	$estVisible = $offreDAlternance->estVisible() ? 1 : 0;
 	if ($offreDAlternance->getIdentifiantBDD() == "") {
@@ -53,16 +55,20 @@ class offreDAlternance_BDD {
 		    WHERE idoffre='" . $offreDAlternance->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //Themes
+	    // Themes
 	    $sql = "DELETE FROM $tab27 WHERE idoffre='" . $offreDAlternance->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //Profils
+	    // Profils
 	    $sql = "DELETE FROM $tab26 WHERE idoffre='" . $offreDAlternance->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
-	    //Competences
+	    // Competences
 	    $sql = "DELETE FROM $tab28 WHERE idoffre='" . $offreDAlternance->getIdentifiantBDD() . "';";
+	    $db->query($sql);
+
+	    // Promotions
+	    $sql = "DELETE FROM $tab36 WHERE idoffre='". $offreDAlternance->getIdentifiantBDD() . "';";
 	    $db->query($sql);
 
 	    $lastId = $offreDAlternance->getIdentifiantBDD();
@@ -86,6 +92,13 @@ class offreDAlternance_BDD {
 	$tabCompetences = $offreDAlternance->getListesCompetences();
 	for ($i = 0; $i < sizeof($tabCompetences); $i++) {
 	    $sql = "INSERT INTO $tab28 VALUES('" . $tabCompetences[$i]->getIdentifiantBDD() . "', '" . $lastId . "')";
+	    $db->query($sql);
+	}
+
+	// Promotions
+	$tabPromotions = $offreDAlternance->getPromotions();
+	for ($i =0; $i < sizeof($tabPromotions); $i++) {
+	    $sql = "INSERT INTO $tab36 VALUES('" . $tabPromotions[$i]->getIdentifiantBDD() . "', '" . $lastId . "')";
 	    $db->query($sql);
 	}
 
@@ -123,6 +136,7 @@ class offreDAlternance_BDD {
      * @global string $tab27 Nom de la table 'theme_offredalternance'
      * @global string $tab28 Nom de la table 'relation_competence_offredalternance'
      * @global string $tab29 Nom de la table 'offredalternance'
+     * @global string $tab36 Nom de la table 'relation_promotion_offredalternance'
      * @param integer $identifiantBDD Identifiant de l'enregistrement cherché
      * @return enregistrement
      */
@@ -132,6 +146,7 @@ class offreDAlternance_BDD {
 	global $tab27;
 	global $tab28;
 	global $tab29;
+	global $tab36;
 
 	$sql = "SELECT * FROM $tab29 WHERE idoffre='$identifiantBDD'";
 	$res = $db->query($sql);
@@ -143,6 +158,7 @@ class offreDAlternance_BDD {
 	array_push($tabOffreDAlternance, $data['sujet']);
 	array_push($tabOffreDAlternance, $data['titre']);
 
+	// Parcours
 	$sql2 = "SELECT * FROM $tab27 WHERE idoffre='$identifiantBDD'";
 	$res2 = $db->query($sql2);
 	$tabThemes = array();
@@ -152,23 +168,22 @@ class offreDAlternance_BDD {
 	$res2->free();
 	array_push($tabOffreDAlternance, $tabThemes);
 
+	// Filiere
+	$sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
+	      $res3 = $db->query($sql3);
+	$tabProfils = array();
+	while ($profil = $res3->fetch_array()) {
+	    array_push($tabProfils, $profil['idfiliere']);
+	}
+	$res3->free();
+	array_push($tabOffreDAlternance, $tabProfils);
 
+	array_push($tabOffreDAlternance, $data['duree']);
+	array_push($tabOffreDAlternance, $data['indemnite']);
+	array_push($tabOffreDAlternance, $data['remarques']);
+	array_push($tabOffreDAlternance, $data['estVisible']);
 
-  $sql3 = "SELECT * FROM $tab26 WHERE idoffre='$identifiantBDD'";
-	$res3 = $db->query($sql3);
-  $tabProfils = array();
-  while ($profil = $res3->fetch_array()) {
-      array_push($tabProfils, $profil['idfiliere']);
-  }
-  $res3->free();
-  array_push($tabOffreDAlternance, $tabProfils);
-
-
-  array_push($tabOffreDAlternance, $data['duree']);//Erreur ici
-  array_push($tabOffreDAlternance, $data['indemnite']);
-  array_push($tabOffreDAlternance, $data['remarques']);
-  array_push($tabOffreDAlternance, $data['estVisible']);
-
+	// Compétences
 	$sql4 = "SELECT * FROM $tab28 WHERE idoffre='$identifiantBDD'";
 	$res4 = $db->query($sql4);
 	$tabCompetences = array();
@@ -177,9 +192,19 @@ class offreDAlternance_BDD {
 	}
 	$res4->free();
 	array_push($tabOffreDAlternance, $tabCompetences);
-  array_push($tabOffreDAlternance, $data['idcontact']);
-  array_push($tabOffreDAlternance, $data['typedecontrat']);
 
+	array_push($tabOffreDAlternance, $data['idcontact']);
+	array_push($tabOffreDAlternance, $data['typedecontrat']);
+
+	// Promotions
+	$sql5 = "SELECT * FROM $tab36 WHERE idoffre='$identifiantBDD'";
+	$res5 = $db->query($sql5);
+	$tabPromotions = array();
+	while ($promotion = $res5->fetch_array()) {
+	    array_push($tabPromotions, $promotion['idpromotion']);
+	}
+	$res5->free();
+	array_push($tabOffreDAlternance, $tabPromotions);
 
 	return $tabOffreDAlternance;
     }
@@ -193,6 +218,7 @@ class offreDAlternance_BDD {
      * @global string $tab27 Nom de la table 'theme_offredalternance'
      * @global string $tab28 Nom de la table 'relation_competence_offredalternance'
      * @global string $tab29 Nom de la table 'offredalternance'
+     * @global string $tab36 Nom de la table 'relation_promotion_offredalternance'
      * @param Filtre $filtre Le filtre de la recherche
      * @return tableau d'enregistrements
      */
@@ -204,6 +230,7 @@ class offreDAlternance_BDD {
 	global $tab27;
 	global $tab28;
 	global $tab29;
+	global $tab36;
 
 	// --------------------------------------------------------------------
 	// Recherche des identifiants des offres d'alternance selon le filtre
@@ -219,6 +246,7 @@ class offreDAlternance_BDD {
 	    $pos1 = strripos($filtre->getStrFiltres(), "idfiliere");
 	    $pos2 = strripos($filtre->getStrFiltres(), "idparcours");
 	    $pos3 = strripos($filtre->getStrFiltres(), "idcompetence");
+	    $pos4 = strripos($filtre->getStrFiltres(), "idpromotion");
 
 	    if ($pos1 !== false) {
 		$requete = $requete . " AND $tab26.idoffre=$tab29.idoffre";
@@ -235,12 +263,15 @@ class offreDAlternance_BDD {
 		$table = $table . "," . $tab28;
 	    }
 
-	    $requete = "SELECT $tab29.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab29.idoffre";
+	    if ($pos4 !== false) {
+		$requete = $requete . " AND $tab36.idoffre=$tab29.idoffre";
+		$table = $table . "," . $tab36;
+	    }
+
+	    $requete = "SELECT DISTINCT $tab29.idoffre $table $requete AND " . $filtre->getStrFiltres() . " ORDER BY $tab29.idoffre";
 	}
 
-
 	$result = $db->query($requete);
-
 
 	// --------------------------------------------------------------------
 	// Construire le tableau des enregistrements trouvés
