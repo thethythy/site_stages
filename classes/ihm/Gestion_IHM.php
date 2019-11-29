@@ -158,7 +158,7 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./entreprises/listeDesOffreDeStage.php">Valider/Editer des offres de stage</a></li>
+					<li><a href="./stages/listeDesOffreDeStage.php">Valider/Editer des offres de stage</a></li>
 				    </ul>
 				</td>
 			    </tr>
@@ -172,9 +172,9 @@ class Gestion_IHM {
 			    <tr>
 				<td>
 				    <ul>
-					<li><a href="./entreprises/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
-					<li><a href="./SuiviCandidatures/SuiviCandidatures.php">Suivi des démarches alternants</a></li>
-					<li><a href="./exportation/exportListeContrat.php">Exporter étudiant/contrat</a></li>
+					<li><a href="./alternance/listeDesOffreDAlternance.php">Valider/Editer des offres d'alternance</a></li>
+					<li><a href="./alternance/SuiviCandidatures.php">Suivi des démarches alternants</a></li>
+					<li><a href="./alternance/exportListeContrat.php">Exporter étudiant/contrat</a></li>
 				    </ul>
 				</td>
 			    </tr>
