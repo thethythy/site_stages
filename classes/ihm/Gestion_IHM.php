@@ -9,8 +9,6 @@ class Gestion_IHM {
      */
     public static function afficherMenuGestion() {
 	?>
-	<center><a href="./manuel/manuel.php">Manuel d'utilisation</a></center>
-
 	<div id="menuGestion">
 	    <ul id="ongletsGestion">
 		<li id="li_onglet1" class="active"><a href="#" onclick="cacheOuMontre('onglet1')"> Tâches </a></li>
