@@ -1072,10 +1072,12 @@ public static function afficherFormulaireSuivi($tabOffreDAlt, $tabEtu) {
 }
 
 /**
-* Afficher un formulaire de sélection des offres d'alternance
-* @param string $fichier La page de traitement du formulaire
-*/
-public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
+* Afficher un tableau des candidatures sur des offres d'alternance
+ * @param array $tabEtu Table de tous les étudiants
+ * @param array $tabOffres Table des offres
+ * @param array $tabEtuSelection Tables des étudiants sélectionnés
+ */
+public static function afficherFormulaireSuiviGestion($tabEtu, $tabOffres, $tabEtuSelection) {
 
   /**
    * Retourne le style CSS pour afficher une case du tableau des candidatures
@@ -1115,11 +1117,11 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
 	    <select name="idEtudiant" id="idEtudiant" onchange="loadEtudiant();">
             <option value="*">Tous</option>
             <?php
-            for ($i = 0; $i < sizeof($tabEtu); $i++) {
-              if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $tabEtu[$i]->getIdentifiantBDD()))
-		echo "<option selected value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+            foreach ($tabEtu as $oEtu) {
+              if ((isset($_POST['idEtudiant'])) && ($_POST['idEtudiant'] == $oEtu->getIdentifiantBDD()))
+		echo "<option selected value='" . $oEtu->getIdentifiantBDD() . "'>" . $oEtu->getNom() . " " . $oEtu->getPrenom() . "</option>";
               else
-		echo "<option value='" . $tabEtu[$i]->getIdentifiantBDD() . "'>" . $tabEtu[$i]->getNom() . " " . $tabEtu[$i]->getPrenom() . "</option>";
+		echo "<option value='" . $oEtu->getIdentifiantBDD() . "'>" . $oEtu->getNom() . " " . $oEtu->getPrenom() . "</option>";
             }
             ?>
           </select>
@@ -1130,31 +1132,41 @@ public static function afficherFormulaireSuiviGestion($tabC, $tabEtu) {
   </form>
 
   <?php
-  if(is_array($tabC) && sizeof($tabC) != 0) { ?>
+  if(sizeof($tabOffres) != 0) { ?>
+    <p>Liste des étudiants ayant candidatés :</p>
     <table>
-      <tr id="entete">
-        <td id="idEtu-0" name='nomEtu-0'>Nom Étudiant</td>
-        <td>Titre</td>
-        <td>Entreprise</td>
-        <td>Etat</td>
-      </tr>
-      <?php
-      $cpt = 0;
-      for ($i = 0; $i < sizeof($tabC); $i++) {
-        ?>
-        <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>" id="ligneCandidature-<?php echo $cpt;?>">
-          <?php echo '<td id="idEtu-'.$tabC[$i]->getEtudiant().'"  name="nomEtu-'.$cpt.'">'. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getNom().' '. Etudiant::getEtudiant($tabC[$i]->getEtudiant())->getPrenom().'</td>';?>
-          <?php echo '<td>'. OffreDAlternance::getOffreDAlternance($tabC[$i]->getOffre())->getTitre().'</td>'; ?>
-          <?php echo '<td>'.Entreprise::getEntreprise($tabC[$i]->getEntreprise())->getNom().'</td>'; ?>
-          <?php echo '<td id="statut-'.$cpt.'" style="'.getStyle($tabC[$i]->getStatut()).'">'.$tabC[$i]->getStatut().'</td>' ?>
-        </tr>
-        <?php
-      }
-      ?>
+	<tr id="entete">
+	    <td>Etudiant</td><?php
+	    foreach($tabOffres as $oOffre) {
+		$nomEnt = $oOffre->getEntreprise()->getNom();
+		$titreOffre = $oOffre->getTitre();
+		echo "<td>$nomEnt<hr/>$titreOffre</td>";
+	    }
+	    ?>
+	</tr>
+	<?php
+	$cpt = 0;
+	foreach($tabEtuSelection as $oEtu) {
+	    $cpt2 = $cpt % 2;
+	    echo "<tr class=ligne$cpt2>";
+	    $cpt++;
+	    echo '<td>'. $oEtu->getNom().' '. $oEtu->getPrenom().'</td>';
+	    foreach($tabOffres as $oOffre) {
+		$oEntreprise = $oOffre->getEntreprise();
+		$candidature = Candidature::getCandidature($oEtu->getIdentifiantBDD(), $oOffre->getIdentifiantBDD(), $oEntreprise->getIdentifiantBDD());
+		if ($candidature) {
+		    echo '<td style="'.getStyle($candidature->getStatut()).'">'.$candidature->getStatut().'</td>';
+		} else {
+		    echo '<td>----</td>';
+		}
+	    }
+	    echo "</tr>";
+	}
+	?>
     </table>
   <?php
   } else {
-      echo "<p>Aucune candidature effectuée !</p>";
+      echo "<p>Aucune offre pour ces critères !</p>";
   }
 }
 

@@ -5,7 +5,7 @@
 * Utilisation : page d'accès aux offres de stages de l'année en cours
 * Dépendance(s) : SuiviCandidaturesData.php --> traitement des requêtes Ajax
  *                suiviCandidatures.js --> ajout dynamique des gestionnaires
-* Accès : restreint par cookie
+ * Accès : restreint par authentification HTTP
 */
 
 include_once("../../classes/bdd/connec.inc");
