@@ -390,7 +390,7 @@ public static function afficherFormulaireModification() {
     <table id="table_saisieOffreDAlternance">
 	<tr>
 	    <td colspan=2>
-		<table id="presentation_saisieOffreDAlternance">
+		<table id="presentation_saisieOffreDeStage">
 		    <tr id="entete2">
 			<td colspan=2>Alternance</td>
 		    </tr>
@@ -625,7 +625,7 @@ public static function afficherFormulaireModification() {
 	</tr>
 	<tr>
 	    <td colspan=2>
-		<table id="presentation_saisieOffreDAlternance">
+		<table id="presentation_saisieOffreDeStage">
 		    <tr id="entete2">
 			<td colspan=2>Entreprise</td>
 		    </tr>
@@ -729,7 +729,7 @@ public static function afficherFormulaireModification() {
 	</tr>
 	<tr>
 	    <td colspan="2">
-		<table id="presentation_saisieOffreDAlternance">
+		<table id="presentation_saisieOffreDeStage">
 		    <tr id="entete2">
 			<td colspan=2>Contact ou Maître d'alternance</td>
 		    </tr>
@@ -833,7 +833,7 @@ $duree_init, $competence_init) {
   <table>
     <tr>
       <td colspan=2>
-        <table id="presentation_saisieOffreDAlternance">
+        <table id="presentation_saisieOffreDeStage">
           <tr id="entete2">
             <td colspan="2">Offre d'alternance</td>
           </tr>
@@ -921,7 +921,7 @@ $duree_init, $competence_init) {
     </tr>
     <tr>
       <td colspan=2>
-        <table id="presentation_saisieOffreDAlternance">
+        <table id="presentation_saisieOffreDeStage">
           <tr id="entete2">
             <td colspan="2">Entreprise</td>
           </tr>
@@ -954,7 +954,7 @@ $duree_init, $competence_init) {
     </tr>
     <tr>
       <td colspan="2">
-        <table id="presentation_saisieOffreDAlternance">
+        <table id="presentation_saisieOffreDeStage">
           <tr id="entete2">
             <td colspan="2">Contact ou tuteur/maître d’apprentissage</td>
           </tr>
