@@ -152,10 +152,10 @@ function verifier() {
 	    $headers .= 'X-Mailer: PHP/' . phpversion();
 
 	    if (isset($_POST['type']) && $_POST['type'] === "alternant") {
-		$msg = "Une nouvelle offre d'alternance a été ajoutée.<br/>Vous pouvez la visualiser <a href=" . $baseSite . "gestion/entreprises/editionOffreDAlternance.php?id=" . $idOffreDeStage . ">ici</a>";
+		$msg = "Une nouvelle offre d'alternance a été ajoutée.<br/>Vous pouvez la visualiser <a href=" . $baseSite . "gestion/alternance/editionOffreDAlternance.php?id=" . $idOffreDeStage . ">ici</a>";
 		mail($emailResponsable, "Site de l'alternance et des stages : nouvelle offre d'alternance !", $msg, $headers);
 	    } else {
-		$msg = "Une nouvelle offre de stage a été ajoutée.<br/>Vous pouvez la visualiser <a href=" . $baseSite . "gestion/entreprises/editionOffreDeStage.php?id=" . $idOffreDeStage . ">ici</a>";
+		$msg = "Une nouvelle offre de stage a été ajoutée.<br/>Vous pouvez la visualiser <a href=" . $baseSite . "gestion/stages/editionOffreDeStage.php?id=" . $idOffreDeStage . ">ici</a>";
 		mail($emailResponsable, "Site de l'alternance et des stages : nouvelle offre de stage !", $msg, $headers);
 	    }
 	    echo "<p>Votre annonce a bien été enregistrée !</p><p>Après validation du sujet, un mail de confirmation de diffusion vous sera envoyé.</p><p><a href='../index.php'>Retour</a></p>";
