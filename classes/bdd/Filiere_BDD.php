@@ -12,7 +12,7 @@ class Filiere_BDD {
      * @global resource $db Référence sur la base ouverte
      * @global string $tab10 Nom de la table 'filiere'
      * @param integer $identifiantBDD Identifiant de la filière recherchée
-     * @return enregistrementou FALSE
+     * @return enregistrement ou FALSE
      */
     public static function getFiliere($identifiantBDD) {
 	global $db;
@@ -51,6 +51,7 @@ class Filiere_BDD {
 		array_push($tab, $filiere["nomfiliere"]);
 		array_push($tab, $filiere["temps_soutenance"]);
 		array_push($tab, $filiere["affDepot"]);
+		array_push($tab, $filiere["idfilieresuivante"]);
 		array_push($tabFilieres, $tab);
 	    }
 	    $result->free();
@@ -72,11 +73,11 @@ class Filiere_BDD {
 
 	if ($f->getIdentifiantBDD() == "") {
 	    // Création d'une filière
-	    $req = "INSERT INTO $tab10(nomfiliere, temps_soutenance)
-		    VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ")";
+	    $req = "INSERT INTO $tab10(nomfiliere, temps_soutenance, idfilieresuivante)
+		    VALUES ('" . $f->getNom() . "', " . $f->getTempsSoutenance() . ", " . $f->getIdFiliereSuivante() . ")";
 	} else {
 	    // Mise à jour d'une filière
-	    $req = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "'
+	    $req = "UPDATE $tab10 SET nomfiliere = '" . $f->getNom() . "', temps_soutenance = '" . $f->getTempsSoutenance() . "', idfilieresuivante = " . $f->getIdFiliereSuivante() . "
 		    WHERE idfiliere = '" . $f->getIdentifiantBDD() . "'";
 	}
 

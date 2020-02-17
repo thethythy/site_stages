@@ -205,148 +205,148 @@ class OffreDAlternance_IHM {
   }
 
   /**
-  * Afficher deux listes :
-  * - une liste des offres d'alternance pas encore validées
-  * - une liste des offres d'alternance déjà validées
-  * Dans les 2 cas, la sélection permet d'éditer l'offre
-  * @param tableau d'objets $tabOffreDAlt Les objets OffreDAlternance concernés
-  */
-  public static function afficherListeOffresAEditer($tabOffreDAlt) {
-    $cpt = 0;
-    $enteteAffichee = false;
+     * Afficher deux listes :
+     * - une liste des offres d'alternance pas encore validées
+     * - une liste des offres d'alternance déjà validées
+     * Dans les 2 cas, la sélection permet d'éditer l'offre
+     * @param tableau d'objets $tabOffreDAlt Les objets OffreDAlternance concernés
+     */
+    public static function afficherListeOffresAEditer($tabOffreDAlt) {
+	$cpt = 0;
+	$enteteAffichee = false;
 
-    for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
-      if (!$tabOffreDAlt[$i]->estVisible()) {
-        if (!$enteteAffichee) {
-          $enteteAffichee = true;
-          ?>
-          <p>Voici la liste des offres d'alternance qu'il reste à traiter :</p>
-          <table width="100%">
-            <tr id="entete">
-              <td width="30%">Titre</td>
-              <td width="35%">Entreprise</td>
-              <td width="13%">Diplôme</td>
-              <td width="13%">Spécialité</td>
-              <td align="center" width="9%">A Valider</td>
-            </tr>
-            <?php
-          }
-          ?>
-          <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
-            <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
-            <td><?php
-            $entreprise = $tabOffreDAlt[$i]->getEntreprise();
-            echo $entreprise->getNom();
-            ?>
-          </td>
-          <td><?php
-          $profil = $tabOffreDAlt[$i]->getListeProfilSouhaite();
-          for ($j = 0; $j < sizeof($profil); $j++) {
-            if ($j == (sizeof($profil) - 1)) {
-              echo $profil[$j]->getNom();
-            } else {
-              echo $profil[$j]->getNom() . " / ";
-            }
-          }
-          ?>
-        </td>
-        <td><?php
-        $themes = $tabOffreDAlt[$i]->getThemes();
-        for ($j = 0; $j < sizeof($themes); $j++) {
-          if ($j == (sizeof($themes) - 1)) {
-            echo $themes[$j]->getNom();
-          } else {
-            echo $themes[$j]->getNom() . " / ";
-          }
-        }
-        ?>
-      </td>
-      <td align="center">
-        <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
-          <img src="../../images/search.png">
-        </a>
-      </td>
-    </tr>
-    <?php
-  }
-}
+	for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
+	    if (!$tabOffreDAlt[$i]->estVisible()) {
+		if (!$enteteAffichee) {
+		    $enteteAffichee = true;
+		    ?>
+		              <p>Voici la liste des offres d'alternance qu'il reste à traiter :</p>
+		              <table width="100%">
+		                <tr id="entete">
+		                  <td width="30%">Titre</td>
+		                  <td width="35%">Entreprise</td>
+		                  <td width="13%">Diplôme</td>
+		                  <td width="13%">Spécialité</td>
+		                  <td align="center" width="9%">A Valider</td>
+		                </tr>
+		    <?php
+		}
+		?>
+		          <tr class="ligne<?php echo $cpt % 2;
+		$cpt++; ?>">
+		            <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
+		            <td><?php
+		$entreprise = $tabOffreDAlt[$i]->getEntreprise();
+		echo $entreprise->getNom();
+		?>
+		          </td>
+		          <td><?php
+		$profil = $tabOffreDAlt[$i]->getListeProfilSouhaite();
+		for ($j = 0; $j < sizeof($profil); $j++) {
+		    if ($j == (sizeof($profil) - 1)) {
+			echo $profil[$j]->getNom();
+		    } else {
+			echo $profil[$j]->getNom() . " / ";
+		    }
+		}
+		?>
+		        </td>
+		        <td><?php
+		$themes = $tabOffreDAlt[$i]->getThemes();
+		for ($j = 0; $j < sizeof($themes); $j++) {
+		    if ($j == (sizeof($themes) - 1)) {
+			echo $themes[$j]->getNom();
+		    } else {
+			echo $themes[$j]->getNom() . " / ";
+		    }
+		}
+		?>
+		      </td>
+		      <td align="center">
+		        <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
+		          <img src="../../images/search.png">
+		        </a>
+		      </td>
+		    </tr>
+		<?php
+	    }
+	}
 
-if ($cpt == 0) {
-  echo "<p>Toutes les offres d'alternance ont été validées.</p>";
-}
+	if ($cpt == 0) {
+	    echo "<p>Toutes les offres d'alternance ont été validées.</p>";
+	}
+	?>
+	<table width="100%">
+	  <tr id="entete">
+	    <td width="10%">Année</td>
+	    <td width="40%">Titre</td>
+	    <td width="20%">Entreprise</td>
+	    <td width="10%">Diplôme</td>
+	    <td width="10%">Spécialité</td>
+	    <td align="center" width="10%">Visualiser</td>
+	  </tr>
 
-?>
-<table width="100%">
-  <tr id="entete">
-    <td width="10%">Année</td>
-    <td width="40%">Titre</td>
-    <td width="20%">Entreprise</td>
-    <td width="10%">Diplôme</td>
-    <td width="10%">Spécialité</td>
-    <td align="center" width="10%">Visualiser</td>
-  </tr>
+	  <?php
+	  $cpt = 0;
+	  echo "<p>Voici la liste des offres d'alternance validées : </p>";
+	  for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
+	      if ($tabOffreDAlt[$i]->estVisible()) {
+		  ?>
+		      <tr class="ligne<?php echo $cpt % 2;
+		$cpt++; ?>">
+		        <td><?php
+			    $tabPromotions = $tabOffreDAlt[$i]->getPromotions();
+			    if (sizeof($tabPromotions) > 0) {
+				$annee = $tabPromotions[0]->getAnneeUniversitaire();
+				echo $annee . " / " . ($annee + 1);
+			    } else {
+				echo "----";
+			    }
+			    ?>
+		        </td>
+		        <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
+		        <td><?php
+			    $entreprise = $tabOffreDAlt[$i]->getEntreprise();
+			    echo $entreprise->getNom();
+			    ?>
+		      </td>
+		      <td><?php
+			  $profil = $tabOffreDAlt[$i]->getListeProfilSouhaite();
+			  for ($j = 0; $j < sizeof($profil); $j++) {
+			      if ($j == (sizeof($profil) - 1)) {
+				  echo $profil[$j]->getNom();
+			      } else {
+				  echo $profil[$j]->getNom() . " / ";
+			      }
+			  }
+			  ?>
+		    </td>
+		    <td><?php
+			$themes = $tabOffreDAlt[$i]->getThemes();
+			for ($j = 0; $j < sizeof($themes); $j++) {
+			    if ($j == (sizeof($themes) - 1)) {
+				echo $themes[$j]->getNom();
+			    } else {
+				echo $themes[$j]->getNom() . " / ";
+			    }
+			}
+			?>
+		  </td>
+		  <td align="center">
+		    <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
+		      <img src="../../images/search.png">
+		    </a>
+		  </td>
+		</tr>
+		<?php
+	    }
+	}
+	echo "</table>";
+	?>
 
-  <?php
-  $cpt = 0;
-  echo "<p>Voici la liste des offres d'alternance validées : </p>";
-  for ($i = 0; $i < sizeof($tabOffreDAlt); $i++) {
-    if ($tabOffreDAlt[$i]->estVisible()) {
-      ?>
-      <tr class="ligne<?php echo $cpt % 2; $cpt++; ?>">
-        <td><?php
-        $tabPromotions = $tabOffreDAlt[$i]->getPromotions();
-        if (sizeof($tabPromotions) > 0) {
-          $annee = $tabPromotions[0]->getAnneeUniversitaire();
-          echo $annee . " / " . ($annee + 1);
-        } else {
-          echo "----";
-        }
-        ?>
-        </td>
-        <td><?php echo $tabOffreDAlt[$i]->getTitre(); ?></td>
-        <td><?php
-        $entreprise = $tabOffreDAlt[$i]->getEntreprise();
-        echo $entreprise->getNom();
-        ?>
-      </td>
-      <td><?php
-      $profil = $tabOffreDAlt[$i]->getListeProfilSouhaite();
-      for ($j = 0; $j < sizeof($profil); $j++) {
-        if ($j == (sizeof($profil) - 1)) {
-          echo $profil[$j]->getNom();
-        } else {
-          echo $profil[$j]->getNom() . " / ";
-        }
-      }
-      ?>
-    </td>
-    <td><?php
-    $themes = $tabOffreDAlt[$i]->getThemes();
-    for ($j = 0; $j < sizeof($themes); $j++) {
-      if ($j == (sizeof($themes) - 1)) {
-        echo $themes[$j]->getNom();
-      } else {
-        echo $themes[$j]->getNom() . " / ";
-      }
+	<br/><br/>
+	<?php
     }
-    ?>
-  </td>
-  <td align="center">
-    <a href="./editionOffreDAlternance.php?id=<?php echo $tabOffreDAlt[$i]->getIdentifiantBDD(); ?>">
-      <img src="../../images/search.png">
-    </a>
-  </td>
-</tr>
-<?php
-}
-}
-echo "</table>";
-?>
-
-<br/><br/>
-<?php
-}
-
 
 /**
 * Afficher un formulaire d'édition d'une offre d'alternance
@@ -1110,7 +1110,6 @@ public static function afficherFormulaireSuiviGestion($tabEtu, $tabOffres, $tabE
 
   ?>
   <form method=POST action="javascript:">
-
     <table width="100%">
       <tr>
         <td width='50%' align='center'>Nom de l'etudiant :
@@ -1132,39 +1131,44 @@ public static function afficherFormulaireSuiviGestion($tabEtu, $tabOffres, $tabE
   </form>
 
   <?php
-  if(sizeof($tabOffres) != 0) { ?>
-    <p>Liste des étudiants ayant candidatés :</p>
-    <table>
-	<tr id="entete">
-	    <td>Etudiant</td><?php
-	    foreach($tabOffres as $oOffre) {
-		$nomEnt = $oOffre->getEntreprise()->getNom();
-		$titreOffre = $oOffre->getTitre();
-		echo "<td>$nomEnt<hr/>$titreOffre</td>";
+  if(sizeof($tabOffres) != 0) {
+      if (sizeof($tabEtuSelection) > 0) {
+	?>
+	<p>Liste des étudiants ayant candidatés :</p>
+	<table>
+	    <tr id="entete">
+		<td>Etudiant</td><?php
+		foreach($tabOffres as $oOffre) {
+		    $nomEnt = $oOffre->getEntreprise()->getNom();
+		    $titreOffre = $oOffre->getTitre();
+		    echo "<td>$nomEnt<hr/>$titreOffre</td>";
+		}
+		?>
+	    </tr>
+	    <?php
+	    $cpt = 0;
+	    foreach($tabEtuSelection as $oEtu) {
+		$cpt2 = $cpt % 2;
+		echo "<tr class=ligne$cpt2>";
+		$cpt++;
+		echo '<td>'. $oEtu->getNom().' '. $oEtu->getPrenom().'</td>';
+		foreach($tabOffres as $oOffre) {
+		    $oEntreprise = $oOffre->getEntreprise();
+		    $candidature = Candidature::getCandidature($oEtu->getIdentifiantBDD(), $oOffre->getIdentifiantBDD(), $oEntreprise->getIdentifiantBDD());
+		    if ($candidature) {
+			echo '<td style="'.getStyle($candidature->getStatut()).'">'.$candidature->getStatut().'</td>';
+		    } else {
+			echo '<td>----</td>';
+		    }
+		}
+		echo "</tr>";
 	    }
 	    ?>
-	</tr>
+	</table>
 	<?php
-	$cpt = 0;
-	foreach($tabEtuSelection as $oEtu) {
-	    $cpt2 = $cpt % 2;
-	    echo "<tr class=ligne$cpt2>";
-	    $cpt++;
-	    echo '<td>'. $oEtu->getNom().' '. $oEtu->getPrenom().'</td>';
-	    foreach($tabOffres as $oOffre) {
-		$oEntreprise = $oOffre->getEntreprise();
-		$candidature = Candidature::getCandidature($oEtu->getIdentifiantBDD(), $oOffre->getIdentifiantBDD(), $oEntreprise->getIdentifiantBDD());
-		if ($candidature) {
-		    echo '<td style="'.getStyle($candidature->getStatut()).'">'.$candidature->getStatut().'</td>';
-		} else {
-		    echo '<td>----</td>';
-		}
-	    }
-	    echo "</tr>";
-	}
-	?>
-    </table>
-  <?php
+    } else {
+	echo "<p>Aucune candidature pour l'instant !</p>";
+    }
   } else {
       echo "<p>Aucune offre pour ces critères !</p>";
   }

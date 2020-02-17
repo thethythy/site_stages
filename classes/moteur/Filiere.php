@@ -10,6 +10,7 @@ class Filiere {
     var $nom;  // Nom de la filière
     var $tempsSoutenance;  // Temps de soutenance de la filière
     var $affDepot;  // Indicateur d'affichage lors du dépôt d'une offre de stage
+    var $idfilieresuivante;  // Identifiant de la filière suivante
 
     /**
      * Constructeur
@@ -17,12 +18,14 @@ class Filiere {
      * @param string $nom
      * @param integer $tempsSoutenance
      * @param boolean $affDepot
+     * @param integer $idfilieresuivante
      */
-    public function __construct($identifiant_BDD, $nom, $tempsSoutenance = 20, $affDepot = 1) {
+    public function __construct($identifiant_BDD, $nom, $tempsSoutenance = 20, $affDepot = 1, $idfilieresuivante = Null) {
 	$this->identifiant_BDD = $identifiant_BDD;
 	$this->nom = $nom;
 	$this->tempsSoutenance = $tempsSoutenance;
 	$this->affDepot = $affDepot;
+	$this->idfilieresuivante = $idfilieresuivante;
     }
 
     // ------------------------------------------------------------------------
@@ -44,6 +47,10 @@ class Filiere {
 	return $this->affDepot;
     }
 
+    public function getIdFiliereSuivante() {
+	return $this->idfilieresuivante;
+    }
+
     // ------------------------------------------------------------------------
     // Accesseurs en lecture
 
@@ -53,6 +60,10 @@ class Filiere {
 
     public function setTempsSoutenance($temps) {
 	$this->tempsSoutenance = $temps;
+    }
+
+    public function setIdFiliereSuivante($idfilieresuivante) {
+	$this->idfilieresuivante = $idfilieresuivante;
     }
 
     // ------------------------------------------------------------------------
@@ -68,7 +79,8 @@ class Filiere {
 	$filiere = new Filiere($filiereString['idfiliere'],
 			       $filiereString['nomfiliere'],
 			       $filiereString['temps_soutenance'],
-			       $filiereString['affDepot']);
+			       $filiereString['affDepot'],
+			       $filiereString['idfilieresuivante']);
 	return $filiere;
     }
 
@@ -84,7 +96,8 @@ class Filiere {
 		    new Filiere($tabFiliereString[$i][0],
 				$tabFiliereString[$i][1],
 				$tabFiliereString[$i][2],
-				$tabFiliereString[$i][3]));
+				$tabFiliereString[$i][3],
+				$tabFiliereString[$i][4]));
 	return $tabFilieres;
     }
 

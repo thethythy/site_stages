@@ -33,11 +33,22 @@ if (isset($_POST['delpromo'])) {
     echo '<br/><br/>';
 } else {
 
-    if (isset($_POST['promo']) && isset($_POST['email']) && Utils::VerifierAdresseMail($_POST['email'])) {
-	// Modification de l'email de la promotion
+    if (isset($_POST['promo'])) {
+
 	$promo = Promotion::getPromotion($_POST['promo']);
-	$promo->setEmailPromotion($_POST['email']);
-	Promotion_BDD::sauvegarder($promo);
+
+	if (isset($_POST['email']) && Utils::VerifierAdresseMail($_POST['email'])) {
+	    // Modification de l'email de la promotion
+	    $promo->setEmailPromotion($_POST['email']);
+	    Promotion_BDD::sauvegarder($promo);
+	}
+
+	if (isset($_POST['filieresuivante'])) {
+	    // Modification de la filiere suivant cette promotion
+	    $oFiliere = $promo->getFiliere();
+	    $oFiliere->setIdFiliereSuivante($_POST['filieresuivante']);
+	    Filiere_BDD::sauvegarder($oFiliere);
+	}
 
 	$filiere = $promo->getFiliere();
 	$parcours = $promo->getParcours();

@@ -39,11 +39,17 @@ if (isset($_POST['add'])) {
 		$filiere = $filiere1;
 	    }
 
+	    if ($filiere3 != "NULL") {
+		$oFiliere = Filiere::getFiliere($filiere);
+		$oFiliere->setIdFiliereSuivante($filiere3);
+	    }
+
 	    $newPromotion = new Promotion("", $annee, $parcours, $filiere, $email);
 
-	    // Si la promotion que l'on veut créer n'éxiste pas déjà
+	    // Si la promotion que l'on veut créer n'existe pas déjà
 	    if (Promotion_BDD::existe($newPromotion) == false) {
 		$promo = Promotion_BDD::sauvegarder($newPromotion);
+		if ($filiere3 != "NULL") Filiere_BDD::sauvegarder($oFiliere);
 		Promotion_IHM::afficherFormulaireAjoutOK($promo);
 	    } else {
 		Promotion_IHM::afficherFormulaireAjout();

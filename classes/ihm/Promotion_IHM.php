@@ -328,24 +328,24 @@ class Promotion_IHM {
 	<form method=post action="">
 	    <table width="100%">
 	        <tr>
-		    <td colspan="3" align="center">
-			Année :&nbsp;
-	<?php
-	if ((isset($_POST['annee'])) && ($_POST['annee'] != ""))
-	    echo "<input type='text' value='" . $_POST['annee'] . "' name='annee'>";
-	else
-	    echo "<input type='text' value='" . date("Y") . "' name='annee'>";
-	?>
+		    <td align="right">
+			Année (de la rentrée) :&nbsp;
+			<?php
+			if ((isset($_POST['annee'])) && ($_POST['annee'] != ""))
+			    echo "<input type='text' value='" . $_POST['annee'] . "' name='annee'>";
+			else
+			    echo "<input type='text' value='" . date("Y") . "' name='annee'>";
+			?>
 		    </td>
 	        </tr>
+		<tr><td colspan="3">&nbsp;</td></tr>
 	        <tr>
-		    <td width="45%" align="center">
-			<br/>
+		    <td width="45%" align="right">
 			Sélectionnez le diplôme :&nbsp;
 			<select name="filiere1">
 			    <?php
 			    for ($i = 0; $i < sizeof($tabF); $i++) {
-				if (isset($_POST['filiere']) && $_POST['filiere'] == $tabF[$i]->getIdentifiantBDD())
+				if (isset($_POST['filiere1']) && $_POST['filiere1'] == $tabF[$i]->getIdentifiantBDD())
 				    echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
 				else
 				    echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
@@ -353,12 +353,11 @@ class Promotion_IHM {
 			    ?>
 			</select>
 		    </td>
-		    <td width="10%" align="center">OU</td>
-		    <td width="45%" align="center">Créez un nouveau diplôme :&nbsp;<input type="text" value="<?php if (isset($_POST['filiere2'])) $_POST['filiere2'] ?>" name="filiere2"></td>
+		    <td width="5%" align="center">OU</td>
+		    <td width="50%" align="left">créez un nouveau diplôme :&nbsp;<input type="text" value="<?php if (isset($_POST['filiere2'])) $_POST['filiere2'] ?>" name="filiere2"></td>
 	        </tr>
 	        <tr>
-		    <td width="45%" align="center">
-			<br/>
+		    <td width="45%" align="right">
 			Sélectionnez la spécialité :&nbsp;
 			<select name="parcours1">
 			    <?php
@@ -371,21 +370,38 @@ class Promotion_IHM {
 			    ?>
 			</select>
 		    </td>
-		    <td width="10%" align="center">OU</td>
-		    <td width="45%" align="center">Crééz une nouveau parcours :&nbsp;<input type="text" value="<?php if (isset($_POST['parcours2'])) $_POST['parcours2'] ?>" name="parcours2"></td>
+		    <td width="5%" align="center">OU</td>
+		    <td width="50%" align="left">crééz un nouveau parcours :&nbsp;<input type="text" value="<?php if (isset($_POST['parcours2'])) $_POST['parcours2'] ?>" name="parcours2"></td>
 	        </tr>
-	        <tr>
-		    <td colspan="3" align="center">
-			<br/>
-			Email :&nbsp;
-	<?php
-	if ((isset($_POST['email'])) && ($_POST['email'] != ""))
-	    echo "<input type='text' value='" . $_POST['email'] . "' name='email'>";
-	else
-	    echo "<input type='text' value='' name='email'>";
-	?>
+		<tr><td colspan="3">&nbsp;</td></tr>
+		<tr>
+		    <td align="right">
+			Sélectionnez le diplôme suivant :&nbsp;
+			<select name="filiere3">
+			    <?php
+			    echo "<option value='NULL'>Auncun</option>";
+			    for ($i = 0; $i < sizeof($tabF); $i++) {
+				if (isset($_POST['filiere3']) && $_POST['filiere3'] == $tabF[$i]->getIdentifiantBDD())
+				    echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+				else
+				    echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+			    }
+			    ?>
+			</select>
 		    </td>
-	        </tr>
+		</tr>
+		<tr><td colspan="3">&nbsp;</td></tr>
+		<tr>
+		    <td align="right">
+			Email :&nbsp;
+			<?php
+			if ((isset($_POST['email'])) && ($_POST['email'] != ""))
+			    echo "<input type='text' value='" . $_POST['email'] . "' name='email'>";
+			else
+			    echo "<input type='text' value='' name='email'>";
+			?>
+		    </td>
+		</tr>
 	        <tr>
 		    <td colspan="3" align="center">
 			<br/>
@@ -669,9 +685,11 @@ class Promotion_IHM {
 	    $promotion = Promotion::getPromotion($idPromo);
 	    $email = $promotion->getEmailPromotion();
 	    $nbEtudiants = sizeof($tabEtudiants);
+	    $filieresuivante = $promotion->getFiliere()->getIdFiliereSuivante();
+	    $tabF = Filiere::listerFilieres();
 	    ?>
 	<table align="center">
-		<tr>
+	    <tr>
 		<td width="25%" align="center">
 		    <form method=post action="ajouterEtudiant.php">
 			<input type="hidden" value="<?php echo $idPromo; ?>" name="promo"/>
@@ -690,14 +708,26 @@ class Promotion_IHM {
 			<input type="submit" value="Supprimer la promotion"/>
 		    </form>
 		</td>
-		</tr>
+	    </tr>
 	</table>
 
 	<form method=post action="modifierPromotion.php">
-		<input type="hidden" value="<?php echo $idPromo; ?>" name="promo"/>
-		<input type="submit" value="Modifier l'email de la promotion :"/>
-		<input type='text' value="<?php if ($email == "") echo "?";
-    else echo $email; ?>" name='email'>
+	    <input type="hidden" value="<?php echo $idPromo; ?>" name="promo"/>
+	    &nbsp;<input type="submit" value="Modifier l'email de la promotion :"/>
+	    <input type='text' value="<?php if ($email == "") echo "?"; else echo $email; ?>" name='email'>
+	    <br/><br/>
+	    &nbsp;<input type='submit' value="Modifier le diplôme qui suit ce diplôme :"/>
+	    <select name="filieresuivante">
+		<?php
+		    echo "<option value='NULL'>------</option>";
+		    for ($i = 0; $i < sizeof($tabF); $i++) {
+			if ($filieresuivante == $tabF[$i]->getIdentifiantBDD())
+			    echo "<option selected value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+			else
+			    echo "<option value='" . $tabF[$i]->getIdentifiantBDD() . "'>" . $tabF[$i]->getNom() . "</option>";
+		    }
+		?>
+	    </select>
 	</form>
 
 	    <?php
@@ -706,11 +736,11 @@ class Promotion_IHM {
 		// Affichage des étudiants correspondants aux critères de recherches
 		echo "Nombre d'étudiants de la promotion : " . $nbEtudiants . "<p/>";
 		echo "<table width='75%'>
-    <tr id='entete'>
-    <td width='55%'>Nom et Prénom</td>
-    <td width='10%' align='center'>Modifier</td>
-    <td width='10%' align='center'>Supprimer</td>
-    </tr>";
+		    <tr id='entete'>
+		    <td width='55%'>Nom et Prénom</td>
+		    <td width='10%' align='center'>Modifier</td>
+		    <td width='10%' align='center'>Supprimer</td>
+		    </tr>";
 		for ($i = 0; $i < $nbEtudiants; $i++) {
 		    ?>
 		<tr class="ligne<?php echo $i % 2; ?>">
