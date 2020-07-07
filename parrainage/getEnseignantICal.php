@@ -36,9 +36,15 @@ if (sizeof($tabSoutenances) > 0) {
 
     for ($i = 0; $i < sizeof($tabSoutenances); $i++) {
 
+	// On cherche d'abord si il y a une convention
 	$convention = Soutenance::getConvention($tabSoutenances[$i]);
 
-	if ($convention->getIdParrain() == $id || $convention->getIdExaminateur() == $id) {
+	// Pas de convention : donc il doit y avoir un contrat
+	if (!$convention) {
+	    $convention = Soutenance::getContrat($tabSoutenances[$i]);
+	}
+
+	if ($convention && $convention->getIdParrain() == $id || $convention->getIdExaminateur() == $id) {
 
 	    // Titre (à faire une seule fois)
 	    $nom_prenom_parrain = $convention->getParrain()->getNom() . " " . $convention->getParrain()->getPrenom();
