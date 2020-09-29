@@ -21,8 +21,8 @@ IHM_Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../documents/telechargements/presentation-1920.pdf">Téléchargement</a>
-    <A href="../documents/telechargements/presentation-1920.pdf">
+    <A href="../documents/telechargements/presentation-2021.pdf">Téléchargement</a>
+    <A href="../documents/telechargements/presentation-2021.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
@@ -66,34 +66,31 @@ IHM_Menu::menuPresentation();
 
 <p>Le logiciel objet du stage doit être écrit dans un langage structuré (C, langage orienté objet, langage de programmation logique par exemple), ou en assembleur. L'utilisation d'une méthode ou d'une démarche de développement issue du génie logiciel ou de l'intelligence artificielle est fortement recommandée. Un planning du stage est d'ailleurs demandé dans le rapport et à la soutenance.</p>
 
-<div class="titre2"><a name="12">1.2. Planification et durée en 2019-2020</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="12">1.2. Planification et durée en 2020-2021</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>
     <table border=1 align=center cellpadding=5 cellspacing=1>
-	<th align=center>Diplôme</th><th align=center>Période</th><th align=center>Date début</th><th align=center>Date fin</th><th align=center>Durée</th><th align=center>Soutenance</th>
+	<th align=center>Diplôme</th><th align=center>Date début</th><th align=center>Date fin</th><th align=center>Durée</th><th align=center>Soutenance</th>
 	<tr>
 	    <td align=center valign=center>Master 1</td>
-	    <td align=center valign=center>avril à juin</td>
-	    <td align=center valign=center>6 Avril 2020</td>
-	    <td align=center valign=center>26 Juin 2020</td>
-	    <td align=center valign=center>3 mois<br/>(12 semaines)</td>
-	    <td align=center valign=center>29 Juin 2020<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>12 Avril 2021</td>
+	    <td align=center valign=center>Initiaux : 2 Juillet 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>Initiaux : 3 mois (12 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
+	    <td align=center valign=center>5 Juillet 2021<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 AFD</td>
-	    <td align=center valign=center>mars à août</td>
-	    <td align=center valign=center>2 Mars 2020</td>
-	    <td align=center valign=center>14 Août 2020</td>
-	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
-	    <td align=center valign=center>27 Août 2020<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>1 Mars 2021</td>
+	    <td align=center valign=center>Initiaux : 13 Août 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
+	    <td align=center valign=center>27 Août 2021<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 ATAL</td>
-	    <td align=center valign=center>janvier à juin</td>
-	    <td align=center valign=center>27 Janvier 2020</td>
-	    <td align=center valign=center>26 Juin 2020</td>
-	    <td align=center valign=center>6 mois<br/>(24 semaines)</td>
-	    <td align=center valign=center>Initiaux : 3 Juillet 2020<br/>(susceptible de modification)<br/>Alternants : 27 Août 2020<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>25 Janvier 2021</td>
+	    <td align=center valign=center>Initiaux : 9 Juillet 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
+	    <td align=center valign=center>Initiaux : 9 Juillet 2021<br/>(susceptible de modification)<hr/>Alternants : 27 Août 2021<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
@@ -280,16 +277,9 @@ IHM_Menu::menuPresentation();
 
 <p>Le respect de ces durées est essentiel, les débordements seront sanctionnés lors de la notation de la soutenance. Les moyens matériels de soutenance sont ceux disponibles pour les exposés en cours d'année (rétroprojecteur, vidéo projecteur, magnétoscope...). En cas de démonstration nécessitant l'installation de matériels spécifiques, l'étudiant est responsable de sa préparation (il peut demander de l'aide aux techniciens).</p>
 
-<div class="titre3">Période de soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre3">Date de soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>Les soutenances ne font pas l'objet d'une convocation : il est de la responsabilité des étudiants de <strong>consulter régulièrement le site des stages pour se tenir informés de la date et de l'heure de leur soutenance</strong>. Des périodes spécifiques sont réservées dans le planning de chaque diplôme.</p>
-<p>Pour l'année 2019/2020&nbsp;:</p>
-<ul>
-    <li>en Master 1 la date est le 29 juin 2020 (susceptible de modification)&nbsp;;</li>
-    <li>en Master 2 AFD la date est le 27 août 2020 (susceptible de modification)&nbsp;;</li>
-    <li>en Master 2 ATAL initiaux la date est le 3 juillet 2020 (susceptible de modification).</li>
-    <li>en Master 2 ATAL alternants la date est le 27 août 2020 (susceptible de modification).</li>
-</ul>
 
 <p>Si, pour une raison quelconque mais impérieuse (par exemple accident), la soutenance ne peut se faire à la date prévue, une date ultérieure pourra être fixée. Cependant, le diplôme ne peut être décerné qu'après la soutenance orale. Cette solution peut donc être handicapante pour les étudiants désirant poursuivre leurs études. En particulier, même en cas de prolongation du stage au-delà de la durée officielle, les étudiants doivent soutenir à la date prévue.</p>
 

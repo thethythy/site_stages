@@ -26,7 +26,6 @@ IHM_Menu::menuSoutenance();
 <table style="width: 699px;">
 	<tr id="entete">
 		<td>Diplôme</td>
-		<td>Période</td>
 		<td>Date début</td>
 		<td>Date fin</td>
 		<td>Durée</td>
@@ -35,42 +34,42 @@ IHM_Menu::menuSoutenance();
 
 	<tr class="ligne0">
 		<td>Master 1</td>
-		<td>avril à juin</td>
-		<td>6 avril 2020</td>
-		<td>26 juin 2020</td>
-		<td>3 mois<br/>
-		(12 sem.)</td>
-		<td>29 juin 2020</td>
+		<td>12 avril 2021</td>
+		<td>2 juillet 2021</td>
+		<td>3 mois (12 sem.)</td>
+		<td>5 juillet 2021</td>
 	</tr>
 
 	<tr class="ligne1">
-		<td>Master 2 AFD</td>
-		<td>mars à août</td>
-		<td>2 mars 2020</td>
-		<td>14 août 2020</td>
-		<td>6 mois<br>
-		(24 sem.)</td>
-		<td>27 août 2020</td>
+		<td>Master 2 AFD initiaux</td>
+		<td>1 mars 2021</td>
+		<td>13 août 2021</td>
+		<td>6 mois (24 sem.)</td>
+		<td>27 août 2021</td>
 	</tr>
 
 	<tr class="ligne0">
+		<td>Master 2 AFD alternants</td>
+		<td>1 mars 2021</td>
+		<td>Fin du contrat</td>
+		<td>Jusqu'à fin du contrat</td>
+		<td>27 août 2021</td>
+	</tr>
+
+	<tr class="ligne1">
 		<td>Master 2 ATAL initiaux</td>
-		<td>janvier à juin</td>
-		<td>27 janvier 2020</td>
-		<td>26 juin 2020</td>
-		<td>6 mois<br>
-		(24 sem.)</td>
-		<td>3 juillet 2020</td>
+		<td>25 janvier 2021</td>
+		<td>9 juillet 2021</td>
+		<td>6 mois (24 sem.)</td>
+		<td>9 juillet 2021</td>
 	</tr>
 
 	<tr class="ligne0">
 		<td>Master 2 ATAL alternants</td>
-		<td>janvier à juin</td>
-		<td>27 janvier 2020</td>
-		<td>26 juin 2020</td>
-		<td>6 mois<br>
-		(24 sem.)</td>
-		<td>27 août 2020</td>
+		<td>25 janvier 2021</td>
+		<td>Fin du contrat</td>
+		<td>Jusqu'à fin du contrat</td>
+		<td>27 août 2021</td>
 	</tr>
 
 </table>
