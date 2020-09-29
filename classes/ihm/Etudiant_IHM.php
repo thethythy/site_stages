@@ -20,9 +20,9 @@ class Etudiant_IHM {
 				    <input type="text" name="nom"
 				    <?php
 				    if (isset($_POST['nom']))
-					echo "value=" . $_POST['nom'];
+					echo "value='" . $_POST['nom'] . "'";
 				    else if ($etu != "")
-					echo "value=" . $etu->getNom();
+					echo "value='" . $etu->getNom() . "'";
 				    ?>
 					   />
 				</td>
@@ -33,9 +33,9 @@ class Etudiant_IHM {
 				    <input type="text" name="prenom"
 				    <?php
 				    if (isset($_POST['prenom']))
-					echo "value=" . $_POST['prenom'];
+					echo "value='" . $_POST['prenom'] . "'";
 				    else if ($etu != "")
-					echo "value=" . $etu->getPrenom();
+					echo "value='" . $etu->getPrenom() . "'";
 				    ?>
 					   />
 				</td>
