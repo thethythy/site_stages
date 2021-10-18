@@ -56,7 +56,7 @@ var afficherNomPromotions = function(data, padding) {
 };
 
 var donneNomCanvas = function(prefixe, data, i) {
-  return prefixe.toUpperCase() + data["s"+i]['filiere'] + data["s"+i]['parcours'] + "S" + i;
+  return prefixe.toUpperCase() + "S" + i;
 };
 
 var afficheTable = function(prefixe, data) {
@@ -199,7 +199,7 @@ var loadData = function(annee_deb, annee_fin, filiere, parcours, offre) {
     if (data_request.readyState === 4 && data_request.status === 200) {
       if (data_request.responseText !== '') {
         // Récupération des données
-        console.log(data_request.responseText);
+        // console.log(data_request.responseText);
 
         data = JSON.parse(data_request.responseText);
         // Création des vues
