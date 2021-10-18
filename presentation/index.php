@@ -21,8 +21,8 @@ IHM_Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../documents/telechargements/presentation-2021.pdf">Téléchargement</a>
-    <A href="../documents/telechargements/presentation-2021.pdf">
+    <A href="../documents/telechargements/presentation-2122.pdf">Téléchargement</a>
+    <A href="../documents/telechargements/presentation-2122.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
@@ -66,31 +66,31 @@ IHM_Menu::menuPresentation();
 
 <p>Le logiciel objet du stage doit être écrit dans un langage structuré (C, langage orienté objet, langage de programmation logique par exemple), ou en assembleur. L'utilisation d'une méthode ou d'une démarche de développement issue du génie logiciel ou de l'intelligence artificielle est fortement recommandée. Un planning du stage est d'ailleurs demandé dans le rapport et à la soutenance.</p>
 
-<div class="titre2"><a name="12">1.2. Planification et durée en 2020-2021</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="12">1.2. Planification et durée en 2021-2022</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>
     <table border=1 align=center cellpadding=5 cellspacing=1>
 	<th align=center>Diplôme</th><th align=center>Date début</th><th align=center>Date fin</th><th align=center>Durée</th><th align=center>Soutenance</th>
 	<tr>
 	    <td align=center valign=center>Master 1</td>
-	    <td align=center valign=center>12 Avril 2021</td>
-	    <td align=center valign=center>Initiaux : 2 Juillet 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>11 Avril 2022</td>
+	    <td align=center valign=center>Initiaux : 1 Juillet 2022<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 3 mois (12 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>5 Juillet 2021<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>4 Juillet 2022<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 AFD</td>
-	    <td align=center valign=center>1 Mars 2021</td>
-	    <td align=center valign=center>Initiaux : 13 Août 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>28 Février 2022</td>
+	    <td align=center valign=center>Initiaux : 12 Août 2022<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>27 Août 2021<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>29 Août 2022<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
 	    <td align=center valign=center>Master 2 ATAL</td>
-	    <td align=center valign=center>25 Janvier 2021</td>
-	    <td align=center valign=center>Initiaux : 9 Juillet 2021<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>24 Janvier 2022</td>
+	    <td align=center valign=center>Initiaux : 8 Juillet 2022<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>Initiaux : 9 Juillet 2021<br/>(susceptible de modification)<hr/>Alternants : 27 Août 2021<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>Initiaux : 11 Juillet 2022<br/>(susceptible de modification)<hr/>Alternants : 29 Août 2022<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
@@ -192,8 +192,8 @@ IHM_Menu::menuPresentation();
 <p>Le rapport de stage rendu à l'issue du stage est un élément important de la notation. Il ne s'agit pas de faire le rapport le plus volumineux possible à partir de photocopie de documents divers, mais de <strong>décrire votre réalisation personnelle</strong>. L'étudiant doit veiller à planifier un temps suffisant pour sa rédaction. Les rapports sont d'ailleurs préparés pendant le stage et avec les moyens de l'organisme d'accueil. Il est même préférable d'en rédiger certaines parties au fur et à mesure. Dans tous les cas, l'étudiant doit impérativement délivrer <strong>une semaine avant la date de soutenance</strong> les 2 éléments suivants :</p>
 <div style="border: 1px solid #000;">
     <ul>
-	<li>1 rapport de stage numérique au format PDF (déposé grâce au <a href="../stagiaire/depot_doc.php">formulaire accessible ici</a>) pour que l'enseignant-référent puisse le lire&nbsp;;</li>
-	<li>1 résumé de stage numérique au format PDF (déposé grâce au <a href="../stagiaire/depot_doc.php">formulaire accessible ici</a>)&nbsp;;</li>
+	<li>1 rapport de stage numérique au format PDF (déposé directement sur le site) pour que l'enseignant-référent puisse le lire&nbsp;;</li>
+	<li>1 résumé de stage numérique au format PDF (déposé directement sur le site)&nbsp;;</li>
     </ul>
 </div>
 
@@ -256,7 +256,7 @@ IHM_Menu::menuPresentation();
 
 <div class="titre3">Fiche d'appréciation&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Cette fiche est <a href="../documents/telechargements/Fiche_Entreprise_1718.doc">accessible ici</a> (version anglaise <a href="../documents/telechargements/Entreprise_Form_1718.doc">ici</a>) ou dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle  sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
+<p>Cette fiche est <a href="../documents/telechargements/Fiche_Entreprise_2122.doc">accessible ici</a> (version anglaise <a href="../documents/telechargements/Entreprise_Form_2122.doc">ici</a>) ou dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle  sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
 
 <div class="titre3">Participants à la soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 

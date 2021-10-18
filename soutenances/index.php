@@ -34,42 +34,42 @@ IHM_Menu::menuSoutenance();
 
 	<tr class="ligne0">
 		<td>Master 1</td>
-		<td>12 avril 2021</td>
-		<td>2 juillet 2021</td>
+		<td>11 avril 2022</td>
+		<td>1 juillet 2022</td>
 		<td>3 mois (12 sem.)</td>
-		<td>5 juillet 2021</td>
+		<td>4 juillet 2022</td>
 	</tr>
 
 	<tr class="ligne1">
 		<td>Master 2 AFD initiaux</td>
-		<td>1 mars 2021</td>
-		<td>13 août 2021</td>
+		<td>28 février 2022</td>
+		<td>12 août 2022</td>
 		<td>6 mois (24 sem.)</td>
-		<td>27 août 2021</td>
+		<td>29 août 2022</td>
 	</tr>
 
 	<tr class="ligne0">
 		<td>Master 2 AFD alternants</td>
-		<td>1 mars 2021</td>
+		<td>28 février 2022</td>
 		<td>Fin du contrat</td>
 		<td>Jusqu'à fin du contrat</td>
-		<td>27 août 2021</td>
+		<td>29 août 2022</td>
 	</tr>
 
 	<tr class="ligne1">
 		<td>Master 2 ATAL initiaux</td>
-		<td>25 janvier 2021</td>
-		<td>9 juillet 2021</td>
+		<td>24 janvier 2022</td>
+		<td>8 juillet 2022</td>
 		<td>6 mois (24 sem.)</td>
-		<td>9 juillet 2021</td>
+		<td>11 juillet 2022</td>
 	</tr>
 
 	<tr class="ligne0">
 		<td>Master 2 ATAL alternants</td>
-		<td>25 janvier 2021</td>
+		<td>24 janvier 2022</td>
 		<td>Fin du contrat</td>
 		<td>Jusqu'à fin du contrat</td>
-		<td>27 août 2021</td>
+		<td>29 août 2022</td>
 	</tr>
 
 </table>
