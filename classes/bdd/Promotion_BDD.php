@@ -91,6 +91,39 @@ class Promotion_BDD {
   }
 
   /**
+   * Obtenir les objets Promotions à partir de l'année et de la filière
+   * @global resource $db Référence sur la base ouverte
+   * @global string $tab15 Nom de la table 'promotion'
+   * @param type $annee
+   * @param type $idfiliere
+   * @return array Promotion
+   */
+  public static function getPromotionsFromFiliere($annee, $idfiliere) {
+    global $db;
+    global $tab15;
+    
+    $sql = "SELECT * FROM $tab15 WHERE anneeuniversitaire='$annee' AND idfiliere='$idfiliere'";
+    $res = $db->query($sql);
+    
+    $tabPromos = array();
+    
+    if ($res) {
+      while ($p = $res->fetch_array()) {
+        $tab = array();
+        array_push($tab, $p["idpromotion"]);
+        array_push($tab, $p["anneeuniversitaire"]);
+        array_push($tab, $p["idparcours"]);
+        array_push($tab, $p["idfiliere"]);
+        array_push($tab, $p["email_promotion"]);
+        array_push($tabPromos, $tab);
+      }
+      $res->free();
+    }
+
+    return $tabPromos;
+  }
+  
+  /**
   * Obtenir la liste des années de toutes les promotions
   * @global resource $db Référence sur la base ouverte
   * @global string $tab15 Nom de la table 'promotion'

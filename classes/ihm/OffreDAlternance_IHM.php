@@ -460,7 +460,7 @@ public static function afficherFormulaireModification() {
 		    <tr>
 			<td colspan="2">
 			    Copier/coller le texte suivant pour insérer un lien html vers un document descriptif :<br/>
-			    <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDAlternances/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
+			    <?php echo htmlentities("<a href='http://info-stages.univ-lemans.fr/documents/sujetsDAlternance/nom_document'>Commentaire</a>", ENT_QUOTES, 'utf-8'); ?>
 			</td>
 		    </tr>
 		    <tr>

@@ -35,14 +35,6 @@ if (isset($_POST['ville']) && $_POST['ville'] != "")
 if (isset($_POST['pays']) && $_POST['pays'] != "")
     array_push($filtres, new FiltreString("pays", $_POST['pays'] . "%"));
 
-// Si une recherche sur la filiere est demandée
-if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
-    array_push($filtres, new FiltreNumeric("idfiliere", $_POST['filiere']));
-
-// Si une recherche sur le parcours est demandée
-if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
-    array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
-
 // Si une recherche sur la competence est demandée
 if (isset($_POST['competence']) && $_POST['competence'] != '*')
     array_push($filtres, new FiltreNumeric("idcompetence", $_POST['competence']));
@@ -52,48 +44,73 @@ if (isset($_POST['duree']) && $_POST['duree'] != '*') {
     array_push($filtres, new FiltreNumeric("duree", $_POST['duree']));
 }
 
+// Si une recherche sur le parcours est demandée
+if (isset($_POST['parcours']) && $_POST['parcours'] != '*') {
+    array_push($filtres, new FiltreNumeric("idparcours", $_POST['parcours']));
+}
+
+// -----------------------------------------------------------------------------
 // Ajout d'un filtre pour limiter aux promotions de l'année en cours
+
 $filtrePromo = array();
 
 $annee = Promotion_BDD::getLastAnnee();
 array_push ($filtrePromo, new FiltreNumeric("anneeuniversitaire", $annee));
 
-if (isset($_POST['filiere']) && $_POST['filiere'] != '*')
-    array_push($filtrePromo, new FiltreNumeric("idfiliere", $_POST['filiere']));
-
-if (isset($_POST['parcours']) && $_POST['parcours'] != '*')
-    array_push($filtrePromo, new FiltreNumeric("idparcours", $_POST['parcours']));
-
-$filtre = $filtrePromo[0];
-for ($i = 1; $i < sizeof($filtrePromo); $i++)
-    $filtre = new Filtre($filtre, $filtrePromo[$i], "AND");
-
-$oPromotions = Promotion::listerPromotions($filtre);
-if (sizeof($oPromotions) > 0) {
-    $filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
-    for ($i = 1; $i < sizeof($oPromotions); $i++)
-        $filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
-    array_push($filtres, $filtre);
+// Si une recherche sur la filiere est demandée
+$filiere_trouvee = FALSE;
+if (isset($_POST['filiere']) && $_POST['filiere'] != '*') {
+    $tabFilieres = Filiere::listerFilieres();
+    foreach ($tabFilieres as $oFiliere) {
+	if ($oFiliere->getIdFiliereSuivante() == $_POST['filiere']) {
+	    $filiere_trouvee = TRUE;	    
+	    array_push($filtrePromo, new FiltreNumeric("idfiliere", $oFiliere->getIdentifiantBDD()));
+	}
+    }  
 }
 
-// Construction du filtre final
+$tabOffreDAlt = array();
 
-$nbFiltres = sizeof($filtres);
+if ($filiere_trouvee == TRUE || !isset($_POST['filiere']) || isset($_POST['filiere']) && $_POST['filiere'] == '*') {
 
-if ($nbFiltres >= 2) {
-    $filtre = $filtres[0];
-    for ($i = 1; $i < sizeof($filtres); $i++)
-	$filtre = new Filtre($filtre, $filtres[$i], "AND");
-} else if ($nbFiltres == 1) {
-    $filtre = $filtres[0];
-} else {
-    $filtre = "";
+    $filtre = $filtrePromo[0];
+    for ($i = 1; $i < sizeof($filtrePromo); $i++)
+	$filtre = new Filtre($filtre, $filtrePromo[$i], "AND");
+
+    $promotion_trouvee = FALSE;
+    $oPromotions = Promotion::listerPromotions($filtre);
+    if (sizeof($oPromotions) > 0) {
+	$promotion_trouvee = TRUE;
+	
+	$filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
+	for ($i = 1; $i < sizeof($oPromotions); $i++)
+	    $filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
+	array_push($filtres, $filtre);
+    }
+    
+    // Construction du filtre final
+    if ($promotion_trouvee){
+    
+	$nbFiltres = sizeof($filtres);
+
+	if ($nbFiltres >= 2) {
+	    $filtre = $filtres[0];
+	    for ($i = 1; $i < sizeof($filtres); $i++)
+		$filtre = new Filtre($filtre, $filtres[$i], "AND");
+	} else if ($nbFiltres == 1) {
+	    $filtre = $filtres[0];
+	} else {
+	    $filtre = "";
+	}
+
+	$tabOffreDAlt = OffreDAlternance::getListeOffreDAlternance($filtre);
+    }
 }
 
-$tabOffreDAlt = OffreDAlternance::getListeOffreDAlternance($filtre);
+// -----------------------------------------------------------------------------
+// Affichage de la réponse de la requête
 
-// Si il y a au moins une offre d'alternance
-if (sizeof($tabOffreDAlt) > 0) {
+if (sizeof($tabOffreDAlt) > 0) {    
     OffreDAlternance_IHM::afficherListeOffres($tabOffreDAlt);
 } else {
     ?>

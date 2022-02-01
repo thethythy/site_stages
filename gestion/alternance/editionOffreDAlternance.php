@@ -29,7 +29,8 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     $titreResp = $responsable->getTitreresponsable();
     $expediteur = $emailResp;
     $reponse = $emailResp;
-    $headers = "From: $expediteur\nReply-to: $reponse\nCc: $expediteur\n";
+    $cc = $expediteur . "," . Responsable::getResponsableFromResponsabilite("site")->getEmailresponsable();
+    $headers = "From: $expediteur\nReply-to: $reponse\nCc: $cc\n";
     $headers .= "Content-Type: text/html; charset=utf-8\n";
     $headers .= "Content-Transfer-Encoding: 8bit";
 
@@ -45,42 +46,35 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     Université du Maine";
     mail($contact->getEmail(), "Votre offre d'alternance", $msg, $headers);
     echo "<p>Un email de notification a été envoyé à l'entreprise.</p>";
-
+    
     // ----------------------------------------------------------
     // Envoie d'un mail de notification aux promotions concernées
-
+    
     $offreDAlternance = OffreDAlternance::getOffreDAlternance($idOffreDAlternance);
     $destinataire = "";
 
-    $tabFiliere = $offreDAlternance->getListeProfilSouhaite();
-    for ($i = 0; $i < sizeof($tabFiliere); $i++) {
-	$tabParcours = $offreDAlternance->getThemes();
-	for ($j = 0; $j < sizeof($tabParcours); $j++) {
-	    $promotion = Promotion::getPromotionFromParcoursAndFiliere($annee, $tabFiliere[$i]->getIdentifiantBDD(), $tabParcours[$j]->getIdentifiantBDD());
-	    if ($promotion != FALSE) {
-		if ($destinataire == "")
-		    $destinataire = $promotion->getEmailPromotion();
-		else
-		    $destinataire .= "," . $promotion->getEmailPromotion();
-	    }
-	}
+    $tabOPromotionsConcernes = $offreDAlternance->getPromotions();
+    foreach ($tabOPromotionsConcernes as $oPromotion) {
+	if ($destinataire == "")
+	    $destinataire = $oPromotion->getEmailPromotion();
+	else
+	    $destinataire .= "," . $oPromotion->getEmailPromotion();
     }
 
     $msg = "Bonjour,<br/><br/>
-  Ceci est un message automatique.<br/>
-  Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
-  Vous pouvez directement la consulter à l'adresse suivante :<br/>
-  <a href='" . $baseSite . "/alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
-  $nomResp<br>
-  $titreResp<br>";
+    Ceci est un message automatique.<br/>
+    Une nouvelle offre d'alternance est disponible sur le site Web des stages et de l'alternance.<br/>
+    Vous pouvez directement la consulter à l'adresse suivante :<br/>
+    <a href='" . $baseSite . "/alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "'>'" . $baseSite . "alternant/visualiserOffre.php?id=" . $idOffreDAlternance . "</a><br/><br/>
+    $nomResp<br>
+    $titreResp<br>";
     mail($destinataire, "Site des stages et de l'alternance : nouvelle offre sur le site", $msg, $headers);
     echo "<p>Un email de notification a été envoyé aux étudiants concernés.</p>";
-
+    
     // ------------------------------------------------
     // Mise à jour du flux RSS
     // Création initiale du flux si nécessaire
-    if (!FluxRSS::existe())
-	FluxRSS::initialise();
+    if (!FluxRSS::existe()) { FluxRSS::initialise(); }
 
     // Création d'une nouvelle news
     $title = htmlspecialchars("Nouvelle offre d'alternance", ENT_QUOTES, 'UTF-8');
@@ -88,7 +82,9 @@ function envoyerNotifications($contact, $idOffreDAlternance) {
     $timestamp = time();
     $contents = htmlspecialchars($offreDAlternance->getTitre(), ENT_QUOTES, 'UTF-8');
     $author = $emailResp;
+    
     FluxRSS::miseAJour($title, $link, $timestamp, $contents, $author);
+    
     echo "<p>Le flux RSS a été mis à jour.</p>";
 }
 
@@ -220,14 +216,28 @@ function verifier() {
 
 	    $tabPromotions = array();
 	    $anneeCourante = Promotion_BDD::getLastAnnee();
-	    foreach ($tabThemes as $idParcours ) {
-		    foreach ($tabProfils as $idFiliere)	{
-			    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($anneeCourante, $idFiliere, $idParcours);
+	    
+	    $tabFilieres = Filiere::listerFilieres();
+	    foreach ($tabFilieres as $oFiliere) {
+		foreach ($tabThemes as $idParcoursProfil) {
+		    foreach ($tabProfils as $idFiliereProfil) {
+			if ($oFiliere->getIdFiliereSuivante() == $idFiliereProfil) {
+			    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($anneeCourante, $oFiliere->getIdentifiantBDD(), $idParcoursProfil);
 			    if ($oPromotion != FALSE)
+				array_push($tabPromotions, $oPromotion->getIdentifiantBDD());
+			    else {
+				$tabOPromotion = Promotion::getPromotionsFromFiliere($anneeCourante, $oFiliere->getIdentifiantBDD());
+				foreach ($tabOPromotion as $oPromotion) {
 				    array_push($tabPromotions, $oPromotion->getIdentifiantBDD());
+				    $tabPromotions = array_unique($tabPromotions);
+				}
+			    }
+			}
 		    }
-	    }
+		}
+	    }    	    
 	    array_push($tabDonnees, $tabPromotions);
+
 	    if (sizeof($tabPromotions) == 0 && isset($_POST['valider'])) {
 		    IHM_Generale::erreur("Vous devez choisir au moins un couple profil / spécialité existants !");
 		    OffreDAlternance_IHM::afficherFormulaireModification();
@@ -237,7 +247,7 @@ function verifier() {
 	    // ----------------------------------------------------------------
 	    // Demande de sauvegarde en base de données et envoi des mails
 
-	    if (isset($_POST['valider'])) {
+	    else if (isset($_POST['valider'])) {
 		$idOffreDAlternance = OffreDAlternance::modifierDonnees($tabDonnees);
 		$contact = Contact::getContact($idContact);
 		if (!$_POST['estVisible'])

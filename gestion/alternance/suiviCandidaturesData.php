@@ -19,16 +19,14 @@ if (!headers_sent())
 
 $filtresEtu = array();
 $filtresOffres = array();
-$filtrePromo = array();
 
-// Si pas d'année�sélectionnée
+// Si pas d'année sélectionnée
 if (!isset($_POST['annee'])) {
     $annee = Promotion_BDD::getLastAnnee();
 } else {
     $annee = $_POST['annee'];
 }
 array_push($filtresEtu, new FiltreNumeric("anneeuniversitaire", $annee));
-array_push($filtrePromo, new FiltreNumeric("anneeuniversitaire", $annee));
 
 // Si une recherche sur le parcours est demandé
 if (!isset($_POST['parcours'])) {
@@ -49,30 +47,6 @@ if (!isset($_POST['filiere'])) {
 array_push($filtresEtu, new FiltreNumeric("idfiliere", $filiere));
 
 // ----------------------------------------------------------------------------
-// Sélection des offres pour la filière de l'année suivante
-
-$oFiliere = Filiere::getFiliere($filiere);
-$filiere = $oFiliere->getIdFiliereSuivante();
-
-array_push($filtrePromo, new FiltreNumeric("idfiliere", $filiere));
-
-$filtre = $filtrePromo[0];
-for ($i = 1; $i < sizeof($filtrePromo); $i++)
-    $filtre = new Filtre($filtre, $filtrePromo[$i], "AND");
-
-$oPromotions = Promotion::listerPromotions($filtre);
-if (sizeof($oPromotions) > 0) {
-    $filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
-    for ($i = 1; $i < sizeof($oPromotions); $i++)
-	$filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
-    array_push($filtresOffres, $filtre);
-}
-
-$filtreOffres = $filtresOffres[0];
-for ($i = 1; $i < sizeof($filtresOffres); $i++)
-    $filtreOffres = new Filtre($filtreOffres, $filtresOffres[$i], "AND");
-
-// ----------------------------------------------------------------------------
 // Sélection des étudiants qui ont candidaté
 
 $filtreGlobalEtu = $filtresEtu[0];
@@ -88,6 +62,21 @@ foreach ($tabEtu as $oEtu) {
     if (Candidature::getListeCandidatures($oEtu->getIdentifiantBDD()))
 	array_push($tabEtuSelections, $oEtu);
 }
+
+// ----------------------------------------------------------------------------
+// Sélection des offres pour la filière sélectionnée
+
+$oPromotions = Promotion::listerPromotions($filtreGlobalEtu);
+if (sizeof($oPromotions) > 0) {
+    $filtre = new FiltreNumeric("idpromotion", $oPromotions[0]->getIdentifiantBDD());
+    for ($i = 1; $i < sizeof($oPromotions); $i++)
+	$filtre = new Filtre($filtre, new FiltreNumeric("idpromotion", $oPromotions[$i]->getIdentifiantBDD()), "OR");
+    array_push($filtresOffres, $filtre);
+}
+
+$filtreOffres = $filtresOffres[0];
+for ($i = 1; $i < sizeof($filtresOffres); $i++)
+    $filtreOffres = new Filtre($filtreOffres, $filtresOffres[$i], "AND");
 
 // ----------------------------------------------------------------------------
 // Afficher le tableau de suivi de candidature

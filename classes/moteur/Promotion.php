@@ -104,7 +104,7 @@ class Promotion {
      * @param type $annee
      * @param type $idfiliere
      * @param type $idparcours
-     * @return \Promotion
+     * @return Promotion
      */
     public static function getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours) {
 	$tab_donnees = Promotion_BDD::getPromotionFromParcoursAndFiliere($annee, $idfiliere, $idparcours);
@@ -116,6 +116,27 @@ class Promotion {
 				 $tab_donnees["email_promotion"]);
 	else
 	    return FALSE;
+    }
+    
+    /**
+     * Obtenir les objets Promotions à partir de l'année et de la filière
+     * @param type $annee
+     * @param type $idfiliere
+     * @return array Promotion
+     */
+    public static function getPromotionsFromFiliere($annee, $idfiliere) {
+	$tab_donnees = Promotion_BDD::getPromotionsFromFiliere($annee, $idfiliere);
+	
+	$tabP = array();
+	for ($i = 0; $i < sizeof($tab_donnees); $i++)
+	    array_push($tabP,
+		    new Promotion($tab_donnees[$i][0],
+				  $tab_donnees[$i][1],
+				  $tab_donnees[$i][2],
+				  $tab_donnees[$i][3],
+				  $tab_donnees[$i][4]));
+
+	return $tabP;
     }
 
     /**
