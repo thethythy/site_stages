@@ -223,19 +223,20 @@ function verifier() {
 		    foreach ($tabProfils as $idFiliereProfil) {
 			if ($oFiliere->getIdFiliereSuivante() == $idFiliereProfil) {
 			    $oPromotion = Promotion::getPromotionFromParcoursAndFiliere($anneeCourante, $oFiliere->getIdentifiantBDD(), $idParcoursProfil);
-			    if ($oPromotion != FALSE)
+			    if ($oPromotion != FALSE) {
 				array_push($tabPromotions, $oPromotion->getIdentifiantBDD());
+			    }
 			    else {
 				$tabOPromotion = Promotion::getPromotionsFromFiliere($anneeCourante, $oFiliere->getIdentifiantBDD());
 				foreach ($tabOPromotion as $oPromotion) {
 				    array_push($tabPromotions, $oPromotion->getIdentifiantBDD());
-				    $tabPromotions = array_unique($tabPromotions);
 				}
 			    }
 			}
 		    }
 		}
-	    }    	    
+	    }
+	    $tabPromotions = array_unique($tabPromotions);	    
 	    array_push($tabDonnees, $tabPromotions);
 
 	    if (sizeof($tabPromotions) == 0 && isset($_POST['valider'])) {

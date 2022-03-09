@@ -179,8 +179,8 @@ class OffreDAlternance {
   public function getPromotions() {
     $tabPromotions = array();
 
-    for ($i = 0; $i < sizeof($this->promotions); $i++) {
-        array_push($tabPromotions, Promotion::getPromotion($this->promotions[$i]));
+    foreach ($this->promotions as $value) {
+	array_push($tabPromotions, Promotion::getPromotion($value));
     }
 
     return $tabPromotions;
