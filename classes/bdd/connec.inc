@@ -35,7 +35,8 @@ if (isset($access_control_target)) {
 	$res_comparaison = FALSE;
 
 	if (strcmp($destination, "alternant") == 0) {
-	    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant);
+	    $res_comparaison = $HClef1_alter && hash_equals($HClef1_alter, $condensats->alternant) ||
+			       $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);
 	} else {
 	    if (strcmp($destination, "stagiaire") == 0 || strcmp($destination, "parrainage") == 0) {
 		$res_comparaison = $HClef1_stagi && hash_equals($HClef1_stagi, $condensats->stagiaire);

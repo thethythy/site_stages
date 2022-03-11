@@ -24,6 +24,7 @@ $HClef2_stagi = "";
 
 if (strcmp($destination, "alternant") == 0) {
     $HClef2_alter = $condensats->alternant;
+    $HClef2_stagi = $condensats->stagiaire;
 } else {
     if (strcmp($destination, "stagiaire") == 0 || strcmp($destination, "parrainage") == 0) {
 	$HClef2_stagi = $condensats->stagiaire;
