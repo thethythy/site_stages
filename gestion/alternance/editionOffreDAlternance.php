@@ -185,13 +185,16 @@ function verifier() {
 	    $filtre = new Filtre($filtreNom, $filtreVille, "AND");
 	    $entreprise = Entreprise::getListeEntreprises($filtre);
 
-	    if (sizeof($entreprise) == 1) { //On récupère les informations sur l'entreprise
+	    if (sizeof($entreprise) == 1) {
+	        //On récupère les informations sur l'entreprise
 		$idEntreprise = $entreprise[0]->getIdentifiantBDD();
+		$filtreIdEntreprise = new FiltreNumeric("identreprise", $idEntreprise);
 		$filtreNom = new FiltreString("nomcontact", $nom_contact);
 		$filtrePrenom = new FiltreString("prenomcontact", $prenom_contact);
 		$filtreTel = new FiltreString("telephone", $tel_contact);
 		$filtre = new Filtre($filtreNom, $filtrePrenom, "AND");
 		$filtre = new Filtre($filtre, $filtreTel, "AND");
+		$filtre = new Filtre($filtre, $filtreIdEntreprise, "AND");
 		$contact = Contact::getListeContacts($filtre);
 		if (sizeof($contact) == 1) { //On récupère les informations sur le contact
 		    $idContact = $contact[0]->getIdentifiantBDD();
