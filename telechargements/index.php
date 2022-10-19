@@ -25,9 +25,9 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 <h4>Présentations orales</h4>
 
 <ul>
-    <li>Présentation détaillée 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-2122.pdf"><IMG border=0 title="Présentation détaillée" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M2 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M2-2122.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M1 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M1-2122.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation détaillée 2022-2023 (format PDF) <A href="/documents/telechargements/presentation-2223.pdf"><IMG border=0 title="Présentation détaillée" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M2 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M2-2223.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M1 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M1-2223.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
 </ul>
 
 <h4>Documents annexes</h4>
@@ -35,15 +35,15 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 <ul>
 <li>Annexe 1 - Exemple d'extrait de rapport de stage (format PDF) <a href="/documents/telechargements/Annexe1.pdf"><IMG border=0 title="Fiche extrait" align=middle src="../images/download.png"/></a></li>
 <li>Annexe 2 - Norme de présentation du rapport de stage (format PDF) <a href="/documents/telechargements/Annexe2.pdf"><IMG border=0 title="Fiche rapport" align=middle src="../images/download.png"/></a></li>
-<li>Annexe 3 - Fiche d'évaluation 2021-2022 pour l'entreprise
-    (format DOC) <A href="/documents/telechargements/Fiche_Entreprise_2122.doc"><IMG border=0 title="Fiche entreprise format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Fiche_Entreprise_2122.pdf"><IMG border=0 title="Fiche entreprise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 3bis - Fiche d'évaluation 2021-2022 pour l'entreprise version anglaise
-    (format DOC) <A href="/documents/telechargements/Entreprise_Form_2122.doc"><IMG border=0 title="Fiche entreprise version anglaise format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Entreprise_Form_2122.pdf"><IMG border=0 title="Fiche entreprise version anglaise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 4 - Fiche de soutenance 2021-2022 pour le jury
-    (format DOC) <A href="/documents/telechargements/Fiche_Soutenance_2122.doc"><IMG border=0 title="Fiche soutenance format DOC" align=middle src="../images/download.png"/></A>
-    (format PDF) <A href="/documents/telechargements/Fiche_Soutenance_2122.pdf"><IMG border=0 title="Fiche soutenance format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 3 - Fiche d'évaluation 2022-2023 pour l'entreprise
+    (format DOC) <A href="/documents/telechargements/Fiche_Entreprise_2223.doc"><IMG border=0 title="Fiche entreprise format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Fiche_Entreprise_2223.pdf"><IMG border=0 title="Fiche entreprise format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 3bis - Fiche d'évaluation 2022-2023 pour l'entreprise version anglaise
+    (format DOC) <A href="/documents/telechargements/Entreprise_Form_2223.doc"><IMG border=0 title="Fiche entreprise version anglaise format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Entreprise_Form_2223.pdf"><IMG border=0 title="Fiche entreprise version anglaise format PDF" align=middle src="../images/download.png"/></A></li>
+<li>Annexe 4 - Fiche de soutenance 2022-2023 pour le jury
+    (format DOC) <A href="/documents/telechargements/Fiche_Soutenance_2223.doc"><IMG border=0 title="Fiche soutenance format DOC" align=middle src="../images/download.png"/></A>
+    (format PDF) <A href="/documents/telechargements/Fiche_Soutenance_2223.pdf"><IMG border=0 title="Fiche soutenance format PDF" align=middle src="../images/download.png"/></A></li>
 </ul>
 
 <h4>Documents officiels</h4>

@@ -21,8 +21,8 @@ IHM_Menu::menuPresentation();
 <a name="debut"></a>
 
 <div class="navigation">
-    <A href="../documents/telechargements/presentation-2122.pdf">Téléchargement</a>
-    <A href="../documents/telechargements/presentation-2122.pdf">
+    <A href="../documents/telechargements/presentation-2223.pdf">Téléchargement</a>
+    <A href="../documents/telechargements/presentation-2223.pdf">
 	<img title="Présentation détaillée" align=middle src="../images/download.png">
     </a>
 </div>
@@ -66,31 +66,24 @@ IHM_Menu::menuPresentation();
 
 <p>Le logiciel objet du stage doit être écrit dans un langage structuré (C, langage orienté objet, langage de programmation logique par exemple), ou en assembleur. L'utilisation d'une méthode ou d'une démarche de développement issue du génie logiciel ou de l'intelligence artificielle est fortement recommandée. Un planning du stage est d'ailleurs demandé dans le rapport et à la soutenance.</p>
 
-<div class="titre2"><a name="12">1.2. Planification et durée en 2021-2022</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="12">1.2. Planification et durée en 2022-2023</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>
     <table border=1 align=center cellpadding=5 cellspacing=1>
 	<th align=center>Diplôme</th><th align=center>Date début</th><th align=center>Date fin</th><th align=center>Durée</th><th align=center>Soutenance</th>
 	<tr>
 	    <td align=center valign=center>Master 1</td>
-	    <td align=center valign=center>11 Avril 2022</td>
-	    <td align=center valign=center>Initiaux : 1 Juillet 2022<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>10 Avril 2023</td>
+	    <td align=center valign=center>Initiaux : 30 Juin 2023<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 3 mois (12 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>4 Juillet 2022<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>3 Juillet 2023<br/>(susceptible de modification)</td>
 	</tr>
 	<tr>
-	    <td align=center valign=center>Master 2 AFD</td>
-	    <td align=center valign=center>28 Février 2022</td>
-	    <td align=center valign=center>Initiaux : 12 Août 2022<hr/>Alternants : fin du contrat</td>
+	    <td align=center valign=center>Master 2</td>
+	    <td align=center valign=center>27 Février 2023</td>
+	    <td align=center valign=center>Initiaux : 11 Août 2023<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>29 Août 2022<br/>(susceptible de modification)</td>
-	</tr>
-	<tr>
-	    <td align=center valign=center>Master 2 ATAL</td>
-	    <td align=center valign=center>24 Janvier 2022</td>
-	    <td align=center valign=center>Initiaux : 8 Juillet 2022<hr/>Alternants : fin du contrat</td>
-	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>Initiaux : 11 Juillet 2022<br/>(susceptible de modification)<hr/>Alternants : 29 Août 2022<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>28 Août 2023<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
@@ -209,11 +202,7 @@ IHM_Menu::menuPresentation();
     <li>Le stagiaire doit impérativement suivre la norme de présentation (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
     <li>L'utilisation d'un traitement de texte est obligatoire (les documents manuscrits ne sont pas acceptés).</li>
     <li>Le format du document numérique doit être le format PDF.</li>
-    <li>Le nombre de page (annexes comprises) est limité selon l'année du diplôme de l'étudiant :</li>
-    <ul>
-	<li>en Master 1 : entre 25 à 30 pages au maximum ;</li>
-	<li>en Master 2 : entre 30 et 40 pages au maximum.</li>
-    </ul>
+    <li>Le nombre de page (annexes comprises) est limité à environ 20 pages au maximum.</li>
 </ul>
 
 <div class="titre3">Confidentialité&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
