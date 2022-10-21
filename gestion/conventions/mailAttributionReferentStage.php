@@ -62,8 +62,9 @@ Cordialement<br/>
 <br/>
 $nomResp<br/>
 $titreResp<br/>
+Le Mans Université<br/>
 Département Informatique<br/>
-http://www-info.univ-lemans.fr/";
+https://info-stages.univ-lemans.fr/";
 
     mail($emailResp . "," . $emailE . "," . $oContact->getEmail() . "," . $emailR, "Suivi de stage", $msg, $headers);
 }
