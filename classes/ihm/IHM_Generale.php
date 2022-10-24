@@ -54,6 +54,12 @@ class IHM_Generale {
 		if ($ext == "statistiques") {
 		    echo "<script src='frameworks/Chart.min.js'></script>";
 		}
+		
+		if ($ext == "entreprise") {
+		    echo "<script src='index.min.js'></script>";
+		    $ext = "auchargement";
+		}
+		
 		?>
 
 		<link rel="stylesheet" href="<?php echo $lienRacine; ?>classes/ihm/Orange.css"/>

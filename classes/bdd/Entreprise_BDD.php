@@ -227,6 +227,51 @@ class Entreprise_BDD {
 	return $tabIDContrats;
     }
 
+    /**
+     * Retourne un tableau contenant des données Entreprise dont le nom commence
+     * comme la chaine donnée en paramètre
+     * 
+     * @global resource $db Référence sur la base ouverte
+     * @global string $tab6 Nom de la table 'entreprise'
+     * 
+     * @param string $debut_nom Le début du nom de l'entreprise
+     * @param string $name Le nombre de réponse attendu au maximum
+     * @return array Tableau contenant les données entreprises
+     */
+    public static function getListeEntreprisesByNom($debut_nom, $size) {
+	global $db;
+	global $tab6;
+	
+	$requete = "SELECT *
+		    FROM $tab6
+		    WHERE LOWER(nom) LIKE '$debut_nom%'
+		    ORDER BY nom ASC
+		    LIMIT 0, $size ;";
+	
+	$result = $db->query($requete);
+	
+	$tabEntreprises = array();
+	
+	if ($result) {	    
+	    while ($entreprise = $result->fetch_array()) {
+		$tab = array();
+		$tab["identreprise"] = $entreprise["identreprise"];
+		$tab["nom"] = $entreprise["nom"];
+		$tab["adresse"] = $entreprise["adresse"];
+		$tab["codepostal"] = $entreprise["codepostal"];
+		$tab["ville"] = $entreprise["ville"];
+		$tab["pays"] = $entreprise["pays"];
+		$tab["email"] = $entreprise["email"];
+		$tab["idtypeentreprise"] = $entreprise["idtypeentreprise"];
+		$tab["siret"] = $entreprise["siret"];
+		
+		array_push($tabEntreprises, $tab);
+	    }
+	    $result->free();
+	}
+
+	return $tabEntreprises;
+    }
 }
 
 ?>

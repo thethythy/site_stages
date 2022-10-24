@@ -5,6 +5,7 @@
  * Utilisation : page pour déposer une offre de stage ou d'alternance
  * Accès : public
  */
+
 include_once("../classes/bdd/connec.inc");
 
 include_once('../classes/moteur/Utils.php');
@@ -174,7 +175,7 @@ $tabLiens = array();
 $tabLiens[0] = array('../', 'Accueil');
 $tabLiens[1] = array('./', 'Entreprise');
 
-IHM_Generale::header("Dépôt d'une", "offre", "../", $tabLiens);
+IHM_Generale::header("Dépôt d'une", "offre", "../", $tabLiens, "entreprise");
 
 verifier();
 deconnexion();
