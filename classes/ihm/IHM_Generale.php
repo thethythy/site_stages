@@ -142,7 +142,6 @@ class IHM_Generale {
 			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !"><img src='/images/mail.png' align='center' alt='Email' /></a>
 			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
-			<a href="http://www.viadeo.com/fr/profile/thierry.lemeunier2" title="Suivez-moi sur Viadeo"><img src='/images/Favicon.png' align='center' alt='Profil Viadeo' /></a>
 		    </p>
 		</div>
 	    </body>
@@ -159,15 +158,13 @@ class IHM_Generale {
 		    <a href="gestion/" title="Partie réservée">Connexion<img src='/images/cadenas.png' width="10" height="12" align="absbottom"/> | </a>
 		    <a href="mentions.php" title="Partie réservée">Mentions légales</a>
 		    <p>
-			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
+			<a href="mailto:Thierry.Lemeunier%20@%20univ-lemans.fr?subject=Site%20web%20des%20stages&body=Enlevez les espaces entourant @ dans l'adresse mail de destination puis supprimer cette ligne !" title='Contactez-moi par email'><img src='/images/mail.png' align='center' alt='Email' /></a>
 			<a href='http://info-stages.univ-lemans.fr/flux/fluxrss.xml' title='Suivez les offres de stage sur le flux RSS'><img src='/images/feed.png' align='center' alt='Flux RSS' /></a>
 			<a href="http://fr.linkedin.com/pub/thierry-lemeunier/64/72a/1b1/" title="Suivez-moi sur LinkedIn"><img src='/images/InBug-16px_0.png' align='center' alt='Profil LinkedIn' /></a>
-			<a href="http://www.viadeo.com/fr/profile/thierry.lemeunier2" title="Suivez-moi sur Viadeo"><img src='/images/Favicon.png' align='center' alt='Profil Viadeo' /></a>
 		    </p>
 		    <p><nav>
-			<a href="http://www-info.univ-lemans.fr"><img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/></a>
-			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc.png" width="120" height="40" align='center'/></a>
-			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences.gif" width="80" height="50" align='center'/></a>
+			<a href="http://ic2.univ-lemans.fr/"><img src="/images/logo_iicc_web.jpg" width="120" height="50" align='center'/></a>
+			<a href="http://sciences.univ-lemans.fr"><img src="/images/logo_sciences_web.jpg" width="140" height="40" align='center'/></a>
 			<a href="http://www.univ-lemans.fr"><img src="/images/logo_universite.png" width="120" height="30" align='center'/></a>
 		    </nav></p>
 		</div>
@@ -191,9 +188,8 @@ class IHM_Generale {
 			<img src='/images/Favicon.png' align='center' alt='Profil Viadeo' />
 		    </p>
 		    <p><nav>
-			<img src="/images/logo_deptinfo.jpg" width="100" height="50" align='center'/>
-			<img src="/images/logo_iicc.png" width="120" height="40" align='center'/>
-			<img src="/images/logo_sciences.gif" width="80" height="50" align='center'/>
+			<img src="/images/logo_iicc_web.jpg" width="120" height="50" align='center'/>
+			<img src="/images/logo_sciences_web.jpg" width="140" height="40" align='center'/>
 			<img src="/images/logo_universite.png" width="120" height="30" align='center'/>
 		    </nav></p>
 		</div>
