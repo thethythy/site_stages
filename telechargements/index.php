@@ -26,8 +26,8 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 
 <ul>
     <li>Présentation détaillée 2022-2023 (format PDF) <A href="/documents/telechargements/presentation-2223.pdf"><IMG border=0 title="Présentation détaillée" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M2 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M2-2223.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
-    <li>Présentation aux étudiants de M1 2021-2022 (format PDF) <A href="/documents/telechargements/presentation-M1-2223.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M2 2022-2023 (format PDF) <A href="/documents/telechargements/presentation-M2-2223.pdf"><IMG border=0 title="Présentation M2" align=middle src="../images/download.png"/></A></li>
+    <li>Présentation aux étudiants de M1 2022-2023 (format PDF) <A href="/documents/telechargements/presentation-M1-2223.pdf"><IMG border=0 title="Présentation M1" align=middle src="../images/download.png"/></A></li>
 </ul>
 
 <h4>Documents annexes</h4>
