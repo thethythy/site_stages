@@ -33,15 +33,15 @@ IHM_Generale::header("", "Téléchargements", "../", $tabLiens);
 <h4>Documents annexes</h4>
 
 <ul>
-<li>Annexe 1 - Exemple d'extrait de rapport de stage (format PDF) <a href="/documents/telechargements/Annexe1.pdf"><IMG border=0 title="Fiche extrait" align=middle src="../images/download.png"/></a></li>
-<li>Annexe 2 - Norme de présentation du rapport de stage (format PDF) <a href="/documents/telechargements/Annexe2.pdf"><IMG border=0 title="Fiche rapport" align=middle src="../images/download.png"/></a></li>
-<li>Annexe 3 - Fiche d'évaluation 2022-2023 pour l'entreprise
-    (format DOC) <A href="/documents/telechargements/Fiche_Entreprise_2223.doc"><IMG border=0 title="Fiche entreprise format DOC" align=middle src="../images/download.png"/></A>
+<li>Annexe 1 - Norme de présentation du rapport de stage (format PDF) <a href="/documents/telechargements/Annexe1.pdf"><IMG border=0 title="Fiche rapport" align=middle src="../images/download.png"/></a></li>
+<li>Annexe 1bis - Norme de présentation du rapport de stage (template Overleaf) <a href='https://www.overleaf.com/4394543784cwspycvwmgwz' ><IMG border=0 title="Fiche rapport" align=middle src="../images/download.png"/></a></li>
+<li>Annexe 2 - Fiche d'évaluation 2022-2023 pour l'entreprise
+    (format DOCX) <A href="/documents/telechargements/Fiche_Entreprise_2223.docx"><IMG border=0 title="Fiche entreprise format DOCX" align=middle src="../images/download.png"/></A>
     (format PDF) <A href="/documents/telechargements/Fiche_Entreprise_2223.pdf"><IMG border=0 title="Fiche entreprise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 3bis - Fiche d'évaluation 2022-2023 pour l'entreprise version anglaise
+<li>Annexe 2bis - Fiche d'évaluation 2022-2023 pour l'entreprise version anglaise
     (format DOC) <A href="/documents/telechargements/Entreprise_Form_2223.doc"><IMG border=0 title="Fiche entreprise version anglaise format DOC" align=middle src="../images/download.png"/></A>
     (format PDF) <A href="/documents/telechargements/Entreprise_Form_2223.pdf"><IMG border=0 title="Fiche entreprise version anglaise format PDF" align=middle src="../images/download.png"/></A></li>
-<li>Annexe 4 - Fiche de soutenance 2022-2023 pour le jury
+<li>Annexe 3 - Fiche de soutenance 2022-2023 pour le jury
     (format DOC) <A href="/documents/telechargements/Fiche_Soutenance_2223.doc"><IMG border=0 title="Fiche soutenance format DOC" align=middle src="../images/download.png"/></A>
     (format PDF) <A href="/documents/telechargements/Fiche_Soutenance_2223.pdf"><IMG border=0 title="Fiche soutenance format PDF" align=middle src="../images/download.png"/></A></li>
 </ul>

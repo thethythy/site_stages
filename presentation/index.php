@@ -83,7 +83,7 @@ IHM_Menu::menuPresentation();
 	    <td align=center valign=center>27 Février 2023</td>
 	    <td align=center valign=center>Initiaux : 11 Août 2023<hr/>Alternants : fin du contrat</td>
 	    <td align=center valign=center>Initiaux : 6 mois (24 semaines)<hr/>Alternants : jusqu'à fin du contrat</td>
-	    <td align=center valign=center>28 Août 2023<br/>(susceptible de modification)</td>
+	    <td align=center valign=center>31 Août et 1 Sept. 2023<br/>(susceptible de modification)</td>
 	</tr>
     </table>
 </p>
@@ -98,7 +98,7 @@ IHM_Menu::menuPresentation();
     <li>Consulter ce site pour découvrir les entreprises ayant déjà pris des stagiaires les années passées.</li>
     <li>Si vos finances le permettent, cherchez plutôt un stage intéressant que bien rémunéré.</li>
     <li>Le stage de M2 peut être primordial pour le début de votre carrière professionnel dans le sens ou de nombreuses entreprises proposent des contrats d'embauche aux stagiaires dont elles ont été satisfaites des prestations durant le stage.</li>
-    <li>La présentation orale compte presque pour autant que le rapport écrit. Il faut penser à bien la préparer car c'est elle qui donne l'impression générale sur le stage et le stagiaire.</li>
+    <li>La présentation orale compte autant que le rapport écrit. Il faut penser à bien la préparer car c'est elle qui donne l'impression générale sur le stage et le stagiaire.</li>
     <li>Si l'étudiant bénéficie d'une bourse régionale des Pays de La Loire, il doit <strong>impérativement</strong> effectué son stage dans la région Pays de La Loire.</li>
 </ul>
 
@@ -121,7 +121,7 @@ IHM_Menu::menuPresentation();
 
 <div class="titre3">Validation du sujet de stage&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le responsable pédagogique doit valider le sujet de stage de chaque étudiant stagiaire. Afin de faciliter ce travail, les étudiants saisissent ou téléchargent sur le site des stages un résumé présentant le sujet de stage envisagé. Une demande de validation et envoyée automatiquement au responsable pédagogique à l'issue de cette saisie. En retour, le responsable pédagogique prévient l'étudiant par email de la validation ou de la non-validation du sujet proposé. L'étudiant doit donc consulter régulièrement son email institutionnel après la saisie d'une demande de validation.</p>
+<p>Le responsable pédagogique doit valider le sujet de stage de chaque étudiant stagiaire. Afin de faciliter ce travail, les étudiants éditent une fiche préalable disponible sur l'application pStage (cf. ci-après) et envoient cette fiche par email au responsable pédagogique. En retour, le responsable pédagogique répond en validant ou en ne validant pas le sujet proposé. L'étudiant doit donc consulter régulièrement son email institutionnel après l'envoi de la fiche préalable.</p>
 
 <p>Dès que le sujet proposé par l'étudiant est validé par le responsable pédagogique, l'étudiant peut poursuivre la procédure prévue pour le déroulement du stage (cf. ci-après).</p>
 
@@ -139,7 +139,7 @@ IHM_Menu::menuPresentation();
     <li>Assurer le premier niveau d'interaction en cas de problème (désaccord avec l'entreprise, accident du travail, maladie de longue durée...).</li>
     <li>Lire le rapport fourni par l'étudiant à l'issue du stage.</li>
     <li>Assister et participer à la soutenance orale.</li>
-    <li>Remplir la fiche d'évaluation sur le stage avec le second membre du jury.</li>
+    <li>Remplir la fiche d'évaluation sur le stage.</li>
     <li>Vérifier lors de la soutenance que toutes les conditions sont satisfaites : dépôts du rapport et du résumé, remise de la fiche d'appréciation de l'entreprise.</li>
 </ul>
 
@@ -155,7 +155,7 @@ IHM_Menu::menuPresentation();
 
 <p>La convention de stage est un document officiel définissant un accord passé entre l'université, l'entreprise et le stagiaire. A l'issue de la procédure, chacune des parties est en possession d'un exemplaire de cette convention. Chacun de ces trois exemplaires doit être signé par les trois parties : une convention qui n'a pas ces trois signatures avant le départ en stage n'a aucune valeur juridique. Enfin, tout stage qui n'entrerait pas dans le cadre de la formation obligatoire devra faire l'objet d'une convention distincte, précisant qu'il s'agit d'un stage facultatif hors cursus universitaire.</p>
 
-<p>Les conventions sont gérées par la scolarité de la Faculté des Sciences. Une fois le sujet validé par le responsable des stages, l'étudiant fait une demande à la scolarité d'une convention en suivant la procédure <a href="http://sciences.univ-lemans.fr/fr/ma-scolarite.html">indiquée ici</a>. Une convention-type, rédigée par l'université, est établie par la scolarité de la Faculté des Sciences avec les éléments propres à chaque stage, et en particulier&nbsp;:
+<p>Les conventions sont gérées par la scolarité de la Faculté des Sciences. Une fois le sujet validé par le responsable des stages, l'étudiant fait une demande à la scolarité d'une convention en suivant la procédure <a href="http://sciences.univ-lemans.fr/fr/ma-scolarite.html">indiquée ici ("Pendant mes études : Démarches administratives/Stages et demande de césure")</a>. Une convention-type, rédigée par l'université, est établie par la scolarité de la Faculté des Sciences avec les éléments propres à chaque stage, et en particulier&nbsp;:
 <ul>
     <li>Les coordonnées de l'entreprise.</li>
     <li>Les dates officielles de début et de fin de stage (en cas de prolongation du stage la convention devra être complétée d'un avenant dont la demande se fera également à la scolarité).</li>
@@ -165,10 +165,10 @@ IHM_Menu::menuPresentation();
 
 <p>Le nombre de conventions à signer est devenu important. Afin d'éviter toute perte de temps, il est indispensable que chacun respecte l'ordre suivant :</p>
 <ul>
-    <li style="list-style-type: decimal;">l'étudiant <a href="../stagiaire/demanderValidationSDS.php">fait une demande de validation</a> au responsable des stages&nbsp;;</li>
+    <li style="list-style-type: decimal;">l'étudiant demande une validation en envoyant par email (ou en déposant <a href="../stagiaire/demanderValidationSDS.php">ici</a>) la fiche préalable récupérée sur <a href='https://pstage.univ-lemans.fr'>pStage</a>&nbsp;;</li>
     <li style="list-style-type: decimal;">le responsable des stages valide ou pas le sujet&nbsp;;</li>
-    <li style="list-style-type: decimal;">l'étudiant <a href="http://sciences.univ-lemans.fr/fr/ma-scolarite.html">fait une demande d'établissement d'une convention</a> à la scolarité des Sciences&nbsp;;</li>
-    <li style="list-style-type: decimal;">la scolarité établit la convention (édition, impression, signatures).</li>
+    <li style="list-style-type: decimal;">l'étudiant fait une demande de convention via l'application <a href='http://pstage.univ-lemans.fr'>pStage</a>&nbsp;;</li>
+    <li style="list-style-type: decimal;">la scolarité établit la convention (édition, impression, signatures) toujours via l'application pStage.</li>
 </ul>
 
 <div class="titre2"><a name="24">2.4. Pendant le stage</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
@@ -176,60 +176,34 @@ IHM_Menu::menuPresentation();
 <p>Pendant le stage, l'étudiant est soumis aux horaires et aux conditions de travail de l'organisme d'accueil. En particulier, il est soumis aux contraintes de sécurité en vigueur au sein de l'organisme d'accueil. En cas de problème, dont les causes peuvent être de divers origines (relation avec l'entreprise, conflit sur le sujet de stage, accident, etc.), il faut prévenir au plus tôt au moins une des personnes suivantes&nbsp;:</p>
 <ul>
     <li>l'enseignant-référent du stage (coordonnées accessibles dans <a href="http://www.univ-lemans.fr/fr/acces-directs-annuaire/annuaire.html">l'annuaire Web</a> de l'Université) ;</li>
-    <li>le secrétariat du Département Informatique : Mme Nathalie Rodier au 02 43 83 38 38 ou par email à l'adresse <a href="mailto:secretariat @ univ-lemans.fr">secretariat @ univ-lemans.fr</a> ;</li>
+    <li>la scolarité de la faculté : par email à l'adresse <a href="mailto:stage-sco-sciences @ univ-lemans.fr">stage-sco-sciences @ univ-lemans.fr</a> ;</li>
     <li>le responsable pédagogique : M. Thierry Lemeunier au 02 43 83 38 65 ou par email à l'adresse <a href="mailto:Thierry.Lemeunier @ univ-lemans.fr">Thierry.Lemeunier @ univ-lemans.fr.</a></li>
 </ul>
 
-<div class="titre2"><a name="25">2.5. Le rapport de stage</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre2"><a name="25">2.5. Le rapport de stage et le résumé</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le rapport de stage rendu à l'issue du stage est un élément important de la notation. Il ne s'agit pas de faire le rapport le plus volumineux possible à partir de photocopie de documents divers, mais de <strong>décrire votre réalisation personnelle</strong>. L'étudiant doit veiller à planifier un temps suffisant pour sa rédaction. Les rapports sont d'ailleurs préparés pendant le stage et avec les moyens de l'organisme d'accueil. Il est même préférable d'en rédiger certaines parties au fur et à mesure. Dans tous les cas, l'étudiant doit impérativement délivrer <strong>une semaine avant la date de soutenance</strong> les 2 éléments suivants :</p>
-<div style="border: 1px solid #000;">
-    <ul>
-	<li>1 rapport de stage numérique au format PDF (déposé directement sur le site) pour que l'enseignant-référent puisse le lire&nbsp;;</li>
-	<li>1 résumé de stage numérique au format PDF (déposé directement sur le site)&nbsp;;</li>
-    </ul>
-</div>
+<p>Le rapport de stage rendu à l'issue du stage est un élément important de la notation. Il ne s'agit pas de faire le rapport le plus volumineux possible à partir de photocopie de documents divers, mais de <strong>décrire votre réalisation personnelle</strong>. L'étudiant doit veiller à planifier un temps suffisant pour sa rédaction. Les rapports sont d'ailleurs préparés pendant le stage et avec les moyens de l'organisme d'accueil. Il est même préférable d'en rédiger certaines parties au fur et à mesure.</p>
 
-<p>Etant donnée le grand nombre d'étudiants (et nos capacités limitées de stockage), <strong>aucune version papier et/ou sur CD-ROM ne sera délivrée et ne sera acceptée</strong>. Seul le dépôt sur ce site sera pris en compte.</p>
-
-<p>Le résumé de stage est mis en consultation sur le site Web des stages. C'est un court document résumant les éléments principaux du stage. Il doit suivre les spécifications données à l'<a href="../documents/telechargements/Annexe1.pdf">Annexe 1 accessible ici.</a></p>
-
-<div class="titre3">Forme&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
-
+<p>Dans tous les cas, l'étudiant doit impérativement déposer <strong>une semaine avant la date de soutenance</strong> le rapport de stage numérique au format PDF :</p>
 <ul>
-    <li>La rédaction se fait en français, y compris pour les stages se déroulant dans une société étrangère ayant une filiale en France.</li>
-    <li>Pour les stages à l'étranger, le rapport peut être écrit en anglais.</li>
-    <li>Le stagiaire doit impérativement suivre la norme de présentation (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
-    <li>L'utilisation d'un traitement de texte est obligatoire (les documents manuscrits ne sont pas acceptés).</li>
-    <li>Le format du document numérique doit être le format PDF.</li>
-    <li>Le nombre de page (annexes comprises) est limité à environ 20 pages au maximum.</li>
+    <li>Les étudiants initiaux déposent dans la partie "Stagiaire" du site <a href='https://info-stages.univ-lemans.fr/stagiaire/depot_doc.php'>ici</a></li>
+    <li>Les étudiants alternants déposent dans la partie "Alternant" du site <a href='https://info-stages.univ-lemans.fr/alternant/depot_doc.php'>ici</a> <strong>ET</strong> sur le <a href='https://lea.univ-lemans.fr/'>LEA</a></li>
 </ul>
+
+<p>En plus du rapport, chaque étudiant doit déposer <strong>le résumé (en français et anglais) du rapport</strong> dans un document PDF séparé au même endroit que le dépôt du rapport. Ces résumés servent aux étudiants des années suivantes dans leur recherche d'une entreprise via ce site.</p>
 
 <div class="titre3">Confidentialité&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <p>Si l'entreprise le souhaite, le rapport peut être confidentiel. Dans ce cas, il doit être marqué comme tel (pages et couvertures estampillées).</p>
-<p>La soutenance, qui est normalement publique, peut également avoir lieu à huis clos en présence uniquement de l'étudiant, de l'enseignant-référent et d'un second enseignant membre de l'équipe pédagogique et d'un ou plusieurs représentants de l'entreprise.</p>
+<p>La soutenance, qui est normalement publique, peut également avoir lieu à huis clos en présence uniquement de l'étudiant, du jury constitué de plusieurs enseignant-référent et d'un ou plusieurs représentants de l'entreprise.</p>
 
-<div class="titre3">Fond et contenu&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre3">Forme, fond et contenu du rapport<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le rapport doit comprendre :</p>
+<p>Ces informations ont été regroupées sur UMTICE sur les pages suivantes :</p>
 <ul>
-    <li>Le résumé 4 pages maximum dans un fichier séparé (cf. <a  href="../documents/telechargements/Annexe1.pdf">Annexe 1 accessible ici</a>).</li>
-    <li>Un court résumé inclus dans la page de garde (cf. <a href="../documents/telechargements/Annexe2.pdf">Annexe 2 accessible ici</a>).</li>
-    <li>Un sommaire.</li>
-    <li>Le texte (structuré) lui-même décrivant le travail effectué durant le stage.</li>
-    <li>Des annexes techniques (comptées dans le nombre maximum de page).</li>
+    <li>Pour les Master 1 : <a href='https://umtice.univ-lemans.fr/course/view.php?id=3022'>M1 Informatique - Informations</a></li>
+    <li>Pour les Master 2 : <a href='https://umtice.univ-lemans.fr/enrol/index.php?id=3064'>M2 informatique - Accueil</a></li>
 </ul>
-
-<p>Le texte décrivant le travail réalisé doit inclure au minimum&nbsp;:</p>
-<ul>
-    <li>la spécification initiale du problème (cadre du travail réalisé, cahier des charges, intégration dans un projet existant de l'entreprise, etc.)&nbsp;;</li>
-    <li>l'analyse du problème (organigrammes, structures de données, description des fonctionnalités principales, diagrammes UML...)&nbsp;;</li>
-    <li>la conception : choix effectués et leurs justifications, description et choix de l'architecture logicielle, difficultés rencontrées...</li>
-    <li>les apports aussi bien pour l'entreprise que pour l'étudiant.</li>
-</ul>
-
-<p>Tout détail pertinent aidant à la compréhension doit être inclus, <b>ainsi que les difficultés rencontrées et les solutions retenues</b>. Les moyens matériels mis en oeuvre et les conditions effectives de la réalisation doivent être également donnés. Des plannings (initial et final) doivent apparaître et être justifié. Enfin les annexes peuvent contenir une description sommaire de l'entreprise et certaines parties de listings de code limitées aux parties significatives et intéressantes.</p>
 
 <div class="titre2"><a name="26">2.6. Résumé de la procédure</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
@@ -237,34 +211,40 @@ IHM_Menu::menuPresentation();
 
 <div class="titre1"><a name="3">3. La soutenance</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Les soutenances orales sont obligatoires pour tous les étudiants. Les soutenances suivent un planning prévisionnel, nominatif, fixé à l'avance et <strong>disponible sur le site des stages</strong>. Compte tenu des difficultés d'organisation des plannings qui prennent en compte les contraintes des multiples enseignants-référents et des responsables de stages qui viennent d'entreprises parfois distantes pour participer aux soutenances, les modifications ultérieures sont impossibles même par permutation (sauf cas exceptionnel et sur demande de l'entreprise faite au moins 5 jours ouvrables avant la soutenance).</p>
+<p>Les soutenances orales sont obligatoires pour tous les étudiants. Les soutenances suivent un planning prévisionnel, nominatif, fixé à l'avance et <strong>disponible sur le site des stages</strong>. Compte tenu des difficultés d'organisation des plannings qui prennent en compte les contraintes des multiples enseignants-référents et des encadrants qui viennent d'entreprises parfois distantes pour participer aux soutenances, les modifications ultérieures sont impossibles même par permutation (sauf cas exceptionnel et sur demande de l'entreprise faite au moins 5 jours ouvrables avant la soutenance).</p>
+
+<p>Les soutenances se font <strong>par groupe et par demi-journée</strong>.</p>
 
 <div class="titre3">Conditions pour soutenir&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Les soutenances sont planifiées par le responsable pédagogique. Une soutenance ne peut être planifiée que si une convention a été signée.</p>
+<p>Les soutenances sont planifiées par le responsable pédagogique. Une soutenance ne peut être planifiée que si une convention (ou un contrat d'alternance) a été signée.</p>
 
-<div class="titre3">Fiche d'appréciation&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<div class="titre3">Fiche d'appréciation d'entreprise pour les stagaires initiaux&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Cette fiche est <a href="../documents/telechargements/Fiche_Entreprise_2122.doc">accessible ici</a> (version anglaise <a href="../documents/telechargements/Entreprise_Form_2122.doc">ici</a>) ou dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle  sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
+<p>Cette fiche est accessible dans la partie téléchargement du site (<a href="../telechargements/">ici</a>). Elle sera remplie par votre encadrant dans l'entreprise qui devra la transmettre de façon confidentielle avant ou le jour de la soutenance (<u>sous enveloppe cachetée</u> si nécessaire). Dans tous les cas, si cette pièce n'est pas disponible le jour de la soutenance, celle-ci sera <strong>ajournée</strong>.</p>
 
-<div class="titre3">Participants à la soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<p><strong>Attention</strong> : pour les alternants l'appréciation de l'entreprise se fait via le LEA et non via cette fiche.</p>
+
+<div class="titre3">Participants aux soutenances&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
 <ul>
-    <li>L'étudiant stagiaire.</li>
-    <li>Les personnes ayant encadrées le stage dans l'organisme d'accueil selon leurs disponibilités.</li>
-    <li>Au moins deux membres de l'équipe pédagogique, dont l'enseignant-référent.</li>
-    <li>Par défaut, la soutenance est publique et ouverte à toutes autres personnes sauf en cas de confidentialité demandée par l'organisme d'accueil.</li>
+    <li>L'étudiant stagiaire ou alternant.</li>
+    <li>Les personnes ayant encadrées le stage ou l'alternance dans l'organisme d'accueil. Ces personnes sont invitées à participer aux autres soutenances de la demi-journée en tant que membre du jury.</li>
+    <li>Les autres étudiants de ce groupe.</li>
+    <li>Les autres personnels d'entreprise de ce groupe.</li>
+    <li>Un jury composé d'universitaires (dont l'enseignant-référent) et les personnels d'entreprises présents.</li>
 </ul>
 
-<div class="titre3">Conditions matérielles de la soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+<p>Par défaut, la soutenance est publique sauf en cas de confidentialité demandée par l'organisme d'accueil. Dans ce cas la soutenance à lieu à huis clos et seul sont présents l'étudiant, l'entreprise et les membres universitaires du jury.</p>
 
-<p>La durée de la soutenance diffère selon l'année dans le diplôme :</p>
+<div class="titre3">Durée et critères d'évaluation de la soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
+
+<p>La durée des soutenances et les critères d"évaluation sont indiqués sur les pages UMTICE.</p>
+
 <ul>
-    <li>en Master 1, la durée est de 30 min par étudiant (20 min d'exposé + 10 min de questions) ;</li>
-    <li>en Master 2, la durée est de 50 min par étudiant (30 min d'exposé + 20 min de questions) ;</li>
+    <li>en Master 1 : <a href='https://umtice.univ-lemans.fr/course/view.php?id=3022'>M1 Informatique - Informations</a>;</li>
+    <li>en Master 2 : <a href='https://umtice.univ-lemans.fr/enrol/index.php?id=3064'>M2 informatique - Accueil</a>;</li>
 </ul>
-
-<p>Le respect de ces durées est essentiel, les débordements seront sanctionnés lors de la notation de la soutenance. Les moyens matériels de soutenance sont ceux disponibles pour les exposés en cours d'année (rétroprojecteur, vidéo projecteur, magnétoscope...). En cas de démonstration nécessitant l'installation de matériels spécifiques, l'étudiant est responsable de sa préparation (il peut demander de l'aide aux techniciens).</p>
 
 <div class="titre3">Date de soutenance&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
@@ -274,9 +254,9 @@ IHM_Menu::menuPresentation();
 
 <div class="titre1"><a name="4">4. L'évaluation du stage</a>&nbsp;<a href="#debut"><img src="../images/arrow_top.png"></a></div>
 
-<p>Le stage est évalué en fonction du travail effectué par l'étudiant, de l'appréciation de l'organisme d'accueil, de l'évaluation de l'enseignant-référent concernant le rapport et enfin de l'évaluation de la soutenance orale par le jury. Les critères d'évaluation retenus sont disponibles dans les deux fiches des Annexe 3 et 4 et <a href="http://info-stages.univ-lemans.fr/telechargements/">accessibles ici</a> (grille d'évaluation de la soutenance, grille d'évaluation du rapport, grille d'évaluation de l'entreprise).</p>
+<p>Le stage est évalué en fonction de l'appréciation de l'organisme d'accueil, de l'évaluation de l'enseignant-référent concernant le rapport et enfin de l'évaluation de la soutenance orale par le jury.</p>
 
-<p>La note obtenue est ensuite intégrée dans le contrôle des connaissances de l'année du diplôme de l'étudiant (se reporter à ces différents contrôles des connaissances).</p>
+<p><strong>Attention</strong>, dans le cas du M2, les MCC du semestre S4 indique que le module est acquis par la moyenne du rapport et de la soutenance orale. Le rapport de stage peut faire l'objet d'une seconde session (version améliorée du rapport).</p>
 
 <br/>
 
