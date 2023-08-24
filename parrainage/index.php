@@ -29,6 +29,8 @@ IHM_Menu::menuParrainage();
 <p>Elle permet d'autre part d'accéder à un résumé de la charge des référents par année et par diplôme pour chaque enseignant-référent membre de l'équipe pédagogique du département informatique.
 </p>
 
+<p>Elle permet enfin un accès aux rapports de stage de l'année en cours.</p>
+
 <?php
 
 IHM_Generale::endHeader(true);

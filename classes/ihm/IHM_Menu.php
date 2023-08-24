@@ -171,6 +171,8 @@ class IHM_Menu {
 		<br></br>
 		<li><a href="./bilanParrainages.php">Bilan des référents</a></li>
 		<br></br>
+		<li><a href="./accesRapports.php">Accès aux rapports de stage</a></li>
+		<br></br>
 	    </ul>
 	</div>
 	<div id="main">
